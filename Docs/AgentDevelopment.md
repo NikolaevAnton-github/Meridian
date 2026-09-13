@@ -205,9 +205,12 @@ the registry, and large source files and outputs in files/Git LFS.
    [minimal asset registry](Tasks/AssetRegistry.md) through Multica. It reuses
    PostgreSQL, distinguishes verified dependencies from declarations, and
    registers saved files without regenerating assets.
-6. Next: the [opening lobby walkthrough](Tasks/OpeningLobby.md), Multica parent
-   MSQ-4 with sequential children MSQ-5 (on-foot prototype), MSQ-6 (architecture
-   and materials) and MSQ-7 (atmosphere and acceptance). Planned, not implemented.
+6. In progress: the [opening lobby walkthrough](Tasks/OpeningLobby.md), Multica
+   parent MSQ-4. MSQ-5 passed technical acceptance: the saved on-foot prototype
+   supports the full entrance/elevator route, side paths and return, with verified
+   collision, gravity and mouse look. See [Stage 1 handoff](OpeningLobbyStage1.md).
+   MSQ-6 (architecture and materials) and MSQ-7 (atmosphere and acceptance) remain
+   in backlog pending the owner's Stage 1 layout and movement review.
    The owner's [game direction](Design/GameBrief.md) and
    [story foundation](Design/StoryCanon.md) are recorded in English.
 7. Use 10–15 real tasks to measure first-pass acceptance, rework, time and

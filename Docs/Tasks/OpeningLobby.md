@@ -1,7 +1,10 @@
 # Opening lobby walkthrough
 
-Status: planned as Multica parent MSQ-4; no lobby implementation has started.
-Child tasks MSQ-5, MSQ-6 and MSQ-7 are unassigned backlog items for stages 1-3.
+Status: Stage 1 (Multica MSQ-5) passed technical acceptance on 2026-09-13.
+The saved walkthrough is ready for the owner's layout and movement review.
+MSQ-6 and MSQ-7 remain unassigned backlog items pending that review and the
+subsequent sequential acceptance gates. Parent MSQ-4 remains in progress.
+See [Stage 1 handoff and acceptance](../OpeningLobbyStage1.md).
 
 Owner request: a realistic first-person skyscraper entrance lobby to walk
 around, using the lobby from The Matrix (1999) as the architectural reference.
