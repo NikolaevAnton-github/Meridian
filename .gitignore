@@ -1,0 +1,28 @@
+# Unreal generated files and local IDE state
+/Binaries/
+**/Intermediate/
+**/Saved/
+**/DerivedDataCache/
+/.vs/
+/.idea/
+*.sln
+*.slnx
+*.suo
+*.VC.db
+*.VC.opendb
+*.opensdf
+*.sdf
+*.opendb
+*.code-workspace
+
+# Local caches, environments, credentials and generated reports
+**/__pycache__/
+*.pyc
+/.venv/
+/node_modules/
+.env
+.env.*
+!.env.example
+/.codex/*.log
+*.blend1
+*.blend2
