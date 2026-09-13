@@ -26,6 +26,8 @@ Verified on this computer on September 13, 2026:
 | Substance Designer | 16.0.6; MCP connection not yet verified |
 | Substance Sampler | 6.0.2, executable verified; MCP connection not yet verified |
 | LM Studio | 0.4.24+1; no local model selected for the project yet |
+| Multica | Local 0.4.43 pilot; one Codex subscription task passed |
+| PostgreSQL | Portable 17.11; Multica task database, loopback port 15432 |
 
 The verified Sampler executable is
 `C:\Program Files\Adobe\Adobe Substance 3D Sampler\Adobe Substance 3D Sampler.exe`.
@@ -119,8 +121,24 @@ and the rendered result were checked. Painter's project audit reported no issues
 
 See [Painter workflow](PainterWorkflow.md) for the pinned bridge installation,
 repeatable operations, verification evidence and the scope of this probe.
-The current test used the MCP SDK over stdio; Codex reads the new
-`substance_painter` server configuration after an agent/MCP restart.
+The transfer used the MCP SDK over stdio. After the agent restart on
+September 13, 2026, native `substance_painter` tools appeared in Codex and
+`painter_status` confirmed a working connection to Painter 12.1.4 with a project open.
+
+## Stage 4: Local Multica pilot
+
+Multica 0.4.43 is running natively on Windows with a production web build,
+Go API, PostgreSQL 17.11 and one Codex runtime. Existing ChatGPT authentication
+was reused; the optional server LLM is disabled. No Docker or WSL was installed.
+
+Issue `MSQ-1` passed on its first attempt using Astra, medium reasoning and
+standard speed. It verified the project rules in the existing project directory.
+Multica restored its temporary `AGENTS.md` changes; project and user Codex
+configuration hashes were unchanged. Stop/start and result persistence passed.
+
+See [Multica pilot](MulticaPilot.md) for operation, pinned dependencies, evidence,
+token measurements and limits. The pilot verifies orchestration of a read-only
+task; an asset-producing task through Multica is the next acceptance gate.
 
 ## Storage
 
@@ -131,7 +149,8 @@ A Git repository alone is not a backup. The `origin` remote is configured as
 is `main`. Commit authorship is configured locally for this repository as
 Anton Nikolaev, using the email supplied by the user. Git Credential Manager
 uses the `NikolaevAnton-github` account. Check Git status and the upstream branch
-for synchronization state. Separate backups have not been configured.
+for synchronization state. An off-device backup has not been configured.
+The local Multica database has one same-disk dump recorded in its pilot guide.
 Copies of existing files from before setup are stored in
 `Saved/AgentSetup/20260913-131612/`.
 
@@ -142,8 +161,10 @@ configure this service separately with local credentials.
 Files are the first system layer, not a replacement for the planned database.
 Structured metadata, checks and asset relationships will be stored in a database;
 large source files and outputs will remain in files referenced by paths and hashes.
-Approve the specific schema after the first task is verified from start to finish.
-PostgreSQL/a graph database has not been installed for the project.
+PostgreSQL now stores Multica's tasks, runs and related application data.
+An asset metadata schema and a graph database have not been installed.
+Keep task state in Multica; define asset IDs, paths, hashes and dependencies
+after the first asset-producing Multica task is accepted.
 
 ## Next stages
 
@@ -151,12 +172,14 @@ PostgreSQL/a graph database has not been installed for the project.
    correct scale, orientation and material. Results are recorded in stage 2.
 2. Completed: verify Painter MCP, create a project and fill layer, export textures
    and connect them in UE. Add Designer and Sampler as tasks require them.
-3. Deploy a self-hosted Multica pilot using existing Codex authentication.
-   Verify one complete task and limit concurrency. Do not develop a custom
-   task dispatcher before this pilot.
-4. Add asset metadata and dependencies to a database. Extract relationships
+3. Completed: deploy local Multica using existing Codex authentication, limit
+   concurrency to one and verify one complete read-only task.
+4. Run one bounded asset-producing task through Multica, with explicit DCC
+   ownership, required tools only and acceptance evidence. Measure context
+   overhead before making Multica the default for routine work.
+5. Add asset metadata and dependencies to a database. Extract relationships
    from tools; distinguish verified facts from model assumptions.
-5. Use 10–15 real tasks to measure first-pass acceptance, rework, time and
+6. Use 10–15 real tasks to measure first-pass acceptance, rework, time and
    available subscription usage metrics; use the results to tune model selection.
 
 ## Documentation

@@ -1,7 +1,8 @@
 # MeridianSquad agent instructions
 
 - Communicate with the user in Russian. Write all project content in English,
-  including documentation, code comments, names and commit messages.
+  including documentation, code comments, names, commit messages and Multica
+  task reports. Russian is reserved for the owner's direct chat with Codex.
 - Budget: the user's existing $200/month Codex subscription only. Do not add paid
   API usage, paid cloud generation, extra credits or paid services. Local models
   are allowed, subject to available RAM/VRAM and project disk space.
@@ -28,6 +29,8 @@
 - Source code, configuration, accepted decisions and asset source files belong
   in Git; binary assets use Git LFS. Generated data and large logs stay outside Git.
   Never put credentials in tracked files or tool output.
-- Multica is the candidate for the next orchestration stage; do not build a
-  competing custom task dispatcher. Database-backed metadata is planned, not
-  installed. See Docs/AgentDevelopment.md for status and the next acceptance gate.
+- The local Multica pilot passed one read-only task using Codex subscription
+  authentication. Keep runtime concurrency at one and use the existing project
+  directory. Do not build a competing task dispatcher or create a separate task
+  database. Multica uses PostgreSQL; asset metadata is not implemented yet.
+  See Docs/AgentDevelopment.md and Docs/MulticaPilot.md for the next acceptance gate.

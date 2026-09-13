@@ -1,0 +1,25 @@
+diff --git a/apps/web/next.config.ts b/apps/web/next.config.ts
+index 2437bd2..4d5a59b 100644
+--- a/apps/web/next.config.ts
++++ b/apps/web/next.config.ts
+@@ -39,6 +39,7 @@ const allowedDevOrigins = process.env.CORS_ALLOWED_ORIGINS
+   : undefined;
+ 
+ const nextConfig: NextConfig = {
++  experimental: { cpus: 1, webpackMemoryOptimizations: true },
+   ...(process.env.STANDALONE === "true" ? { output: "standalone" as const } : {}),
+   transpilePackages: ["@multica/core", "@multica/ui", "@multica/views"],
+   ...(allowedDevOrigins && allowedDevOrigins.length > 0
+diff --git a/server/cmd/server/main.go b/server/cmd/server/main.go
+index 7634ecb..e5a28da 100644
+--- a/server/cmd/server/main.go
++++ b/server/cmd/server/main.go
+@@ -674,7 +674,7 @@ func main() {
+ 	// the scheduler's Run goroutine starts so the field write is race-free.
+ 	heartbeatScheduler.RecoveryNotifier = h
+ 
+-	srv := newMainHTTPServer(":"+port, r)
++	srv := newMainHTTPServer("127.0.0.1:"+port, r)
+ 	profilingServer := profiling.NewServer()
+ 
+ 	// Start background workers.

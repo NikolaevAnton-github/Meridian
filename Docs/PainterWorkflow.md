@@ -66,6 +66,10 @@ checks those three required maps and permits only that optional omission.
 
 ## Acceptance evidence
 
+After the September 13, 2026 agent restart, native Painter MCP tools loaded in
+Codex. A direct `painter_status` call reported `connected=true`, Painter 12.1.4,
+and an open project, completing the client configuration check.
+
 | Map | UE settings | Material connection |
 | --- | --- | --- |
 | Base Color | sRGB on, `TC_Default`, Color sampler | RGB to Base Color |

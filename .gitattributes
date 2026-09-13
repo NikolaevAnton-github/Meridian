@@ -1,4 +1,7 @@
 * text=auto
+
+# Unified diffs must preserve whitespace in their context lines.
+Tools/Patches/*.patch text eol=lf -whitespace
 *.ps1 text eol=crlf
 *.sh text eol=lf
 *.uasset filter=lfs diff=lfs merge=lfs -text
