@@ -1,0 +1,12 @@
+{
+  "texture_set": "M_PipelineProbe_Green",
+  "recipe": [
+    {
+      "type": "fill",
+      "name": "Pipeline Validation Copper",
+      "base_color": [0.8, 0.28, 0.08],
+      "channels": {"Roughness": 0.42, "Metallic": 0.35},
+      "active_channels": ["BaseColor", "Roughness", "Metallic"]
+    }
+  ]
+}

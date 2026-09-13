@@ -22,7 +22,7 @@ Verified on this computer on September 13, 2026:
 | Project | C++, `MeridianSquad`; one verified Blender-to-Unreal smoke-test mesh |
 | Codex CLI | 0.153.4, signed in through ChatGPT |
 | Blender | 5.2.1 LTS; installed community MCP 1.9.1 / addon 1.6, protocol 5 verified |
-| Substance Painter | 12.1.4; MCP connection not yet verified |
+| Substance Painter | 12.1.4; project, fill layer, texture export and UE material verified through MCP |
 | Substance Designer | 16.0.6; MCP connection not yet verified |
 | Substance Sampler | 6.0.2, executable verified; MCP connection not yet verified |
 | LM Studio | 0.4.24+1; no local model selected for the project yet |
@@ -109,6 +109,19 @@ is generated under `Saved/Exports/SmokeTest/`, outside Git. Export settings are
 validated against Epic's `StaticMeshTools.import_file` defaults. A new workflow
 using different import settings must recheck bounds rather than assume parity.
 
+## Stage 3: Painter to Unreal
+
+The first Painter transfer passed on September 13, 2026. The existing probe mesh
+now uses a material driven by exported 1024 x 1024 Base Color, DirectX Normal and
+ORM textures. The Painter source project, texture files and Unreal assets are
+saved. Channel values, texture settings, graph connections, shader compilation
+and the rendered result were checked. Painter's project audit reported no issues.
+
+See [Painter workflow](PainterWorkflow.md) for the pinned bridge installation,
+repeatable operations, verification evidence and the scope of this probe.
+The current test used the MCP SDK over stdio; Codex reads the new
+`substance_painter` server configuration after an agent/MCP restart.
+
 ## Storage
 
 Git and Git LFS are prepared for source files, configuration, decisions and
@@ -136,9 +149,8 @@ PostgreSQL/a graph database has not been installed for the project.
 
 1. Completed: verify Blender MCP and transfer one simple asset to UE with the
    correct scale, orientation and material. Results are recorded in stage 2.
-2. Verify Painter MCP on the installed version: open a test project,
-   create a material/layer, export textures and connect them in UE.
-   Add Designer and Sampler as tasks require them.
+2. Completed: verify Painter MCP, create a project and fill layer, export textures
+   and connect them in UE. Add Designer and Sampler as tasks require them.
 3. Deploy a self-hosted Multica pilot using existing Codex authentication.
    Verify one complete task and limit concurrency. Do not develop a custom
    task dispatcher before this pilot.

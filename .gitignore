@@ -19,6 +19,7 @@
 **/__pycache__/
 *.pyc
 /.venv/
+/.tools/
 /node_modules/
 .env
 .env.*
@@ -26,3 +27,4 @@
 /.codex/*.log
 *.blend1
 *.blend2
+*.painter_lock
