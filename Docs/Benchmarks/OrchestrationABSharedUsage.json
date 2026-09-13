@@ -1,0 +1,26 @@
+{
+  "snapshot_at": "2026-09-13T12:35:46.871816+00:00",
+  "instruction_boundary_at": "2026-09-13T11:45:22.582Z",
+  "shared_controller_and_helpers_native_usage": {
+    "input_tokens": 21856590,
+    "cached_input_tokens": 21203328,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 155307,
+    "reasoning_output_tokens": 49181,
+    "total_tokens": 22011897,
+    "uncached_input_tokens": 653262
+  },
+  "both_workers": {
+    "uncached_input_tokens": 158762,
+    "cached_input_tokens": 2111360,
+    "output_tokens": 20123
+  },
+  "later_responses_included": false,
+  "limits": [
+    "This is shared preparation, control and verification work, separate from both worker runs.",
+    "The snapshot is partial while controller/helper turns continue; refresh after final measurement/report preparation.",
+    "Only root-session threads stored in the selected date directory are included. Missing or remote traces remain unmeasured.",
+    "Per-response usage is counted once by response ID within each native thread; cumulative usage is not summed.",
+    "Output includes reasoning. Cached input remains part of native input. No dollar or subscription-quota conversion is inferred."
+  ]
+}

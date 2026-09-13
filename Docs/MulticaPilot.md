@@ -156,9 +156,10 @@ Full evidence is under `Saved/AgentSetup/MulticaProbe/`. The local database dump
 is `Saved/Multica/backups/pilot-20260913.dump`. It is a same-disk backup, not an
 off-device disaster-recovery copy or proof that restore has been tested.
 
-This gate establishes read-only task dispatch, execution and reporting. The next
-gate is one bounded real DCC asset task with explicit acceptance checks and
-coordinated ownership of the running editors. Define finer task/context/retry and
+This gate established read-only task dispatch, execution and reporting. The next
+gate also passed: [the complete asset A/B comparison](Benchmarks/OrchestrationABComparison.md)
+records independently accepted Blender/Painter/Unreal results, native token
+usage and substantial shared preparation costs. Define finer task/context/retry and
 retention budgets from measured accepted work, including rework, before scaling
 the number or autonomy of agents. Multica remains the task orchestrator; the
 PowerShell launcher only manages local component lifecycles.

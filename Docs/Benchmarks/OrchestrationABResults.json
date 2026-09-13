@@ -1,0 +1,385 @@
+{
+  "measured_at": "2026-09-13T12:24:56.766123+00:00",
+  "runs": {
+    "BenchA": {
+      "route": "direct",
+      "usage": {
+        "input_tokens": 1330880,
+        "cached_input_tokens": 1255296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 11925,
+        "reasoning_output_tokens": 900,
+        "total_tokens": 1342805,
+        "uncached_input_tokens": 75584
+      },
+      "response_count": 22,
+      "model_exec_call_count": 21,
+      "execution_item_counts": {
+        "CommandExecution": 10,
+        "McpToolCall": 36,
+        "FileChange": 23
+      },
+      "failed_tool_calls": 1,
+      "accepted_on_first_submission": true,
+      "external_repair_turns": 0,
+      "worker_seconds": 449.25,
+      "start": "2026-09-13T12:06:11.805061+00:00",
+      "end": "2026-09-13T12:13:42.219618+00:00",
+      "resources": {
+        "sample_count": 89,
+        "period_seconds": 5,
+        "minimum_system_available_gib": 10.271,
+        "process_peak_mib": {
+          "Adobe Substance 3D Painter": {
+            "working_set_mib": 726.1,
+            "private_committed_mib": 4848.7
+          },
+          "UnrealEditor": {
+            "working_set_mib": 1004.2,
+            "private_committed_mib": 8407.6
+          },
+          "blender": {
+            "working_set_mib": 151,
+            "private_committed_mib": 1629.5
+          },
+          "codex": {
+            "working_set_mib": 667.9,
+            "private_committed_mib": 527.5
+          },
+          "multica": {
+            "working_set_mib": 22.4,
+            "private_committed_mib": 56.9
+          },
+          "postgres": {
+            "working_set_mib": 211.3,
+            "private_committed_mib": 74.8
+          }
+        }
+      },
+      "triangles": 864,
+      "bounds_cm": {
+        "min": {
+          "x": -60.00000762939453,
+          "y": -40.00000762939453,
+          "z": 0
+        },
+        "max": {
+          "x": 60.00000762939453,
+          "y": 40.00000762939453,
+          "z": 90
+        },
+        "isValid": true
+      },
+      "texture_map_count": 6,
+      "saved_unreal_assets": 9,
+      "thumbnail": {
+        "path": "Saved/AgentSetup/OrchestrationAB/Independent/BenchA/UnrealCrate.png",
+        "mime_type": "image/png",
+        "sha256": "40070f6b335aaaca9383e12d525f7f83778675e2e10cba403bd746eb6fb48ece"
+      },
+      "files": [
+        {
+          "path": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.blend",
+          "bytes": 85969,
+          "sha256": "26424b1583689985110d7c4fb2685c469c8b5e2e91cc8ed0b47636ad948226c1"
+        },
+        {
+          "path": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.spp",
+          "bytes": 13112505,
+          "sha256": "64b3ae52a6dffee3840ea6a3cbb267807e57ade8aa3038ede650e2e9966443bf"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_BaseColor.png",
+          "bytes": 5361,
+          "sha256": "04d0849cc508fc33ab649e4550210cc6c86d8cdbfa26f7bebe5958838388e889"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_Normal.png",
+          "bytes": 568971,
+          "sha256": "3b029cc952c53262bdb085fa2d9ee40deb91d2f673e665d04b1fde9e0ffaa56a"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_OcclusionRoughnessMetallic.png",
+          "bytes": 5355,
+          "sha256": "078654dae4807369bcc02144047a652b16751043cd2463c70845a3a09ef3d82c"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_BaseColor.png",
+          "bytes": 5360,
+          "sha256": "18b8c22ad898a6b0bddf17130d2107d11efb1c9c3435f92ab594be2a0f2b5926"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_Normal.png",
+          "bytes": 568971,
+          "sha256": "3b029cc952c53262bdb085fa2d9ee40deb91d2f673e665d04b1fde9e0ffaa56a"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_OcclusionRoughnessMetallic.png",
+          "bytes": 5357,
+          "sha256": "5b048392e19a5ef6af874364413d66582fb00b2665372793216e7e944993161f"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchA/M_BenchA_Body.uasset",
+          "bytes": 12032,
+          "sha256": "e46e9e3c3630170cbc9d184f766438b237fe33fce01bc683af31172ec4b25eb0"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchA/M_BenchA_Metal.uasset",
+          "bytes": 11884,
+          "sha256": "66c7927669ec22d472d4b3b35d0de347d1b800fea1921a3a42b562d2cac50601"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchA/SM_BenchA_Crate.uasset",
+          "bytes": 50273,
+          "sha256": "a9ca74984ca941ced6e48346760907231eec828766157ba5c3678d848d2a6462"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchA/T_BenchA_Body_BaseColor.uasset",
+          "bytes": 14379,
+          "sha256": "7104b9558411c1907488d36ff2d5b74da35d1e38cdf9e77d1a288aac2fe3721b"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchA/T_BenchA_Body_Normal.uasset",
+          "bytes": 708867,
+          "sha256": "8f35e83402cfb895aa59352403a2346c942c41a262a0e53607b860c7535ca63d"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchA/T_BenchA_Body_ORM.uasset",
+          "bytes": 14543,
+          "sha256": "f42c52aad6d82b72cb486b393e18b31982b6e210ba5ad330128130191c09df11"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_BaseColor.uasset",
+          "bytes": 14401,
+          "sha256": "70cfd240a308c1ae3a973a318c20ef5265d5a39e0f1ef290d23b64f17be3c1c3"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_Normal.uasset",
+          "bytes": 708890,
+          "sha256": "c7350484fe93909251e08c134b361516791862cef7dbccee9309df23dbc06da1"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_ORM.uasset",
+          "bytes": 14581,
+          "sha256": "d1139c32bc1674adb450db054c445ed1e6202ef90742bc18397bee9d0bb4904a"
+        },
+        {
+          "path": "Saved/Exports/SmokeTest/OrchestrationAB/BenchA/SM_BenchA_Crate.fbx",
+          "bytes": 42076,
+          "sha256": "0540da4a38a30b54d629b1d2ac0c82fcf3a6e503df8a589a0df5c7d0733fae56"
+        }
+      ],
+      "deliverable_bytes_including_generated_fbx": 15949775,
+      "verification_files": [
+        "Saved/AgentSetup/OrchestrationAB/Independent/BenchA/mesh-verification.json",
+        "Saved/AgentSetup/OrchestrationAB/Independent/BenchA/maps-verification.json",
+        "Saved/AgentSetup/OrchestrationAB/Independent/BenchA/unreal-verification.json",
+        "Saved/AgentSetup/OrchestrationAB/Independent/BenchA/painter-verification.json"
+      ]
+    },
+    "BenchB": {
+      "route": "multica",
+      "usage": {
+        "input_tokens": 939242,
+        "cached_input_tokens": 856064,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8198,
+        "reasoning_output_tokens": 230,
+        "total_tokens": 947440,
+        "uncached_input_tokens": 83178
+      },
+      "response_count": 16,
+      "model_exec_call_count": 15,
+      "execution_item_counts": {
+        "CommandExecution": 11,
+        "McpToolCall": 34,
+        "FileChange": 16
+      },
+      "failed_tool_calls": 0,
+      "accepted_on_first_submission": true,
+      "external_repair_turns": 0,
+      "worker_seconds": 334.0,
+      "start": "2026-09-13T15:16:17+03:00",
+      "end": "2026-09-13T15:21:51+03:00",
+      "resources": {
+        "sample_count": 66,
+        "period_seconds": 5,
+        "minimum_system_available_gib": 10.11,
+        "process_peak_mib": {
+          "Adobe Substance 3D Painter": {
+            "working_set_mib": 686.4,
+            "private_committed_mib": 5010.5
+          },
+          "UnrealEditor": {
+            "working_set_mib": 1053.3,
+            "private_committed_mib": 8032
+          },
+          "blender": {
+            "working_set_mib": 203,
+            "private_committed_mib": 1563.9
+          },
+          "codex": {
+            "working_set_mib": 655.6,
+            "private_committed_mib": 526.4
+          },
+          "multica": {
+            "working_set_mib": 28.2,
+            "private_committed_mib": 61.8
+          },
+          "postgres": {
+            "working_set_mib": 213.3,
+            "private_committed_mib": 77.3
+          }
+        }
+      },
+      "triangles": 864,
+      "bounds_cm": {
+        "min": {
+          "x": -60.00000762939453,
+          "y": -40.00000762939453,
+          "z": 0
+        },
+        "max": {
+          "x": 60.00000762939453,
+          "y": 40.00000762939453,
+          "z": 90
+        },
+        "isValid": true
+      },
+      "texture_map_count": 6,
+      "saved_unreal_assets": 9,
+      "thumbnail": {
+        "path": "Saved/AgentSetup/OrchestrationAB/Independent/BenchB/UnrealCrate.png",
+        "mime_type": "image/png",
+        "sha256": "f2f5908341a73e04a10c58fc4308c3dfaeded5c3365956c4c725629b1e6f8bb3"
+      },
+      "files": [
+        {
+          "path": "Assets/Source/SmokeTest/OrchestrationAB/BenchB/Crate.blend",
+          "bytes": 82444,
+          "sha256": "3264bd5dee1db1fb04cb52273b9a075e675edbe7d3cfa6d5222da890cd9326ac"
+        },
+        {
+          "path": "Assets/Source/SmokeTest/OrchestrationAB/BenchB/Crate.spp",
+          "bytes": 13115259,
+          "sha256": "245c71147bf9f09aa44a58c759eb62a8737713efb51ff7a54cd6e8d203cc0c13"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchB/SM_BenchB_Crate_M_BenchB_Body_BaseColor.png",
+          "bytes": 5361,
+          "sha256": "04d0849cc508fc33ab649e4550210cc6c86d8cdbfa26f7bebe5958838388e889"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchB/SM_BenchB_Crate_M_BenchB_Body_Normal.png",
+          "bytes": 568971,
+          "sha256": "3b029cc952c53262bdb085fa2d9ee40deb91d2f673e665d04b1fde9e0ffaa56a"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchB/SM_BenchB_Crate_M_BenchB_Body_OcclusionRoughnessMetallic.png",
+          "bytes": 5355,
+          "sha256": "078654dae4807369bcc02144047a652b16751043cd2463c70845a3a09ef3d82c"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchB/SM_BenchB_Crate_M_BenchB_Metal_BaseColor.png",
+          "bytes": 5360,
+          "sha256": "18b8c22ad898a6b0bddf17130d2107d11efb1c9c3435f92ab594be2a0f2b5926"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchB/SM_BenchB_Crate_M_BenchB_Metal_Normal.png",
+          "bytes": 568971,
+          "sha256": "3b029cc952c53262bdb085fa2d9ee40deb91d2f673e665d04b1fde9e0ffaa56a"
+        },
+        {
+          "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchB/SM_BenchB_Crate_M_BenchB_Metal_OcclusionRoughnessMetallic.png",
+          "bytes": 5357,
+          "sha256": "5b048392e19a5ef6af874364413d66582fb00b2665372793216e7e944993161f"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchB/M_BenchB_Body.uasset",
+          "bytes": 12031,
+          "sha256": "165e1550bc1b28645529f95cfeaa8b3be11d13d49767ec45b422fd94dadf4d37"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchB/M_BenchB_Metal.uasset",
+          "bytes": 11884,
+          "sha256": "3a8a8f274d2e5d9373bd822aa7b731c60f2fcbced5229d540b25a898e0a2d215"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchB/SM_BenchB_Crate.uasset",
+          "bytes": 45020,
+          "sha256": "fd1e2c8842ee338404201104398873341b85e8903486dd0b9ec356d998968555"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchB/T_BenchB_Body_BaseColor.uasset",
+          "bytes": 14379,
+          "sha256": "1cab20652aab28e8dd8c6dde8a262b615441045491738104090f30dd6465eae2"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchB/T_BenchB_Body_Normal.uasset",
+          "bytes": 708868,
+          "sha256": "dc5a5bad0a856eb23e9079fc8316150b7ac003064a99c682acd8631d1411c51e"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchB/T_BenchB_Body_ORM.uasset",
+          "bytes": 14544,
+          "sha256": "41e173b0994ea39d275564973b2b102a5dc6c709f2e00a385a70af6f3a56645a"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchB/T_BenchB_Metal_BaseColor.uasset",
+          "bytes": 14402,
+          "sha256": "d309f65979008f9cf321ae6979bab86ec832f0655d8ad14778eebedb99eba16f"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchB/T_BenchB_Metal_Normal.uasset",
+          "bytes": 708891,
+          "sha256": "89bc3daadf98e42071b2d70d3cc8c758efeec7e5313b8846fd57b9c9bfa8dd05"
+        },
+        {
+          "path": "Content/Development/Benchmark/BenchB/T_BenchB_Metal_ORM.uasset",
+          "bytes": 14582,
+          "sha256": "0653c12fce9a0d540a34eab975223af5973832d93312de9b3333c9e786610a14"
+        },
+        {
+          "path": "Saved/Exports/SmokeTest/OrchestrationAB/BenchB/SM_BenchB_Crate.fbx",
+          "bytes": 37788,
+          "sha256": "91a124351f56b1778ec6d5c5ed6427cc470b8cea4f8626208e00270d957e0f4f"
+        }
+      ],
+      "deliverable_bytes_including_generated_fbx": 15939467,
+      "verification_files": [
+        "Saved/AgentSetup/OrchestrationAB/Independent/BenchB/mesh-verification.json",
+        "Saved/AgentSetup/OrchestrationAB/Independent/BenchB/maps-verification.json",
+        "Saved/AgentSetup/OrchestrationAB/Independent/BenchB/unreal-verification.json",
+        "Saved/AgentSetup/OrchestrationAB/Independent/BenchB/painter-verification.json"
+      ]
+    }
+  },
+  "preview_files_identical": false,
+  "instructions": {
+    "direct_project_AGENTS": {
+      "path": "D:\\devgames\\MeridianSquad\\AGENTS.md",
+      "bytes": 2702,
+      "sha256": "14a7a22896f3bd109ad52e173e328cf5a002b736bcfd212ecab23036f4d80227"
+    },
+    "multica_injected_AGENTS_bytes": 17858,
+    "byte_delta": 15156,
+    "limit": "File byte delta is not a token estimate or the complete model prompt; it may include newline normalization."
+  },
+  "multica_api_usage_reconciled": true,
+  "preview_comparison": {
+    "png_info": {
+      "width": 256,
+      "height": 256,
+      "bit_depth": 8,
+      "color_type": 6,
+      "compression": 0,
+      "filter": 0,
+      "interlace": 0
+    },
+    "pixel_identical": false,
+    "changed_rgba_components": 13770,
+    "maximum_8bit_component_difference": 18,
+    "mean_absolute_rgba_component_difference": 0.055736541748046875,
+    "scope": "Original Unreal asset thumbnails; no image edits. This metric is not a general art-quality score."
+  }
+}

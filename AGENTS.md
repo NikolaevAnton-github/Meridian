@@ -29,8 +29,13 @@
 - Source code, configuration, accepted decisions and asset source files belong
   in Git; binary assets use Git LFS. Generated data and large logs stay outside Git.
   Never put credentials in tracked files or tool output.
-- The local Multica pilot passed one read-only task using Codex subscription
-  authentication. Keep runtime concurrency at one and use the existing project
-  directory. Do not build a competing task dispatcher or create a separate task
-  database. Multica uses PostgreSQL; asset metadata is not implemented yet.
-  See Docs/AgentDevelopment.md and Docs/MulticaPilot.md for the next acceptance gate.
+- Multica passed a complete Blender/Painter/Unreal asset task and a direct-Codex
+  comparison using subscription authentication. Keep concurrency at one and use
+  the existing project directory. Use Multica for complete queued tasks and
+  direct Codex for short interactive work. Do not build a competing dispatcher
+  or separate task database. Reuse the existing validators; do not rebuild the
+  benchmark harness or repeat A/B runs for routine assets. Track native input,
+  cache and output separately; Multica 0.4.43 adds reasoning to output again.
+  Shared preparation was the largest experiment cost. Asset metadata is still
+  unimplemented. See Docs/Benchmarks/OrchestrationABComparison.md and
+  Docs/AgentDevelopment.md for evidence and the next stage.

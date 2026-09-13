@@ -1,0 +1,89 @@
+{
+  "prepared_at": "2026-09-13T11:54:42.135621+00:00",
+  "model": "gpt-6-astra",
+  "reasoning": "medium",
+  "service_tier": "default",
+  "custom_args": [
+    "-c",
+    "forced_login_method=\"chatgpt\"",
+    "-c",
+    "model_provider=\"openai\"",
+    "-c",
+    "model=\"gpt-6-astra\"",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "-c",
+    "service_tier=\"default\"",
+    "-c",
+    "approval_policy=\"never\"",
+    "-c",
+    "sandbox_mode=\"danger-full-access\"",
+    "--disable",
+    "fast_mode",
+    "-c",
+    "features.multi_agent=false",
+    "-c",
+    "features.memories=false",
+    "-c",
+    "memories.generate_memories=false",
+    "-c",
+    "memories.use_memories=false",
+    "-c",
+    "mcp_servers.node_repl.enabled=false",
+    "-c",
+    "mcp_servers.blender.enabled=true",
+    "-c",
+    "mcp_servers.substance_painter.enabled=true",
+    "-c",
+    "mcp_servers.unreal_epic.enabled=true",
+    "-c",
+    "mcp_servers.cua_repl.command=\"C:\\\\Users\\\\Origa\\\\AppData\\\\Local\\\\OpenAI\\\\Codex\\\\runtimes\\\\cua_node\\\\a708e72b10c27b59\\\\bin\\\\node.exe\"",
+    "-c",
+    "mcp_servers.cua_repl.enabled=false"
+  ],
+  "max_concurrent_tasks": 1,
+  "per_run_wall_time_limit_seconds": 1800,
+  "spec_sha256": "c1d3054bc1eda1e24b4c7d23fd4bed38232566f1dc2d39741d3b0c65dbb5ec88",
+  "shared_files_sha256": {
+    "AGENTS.md": "14a7a22896f3bd109ad52e173e328cf5a002b736bcfd212ecab23036f4d80227",
+    ".codex/config.toml": "e426c36dccd4c0974090c0f06fa3f7dbd77e08a99f06f55b231989c2aab25d6b",
+    "Docs/PainterWorkflow.md": "1cc8a5b4be10ed76680b78f164987fbdac992a525eed4ac6035df5733915f618",
+    "Scripts/create_pipeline_probe.py": "ed42bca688c62f5a3f9ea0280e9be5e00f79cac24e1529dc263ed7ca9e5d0c36",
+    "Scripts/connect_painter_material.py": "f145c4f28b2e170bb11013894b8e3fb52dab8374f4c904aae9055382680eb1f2",
+    "Scripts/Recipes/PainterProbeFill.json": "d3d78066c4baf8dc0d379df4d2979610add6027158e593db880be703e43f2650"
+  },
+  "global_codex_config_sha256": "a728471f654fec7ff9a499e1bae80492cb5444673912800fa37530d6ee4fce15",
+  "runs": [
+    {
+      "run_id": "BenchA",
+      "route": "direct",
+      "prompt_file": "D:\\devgames\\MeridianSquad\\Saved\\AgentSetup\\OrchestrationAB\\Prompts\\BenchA.txt",
+      "prompt_sha256": "81386b34a1011ad1feef5f9bb25070d217946dd526cf986d5207cced9c34ef93"
+    },
+    {
+      "run_id": "BenchB",
+      "route": "multica",
+      "prompt_file": "D:\\devgames\\MeridianSquad\\Saved\\AgentSetup\\OrchestrationAB\\Prompts\\BenchB.txt",
+      "prompt_sha256": "3b3df70fed3afd048d03d68dd9bbcdadf769d7ab96b0614e8e0932e4964b4acd",
+      "agent_id": "c8fbc923-a0d6-4f64-aedb-d78e9a95d3b3",
+      "issue_id": "01a09a9e-a03a-76ab-812d-43c76408b6cc",
+      "issue_identifier": "MSQ-2"
+    }
+  ],
+  "notes": [
+    "One pair only; random route order does not eliminate warm-cache and stochastic effects.",
+    "No model runs were made during preparation; both providers use the same Codex app-server version.",
+    "Task tokens exclude shared controller setup and independent validation."
+  ],
+  "protocol_frozen_at": "2026-09-13T12:05:52.663110+00:00",
+  "enabled_mcp_servers": [
+    "blender",
+    "substance_painter",
+    "unreal_epic"
+  ],
+  "disabled_mcp_servers": [
+    "node_repl",
+    "cua_repl",
+    "codex_app"
+  ]
+}

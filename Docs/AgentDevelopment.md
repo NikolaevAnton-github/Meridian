@@ -137,8 +137,27 @@ Multica restored its temporary `AGENTS.md` changes; project and user Codex
 configuration hashes were unchanged. Stop/start and result persistence passed.
 
 See [Multica pilot](MulticaPilot.md) for operation, pinned dependencies, evidence,
-token measurements and limits. The pilot verifies orchestration of a read-only
-task; an asset-producing task through Multica is the next acceptance gate.
+token measurements and limits. The read-only pilot was followed by the complete
+asset comparison recorded below.
+
+## Stage 5: Complete asset task and orchestration comparison
+
+On September 13, 2026, two independent Astra medium/standard workers created the
+same specified crate through Blender, Painter and official Epic Unreal MCP.
+Direct BenchA and Multica BenchB both passed independent acceptance on their
+first submission: 864 triangles, eight closed components, valid UVs, two Painter
+sets, six maps and nine saved UE assets. Multica issue MSQ-2 is accepted and done.
+
+Direct execution took 449.25 seconds; Multica took 334 seconds. Multica used more
+uncached input but fewer model responses, less cached input and less output.
+One sequential pair cannot establish a general causal saving. Native output
+includes reasoning; Multica 0.4.43 adds reasoning again in its output counter.
+The large shared preparation/measurement cost is recorded separately and was
+disproportionate to one simple prop. Reuse the existing scripts and validators.
+
+See [the full comparison](Benchmarks/OrchestrationABComparison.md), including
+previews, native usage, quality evidence, storage, limitations and public hashes.
+The finite direct measurement client is not a replacement task dispatcher.
 
 ## Storage
 
@@ -164,7 +183,7 @@ large source files and outputs will remain in files referenced by paths and hash
 PostgreSQL now stores Multica's tasks, runs and related application data.
 An asset metadata schema and a graph database have not been installed.
 Keep task state in Multica; define asset IDs, paths, hashes and dependencies
-after the first asset-producing Multica task is accepted.
+now that the first asset-producing Multica task is accepted.
 
 ## Next stages
 
@@ -174,9 +193,9 @@ after the first asset-producing Multica task is accepted.
    and connect them in UE. Add Designer and Sampler as tasks require them.
 3. Completed: deploy local Multica using existing Codex authentication, limit
    concurrency to one and verify one complete read-only task.
-4. Run one bounded asset-producing task through Multica, with explicit DCC
-   ownership, required tools only and acceptance evidence. Measure context
-   overhead before making Multica the default for routine work.
+4. Completed: one full asset task through Multica and an equivalent direct run,
+   both independently accepted. Use Multica for queued complete tasks and direct
+   Codex for short interactive work; reuse acceptance scripts and native metrics.
 5. Add asset metadata and dependencies to a database. Extract relationships
    from tools; distinguish verified facts from model assumptions.
 6. Use 10–15 real tasks to measure first-pass acceptance, rework, time and
