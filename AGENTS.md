@@ -29,6 +29,10 @@
 - Source code, configuration, accepted decisions and asset source files belong
   in Git; binary assets use Git LFS. Generated data and large logs stay outside Git.
   Never put credentials in tracked files or tool output.
+- For game/level requirements, use Docs/Design/GameBrief.md. For narrative work,
+  also read Docs/Design/StoryCanon.md and preserve fixed facts, working proposals
+  and unresolved details as separate categories. The first playable milestone
+  is the lobby walkthrough specified in Docs/Tasks/OpeningLobby.md.
 - Multica passed a complete Blender/Painter/Unreal asset task and a direct-Codex
   comparison using subscription authentication. Keep concurrency at one and use
   the existing project directory. The owner selected Multica as the default

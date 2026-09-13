@@ -205,7 +205,12 @@ the registry, and large source files and outputs in files/Git LFS.
    [minimal asset registry](Tasks/AssetRegistry.md) through Multica. It reuses
    PostgreSQL, distinguishes verified dependencies from declarations, and
    registers saved files without regenerating assets.
-6. Use 10–15 real tasks to measure first-pass acceptance, rework, time and
+6. Next: the [opening lobby walkthrough](Tasks/OpeningLobby.md), Multica parent
+   MSQ-4 with sequential children MSQ-5 (on-foot prototype), MSQ-6 (architecture
+   and materials) and MSQ-7 (atmosphere and acceptance). Planned, not implemented.
+   The owner's [game direction](Design/GameBrief.md) and
+   [story foundation](Design/StoryCanon.md) are recorded in English.
+7. Use 10–15 real tasks to measure first-pass acceptance, rework, time and
    available subscription usage metrics; use the results to tune model selection.
 
 ## Documentation
