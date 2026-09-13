@@ -31,8 +31,10 @@
   Never put credentials in tracked files or tool output.
 - Multica passed a complete Blender/Painter/Unreal asset task and a direct-Codex
   comparison using subscription authentication. Keep concurrency at one and use
-  the existing project directory. Use Multica for complete queued tasks and
-  direct Codex for short interactive work. Do not build a competing dispatcher
+  the existing project directory. The owner selected Multica as the default
+  execution route for project implementation tasks. Direct chat handles task
+  clarification, dispatch, review and small administrative updates. Do not build
+  a competing dispatcher
   or separate task database. Reuse the existing validators; do not rebuild the
   benchmark harness or repeat A/B runs for routine assets. Track native input,
   cache and output separately; Multica 0.4.43 adds reasoning to output again.

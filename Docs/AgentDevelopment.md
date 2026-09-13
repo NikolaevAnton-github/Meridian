@@ -11,6 +11,8 @@
   Allow only one agent to change the state of each open editor.
 - Communicate with the user in Russian; write all project content in English,
   including documentation, code comments, names and commit messages.
+- The owner selected Multica as the default route for project implementation.
+  Direct chat handles requirements, dispatch, acceptance and administration.
 
 ## Stage 1: Codex and Unreal
 
@@ -26,7 +28,7 @@ Verified on this computer on September 13, 2026:
 | Substance Designer | 16.0.6; MCP connection not yet verified |
 | Substance Sampler | 6.0.2, executable verified; MCP connection not yet verified |
 | LM Studio | 0.4.24+1; no local model selected for the project yet |
-| Multica | Local 0.4.43 pilot; one Codex subscription task passed |
+| Multica | Local 0.4.43; read-only and complete asset tasks accepted; selected for implementation |
 | PostgreSQL | Portable 17.11; Multica task database, loopback port 15432 |
 
 The verified Sampler executable is
@@ -194,10 +196,11 @@ now that the first asset-producing Multica task is accepted.
 3. Completed: deploy local Multica using existing Codex authentication, limit
    concurrency to one and verify one complete read-only task.
 4. Completed: one full asset task through Multica and an equivalent direct run,
-   both independently accepted. Use Multica for queued complete tasks and direct
-   Codex for short interactive work; reuse acceptance scripts and native metrics.
-5. Add asset metadata and dependencies to a database. Extract relationships
-   from tools; distinguish verified facts from model assumptions.
+   both independently accepted. The owner selected Multica for implementation;
+   reuse acceptance scripts and native metrics.
+5. Next: implement the [minimal asset registry](Tasks/AssetRegistry.md) through
+   Multica. Reuse the existing PostgreSQL instance and distinguish verified
+   dependencies from declarations. Registration must not regenerate assets.
 6. Use 10–15 real tasks to measure first-pass acceptance, rework, time and
    available subscription usage metrics; use the results to tune model selection.
 
