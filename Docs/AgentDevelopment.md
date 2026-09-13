@@ -180,12 +180,15 @@ and its token has been removed from tracked configuration. When adding Android,
 configure this service separately with local credentials.
 
 Files are the first system layer, not a replacement for the planned database.
-Structured metadata, checks and asset relationships will be stored in a database;
+Structured metadata, checks and asset relationships are stored in a database;
 large source files and outputs will remain in files referenced by paths and hashes.
 PostgreSQL now stores Multica's tasks, runs and related application data.
-An asset metadata schema and a graph database have not been installed.
-Keep task state in Multica; define asset IDs, paths, hashes and dependencies
-now that the first asset-producing Multica task is accepted.
+The minimal asset metadata registry is implemented in the separate local
+`meridian_assets` database and accepted as MSQ-3: 3 assets, 48 artifacts and
+59 evidence-backed dependency records with explicit certainty. See
+[asset registry usage](AssetRegistry.md) and [acceptance](AssetRegistryAcceptance.md).
+No graph database is installed. Keep task state in Multica, asset metadata in
+the registry, and large source files and outputs in files/Git LFS.
 
 ## Next stages
 
@@ -198,9 +201,10 @@ now that the first asset-producing Multica task is accepted.
 4. Completed: one full asset task through Multica and an equivalent direct run,
    both independently accepted. The owner selected Multica for implementation;
    reuse acceptance scripts and native metrics.
-5. Next: implement the [minimal asset registry](Tasks/AssetRegistry.md) through
-   Multica. Reuse the existing PostgreSQL instance and distinguish verified
-   dependencies from declarations. Registration must not regenerate assets.
+5. Completed and accepted: the
+   [minimal asset registry](Tasks/AssetRegistry.md) through Multica. It reuses
+   PostgreSQL, distinguishes verified dependencies from declarations, and
+   registers saved files without regenerating assets.
 6. Use 10–15 real tasks to measure first-pass acceptance, rework, time and
    available subscription usage metrics; use the results to tune model selection.
 

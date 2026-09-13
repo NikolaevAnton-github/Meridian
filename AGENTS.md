@@ -38,6 +38,9 @@
   or separate task database. Reuse the existing validators; do not rebuild the
   benchmark harness or repeat A/B runs for routine assets. Track native input,
   cache and output separately; Multica 0.4.43 adds reasoning to output again.
-  Shared preparation was the largest experiment cost. Asset metadata is still
-  unimplemented. See Docs/Benchmarks/OrchestrationABComparison.md and
+  Shared preparation was the largest experiment cost. Asset metadata is now in
+  the separate local PostgreSQL database meridian_assets. Use the register,
+  inspect and validate commands documented in Docs/AssetRegistry.md. Preserve
+  accepted fingerprints and relationship uncertainty; registration is not
+  approval of changed asset bytes. See Docs/AssetRegistryAcceptance.md and
   Docs/AgentDevelopment.md for evidence and the next stage.

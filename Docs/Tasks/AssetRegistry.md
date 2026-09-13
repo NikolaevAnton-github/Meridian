@@ -1,6 +1,8 @@
 # Minimal asset registry
 
-Status: Multica issue MSQ-3, backlog; implementation has not started.
+Status: Multica issue MSQ-3, accepted on 2026-09-13 after implementation and one review follow-up.
+Acceptance evidence and usage: [Controller report](../AssetRegistryAcceptance.md).
+Usage and limitations: [Asset registry](../AssetRegistry.md).
 
 Provide a small queryable inventory of accepted asset files and dependencies so
 an agent can find the correct sources and identify stale downstream outputs.

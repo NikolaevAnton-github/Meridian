@@ -1,0 +1,319 @@
+{
+  "asset": "PipelineProbe",
+  "artifacts": [
+    {
+      "path": "Assets/Source/SmokeTest/PipelineProbe.spp",
+      "role": "painter_source",
+      "sha256": "4615b8e403151073f0c91050a085307b33b3c394212528593b36bf98b444907f",
+      "size_bytes": 12881538,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/PainterProbe/verification.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Textures/SmokeTest/Painter/SM_PipelineProbe_M_PipelineProbe_Green_BaseColor.png",
+      "role": "texture_export",
+      "sha256": "0da1c03054919f8653fab66e17bb6bfc874452bd635924164aa207573520107e",
+      "size_bytes": 5359,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/PainterProbe/verification.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Textures/SmokeTest/Painter/SM_PipelineProbe_M_PipelineProbe_Green_OcclusionRoughnessMetallic.png",
+      "role": "texture_export",
+      "sha256": "db835a792ea58ddfd78b3b1da2c7593e0c7dbcbb723e0a6295525ef0c4ba1031",
+      "size_bytes": 5359,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/PainterProbe/verification.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Textures/SmokeTest/Painter/SM_PipelineProbe_M_PipelineProbe_Green_Normal.png",
+      "role": "texture_export",
+      "sha256": "3b029cc952c53262bdb085fa2d9ee40deb91d2f673e665d04b1fde9e0ffaa56a",
+      "size_bytes": 568971,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/PainterProbe/verification.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/SmokeTest/Painter/M_PipelineProbe_Painter.uasset",
+      "role": "unreal_material",
+      "sha256": "fae20ddeebeaa3ceb0a02b272206029c6bdb53a2e36bc82e8668c80e3d6577c1",
+      "size_bytes": 12204,
+      "unreal_package": "/Game/Development/SmokeTest/Painter/M_PipelineProbe_Painter",
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/PainterProbe/verification.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/SmokeTest/Painter/T_PipelineProbe_BaseColor.uasset",
+      "role": "unreal_texture",
+      "sha256": "80370b62a02fcc5ad91acfff87fc847d7dbea01d605599f39d4ba3823a8c5c54",
+      "size_bytes": 14222,
+      "unreal_package": "/Game/Development/SmokeTest/Painter/T_PipelineProbe_BaseColor",
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/PainterProbe/verification.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/SmokeTest/Painter/T_PipelineProbe_Normal.uasset",
+      "role": "unreal_texture",
+      "sha256": "08b73ec37e59e323abfa3c2062effdc4c472333884ba59c65955b41c461ff83d",
+      "size_bytes": 708709,
+      "unreal_package": "/Game/Development/SmokeTest/Painter/T_PipelineProbe_Normal",
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/PainterProbe/verification.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/SmokeTest/Painter/T_PipelineProbe_ORM.uasset",
+      "role": "unreal_texture",
+      "sha256": "f46e23bb3eae42277c3d3e2de4c5574ba6894f707a37aab2c1743c4c2adfcebc",
+      "size_bytes": 14464,
+      "unreal_package": "/Game/Development/SmokeTest/Painter/T_PipelineProbe_ORM",
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/PainterProbe/verification.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/SmokeTest/PipelineProbe.blend",
+      "role": "blender_source",
+      "sha256": "60e0df7585da9ff6a3e88c0430747c659368f4255c1d9a7719147fe8154e1c3a",
+      "size_bytes": 65401,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/BlenderProbe/asset-hashes.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/SmokeTest/SM_PipelineProbe.uasset",
+      "role": "unreal_mesh",
+      "sha256": "595a529b23db07a5d851c033d99bb308a13f89f4e8bb08940b3167d2dba6de09",
+      "size_bytes": 19011,
+      "unreal_package": "/Game/Development/SmokeTest/SM_PipelineProbe",
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/PainterProbe/unreal-material.json",
+          "note": "Later Painter report explicitly saves/rebinds this mesh; old Blender hash is superseded. Current fingerprint is an inventory baseline, not historical byte verification."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/SmokeTest/M_PipelineProbe_Green.uasset",
+      "role": "unreal_material",
+      "sha256": "e1d33c7e041a7d03c1695c99342e62f85cdc6f5f07b34e155b43f773e52730a0",
+      "size_bytes": 9843,
+      "unreal_package": "/Game/Development/SmokeTest/M_PipelineProbe_Green",
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/BlenderProbe/asset-hashes.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Saved/Exports/SmokeTest/SM_PipelineProbe.fbx",
+      "role": "mesh_export",
+      "sha256": "63197a151948f183121824dc8507a44f7588de91f219c3e1cae6bab3e7ed1526",
+      "size_bytes": 16076,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/BlenderProbe/export.json",
+          "note": "Export report identifies this file but has no accepted hash; current fingerprint is an inventory baseline only."
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "upstream": "Assets/Source/SmokeTest/PipelineProbe.blend",
+      "downstream": "Saved/Exports/SmokeTest/SM_PipelineProbe.fbx",
+      "kind": "export",
+      "status": "verified",
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/BlenderProbe/export.json",
+          "note": "Report explicitly records Blender source and FBX export."
+        }
+      ]
+    },
+    {
+      "upstream": "Saved/Exports/SmokeTest/SM_PipelineProbe.fbx",
+      "downstream": "Assets/Source/SmokeTest/PipelineProbe.spp",
+      "kind": "project_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Documented pipeline input; saved SPP provenance was not independently parsed."
+        }
+      ]
+    },
+    {
+      "upstream": "Saved/Exports/SmokeTest/SM_PipelineProbe.fbx",
+      "downstream": "Content/Development/SmokeTest/SM_PipelineProbe.uasset",
+      "kind": "import",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Documented FBX import; exact import-source metadata has not been independently read."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/SmokeTest/PipelineProbe.spp",
+      "downstream": "Assets/Textures/SmokeTest/Painter/SM_PipelineProbe_M_PipelineProbe_Green_BaseColor.png",
+      "kind": "export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Documented Painter export; saved SPP-to-file derivation is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Textures/SmokeTest/Painter/SM_PipelineProbe_M_PipelineProbe_Green_BaseColor.png",
+      "downstream": "Content/Development/SmokeTest/Painter/T_PipelineProbe_BaseColor.uasset",
+      "kind": "import",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Filename/channel mapping consistent with workflow; not verified import metadata."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/SmokeTest/Painter/T_PipelineProbe_BaseColor.uasset",
+      "downstream": "Content/Development/SmokeTest/Painter/M_PipelineProbe_Painter.uasset",
+      "kind": "texture_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Expected texture/material mapping; report does not independently identify the texture object in each sample."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/SmokeTest/PipelineProbe.spp",
+      "downstream": "Assets/Textures/SmokeTest/Painter/SM_PipelineProbe_M_PipelineProbe_Green_OcclusionRoughnessMetallic.png",
+      "kind": "export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Documented Painter export; saved SPP-to-file derivation is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Textures/SmokeTest/Painter/SM_PipelineProbe_M_PipelineProbe_Green_OcclusionRoughnessMetallic.png",
+      "downstream": "Content/Development/SmokeTest/Painter/T_PipelineProbe_ORM.uasset",
+      "kind": "import",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Filename/channel mapping consistent with workflow; not verified import metadata."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/SmokeTest/Painter/T_PipelineProbe_ORM.uasset",
+      "downstream": "Content/Development/SmokeTest/Painter/M_PipelineProbe_Painter.uasset",
+      "kind": "texture_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Expected texture/material mapping; report does not independently identify the texture object in each sample."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/SmokeTest/PipelineProbe.spp",
+      "downstream": "Assets/Textures/SmokeTest/Painter/SM_PipelineProbe_M_PipelineProbe_Green_Normal.png",
+      "kind": "export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Documented Painter export; saved SPP-to-file derivation is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Textures/SmokeTest/Painter/SM_PipelineProbe_M_PipelineProbe_Green_Normal.png",
+      "downstream": "Content/Development/SmokeTest/Painter/T_PipelineProbe_Normal.uasset",
+      "kind": "import",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Filename/channel mapping consistent with workflow; not verified import metadata."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/SmokeTest/Painter/T_PipelineProbe_Normal.uasset",
+      "downstream": "Content/Development/SmokeTest/Painter/M_PipelineProbe_Painter.uasset",
+      "kind": "texture_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PainterWorkflow.md",
+          "note": "Expected texture/material mapping; report does not independently identify the texture object in each sample."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/SmokeTest/Painter/M_PipelineProbe_Painter.uasset",
+      "downstream": "Content/Development/SmokeTest/SM_PipelineProbe.uasset",
+      "kind": "material_assignment",
+      "status": "verified",
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/PainterProbe/unreal-material.json",
+          "note": "Saved material assignment verified in the existing Unreal acceptance report."
+        }
+      ]
+    }
+  ]
+}

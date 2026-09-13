@@ -1,0 +1,517 @@
+{
+  "asset": "BenchA",
+  "artifacts": [
+    {
+      "path": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.blend",
+      "role": "blender_source",
+      "sha256": "26424b1583689985110d7c4fb2685c469c8b5e2e91cc8ed0b47636ad948226c1",
+      "size_bytes": 85969,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.spp",
+      "role": "painter_source",
+      "sha256": "64b3ae52a6dffee3840ea6a3cbb267807e57ade8aa3038ede650e2e9966443bf",
+      "size_bytes": 13112505,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_BaseColor.png",
+      "role": "texture_export",
+      "sha256": "04d0849cc508fc33ab649e4550210cc6c86d8cdbfa26f7bebe5958838388e889",
+      "size_bytes": 5361,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_Normal.png",
+      "role": "texture_export",
+      "sha256": "3b029cc952c53262bdb085fa2d9ee40deb91d2f673e665d04b1fde9e0ffaa56a",
+      "size_bytes": 568971,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_OcclusionRoughnessMetallic.png",
+      "role": "texture_export",
+      "sha256": "078654dae4807369bcc02144047a652b16751043cd2463c70845a3a09ef3d82c",
+      "size_bytes": 5355,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_BaseColor.png",
+      "role": "texture_export",
+      "sha256": "18b8c22ad898a6b0bddf17130d2107d11efb1c9c3435f92ab594be2a0f2b5926",
+      "size_bytes": 5360,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_Normal.png",
+      "role": "texture_export",
+      "sha256": "3b029cc952c53262bdb085fa2d9ee40deb91d2f673e665d04b1fde9e0ffaa56a",
+      "size_bytes": 568971,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_OcclusionRoughnessMetallic.png",
+      "role": "texture_export",
+      "sha256": "5b048392e19a5ef6af874364413d66582fb00b2665372793216e7e944993161f",
+      "size_bytes": 5357,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/Benchmark/BenchA/M_BenchA_Body.uasset",
+      "role": "unreal_material",
+      "sha256": "e46e9e3c3630170cbc9d184f766438b237fe33fce01bc683af31172ec4b25eb0",
+      "size_bytes": 12032,
+      "unreal_package": "/Game/Development/Benchmark/BenchA/M_BenchA_Body",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/Benchmark/BenchA/M_BenchA_Metal.uasset",
+      "role": "unreal_material",
+      "sha256": "66c7927669ec22d472d4b3b35d0de347d1b800fea1921a3a42b562d2cac50601",
+      "size_bytes": 11884,
+      "unreal_package": "/Game/Development/Benchmark/BenchA/M_BenchA_Metal",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/Benchmark/BenchA/SM_BenchA_Crate.uasset",
+      "role": "unreal_mesh",
+      "sha256": "a9ca74984ca941ced6e48346760907231eec828766157ba5c3678d848d2a6462",
+      "size_bytes": 50273,
+      "unreal_package": "/Game/Development/Benchmark/BenchA/SM_BenchA_Crate",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/Benchmark/BenchA/T_BenchA_Body_BaseColor.uasset",
+      "role": "unreal_texture",
+      "sha256": "7104b9558411c1907488d36ff2d5b74da35d1e38cdf9e77d1a288aac2fe3721b",
+      "size_bytes": 14379,
+      "unreal_package": "/Game/Development/Benchmark/BenchA/T_BenchA_Body_BaseColor",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/Benchmark/BenchA/T_BenchA_Body_Normal.uasset",
+      "role": "unreal_texture",
+      "sha256": "8f35e83402cfb895aa59352403a2346c942c41a262a0e53607b860c7535ca63d",
+      "size_bytes": 708867,
+      "unreal_package": "/Game/Development/Benchmark/BenchA/T_BenchA_Body_Normal",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/Benchmark/BenchA/T_BenchA_Body_ORM.uasset",
+      "role": "unreal_texture",
+      "sha256": "f42c52aad6d82b72cb486b393e18b31982b6e210ba5ad330128130191c09df11",
+      "size_bytes": 14543,
+      "unreal_package": "/Game/Development/Benchmark/BenchA/T_BenchA_Body_ORM",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_BaseColor.uasset",
+      "role": "unreal_texture",
+      "sha256": "70cfd240a308c1ae3a973a318c20ef5265d5a39e0f1ef290d23b64f17be3c1c3",
+      "size_bytes": 14401,
+      "unreal_package": "/Game/Development/Benchmark/BenchA/T_BenchA_Metal_BaseColor",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_Normal.uasset",
+      "role": "unreal_texture",
+      "sha256": "c7350484fe93909251e08c134b361516791862cef7dbccee9309df23dbc06da1",
+      "size_bytes": 708890,
+      "unreal_package": "/Game/Development/Benchmark/BenchA/T_BenchA_Metal_Normal",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_ORM.uasset",
+      "role": "unreal_texture",
+      "sha256": "d1139c32bc1674adb450db054c445ed1e6202ef90742bc18397bee9d0bb4904a",
+      "size_bytes": 14581,
+      "unreal_package": "/Game/Development/Benchmark/BenchA/T_BenchA_Metal_ORM",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    },
+    {
+      "path": "Saved/Exports/SmokeTest/OrchestrationAB/BenchA/SM_BenchA_Crate.fbx",
+      "role": "mesh_export",
+      "sha256": "0540da4a38a30b54d629b1d2ac0c82fcf3a6e503df8a589a0df5c7d0733fae56",
+      "size_bytes": 42076,
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABResults.json",
+          "note": "Saved acceptance manifest; current bytes match its SHA-256."
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "upstream": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.blend",
+      "downstream": "Saved/Exports/SmokeTest/OrchestrationAB/BenchA/SM_BenchA_Crate.fbx",
+      "kind": "export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Accepted workflow describes source/export parity; exact derivation is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Saved/Exports/SmokeTest/OrchestrationAB/BenchA/SM_BenchA_Crate.fbx",
+      "downstream": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.spp",
+      "kind": "project_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Documented pipeline input; saved SPP provenance was not independently parsed."
+        }
+      ]
+    },
+    {
+      "upstream": "Saved/Exports/SmokeTest/OrchestrationAB/BenchA/SM_BenchA_Crate.fbx",
+      "downstream": "Content/Development/Benchmark/BenchA/SM_BenchA_Crate.uasset",
+      "kind": "import",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Documented FBX import; exact import-source metadata has not been independently read."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.spp",
+      "downstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_BaseColor.png",
+      "kind": "export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Documented Painter export; saved SPP-to-file derivation is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_BaseColor.png",
+      "downstream": "Content/Development/Benchmark/BenchA/T_BenchA_Body_BaseColor.uasset",
+      "kind": "import",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Filename/channel mapping consistent with workflow; not verified import metadata."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/Benchmark/BenchA/T_BenchA_Body_BaseColor.uasset",
+      "downstream": "Content/Development/Benchmark/BenchA/M_BenchA_Body.uasset",
+      "kind": "texture_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Expected texture/material mapping; report does not independently identify the texture object in each sample."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.spp",
+      "downstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_Normal.png",
+      "kind": "export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Documented Painter export; saved SPP-to-file derivation is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_Normal.png",
+      "downstream": "Content/Development/Benchmark/BenchA/T_BenchA_Body_Normal.uasset",
+      "kind": "import",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Filename/channel mapping consistent with workflow; not verified import metadata."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/Benchmark/BenchA/T_BenchA_Body_Normal.uasset",
+      "downstream": "Content/Development/Benchmark/BenchA/M_BenchA_Body.uasset",
+      "kind": "texture_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Expected texture/material mapping; report does not independently identify the texture object in each sample."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.spp",
+      "downstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_OcclusionRoughnessMetallic.png",
+      "kind": "export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Documented Painter export; saved SPP-to-file derivation is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Body_OcclusionRoughnessMetallic.png",
+      "downstream": "Content/Development/Benchmark/BenchA/T_BenchA_Body_ORM.uasset",
+      "kind": "import",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Filename/channel mapping consistent with workflow; not verified import metadata."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/Benchmark/BenchA/T_BenchA_Body_ORM.uasset",
+      "downstream": "Content/Development/Benchmark/BenchA/M_BenchA_Body.uasset",
+      "kind": "texture_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Expected texture/material mapping; report does not independently identify the texture object in each sample."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.spp",
+      "downstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_BaseColor.png",
+      "kind": "export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Documented Painter export; saved SPP-to-file derivation is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_BaseColor.png",
+      "downstream": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_BaseColor.uasset",
+      "kind": "import",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Filename/channel mapping consistent with workflow; not verified import metadata."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_BaseColor.uasset",
+      "downstream": "Content/Development/Benchmark/BenchA/M_BenchA_Metal.uasset",
+      "kind": "texture_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Expected texture/material mapping; report does not independently identify the texture object in each sample."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.spp",
+      "downstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_Normal.png",
+      "kind": "export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Documented Painter export; saved SPP-to-file derivation is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_Normal.png",
+      "downstream": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_Normal.uasset",
+      "kind": "import",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Filename/channel mapping consistent with workflow; not verified import metadata."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_Normal.uasset",
+      "downstream": "Content/Development/Benchmark/BenchA/M_BenchA_Metal.uasset",
+      "kind": "texture_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Expected texture/material mapping; report does not independently identify the texture object in each sample."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/SmokeTest/OrchestrationAB/BenchA/Crate.spp",
+      "downstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_OcclusionRoughnessMetallic.png",
+      "kind": "export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Documented Painter export; saved SPP-to-file derivation is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Textures/SmokeTest/Painter/OrchestrationAB/BenchA/SM_BenchA_Crate_M_BenchA_Metal_OcclusionRoughnessMetallic.png",
+      "downstream": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_ORM.uasset",
+      "kind": "import",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Filename/channel mapping consistent with workflow; not verified import metadata."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/Benchmark/BenchA/T_BenchA_Metal_ORM.uasset",
+      "downstream": "Content/Development/Benchmark/BenchA/M_BenchA_Metal.uasset",
+      "kind": "texture_input",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/Benchmarks/OrchestrationABComparison.md",
+          "note": "Expected texture/material mapping; report does not independently identify the texture object in each sample."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/Benchmark/BenchA/M_BenchA_Body.uasset",
+      "downstream": "Content/Development/Benchmark/BenchA/SM_BenchA_Crate.uasset",
+      "kind": "material_assignment",
+      "status": "verified",
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/OrchestrationAB/Independent/BenchA/unreal-verification.json",
+          "note": "Saved material assignment verified in the existing Unreal acceptance report."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/Benchmark/BenchA/M_BenchA_Metal.uasset",
+      "downstream": "Content/Development/Benchmark/BenchA/SM_BenchA_Crate.uasset",
+      "kind": "material_assignment",
+      "status": "verified",
+      "evidence": [
+        {
+          "source": "Saved/AgentSetup/OrchestrationAB/Independent/BenchA/unreal-verification.json",
+          "note": "Saved material assignment verified in the existing Unreal acceptance report."
+        }
+      ]
+    }
+  ]
+}
