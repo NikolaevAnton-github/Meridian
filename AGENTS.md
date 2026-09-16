@@ -1,5 +1,18 @@
 # MeridianSquad agent instructions
 
+- Latest owner direction, 2026-09-16: close all current lobby tasks and defer
+  their remaining work until gameplay has been integrated; the owner will then
+  provide a new list. See Docs/Approvals/LobbyDeferred01-OwnerClosure01.json and
+  Docs/OpeningLobbyDeferred01.md. MSQ-4/6/7/14/20/28/30 are administratively
+  closed as cancelled, with disposition CLOSED_BY_OWNER_DEFERRAL. This closes
+  their pending work/owner-review gates without rejecting retained assets,
+  granting new visual acceptance or declaring deferred verification complete.
+  UpperVoid01 acceptance and done MSQ-31/32 remain unchanged. Preserve current
+  scene/assets/sources, owner edits, gameplay and all historical evidence.
+  Earlier active/backlog/in-review directions below are historical; do not
+  resume lobby work or dispatch from them. Wait for the owner's new scope.
+  This administrative request does not dispatch gameplay implementation.
+
 - Latest owner acceptance, 2026-09-16: the owner is satisfied with the current
   UpperVoid01 height-corrected atmosphere and explicitly requested closure.
   See Docs/Approvals/LobbyUpperVoid01-Acceptance01.json and

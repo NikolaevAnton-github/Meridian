@@ -1,5 +1,12 @@
 # Entrance glazing refinement: deferred by owner
 
+Current status, 2026-09-16: MSQ-30 is **CLOSED_BY_OWNER_DEFERRAL**, terminal
+`cancelled`, as part of the owner's closure of all remaining lobby tasks.
+The owner will provide a new list after gameplay integration. Existing glass
+and the unresolved visual finding are retained; this is not optical acceptance.
+See the [owner decision](../Approvals/LobbyDeferred01-OwnerClosure01.json).
+The earlier backlog status and diagnostic plan below are historical only.
+
 Status: backlog, no run authorized by this record. On2026-09-15 the owner said
 to skip glass for now and work on it separately later. See
 ../Approvals/LobbyMaterialsComplete01-GlazingDeferred01.json. This deferred task

@@ -1,0 +1,41 @@
+{
+  "record_id": "LobbyDeferred01-OwnerClosure01",
+  "date_local": "2026-09-16",
+  "source": "Owner direct chat after the controller summarized the remaining lobby work",
+  "owner_message_english_translation": "I suggest we defer all of this for now and close the tasks. Then, after gameplay has been integrated here, I will write a list of what is needed.",
+  "decision": "Close all currently open lobby tasks and defer their remaining work and owner-review gates. Future lobby work will be specified by the owner after gameplay integration.",
+  "disposition": "CLOSED_BY_OWNER_DEFERRAL",
+  "multica_terminal_status": "cancelled",
+  "status_meaning": "Administrative closure of the current scope at the owner's request. This does not reject retained assets, grant new visual acceptance, or claim that deferred work and verification have been completed.",
+  "issues": [
+    { "identifier": "MSQ-4", "previous_status": "in_progress", "scope": "Overall lobby walkthrough milestone" },
+    { "identifier": "MSQ-6", "previous_status": "in_progress", "scope": "Remaining architecture/material work and acceptance" },
+    { "identifier": "MSQ-7", "previous_status": "in_progress", "scope": "Remaining atmosphere and final walkthrough acceptance" },
+    { "identifier": "MSQ-14", "previous_status": "in_review", "scope": "Historical Variant A neutral 3D owner-review gate" },
+    { "identifier": "MSQ-20", "previous_status": "in_review", "scope": "Functional 3D assembly owner-review gate" },
+    { "identifier": "MSQ-28", "previous_status": "in_review", "scope": "Complete opaque materials and stone slab owner-review gate" },
+    { "identifier": "MSQ-30", "previous_status": "backlog", "scope": "Entrance glazing refinement" }
+  ],
+  "deferred_scope": [
+    "Entrance glazing refinement and unresolved visual R1",
+    "Further dressing, fixtures, signage, furniture and any owner-selected static damage",
+    "Final whole-scene route checks, comparable captures and performance acceptance",
+    "Remaining overall architecture/material/lobby owner acceptance and stable accepted asset registration/handoff"
+  ],
+  "preserved": [
+    "Current map, owner edits, all material bindings, native assets/sources, atmosphere, glass/support and gameplay",
+    "All existing evidence, failed trials, manifests and previously recorded scoped acceptances",
+    "Completed and previously cancelled Multica issues, including done MSQ-31 and MSQ-32"
+  ],
+  "observed_saved_map": {
+    "path": "Content/Maps/L_OpeningLobby_PainterStone01.umap",
+    "sha256": "b28fa0f6e8bb80dcc71b4789df9c3e2375a3cf8b1da67021225584e4560fd92f",
+    "meaning": "Read-only snapshot during administrative closure, not a new whole-lobby acceptance or a restriction on future owner/gameplay edits"
+  },
+  "supersedes": "Earlier active/backlog/in-review lobby scheduling and the obligation to continue the remaining work or wait at the listed owner-review gates. Historical requirements remain reference material until replaced by a new owner scope.",
+  "resume_condition": "A new owner-provided list after gameplay integration; no automatic resumption or dispatch from historical task documents.",
+  "new_production_or_gameplay_run_authorized_by_this_record": false,
+  "administrative_updates_suppress_run": true,
+  "closure_evidence": "Saved/OpeningLobby/OwnerDeferral01/Controller/",
+  "summary": "Docs/OpeningLobbyDeferred01.md"
+}

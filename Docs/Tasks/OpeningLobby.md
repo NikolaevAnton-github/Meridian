@@ -1,5 +1,14 @@
 # Opening lobby walkthrough
 
+Current status, 2026-09-16: **CLOSED_BY_OWNER_DEFERRAL**. The owner requested
+closure of all remaining lobby tasks and will provide a new list after gameplay
+integration. MSQ-4/6/7/14/20/28/30 are terminal `cancelled` for administrative
+closure, without new visual acceptance or rejection of retained work. Existing
+UpperVoid01 acceptance remains valid. See the
+[owner decision](../Approvals/LobbyDeferred01-OwnerClosure01.json) and
+[closure summary](../OpeningLobbyDeferred01.md). No automatic resumption is
+authorized. The status narrative and requirements below are historical reference.
+
 Status: Stage 1 (Multica MSQ-5) passed technical acceptance on 2026-09-13.
 The owner subsequently rejected the spatial direction: the current layout does
 not match the intended lobby. Its technical result remains valid as historical

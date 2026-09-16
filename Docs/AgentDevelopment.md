@@ -1,5 +1,11 @@
 # MeridianSquad agent development
 
+Current lobby status, 2026-09-16: MSQ-4/6/7/14/20/28/30 are closed by owner
+deferral. Future lobby work awaits the owner's new list after gameplay
+integration; older in-progress/backlog/in-review wording below is historical.
+See [the closure decision](Approvals/LobbyDeferred01-OwnerClosure01.json) and
+[summary](OpeningLobbyDeferred01.md). UpperVoid01 remains accepted and closed.
+
 ## Constraints and decisions
 
 - Ryzen 9800X3D, 32 GB RAM, RTX 5090. Project disk budget: at most 250 GB.

@@ -1,5 +1,11 @@
 # Game direction
 
+Current lobby scheduling, 2026-09-16: the owner closed all remaining lobby tasks
+and deferred further work until a new owner list after gameplay integration.
+See [the closure decision](../Approvals/LobbyDeferred01-OwnerClosure01.json).
+Earlier lobby dispatch/status wording below is historical; fixed product
+direction is unchanged. This closure does not commission a gameplay task.
+
 Owner brief recorded on 2026-09-13. This document distinguishes product goals
 from the scope of the first environment milestone. MeridianSquad is the current
 project/repository name; a final public game title has not been established.

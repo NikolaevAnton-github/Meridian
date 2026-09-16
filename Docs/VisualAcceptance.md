@@ -1,5 +1,11 @@
 # Environment visual acceptance
 
+Current lobby disposition, 2026-09-16: all remaining lobby tasks and pending
+owner-review gates are closed by owner deferral until a new post-gameplay list.
+See [the owner decision](Approvals/LobbyDeferred01-OwnerClosure01.json).
+Prior scoped acceptances and review evidence are preserved. Historical lobby
+authorization/status wording below does not authorize further dispatch.
+
 ## Current architectural recovery direction, 2026-09-14
 
 The owner subsequently rejected the current Architecture01 result's overall
