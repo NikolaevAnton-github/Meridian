@@ -1,0 +1,159 @@
+{
+  "schema": 1,
+  "candidate_id": "LobbyFunctional-Revision01/Candidate01",
+  "status": "pending_independent_review",
+  "base": "project root",
+  "scope": "Immutable 2D proposal only. Pending independent review and named-package owner approval; no 3D authorization.",
+  "manifest_exclusions": [
+    "manifest.json and manifest.sha256 (self-reference)",
+    "Worker transient browser profile, HTML wrappers and render logs",
+    "Worker freeze-verification.json (post-freeze read-only verification receipt)"
+  ],
+  "entries": [
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/01-plan-circulation.png",
+      "bytes": 115540,
+      "sha256": "4b0f4e1baf1d2871dfa35da6a079ff960439e3ab68b8e53f9abd416a8143ef82"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/01-plan-circulation.svg",
+      "bytes": 24841,
+      "sha256": "c0e575bcd829d056eefdb05790c5856218cb2f466c5b96719700253db4250559"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/02-entrance-checkpoint.png",
+      "bytes": 140325,
+      "sha256": "d3776cbec5c563c12e6ec6375c9129f54519938237f8807cc4c2d350830df9e7"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/02-entrance-checkpoint.svg",
+      "bytes": 12259,
+      "sha256": "deb2395cc03ff362703789d471e7bcb2efd2a641fabb5da81167e86f1291b6ac"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/03-inner-elevator.png",
+      "bytes": 111399,
+      "sha256": "358a22abc9d91e23631a36d9221c80294553b83a8c5a48f80839a41d36400f41"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/03-inner-elevator.svg",
+      "bytes": 9684,
+      "sha256": "2bfb96a7bcd507b4526e401c6d93fb931d13d9d0f6bd515d214734ee9b7fe0a0"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/04-room-faces.png",
+      "bytes": 123546,
+      "sha256": "227a406c44f5b7d250090d55e55e4eb05f251d805c2f223d4729da0015efd936"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/04-room-faces.svg",
+      "bytes": 13916,
+      "sha256": "130f311323d327b5e2e602b6910802b6905aa0ed1415557e8874cacd00da34c7"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/05-spatial-context.png",
+      "bytes": 298476,
+      "sha256": "7842392e10c186d88eda734200fff707350f528109286702bd8c4838a90497a2"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/05-spatial-context.svg",
+      "bytes": 6126176,
+      "sha256": "d1ec1d5586850be1be5d4a0db15dc8f1541804822350f319c36742ed646802f5"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/assemble.mjs",
+      "bytes": 502,
+      "sha256": "2a8a6b6e172982ccd0376397b2be97b9081fd31113e6364d11597fb04eb84c2f"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/audit-text.mjs",
+      "bytes": 3596,
+      "sha256": "f95fe4a735bcbb4d8c5c5a188c0f90f77e56f20489517adbecd965c9499a5a7f"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/design.json",
+      "bytes": 10717,
+      "sha256": "9b6a047fad0b34587f1fa1372f5de9845232e8a2df3bf419303ab772d58f1456"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/drafting.mjs.txt",
+      "bytes": 12060,
+      "sha256": "3c0982f4db5a3839bd63785b0e1ad16edd810b8e4a99fcc71d812782de011dc7"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/freeze.mjs",
+      "bytes": 3897,
+      "sha256": "5b68e973581cacf831d7f97588318137e7cb4879b46334080c5b0a86b4c9922d"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/generate.mjs",
+      "bytes": 33321,
+      "sha256": "54d77bf4ca2ad767ffc9e6e6a82fba8c0ab198a541c42031f3c4b9a6ffddfd93"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/input-provenance.json",
+      "bytes": 3493,
+      "sha256": "6c5c455f38bae1e2c834371e3d168bdbd49fd885a65da23c9488093aeaa6ae89"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/occlusion.mjs.txt",
+      "bytes": 1716,
+      "sha256": "3edc01ff24a0eb1bb9f5ee64115ac0ab179143596eb2d54e1734564ade20be9c"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/README.md",
+      "bytes": 14196,
+      "sha256": "9fd28dc478db3143896fe3c074006784e8ff48acfed40acc108d41559e70aac2"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/render.mjs.txt",
+      "bytes": 1764,
+      "sha256": "95dff4d236b28aa38cefa8f55a9d429fe36c66e4b2a6f2fda2d4c35f8bd54915"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/sheets.mjs.txt",
+      "bytes": 17778,
+      "sha256": "3f421c1c3470bbe943148d71b7bfd423755f221ddb664eda0d9bfd366f1ecb04"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision01/verify.mjs",
+      "bytes": 8889,
+      "sha256": "6286d3730f5f0e5fc72c865e65d124dfae6e83f2338bc9bd3b1a4b5a9aa313e9"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision01/Worker/drawing-bounds.json",
+      "bytes": 16557,
+      "sha256": "697f8d0e674d99604e4f9ce60b71c724f11157f42b5ec56400295d364e7a6e7d"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision01/Worker/handoff.md",
+      "bytes": 1117,
+      "sha256": "2cff7f69b6657afc650fd782d669a6446e0cbf1178e01fd2ebab4260cb01ce62"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision01/Worker/sheets.json",
+      "bytes": 407,
+      "sha256": "7c1a5ffaa249456163089eb50bdc0a174f56a32852c98659fd6c2bc1c8ac299f"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision01/Worker/text-audit.json",
+      "bytes": 698,
+      "sha256": "23c3da741d9be0f268d40686280af74c77286a571d595a16a19aae4a7cd8027d"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision01/Worker/text-records.json",
+      "bytes": 28166,
+      "sha256": "098b778ad8e9e03d51b76f7cfcf74ac9c4ee9c4f12de3b2470fe0612a5013977"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision01/Worker/verification.json",
+      "bytes": 34711,
+      "sha256": "5f18fdff85ffa261f0a3d3e3bc97af8fa61353ea680414d5d50fd17a926f81d5"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision01/Worker/visual-inspection.md",
+      "bytes": 2481,
+      "sha256": "f8aa240a5f2cf163a96be6247ed1fa2ffa3476e57b417f98c96809dfd62a9972"
+    }
+  ]
+}

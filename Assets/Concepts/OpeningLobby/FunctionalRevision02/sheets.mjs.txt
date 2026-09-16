@@ -1,0 +1,123 @@
+const all=solids(V),R=D.rooms,Q=D.checkpoint,E=D.elevator,N=D.columns;
+function cutPlan(px,py,s,xlo=-30,xhi=30){
+ for(const o of all.filter(o=>o.b[4]<1&&o.b[5]>1)){
+  const [a,b,c,d]=o.b;if(b<=xlo||a>=xhi)continue;
+  const fill=o.kind==='checkpoint'?C.orange:o.kind==='newcolumn'?'#ba956c':o.kind==='infill'?'#c6b39a':o.kind==='metal'?C.deep:C.stone;
+  rect(px(Math.max(a,xlo)),py(d),(Math.min(b,xhi)-Math.max(a,xlo))*s,(d-c)*s,fill,C.ink,1,`data-element="${o.id}" data-scale="${s}"`);
+ }
+}
+function path2(points,px,py,color=C.teal,width=2){for(let i=1;i<points.length;i++)arrow(px(points[i-1][0]),py(points[i-1][1]),px(points[i][0]),py(points[i][1]),color,width);}
+function roomTint(px,py,s){for(const d of R.doors){const [a,b]=R[d.end+'_x'];rect(px(a),py(d.sign>0?12:-5.6),(b-a)*s,6.4*s,'#eee4d6','none');}}
+function stripsPlan(px,py,s,x0=-30,x1=30){for(const sign of [-1,1])rect(px(x0),py(sign*S.floor_strips.abs_y+S.floor_strips.width/2),(x1-x0)*s,S.floor_strips.width*s,'#d5dace','none');}
+function markerImage(x,y,w,h){out.push(`<image x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid meet" href="data:image/png;base64,${fs.readFileSync(path.join(dir,'OwnerMarkup01.png')).toString('base64')}"/>`);}
+start('01-plan-markup','Four corner rooms close the terminal aisles','Owner yellow strokes control topology. Exact room and new-column metres below are proposals; hall remains 60 x 24 x 18.');
+{
+ const s=21,px=x=>170+(x+30)*s,py=y=>490-y*s;
+ text(55,183,'PLAN Z 1.0 / +X right, +Y up / green: original piers / tan: new walls and four tall columns',18,C.teal);
+ rect(px(-30),py(12),60*s,24*s,C.white);stripsPlan(px,py,s);roomTint(px,py,s);cutPlan(px,py,s);
+ for(const r of D.routes.polylines)path2(r.points,px,py,C.teal,r.id.startsWith('column')?1.2:2);
+ for(const d of R.doors){tag(px(d.end==='entrance'?-25.5:25.5),py(d.sign*9),d.id);path2([d.centre,[d.centre[0]+d.normal[0]*1.3,d.centre[1]+d.normal[1]*1.3]],px,py,C.orange,2.5);}
+ for(const x of N.x)for(const y of N.y)text(px(x),py(y)+5,'N',16,C.deep,'middle',700);
+ dh(px(-30),px(30),214,'60.00 overall');dv(114,py(12),py(-12),'24.00 overall');
+ text(px(-30),775,'ENTRANCE -30',17,C.teal);text(px(30),775,'ELEVATOR +30',17,C.teal,'end');
+ for(const x of [-19.8,-12.6,12.6,19.8]){line(px(x),py(12)-8,px(x),py(12),C.teal);text(px(x),py(12)-13,`${x}`,16,C.teal,'middle');}
+ bar(170,797,s);person(1440,831,s);text(1490,818,'1.8 m',16,C.orange);
+ markerImage(55,872,500,230);text(55,1126,'OwnerMarkup01 / entire unmodified source paired in package',16,C.muted);
+ notes(590,867,['MARKUP MAPPING / high-confidence topology; regularized dimensions','Four large outlines -> 10.2 x 6.4 gross corner rooms, |Y|5.6..12.','Small entrance marks -> doors on X -19.8, normals +X (orange).','Inner door marks -> X26.1 / Y +/-5.6, normals toward hall.','Four central squares -> N columns, X +/-12.6 / Y +/-2.4, Z0..18.','Routes terminate before closed doors. Aisles run only X -19.8..19.8.','Cross between hall and aisles at X +/-16.8 in the open 6 m bays.','Exactly two entrance floor paths through checkpoint; no terminal bypass.'],18,32);
+}
+save();
+start('02-rooms-closure','Transverse service doors; hall-facing inner doors','All four gross rooms: 10.20 x 6.40. No dividing wall at |Y|8. Four original terminal piers are integrated into the enclosures.');
+{
+ panelTitle(55,187,'P','Positive-Y rooms / mirror across Y0');
+ const s=30,py=y=>445-(y-5.6)*s,p1=x=>70+(x+30)*s,p2=x=>500+(x-19.8)*s;
+ for(const [px,a,b,id] of [[p1,-30,-19.8,'E+'],[p2,19.8,30,'I+']]){
+  rect(px(a),py(12),(b-a)*s,6.4*s,'#eee4d6');
+  out.push(`<defs><clipPath id="${id}cut"><rect x="${px(a)}" y="${py(12)}" width="${(b-a)*s}" height="${6.4*s}"/></clipPath></defs><g clip-path="url(#${id}cut)">`);cutPlan(px,py,s,a,b);out.push('</g>');
+  dh(px(a),px(b),225,'10.20 gross');text(px(a),488,id+' / unknown interior',17,C.muted);
+ }
+ dv(840,py(12),py(5.6),'6.40 gross');
+ path2([[-19.8,10],[-18.2,10]],p1,py,C.orange);path2([[26.1,5.6],[26.1,4.2]],p2,py,C.orange);
+ notes(910,231,['DOOR NORMALS / closed endpoints','E+ / E- : X -19.8, Y +/-10; face +X.','Approach from remaining aisle on +X side.','I+ : X26.1, Y5.6; face -Y.','I- : X26.1, Y-5.6; face +Y.','Entrance hall faces and inner caps: blind.','No old X-25.5 / |Y|8 service doors.','Both door types: 1.20 W x 2.40 H.','Wall 0.36; recess 0.24; frame 0.12.'],18,31);
+ line(44,540,1556,540,C.line);
+ panelTitle(55,580,'T','Room roof step / X -25 / look +X');
+ const k=36,yy=y=>85+(y-5.6)*k,zz=z=>1030-z*k;
+ // Section outside the old pier: one enlarged enclosed volume under stepped closure.
+ rect(yy(5.6),zz(8.4),.36*k,8.4*k,'#c6b39a');rect(yy(11.64),zz(9.2),.36*k,9.2*k,'#c6b39a');
+ rect(yy(5.6),zz(8.4),2.4*k,.36*k,'#c6b39a');rect(yy(8),zz(9.2),4*k,.36*k,'#c6b39a');
+ rect(yy(5.6),zz(11.2),2.4*k,2.8*k,'url(#cut)');line(yy(8),zz(9.2),yy(12),zz(9.2),C.stone,4);
+ line(yy(5),zz(0),yy(12),zz(0),C.ink,2);person(yy(9.8),zz(0),k);eye(yy(5),yy(12),zz(0),k);
+ dh(yy(5.6),yy(12),1070,'6.40 gross');leader(yy(8),zz(9.2),400,668,'Z9.20 soffit / closure top');
+ notes(395,720,['Z8.40 band closure meets old beam.','Z8.84..9.20 aisle closure touches','beam side at |Y|8; no upper slot.','Wall and closure thickness 0.36.','No internal wall at |Y|8.','No new floor or accessible roof.','Retained coffer edges stay enclosed.'],17,32);
+ text(55,1110,'Human 1.8 / eye 1.72; interior silhouette is scale only, not a usable-room claim.',16,C.muted);
+ panelTitle(910,580,'L','Service door / Y +10 / look +Y');
+ const q=42,xx=x=>940+(x+22)*q,z=z=>1030-z*q;
+ rect(xx(-20.16),z(9.2),.36*q,(9.2-2.52)*q,'#c6b39a');rect(xx(-22),z(9.2),(22-19.8)*q,.36*q,'#c6b39a');
+ rect(xx(-20.16),z(2.52),.36*q,.12*q,C.deep);rect(xx(-20.10),z(2.4),.06*q,2.4*q,C.deep);
+ line(xx(-22),z(0),xx(-14),z(0),C.ink,2);person(xx(-18.4),z(0),q);eye(xx(-22),xx(-14),z(0),q);
+ arrow(xx(-17),z(.25),xx(-19.15),z(.25),C.orange);
+ dv(1380,z(9.2),z(0),'9.20 closure top');
+ notes(1100,710,['Remaining corridor on +X.','Wall face X -19.80.','Closed leaf face X -20.04.','1.20 W / 2.40 H opening.','0.24 recess; threshold Z0.','Inner leaves |Y|5.84.'],17,32);
+}
+save();
+start('03-retained-functions','Two checkpoint lanes and the large inner elevator','Carried forward from Revision01 without new approval. Enlarged rooms now close the old side-aisle bypass at floor level.');
+{
+ panelTitle(55,185,'C','Checkpoint / hall-facing elevation');
+ const s=58,px=y=>395-y*s,pz=z=>480-z*s;
+ for(const o of all.filter(o=>o.kind==='checkpoint')){const [a,b,c,d,e,g]=o.b;rect(px(d),pz(g),(d-c)*s,(g-e)*s,C.orange);}
+ for(const y of Q.lane_centres_y){person(px(y),pz(0),s);dh(px(y+.75),px(y-.75),315,'1.50');}
+ eye(px(5.6),px(-5.6),pz(0),s);dh(px(5.6),px(-5.6),524,'11.20 control line / wall to wall');
+ notes(55,575,['X -24.60 / depth 0.90 / lane centres Y +/-4.65.','Lane height 2.40; overall frame height 2.58.','Joined desk 7.40 wide / top Z1.02 / posts 0.20.','End posts touch room hall faces at |Y|5.60.','Exactly two 1.50 m physical floor openings.','Capsule diameter 0.68 leaves 0.41 m on each side.','Entrance-to-near-checkpoint face: 4.95 m.'],19,33);
+ panelTitle(850,185,'E','Inner elevation / look +X');
+ const q=31,cx=1150,b=817,yy=y=>cx+y*q,zz=z=>b-z*q;
+ rect(yy(-8),zz(18),16*q,18*q,C.pale);
+ for(const sg of [-1,1]){rect(yy(sg<0?-8:5.6),zz(11.2),2.4*q,11.2*q,C.stone);rect(yy(sg<0?-8:6.2),zz(18),1.8*q,6.8*q,C.pale);}
+ rect(yy(-E.outer_width/2),zz(E.outer_height),E.outer_width*q,E.outer_height*q,C.stone);rect(yy(-1.8),zz(4.2),3.6*q,4.2*q,C.deep);line(cx,zz(0),cx,zz(4.2),C.line);
+ const v=E.sign_zone;rect(yy(-v.width/2),zz(v.z[1]),v.width*q,(v.z[1]-v.z[0])*q,'none',C.teal,1.5,'stroke-dasharray="8 6"');
+ notes(cx-90,zz(14.8),['OPAQUE WALL','Blank future name/logo','6.0 x 6.0 reservation'],16,27,C.teal);
+ person(yy(3.5),b,q);eye(yy(-5.6),yy(5.6),b,q);dv(1450,zz(18),b,'18.00 retained');dh(yy(-1.8),yy(1.8),857,'3.60 opening');
+ line(44,893,1556,893,C.line);
+ notes(55,940,['Retained A entrance: glazing X-30; main jamb face X-28.4; reveal X-29.0.','Datum Z5.28..5.40 and upper glazing head Z17.80 remain.','Rooms bound the checkpoint line; side aisles are reached after control.','Floor-level route study only: no detector, anti-jump or security gameplay claim.'],18,38);
+ notes(900,940,['Elevator opening 3.60 W x 4.20 H; closed leaves X30.','Reveal 0.60 / front X29.40 / frame 0.40.','Remove full 2.4 x 6.2 high window and its grid.','Reservation is annotation only; no logo, cab or shaft.'],18,38);
+}
+save();
+start('04-columns-passages','Four new columns meet the main ceiling at 18 m','Exact X +/-12.6, Y +/-2.4 and 2.40 square section are proposals. Twelve original piers retain their positions and sizes.');
+{
+ panelTitle(55,185,'T','Transverse section / X -12.6 / look +X');
+ const s=31,py=y=>455+y*s,pz=z=>837-z*s;
+ for(const o of all.filter(o=>o.b[0]<-12.6&&o.b[1]>-12.6)){const [a,b,c,d,e,g]=o.b;rect(py(c),pz(g),(d-c)*s,(g-e)*s,o.kind==='newcolumn'?'#ba956c':'url(#cut)');}
+ line(py(-8),pz(18),py(8),pz(18),C.ink,3);for(const sg of [-1,1])line(py(sg*8),pz(9.2),py(sg*12),pz(9.2),C.stone,3);
+ line(py(-12),pz(0),py(12),pz(0),C.ink,2);for(const y of [-4.6,0,4.6])person(py(y),pz(0),s);eye(py(-5.6),py(5.6),pz(0),s);
+ dh(py(-1.2),py(1.2),886,'2.40');dh(py(-5.6),py(-3.6),886,'2.00');dh(py(3.6),py(5.6),886,'2.00');
+ dv(865,pz(18),pz(0),'18.00 / ten 1.8 m humans');
+ text(80,253,'Main ceiling Z18 / flush full-section contact; no capital or ceiling opening',17,C.teal);
+ notes(55,944,['At both X stations: gaps measured between actual shaft faces.','Axis: Y -1.2..1.2; sides: |Y|3.6..5.6.','Centred capsule margins: axis 0.86; side passages 0.66 m.','New top Z18 exceeds beam top Z11.2 by 6.8 m.','Human 1.80 / eye 1.72 / capsule R0.34 / walk 3.6 m/s.'],18,33);
+ panelTitle(940,185,'P','Pair plan / cut Z1.0');
+ const k=33,xx=x=>1000+(x+15.6)*k,yy=y=>510-y*k;
+ rect(xx(-15.6),yy(8),6*k,16*k,C.white);stripsPlan(xx,yy,k,-15.6,-9.6);cutPlan(xx,yy,k,-15.6,-9.6);
+ for(const y of [-4.6,0,4.6])path2([[-15.5,y],[-9.7,y]],xx,yy);
+ dh(xx(-13.8),xx(-11.4),813,'2.40 shaft');
+ notes(1245,275,['New centres','X +/-12.6','Y +/-2.4','Original shafts','Y +/-6.8','2.40 square','height 8.40'],18,33);
+ notes(940,868,['Strips stay at |Y|2.20, width 0.64; no relocation.','Four shaft-covered areas: 2.40 x 0.64 each.'],18,31);
+ panelTitle(940,939,'L','Longitudinal section / Y +2.4');
+ const ls=8,lx=x=>995+(x+30)*ls,lz=z=>1104-z*ls;
+ line(lx(-30),lz(0),lx(30),lz(0),C.ink,2);line(lx(-30),lz(18),lx(30),lz(18),C.ink,2);
+ for(const x of N.x)rect(lx(x-N.section[0]/2),lz(N.z[1]),N.section[0]*ls,(N.z[1]-N.z[0])*ls,'#ba956c');
+ person(lx(0),lz(0),ls);eye(lx(-30),lx(30),lz(0),ls);
+ dh(lx(N.x[0]),lx(N.x[1]),1131,'25.20 between pair centres');dv(1520,lz(18),lz(0),'18.00');
+ text(950,1109,'-30',15,C.teal);text(1482,1109,'+30',15,C.teal);
+}
+save();
+start('05-spatial-context','Entrance, inner end, full hall and the service-door approach','SVG perspective drawings from design.json; neutral diagram colours. Camera eye 1.72 m and HFOV 90 throughout.');
+{
+ const views=[['A','Entrance / retained portal','entrance',44,205],['B','Inner end / retained proposal','inner',824,205],['C','Whole hall / both new pairs','context',44,695],['D','Positive aisle / closed service door','aisle',824,695]];
+ for(const [id,title,key,x,y] of views){panelTitle(x,y-23,id,title);perspective(V,D.drawing_cameras[key],{x,y,w:732,h:key==='context'||key==='aisle'?380:360},'view'+id);const c=D.drawing_cameras[key];text(x,y+(key==='context'||key==='aisle'?407:387),`X ${c.xyz[0]} / Y ${c.xyz[1]} / yaw ${c.yaw} / pitch +${c.pitch} / eye ${c.xyz[2]} / HFOV ${c.hfov}`,17);}
+ text(44,623,'Portal main -28.4 > reveal -29.0 > glass -30; blind hall infill.',17,C.muted);
+ text(824,623,'Elevator remains focal; both inner doors face the hall.',17,C.muted);
+ text(44,1131,'Four tan shafts reach Z18; axial view narrows to 2.4 m at each pair.',17,C.muted);
+ text(824,1131,'Door in X-19.8 cap faces this corridor; room continues to outer wall.',17,C.muted);
+}
+save();
+fs.writeFileSync(path.join(worker,'sheets.json'),JSON.stringify(sheets,null,2)+'\n');
+fs.writeFileSync(path.join(worker,'text-records.json'),JSON.stringify(textRecords,null,2)+'\n');
+fs.writeFileSync(path.join(worker,'drawing-bounds.json'),JSON.stringify({scope:'Derived 2D drawing bounds only; no mesh or scene output',objects:all},null,2)+'\n');
+console.log(`Generated ${sheets.length} SVG sheets`);

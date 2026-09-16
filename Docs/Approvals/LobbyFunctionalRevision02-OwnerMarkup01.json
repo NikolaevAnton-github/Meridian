@@ -1,0 +1,31 @@
+{
+  "decision_id": "LobbyFunctionalRevision02-OwnerMarkup01",
+  "recorded_on": "2026-09-14",
+  "source": "Owner direct chat and attached yellow-marked plan",
+  "owner_message_english_translation": "No, not quite. I marked in yellow on the drawing how it should be, and let's also add several columns reaching the ceiling; I drew those in yellow too.",
+  "decision": "FunctionalRevision01 interpretation rejected; corrected drawing study requested from owner markup",
+  "rejected_package": "LobbyFunctional-Revision01/Candidate01",
+  "rejected_manifest_sha256": "c7828c0bfdebd05705d2a47194b10bd44db437b2c02adc80971d82166c3196eb",
+  "markup": "Assets/Concepts/OpeningLobby/FunctionalRevision02Inputs/OwnerMarkup01.png",
+  "markup_sha256": "fedce738e8218f3a80c5f811b4d2cbab947b96c02d965f45e5355fab02880541",
+  "readable_corrections": [
+    "Four terminal rooms extend through the former terminal side aisles to the outer walls",
+    "Transverse room caps align near hallward faces of X +/-21 terminal piers",
+    "Entrance service doors move to transverse caps facing the remaining side corridors",
+    "Inner stair-access doors face the hall; inner transverse caps stay blind",
+    "Four new columns within the central hall reach the main ceiling"
+  ],
+  "proposed_coordinate_interpretation": {
+    "room_gross_extents_m": "Entrance X -30..-19.8, inner X 19.8..30, both |Y|5.6..12",
+    "entrance_door_centres_m": "X -19.8, Y +/-10, normal +X",
+    "new_column_centres_m": "X +/-12.6, Y +/-2.4",
+    "new_column_section_m": [2.4, 2.4],
+    "new_column_height_m": 18,
+    "status": "Dimensions regularized from rough markup; not exact owner-approved measurements"
+  },
+  "authority_delta": "Latest markup supersedes former preservation of terminal longitudinal aisles and narrow colonnade-band enclosures",
+  "unmarked_elements": "Carry checkpoint/elevator proposals forward without treating the lack of yellow marks as exact dimension approval",
+  "next_task": "Docs/Tasks/OpeningLobbyFunctionalRevision02.md",
+  "three_d_authorized_by_this_record": false,
+  "preservation": "Original markup copied unchanged; prior frozen candidate and reviews remain historical."
+}

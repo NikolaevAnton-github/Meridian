@@ -1,0 +1,33 @@
+{
+  "package": "LobbyScale-Review01",
+  "status": "pending_owner_approval",
+  "units": "metres, degrees, seconds",
+  "authority": "Owner requires monumental architecture at least twice Layout02. Exact 2x candidate is a proposal; photographs do not establish dimensions.",
+  "coordinates": "X entrance to inner end; Y across hall; Z up. Plan +X right and +Y up. Looking -X, +Y is screen left.",
+  "architecture": {
+    "old": {"length":30,"width":12,"height":9,"central_clear":5.6,"pier_size":1.2,"shaft_height":4.2,"bay_pitch":4.2,"bay_clear":3,"aisle_clear":2,"aisle_height":4.6,"lintel_width":1.2,"lintel_depth":1.4,"lintel_underside":4.2,"pier_x":[-10.5,-6.3,-2.1,2.1,6.3,10.5],"pier_y":3.4,"floor_strip_width":0.32,"floor_strip_y":1.1},
+    "candidate": {"length":60,"width":24,"height":18,"central_clear":11.2,"pier_size":2.4,"shaft_height":8.4,"bay_pitch":8.4,"bay_clear":6,"aisle_clear":4,"aisle_height":9.2,"lintel_width":2.4,"lintel_depth":2.8,"lintel_underside":8.4,"pier_x":[-21,-12.6,-4.2,4.2,12.6,21],"pier_y":6.8,"floor_strip_width":0.64,"floor_strip_y":2.2},
+    "pair_count":6,
+    "unseen": "Roof construction, wall thickness, external facade, off-camera connections and structural engineering unresolved. Lines represent interior faces. Upper walls over the two lintels are proposed solid infill, as Layout02; not recovered from art."
+  },
+  "end_fields": {
+    "old": {"entrance_field_width":2.6,"entry_field_height":2.64,"upper_sill":2.7,"upper_height":6.2,"inner_window_width":1.2,"inner_window_sill":5.7,"inner_window_height":3.1},
+    "candidate": {"entrance_field_width":5.2,"entry_field_height":5.28,"upper_sill":5.4,"upper_height":12.4,"inner_window_width":2.4,"inner_window_sill":11.4,"inner_window_height":6.2},
+    "status":"Exact 2x estimated architectural fields. Proposed mullion subdivisions are schematic, not fabricated dimensions."
+  },
+  "human_elements": {
+    "inner_door": {"old_width":1.04,"old_height":2.18,"candidate_width":1.04,"candidate_height":2.18,"candidate_frame_width":1.22,"candidate_frame_height":2.32,"x":30,"y":0,"status":"Proposed retained human-size exception; destination unspecified. Old decorative leaf bottom was Z=0.01; drawings use nominal floor datum 0."},
+    "entrance_leaves": {"old_operable_dimensions":null,"old_inferred_panel_width":0.65,"old_lower_field_height":2.64,"candidate_leaf_count":2,"candidate_leaf_width":1.04,"candidate_leaf_height":2.64,"x":-30,"y":0,"status":"Additional explicit proposed human-size exception. Old central two panels were nominally 0.65 m each between mullion centre lines, not verified operable leaves. Candidate nominal leaves total 2.08 m; fixed sidelights and overlight fill the 5.2 x 5.28 m lower field. Net opening and hardware unresolved; no route beyond end walls authorized."},
+    "detector": {"old_x":-12.3,"old_y":-1.05,"x":-24.6,"y":-1.05,"old_clear_width":1.14,"old_clear_height":2.28,"clear_width":1.14,"clear_height":2.28,"post_width":0.16,"depth":0.55,"header_depth":0.14,"status":"Proposed retained human-size exception, including frame and depth. X doubled; local Y retained to keep one compact checkpoint group."},
+    "station": {"old_x":-12.3,"old_y":0.95,"x":-24.6,"y":0.95,"old_depth_x":0.85,"old_width_y":2.2,"old_body_height":0.96,"old_worktop_height":1.02,"depth_x":0.85,"width_y":2.2,"body_height":0.96,"worktop_depth_x":0.95,"worktop_width_y":2.3,"worktop_height":1.02,"worktop_thickness":0.06,"status":"Proposed retained footprint and working-height exception. Group spacing retained; not an owner request. Monitor geometry is outside this dimension package."}
+  },
+  "human_reference": {"height":1.8,"eye_height":1.72,"walk_speed":3.6,"capsule_radius":0.34,"capsule_half_height":0.88,"gameplay_horizontal_fov":90},
+  "cameras": [
+    {"id":"C1","name":"Entrance to inner","xyz":[-19,0,1.72],"yaw":0,"pitch":0,"roll":0,"estimated_reference_hfov":75,"aspect":"16:9","target":"inner door, six-pair rhythm, both aisles","status":"Proposed capture pose; reference lens and source camera position unverified."},
+    {"id":"C2","name":"Inner to entrance","xyz":[19,0,1.72],"yaw":180,"pitch":0,"roll":0,"estimated_reference_hfov":75,"aspect":"16:9","target":"entrance glazing, station screen-left of detector, both aisles","status":"Proposed capture pose; not a camera reconstruction."},
+    {"id":"C3","name":"Security oblique","xyz":[-14,3.5,1.72],"target_xy":[-24.6,3.5],"yaw":180,"pitch":0,"roll":0,"estimated_reference_hfov":90,"aspect":"16:9","target":"complete checkpoint, adjacent +Y pier, entrance glazing and side-aisle connection","status":"Initial estimate; camera is offset +Y and looks parallel to the hall. Checkpoint appears screen-right, +Y pier screen-left. Actual later capture must prove framing. No close-up substitution."}
+  ],
+  "capture_protocol": {"resolution":[1920,1080],"gameplay_hfov":90,"reference_hfov_status":"Estimates only; record any later adjustment. Capture unchanged 90-degree gameplay view at every same pose as well.","implementation_tolerance_proposal":0.05},
+  "sections": {"A":"Longitudinal Y=0 looking +Y, piers at +Y shown in projection","B":"Transverse X=4.2 looking +X, through a pier pair","E1":"Interior inner elevation at X=30 looking +X; foreground structure omitted","E2":"Interior entrance elevation at X=-30 looking -X; checkpoint projected from X=-24.6"},
+  "approval_decisions": ["Accept or revise the exact 2x architectural schedule and six-pair rhythm.","Accept or revise unchanged inner door and checkpoint dimensions, retained local checkpoint spacing, and proposed 1.04 x 2.64 m entrance leaves.","Accept or revise doubled glazing fields, floor strips, proposed upper infill and end-wall composition.","Accept or revise circulation, camera estimates and proposed 0.05 m implementation tolerance; unseen connections remain unresolved.","Identify this package by manifest hash alongside the unchanged LobbyArt-Review02 hashes; only the owner can approve. Independent visual review must happen first."]
+}

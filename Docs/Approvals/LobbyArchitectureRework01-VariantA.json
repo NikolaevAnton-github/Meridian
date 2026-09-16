@@ -1,0 +1,27 @@
+{
+  "decision_id": "LobbyArchitectureRework01-VariantA",
+  "recorded_on": "2026-09-14",
+  "approved_by": "Project owner",
+  "decision_source": "Explicit owner message in the direct project chat on 2026-09-14",
+  "owner_message_english_translation": "I reviewed the new drawings and chose option A. Before proceeding, I want to know whether the executor has skills for editor work and what reasoning level will be used.",
+  "decision": "Variant A selected after owner review of the drawings",
+  "candidate": "LobbyArchitecture-Rework01 / Candidate01",
+  "selected_variant": "A",
+  "manifest": "Assets/Concepts/OpeningLobby/ArchitectureRework01/manifest.json",
+  "manifest_sha256": "fb0f306ff60011d01a1008345017d9029964301b2365d81d8ca5d5eba686a4df",
+  "approved_scope": "The identified Variant A architectural drawing proposal, including its explicit secondary depth, upper-wall and soffit deltas, preserving the previously approved overall hall scale and human-scale exceptions.",
+  "preserved_authority": ["LobbyArt-Review02", "LobbyScale-Review01", "LobbyLayout03-Scale01"],
+  "independent_review": "Docs/OpeningLobbyArchitectureRework01Review.json",
+  "subsequent_owner_instruction_english_translation": "Let's do it at max; proceed.",
+  "production_authorized_on": "2026-09-14",
+  "authorized_production_task": "Docs/Tasks/OpeningLobbyArchitectureReworkA01.md",
+  "authorized_reasoning": "gpt-6-astra / max / standard service, existing subscription",
+  "next_step": "Execute the separate bounded Multica production task for the selected entrance and adjoining bays in neutral material, with independent review and bounded correction.",
+  "production_dispatched_by_this_record": false,
+  "not_assessed_or_accepted": [
+    "Variant B",
+    "Existing or future 3D implementation quality",
+    "Materials, lighting, final detailing or completion of the lobby milestone"
+  ],
+  "historical_evidence_note": "The immutable candidate and independent review retain their original pending-owner fields. This external decision records the later owner selection without modifying reviewed bytes."
+}

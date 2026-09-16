@@ -1,0 +1,15 @@
+{
+  "record_id": "LobbyMaterialsComplete01-StoneSlabs01",
+  "date_local": "2026-09-15",
+  "source": "Owner direct chat after glazing was deferred",
+  "owner_message_english_translation": "I have a few comments: I see that the columns now have one gloss and the walls another, but I like the appearance of the columns. Also, this is tile: on the floor it is visible as tile, but the columns and walls look like continuous material. It would be better to make large-format tile.",
+  "decision": "Use the current accepted column stone response as the gloss reference for walls. Add a readable large-format stone slab layout with thin joints to columns and walls. Preserve the existing mineral character and floor; glazing remains deferred.",
+  "supersedes": [
+    "Review01 R2's requirement to retain a quieter broad-wall gloss than the current column gloss",
+    "The existing binding-only preservation restriction for four accepted stone components, solely to apply the requested slab variants"
+  ],
+  "preservation": "Accepted stone texture, material and native Painter source bytes remain immutable. New material variants may reuse them read-only. Accepted floor/strip and metal bindings, ceiling, current glazing/support, geometry, transforms, collision, gameplay, lights and exposure remain unchanged.",
+  "implementation_scope": "Native Unreal material graphs for slab joints and projection; no geometry production or new texture pixels are required. The user's material-layout instruction does not require a new architectural concept gate.",
+  "module_decision": "The controller asked an optional orientation/module preference. Any eventual default must be identified as the controller's working choice, not exact owner approval.",
+  "acceptance_status": "Direction and implementation authorized; resulting slab material bytes remain subject to fresh independent review and owner viewing. No final atmosphere acceptance."
+}

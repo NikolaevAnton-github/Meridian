@@ -1,0 +1,25 @@
+{
+  "Fixed": {
+    "path": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_GlassFixed.M_C01_GlassFixed",
+    "recipe": {
+      "albedo": 0.9,
+      "transmission": 0.72,
+      "roughness": 0.48
+    }
+  },
+  "Leaf": {
+    "path": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_GlassLeaf.M_C01_GlassLeaf",
+    "recipe": {
+      "albedo": 0.65,
+      "transmission": 0.88,
+      "roughness": 0.18
+    }
+  },
+  "Stone": {
+    "path": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+    "roughness": "0.57 + 0.35 * accepted ORM.G",
+    "specular": 0.35,
+    "F0": 0.028,
+    "unchanged": "BaseColor, mineral world projection at 240 cm, normal, metallic, AO; all source textures read-only"
+  }
+}

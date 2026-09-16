@@ -1,0 +1,13 @@
+ for(const sign of [-1,1])add('retained-inner-band'+sign,29.97,30,sign<0?-8:5.6,sign<0?-5.6:8,0,18,'stone');
+ const x0=Q.x-Q.depth/2,x1=Q.x+Q.depth/2;
+ add('joined-desk',x0,x1,...Q.desk_y,0,Q.desk_height-Q.top_thickness,'checkpoint');
+ add('joined-top',x0,x1,...Q.desk_y,Q.desk_height-Q.top_thickness,Q.desk_height,'checkpoint');
+ for(const y of Q.lane_centres_y){
+  for(const sign of [-1,1]){const c=y+sign*(Q.net_width/2+Q.post_width/2);add('lane-post'+y+sign,x0,x1,c-Q.post_width/2,c+Q.post_width/2,0,Q.net_height,'checkpoint');}
+  add('lane-head'+y,x0,x1,y-Q.net_width/2-Q.post_width,y+Q.net_width/2+Q.post_width,Q.net_height,Q.net_height+Q.header_height,'checkpoint');
+ }
+ for(const sign of [-1,1])add('elevator-jamb'+sign,E.front_x,E.leaf_x,sign<0?-E.outer_width/2:E.opening_width/2,sign<0?-E.opening_width/2:E.outer_width/2,0,E.outer_height,'stone');
+ add('elevator-head',E.front_x,E.leaf_x,-E.opening_width/2,E.opening_width/2,E.opening_height,E.outer_height,'stone');
+ for(const sign of [-1,1])add('elevator-closed-leaf'+sign,E.leaf_x,E.leaf_x+E.leaf_thickness,sign<0?-E.opening_width/2:0,sign<0?0:E.opening_width/2,0,E.opening_height,'metal');
+ return a;
+}

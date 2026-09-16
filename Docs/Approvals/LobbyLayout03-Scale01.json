@@ -1,0 +1,27 @@
+{
+  "decision_id": "LobbyLayout03-Scale01",
+  "candidate": "Layout03 / Correction01",
+  "task": "MSQ-11",
+  "recorded_on": "2026-09-14",
+  "approved_by": "Project owner",
+  "decision": "Scale accepted; detailing not assessed",
+  "owner_message_english_translation": "The lobby scale is accepted; I am not assessing detailing yet; let us continue.",
+  "decision_source": "Explicit owner message in the direct project chat on 2026-09-14",
+  "map": "/Game/Maps/L_OpeningLobby_Layout03",
+  "map_file": "Content/Maps/L_OpeningLobby_Layout03.umap",
+  "map_sha256": "3ffb79dac80eeb13fa527e43e2724eeac605013b3bbf288dbdb309c45f66dc30",
+  "approved_scope": "Perceived in-game lobby scale of the identified neutral blockout, completing the owner scale gate after its recorded technical and independent visual reviews.",
+  "dimensional_authority": "LobbyScale-Review01",
+  "scale_manifest_sha256": "e7c113fd8b74ea2106d8af29391cdfece7a1f763db272fb9727da0568a65efb6",
+  "art_authority": "LobbyArt-Review02",
+  "technical_and_independent_review": "Docs/OpeningLobbyLayout03.md; Saved/OpeningLobby/Layout03/Review/report.md and verdict.json",
+  "controller_identity_check": "All eight map/material asset hashes match the independent recheck candidate. Epic MCP confirmed MeridianSquad UE 5.8.1, Layout03 loaded, PIE stopped and no dirty packages before recording this decision.",
+  "authorized_next_step": "MSQ-6 architecture and material production following Docs/Tasks/OpeningLobbyArchitecture01.md, preserving the accepted scale and original Layout03 assets.",
+  "not_assessed_or_accepted": [
+    "Existing or future detailing and material quality",
+    "Final lighting, atmosphere, dressing or damage",
+    "Completion of the overall environment milestone or new runtime test by the owner"
+  ],
+  "unchanged_open_questions": "Inner-door destination and operation, unseen routes, structural engineering and narrative/damage staging remain unresolved.",
+  "historical_evidence_note": "Earlier reports retain their original pending-owner metadata. This external decision supersedes that gate only for the identified candidate and explicit scale scope. It does not rewrite the approved art, drawings or historical reviewer reports."
+}

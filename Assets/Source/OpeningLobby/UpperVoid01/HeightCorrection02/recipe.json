@@ -1,0 +1,135 @@
+{
+  "candidate": "LobbyAtmosphere-UpperVoid01/HeightCorrection02",
+  "trial": "Trial02",
+  "fade_start_cm": 1370,
+  "fade_end_cm": 1780,
+  "postprocess": "float h = saturate((WorldCm.z - FadeStartCm) / max(FadeEndCm - FadeStartCm, 1.0));\n// Early visible decay with a long dark tail, anchored exclusively to world height.\nfloat tail = (1.0-h)*(1.0-h)*(1.0+2.0*h);\nreturn exp(-8.0*h*h)*tail;",
+  "light_function": "float h = saturate((WorldCm.z - FadeStartCm) / max(FadeEndCm - FadeStartCm, 1.0));\n// Broad cubic light transmission avoids duplicating the sharper extinction curve.\nreturn (1.0-h)*(1.0-h)*(1.0+2.0*h);",
+  "materials": [
+    {
+      "asset": "/Game/OpeningLobby/UpperVoid01/M_UpperVoid_Extinction.M_UpperVoid_Extinction",
+      "changes": [
+        {
+          "node": "MaterialExpressionScalarParameter_0",
+          "property": "defaultValue",
+          "before": 1400.0,
+          "after": 1370.0
+        },
+        {
+          "node": "MaterialExpressionScalarParameter_1",
+          "property": "defaultValue",
+          "before": 1750.0,
+          "after": 1780.0
+        },
+        {
+          "node": "MaterialExpressionCustom_0",
+          "property": "code",
+          "before": "float h = saturate((WorldCm.z - FadeStartCm) / max(FadeEndCm - FadeStartCm, 1.0));\n// Quintic extinction: zero derivatives at both endpoints, fixed world height.\nfloat extinction = h*h*h*(h*(h*6.0-15.0)+10.0);\nreturn 1.0-extinction;",
+          "after": "float h = saturate((WorldCm.z - FadeStartCm) / max(FadeEndCm - FadeStartCm, 1.0));\n// Early visible decay with a long dark tail, anchored exclusively to world height.\nfloat tail = (1.0-h)*(1.0-h)*(1.0+2.0*h);\nreturn exp(-8.0*h*h)*tail;"
+        }
+      ]
+    },
+    {
+      "asset": "/Game/OpeningLobby/UpperVoid01/M_UpperVoid_LightTransmission.M_UpperVoid_LightTransmission",
+      "changes": [
+        {
+          "node": "MaterialExpressionScalarParameter_0",
+          "property": "defaultValue",
+          "before": 1400.0,
+          "after": 1370.0
+        },
+        {
+          "node": "MaterialExpressionScalarParameter_1",
+          "property": "defaultValue",
+          "before": 1750.0,
+          "after": 1780.0
+        },
+        {
+          "node": "MaterialExpressionCustom_0",
+          "property": "code",
+          "before": "float h = saturate((WorldCm.z - FadeStartCm) / max(FadeEndCm - FadeStartCm, 1.0));\n// Quintic extinction: zero derivatives at both endpoints, fixed world height.\nfloat extinction = h*h*h*(h*(h*6.0-15.0)+10.0);\nreturn 1.0-extinction;",
+          "after": "float h = saturate((WorldCm.z - FadeStartCm) / max(FadeEndCm - FadeStartCm, 1.0));\n// Broad cubic light transmission avoids duplicating the sharper extinction curve.\nreturn (1.0-h)*(1.0-h)*(1.0+2.0*h);"
+        }
+      ]
+    }
+  ],
+  "lights": [
+    {
+      "actor": "PointLight_1",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.05000000074505806
+    },
+    {
+      "actor": "PointLight_4",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.05000000074505806
+    },
+    {
+      "actor": "PointLight_7",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.05000000074505806
+    },
+    {
+      "actor": "PointLight_10",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.05000000074505806
+    },
+    {
+      "actor": "PointLight_13",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.05000000074505806
+    },
+    {
+      "actor": "PointLight_16",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.05000000074505806
+    }
+  ],
+  "rationale": "Earlier visible decline within high zone with long dark tail; broad light transmission; suppress upper central specular pool without dimming diffuse fill or changing twelve aisle lights.",
+  "fixed_exposure": "Manual bias -5 unchanged",
+  "revision_deltas": [
+    {
+      "actor": "PointLight_1",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 20000.0
+    },
+    {
+      "actor": "PointLight_4",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 20000.0
+    },
+    {
+      "actor": "PointLight_7",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 20000.0
+    },
+    {
+      "actor": "PointLight_10",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 20000.0
+    },
+    {
+      "actor": "PointLight_13",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 20000.0
+    },
+    {
+      "actor": "PointLight_16",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 20000.0
+    }
+  ],
+  "revision_reason": "Trial01 still showed a bright terminal pool in the exact close pose. Reduce six central diffuse fills to 20 percent, preserving their positions/radii and all twelve aisle fills."
+}

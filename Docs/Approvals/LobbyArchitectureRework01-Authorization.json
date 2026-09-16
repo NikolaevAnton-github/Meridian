@@ -1,0 +1,20 @@
+{
+  "decision_id": "LobbyArchitectureRework01-Authorization",
+  "recorded_on": "2026-09-14",
+  "decision_source": "Owner direct chat: architectural criticism with entrance crop, followed by explicit 'Act' authorization of the proposed recovery workflow.",
+  "owner_direction_english": "The current lobby is architecturally dry and substantially less sophisticated than the art. Develop cinematic location quality, meaningful architectural depth, richer secondary forms and creativity. Investigate role instructions, reasoning and specialized skills together.",
+  "authorized_now": [
+    "Prepare and validate project-specific architectural analysis, production and review skills.",
+    "Use Multica for architectural preproduction of the entrance and adjacent colonnade, with two design alternatives and independent review.",
+    "Verify higher task-specific reasoning availability and use it for the difficult design/review work at standard speed within the existing subscription.",
+    "Prepare a named dimensioned 2D package for owner selection before renewed 3D work."
+  ],
+  "preserved_authority": ["LobbyArt-Review02", "LobbyScale-Review01", "LobbyLayout03-Scale01"],
+  "not_granted": [
+    "Approval of either new architectural variant or any new package bytes.",
+    "Acceptance of current Architecture01 details or overall cinematic quality.",
+    "Immediate 3D implementation of unapproved architectural proposals.",
+    "Paid services, added API budget, unrelated gameplay or narrative changes."
+  ],
+  "task_specification": "Docs/Tasks/OpeningLobbyArchitectureRework01.md"
+}

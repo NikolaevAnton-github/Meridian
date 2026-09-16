@@ -1,0 +1,30 @@
+{
+  "Fixed": {
+    "path": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_GlassFixed.M_C01_GlassFixed",
+    "recipe": {
+      "albedo": 0.92,
+      "transmission": 0.7,
+      "roughness": 0.5,
+      "slope": 0.045
+    },
+    "F0": 0.04,
+    "thin_surface": true,
+    "simple_volume": true,
+    "no_emission": true,
+    "normal_code": "\n// Native procedural micro-slope field; no colour, emission or texture pixels.\nfloat3 p = WorldCm / 2.0;\nfloat3 i = floor(p), f = frac(p);\nf = f*f*(3.0-2.0*f);\nfloat3 v = 0;\n[unroll] for (int z=0;z<2;z++)\n[unroll] for (int y=0;y<2;y++)\n[unroll] for (int x=0;x<2;x++) {\n    float3 c=i+float3(x,y,z);\n    float3 h=frac(sin(float3(dot(c,float3(127.1,311.7,74.7)),dot(c,float3(269.5,183.3,246.1)),dot(c,float3(113.5,271.9,124.6))))*43758.5453)*2-1;\n    float3 w=lerp(1-f,f,float3(x,y,z));\n    v+=h*w.x*w.y*w.z;\n}\nfloat footprint=max(length(ddx(p)),length(ddy(p)));\nv*=saturate(1-footprint);\nv-=GeometryNormal*dot(v,GeometryNormal);\nreturn normalize(GeometryNormal+v*Slope);\n"
+  },
+  "Leaf": {
+    "path": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_GlassLeaf.M_C01_GlassLeaf",
+    "recipe": {
+      "albedo": 0.85,
+      "transmission": 0.82,
+      "roughness": 0.25,
+      "slope": 0.025
+    },
+    "F0": 0.04,
+    "thin_surface": true,
+    "simple_volume": true,
+    "no_emission": true,
+    "normal_code": "\n// Native procedural micro-slope field; no colour, emission or texture pixels.\nfloat3 p = WorldCm / 2.0;\nfloat3 i = floor(p), f = frac(p);\nf = f*f*(3.0-2.0*f);\nfloat3 v = 0;\n[unroll] for (int z=0;z<2;z++)\n[unroll] for (int y=0;y<2;y++)\n[unroll] for (int x=0;x<2;x++) {\n    float3 c=i+float3(x,y,z);\n    float3 h=frac(sin(float3(dot(c,float3(127.1,311.7,74.7)),dot(c,float3(269.5,183.3,246.1)),dot(c,float3(113.5,271.9,124.6))))*43758.5453)*2-1;\n    float3 w=lerp(1-f,f,float3(x,y,z));\n    v+=h*w.x*w.y*w.z;\n}\nfloat footprint=max(length(ddx(p)),length(ddy(p)));\nv*=saturate(1-footprint);\nv-=GeometryNormal*dot(v,GeometryNormal);\nreturn normalize(GeometryNormal+v*Slope);\n"
+  }
+}

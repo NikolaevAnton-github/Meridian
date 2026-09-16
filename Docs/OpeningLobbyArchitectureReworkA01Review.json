@@ -1,0 +1,315 @@
+{
+  "schema": 1,
+  "review": "Review01",
+  "issue_id": "01a09fdd-c980-7128-a7e7-992e4d3e2628",
+  "reviewer": "MeridianSquad Visual Reviewer",
+  "candidate": "LobbyArchitecture-ReworkA01 / WorkerCandidate01",
+  "candidate_manifest": {
+    "path": "Saved/OpeningLobby/ArchitectureReworkA01/Worker/manifest.json",
+    "sha256": "c960e227ba7d8e7112c3510b59c7708a1047ef0ef106deadb4e0f516c8288f21",
+    "entries": 117
+  },
+  "map": {
+    "package": "/Game/Maps/L_OpeningLobby_ArchitectureReworkA01",
+    "path": "Content/Maps/L_OpeningLobby_ArchitectureReworkA01.umap",
+    "sha256": "71cfc087c80510313054255d784d1b43c45395d6400c9e0b75e9f64d7be944d0"
+  },
+  "approved_drawing_manifest_sha256": "fb0f306ff60011d01a1008345017d9029964301b2365d81d8ca5d5eba686a4df",
+  "owner_approval_record": "Docs/Approvals/LobbyArchitectureRework01-VariantA.json",
+  "skill_loaded": "Saved/Multica/workspaces/meridiansqu-6f91832bf07d/msq-15-131a9b311961/codex-home/skills/environment-architecture-review/SKILL.md",
+  "first_look_recorded_before_author_conclusions": true,
+  "first_look_sha256": "4233e6fbc997bbf275b836b8d387f3e0d612a9f6ea842cc3f0892d154a8cda1f",
+  "visual_verdict": "PASS",
+  "technical_verdict": "PASS",
+  "ready_for_owner_walkthrough": true,
+  "critical_or_unverified_requirements": [],
+  "required_corrections": [],
+  "owner_approved": false,
+  "owner_acceptance": "pending",
+  "criteria": [
+    {
+      "id": "candidate_identity",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "Bound manifest, all 117 entries, map and delivery archive hashes match.",
+      "evidence": [
+        "Worker/manifest.json",
+        "Review01/preservation.json",
+        "Review01/evidence-audit.json"
+      ]
+    },
+    {
+      "id": "approved_design_and_art",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "External A approval binds the unchanged 28-entry drawing package; all actual art/dimension bytes match.",
+      "evidence": [
+        "Docs/Approvals/LobbyArchitectureRework01-VariantA.json",
+        "Review01/integrity-audit.json"
+      ]
+    },
+    {
+      "id": "primary_composition_and_human_scale",
+      "category": "visual",
+      "critical": true,
+      "status": "PASS",
+      "finding": "Tall entrance focus, repeated heavy piers/beams, side voids and small checkpoint preserve the approved hierarchy. Neutral inner-end context remains coherent.",
+      "evidence": [
+        "OwnerReferences01/01-InnerEnd.png",
+        "OwnerReferences01/02-EntranceSecurity.png",
+        "Worker/C2-75.png",
+        "Worker/C2-90.png",
+        "Worker/C1-90.png",
+        "ArchitectureRework01/05-A-spatial.png"
+      ]
+    },
+    {
+      "id": "continuous_portal_and_real_depth",
+      "category": "visual",
+      "critical": true,
+      "status": "PASS",
+      "finding": "Continuous jamb faces, inner step, recessed pane, thin datum and closed head read as coherent solid architecture.",
+      "evidence": [
+        "ArchitectureRework01Inputs/OwnerEntranceDetail.png",
+        "ArchitectureRework01/03-A-plan-elevation.png",
+        "ArchitectureRework01/04-A-sections.png",
+        "Worker/A-oblique-106.png",
+        "Worker/A-oblique-90.png",
+        "Worker/C3-context-90.png"
+      ]
+    },
+    {
+      "id": "terminal_shoulder_bearing_free_pier_relationship",
+      "category": "visual",
+      "critical": true,
+      "status": "PASS",
+      "finding": "Recessed shoulder separates portal and engaged pier; beam lands over the end pier and the first free pier remains spatially separate.",
+      "evidence": [
+        "Worker/A-oblique-106.png",
+        "Worker/Terminal-junction-90.png",
+        "Worker/Terminal-soffit-90.png"
+      ]
+    },
+    {
+      "id": "upper_wall_setback_legibility",
+      "category": "visual",
+      "critical": true,
+      "status": "PASS",
+      "finding": "Focused original-image reinspection resolves the first-look concern: beam front/upper wall boundary and terminal step are visible. Upward-facing ledge top is naturally occluded from below.",
+      "evidence": [
+        "Worker/A-oblique-106.png: right beam edge near (1190,359) to (1449,100)",
+        "Worker/Terminal-junction-90.png: upper terminal step near (882,86)",
+        "Review01/visual-followup.json",
+        "ArchitectureRework01/04-A-sections.png"
+      ]
+    },
+    {
+      "id": "bilateral_terminal_soffit_closure",
+      "category": "visual",
+      "critical": true,
+      "status": "PASS",
+      "finding": "One quiet pocket closes at beam, wall and end; opposite bay is visible in context and corroborated by mirrored geometry/traces.",
+      "evidence": [
+        "Worker/Terminal-soffit-90.png",
+        "Worker/Terminal-junction-90.png",
+        "Worker/A-oblique-106.png",
+        "Worker/C3-context-90.png",
+        "Review01/evidence-audit.json: actual_profile_traces"
+      ]
+    },
+    {
+      "id": "required_neutral_context_views",
+      "category": "visual",
+      "critical": true,
+      "status": "PASS",
+      "finding": "All eight full frames inspected. The 106-degree drawing lens shows the head; the specified 90-degree oblique crop is a framing difference.",
+      "evidence": [
+        "Review01/first-look.md",
+        "Worker/C2-75.png",
+        "Worker/C2-90.png",
+        "Worker/A-oblique-106.png",
+        "Worker/A-oblique-90.png",
+        "Worker/C3-context-90.png",
+        "Worker/C1-90.png"
+      ]
+    },
+    {
+      "id": "primary_and_secondary_dimension_contract",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "41 direct approved-dimension comparisons and all 65 instance comparisons pass; six free pairs, 60 x 24 x 18 m hall, 6.6 m gap, 0.6 m setback and human elements retained. Numeric schedule maximum error 0.035 m within 0.05 m.",
+      "evidence": [
+        "Review01/evidence-audit.json",
+        "Worker/construction.json",
+        "Worker/schedule-verification.json",
+        "ArchitectureRework01/design.json"
+      ]
+    },
+    {
+      "id": "imported_profile_handedness_and_soffit_planes",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "All 26 actual complex traces hit the approved planes and expected actors, including both jamb hands and both field/four-edge soffit sets.",
+      "evidence": [
+        "Worker/imported-profile-probes.json",
+        "Worker/handedness-correction.json",
+        "Review01/evidence-audit.json: actual_profile_traces"
+      ]
+    },
+    {
+      "id": "source_import_normals_uv_transforms_collision",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "23 saved modules and 23 FBX reimports pass recorded topology/normals/UV/slot checks; 23 imported meshes retain normals/tangents and complex static collision. All 65 actors have matching collision assignment and unit scale.",
+      "evidence": [
+        "Worker/saved-source-audit.json",
+        "Worker/asset-audit.json",
+        "Worker/imports.json",
+        "Review01/evidence-audit.json"
+      ]
+    },
+    {
+      "id": "real_pie_full_hall_and_entrance_coverage",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "67-event full hall result retained for unchanged context; 20 completed focused events plus 30-event continuation cover all 15 corrected-entrance requirements. The failed setup report remains failed, and its affected test was successfully repeated.",
+      "evidence": [
+        "Worker/runtime-verification.json",
+        "Worker/EntranceRecheck/runtime-verification.json",
+        "Worker/EntranceRecheckResume/runtime-verification.json",
+        "Review01/evidence-audit.json: runtime_runs"
+      ]
+    },
+    {
+      "id": "new_floor_mass_contacts_and_clear_routes",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "Actual capsule movement reaches new portal/reveal/shoulder/end-pier contacts, both terminal crossovers/aisles and checkpoint both ways. Corrected contact errors stay below 0.101 cm against a 3 cm tolerance.",
+      "evidence": [
+        "Review01/evidence-audit.json: runtime_runs.contacts",
+        "Worker/route-contract.json",
+        "Worker/EntranceRecheckResume/route-contract.json"
+      ]
+    },
+    {
+      "id": "longitudinal_start_adjustment",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "Historical (-28.5,-3) is inside the A jamb. Clear (-27.5,-3) to (+28.5,-3) requires 56 m; measured 55.7996 m in 15.703 s with normal endpoint tolerance.",
+      "evidence": [
+        "Review01/evidence-audit.json: longitudinal",
+        "Worker/route-contract.json"
+      ]
+    },
+    {
+      "id": "possession_look_grounding_jump_and_gameplay_settings",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "2057 actual samples have no identity/FOV/capsule mismatches or non-jump grounding failures. Input bindings, gravity/jump/landing, speed 360 cm/s, capsule 34/88 cm and final HFOV 90 are evidenced.",
+      "evidence": [
+        "Source/MeridianSquad/OpeningLobbyCharacter.cpp",
+        "Scripts/OpeningLobby/verify_lobby.py",
+        "Worker/runtime-settings.json",
+        "Review01/evidence-audit.json"
+      ]
+    },
+    {
+      "id": "native_capture_metadata_and_identity",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "Eight 1920 x 1080 PNGs match hashes, metadata, recorded rotations and requested poses within 0.15 cm. Seven entrance images were recaptured; unaffected C1 is explicitly retained.",
+      "evidence": [
+        "Worker/capture-inventory.json",
+        "Review01/evidence-audit.json: captures"
+      ]
+    },
+    {
+      "id": "saved_reopened_state_and_cleanup_evidence",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "Frozen records and inspected save/reopen path bind the candidate, correct GameMode, final clean state, stopped PIE and restored capture/throttle settings. No reviewer live editor operation was performed.",
+      "evidence": [
+        "Worker/construction.json",
+        "Worker/final-state.json",
+        "Worker/capture-settings-restored.json",
+        "Scripts/OpeningLobby/reworka01_unreal.py: save_reopen"
+      ]
+    },
+    {
+      "id": "review_period_candidate_and_historical_preservation",
+      "category": "technical",
+      "critical": true,
+      "status": "PASS",
+      "finding": "Before/after hashes confirm read-only candidate, art and historical map inspection; protected project bytes remain stable during the measured review interval.",
+      "evidence": [
+        "Review01/preservation.json",
+        "Review01/integrity-audit.json"
+      ]
+    },
+    {
+      "id": "strict_historical_freeze_command",
+      "category": "provenance_diagnostic",
+      "critical": false,
+      "status": "FAIL",
+      "finding": "Exit 1 preserved: only Docs/VisualAcceptance.md differs from the historical input fingerprint. This is the disclosed later owner-authorization text; frozen art/design/manifest entries match.",
+      "evidence": [
+        "Review01/freeze-verification.txt",
+        "Controller/source-provenance-note.md",
+        "Review01/integrity-audit.json"
+      ]
+    },
+    {
+      "id": "whole_worker_protected_baseline_still_identical",
+      "category": "provenance_diagnostic",
+      "critical": false,
+      "status": "FAIL",
+      "finding": "282/283 match; AGENTS.md contains this reviewer run's auto-managed runtime. Non-runtime project instructions match the pre-dispatch backup after normalization. The old complete runtime snapshot is not reconstructed.",
+      "evidence": [
+        "Review01/integrity-audit.json",
+        "Review01/runtime-instructions-audit.json"
+      ]
+    },
+    {
+      "id": "final_material_atmosphere_full_lobby_detail_acceptance",
+      "category": "outside_review_scope",
+      "critical": false,
+      "status": "UNVERIFIED",
+      "finding": "Deferred by the assigned neutral-geometry scope; no final look or full-lobby detail acceptance is implied.",
+      "evidence": [
+        "Docs/Tasks/OpeningLobbyArchitectureReworkA01.md"
+      ]
+    },
+    {
+      "id": "door_operation_hidden_structure_off_camera_destinations",
+      "category": "outside_review_scope",
+      "critical": false,
+      "status": "UNVERIFIED",
+      "finding": "Explicitly unresolved design matters outside this bounded review.",
+      "evidence": [
+        "ArchitectureRework01/design.json",
+        "Docs/Tasks/OpeningLobbyArchitectureReworkA01.md"
+      ]
+    }
+  ],
+  "limits": [
+    "Independent read-only inspection of frozen source/import/runtime evidence; no new live editor, DCC or walkthrough execution by this reviewer.",
+    "Neutral entrance and terminal assembly only; material/lighting and full-hall detail acceptance remain outside scope.",
+    "The top surface of the upper ledge is occluded from low eye positions; readiness rests on visible boundary/terminal return plus measured section, not a claim to see the top surface.",
+    "The strict historical freeze command and complete old worker protected baseline are explicitly failed diagnostics with identified non-candidate exceptions."
+  ],
+  "evidence_path_base": "Worker, Controller and Review01 paths are relative to Saved/OpeningLobby/ArchitectureReworkA01; art package paths are relative to Assets/Concepts/OpeningLobby; Docs, Scripts and Source paths are project-relative.",
+  "report_sha256": "74e33f0b6069bcf187d2635fcd95a10516cd3895eac3eb7b1bb23aad43c1c41d",
+  "evidence_audit_sha256": "0e18e2661d2dc74ad012a4a2d70ff6832667cacf2cd3122afc5f2f6701ae54ff",
+  "created_at_utc": "2026-09-14T12:39:11.110Z"
+}

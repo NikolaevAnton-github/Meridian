@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="1200" viewBox="0 0 1600 1200" font-family="Arial, sans-serif"><defs><pattern id="cut" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#c5d0c0"/><path d="M0 9L9 0" stroke="#83957f" stroke-width="1"/></pattern></defs><rect x="0" y="0" width="1600" height="1200" fill="#f6f4ed" stroke="none" stroke-width="1.2" />
+<text x="44" y="37" font-size="16" fill="#187568" text-anchor="start" font-weight="600">MERIDIAN SQUAD   /   LOBBYFUNCTIONAL–REVISION01   /   CANDIDATE01</text>
+<text x="1556" y="37" font-size="22" fill="#187568" text-anchor="end" font-weight="700">02</text>
+<text x="44" y="82" font-size="34" fill="#243c38" text-anchor="start" font-weight="600">One joined checkpoint, two opposite-side lanes</text>
+<text x="44" y="119" font-size="18" fill="#60736b" text-anchor="start" font-weight="400">Proposed human-use exception: each net opening 1.50 W x 2.40 H. A entrance portal and glazing remain unchanged.</text>
+<line x1="44" y1="143" x2="1556" y2="143" stroke="#a6b2a7" stroke-width="1.4" />
+<line x1="44" y1="1145" x2="1556" y2="1145" stroke="#a6b2a7" stroke-width="1.4" />
+<text x="44" y="1176" font-size="17" fill="#ae542d" text-anchor="start" font-weight="400">2D ARCHITECTURAL DRAWINGS  •  Metres  •  Functional proposals  •  Pending independent review</text>
+<text x="1556" y="1176" font-size="17" fill="#60736b" text-anchor="end" font-weight="400">Owner approval required before 3D</text>
+<text x="55" y="186" font-size="17" fill="#187568" text-anchor="start" font-weight="700">P</text>
+<text x="98" y="186" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Checkpoint plan / cut Z 1.0</text>
+<rect x="70.08" y="240" width="619.84" height="312" fill="#fffdf7" stroke="#243c38" stroke-width="1.2" />
+<rect x="671.2" y="240" width="18.72" height="301.6" fill="#c6b39a" stroke="#243c38" stroke-width="1.2" />
+<rect x="70.08" y="240" width="18.72" height="301.6" fill="#c6b39a" stroke="#243c38" stroke-width="1.2" />
+<rect x="187.6" y="393.4" width="384.8" height="46.8" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="187.6" y="393.4" width="384.8" height="46.8" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="660.8" y="393.4" width="10.4" height="46.8" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="572.4" y="393.4" width="10.4" height="46.8" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="177.2" y="393.4" width="10.4" height="46.8" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="88.8" y="393.4" width="10.4" height="46.8" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<line x1="621.8" y1="292" x2="621.8" y2="500" stroke="#187568" stroke-width="2" />
+<line x1="621.8" y1="500" x2="617.006" y2="491.224" stroke="#187568" stroke-width="2" />
+<line x1="621.8" y1="500" x2="626.594" y2="491.224" stroke="#187568" stroke-width="2" />
+<circle cx="621.8" cy="416.8" r="17.68" fill="#187568"/>
+<line x1="582.8" y1="227" x2="660.8" y2="227" stroke="#187568" stroke-width="1.4" />
+<line x1="578.8" y1="232" x2="586.8" y2="222" stroke="#187568" stroke-width="1.4" />
+<line x1="656.8" y1="232" x2="664.8" y2="222" stroke="#187568" stroke-width="1.4" />
+<text x="621.8" y="218" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">1.50</text>
+<line x1="138.2" y1="292" x2="138.2" y2="500" stroke="#187568" stroke-width="2" />
+<line x1="138.2" y1="500" x2="133.406" y2="491.224" stroke="#187568" stroke-width="2" />
+<line x1="138.2" y1="500" x2="142.994" y2="491.224" stroke="#187568" stroke-width="2" />
+<circle cx="138.2" cy="416.8" r="17.68" fill="#187568"/>
+<line x1="99.2" y1="227" x2="177.2" y2="227" stroke="#187568" stroke-width="1.4" />
+<line x1="95.2" y1="232" x2="103.2" y2="222" stroke="#187568" stroke-width="1.4" />
+<line x1="173.2" y1="232" x2="181.2" y2="222" stroke="#187568" stroke-width="1.4" />
+<text x="138.2" y="218" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">1.50</text>
+<line x1="187.6" y1="227" x2="572.4" y2="227" stroke="#187568" stroke-width="1.4" />
+<line x1="183.6" y1="232" x2="191.6" y2="222" stroke="#187568" stroke-width="1.4" />
+<line x1="568.4" y1="232" x2="576.4" y2="222" stroke="#187568" stroke-width="1.4" />
+<text x="380" y="218" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">7.40 joined desk + barrier</text>
+<line x1="88.8" y1="588" x2="671.2" y2="588" stroke="#187568" stroke-width="1.4" />
+<line x1="84.8" y1="593" x2="92.8" y2="583" stroke="#187568" stroke-width="1.4" />
+<line x1="667.2" y1="593" x2="675.2" y2="583" stroke="#187568" stroke-width="1.4" />
+<text x="380" y="579" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">11.20 control line / wall to wall</text>
+<text x="55" y="630" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">X -24.60 centre; depth 0.90; end posts touch Y +/-5.60.</text>
+<text x="55" y="660" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">No gap beside end posts; no desk undercut or raised threshold.</text>
+<text x="835" y="186" font-size="17" fill="#187568" text-anchor="start" font-weight="700">E</text>
+<text x="878" y="186" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Hall-facing checkpoint elevation / look -X</text>
+<rect x="976.5" y="422.2" width="407" height="52.8" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="976.5" y="418.9" width="407" height="3.3" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="1477" y="343" width="11" height="132" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="1383.5" y="343" width="11" height="132" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="1383.5" y="333.1" width="104.5" height="9.9" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="965.5" y="343" width="11" height="132" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="872" y="343" width="11" height="132" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="872" y="333.1" width="104.5" height="9.9" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<circle cx="1435.75" cy="382.6" r="6.6" fill="#ae542d"/>
+<line x1="1435.75" y1="390.3" x2="1435.75" y2="434.3" stroke="#ae542d" stroke-width="9.350000000000001" />
+<line x1="1435.75" y1="401.85" x2="1422.55" y2="427.15" stroke="#ae542d" stroke-width="4.4" />
+<line x1="1435.75" y1="433.75" x2="1425.85" y2="475" stroke="#ae542d" stroke-width="5.5" />
+<line x1="1435.75" y1="401.85" x2="1448.95" y2="427.15" stroke="#ae542d" stroke-width="4.4" />
+<line x1="1435.75" y1="433.75" x2="1445.65" y2="475" stroke="#ae542d" stroke-width="5.5" />
+<circle cx="924.25" cy="382.6" r="6.6" fill="#ae542d"/>
+<line x1="924.25" y1="390.3" x2="924.25" y2="434.3" stroke="#ae542d" stroke-width="9.350000000000001" />
+<line x1="924.25" y1="401.85" x2="911.05" y2="427.15" stroke="#ae542d" stroke-width="4.4" />
+<line x1="924.25" y1="433.75" x2="914.35" y2="475" stroke="#ae542d" stroke-width="5.5" />
+<line x1="924.25" y1="401.85" x2="937.45" y2="427.15" stroke="#ae542d" stroke-width="4.4" />
+<line x1="924.25" y1="433.75" x2="934.15" y2="475" stroke="#ae542d" stroke-width="5.5" />
+<line x1="872" y1="380.4" x2="1488" y2="380.4" stroke="#ae542d" stroke-width="1.2" stroke-dasharray="7 5"/>
+<line x1="872" y1="475" x2="1488" y2="475" stroke="#243c38" stroke-width="2" />
+<line x1="1530" y1="343" x2="1530" y2="475" stroke="#187568" stroke-width="1.4" />
+<line x1="1525" y1="347" x2="1535" y2="339" stroke="#187568" stroke-width="1.4" />
+<line x1="1525" y1="479" x2="1535" y2="471" stroke="#187568" stroke-width="1.4" />
+<text transform="translate(1521 409) rotate(-90)" font-size="17" fill="#187568" text-anchor="middle">2.40 net</text>
+<line x1="872" y1="515" x2="1488" y2="515" stroke="#187568" stroke-width="1.4" />
+<line x1="868" y1="520" x2="876" y2="510" stroke="#187568" stroke-width="1.4" />
+<line x1="1484" y1="520" x2="1492" y2="510" stroke="#187568" stroke-width="1.4" />
+<text x="1180" y="506" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">11.20 overall</text>
+<text x="835" y="570" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Posts 0.20; heads 0.18; overall lane height 2.58.</text>
+<text x="835" y="600" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Desk/barrier top Z 1.02, slab 0.06; all faces join.</text>
+<text x="835" y="630" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Each lane: 1.50 - 0.68 capsule = 0.82 total spare width.</text>
+<text x="835" y="660" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Centred capsule margin 0.41 per side. Eye line Z 1.72.</text>
+<line x1="44" y1="695" x2="1556" y2="695" stroke="#a6b2a7" stroke-width="1.4" />
+<text x="55" y="735" font-size="17" fill="#187568" text-anchor="start" font-weight="700">S</text>
+<text x="98" y="735" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Longitudinal cut at Y +4.65 / look +Y</text>
+<rect x="95" y="783" width="22" height="297" fill="url(#cut)" stroke="#243c38" stroke-width="1.2" />
+<text x="130" y="820" font-size="16" fill="#187568" text-anchor="start" font-weight="400">Retained shoulder</text>
+<text x="130" y="846" font-size="16" fill="#187568" text-anchor="start" font-weight="400">cropped at Z 5.4</text>
+<rect x="367.25" y="938.1" width="49.5" height="9.9" fill="url(#cut)" stroke="#243c38" stroke-width="1.2" />
+<line x1="95" y1="1080" x2="524" y2="1080" stroke="#243c38" stroke-width="2" />
+<circle cx="392" cy="987.6" r="6.6" fill="#ae542d"/>
+<line x1="392" y1="995.3" x2="392" y2="1039.3" stroke="#ae542d" stroke-width="9.350000000000001" />
+<line x1="392" y1="1006.85" x2="378.8" y2="1032.15" stroke="#ae542d" stroke-width="4.4" />
+<line x1="392" y1="1038.75" x2="382.1" y2="1080" stroke="#ae542d" stroke-width="5.5" />
+<line x1="392" y1="1006.85" x2="405.2" y2="1032.15" stroke="#ae542d" stroke-width="4.4" />
+<line x1="392" y1="1038.75" x2="401.9" y2="1080" stroke="#ae542d" stroke-width="5.5" />
+<line x1="95" y1="985.4" x2="524" y2="985.4" stroke="#ae542d" stroke-width="1.2" stroke-dasharray="7 5"/>
+<line x1="367.25" y1="790" x2="416.75" y2="790" stroke="#187568" stroke-width="1.4" />
+<line x1="363.25" y1="795" x2="371.25" y2="785" stroke="#187568" stroke-width="1.4" />
+<line x1="412.75" y1="795" x2="420.75" y2="785" stroke="#187568" stroke-width="1.4" />
+<text x="392" y="781" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">0.90</text>
+<line x1="580" y1="948" x2="580" y2="1080" stroke="#187568" stroke-width="1.4" />
+<line x1="575" y1="952" x2="585" y2="944" stroke="#187568" stroke-width="1.4" />
+<line x1="575" y1="1084" x2="585" y2="1076" stroke="#187568" stroke-width="1.4" />
+<text transform="translate(571 1014) rotate(-90)" font-size="17" fill="#187568" text-anchor="middle">2.40</text>
+<text x="690" y="782" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Retained A: glazing/entrance leaves X -30; portal main face -28.4.</text>
+<text x="690" y="818" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Retained datum Z 5.28..5.40; upper glazing head 17.80.</text>
+<text x="690" y="854" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Entry-to-checkpoint near face: 4.95 m from X -30.</text>
+<text x="690" y="890" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Lane floor flush Z 0; no operational detector or security claim.</text>
+<text x="690" y="926" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Old single lane Y -1.05 becomes Y +/-4.65; X remains -24.60.</text>
+<text x="690" y="962" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Old station Y +0.95 becomes one centred 7.40 m composition.</text>
+<text x="690" y="998" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Aisles |Y| 8..12 remain open. This is central-passage control only.</text>
+<text x="690" y="1034" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">The wider checkpoint interpretation remains an owner decision.</text></svg>

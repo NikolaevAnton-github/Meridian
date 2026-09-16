@@ -1,0 +1,28 @@
+{
+  "candidate": "LobbyMaterials-Complete01/Correction02",
+  "setup": "Setup01",
+  "actor": "StaticMeshActor_29",
+  "label": "MC02_ProvisionalNeutralFarField",
+  "mesh": "/Engine/BasicShapes/Sphere.Sphere",
+  "mesh_bounds": "<Struct 'BoxSphereBounds' (0x000001AF7C7F8080) {origin: {x: 0.000000, y: 0.000004, z: 0.000000}, box_extent: {x: 50.000000, y: 50.000000, z: 50.000000}, sphere_radius: 50.000004}>",
+  "location_cm": [
+    0,
+    0,
+    0
+  ],
+  "scale": [
+    2000,
+    2000,
+    2000
+  ],
+  "radius_cm": 100000,
+  "material": "/Game/OpeningLobby/MaterialsComplete01/Correction02/M_MC02_NeutralFarField.M_MC02_NeutralFarField",
+  "hlsl": "// Provisional neutral inspection field: continuous horizon/zenith gradient.\nfloat3 d=normalize(WorldCm);\nfloat upper=smoothstep(0.0,0.70,max(d.z,0.0));\nfloat lower=smoothstep(0.0,0.50,max(-d.z,0.0));\nfloat radiance=lerp(12.0,2.0,upper);\nradiance=lerp(radiance,3.0,lower);\nradiance*=1.0+0.18*d.y;\nreturn float3(radiance,radiance,radiance);",
+  "neutral_rgb": true,
+  "collision": false,
+  "shadow": false,
+  "visible": true,
+  "hidden_in_game": false,
+  "new_skylight_or_reflection": false,
+  "exception": "One stock-engine distant neutral sphere; provisional inspection far field, no exterior design or final atmosphere."
+}

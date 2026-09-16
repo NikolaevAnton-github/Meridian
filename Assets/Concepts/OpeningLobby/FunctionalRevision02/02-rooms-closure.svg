@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="1200" viewBox="0 0 1600 1200" font-family="Arial, sans-serif"><defs><pattern id="cut" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#c5d0c0"/><path d="M0 9L9 0" stroke="#83957f" stroke-width="1"/></pattern></defs><rect x="0" y="0" width="1600" height="1200" fill="#f6f4ed" stroke="none" stroke-width="1.2" />
+<text x="44" y="37" font-size="16" fill="#187568" text-anchor="start" font-weight="600">MERIDIAN SQUAD   /   LOBBYFUNCTIONAL–REVISION02   /   CANDIDATE01</text>
+<text x="1556" y="37" font-size="22" fill="#187568" text-anchor="end" font-weight="700">02</text>
+<text x="44" y="82" font-size="34" fill="#243c38" text-anchor="start" font-weight="600">Transverse service doors; hall-facing inner doors</text>
+<text x="44" y="119" font-size="18" fill="#60736b" text-anchor="start" font-weight="400">All four gross rooms: 10.20 x 6.40. No dividing wall at |Y|8. Four original terminal piers are integrated into the enclosures.</text>
+<line x1="44" y1="143" x2="1556" y2="143" stroke="#a6b2a7" stroke-width="1.4" />
+<line x1="44" y1="1145" x2="1556" y2="1145" stroke="#a6b2a7" stroke-width="1.4" />
+<text x="44" y="1176" font-size="17" fill="#ae542d" text-anchor="start" font-weight="400">2D ARCHITECTURAL DRAWINGS  •  Metres  •  Functional proposals  •  Pending independent review</text>
+<text x="1556" y="1176" font-size="17" fill="#60736b" text-anchor="end" font-weight="400">Owner approval required before 3D</text>
+<text x="55" y="187" font-size="17" fill="#187568" text-anchor="start" font-weight="700">P</text>
+<text x="98" y="187" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Positive-Y rooms / mirror across Y0</text>
+<rect x="70" y="253" width="306" height="192" fill="#eee4d6" stroke="#243c38" stroke-width="1.2" />
+<defs><clipPath id="E+cut"><rect x="70" y="253" width="306" height="192"/></clipPath></defs><g clip-path="url(#E+cut)">
+<rect x="304" y="373" width="72" height="72" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="original-pier--21+" data-scale="30"/>
+<rect x="304" y="781" width="72" height="72" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="original-pier--21-" data-scale="30"/>
+<rect x="70" y="373" width="36" height="72" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="terminal-engaged-pier+" data-scale="30"/>
+<rect x="70" y="781" width="36" height="72" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="terminal-engaged-pier-" data-scale="30"/>
+<rect x="70" y="475" width="48" height="51" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="portal-main+" data-scale="30"/>
+<rect x="70" y="700" width="48" height="51" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="portal-main-" data-scale="30"/>
+<rect x="70" y="526" width="30" height="9" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="portal-reveal-step+" data-scale="30"/>
+<rect x="70" y="691" width="30" height="9" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="portal-reveal-step-" data-scale="30"/>
+<rect x="70" y="445" width="12" height="30" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="recessed-shoulder+" data-scale="30"/>
+<rect x="70" y="751" width="12" height="30" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="recessed-shoulder-" data-scale="30"/>
+<rect x="70" y="577.6" width="18" height="4.2" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="human-door-jamb+" data-scale="30"/>
+<rect x="70" y="644.2" width="18" height="4.2" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="human-door-jamb-" data-scale="30"/>
+<rect x="106" y="434.2" width="198" height="10.8" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="E+-blind-hall" data-scale="30"/>
+<rect x="365.2" y="334.6" width="10.8" height="38.4" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="E+-wall-left" data-scale="30"/>
+<rect x="365.2" y="253" width="10.8" height="38.4" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="E+-wall-right" data-scale="30"/>
+<rect x="365.2" y="331" width="10.8" height="3.6" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="E+-jamb-left" data-scale="30"/>
+<rect x="365.2" y="291.4" width="10.8" height="3.6" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="E+-jamb-right" data-scale="30"/>
+<rect x="367" y="295" width="1.8" height="36" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="E+-closed-leaf" data-scale="30"/>
+<rect x="70" y="253" width="306" height="10.8" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="E+-outer-wall" data-scale="30"/>
+<rect x="70" y="253" width="10.8" height="120" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="E+-end-wall" data-scale="30"/>
+<rect x="106" y="781" width="198" height="10.8" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="E--blind-hall" data-scale="30"/>
+<rect x="365.2" y="934.6" width="10.8" height="38.4" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="E--wall-left" data-scale="30"/>
+<rect x="365.2" y="853" width="10.8" height="38.4" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="E--wall-right" data-scale="30"/>
+<rect x="365.2" y="931" width="10.8" height="3.6" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="E--jamb-left" data-scale="30"/>
+<rect x="365.2" y="891.4" width="10.8" height="3.6" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="E--jamb-right" data-scale="30"/>
+<rect x="367" y="895" width="1.8" height="36" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="E--closed-leaf" data-scale="30"/>
+<rect x="70" y="962.2" width="306" height="10.8" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="E--outer-wall" data-scale="30"/>
+<rect x="70" y="853" width="10.8" height="120" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="E--end-wall" data-scale="30"/>
+<rect x="218.5" y="502" width="27" height="222" fill="#ae542d" stroke="#243c38" stroke-width="1" data-element="joined-top" data-scale="30"/>
+<rect x="218.5" y="775" width="27" height="6" fill="#ae542d" stroke="#243c38" stroke-width="1" data-element="lane-post-4.65-1" data-scale="30"/>
+<rect x="218.5" y="724" width="27" height="6" fill="#ae542d" stroke="#243c38" stroke-width="1" data-element="lane-post-4.651" data-scale="30"/>
+<rect x="218.5" y="496" width="27" height="6" fill="#ae542d" stroke="#243c38" stroke-width="1" data-element="lane-post4.65-1" data-scale="30"/>
+<rect x="218.5" y="445" width="27" height="6" fill="#ae542d" stroke="#243c38" stroke-width="1" data-element="lane-post4.651" data-scale="30"/>
+</g>
+<line x1="70" y1="225" x2="376" y2="225" stroke="#187568" stroke-width="1.4" />
+<line x1="66" y1="230" x2="74" y2="220" stroke="#187568" stroke-width="1.4" />
+<line x1="372" y1="230" x2="380" y2="220" stroke="#187568" stroke-width="1.4" />
+<text x="223" y="216" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">10.20 gross</text>
+<text x="70" y="488" font-size="17" fill="#60736b" text-anchor="start" font-weight="400">E+ / unknown interior</text>
+<rect x="500" y="253" width="306" height="192" fill="#eee4d6" stroke="#243c38" stroke-width="1.2" />
+<defs><clipPath id="I+cut"><rect x="500" y="253" width="306" height="192"/></clipPath></defs><g clip-path="url(#I+cut)">
+<rect x="500" y="373" width="72" height="72" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="original-pier-21+" data-scale="30"/>
+<rect x="500" y="781" width="72" height="72" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="original-pier-21-" data-scale="30"/>
+<rect x="572" y="434.2" width="95.4" height="10.8" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="I+-wall-left" data-scale="30"/>
+<rect x="710.6" y="434.2" width="95.4" height="10.8" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="I+-wall-right" data-scale="30"/>
+<rect x="667.4" y="434.2" width="3.6" height="10.8" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="I+-jamb-left" data-scale="30"/>
+<rect x="707" y="434.2" width="3.6" height="10.8" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="I+-jamb-right" data-scale="30"/>
+<rect x="671" y="436" width="36" height="1.8" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="I+-closed-leaf" data-scale="30"/>
+<rect x="500" y="253" width="10.8" height="120" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="I+-blind-transverse" data-scale="30"/>
+<rect x="500" y="253" width="306" height="10.8" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="I+-outer-wall" data-scale="30"/>
+<rect x="795.2" y="253" width="10.8" height="120" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="I+-end-wall" data-scale="30"/>
+<rect x="572" y="781" width="95.4" height="10.8" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="I--wall-left" data-scale="30"/>
+<rect x="710.6" y="781" width="95.4" height="10.8" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="I--wall-right" data-scale="30"/>
+<rect x="667.4" y="781" width="3.6" height="10.8" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="I--jamb-left" data-scale="30"/>
+<rect x="707" y="781" width="3.6" height="10.8" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="I--jamb-right" data-scale="30"/>
+<rect x="671" y="788.2" width="36" height="1.8" fill="#2b4943" stroke="#243c38" stroke-width="1" data-element="I--closed-leaf" data-scale="30"/>
+<rect x="500" y="853" width="10.8" height="120" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="I--blind-transverse" data-scale="30"/>
+<rect x="500" y="962.2" width="306" height="10.8" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="I--outer-wall" data-scale="30"/>
+<rect x="795.2" y="853" width="10.8" height="120" fill="#c6b39a" stroke="#243c38" stroke-width="1" data-element="I--end-wall" data-scale="30"/>
+<rect x="805.1" y="781" width="0.9" height="72" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="retained-inner-band-1" data-scale="30"/>
+<rect x="805.1" y="373" width="0.9" height="72" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="retained-inner-band1" data-scale="30"/>
+<rect x="788" y="667" width="18" height="12" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="elevator-jamb-1" data-scale="30"/>
+<rect x="788" y="547" width="18" height="12" fill="#70877a" stroke="#243c38" stroke-width="1" data-element="elevator-jamb1" data-scale="30"/>
+</g>
+<line x1="500" y1="225" x2="806" y2="225" stroke="#187568" stroke-width="1.4" />
+<line x1="496" y1="230" x2="504" y2="220" stroke="#187568" stroke-width="1.4" />
+<line x1="802" y1="230" x2="810" y2="220" stroke="#187568" stroke-width="1.4" />
+<text x="653" y="216" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">10.20 gross</text>
+<text x="500" y="488" font-size="17" fill="#60736b" text-anchor="start" font-weight="400">I+ / unknown interior</text>
+<line x1="840" y1="253" x2="840" y2="445" stroke="#187568" stroke-width="1.4" />
+<line x1="835" y1="257" x2="845" y2="249" stroke="#187568" stroke-width="1.4" />
+<line x1="835" y1="449" x2="845" y2="441" stroke="#187568" stroke-width="1.4" />
+<text transform="translate(831 349) rotate(-90)" font-size="17" fill="#187568" text-anchor="middle">6.40 gross</text>
+<line x1="376" y1="313" x2="424" y2="313" stroke="#ae542d" stroke-width="2" />
+<line x1="424" y1="313" x2="415.224" y2="317.794" stroke="#ae542d" stroke-width="2" />
+<line x1="424" y1="313" x2="415.224" y2="308.206" stroke="#ae542d" stroke-width="2" />
+<line x1="689" y1="445" x2="689" y2="487" stroke="#ae542d" stroke-width="2" />
+<line x1="689" y1="487" x2="684.206" y2="478.224" stroke="#ae542d" stroke-width="2" />
+<line x1="689" y1="487" x2="693.794" y2="478.224" stroke="#ae542d" stroke-width="2" />
+<text x="910" y="231" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">DOOR NORMALS / closed endpoints</text>
+<text x="910" y="262" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">E+ / E- : X -19.8, Y +/-10; face +X.</text>
+<text x="910" y="293" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Approach from remaining aisle on +X side.</text>
+<text x="910" y="324" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">I+ : X26.1, Y5.6; face -Y.</text>
+<text x="910" y="355" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">I- : X26.1, Y-5.6; face +Y.</text>
+<text x="910" y="386" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Entrance hall faces and inner caps: blind.</text>
+<text x="910" y="417" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">No old X-25.5 / |Y|8 service doors.</text>
+<text x="910" y="448" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Both door types: 1.20 W x 2.40 H.</text>
+<text x="910" y="479" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Wall 0.36; recess 0.24; frame 0.12.</text>
+<line x1="44" y1="540" x2="1556" y2="540" stroke="#a6b2a7" stroke-width="1.4" />
+<text x="55" y="580" font-size="17" fill="#187568" text-anchor="start" font-weight="700">T</text>
+<text x="98" y="580" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Room roof step / X -25 / look +X</text>
+<rect x="85" y="727.6" width="12.96" height="302.4" fill="#c6b39a" stroke="#243c38" stroke-width="1.2" />
+<rect x="302.44" y="698.8" width="12.96" height="331.2" fill="#c6b39a" stroke="#243c38" stroke-width="1.2" />
+<rect x="85" y="727.6" width="86.4" height="12.96" fill="#c6b39a" stroke="#243c38" stroke-width="1.2" />
+<rect x="171.4" y="698.8" width="144" height="12.96" fill="#c6b39a" stroke="#243c38" stroke-width="1.2" />
+<rect x="85" y="626.8" width="86.4" height="100.8" fill="url(#cut)" stroke="#243c38" stroke-width="1.2" />
+<line x1="171.4" y1="698.8" x2="315.4" y2="698.8" stroke="#70877a" stroke-width="4" />
+<line x1="63.4" y1="1030" x2="315.4" y2="1030" stroke="#243c38" stroke-width="2" />
+<circle cx="236.2" cy="969.52" r="4.32" fill="#ae542d"/>
+<line x1="236.2" y1="974.56" x2="236.2" y2="1003.36" stroke="#ae542d" stroke-width="6.12" />
+<line x1="236.2" y1="982.12" x2="227.56" y2="998.68" stroke="#ae542d" stroke-width="2.88" />
+<line x1="236.2" y1="1003" x2="229.72" y2="1030" stroke="#ae542d" stroke-width="3.6" />
+<line x1="236.2" y1="982.12" x2="244.84" y2="998.68" stroke="#ae542d" stroke-width="2.88" />
+<line x1="236.2" y1="1003" x2="242.68" y2="1030" stroke="#ae542d" stroke-width="3.6" />
+<line x1="63.4" y1="968.08" x2="315.4" y2="968.08" stroke="#ae542d" stroke-width="1.2" stroke-dasharray="7 5"/>
+<line x1="85" y1="1070" x2="315.4" y2="1070" stroke="#187568" stroke-width="1.4" />
+<line x1="81" y1="1075" x2="89" y2="1065" stroke="#187568" stroke-width="1.4" />
+<line x1="311.4" y1="1075" x2="319.4" y2="1065" stroke="#187568" stroke-width="1.4" />
+<text x="200.2" y="1061" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">6.40 gross</text>
+<circle cx="171.4" cy="698.8" r="3" fill="#187568"/>
+<line x1="171.4" y1="698.8" x2="400" y2="668" stroke="#187568" stroke-width="1.4" />
+<line x1="400" y1="668" x2="418" y2="668" stroke="#187568" stroke-width="1.4" />
+<text x="424" y="674" font-size="18" fill="#187568" text-anchor="start" font-weight="400">Z9.20 soffit / closure top</text>
+<text x="395" y="720" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">Z8.40 band closure meets old beam.</text>
+<text x="395" y="752" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">Z8.84..9.20 aisle closure touches</text>
+<text x="395" y="784" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">beam side at |Y|8; no upper slot.</text>
+<text x="395" y="816" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">Wall and closure thickness 0.36.</text>
+<text x="395" y="848" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">No internal wall at |Y|8.</text>
+<text x="395" y="880" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">No new floor or accessible roof.</text>
+<text x="395" y="912" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">Retained coffer edges stay enclosed.</text>
+<text x="55" y="1110" font-size="16" fill="#60736b" text-anchor="start" font-weight="400">Human 1.8 / eye 1.72; interior silhouette is scale only, not a usable-room claim.</text>
+<text x="910" y="580" font-size="17" fill="#187568" text-anchor="start" font-weight="700">L</text>
+<text x="953" y="580" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Service door / Y +10 / look +Y</text>
+<rect x="1017.28" y="643.6" width="15.12" height="280.56" fill="#c6b39a" stroke="#243c38" stroke-width="1.2" />
+<rect x="940" y="643.6" width="92.4" height="15.12" fill="#c6b39a" stroke="#243c38" stroke-width="1.2" />
+<rect x="1017.28" y="924.16" width="15.12" height="5.04" fill="#2b4943" stroke="#243c38" stroke-width="1.2" />
+<rect x="1019.8" y="929.2" width="2.52" height="100.8" fill="#2b4943" stroke="#243c38" stroke-width="1.2" />
+<line x1="940" y1="1030" x2="1276" y2="1030" stroke="#243c38" stroke-width="2" />
+<circle cx="1091.2" cy="959.44" r="5.04" fill="#ae542d"/>
+<line x1="1091.2" y1="965.32" x2="1091.2" y2="998.92" stroke="#ae542d" stroke-width="7.140000000000001" />
+<line x1="1091.2" y1="974.14" x2="1081.12" y2="993.46" stroke="#ae542d" stroke-width="3.36" />
+<line x1="1091.2" y1="998.5" x2="1083.64" y2="1030" stroke="#ae542d" stroke-width="4.2" />
+<line x1="1091.2" y1="974.14" x2="1101.28" y2="993.46" stroke="#ae542d" stroke-width="3.36" />
+<line x1="1091.2" y1="998.5" x2="1098.76" y2="1030" stroke="#ae542d" stroke-width="4.2" />
+<line x1="940" y1="957.76" x2="1276" y2="957.76" stroke="#ae542d" stroke-width="1.2" stroke-dasharray="7 5"/>
+<line x1="1150" y1="1019.5" x2="1059.7" y2="1019.5" stroke="#ae542d" stroke-width="2" />
+<line x1="1059.7" y1="1019.5" x2="1068.476" y2="1014.706" stroke="#ae542d" stroke-width="2" />
+<line x1="1059.7" y1="1019.5" x2="1068.476" y2="1024.294" stroke="#ae542d" stroke-width="2" />
+<line x1="1380" y1="643.6" x2="1380" y2="1030" stroke="#187568" stroke-width="1.4" />
+<line x1="1375" y1="647.6" x2="1385" y2="639.6" stroke="#187568" stroke-width="1.4" />
+<line x1="1375" y1="1034" x2="1385" y2="1026" stroke="#187568" stroke-width="1.4" />
+<text transform="translate(1371 836.8) rotate(-90)" font-size="17" fill="#187568" text-anchor="middle">9.20 closure top</text>
+<text x="1100" y="710" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">Remaining corridor on +X.</text>
+<text x="1100" y="742" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">Wall face X -19.80.</text>
+<text x="1100" y="774" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">Closed leaf face X -20.04.</text>
+<text x="1100" y="806" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">1.20 W / 2.40 H opening.</text>
+<text x="1100" y="838" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">0.24 recess; threshold Z0.</text>
+<text x="1100" y="870" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">Inner leaves |Y|5.84.</text></svg>

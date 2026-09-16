@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="1200" viewBox="0 0 1600 1200" font-family="Arial, sans-serif"><defs><pattern id="cut" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#c5d0c0"/><path d="M0 9L9 0" stroke="#83957f" stroke-width="1"/></pattern></defs><rect x="0" y="0" width="1600" height="1200" fill="#f6f4ed" stroke="none" stroke-width="1.2" />
+<text x="44" y="37" font-size="16" fill="#187568" text-anchor="start" font-weight="600">MERIDIAN SQUAD   /   LOBBYFUNCTIONAL–REVISION02   /   CANDIDATE01</text>
+<text x="1556" y="37" font-size="22" fill="#187568" text-anchor="end" font-weight="700">03</text>
+<text x="44" y="82" font-size="34" fill="#243c38" text-anchor="start" font-weight="600">Two checkpoint lanes and the large inner elevator</text>
+<text x="44" y="119" font-size="18" fill="#60736b" text-anchor="start" font-weight="400">Carried forward from Revision01 without new approval. Enlarged rooms now close the old side-aisle bypass at floor level.</text>
+<line x1="44" y1="143" x2="1556" y2="143" stroke="#a6b2a7" stroke-width="1.4" />
+<line x1="44" y1="1145" x2="1556" y2="1145" stroke="#a6b2a7" stroke-width="1.4" />
+<text x="44" y="1176" font-size="17" fill="#ae542d" text-anchor="start" font-weight="400">2D ARCHITECTURAL DRAWINGS  •  Metres  •  Functional proposals  •  Pending independent review</text>
+<text x="1556" y="1176" font-size="17" fill="#60736b" text-anchor="end" font-weight="400">Owner approval required before 3D</text>
+<text x="55" y="185" font-size="17" fill="#187568" text-anchor="start" font-weight="700">C</text>
+<text x="98" y="185" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Checkpoint / hall-facing elevation</text>
+<rect x="180.4" y="424.32" width="429.2" height="55.68" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="180.4" y="420.84" width="429.2" height="3.48" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="708.2" y="340.8" width="11.6" height="139.2" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="609.6" y="340.8" width="11.6" height="139.2" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="609.6" y="330.36" width="110.2" height="10.44" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="168.8" y="340.8" width="11.6" height="139.2" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="70.2" y="340.8" width="11.6" height="139.2" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<rect x="70.2" y="330.36" width="110.2" height="10.44" fill="#ae542d" stroke="#243c38" stroke-width="1.2" />
+<circle cx="664.7" cy="382.56" r="6.96" fill="#ae542d"/>
+<line x1="664.7" y1="390.68" x2="664.7" y2="437.08" stroke="#ae542d" stroke-width="9.860000000000001" />
+<line x1="664.7" y1="402.86" x2="650.78" y2="429.54" stroke="#ae542d" stroke-width="4.64" />
+<line x1="664.7" y1="436.5" x2="654.26" y2="480" stroke="#ae542d" stroke-width="5.800000000000001" />
+<line x1="664.7" y1="402.86" x2="678.62" y2="429.54" stroke="#ae542d" stroke-width="4.64" />
+<line x1="664.7" y1="436.5" x2="675.14" y2="480" stroke="#ae542d" stroke-width="5.800000000000001" />
+<line x1="621.2" y1="315" x2="708.2" y2="315" stroke="#187568" stroke-width="1.4" />
+<line x1="617.2" y1="320" x2="625.2" y2="310" stroke="#187568" stroke-width="1.4" />
+<line x1="704.2" y1="320" x2="712.2" y2="310" stroke="#187568" stroke-width="1.4" />
+<text x="664.7" y="306" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">1.50</text>
+<circle cx="125.3" cy="382.56" r="6.96" fill="#ae542d"/>
+<line x1="125.3" y1="390.68" x2="125.3" y2="437.08" stroke="#ae542d" stroke-width="9.860000000000001" />
+<line x1="125.3" y1="402.86" x2="111.38" y2="429.54" stroke="#ae542d" stroke-width="4.64" />
+<line x1="125.3" y1="436.5" x2="114.86" y2="480" stroke="#ae542d" stroke-width="5.800000000000001" />
+<line x1="125.3" y1="402.86" x2="139.22" y2="429.54" stroke="#ae542d" stroke-width="4.64" />
+<line x1="125.3" y1="436.5" x2="135.74" y2="480" stroke="#ae542d" stroke-width="5.800000000000001" />
+<line x1="81.8" y1="315" x2="168.8" y2="315" stroke="#187568" stroke-width="1.4" />
+<line x1="77.8" y1="320" x2="85.8" y2="310" stroke="#187568" stroke-width="1.4" />
+<line x1="164.8" y1="320" x2="172.8" y2="310" stroke="#187568" stroke-width="1.4" />
+<text x="125.3" y="306" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">1.50</text>
+<line x1="70.2" y1="380.24" x2="719.8" y2="380.24" stroke="#ae542d" stroke-width="1.2" stroke-dasharray="7 5"/>
+<line x1="70.2" y1="524" x2="719.8" y2="524" stroke="#187568" stroke-width="1.4" />
+<line x1="66.2" y1="529" x2="74.2" y2="519" stroke="#187568" stroke-width="1.4" />
+<line x1="715.8" y1="529" x2="723.8" y2="519" stroke="#187568" stroke-width="1.4" />
+<text x="395" y="515" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">11.20 control line / wall to wall</text>
+<text x="55" y="575" font-size="19" fill="#243c38" text-anchor="start" font-weight="400">X -24.60 / depth 0.90 / lane centres Y +/-4.65.</text>
+<text x="55" y="608" font-size="19" fill="#243c38" text-anchor="start" font-weight="400">Lane height 2.40; overall frame height 2.58.</text>
+<text x="55" y="641" font-size="19" fill="#243c38" text-anchor="start" font-weight="400">Joined desk 7.40 wide / top Z1.02 / posts 0.20.</text>
+<text x="55" y="674" font-size="19" fill="#243c38" text-anchor="start" font-weight="400">End posts touch room hall faces at |Y|5.60.</text>
+<text x="55" y="707" font-size="19" fill="#243c38" text-anchor="start" font-weight="400">Exactly two 1.50 m physical floor openings.</text>
+<text x="55" y="740" font-size="19" fill="#243c38" text-anchor="start" font-weight="400">Capsule diameter 0.68 leaves 0.41 m on each side.</text>
+<text x="55" y="773" font-size="19" fill="#243c38" text-anchor="start" font-weight="400">Entrance-to-near-checkpoint face: 4.95 m.</text>
+<text x="850" y="185" font-size="17" fill="#187568" text-anchor="start" font-weight="700">E</text>
+<text x="893" y="185" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Inner elevation / look +X</text>
+<rect x="902" y="259" width="496" height="558" fill="#dce2d7" stroke="#243c38" stroke-width="1.2" />
+<rect x="902" y="469.8" width="74.4" height="347.2" fill="#70877a" stroke="#243c38" stroke-width="1.2" />
+<rect x="902" y="259" width="55.8" height="210.8" fill="#dce2d7" stroke="#243c38" stroke-width="1.2" />
+<rect x="1323.6" y="469.8" width="74.4" height="347.2" fill="#70877a" stroke="#243c38" stroke-width="1.2" />
+<rect x="1342.2" y="259" width="55.8" height="210.8" fill="#dce2d7" stroke="#243c38" stroke-width="1.2" />
+<rect x="1081.8" y="674.4" width="136.4" height="142.6" fill="#70877a" stroke="#243c38" stroke-width="1.2" />
+<rect x="1094.2" y="686.8" width="111.6" height="130.2" fill="#2b4943" stroke="#243c38" stroke-width="1.2" />
+<line x1="1150" y1="817" x2="1150" y2="686.8" stroke="#a6b2a7" stroke-width="1.4" />
+<rect x="1057" y="277.6" width="186" height="186" fill="none" stroke="#187568" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text x="1060" y="358.2" font-size="16" fill="#187568" text-anchor="start" font-weight="400">OPAQUE WALL</text>
+<text x="1060" y="385.2" font-size="16" fill="#187568" text-anchor="start" font-weight="400">Blank future name/logo</text>
+<text x="1060" y="412.2" font-size="16" fill="#187568" text-anchor="start" font-weight="400">6.0 x 6.0 reservation</text>
+<circle cx="1258.5" cy="764.92" r="3.72" fill="#ae542d"/>
+<line x1="1258.5" y1="769.26" x2="1258.5" y2="794.06" stroke="#ae542d" stroke-width="5.2700000000000005" />
+<line x1="1258.5" y1="775.77" x2="1251.06" y2="790.03" stroke="#ae542d" stroke-width="2.48" />
+<line x1="1258.5" y1="793.75" x2="1252.92" y2="817" stroke="#ae542d" stroke-width="3.1" />
+<line x1="1258.5" y1="775.77" x2="1265.94" y2="790.03" stroke="#ae542d" stroke-width="2.48" />
+<line x1="1258.5" y1="793.75" x2="1264.08" y2="817" stroke="#ae542d" stroke-width="3.1" />
+<line x1="976.4" y1="763.68" x2="1323.6" y2="763.68" stroke="#ae542d" stroke-width="1.2" stroke-dasharray="7 5"/>
+<line x1="1450" y1="259" x2="1450" y2="817" stroke="#187568" stroke-width="1.4" />
+<line x1="1445" y1="263" x2="1455" y2="255" stroke="#187568" stroke-width="1.4" />
+<line x1="1445" y1="821" x2="1455" y2="813" stroke="#187568" stroke-width="1.4" />
+<text transform="translate(1441 538) rotate(-90)" font-size="17" fill="#187568" text-anchor="middle">18.00 retained</text>
+<line x1="1094.2" y1="857" x2="1205.8" y2="857" stroke="#187568" stroke-width="1.4" />
+<line x1="1090.2" y1="862" x2="1098.2" y2="852" stroke="#187568" stroke-width="1.4" />
+<line x1="1201.8" y1="862" x2="1209.8" y2="852" stroke="#187568" stroke-width="1.4" />
+<text x="1150" y="848" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">3.60 opening</text>
+<line x1="44" y1="893" x2="1556" y2="893" stroke="#a6b2a7" stroke-width="1.4" />
+<text x="55" y="940" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Retained A entrance: glazing X-30; main jamb face X-28.4; reveal X-29.0.</text>
+<text x="55" y="978" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Datum Z5.28..5.40 and upper glazing head Z17.80 remain.</text>
+<text x="55" y="1016" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Rooms bound the checkpoint line; side aisles are reached after control.</text>
+<text x="55" y="1054" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Floor-level route study only: no detector, anti-jump or security gameplay claim.</text>
+<text x="900" y="940" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Elevator opening 3.60 W x 4.20 H; closed leaves X30.</text>
+<text x="900" y="978" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Reveal 0.60 / front X29.40 / frame 0.40.</text>
+<text x="900" y="1016" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Remove full 2.4 x 6.2 high window and its grid.</text>
+<text x="900" y="1054" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Reservation is annotation only; no logo, cab or shaft.</text></svg>

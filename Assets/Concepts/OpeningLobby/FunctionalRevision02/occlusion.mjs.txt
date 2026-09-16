@@ -1,0 +1,33 @@
+// Exact painter ordering for axis-aligned architectural drawing faces.
+// Splits SVG source polygons at intervening planes; no mesh or scene is exported.
+function orderedFaces(input,camera){
+ const eps=1e-7;
+ const side=(p,axis,k)=>p[axis]-k;
+ function split(face,axis,k){
+  const pos=[],neg=[],pts=face.p;
+  for(let i=0;i<pts.length;i++){
+   const a=pts[i],b=pts[(i+1)%pts.length],sa=side(a,axis,k),sb=side(b,axis,k);
+   if(sa>=-eps)pos.push(a);if(sa<=eps)neg.push(a);
+   if(sa*sb< -eps){const t=sa/(sa-sb),q=a.map((n,j)=>n+(b[j]-n)*t);pos.push(q);neg.push(q);}
+  }
+  return [pos.length>=3?{...face,p:pos}:null,neg.length>=3?{...face,p:neg}:null];
+ }
+ function build(list){
+  if(!list.length)return null;
+  const pivot=list[0],axis=[0,1,2].find(i=>pivot.p.every(p=>Math.abs(p[i]-pivot.p[0][i])<eps)),k=pivot.p[0][axis];
+  const plane=[],pos=[],neg=[];
+  for(const face of list){const v=face.p.map(p=>side(p,axis,k));if(v.every(n=>Math.abs(n)<eps))plane.push(face);else if(v.every(n=>n>=-eps))pos.push(face);else if(v.every(n=>n<=eps))neg.push(face);else{const [p,n]=split(face,axis,k);if(p)pos.push(p);if(n)neg.push(n);}}
+  return {axis,k,plane,pos:build(pos),neg:build(neg)};
+ }
+ const result=[];
+ function visit(n){if(!n)return;const near=camera[n.axis]>=n.k;visit(near?n.neg:n.pos);result.push(...n.plane);visit(near?n.pos:n.neg);}
+ visit(build(input));return result;
+}
+function originalEdge(a,b,original){
+ const eps=1e-6;
+ for(let i=0;i<original.length;i++){
+  const p=original[i],q=original[(i+1)%original.length],axis=[0,1,2].find(j=>Math.abs(p[j]-q[j])>eps);
+  if(axis===undefined)continue;
+  if([0,1,2].every(j=>j===axis||(Math.abs(a[j]-p[j])<eps&&Math.abs(b[j]-p[j])<eps)))return true;
+ }return false;
+}

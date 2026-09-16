@@ -1,0 +1,25 @@
+{
+  "decision_id": "LobbyArchitectureReworkA01-Walkthrough01",
+  "recorded_on": "2026-09-14",
+  "decision_source": "Owner direct chat after the current lobby walkthrough",
+  "baseline_candidate": "LobbyArchitecture-ReworkA01 / WorkerCandidate01",
+  "manifest": "Saved/OpeningLobby/ArchitectureReworkA01/Worker/manifest.json",
+  "manifest_sha256": "c960e227ba7d8e7112c3510b59c7708a1047ef0ef106deadb4e0f516c8288f21",
+  "map": "/Game/Maps/L_OpeningLobby_ArchitectureReworkA01",
+  "map_sha256": "71cfc087c80510313054255d784d1b43c45395d6400c9e0b75e9f64d7be944d0",
+  "owner_message_english_translation": "It is already quite good; I walked around the lobby, but it needs more work. Make room-like volumes along the columns nearest the elevator and exit on both sides. At the elevator end they imply stair access, with doors from the central hall, and blind walls from the corridors behind the columns. We do not need the stair openings themselves now. At the entrance do the reverse: a wall toward the hall and doors toward the corridors, as if to service rooms. At the entrance put a checkpoint across the corridor's full width with two entrances on different sides. At the other end make a large elevator and remove the window: there should not be a window into the shaft. Later the skyscraper's name and logo will be there. Everything else is okay.",
+  "decision": "Positive walkthrough feedback with bounded functional revisions; retain remaining architecture and approved scale",
+  "authorized_next_task": "Docs/Tasks/OpeningLobbyFunctionalRevision01.md",
+  "controller_interpretations": {
+    "four_enclosures": "Terminal colonnade infills preserving side aisles",
+    "checkpoint": "Two lateral central-passage lanes, pending optional clarification",
+    "interiors": "Visible closed doors/enclosures only; interiors deferred",
+    "branding": "Future work, name and logo not supplied"
+  },
+  "not_established": [
+    "Final material, lighting, atmosphere or milestone acceptance",
+    "Approval of exact new dimensions or a not-yet-produced package",
+    "Staircase, usable room, elevator cab/shaft or door gameplay"
+  ],
+  "preservation": "Existing frozen candidate and review stay unchanged; this external record captures later scoped feedback."
+}

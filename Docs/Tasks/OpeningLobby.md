@@ -1,33 +1,63 @@
 # Opening lobby walkthrough
 
 Status: Stage 1 (Multica MSQ-5) passed technical acceptance on 2026-09-13.
-The saved walkthrough is ready for the owner's layout and movement review.
-MSQ-6 and MSQ-7 remain unassigned backlog items pending that review and the
-subsequent sequential acceptance gates. Parent MSQ-4 remains in progress.
+The owner subsequently rejected the spatial direction: the current layout does
+not match the intended lobby. Its technical result remains valid as historical
+evidence, but its dimensions and arrangement are not an approved art baseline.
+MSQ-8 is now accepted: the owner explicitly approved LobbyArt-Review02 and the
+transition to a separately specified [Layout02 revision](OpeningLobbyLayout02.md).
+MSQ-9 passed controller technical review, but the owner has now rejected
+Layout02's architectural scale and requires at least twice its size and stronger
+monumentality. MSQ-10 completed the independently reviewed
+[dimensioned drawing package](OpeningLobbyScaleReview.md), explicitly approved
+by the owner on 2026-09-14. The authorized next step is the separate
+[Layout03 neutral blockout](OpeningLobbyLayout03.md).
+MSQ-11/Correction01 passed technical and independent visual review. The owner
+explicitly accepted its in-game scale on 2026-09-14, deferred detail assessment
+and authorized continuing; see the [scoped decision](../Approvals/LobbyLayout03-Scale01.json).
+MSQ-6 now follows [Architecture01](OpeningLobbyArchitecture01.md), preserving
+the accepted scale. MSQ-7 remains backlog pending architecture/material review
+and the owner's detail decision.
+Parent MSQ-4 remains in progress.
 See [Stage 1 handoff and acceptance](../OpeningLobbyStage1.md).
 
 Owner request: a realistic first-person skyscraper entrance lobby to walk
-around, using the lobby from The Matrix (1999) as the architectural reference.
+around, closely matching the lobby from The Matrix (1999). The selected visual
+basis is [OwnerReferences01](../../Assets/Concepts/OpeningLobby/OwnerReferences01/README.md),
+supplied by the owner after the initial A/B/C concepts. The owner confirmed these
+are opposite views of one hall. The owner subsequently explicitly approved the
+full LobbyArt-Review02 set, including its entrance/security supplement, for the
+transition to layout. The supplied pair remains the primary architectural guide.
 Read [game direction](../Design/GameBrief.md) and the fixed facts and knowledge
 constraints in [story canon](../Design/StoryCanon.md). These briefs do not
 commission combat or a fully scripted opening mission.
 
 ## Milestone structure
 
-One parent deliverable, three sequential implementation tasks. Each task has a
-bounded output and a saved handoff; later work builds on the accepted level.
+One parent deliverable, an explicit concept-art approval gate, then sequential
+implementation tasks. Each task has a bounded output and a saved handoff.
 Keep later tasks in backlog while the preceding stage is being assessed.
-One suitably configured Multica worker owns the active editor operation.
+Concept art is a separate task, not an incidental output of a modeling task.
+After art approval, prepare and approve a dimensioned drawing package following
+[visual acceptance](../VisualAcceptance.md), then specify a bounded layout task
+and review its walkthrough before dispatching MSQ-6. One suitably configured Multica worker
+owns the active editor operation.
 
 | Stage | Deliverable | Acceptance gate |
 | --- | --- | --- |
+| Concept art (MSQ-8, accepted) | LobbyArt-Review02: owner reference pair plus entrance/security supplement | Owner explicitly approved this identified package and transition to layout. |
+| Layout02 revision (MSQ-9, rejected) | Historical saved walkthrough and technical evidence | Owner rejected architectural scale; preserve the map and do not use its dimensions as approved targets. |
+| Scale drawings (MSQ-10, accepted) | LobbyScale-Review01 plans, sections, elevations and human-scale comparison | Independent review passed; owner approved the identified package on 2026-09-14. |
+| Layout03 blockout (MSQ-11, scale accepted) | Approved dimensions implemented in a new neutral-light walkable map | Technical and independent matched-view review passed after Correction01; owner explicitly accepted in-game scale, with detail assessment deferred. |
 | 1. Walkable spatial prototype (MSQ-5) | First-person movement, floor/walls/ceiling, column rhythm, entrance/security area and elevator destination, simple material families and lighting | PIE spawns an on-foot character; the complete route is traversable with working collision and readable scale. |
 | 2. Architecture and materials (MSQ-6) | A small modular Blender kit, appropriate Painter materials, UVs/collision and imported Unreal assets replacing the approved prototype shapes | Architecture and surface response hold up at eye level; floor, stone, metal and glass remain distinct under neutral inspection light. |
 | 3. Atmosphere and walkthrough acceptance (MSQ-7) | Set dressing, final lighting/exposure, bounded static damage, route verification, performance sample and accepted registry entries | The owner can explore a coherent lobby; evidence demonstrates playability, visual quality, file provenance and measured performance. |
 
-The first stage already provides a playable walkthrough. Spatial layout and
-first-person comfort should be reviewed before expensive detail is added.
-Completing stage 1 does not mean the realistic visual milestone is finished.
+The first stage already provides a playable walkthrough, but the owner has not
+approved its layout. Preserve it as a technical prototype. Layout02 was also
+rejected by the owner, specifically for insufficient scale. Neither passing checks nor asking for the next task grants visual
+approval. Completing stage 1 does not mean the realistic visual milestone is
+finished.
 
 ## Working spatial/art direction
 
@@ -35,10 +65,12 @@ The following choices are proposals for this lobby, not new narrative canon:
 
 - Monumental, ordered stone architecture: repeated column bays, tall interior
   openings, geometric floor divisions, stone wall panels and restrained metal.
-- A clear entrance-to-elevator axis, flanking circulation and a security/reception
-  area. Provide enough lateral space for future first-person combat movement.
-- Start with a room approximately 36 x 22 m and a ceiling around 8 m; tune these
-  provisional dimensions from first-person views before producing final meshes.
+- A clear entrance-to-inner-door axis, flanking circulation and an entrance
+  screening checkpoint as shown in LobbyArt-Review02. The original three-elevator
+  wall is superseded. The destination beyond the small inner door remains open.
+- The original prototype used a room approximately 36 x 22 m with an 8 m ceiling.
+  These dimensions now describe the rejected draft only; do not constrain the
+  concept art to them.
 - A dark, realistic atmosphere with readable silhouettes and restrained cool
   green/neutral tones. Avoid using color grading to hide unfinished materials.
 - Pending owner preference: localized post-catastrophe disorder and damage
@@ -46,8 +78,8 @@ The following choices are proposals for this lobby, not new narrative canon:
   attack sequence or cause of any squad member's death. No staged squad bodies.
 - The entrance boundary and upper-floor access can be simple prototype barriers.
   Do not invent a definitive mechanism for the anomaly or a guaranteed exit.
-- Build original project assets and an adapted layout. Film frames are visual
-  reference, not textures or game content to import.
+- Build project geometry and materials that closely follow the owner-selected
+  visual references. Reference images are not textures or game content to import.
 
 Visual reference inspected during preparation:
 [The Matrix lobby frame](https://flipscreenblog.wordpress.com/wp-content/uploads/2020/01/matrix.jpg),
@@ -56,6 +88,10 @@ The local reference copy is ignored under
 `Saved/AgentSetup/Lobby/References/MatrixLobby02.jpg`.
 
 ## Stage 1: walkable spatial prototype
+
+The following describes the original technical prototype. Any new layout work
+must wait for the concept-art approval gate above and use the approved visual
+direction rather than automatically retaining the original room dimensions.
 
 - Confirm the running editor belongs to MeridianSquad, check PIE and dirty
   packages before changing levels; preserve unrelated work and test assets.
@@ -78,8 +114,11 @@ The local reference copy is ignored under
 
 ## Stage 2: architecture and materials
 
-- Reuse the accepted dimensions. Make a small kit of repeated column, wall,
-  floor and ceiling/trim modules; add only the needed entrance and elevator parts.
+- Current authorized implementation: [Architecture01](OpeningLobbyArchitecture01.md).
+- Begin only after explicit concept-art approval and a subsequent reviewed
+  layout revision. The original prototype dimensions are not accepted.
+- Reuse the dimensions approved in that revised walkthrough. Make a small kit of repeated column, wall,
+  floor and ceiling/trim modules; add only the needed entrance, checkpoint and inner-door parts.
 - Keep structural collision, surface cladding, glass and movable dressing
   separable. Choose pivots and material slots that support later targeted damage.
   Do not fracture every object, build dynamic destruction, or merge the entire

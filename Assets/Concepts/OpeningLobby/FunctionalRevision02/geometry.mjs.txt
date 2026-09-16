@@ -1,0 +1,34 @@
+// Derived planar bounds for orthographic cuts and SVG perspective projection only.
+function solids(V){
+ const a=retainedSolids(V),R=D.rooms,Q=D.checkpoint,E=D.elevator,N=D.columns;
+ const add=(id,x0,x1,y0,y1,z0,z1,kind='infill')=>a.push({id,b:[x0,x1,y0,y1,z0,z1],kind});
+ // Local U runs along the face, V runs inward from the face. Closed leaves recess in V.
+ function doorWall(d,u0,u1,h){
+  const c=d.face==='transverse'?d.centre[1]:d.centre[0],t=R.wall_thickness,w=R.door_width/2,F=R.frame_width;
+  const box=(id,lo,hi,v0,v1,z0,z1,kind='infill')=>{
+   if(d.face==='transverse')add(d.id+'-'+id,d.centre[0]-v1,d.centre[0]-v0,lo,hi,z0,z1,kind);
+   else{const ys=[d.centre[1]+d.sign*v0,d.centre[1]+d.sign*v1].sort((a,b)=>a-b);add(d.id+'-'+id,lo,hi,...ys,z0,z1,kind);}
+  };
+  box('wall-left',u0,c-w-F,0,t,0,h);box('wall-right',c+w+F,u1,0,t,0,h);box('wall-over',c-w-F,c+w+F,0,t,R.door_height+F,h);
+  box('jamb-left',c-w-F,c-w,0,t,0,R.door_height+F,'metal');box('jamb-right',c+w,c+w+F,0,t,0,R.door_height+F,'metal');
+  box('head',c-w,c+w,0,t,R.door_height,R.door_height+F,'metal');box('closed-leaf',c-w,c+w,R.door_recess,R.door_recess+R.door_leaf_thickness,0,R.door_height,'metal');
+ }
+ for(const d of R.doors){
+  const [x0,x1]=R[d.end+'_x'],sg=d.sign,t=R.wall_thickness;
+  const range=(lo,hi)=>[sg*lo,sg*hi].sort((a,b)=>a-b);
+  const band=(id,a,b,lo,hi,z0,z1)=>add(d.id+'-'+id,a,b,...range(lo,hi),z0,z1);
+  // Terminal original piers form the last 2.4 m of each hall-facing enclosure wall.
+  if(d.end==='entrance'){
+   band('blind-hall',V.end_pier.front_x,S.piers.x[0]-S.piers.size/2,5.6,5.6+t,0,R.top.band_z);
+   doorWall(d,...range(8,12),R.top.aisle_z);
+  }else{
+   doorWall(d,S.piers.x.at(-1)+S.piers.size/2,x1,R.top.band_z);
+   band('blind-transverse',x0,x0+t,8,12,0,R.top.aisle_z);
+  }
+  band('outer-wall',x0,x1,12-t,12,0,R.top.aisle_z);
+  const end=d.end==='entrance'?x0:x1-t;
+  band('end-wall',end,end+t,8,12,0,R.top.aisle_z);
+  band('roof-band',x0,x1,5.6,8,R.top.band_z-t,R.top.band_z);
+  band('roof-aisle',x0,x1,8,12,R.top.aisle_z-t,R.top.aisle_z);
+ }
+ for(const x of N.x)for(const y of N.y)add(`new-column-${x}-${y}`,x-N.section[0]/2,x+N.section[0]/2,y-N.section[1]/2,y+N.section[1]/2,...N.z,'newcolumn');

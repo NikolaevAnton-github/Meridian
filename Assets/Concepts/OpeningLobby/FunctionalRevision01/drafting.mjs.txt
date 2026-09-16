@@ -1,0 +1,111 @@
+// SVG drafting primitives and perspective adapted from ArchitectureRework01/generate.mjs.
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+import {spawnSync} from 'node:child_process';
+const dir=path.dirname(fileURLToPath(import.meta.url)),root=path.resolve(dir,'../../../..');
+const worker=path.join(root,'Saved/OpeningLobby/FunctionalRevision01/Worker');
+if(fs.existsSync(path.join(dir,'manifest.json')))throw Error('Frozen candidate');
+const D=JSON.parse(fs.readFileSync(path.join(dir,'design.json'),'utf8')),S=D.shared,V=D.retained_A;
+const C={paper:'#f6f4ed',ink:'#243c38',muted:'#60736b',line:'#a6b2a7',stone:'#70877a',dark:'#415d53',deep:'#2b4943',pale:'#dce2d7',glass:'#c3dfd9',teal:'#187568',orange:'#ae542d',white:'#fffdf7'};
+const f=n=>Number(n.toFixed(3));
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+let out=[],sheetName='',textRecords=[],sheets=[];
+const W=1600,H=1200;
+function line(x1,y1,x2,y2,color=C.ink,w=1.4,dash='') {out.push(`<line x1="${f(x1)}" y1="${f(y1)}" x2="${f(x2)}" y2="${f(y2)}" stroke="${color}" stroke-width="${w}" ${dash?`stroke-dasharray="${dash}"`:''}/>`);}
+function rect(x,y,w,h,fill=C.pale,stroke=C.ink,sw=1.2,extra=''){if(w<0||h<0)throw Error('Negative rectangle');out.push(`<rect x="${f(x)}" y="${f(y)}" width="${f(w)}" height="${f(h)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" ${extra}/>`);}
+function poly(points,fill=C.pale,stroke=C.ink,sw=1.3,extra=''){out.push(`<polygon points="${points.map(p=>p.map(f).join(',')).join(' ')}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" ${extra}/>`);}
+function text(x,y,t,size=19,color=C.ink,anchor='start',weight=400){out.push(`<text x="${f(x)}" y="${f(y)}" font-size="${size}" fill="${color}" text-anchor="${anchor}" font-weight="${weight}">${esc(t)}</text>`);textRecords.push({sheet:sheetName,x:f(x),y:f(y),text:t,size,anchor});}
+function notes(x,y,rows,size=19,leading=28,color=C.ink){rows.forEach((t,i)=>text(x,y+i*leading,t,size,color));}
+function dot(x,y,r=4,fill=C.orange){out.push(`<circle cx="${f(x)}" cy="${f(y)}" r="${f(r)}" fill="${fill}"/>`);}
+function tag(x,y,n){dot(x,y,14,C.white);out.push(`<circle cx="${x}" cy="${y}" r="14" fill="none" stroke="${C.teal}" stroke-width="1.7"/>`);text(x,y+6,n,17,C.teal,'middle',700);}
+function arrow(x,y,xx,yy,color=C.teal,w=2){line(x,y,xx,yy,color,w);const a=Math.atan2(yy-y,xx-x);for(const da of [-.5,.5])line(xx,yy,xx-10*Math.cos(a+da),yy-10*Math.sin(a+da),color,w);}
+function dh(x1,x2,y,label){line(x1,y,x2,y,C.teal);for(const x of [x1,x2])line(x-4,y+5,x+4,y-5,C.teal);text((x1+x2)/2,y-9,label,17,C.teal,'middle');}
+function dv(x,y1,y2,label){line(x,y1,x,y2,C.teal);for(const y of [y1,y2])line(x-5,y+4,x+5,y-4,C.teal);out.push(`<text transform="translate(${f(x-9)} ${f((y1+y2)/2)}) rotate(-90)" font-size="17" fill="${C.teal}" text-anchor="middle">${esc(label)}</text>`);}
+function leader(x,y,xx,yy,t,side='right'){dot(x,y,3,C.teal);line(x,y,xx,yy,C.teal);line(xx,yy,xx+(side==='right'?18:-18),yy,C.teal);text(xx+(side==='right'?24:-24),yy+6,t,18,C.teal,side==='right'?'start':'end');}
+function person(x,b,s){const h=S.human.height;dot(x,b-(h-.12)*s,.12*s,C.orange);line(x,b-(h-.26)*s,x,b-.74*s,C.orange,.17*s);for(const a of [-1,1]){line(x,b-1.33*s,x+a*.24*s,b-.87*s,C.orange,.08*s);line(x,b-.75*s,x+a*.18*s,b,C.orange,.1*s);}}
+function eye(x1,x2,b,s){line(x1,b-S.human.eye_height*s,x2,b-S.human.eye_height*s,C.orange,1.2,'7 5');}
+function bar(x,y,s,length=5){for(let i=0;i<2;i++)rect(x+i*length*s/2,y,length*s/2,7,i?C.paper:C.ink);text(x,y+28,'0',16);text(x+length*s,y+28,`${length} m`,16,C.ink,'end');}
+function panelTitle(x,y,n,title){text(x,y,n,17,C.teal,'start',700);text(x+43,y,title,23,C.ink,'start',600);}
+function start(id,title,sub){sheetName=id;out=[];rect(0,0,W,H,C.paper,'none');text(44,37,'MERIDIAN SQUAD   /   LOBBYFUNCTIONAL–REVISION01   /   CANDIDATE01',16,C.teal,'start',600);text(1556,37,id.slice(0,2),22,C.teal,'end',700);text(44,82,title,34,C.ink,'start',600);text(44,119,sub,18,C.muted);line(44,143,1556,143,C.line);line(44,1145,1556,1145,C.line);text(44,1176,'2D ARCHITECTURAL DRAWINGS  •  Metres  •  Functional proposals  •  Pending independent review',17,C.orange);text(1556,1176,'Owner approval required before 3D',17,C.muted,'end');}
+function save(){const svg=`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="Arial, sans-serif"><defs><pattern id="cut" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#c5d0c0"/><path d="M0 9L9 0" stroke="#83957f" stroke-width="1"/></pattern></defs>${out.join('\n')}</svg>`;fs.writeFileSync(path.join(dir,`${sheetName}.svg`),svg);sheets.push({name:sheetName,width:W,height:H});}
+function retainedSolids(V,{full=true}={}) {
+ const a=[];const add=(id,x0,x1,y0,y1,z0,z1,kind='stone')=>a.push({id,b:[x0,x1,y0,y1,z0,z1],kind});
+ const mirror=(id,x0,x1,lo,hi,z0,z1,kind='stone')=>{add(id+'+',x0,x1,lo,hi,z0,z1,kind);add(id+'-',x0,x1,-hi,-lo,z0,z1,kind);};
+ const p=V.portal,e=V.end_pier,u=V.upper,b=V.side_bay,t=V.transom,q=V.shoulder;
+ for(const x of S.piers.x)if(full||x<=-19.8)mirror(`free-pier-${x}`,x-1.2,x+1.2,5.6,8,0,8.4);
+ mirror('longitudinal-beam',-30,30,5.6,8,8.4,11.2);
+ mirror('upper-wall',-30,30,u.inner_abs_y,u.outer_abs_y,u.bottom_z,u.top_z,'wall');
+ mirror('terminal-engaged-pier',e.back_x,e.front_x,e.abs_y_min,e.abs_y_max,0,e.height);
+ mirror('portal-main',p.back_x,p.front_x,p.abs_y_inner,p.abs_y_outer,p.z_min,p.z_max);
+ mirror('portal-reveal-step',p.back_x,p.reveal_front_x,p.reveal_abs_y_inner,p.reveal_abs_y_outer,p.z_min,p.top_band_bottom,'reveal');
+ add('portal-head-ceiling-joint',p.back_x,p.front_x,-p.abs_y_inner,p.abs_y_inner,p.top_band_bottom,18);
+ mirror('recessed-shoulder',-30,q.front_x,q.abs_y_min,q.abs_y_max,q.z_min,q.z_max,'wall');
+ add('entry-datum-or-bridge',t.back_x,t.front_x,-t.half_width,t.half_width,t.bottom_z,t.top_z);
+ if(t.backing_return_to_x!==undefined)add('bridge-backing-return',t.backing_return_to_x,t.back_x,-t.half_width,t.half_width,t.bottom_z,t.top_z,'reveal');
+ // A continuous raised sill is deliberately absent: the threshold remains flush.
+ const dc=S.door_collar;
+ mirror('human-door-jamb',dc.back_x,dc.front_x,dc.inner_half_width,dc.outer_half_width,0,dc.head_top,'metal');
+ add('human-door-head',dc.back_x,dc.front_x,-dc.inner_half_width,dc.inner_half_width,dc.head_bottom,dc.head_top,'metal');
+ for(const sign of [-1,1]){
+  const yl=sign<0?-12:8,yh=sign<0?-8:12;
+  add('coffer-end-'+sign,b.x_min,b.x_min+b.edge_width,yl,yh,b.edge_bottom_z,b.soffit_z,'soffit');
+  add('coffer-pier-'+sign,b.x_max-b.edge_width,b.x_max,yl,yh,b.edge_bottom_z,b.soffit_z,'soffit');
+  add('coffer-wall-'+sign,b.x_min+b.edge_width,b.x_max-b.edge_width,sign<0?-12:12-b.edge_width,sign<0?-12+b.edge_width:12,b.edge_bottom_z,b.soffit_z,'soffit');
+  add('coffer-beam-'+sign,b.x_min+b.edge_width,b.x_max-b.edge_width,sign<0?-8-b.edge_width:8,sign<0?-8:8+b.edge_width,b.edge_bottom_z,b.soffit_z,'soffit');
+  for(const x of b.cross_rib_centres_x)add('coffer-rib-'+sign,x-b.rib_width/2,x+b.rib_width/2,yl+b.edge_width,yh-b.edge_width,b.edge_bottom_z,b.soffit_z,'soffit');
+ }
+ return a;
+}
+function projector(camera,frame){
+ const {xyz,yaw,pitch,hfov}=camera,ya=yaw*Math.PI/180,pa=pitch*Math.PI/180;
+ const F=[Math.cos(ya)*Math.cos(pa),Math.sin(ya)*Math.cos(pa),Math.sin(pa)];
+ const R=[-Math.sin(ya),Math.cos(ya),0],U=[-Math.cos(ya)*Math.sin(pa),-Math.sin(ya)*Math.sin(pa),Math.cos(pa)];
+ const dot3=(a,b)=>a.reduce((r,n,i)=>r+n*b[i],0),dist=p=>p.map((n,i)=>n-xyz[i]);
+ const focal=frame.w/2/Math.tan(hfov*Math.PI/360);
+ return {cam:xyz,toCamera:p=>{const d=dist(p);return [dot3(d,R),dot3(d,U),dot3(d,F)];},screen:q=>[frame.x+frame.w/2+focal*q[0]/q[2],frame.y+frame.h/2-focal*q[1]/q[2]]};
+}
+function nearClip(points,P){const q=points.map(P.toCamera),near=.25,r=[];for(let i=0;i<q.length;i++){const a=q[i],b=q[(i+1)%q.length],ain=a[2]>=near,bin=b[2]>=near;if(ain)r.push(a);if(ain!==bin){const t=(near-a[2])/(b[2]-a[2]);r.push(a.map((n,j)=>n+(b[j]-n)*t));}}return r;}
+function tint(kind,face){const table={stone:['#75887a','#526d61','#354f47'],wall:['#b7c3b1','#93a590','#819782'],reveal:['#668078','#47665e','#2d4c47'],soffit:['#a0ad97','#7d927c','#61785f'],metal:['#394e46','#253d36','#1e312c'],checkpoint:['#465d52','#30483f','#213a32']};return (table[kind]||table.stone)[face==='x'?0:face==='z'?2:1];}
+function perspective(V,camera,frame,id){
+ out.push(`<defs><clipPath id="${id}"><rect x="${frame.x}" y="${frame.y}" width="${frame.w}" height="${frame.h}"/></clipPath></defs><g clip-path="url(#${id})">`);
+ rect(frame.x,frame.y,frame.w,frame.h,'#e2e7da','none');
+ const P=projector(camera,frame);
+ const inner=camera.yaw===0;
+ const face=(pts,color,stroke=C.ink,w=.9)=>{const q=nearClip(pts,P);if(q.length>=3)poly(q.map(P.screen),color,stroke,w);};
+ const drawLine=(a,b,col=C.line,w=1)=>{const q=[P.toCamera(a),P.toCamera(b)];if(q.every(p=>p[2]<.25))return;if(q.some(p=>p[2]<.25)){const i=q[0][2]<.25?0:1,j=1-i,t=(.25-q[i][2])/(q[j][2]-q[i][2]);q[i]=q[i].map((n,k)=>n+(q[j][k]-n)*t);}const [p0,p1]=q.map(P.screen);line(...p0,...p1,col,w);};
+ face([[-30,-12,0],[30,-12,0],[30,12,0],[-30,12,0]],'#e0e4d5','none');
+ for(const sign of [-1,1]){
+  const y=sign*2.2;face([[-30,y-.32,.001],[30,y-.32,.001],[30,y+.32,.001],[-30,y+.32,.001]],'#829688','none');
+  face([[-30,sign*12,0],[30,sign*12,0],[30,sign*12,9.2],[-30,sign*12,9.2]],'#b9c5b3');
+  face([[-30,sign*8,9.2],[30,sign*8,9.2],[30,sign*12,9.2],[-30,sign*12,9.2]],'#899e84');
+ }
+ face([[-30,-8,18],[30,-8,18],[30,8,18],[-30,8,18]],'#adbca6');
+ if(!inner){
+ // End wall stays closed; glazing is a bright planar drawing field, not an exit claim.
+ face([[-30,-12,0],[-30,12,0],[-30,12,9.2],[-30,-12,9.2]],'#b2c0ad');
+ face([[-30,-8,9.2],[-30,8,9.2],[-30,8,18],[-30,-8,18]],'#b2c0ad');
+ for(const [z0,z1] of [[0,5.28],[V.upper_glazing_sill,17.8]]){
+  face([[-29.998,-2.6,z0],[-29.998,2.6,z0],[-29.998,2.6,z1],[-29.998,-2.6,z1]],'#d7ede6',C.deep,1.5);
+  if(z0>0){for(let i=1;i<4;i++)drawLine([-29.99,-2.6+i*1.3,z0],[-29.99,-2.6+i*1.3,z1],C.dark,1.6);for(let i=1;i<6;i++)drawLine([-29.99,-2.6,z0+(z1-z0)*i/6],[-29.99,2.6,z0+(z1-z0)*i/6],C.dark,1.5);}
+ }
+ drawLine([-29.99,0,0],[-29.99,0,2.64],C.dark,1.5);drawLine([-29.99,-2.6,2.88],[-29.99,2.6,2.88],C.dark,1.5);
+ }else{
+ face([[30,-12,0],[30,12,0],[30,12,18],[30,-12,18]],'#b2c0ad');
+ const q=D.elevator.sign_zone;
+ face([[29.99,-q.width/2,q.z[0]],[29.99,q.width/2,q.z[0]],[29.99,q.width/2,q.z[1]],[29.99,-q.width/2,q.z[1]]],'#b2c0ad','none');
+ }
+ for(let x=-30;x<=30;x+=3)drawLine([x,-12,.002],[x,12,.002],'#b5c3ad',.6);
+ const faces=[];
+ for(const o of solids(V)){
+  const [x0,x1,y0,y1,z0,z1]=o.b;
+  const fc=[{n:[1,0,0],p:[[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]],a:'x'},{n:[-1,0,0],p:[[x0,y1,z0],[x0,y0,z0],[x0,y0,z1],[x0,y1,z1]],a:'x'},{n:[0,-1,0],p:[[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]],a:'y'},{n:[0,1,0],p:[[x1,y1,z0],[x0,y1,z0],[x0,y1,z1],[x1,y1,z1]],a:'y'},{n:[0,0,1],p:[[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],a:'z'},{n:[0,0,-1],p:[[x0,y1,z0],[x1,y1,z0],[x1,y0,z0],[x0,y0,z0]],a:'z'}];
+  for(const fp of fc){const ct=fp.p[0];if(fp.n.reduce((a,n,i)=>a+n*(P.cam[i]-ct[i]),0)<=0)continue;const q=nearClip(fp.p,P);if(q.length<3)continue;faces.push({p:fp.p,original:fp.p,col:tint(o.kind,fp.a),id:o.id});}
+ }
+ for(const fc of orderedFaces(faces,P.cam)){const q=nearClip(fc.p,P);if(q.length<3)continue;poly(q.map(P.screen),fc.col,'none',0);for(let i=0;i<fc.p.length;i++){const a=fc.p[i],b=fc.p[(i+1)%fc.p.length];if(originalEdge(a,b,fc.original))drawLine(a,b,'#395447',.7);}}
+ // One standing silhouette, at a known clear central floor position.
+ const hp=inner?[28,3.3,0]:[-26.3,3.25,0],foot=P.screen(P.toCamera(hp)),head=P.screen(P.toCamera([hp[0],hp[1],1.8]));
+ person(foot[0],foot[1],Math.abs(foot[1]-head[1])/1.8);
+ out.push('</g>');rect(frame.x,frame.y,frame.w,frame.h,'none',C.line,1.2);
+}

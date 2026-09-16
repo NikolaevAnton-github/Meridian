@@ -1,0 +1,13 @@
+{
+  "record_id": "LobbyMaterialIntegration01-Rejection01",
+  "date_local": "2026-09-15",
+  "source": "Owner direct chat while viewing pilot",
+  "owner_message_english_translation": "I can already see that the textures are very poor and do not look remotely like stone. Why are you not using Painter?",
+  "decision": "Reject the NumPy-authored pilot textures. Use genuine native Painter authoring, beginning with a bounded stone sample on the existing lobby.",
+  "cancelled_run": "01a0a1d3-cb03-79c3-ad93-697f63e6740a",
+  "rejected_map": "/Game/Maps/L_OpeningLobby_MaterialIntegration01",
+  "rejected_inventory": "Saved/OpeningLobby/MaterialIntegration01/Controller/NumpyRejected01/rejected-artifacts.json",
+  "inventory_sha256": "add8e2b3dd02d0bd1f6e412b9bde6fdd46d0adb3b0374851739a7b5c708a3015",
+  "next_task": "Docs/Tasks/OpeningLobbyPainterStone01.md",
+  "scope": "Preserve geometry, owner map edits and rejected history. No broad rollout until the new stone sample is reviewed."
+}

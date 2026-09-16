@@ -1,0 +1,688 @@
+{
+  "authoring": "New local procedural recipes, no image/old material inputs",
+  "python": "3.13.13 (main, May  8 2026, 12:37:03) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.4",
+  "roles": [
+    {
+      "role": "Stone",
+      "recipe": {
+        "seed": 9152201,
+        "size": 2048,
+        "projection_cm": 400,
+        "method": "dense_mineral",
+        "metallic": 0,
+        "specular": 0.45
+      },
+      "exports": {
+        "BaseColor": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Stone_BaseColor.png",
+          "sha256": "deff3c83643d1489471768fcf13a6ec296c3a5c3a094b5f4ddc527f1014ee75c",
+          "bytes": 3481621,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "min": [
+            26,
+            36,
+            31
+          ],
+          "max": [
+            97,
+            110,
+            99
+          ],
+          "mean": [
+            58.91812348365784,
+            69.92291450500488,
+            62.861578941345215
+          ]
+        },
+        "ORM": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Stone_ORM.png",
+          "sha256": "5fe839c77ddd10d6dac1c95d9d5dcb49a3287ce0b7c8433b0f792c292abddc5b",
+          "bytes": 1439072,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "min": [
+            255,
+            74,
+            0
+          ],
+          "max": [
+            255,
+            100,
+            0
+          ],
+          "mean": [
+            255.0,
+            89.6672306060791,
+            0.0
+          ]
+        },
+        "Normal": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Stone_Normal.png",
+          "sha256": "c3e650858cbbee06cc8226569b2e6c2fca180bf2df4a2ca7ecff30a42672a1b0",
+          "bytes": 1558244,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "min": [
+            127,
+            127,
+            255
+          ],
+          "max": [
+            128,
+            128,
+            255
+          ],
+          "mean": [
+            127.50022411346436,
+            127.5003228187561,
+            255.0
+          ]
+        }
+      },
+      "relief_range_mm": [
+        -0.017579250037670135,
+        0.016011178493499756
+      ],
+      "normal_convention": "DirectX, +G along projected +V; RG encodes negative height slopes; flip_green_channel=false",
+      "max_normal_slope": 0.0036283156368881464,
+      "authoring_inputs": [
+        "Assets/Source/OpeningLobby/MaterialIntegration01/author_surfaces.py",
+        "Assets/Source/OpeningLobby/MaterialIntegration01/recipe.json"
+      ],
+      "images_read": [],
+      "dcc_contribution": false
+    },
+    {
+      "role": "Wall",
+      "recipe": {
+        "seed": 9152229,
+        "size": 2048,
+        "projection_cm": 530,
+        "method": "dense_mineral",
+        "metallic": 0,
+        "specular": 0.43
+      },
+      "exports": {
+        "BaseColor": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Wall_BaseColor.png",
+          "sha256": "225977f67cf48a753cb56409b2b6efd72b093ea64c6458106ec92232e40bef44",
+          "bytes": 3256199,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "min": [
+            34,
+            44,
+            39
+          ],
+          "max": [
+            95,
+            106,
+            96
+          ],
+          "mean": [
+            62.473402976989746,
+            72.60549449920654,
+            66.24387836456299
+          ]
+        },
+        "ORM": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Wall_ORM.png",
+          "sha256": "e77ff5ef48ded3b1fadeb50e19d01f31aa7ecd2683c18f3e01d53a7cdbdce714",
+          "bytes": 1434342,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "min": [
+            255,
+            87,
+            0
+          ],
+          "max": [
+            255,
+            112,
+            0
+          ],
+          "mean": [
+            255.0,
+            102.35122323036194,
+            0.0
+          ]
+        },
+        "Normal": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Wall_Normal.png",
+          "sha256": "abc8b170747e24005a1e08a720b535441f3af60ea02a321b52e0678ad08ea73d",
+          "bytes": 1558993,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "min": [
+            127,
+            127,
+            255
+          ],
+          "max": [
+            128,
+            128,
+            255
+          ],
+          "mean": [
+            127.50003600120544,
+            127.50021147727966,
+            255.0
+          ]
+        }
+      },
+      "relief_range_mm": [
+        -0.016030363738536835,
+        0.016240514814853668
+      ],
+      "normal_convention": "DirectX, +G along projected +V; RG encodes negative height slopes; flip_green_channel=false",
+      "max_normal_slope": 0.0026138511020690203,
+      "authoring_inputs": [
+        "Assets/Source/OpeningLobby/MaterialIntegration01/author_surfaces.py",
+        "Assets/Source/OpeningLobby/MaterialIntegration01/recipe.json"
+      ],
+      "images_read": [],
+      "dcc_contribution": false
+    },
+    {
+      "role": "Floor",
+      "recipe": {
+        "seed": 9152273,
+        "size": 4096,
+        "projection_cm": 1600,
+        "method": "branching_calcite",
+        "metallic": 0,
+        "specular": 0.5
+      },
+      "exports": {
+        "BaseColor": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Floor_BaseColor.png",
+          "sha256": "f54c3ad9205b98dede2185f5863a722e80980b94360cd3ad0fdb373755d7ce1c",
+          "bytes": 7846224,
+          "dimensions": [
+            4096,
+            4096
+          ],
+          "min": [
+            30,
+            46,
+            40
+          ],
+          "max": [
+            145,
+            162,
+            142
+          ],
+          "mean": [
+            66.69447267055511,
+            83.69257545471191,
+            71.5989642739296
+          ]
+        },
+        "ORM": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Floor_ORM.png",
+          "sha256": "c3ee483a24a168d0646cc9ebafc18b2f7cf8b910a833f31c102b6f6c4f80637f",
+          "bytes": 1643658,
+          "dimensions": [
+            4096,
+            4096
+          ],
+          "min": [
+            255,
+            49,
+            0
+          ],
+          "max": [
+            255,
+            60,
+            0
+          ],
+          "mean": [
+            255.0,
+            55.16838103532791,
+            0.0
+          ]
+        },
+        "Normal": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Floor_Normal.png",
+          "sha256": "da3d59f0846d3b31bb48816d3f2183c54b40dd5ec93ad611b34b250f6288eee9",
+          "bytes": 2859458,
+          "dimensions": [
+            4096,
+            4096
+          ],
+          "min": [
+            127,
+            127,
+            255
+          ],
+          "max": [
+            128,
+            128,
+            255
+          ],
+          "mean": [
+            127.50004404783249,
+            127.49986255168915,
+            255.0
+          ]
+        }
+      },
+      "relief_range_mm": [
+        -0.0058097862638533115,
+        0.006735815666615963
+      ],
+      "normal_convention": "DirectX, +G along projected +V; RG encodes negative height slopes; flip_green_channel=false",
+      "max_normal_slope": 0.0004203369317110628,
+      "authoring_inputs": [
+        "Assets/Source/OpeningLobby/MaterialIntegration01/author_surfaces.py",
+        "Assets/Source/OpeningLobby/MaterialIntegration01/recipe.json"
+      ],
+      "images_read": [],
+      "dcc_contribution": false
+    },
+    {
+      "role": "Strip",
+      "recipe": {
+        "seed": 9152311,
+        "size": 2048,
+        "projection_cm": 600,
+        "method": "fine_black_aggregate",
+        "metallic": 0,
+        "specular": 0.5
+      },
+      "exports": {
+        "BaseColor": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Strip_BaseColor.png",
+          "sha256": "7d473e58019c815f15213f98671eddbb36c14c65afc969f46b7290dacc49e551",
+          "bytes": 2255803,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "min": [
+            18,
+            25,
+            23
+          ],
+          "max": [
+            41,
+            50,
+            47
+          ],
+          "mean": [
+            24.723674774169922,
+            31.808497190475464,
+            29.780159950256348
+          ]
+        },
+        "ORM": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Strip_ORM.png",
+          "sha256": "449f576c950c022b07bf49f16a3df9691d7dd8045a0027eb4288a6b319ed12ed",
+          "bytes": 1589632,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "min": [
+            255,
+            55,
+            0
+          ],
+          "max": [
+            255,
+            66,
+            0
+          ],
+          "mean": [
+            255.0,
+            60.014045000076294,
+            0.0
+          ]
+        },
+        "Normal": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Strip_Normal.png",
+          "sha256": "85457d05a3e28e8e444977bb52137f2bd50e00bf5c872a4a65a35788eba595cf",
+          "bytes": 1139700,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "min": [
+            127,
+            127,
+            255
+          ],
+          "max": [
+            128,
+            128,
+            255
+          ],
+          "mean": [
+            127.50022459030151,
+            127.5002281665802,
+            255.0
+          ]
+        }
+      },
+      "relief_range_mm": [
+        -0.004999461118131876,
+        0.004997772164642811
+      ],
+      "normal_convention": "DirectX, +G along projected +V; RG encodes negative height slopes; flip_green_channel=false",
+      "max_normal_slope": 0.0014157691039144993,
+      "authoring_inputs": [
+        "Assets/Source/OpeningLobby/MaterialIntegration01/author_surfaces.py",
+        "Assets/Source/OpeningLobby/MaterialIntegration01/recipe.json"
+      ],
+      "images_read": [],
+      "dcc_contribution": false
+    },
+    {
+      "role": "Ceiling",
+      "recipe": {
+        "seed": 9152347,
+        "size": 1024,
+        "projection_cm": 240,
+        "method": "quiet_honed_finish",
+        "metallic": 0,
+        "specular": 0.34
+      },
+      "exports": {
+        "BaseColor": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Ceiling_BaseColor.png",
+          "sha256": "b202a3882fc08a9ac75c575d5e43de0ca9508f4d7c5dcf3ec07a6468a5a96d04",
+          "bytes": 433757,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "min": [
+            72,
+            79,
+            74
+          ],
+          "max": [
+            81,
+            88,
+            83
+          ],
+          "mean": [
+            76.92746639251709,
+            83.92746257781982,
+            78.92746639251709
+          ]
+        },
+        "ORM": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Ceiling_ORM.png",
+          "sha256": "f74e14a7abe3ee18dc0510f03b0952a383eed88ee705646dcb53411798145b35",
+          "bytes": 560544,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "min": [
+            255,
+            169,
+            0
+          ],
+          "max": [
+            255,
+            175,
+            0
+          ],
+          "mean": [
+            255.0,
+            171.22232246398926,
+            0.0
+          ]
+        },
+        "Normal": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Ceiling_Normal.png",
+          "sha256": "596d5a66cc7e8fce6a0e3c9ea966e420a946824bdf930e19b7213f5b451e9e6a",
+          "bytes": 453992,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "min": [
+            127,
+            127,
+            255
+          ],
+          "max": [
+            128,
+            128,
+            255
+          ],
+          "mean": [
+            127.49984455108643,
+            127.50024223327637,
+            255.0
+          ]
+        }
+      },
+      "relief_range_mm": [
+        -0.00799943320453167,
+        0.007999041117727757
+      ],
+      "normal_convention": "DirectX, +G along projected +V; RG encodes negative height slopes; flip_green_channel=false",
+      "max_normal_slope": 0.0038845757953822613,
+      "authoring_inputs": [
+        "Assets/Source/OpeningLobby/MaterialIntegration01/author_surfaces.py",
+        "Assets/Source/OpeningLobby/MaterialIntegration01/recipe.json"
+      ],
+      "images_read": [],
+      "dcc_contribution": false
+    },
+    {
+      "role": "Metal",
+      "recipe": {
+        "seed": 9152393,
+        "size": 1024,
+        "projection_cm": 160,
+        "method": "directional_machining",
+        "metallic": 0.96,
+        "specular": 0.5
+      },
+      "exports": {
+        "BaseColor": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Metal_BaseColor.png",
+          "sha256": "5cdddf593b2a1dae5626670eaea7ef3742e2dd6dd67de24d8ac63b1354745a64",
+          "bytes": 182240,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "min": [
+            44,
+            53,
+            50
+          ],
+          "max": [
+            50,
+            59,
+            56
+          ],
+          "mean": [
+            46.91123104095459,
+            55.91123008728027,
+            52.91123104095459
+          ]
+        },
+        "ORM": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Metal_ORM.png",
+          "sha256": "ecf25aeeeaf4457f5cf971828650c3e957cc94e8fa4987234f83a4b1f2ee62c4",
+          "bytes": 480818,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "min": [
+            255,
+            82,
+            245
+          ],
+          "max": [
+            255,
+            114,
+            245
+          ],
+          "mean": [
+            255.0,
+            98.00162982940674,
+            245.0
+          ]
+        },
+        "Normal": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Metal_Normal.png",
+          "sha256": "1ab5c8ae9e65c850a39c857a37cafd75e868c37c74664abd16bfd82374f6ae85",
+          "bytes": 258870,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "min": [
+            127,
+            127,
+            255
+          ],
+          "max": [
+            128,
+            128,
+            255
+          ],
+          "mean": [
+            127.50197982788086,
+            127.50205516815186,
+            255.0
+          ]
+        }
+      },
+      "relief_range_mm": [
+        -0.004549877718091011,
+        0.004521435592323542
+      ],
+      "normal_convention": "DirectX, +G along projected +V; RG encodes negative height slopes; flip_green_channel=false",
+      "max_normal_slope": 0.0026281680911779404,
+      "authoring_inputs": [
+        "Assets/Source/OpeningLobby/MaterialIntegration01/author_surfaces.py",
+        "Assets/Source/OpeningLobby/MaterialIntegration01/recipe.json"
+      ],
+      "images_read": [],
+      "dcc_contribution": false
+    },
+    {
+      "role": "Door",
+      "recipe": {
+        "seed": 9152429,
+        "size": 1024,
+        "projection_cm": 200,
+        "method": "directional_machining",
+        "metallic": 1,
+        "specular": 0.5
+      },
+      "exports": {
+        "BaseColor": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Door_BaseColor.png",
+          "sha256": "a097770f77fdecfcb27a29f850f2e3bc4a545914b7284abe35cf675ee7dd14bf",
+          "bytes": 187030,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "min": [
+            83,
+            95,
+            91
+          ],
+          "max": [
+            89,
+            101,
+            97
+          ],
+          "mean": [
+            85.9917688369751,
+            97.9917688369751,
+            93.9917688369751
+          ]
+        },
+        "ORM": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Door_ORM.png",
+          "sha256": "5e0f1541f2c7a9068bed25cf472ee1b6eeb15740121269410fac2c10f178e062",
+          "bytes": 481712,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "min": [
+            255,
+            69,
+            255
+          ],
+          "max": [
+            255,
+            102,
+            255
+          ],
+          "mean": [
+            255.0,
+            85.3803882598877,
+            255.0
+          ]
+        },
+        "Normal": {
+          "path": "Assets/Source/OpeningLobby/MaterialIntegration01/Textures/T_MI01_Door_Normal.png",
+          "sha256": "44c8b8228d84a3e4e29e3884025c962e9c5666a3f2b0cd8b76945c9f387bce77",
+          "bytes": 255710,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "min": [
+            127,
+            127,
+            255
+          ],
+          "max": [
+            128,
+            128,
+            255
+          ],
+          "mean": [
+            127.50159740447998,
+            127.4974718093872,
+            255.0
+          ]
+        }
+      },
+      "relief_range_mm": [
+        -0.004501128103584051,
+        0.004537508822977543
+      ],
+      "normal_convention": "DirectX, +G along projected +V; RG encodes negative height slopes; flip_green_channel=false",
+      "max_normal_slope": 0.002107083098962903,
+      "authoring_inputs": [
+        "Assets/Source/OpeningLobby/MaterialIntegration01/author_surfaces.py",
+        "Assets/Source/OpeningLobby/MaterialIntegration01/recipe.json"
+      ],
+      "images_read": [],
+      "dcc_contribution": false
+    }
+  ],
+  "recipe_sha256": "0e2b53342ac082a40af80e48c30b138e44f45e0d29a8a350b3052deab4b50a77",
+  "generator_sha256": "a1f4a10daf08b948b7c621df1bda004b3e909042a0d046518f1b96aed63ed947"
+}

@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "package": "LobbyArchitecture-Rework01",
+  "revision": "Candidate01",
+  "candidate_id": "LobbyArchitecture-Rework01/Candidate01",
+  "status": "pending_independent_review",
+  "units": "metres",
+  "base": "project root",
+  "scope": "Immutable 2D candidate; pending fresh independent review and owner selection. No 3D authorization.",
+  "manifest_exclusions": [
+    "manifest.json",
+    "manifest.sha256",
+    "Worker browser cache, temporary HTML, logs and text-coordinate scratch data"
+  ],
+  "entries": [
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/01-reference-reading.png",
+      "bytes": 1154675,
+      "sha256": "5e0b6a03e996e22061fa7dde6becb578c6b4fa7989602946b364965ce69b53ba"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/01-reference-reading.svg",
+      "bytes": 10093414,
+      "sha256": "2a505d96f95095cd20ae82823539d371b4e941683362c68114c4fd17f378da89"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/02-baseline-and-constraints.png",
+      "bytes": 904871,
+      "sha256": "03e1e03afdbc1b08eb68b124d579c7d07328e97c58bfdc12555255c0bc7861a9"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/02-baseline-and-constraints.svg",
+      "bytes": 14460176,
+      "sha256": "5d77c319654dd9d58a895085135e060602f49b3296032dfda48601960a108ce6"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/03-A-plan-elevation.png",
+      "bytes": 136658,
+      "sha256": "df767e9b07fe5312d7bbf4179a1637d77864d1615bfc2b88fb2614b90c1c616b"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/03-A-plan-elevation.svg",
+      "bytes": 18622,
+      "sha256": "d79f7521896e1a37711d1d644c63ca03b09aa74d029fcb17eb89cdbbd24490a0"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/04-A-sections.png",
+      "bytes": 132460,
+      "sha256": "329446bd52ae0b8b96885dafc089e8f062bad33efe048ea9c406dc898144833e"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/04-A-sections.svg",
+      "bytes": 15151,
+      "sha256": "07b47620fc1845f05b1c47926392efd7ae996bba3a9d9ad38d55b31ce02c29e0"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/05-A-spatial.png",
+      "bytes": 237379,
+      "sha256": "3242f4f45187d4345ed96aeec210c056d4cdc42c165375f5115f3f4d614e7591"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/05-A-spatial.svg",
+      "bytes": 56201,
+      "sha256": "9d7b0ac66de815a415e469e8eb9d182985e5c67227acf69e26aec62b7e8ca6c9"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/06-B-plan-elevation.png",
+      "bytes": 139150,
+      "sha256": "30d50c32d0d5a81a893453bb4f81e0b2ac25f2c14c8b20684382260dfc24148c"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/06-B-plan-elevation.svg",
+      "bytes": 18213,
+      "sha256": "d0718498270da646107916b95e3b1a2c1aa16320a4ed79dd40626d5dc5a5eaa6"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/07-B-sections.png",
+      "bytes": 132315,
+      "sha256": "ec709a6d2eadca6418e5aa3799ec638a9a7a01dd330f1bf5e0b97315da0907e4"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/07-B-sections.svg",
+      "bytes": 15260,
+      "sha256": "f6e3e272af49dcef8437724b53a8dee871822c5a54047eb086c50b02afd1a14a"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/08-B-spatial-comparison.png",
+      "bytes": 240766,
+      "sha256": "7360d69c55c8ea703b1f1bb272fd7cd26a3bead4488a4612f4743f3d9142c375"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/08-B-spatial-comparison.svg",
+      "bytes": 60650,
+      "sha256": "994aafbcd7ba7ed08fe9007aca9b8debb21e1f58bf1786cff19921df1eaaa029"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/audit-text.mjs",
+      "bytes": 3596,
+      "sha256": "f7854b61bf19297c6c4903c2db8694dc7f129f4dea488acc9badd9a8f0328553"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/design.json",
+      "bytes": 10668,
+      "sha256": "7cc2d308731366d77ac01828c04da45c75c9642f1933f9339c6c674d0c98b25d"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/freeze.mjs",
+      "bytes": 4016,
+      "sha256": "e3d5e96c4268b812ce3205e434c984a501493ad84bf276e8745fdcd744afd1d1"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/generate.mjs",
+      "bytes": 41990,
+      "sha256": "2d00bf355f662cb6e5f0cbf9525e9581c6f860706494ee7ad09fc2cb2fb04659"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/input-provenance.json",
+      "bytes": 3453,
+      "sha256": "eaa45678fa44f1546fa422c17bd1e2a77652d5869ce8048ed0f7339f504fcb82"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/ArchitectureRework01/README.md",
+      "bytes": 14652,
+      "sha256": "00d3d7e26e06df0844b15714e9a078e3eb56a1d4ec78713a16618d19fa0a90cd"
+    },
+    {
+      "path": "Saved/OpeningLobby/ArchitectureRework01/Worker/handoff.md",
+      "bytes": 2230,
+      "sha256": "e77d195b45a943abe62ceb73110c297b96b2b4448c9fdaa3831979bd8c1aa643"
+    },
+    {
+      "path": "Saved/OpeningLobby/ArchitectureRework01/Worker/inputs-before.json",
+      "bytes": 3090,
+      "sha256": "15f383aa0313f3433aff6d115c77418f1fc140cfe08a5d3177bb1d5ba9eb36a9"
+    },
+    {
+      "path": "Saved/OpeningLobby/ArchitectureRework01/Worker/sheets.json",
+      "bytes": 653,
+      "sha256": "9721f59624552bc820b9a15e2541c6cf72d41e3fbf4d7ea378bab694e9418504"
+    },
+    {
+      "path": "Saved/OpeningLobby/ArchitectureRework01/Worker/text-audit.json",
+      "bytes": 1049,
+      "sha256": "a34fd1844bd2bc6937fb42d19ab10e1737cf65067faebede10f2a461d2c96021"
+    },
+    {
+      "path": "Saved/OpeningLobby/ArchitectureRework01/Worker/verification.json",
+      "bytes": 6613,
+      "sha256": "2cca2d23962deaee800cf0565cb2ef5506e6c159867f8a3c8b0c96635e58dd6b"
+    },
+    {
+      "path": "Saved/OpeningLobby/ArchitectureRework01/Worker/visual-inspection.md",
+      "bytes": 5756,
+      "sha256": "9fc6b93fa747a998db9cd5752fe876f76ab58c20ec3a35f8be463743a0db5dbc"
+    }
+  ]
+}

@@ -1,0 +1,2398 @@
+{
+  "candidate": "LobbyMaterials-Complete01/SlabLayout01",
+  "master": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/M_Slabs01.M_Slabs01",
+  "accepted_face_graph": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01",
+  "physical_source_coverage_cm": 240,
+  "face_roughness": "Accepted ORM.G directly, except fractional joint coverage blends grout roughness",
+  "specular": 0.4,
+  "F0": 0.032,
+  "metallic": "Unchanged accepted ORM.B = 0",
+  "coat": false,
+  "basecolor": "Unchanged accepted Correction01 triangular phase sampling; no brightness checker or new pixels",
+  "layout_code": "\nfloat3 p = WorldCm - OriginCm;\nfloat3 a = abs(GeometryNormal);\nint plane = a.x >= a.y && a.x >= a.z ? 0 : (a.y >= a.z ? 1 : 2);\nfloat2 uv = plane == 0 ? p.yz : (plane == 1 ? p.xz : p.xy);\nfloat2 module = float2(WidthCm, HeightCm);\nfloat2 enabled = float2(1,1);\nif (plane == 2) {\n    bool alongX = ExtentCm.x >= ExtentCm.y;\n    uv = alongX ? p.xy : p.yx;\n    module = float2(HeightCm,HeightCm); enabled.y = 0;\n}\nif (LayoutMode > 0.5 && LayoutMode < 1.5) { uv = p.xz; module.x=HeightCm; enabled.y=0; }\nif (LayoutMode > 1.5 && LayoutMode < 2.5) { uv = p.yz; module.x=HeightCm; enabled.y=0; }\nif (LayoutMode > 2.5) {\n    // Composite elevator frame: two slender jambs and a continuous head.\n    uv = WorldCm.z < 420 ? p.zy : p.yz;\n    module.x=HeightCm; enabled.y=0;\n}\nfloat2 q = (frac(uv/module+0.5)-0.5)*module;\nfloat2 footprint=max(abs(ddx(uv))+abs(ddy(uv)),0.0001);\nfloat halfWidth=JointWidthCm*0.5;\nfloat2 lo=q-footprint*0.5, hi=q+footprint*0.5;\nfloat2 coverage=saturate((min(hi,halfWidth)-max(lo,-halfWidth))/footprint)*enabled;\n// When many joints enter one footprint, converge to physical area coverage.\ncoverage=lerp(coverage,JointWidthCm/module*enabled,saturate((footprint-module*0.5)/(module*0.5)));\nfloat mask=1-(1-coverage.x)*(1-coverage.y);\nfloat bevel=max(min(JointWidthCm*0.25,0.15),0.02);\nfloat2 edgeT=saturate((abs(q)-(halfWidth-bevel))/bevel);\nfloat2 slope=sign(q)*JointDepthCm/bevel*6*edgeT*(1-edgeT)*enabled;\nslope*=saturate(1-footprint/(JointWidthCm*2));\nreturn float3(mask,slope.x,slope.y);\n",
+  "normal_code": "\nfloat3 a=abs(GeometryNormal);\nint plane=a.x>=a.y && a.x>=a.z?0:(a.y>=a.z?1:2);\nfloat3 U=plane==0?float3(0,1,0):float3(1,0,0);\nfloat3 V=plane==2?float3(0,1,0):float3(0,0,1);\nif(plane==2 && ExtentCm.x<ExtentCm.y){U=float3(0,1,0);V=float3(1,0,0);}\nif(LayoutMode>0.5 && LayoutMode<1.5){U=float3(1,0,0);V=float3(0,0,1);}\nif(LayoutMode>1.5 && LayoutMode<2.5){U=float3(0,1,0);V=float3(0,0,1);}\nif(LayoutMode>2.5){U=WorldCm.z<420?float3(0,0,1):float3(0,1,0);V=float3(0,0,0);}\nfloat3 gradient=U*Layout.g+V*Layout.b;\ngradient-=GeometryNormal*dot(gradient,GeometryNormal);\nreturn normalize(FaceNormal-gradient);\n",
+  "rows": [
+    {
+      "actor": "StaticMeshActor_6",
+      "label": "Pier_1_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_006.MI_Slabs_006",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -1380.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -1380.0,
+        -800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -1140.0,
+        -560.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_7",
+      "label": "Pier_2_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_007.MI_Slabs_007",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -540.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -540.0,
+        -800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -300.0,
+        -560.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_8",
+      "label": "Pier_3_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_008.MI_Slabs_008",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        300.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        300.0,
+        -800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        540.0,
+        -560.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_9",
+      "label": "Pier_4_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_009.MI_Slabs_009",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        1140.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        1140.0,
+        -800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        1380.0,
+        -560.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_10",
+      "label": "Pier_5_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_010.MI_Slabs_010",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        1980.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        1980.0,
+        -800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        2220.0,
+        -560.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_17",
+      "label": "Pier_1_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_017.MI_Slabs_017",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -1380.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -1380.0,
+        560.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -1140.0,
+        800.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_18",
+      "label": "Pier_2_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_018.MI_Slabs_018",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -540.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -540.0,
+        560.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -300.0,
+        800.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_19",
+      "label": "Pier_3_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_019.MI_Slabs_019",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        300.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        300.0,
+        560.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        540.0,
+        800.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_20",
+      "label": "Pier_4_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_020.MI_Slabs_020",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        1140.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        1140.0,
+        560.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        1380.0,
+        800.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_21",
+      "label": "Pier_5_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_021.MI_Slabs_021",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        1980.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        1980.0,
+        560.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        2220.0,
+        800.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_35",
+      "label": "FB01_newNcolumnNN12p6NN2p4",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_035.MI_Slabs_035",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -1380.0,
+        -360.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -1380.0,
+        -360.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -1140.0,
+        -120.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_36",
+      "label": "FB01_newNcolumnNN12p6N2p4",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_036.MI_Slabs_036",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -1380.0,
+        120.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -1380.0,
+        120.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -1140.0,
+        360.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_37",
+      "label": "FB01_newNcolumnN12p6NN2p4",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_037.MI_Slabs_037",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        1140.0,
+        -360.0,
+        0
+      ],
+      "bounds_min_cm": [
+        1140.0,
+        -360.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        1380.0,
+        -120.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_38",
+      "label": "FB01_newNcolumnN12p6N2p4",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_038.MI_Slabs_038",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        1140.0,
+        120.0,
+        0
+      ],
+      "bounds_min_cm": [
+        1140.0,
+        120.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        1380.0,
+        360.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_71",
+      "label": "RA01_EndPier_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_071.MI_Slabs_071",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -3000.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        -800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -2880.0,
+        -560.0,
+        1120.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_74",
+      "label": "RA01_FirstPier_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_074.MI_Slabs_074",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -2220.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -2220.0,
+        -800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -1980.0,
+        -560.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_82",
+      "label": "RA01_EndPier_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_082.MI_Slabs_082",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -3000.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        560.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -2880.0,
+        800.0,
+        1120.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_85",
+      "label": "RA01_FirstPier_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_085.MI_Slabs_085",
+      "role": "Column",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -2220.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -2220.0,
+        560.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -1980.0,
+        800.0,
+        840.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_1",
+      "label": "SideWall_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_001.MI_Slabs_001",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -3040.0,
+        -1240.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3040.0,
+        -1240.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        3040.0,
+        -1200.0,
+        920.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_2",
+      "label": "FB01_EPos_Shell",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_002.MI_Slabs_002",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -3000.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        560.0,
+        -0.0
+      ],
+      "bounds_max_cm": [
+        -1980.0,
+        1200.0,
+        920.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_5",
+      "label": "FB01_ENeg_Shell",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_005.MI_Slabs_005",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -3000.0,
+        -1200.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        -1200.0,
+        -0.0
+      ],
+      "bounds_max_cm": [
+        -1980.0,
+        -560.0,
+        920.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_12",
+      "label": "SideWall_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_012.MI_Slabs_012",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -3040.0,
+        1200.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3040.0,
+        1200.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        3040.0,
+        1240.0,
+        920.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_15",
+      "label": "FB01_IPos_Shell",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_015.MI_Slabs_015",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        1980.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        1980.0,
+        560.0,
+        -0.0
+      ],
+      "bounds_max_cm": [
+        2997.0,
+        1200.0,
+        920.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_25",
+      "label": "EntranceAisleEnd_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_025.MI_Slabs_025",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -3040.0,
+        -1200.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3040.0,
+        -1200.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -3000.0,
+        -800.0,
+        920.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_26",
+      "label": "FB01_INeg_Shell",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_026.MI_Slabs_026",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        1980.0,
+        -1200.0,
+        0
+      ],
+      "bounds_min_cm": [
+        1980.0,
+        -1200.0,
+        -0.0
+      ],
+      "bounds_max_cm": [
+        2997.0,
+        -560.0,
+        920.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_27",
+      "label": "EntranceAisleEnd_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_027.MI_Slabs_027",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -3040.0,
+        800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3040.0,
+        800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -3000.0,
+        1200.0,
+        920.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_30",
+      "label": "InnerAisleEnd_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_030.MI_Slabs_030",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        3000.0,
+        -1200.0,
+        0
+      ],
+      "bounds_min_cm": [
+        3000.0,
+        -1200.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        3040.0,
+        -800.0,
+        920.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_32",
+      "label": "InnerAisleEnd_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_032.MI_Slabs_032",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        3000.0,
+        800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        3000.0,
+        800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        3040.0,
+        1200.0,
+        920.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_42",
+      "label": "FB01_InnerOpaqueWall",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_042.MI_Slabs_042",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        3000.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        3000.0,
+        -800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        3040.0,
+        800.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_70",
+      "label": "RA01_Shoulder_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_070.MI_Slabs_070",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -3000.0,
+        -560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        -560.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -2960.0,
+        -460.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_73",
+      "label": "RA01_UpperWall_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_073.MI_Slabs_073",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -3000.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        -800.0,
+        1120.0
+      ],
+      "bounds_max_cm": [
+        3000.0,
+        -620.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_79",
+      "label": "RA01_EntranceBacking_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_079.MI_Slabs_079",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -3040.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3040.0,
+        -800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -3000.0,
+        -260.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_81",
+      "label": "RA01_Shoulder_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_081.MI_Slabs_081",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -3000.0,
+        460.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        460.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -2960.0,
+        560.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_84",
+      "label": "RA01_UpperWall_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_084.MI_Slabs_084",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -3000.0,
+        620.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        620.0,
+        1120.0
+      ],
+      "bounds_max_cm": [
+        3000.0,
+        800.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_90",
+      "label": "RA01_EntranceBacking_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_090.MI_Slabs_090",
+      "role": "Wall",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -3040.0,
+        260.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3040.0,
+        260.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -3000.0,
+        800.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_69",
+      "label": "RA01_PortalJamb_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_069.MI_Slabs_069",
+      "role": "Jamb",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -3000.0,
+        -460.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        -460.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -2840.0,
+        -260.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_80",
+      "label": "RA01_PortalJamb_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_080.MI_Slabs_080",
+      "role": "Jamb",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -3000.0,
+        260.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        260.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        -2840.0,
+        460.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_31",
+      "label": "InnerEndBand_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_031.MI_Slabs_031",
+      "role": "Band",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        2997.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        2997.0,
+        -800.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        2999.0,
+        -560.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_33",
+      "label": "InnerEndBand_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_033.MI_Slabs_033",
+      "role": "Band",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        2997.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        2997.0,
+        560.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        2999.0,
+        800.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 0,
+      "course_datum_world_z": 0,
+      "exception": "Vertical courses; horizontal faces use long-axis cut pieces"
+    },
+    {
+      "actor": "StaticMeshActor_72",
+      "label": "RA01_Beam_-1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_072.MI_Slabs_072",
+      "role": "Beam",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -2880.0,
+        -800.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -2880.0,
+        -800.0,
+        840.0
+      ],
+      "bounds_max_cm": [
+        3000.0,
+        -560.0,
+        1120.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 1,
+      "course_datum_world_z": 0,
+      "exception": "Long-axis 240 cm cut pieces; no transverse grid"
+    },
+    {
+      "actor": "StaticMeshActor_83",
+      "label": "RA01_Beam_1",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_083.MI_Slabs_083",
+      "role": "Beam",
+      "source_overrides": [
+        "/Game/OpeningLobby/MaterialsComplete01/Correction01/M_C01_BroadStone.M_C01_BroadStone"
+      ],
+      "origin_cm": [
+        -2880.0,
+        560.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -2880.0,
+        560.0,
+        840.0
+      ],
+      "bounds_max_cm": [
+        3000.0,
+        800.0,
+        1120.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 1,
+      "course_datum_world_z": 0,
+      "exception": "Long-axis 240 cm cut pieces; no transverse grid"
+    },
+    {
+      "actor": "StaticMeshActor_91",
+      "label": "RA01_PortalHead",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_091.MI_Slabs_091",
+      "role": "Trim",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -3000.0,
+        -290.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        -290.0,
+        1780.0
+      ],
+      "bounds_max_cm": [
+        -2840.0,
+        290.0,
+        1800.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 2,
+      "course_datum_world_z": 0,
+      "exception": "Long-axis 240 cm cut pieces; no transverse grid"
+    },
+    {
+      "actor": "StaticMeshActor_92",
+      "label": "RA01_Datum",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_092.MI_Slabs_092",
+      "role": "Trim",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        -3000.0,
+        -260.0,
+        0
+      ],
+      "bounds_min_cm": [
+        -3000.0,
+        -260.0,
+        528.0
+      ],
+      "bounds_max_cm": [
+        -2840.0,
+        260.0,
+        540.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 2,
+      "course_datum_world_z": 0,
+      "exception": "Long-axis 240 cm cut pieces; no transverse grid"
+    },
+    {
+      "actor": "StaticMeshActor_40",
+      "label": "FB01_ElevatorFrame",
+      "component": "StaticMeshComponent0",
+      "slot": 0,
+      "old": "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01",
+      "new": "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_040.MI_Slabs_040",
+      "role": "Trim",
+      "source_overrides": [
+        "/Game/OpeningLobby/PainterStone01/Materials/M_PainterStone01.M_PainterStone01"
+      ],
+      "origin_cm": [
+        2940.0,
+        -220.0,
+        0
+      ],
+      "bounds_min_cm": [
+        2940.0,
+        -220.0,
+        -0.0
+      ],
+      "bounds_max_cm": [
+        3000.0,
+        220.0,
+        460.0
+      ],
+      "axes": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "module_cm": [
+        120,
+        240
+      ],
+      "joint_width_cm": 0.5,
+      "joint_depth_cm": 0.075,
+      "mode": 3,
+      "course_datum_world_z": 0,
+      "exception": "240 cm jamb courses below 420 cm; head length cuts above 420 cm"
+    }
+  ],
+  "instances": [
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_006.MI_Slabs_006",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_007.MI_Slabs_007",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_008.MI_Slabs_008",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_009.MI_Slabs_009",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_010.MI_Slabs_010",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_017.MI_Slabs_017",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_018.MI_Slabs_018",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_019.MI_Slabs_019",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_020.MI_Slabs_020",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_021.MI_Slabs_021",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_035.MI_Slabs_035",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_036.MI_Slabs_036",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_037.MI_Slabs_037",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_038.MI_Slabs_038",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_071.MI_Slabs_071",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_074.MI_Slabs_074",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_082.MI_Slabs_082",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_085.MI_Slabs_085",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_001.MI_Slabs_001",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_002.MI_Slabs_002",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_005.MI_Slabs_005",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_012.MI_Slabs_012",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_015.MI_Slabs_015",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_025.MI_Slabs_025",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_026.MI_Slabs_026",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_027.MI_Slabs_027",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_030.MI_Slabs_030",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_032.MI_Slabs_032",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_042.MI_Slabs_042",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_070.MI_Slabs_070",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_073.MI_Slabs_073",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_079.MI_Slabs_079",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_081.MI_Slabs_081",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_084.MI_Slabs_084",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_090.MI_Slabs_090",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_069.MI_Slabs_069",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_080.MI_Slabs_080",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_031.MI_Slabs_031",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_033.MI_Slabs_033",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_072.MI_Slabs_072",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_083.MI_Slabs_083",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_091.MI_Slabs_091",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_092.MI_Slabs_092",
+    "/Game/OpeningLobby/MaterialsComplete01/SlabLayout01/MI_Slabs_040.MI_Slabs_040"
+  ],
+  "material_only": true,
+  "axes": "Identity orthonormal building frame in centimetres, excludes actor scale and import orientation",
+  "glazing": "DEFERRED_BY_OWNER",
+  "source_helper": "Scripts/OpeningLobby/materialscomplete01_slabs_material.py"
+}

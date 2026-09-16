@@ -1,0 +1,796 @@
+{
+  "tree": {
+    "texture_set": "PainterStone01",
+    "stack": "",
+    "layers": [
+      {
+        "uid": 144,
+        "name": "02 Fine pale fracture network",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "BaseColor"
+        ]
+      },
+      {
+        "uid": 134,
+        "name": "03 Polished dielectric surface",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "BaseMetalness",
+          "SpecularRoughness"
+        ]
+      },
+      {
+        "uid": 83,
+        "name": "01 Green grey crystalline body",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "BaseColor",
+          "BaseMetalness",
+          "Height",
+          "SpecularRoughness"
+        ]
+      }
+    ],
+    "sha256": "c156a8b066d8dbfcfe37330b788cae106824faf1cb2760f570edd628e1c4cf21"
+  },
+  "readbacks": {
+    "83": {
+      "sources": {
+        "uid": 83,
+        "name": "01 Green grey crystalline body",
+        "source_mode": "Material",
+        "material": {
+          "type": "SourceSubstance",
+          "resource_url": "resource://starter_assets/marble_veined/marble_veined?version=760baf5cfc88c86ba4b45e7b0899861cb4667562.sbsar",
+          "color": null,
+          "uid": 94
+        },
+        "channels": {}
+      },
+      "projection": {
+        "uid": 83,
+        "name": "01 Green grey crystalline body",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "offset": [
+            0.10999999940395355,
+            0.23000000417232513
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      },
+      "parameters": {
+        "uid": 83,
+        "name": "01 Green grey crystalline body",
+        "source_mode": "Material",
+        "channel": null,
+        "source_type": "SourceSubstance",
+        "presets": [
+          "Gold Marble",
+          "Light Marble",
+          "Brown Marble"
+        ],
+        "parameters": {
+          "$randomseed": {
+            "label": "Seed",
+            "widget": "RandomSeed",
+            "value": 317,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Seed",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "marble_color": {
+            "label": "Marble Color",
+            "widget": "Color",
+            "value": {
+              "type": "Color",
+              "value": [
+                0.07500000298023224,
+                0.10000000149011612,
+                0.08500000089406967
+              ],
+              "color_space": "GenericColorSpace.sRGB"
+            },
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": null,
+              "description": "",
+              "editorMax": null,
+              "editorMin": null,
+              "label": "Marble Color",
+              "max": null,
+              "min": null,
+              "statustip": "",
+              "step": 0,
+              "subLabels": [],
+              "visible": true
+            }
+          },
+          "marble_roughness": {
+            "label": "Marble Roughness",
+            "widget": "Slider",
+            "value": 0.23999999463558197,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0.05000000074505806,
+              "description": "",
+              "editorMax": 3.4028234663852886e+38,
+              "editorMin": -3.4028234663852886e+38,
+              "label": "Marble Roughness",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "marble_roughness_variation": {
+            "label": "Marble Roughness Variation",
+            "widget": "Slider",
+            "value": 0.029999999329447746,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0.75,
+              "description": "",
+              "editorMax": 3.4028234663852886e+38,
+              "editorMin": -3.4028234663852886e+38,
+              "label": "Marble Roughness Variation",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "cracks_color": {
+            "label": "Cracks Color",
+            "widget": "Color",
+            "value": {
+              "type": "Color",
+              "value": [
+                0.41999998688697815,
+                0.46000000834465027,
+                0.4000000059604645
+              ],
+              "color_space": "GenericColorSpace.sRGB"
+            },
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": null,
+              "description": "",
+              "editorMax": null,
+              "editorMin": null,
+              "label": "Cracks Color",
+              "max": null,
+              "min": null,
+              "statustip": "",
+              "step": 0,
+              "subLabels": [],
+              "visible": true
+            }
+          },
+          "cracks_density": {
+            "label": "Cracks Density",
+            "widget": "Slider",
+            "value": 0.6000000238418579,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 1,
+              "description": "",
+              "editorMax": 3.4028234663852886e+38,
+              "editorMin": -3.4028234663852886e+38,
+              "label": "Cracks Density",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "cracks_deepness": {
+            "label": "Cracks Deepness",
+            "widget": "Slider",
+            "value": 0.004999999888241291,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 1,
+              "description": "",
+              "editorMax": 3.4028234663852886e+38,
+              "editorMin": -3.4028234663852886e+38,
+              "label": "Cracks Deepness",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "channel_diffuse": {
+            "label": "Diffuse",
+            "widget": "Togglebutton",
+            "value": 0,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Diffuse",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "channel_basecolor": {
+            "label": "Base Color",
+            "widget": "Togglebutton",
+            "value": 1,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 1,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Base Color",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "channel_normal": {
+            "label": "Normal",
+            "widget": "Togglebutton",
+            "value": 1,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 1,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Normal",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "channel_specular": {
+            "label": "Specular",
+            "widget": "Togglebutton",
+            "value": 0,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Specular",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "channel_glossiness": {
+            "label": "Glossiness",
+            "widget": "Togglebutton",
+            "value": 0,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Glossiness",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "channel_roughness": {
+            "label": "Roughness",
+            "widget": "Togglebutton",
+            "value": 1,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 1,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Roughness",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "channel_metallic": {
+            "label": "Metallic",
+            "widget": "Togglebutton",
+            "value": 1,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 1,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Metallic",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "channel_height": {
+            "label": "Height",
+            "widget": "Togglebutton",
+            "value": 1,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 1,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Height",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "luminosity": {
+            "label": "Luminosity",
+            "widget": "Slider",
+            "value": 0.5,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0.5,
+              "description": "",
+              "editorMax": 3.4028234663852886e+38,
+              "editorMin": -3.4028234663852886e+38,
+              "label": "Luminosity",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "contrast": {
+            "label": "Contrast",
+            "widget": "Slider",
+            "value": 0,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 3.4028234663852886e+38,
+              "editorMin": -3.4028234663852886e+38,
+              "label": "Contrast",
+              "max": 1,
+              "min": -1,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "hue_shift": {
+            "label": "Hue Shift",
+            "widget": "Slider",
+            "value": 0,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 3.4028234663852886e+38,
+              "editorMin": -3.4028234663852886e+38,
+              "label": "Hue Shift",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "saturation": {
+            "label": "Saturation",
+            "widget": "Slider",
+            "value": 0.5,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0.5,
+              "description": "",
+              "editorMax": 3.4028234663852886e+38,
+              "editorMin": -3.4028234663852886e+38,
+              "label": "Saturation",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "normal_intensity": {
+            "label": "Normal Intensity",
+            "widget": "Slider",
+            "value": 0.009999999776482582,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0.5,
+              "description": "",
+              "editorMax": 3.4028234663852886e+38,
+              "editorMin": -3.4028234663852886e+38,
+              "label": "Normal Intensity",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "height_range": {
+            "label": "Height Range",
+            "widget": "Slider",
+            "value": 0.0010000000474974513,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 1,
+              "description": "",
+              "label": "Height Range",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "height_position": {
+            "label": "Height Position",
+            "widget": "Slider",
+            "value": 0.5,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0.5,
+              "description": "",
+              "label": "Height Position",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          }
+        }
+      }
+    },
+    "134": {
+      "sources": {
+        "uid": 134,
+        "name": "03 Polished dielectric surface",
+        "source_mode": "Split",
+        "material": null,
+        "channels": {
+          "BaseMetalness": {
+            "type": "SourceUniformColor",
+            "resource_url": null,
+            "color": {
+              "value": [
+                0,
+                0,
+                0
+              ],
+              "color_space": "GenericColorSpace.Raw"
+            },
+            "uid": 141
+          },
+          "SpecularRoughness": {
+            "type": "SourceUniformColor",
+            "resource_url": null,
+            "color": {
+              "value": [
+                0.23999999463558197,
+                0.23999999463558197,
+                0.23999999463558197
+              ],
+              "color_space": "GenericColorSpace.Raw"
+            },
+            "uid": 140
+          }
+        }
+      },
+      "projection": {
+        "uid": 134,
+        "name": "03 Polished dielectric surface",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "offset": [
+            0,
+            0
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      }
+    },
+    "144": {
+      "sources": {
+        "uid": 144,
+        "name": "02 Fine pale fracture network",
+        "source_mode": "Split",
+        "material": null,
+        "channels": {
+          "BaseColor": {
+            "type": "SourceSubstance",
+            "resource_url": "resource://starter_assets/marble_veins/marble_veins?version=d9e67ebec2f5df3ad56617a03718444eafbe1376.sbsar",
+            "color": null,
+            "uid": 152
+          }
+        }
+      },
+      "projection": {
+        "uid": 144,
+        "name": "02 Fine pale fracture network",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            2,
+            2
+          ],
+          "rotation": 0,
+          "offset": [
+            0.20999999344348907,
+            0.3700000047683716
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      },
+      "parameters": {
+        "uid": 144,
+        "name": "02 Fine pale fracture network",
+        "source_mode": "Split",
+        "channel": "BaseColor",
+        "source_type": "SourceSubstance",
+        "presets": [],
+        "parameters": {
+          "$randomseed": {
+            "label": "Seed",
+            "widget": "RandomSeed",
+            "value": 593,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Seed",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "invert": {
+            "label": "Invert",
+            "widget": "Togglebutton",
+            "value": 0,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Invert",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "position": {
+            "label": "Balance",
+            "widget": "Slider",
+            "value": 0.36000001430511475,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0.5,
+              "description": "",
+              "label": "Balance",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "contrast": {
+            "label": "Contrast",
+            "widget": "Slider",
+            "value": 0.699999988079071,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "label": "Contrast",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "Disorder": {
+            "label": "Disorder",
+            "widget": "Slider",
+            "value": 67,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 18,
+              "description": "",
+              "label": "Disorder",
+              "max": 100,
+              "min": 0,
+              "statustip": "",
+              "step": 1,
+              "visible": true
+            }
+          },
+          "Slope_Blur": {
+            "label": "Marbling",
+            "widget": "Slider",
+            "value": 0.2800000011920929,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "label": "Marbling",
+              "max": 2,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "physical_coverage_cm": 360,
+  "authoring_mesh_cm": 240,
+  "resolution": 2048,
+  "blend_overrides": {
+    "144": {
+      "BaseColor": {
+        "opacity": 0.08,
+        "mode": "Screen"
+      }
+    }
+  }
+}

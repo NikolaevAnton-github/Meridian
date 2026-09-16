@@ -1,0 +1,100 @@
+{
+  "package": "LobbyArchitecture-Rework01",
+  "revision": "Candidate01",
+  "status": "pending_independent_review",
+  "units": "metres and degrees",
+  "scope": "2D architectural proposals only. Bounds describe drawing solids; no mesh, scene or editor production. Numeric secondary depths are designed, not measured from perspective art.",
+  "coordinates": "X entrance (-30) to inner end (+30); Y across hall; Z up. Looking toward -X, +Y is screen left. Entry plans have +X downward and +Y left.",
+  "authority": {
+    "art": "LobbyArt-Review02; original OwnerReferences01 pair is primary; Review02 oblique is subordinate",
+    "scale": "LobbyScale-Review01",
+    "scale_manifest_sha256": "e7c113fd8b74ea2106d8af29391cdfece7a1f763db272fb9727da0568a65efb6",
+    "scale_approval": "Assets/Concepts/OpeningLobby/Approvals/LobbyScale-Review01.json",
+    "walkthrough_approval": "Docs/Approvals/LobbyLayout03-Scale01.json",
+    "task": "Docs/Tasks/OpeningLobbyArchitectureRework01.md"
+  },
+  "shared": {
+    "hall": {"length": 60, "width": 24, "height": 18, "entrance_x": -30, "inner_x": 30},
+    "piers": {"x": [-21, -12.6, -4.2, 4.2, 12.6, 21], "abs_y": 6.8, "size": 2.4, "height": 8.4, "pair_count": 6, "pitch": 8.4, "clear_bay": 6},
+    "circulation": {"central_clear": 11.2, "aisle_clear": 4, "aisle_centres_y": [-10, 10], "crossovers_x": [-27, 27], "capsule_radius": 0.34, "capsule_half_height": 0.88},
+    "beam": {"abs_y_min": 5.6, "abs_y_max": 8, "z_min": 8.4, "z_max": 11.2},
+    "aisle_ceiling_z": 9.2,
+    "entrance": {"glass_x": -30, "field_width": 5.2, "lower_height": 5.28, "upper_sill_baseline": 5.4, "upper_head": 17.8, "leaf_count": 2, "leaf_width": 1.04, "leaf_height": 2.64, "leaf_x": -30, "leaf_centre_y": 0, "threshold_z": 0},
+    "inner": {"x": 30, "door_width": 1.04, "door_height": 2.18, "window_width": 2.4, "window_sill": 11.4, "window_height": 6.2},
+    "detector": {"x": -24.6, "y": -1.05, "depth": 0.55, "clear_width": 1.14, "clear_height": 2.28, "post_width": 0.16, "header_height": 0.14},
+    "station": {"x": -24.6, "y": 0.95, "depth": 0.85, "width": 2.2, "height": 0.96, "top_depth": 0.95, "top_width": 2.3, "top_height": 1.02, "top_thickness": 0.06},
+    "floor_strips": {"abs_y": 2.2, "width": 0.64},
+    "human": {"height": 1.8, "eye_height": 1.72, "walk_speed": 3.6, "gameplay_hfov": 90},
+    "door_collar": {"outer_half_width": 1.18, "inner_half_width": 1.04, "head_top": 2.88, "head_bottom": 2.64, "front_x": -29.4, "back_x": -30},
+    "reference_mullions": {"columns": 4, "upper_rows": 6, "width": 0.055, "depth": 0.12, "status": "Schematic drawing subdivisions, not fabrication specification"}
+  },
+  "baseline": {
+    "end_wall_front_x": -30,
+    "end_band_front_x": -29.97,
+    "end_band_abs_y": [5.6, 8],
+    "upper_wall_inner_abs_y": 5.6,
+    "upper_wall_z_min": 11.2,
+    "portal_structural_depth": null,
+    "end_cladding_thickness": 0.01,
+    "end_band_thickness": 0.02,
+    "evidence": "architecture01_unreal.py assembly/end_rectangle: ordinary panels at X=-30.005 with 0.01 thickness; band centre -29.98 with 0.02 thickness. PierCourse is a 2.4 m square shaft. Thin panel thickness is not a claim about the hidden wall construction."
+  },
+  "variants": {
+    "A": {
+      "name": "Stepped monolithic portal",
+      "intent": "Continuous tall jambs anchor the window; an inset shoulder separates them from engaged end piers and the longitudinal beams.",
+      "portal": {"front_x": -28.4, "back_x": -30, "abs_y_inner": 2.9, "abs_y_outer": 4.6, "z_min": 0, "z_max": 18, "reveal_front_x": -29, "reveal_abs_y_inner": 2.6, "reveal_abs_y_outer": 2.9, "top_band_bottom": 17.8},
+      "shoulder": {"front_x": -29.6, "abs_y_min": 4.6, "abs_y_max": 5.6, "z_min": 0, "z_max": 18},
+      "end_pier": {"front_x": -28.8, "back_x": -30, "abs_y_min": 5.6, "abs_y_max": 8, "height": 11.2},
+      "upper": {"inner_abs_y": 6.2, "outer_abs_y": 8, "bottom_z": 11.2, "top_z": 18, "application": "Uniform secondary section along both colonnades, returning into unchanged inner-end wall. No new floor area or route."},
+      "transom": {"front_x": -28.4, "back_x": -30, "half_width": 2.6, "bottom_z": 5.28, "top_z": 5.4, "role": "Thin datum splice aligned to existing field boundary; not a structural lintel."},
+      "upper_glazing_sill": 5.4,
+      "side_bay": {"x_min": -28.8, "x_max": -22.2, "abs_y_min": 8, "abs_y_max": 12, "soffit_z": 9.2, "edge_bottom_z": 8.4, "edge_width": 0.35, "cross_rib_centres_x": [], "rib_width": 0.4},
+      "terminal_clear_gap": 6.6,
+      "crossover_min_centre_distance": 1.4,
+      "crossover_capsule_margin": 1.06,
+      "tradeoff": "Closest to the primary art's vertical hierarchy and quieter terminal shoulder. The deep jambs narrow the oblique apparent glass width; the thin 0.2 m head zone is a ceiling junction, not evidence of a load-bearing lintel."
+    },
+    "B": {
+      "name": "Bridged terminal bay",
+      "intent": "Engaged end piers carry a broad entrance bridge; the lower field sits in an 11.2 m wide recess and the tall window steps back above it.",
+      "portal": {"front_x": -28.6, "back_x": -30, "abs_y_inner": 3, "abs_y_outer": 4.6, "z_min": 6, "z_max": 18, "reveal_front_x": -29.2, "reveal_abs_y_inner": 2.6, "reveal_abs_y_outer": 3, "top_band_bottom": 17.8},
+      "shoulder": {"front_x": -29.6, "abs_y_min": 2.6, "abs_y_max": 5.6, "z_min": 0, "z_max": 18},
+      "end_pier": {"front_x": -27.8, "back_x": -30, "abs_y_min": 5.6, "abs_y_max": 8, "height": 11.2},
+      "upper": {"inner_abs_y": 6.8, "outer_abs_y": 8, "bottom_z": 11.2, "top_z": 18, "application": "Uniform secondary section along both colonnades, returning into unchanged inner-end wall. No new floor area or route."},
+      "transom": {"front_x": -27.8, "back_x": -29.6, "backing_return_to_x": -30, "half_width": 5.6, "bottom_z": 5.28, "top_z": 6, "role": "Proposed architectural bridge tied into engaged end piers, with 0.4 m backing return to the end-wall/glazing datum. Structural feasibility is unresolved; dimensions express visible form."},
+      "upper_glazing_sill": 6,
+      "side_bay": {"x_min": -27.8, "x_max": -22.2, "abs_y_min": 8, "abs_y_max": 12, "soffit_z": 9.2, "edge_bottom_z": 8.4, "edge_width": 0.35, "cross_rib_centres_x": [-25], "rib_width": 0.4},
+      "terminal_clear_gap": 5.6,
+      "crossover_min_centre_distance": 0.8,
+      "crossover_capsule_margin": 0.46,
+      "tradeoff": "Stronger lateral enclosure and a deliberate pause at the entrance. The bridge competes with the reference's uninterrupted vertical emphasis; upper glazing height reduces by 0.6 m."
+    }
+  },
+  "drawing_cameras": {
+    "approach": {"xyz": [-14, 3.5, 1.72], "yaw": 192, "pitch": 16, "hfov": 106, "aspect": [16, 9], "status": "Wide architectural perspective drawing, aimed toward the entrance centre and tilted upward to include the portal head and adjacent shaft. Not gameplay or a reconstructed source camera; gameplay HFOV remains 90."},
+    "context": {"xyz": [19, 0, 1.72], "yaw": 180, "pitch": 0, "hfov": 75, "aspect": [16, 9], "status": "Axial whole-hall drawing using the accepted provisional C2 pose; source camera remains an estimate."},
+    "detail_axon": {"projection": "Parallel architectural cutaway", "show_x": [-30, -19.8], "show_y": [0, 12], "show_z": [0, 18], "status": "Only code-native 2D polygons are emitted. Selected enclosing faces omitted to expose returns."}
+  },
+  "deltas": [
+    {"item": "Hall L/W/H; free pier positions/count/size; floor circulation", "baseline": "60/24/18; six pairs at prescribed coordinates; 11.2 central / 4 side", "A": "unchanged", "B": "unchanged", "authority": "accepted primary"},
+    {"item": "Portal main face X / projection from end datum", "baseline": "-30 / 0; no developed portal in visible kit", "A": "-28.4 / 1.6", "B": "-28.6 / 1.4 above Z6 only", "authority": "secondary proposal"},
+    {"item": "Terminal engaged pier face X", "baseline": "-29.97", "A": "-28.8; +1.17 into hall", "B": "-27.8; +2.17 into hall", "authority": "secondary proposal"},
+    {"item": "Gap from terminal pier face to first free pier", "baseline": "7.77", "A": "6.6; -1.17", "B": "5.6; -2.17", "authority": "secondary proposal"},
+    {"item": "Upper-wall inner |Y| above Z11.2", "baseline": "5.6", "A": "6.2; +0.6 setback", "B": "6.8; +1.2 setback", "authority": "secondary proposal; upper central width changes 11.2 to 12.4 / 13.6"},
+    {"item": "Glazing W / sill / head / height", "baseline": "5.2 / 5.4 / 17.8 / 12.4", "A": "unchanged", "B": "5.2 / 6 / 17.8 / 11.8", "authority": "B explicitly departs from accepted glazing schedule"},
+    {"item": "Entrance lower field / leaves / pane X", "baseline": "5.2 x 5.28; 2 x 1.04 x 2.64; X=-30", "A": "unchanged; added collar projects 0.6", "B": "unchanged; added collar projects 0.6", "authority": "accepted fields retained; collar is secondary proposal"},
+    {"item": "Low entrance band W / Z / depth", "baseline": "5.2 / 5.28..5.4 / thin cladding", "A": "5.2 / 5.28..5.4 / 1.6", "B": "11.2 / 5.28..6 / 1.8 plus 0.4 backing return", "authority": "secondary proposal; B changes vertical field junction"},
+    {"item": "Final side-bay soffit", "baseline": "flat Z9.2", "A": "Z9.2 inset; 0.35 perimeter at Z8.4", "B": "same plus 0.4 cross rib at X=-25", "authority": "explicit local overhead clearance reduction to 8.4; 4 m floor aisle retained"},
+    {"item": "Crossovers and checkpoint", "baseline": "X +/-27; checkpoint X=-24.6", "A": "unchanged; minimum centre-to-new-mass 1.4", "B": "unchanged; minimum centre-to-new-mass 0.8", "authority": "accepted circulation; nominal capsule margins 1.06 / 0.46, not collision testing"},
+    {"item": "Threshold / raised sill", "baseline": "Z0 nominal floor", "A": "Z0; flush 1.6 m reveal apron", "B": "Z0; flush 2.2 m recess apron", "authority": "no step, external route or door function proposed"},
+    {"item": "Inner end; other five free pier pairs; human height / eye", "baseline": "approved schedule", "A": "unchanged", "B": "unchanged", "authority": "accepted primary; upper-wall section returns into existing end plane"}
+  ],
+  "unresolved": [
+    "Owner choice A or B and acceptance of each explicit secondary delta; B additionally changes approved upper glazing sill and height.",
+    "Load paths, hidden wall/roof construction and support of the broad B bridge; no structural engineering acceptance is claimed.",
+    "Door operation, hardware and net clear opening, external access and inner-door destination remain unspecified.",
+    "Exact source lens, hidden returns and material response cannot be recovered from the art. Numbers here are proposals.",
+    "Fresh independent image-first review and subsequent owner selection have not occurred for this candidate."
+  ]
+}

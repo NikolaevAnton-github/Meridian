@@ -1,0 +1,23 @@
+{
+  "package": "LobbyScale-Review01",
+  "task": "MSQ-10",
+  "approved_by": "Project owner",
+  "recorded_on": "2026-09-14",
+  "decision": "Approved",
+  "decision_context": "The owner explicitly stated that the lobby drawing is approved and authorized proceeding. The current owner handoff identifies the complete LobbyScale-Review01 package after correction B1; no partial approval or exception was stated.",
+  "manifest": "Assets/Concepts/OpeningLobby/ScaleReview01/manifest.json",
+  "manifest_sha256": "e7c113fd8b74ea2106d8af29391cdfece7a1f763db272fb9727da0568a65efb6",
+  "verified_package_files": 19,
+  "approved_scope": [
+    "Exact 60 x 24 x 18 m architectural schedule, six pier pairs and spacing.",
+    "All listed human-size exceptions: inner door, two 1.04 x 2.64 m entrance leaves, detector, station footprint and worktop, retained local checkpoint spacing.",
+    "Scheduled glazing fields, floor strips, proposed upper infill and end-wall composition.",
+    "Circulation, provisional capture poses and FOV estimates, and 0.05 m primary-dimension implementation tolerance."
+  ],
+  "unchanged_visual_authority": "LobbyArt-Review02; its three approved image hashes were verified against this manifest.",
+  "independent_review": "Saved/OpeningLobby/ScaleReview01/Review/report.md: READY after correction B1, same manifest digest.",
+  "authorized_next_step": "A separate neutral-light walkable Layout03 blockout from this schedule, followed by technical and independent visual review and owner walkthrough acceptance.",
+  "unresolved": "Actual in-game framing and perceived monumentality; door operation, net openings and hardware; external access and unseen connections; inner door destination; roof/wall construction and structural engineering.",
+  "not_approved": "Rejected Stage1/Layout02, completed 3D walkthrough, detailed architecture/materials or final environment milestone.",
+  "immutable_submission_note": "The approved package bytes retain historical pending submission metadata. This external decision record supersedes that metadata only for the identified digest; do not regenerate the package or rewrite its manifest to record approval."
+}

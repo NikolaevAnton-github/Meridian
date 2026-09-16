@@ -1,32 +1,29 @@
-# This project's Epic Unreal MCP. Start the editor before the Codex session.
-[mcp_servers.unreal_epic]
-url = "http://127.0.0.1:8000/mcp"
-enabled = true
-required = false
-startup_timeout_sec = 20
-tool_timeout_sec = 120
+  # This project's Epic Unreal MCP. Start the editor before the Codex session.
+  [mcp_servers.unreal_epic]
+    url = "http://127.0.0.1:8000/mcp"
+    enabled = true
+    required = false
+    startup_timeout_sec = 20
+    tool_timeout_sec = 120
 
-# Merge with the installed user-level Blender server configuration.
-[mcp_servers.blender.env]
-DISABLE_TELEMETRY = "true"
+    # Merge with the installed user-level Blender server configuration.
+    [mcp_servers.blender.env]
+      DISABLE_TELEMETRY = "true"
 
-[mcp_servers.substance_painter]
-command = 'D:\devgames\MeridianSquad\.tools\painter-mcp\runtime\Scripts\python.exe'
-args = ["-m", "substance_painter_mcp"]
-startup_timeout_sec = 30
-tool_timeout_sec = 180
-enabled_tools = [
-    "painter_status", "get_capabilities", "get_project_info", "audit_project",
-    "plan_project_creation", "create_project", "get_project_creation_job",
-    "plan_layer_recipe", "create_layer_recipe", "list_layers",
-    "list_export_presets", "inspect_export_preset",
-    "plan_texture_export", "export_textures", "save_project",
-]
+  [mcp_servers.substance_painter]
+    command = "D:\\devgames\\MeridianSquad\\.tools\\painter-mcp\\runtime\\Scripts\\python.exe"
+    args = ["-m", "substance_painter_mcp"]
+    startup_timeout_sec = 30
+    tool_timeout_sec = 180
+    enabled_tools = ["painter_status", "get_capabilities", "get_project_info", "audit_project", "plan_project_creation", "create_project", "get_project_creation_job", "plan_layer_recipe", "create_layer_recipe", "list_layers", "list_export_presets", "inspect_export_preset", "plan_texture_export", "export_textures", "save_project"]
 
-[mcp_servers.substance_painter.env]
-SP_MCP_HOST = "localhost"
-SP_MCP_PORT = "60041"
-SP_MCP_TIMEOUT = "120"
-SP_MCP_PROJECT_ROOTS = 'D:\devgames\MeridianSquad\Assets\Source\SmokeTest'
-SP_MCP_MESH_ROOTS = 'D:\devgames\MeridianSquad\Saved\Exports\SmokeTest'
-SP_MCP_EXPORT_ROOTS = 'D:\devgames\MeridianSquad\Assets\Textures\SmokeTest\Painter'
+    [mcp_servers.substance_painter.env]
+      SP_MCP_HOST = "localhost"
+      SP_MCP_PORT = "60041"
+      SP_MCP_TIMEOUT = "120"
+      SP_MCP_PROJECT_ROOTS = "D:\\devgames\\MeridianSquad\\Assets\\Source\\SmokeTest"
+      SP_MCP_MESH_ROOTS = "D:\\devgames\\MeridianSquad\\Saved\\Exports\\SmokeTest"
+      SP_MCP_EXPORT_ROOTS = "D:\\devgames\\MeridianSquad\\Assets\\Textures\\SmokeTest\\Painter"
+
+  [mcp_servers.rider]
+    url = "http://127.0.0.1:64482/stream"

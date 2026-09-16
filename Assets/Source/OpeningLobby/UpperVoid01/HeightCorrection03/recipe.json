@@ -1,0 +1,105 @@
+{
+  "candidate": "LobbyAtmosphere-UpperVoid01/HeightCorrection03",
+  "trial": "Trial02",
+  "fade_start_cm": 1370,
+  "fade_end_cm": 1780,
+  "postprocess": "// Analytic Beer-Lambert absorption through a world-anchored upper half-space.\n// Density begins with zero slope at 13.7m: sigma(z)=0.034*(height/410)^2 per cm.\nfloat span = max(FadeEndCm-FadeStartCm,1.0);\nfloat a = max(CameraCm.z-FadeStartCm,0.0);\nfloat b = max(WorldCm.z-FadeStartCm,0.0);\nfloat dz = WorldCm.z-CameraCm.z;\nfloat distanceCm = length(WorldCm-CameraCm);\nfloat integral = abs(dz)>0.01 ? abs(b*b*b-a*a*a)*distanceCm/(3.0*abs(dz)*span*span) : distanceCm*a*a/(span*span);\nfloat transmittance = exp(-0.034*integral);\n// Exact terminal suppression is confined to the roof margin, above useful volume.\nfloat roof = saturate((WorldCm.z-FadeEndCm)/20.0);\nreturn transmittance*(1.0-roof*roof*(3.0-2.0*roof));",
+  "light_function": "// Reserve direct-light attenuation for the roof; the visible shaft ramp belongs to PP.\nfloat h = saturate((WorldCm.z - 1750.0) / 40.0);\nreturn 1.0-h*h*(3.0-2.0*h);",
+  "materials": [
+    {
+      "asset": "/Game/OpeningLobby/UpperVoid01/M_UpperVoid_Extinction.M_UpperVoid_Extinction",
+      "changes": [
+        {
+          "node": "MaterialExpressionCustom_0",
+          "before": "float h = saturate((WorldCm.z - FadeStartCm) / max(FadeEndCm - FadeStartCm, 1.0));\n// Almost-linear display transmission with short rounded endpoint shoulders.\nfloat e = 0.06;\nfloat q = h < e ? h*h/(2.0*e) : (h > 1.0-e ? 1.0-e-(1.0-h)*(1.0-h)/(2.0*e) : h-e*0.5);\nreturn 1.0-q/(1.0-e);",
+          "after": "// Analytic Beer-Lambert absorption through a world-anchored upper half-space.\n// Density begins with zero slope at 13.7m: sigma(z)=0.034*(height/410)^2 per cm.\nfloat span = max(FadeEndCm-FadeStartCm,1.0);\nfloat a = max(CameraCm.z-FadeStartCm,0.0);\nfloat b = max(WorldCm.z-FadeStartCm,0.0);\nfloat dz = WorldCm.z-CameraCm.z;\nfloat distanceCm = length(WorldCm-CameraCm);\nfloat integral = abs(dz)>0.01 ? abs(b*b*b-a*a*a)*distanceCm/(3.0*abs(dz)*span*span) : distanceCm*a*a/(span*span);\nfloat transmittance = exp(-0.034*integral);\n// Exact terminal suppression is confined to the roof margin, above useful volume.\nfloat roof = saturate((WorldCm.z-FadeEndCm)/20.0);\nreturn transmittance*(1.0-roof*roof*(3.0-2.0*roof));"
+        }
+      ]
+    },
+    {
+      "asset": "/Game/OpeningLobby/UpperVoid01/M_UpperVoid_LightTransmission.M_UpperVoid_LightTransmission",
+      "changes": [
+        {
+          "node": "MaterialExpressionCustom_0",
+          "before": "// Reserve direct-light attenuation for the roof; the visible shaft ramp belongs to PP.\nfloat h = saturate((WorldCm.z - 1750.0) / 40.0);\nreturn 1.0-h*h*(3.0-2.0*h);",
+          "after": "// Reserve direct-light attenuation for the roof; the visible shaft ramp belongs to PP.\nfloat h = saturate((WorldCm.z - 1750.0) / 40.0);\nreturn 1.0-h*h*(3.0-2.0*h);"
+        }
+      ]
+    }
+  ],
+  "lights": [
+    {
+      "actor": "PointLight_1",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 100000.0
+    },
+    {
+      "actor": "PointLight_1",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.20000000298023224
+    },
+    {
+      "actor": "PointLight_4",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 100000.0
+    },
+    {
+      "actor": "PointLight_4",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.20000000298023224
+    },
+    {
+      "actor": "PointLight_7",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 100000.0
+    },
+    {
+      "actor": "PointLight_7",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.20000000298023224
+    },
+    {
+      "actor": "PointLight_10",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 100000.0
+    },
+    {
+      "actor": "PointLight_10",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.20000000298023224
+    },
+    {
+      "actor": "PointLight_13",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 100000.0
+    },
+    {
+      "actor": "PointLight_13",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.20000000298023224
+    },
+    {
+      "actor": "PointLight_16",
+      "property": "intensity",
+      "before": 100000.0,
+      "after": 100000.0
+    },
+    {
+      "actor": "PointLight_16",
+      "property": "specularScale",
+      "before": 0.20000000298023224,
+      "after": 0.20000000298023224
+    }
+  ],
+  "fixed_exposure": "Manual bias -5 unchanged"
+}

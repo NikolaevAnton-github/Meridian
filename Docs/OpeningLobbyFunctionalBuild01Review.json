@@ -1,0 +1,193 @@
+{
+  "schema": 1,
+  "review_issue": "MSQ-21",
+  "issue_id": "01a0a1ac-2ce9-7462-99c5-d980119dabfd",
+  "reviewer": "MeridianSquad Visual Reviewer",
+  "reviewed_at_utc": "2026-09-14T20:56:35.124Z",
+  "candidate": "LobbyFunctional-Build01/WorkerCandidate01",
+  "map": "/Game/Maps/L_OpeningLobby_FunctionalBuild01",
+  "map_file": "Content/Maps/L_OpeningLobby_FunctionalBuild01.umap",
+  "map_sha256": "9990d2ca10a62a32fcb7d7e38fb324e84d6f52e406601b74ce9689c6b6d08894",
+  "manifest": "Saved/OpeningLobby/FunctionalBuild01/Worker/manifest.json",
+  "manifest_sha256": "63b7d7030310d948d64efbe453b4016edb41e62b8987154da257da5f1380654f",
+  "manifest_entries": 116,
+  "approved_drawing_manifest_sha256": "440064e9a1df1180cec92cc3e43be78034b7de30a6e94ef94d0a9d0534b0ecd1",
+  "authority": "Docs/Approvals/LobbyFunctionalRevision02-Production01.json",
+  "visual_verdict": "PASS",
+  "technical_verdict": "PASS",
+  "owner_review_ready": true,
+  "owner_acceptance": "PENDING; not granted by this review",
+  "scope": "Approved FunctionalRevision02 neutral 3D assembly and retained A preservation only",
+  "criteria": [
+    {
+      "id": 1,
+      "name": "Hall scale and retained A hierarchy",
+      "visual_verdict": "PASS",
+      "technical_verdict": "PASS",
+      "finding": "60 x 24 x 18 m datums; 107 retained actor records unchanged; portal, beams and setbacks remain readable.",
+      "evidence": [
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/entrance-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/context-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/C1-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/C2-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/construction.json"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Four rooms, terminal closure and roofs",
+      "visual_verdict": "PASS",
+      "technical_verdict": "PASS",
+      "finding": "Four rooms close terminal aisles; correct stepped roof contacts. Inner rear trim is outside the closed room envelope; actual 2 cm retained band is distinguished from author 3 cm prose.",
+      "evidence": [
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/aisle-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/aisle-negative-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/room-junction-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/geometry-contract.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/imported-profile-probes.json"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Door orientation, clearance and approaches",
+      "visual_verdict": "PASS",
+      "technical_verdict": "PASS",
+      "finding": "Four correctly faced closed doors; 1.2 x 2.4 m clear frame, 0.24 m recess, 0.06 m leaves, flush thresholds and actual contacts.",
+      "evidence": [
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/inner-door-positive-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/inner-door-negative-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/aisle-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/aisle-negative-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/scheduled-measurements.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/runtime-verification.json"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Four tall columns, ceiling contacts and passages",
+      "visual_verdict": "PASS",
+      "technical_verdict": "PASS",
+      "finding": "Four 2.4-square shafts at X +/-12.6 / Y +/-2.4 meet Z18 ceiling over full sections; 2.4/2.0 m gaps and unchanged strips.",
+      "evidence": [
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/context-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/column-contact-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/construction.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/runtime-samples.json"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Checkpoint walking lanes",
+      "visual_verdict": "PASS",
+      "technical_verdict": "PASS",
+      "finding": "Exactly two 1.5 m ground-level openings at the 11.2 m joined control line; actual passage both ways and terminal blocking. No security/anti-jump claim.",
+      "evidence": [
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/checkpoint-context-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/entrance-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/imported-profile-probes.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/runtime-verification.json"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Elevator and opaque inner wall",
+      "visual_verdict": "PASS",
+      "technical_verdict": "PASS",
+      "finding": "Single 3.6 x 4.2 m opening, 0.6 m reveal, closed leaves and blank opaque upper wall; superseded glazing/grid absent.",
+      "evidence": [
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/inner-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/elevator-detail-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/replacement-record.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/ElevatorRecheck/runtime-verification.json"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Depth and coherent joins",
+      "visual_verdict": "PASS",
+      "technical_verdict": "PASS",
+      "finding": "Neutral views expose real reveals, returns, soffits and setbacks. No unresolved visible geometry failure; inner seams assessed as retained facing/rear cavities.",
+      "evidence": [
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/room-junction-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/inner-door-positive-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/inner-door-negative-90.png",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/saved-source-audit.json"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Image quality and comparable camera evidence",
+      "visual_verdict": "PASS",
+      "technical_verdict": "PASS",
+      "finding": "13 native 1920 x 1080 captures, actual HFOV90 and matching map metadata; all four approved sheet-05 poses matched.",
+      "evidence": [
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/entrance-90-camera.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/inner-90-camera.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/context-90-camera.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/aisle-90-camera.json"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Real input-driven runtime movement",
+      "visual_verdict": "PASS",
+      "technical_verdict": "PASS",
+      "finding": "115 events/2041 samples full run plus 11 events/226 samples final elevator recheck; required routes, contacts, possession, look, grounding, jump and landing covered.",
+      "evidence": [
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/route-contract.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/runtime-samples.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/runtime-verification.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/runtime-settings.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/ElevatorRecheck/runtime-samples.json"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Saved source/imports, identity, preservation and restoration",
+      "visual_verdict": "PASS",
+      "technical_verdict": "PASS",
+      "finding": "17 native/imported modules, 20 assemblies, verified hashes and protected bytes; recorded final candidate clean and PIE stopped with restored settings.",
+      "evidence": [
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/saved-source-audit.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/asset-audit.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/construction.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/final-state.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/capture-settings-restored.json",
+        "Saved/OpeningLobby/FunctionalBuild01/Worker/manifest.json"
+      ]
+    }
+  ],
+  "required_corrections": [],
+  "critical_unverified_requirements": [],
+  "nonblocking_notes": [
+    {
+      "id": "N1",
+      "observed": "Actual retained InnerEndBand bounds are X29.97..29.99 (2 cm), while worker prose calls them 3 cm.",
+      "consequence": "Author wording overstates rear fill. Component-level audit establishes a closed room at the band front, with a rear cavity outside the enclosure; no room leak or walking bypass.",
+      "smallest_followup": "Clarify the dimension in a future mutable handoff; do not alter frozen candidate evidence."
+    },
+    {
+      "id": "N2",
+      "observed": "Inner shell module length is 10.17 m after a concealed 0.03 m rear trim; the schedule report uses literal gross assembly length 10.2 m.",
+      "consequence": "That row is an assembly datum, not independent measured shell length. The room-side plane and visible/functional dimensions remain within scope and tolerance.",
+      "smallest_followup": "Keep measured component lengths distinct from overall assembly datums in future reporting."
+    }
+  ],
+  "limitations": [
+    "Read-only review of recorded editor/DCC/runtime evidence; no new live editor query, DCC operation or PIE run.",
+    "Native source assessed from frozen editable scripts, saved blend/FBX audit, import and actual profile evidence; Blender was not launched.",
+    "Clean final loaded-map state is the bound final-state snapshot; not a fresh measurement of live editor memory.",
+    "Still-camera pawn placements are not counted as movement.",
+    "Final owner acceptance, full architectural likeness/materials/atmosphere, interiors, operation, branding and anti-jump/security gameplay are outside this verdict."
+  ],
+  "review_evidence": [
+    "Saved/OpeningLobby/FunctionalBuild01/Review01/first-look.md",
+    "Saved/OpeningLobby/FunctionalBuild01/Review01/report.md",
+    "Saved/OpeningLobby/FunctionalBuild01/Review01/identity-audit.json",
+    "Saved/OpeningLobby/FunctionalBuild01/Review01/approved-data-audit.json",
+    "Saved/OpeningLobby/FunctionalBuild01/Review01/image-audit.json",
+    "Saved/OpeningLobby/FunctionalBuild01/Review01/geometry-audit.json",
+    "Saved/OpeningLobby/FunctionalBuild01/Review01/runtime-audit.json",
+    "Saved/OpeningLobby/FunctionalBuild01/Review01/source-config-audit.json"
+  ]
+}

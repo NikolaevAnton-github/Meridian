@@ -1,0 +1,463 @@
+{
+  "tree": {
+    "texture_set": "PainterStone01",
+    "stack": "",
+    "layers": [
+      {
+        "uid": 155,
+        "name": "03 Fine mineral polish variation",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "SpecularRoughness"
+        ]
+      },
+      {
+        "uid": 147,
+        "name": "02 Sparse fine calcite structure",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "BaseColor"
+        ]
+      },
+      {
+        "uid": 121,
+        "name": "01 Near black mineral body",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "BaseColor",
+          "BaseMetalness",
+          "SpecularRoughness"
+        ]
+      }
+    ],
+    "sha256": "f93691461658d0514b63c2cddc5b9345d8205551870b510bc33421f73d981130"
+  },
+  "readbacks": {
+    "121": {
+      "sources": {
+        "uid": 121,
+        "name": "01 Near black mineral body",
+        "source_mode": "Split",
+        "material": null,
+        "channels": {
+          "BaseColor": {
+            "type": "SourceUniformColor",
+            "resource_url": null,
+            "color": {
+              "value": [
+                0.0021671827416867018,
+                0.0026315790601074696,
+                0.0024767802096903324
+              ],
+              "color_space": "GenericColorSpace.Working"
+            },
+            "uid": 128
+          },
+          "BaseMetalness": {
+            "type": "SourceUniformColor",
+            "resource_url": null,
+            "color": {
+              "value": [
+                0,
+                0,
+                0
+              ],
+              "color_space": "GenericColorSpace.Raw"
+            },
+            "uid": 130
+          },
+          "SpecularRoughness": {
+            "type": "SourceUniformColor",
+            "resource_url": null,
+            "color": {
+              "value": [
+                0.2199999988079071,
+                0.2199999988079071,
+                0.2199999988079071
+              ],
+              "color_space": "GenericColorSpace.Raw"
+            },
+            "uid": 129
+          }
+        }
+      },
+      "projection": {
+        "uid": 121,
+        "name": "01 Near black mineral body",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "offset": [
+            0,
+            0
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      }
+    },
+    "147": {
+      "sources": {
+        "uid": 147,
+        "name": "02 Sparse fine calcite structure",
+        "source_mode": "Split",
+        "material": null,
+        "channels": {
+          "BaseColor": {
+            "type": "SourceSubstance",
+            "resource_url": "resource://starter_assets/marble_fine/marble_fine?version=a6a64677a59297a6f8b6a3dc0667dfffb9860d71.sbsar",
+            "color": null,
+            "uid": 163
+          }
+        }
+      },
+      "projection": {
+        "uid": 147,
+        "name": "02 Sparse fine calcite structure",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            5,
+            5
+          ],
+          "rotation": 41,
+          "offset": [
+            0.17000000178813934,
+            0.3100000023841858
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      },
+      "parameters": {
+        "uid": 147,
+        "name": "02 Sparse fine calcite structure",
+        "source_mode": "Split",
+        "channel": "BaseColor",
+        "source_type": "SourceSubstance",
+        "presets": [],
+        "parameters": {
+          "$randomseed": {
+            "label": "Seed",
+            "widget": "RandomSeed",
+            "value": 821,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Seed",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "invert": {
+            "label": "Invert",
+            "widget": "Togglebutton",
+            "value": 0,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Invert",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "position": {
+            "label": "Balance",
+            "widget": "Slider",
+            "value": 0.3199999928474426,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0.5,
+              "description": "",
+              "label": "Balance",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "contrast": {
+            "label": "Contrast",
+            "widget": "Slider",
+            "value": 0.550000011920929,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "label": "Contrast",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "Disorder": {
+            "label": "Disorder",
+            "widget": "Slider",
+            "value": 82,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 18,
+              "description": "",
+              "label": "Disorder",
+              "max": 100,
+              "min": 0,
+              "statustip": "",
+              "step": 1,
+              "visible": true
+            }
+          },
+          "Slope_Blur": {
+            "label": "Marbling",
+            "widget": "Slider",
+            "value": 0.1599999964237213,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "label": "Marbling",
+              "max": 2,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          }
+        }
+      }
+    },
+    "155": {
+      "sources": {
+        "uid": 155,
+        "name": "03 Fine mineral polish variation",
+        "source_mode": "Split",
+        "material": null,
+        "channels": {
+          "SpecularRoughness": {
+            "type": "SourceSubstance",
+            "resource_url": "resource://starter_assets/marble_fine/marble_fine?version=a6a64677a59297a6f8b6a3dc0667dfffb9860d71.sbsar",
+            "color": null,
+            "uid": 173
+          }
+        }
+      },
+      "projection": {
+        "uid": 155,
+        "name": "03 Fine mineral polish variation",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            5,
+            5
+          ],
+          "rotation": 41,
+          "offset": [
+            0.17000000178813934,
+            0.3100000023841858
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      },
+      "parameters": {
+        "uid": 155,
+        "name": "03 Fine mineral polish variation",
+        "source_mode": "Split",
+        "channel": "SpecularRoughness",
+        "source_type": "SourceSubstance",
+        "presets": [],
+        "parameters": {
+          "$randomseed": {
+            "label": "Seed",
+            "widget": "RandomSeed",
+            "value": 821,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Seed",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "invert": {
+            "label": "Invert",
+            "widget": "Togglebutton",
+            "value": 0,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "editorMax": 2147483647,
+              "editorMin": -2147483648,
+              "enumValues": {},
+              "label": "Invert",
+              "labelFalse": "False",
+              "labelTrue": "True",
+              "max": 0,
+              "min": 0,
+              "statustip": "",
+              "step": 0,
+              "visible": true
+            }
+          },
+          "position": {
+            "label": "Balance",
+            "widget": "Slider",
+            "value": 0.3199999928474426,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0.5,
+              "description": "",
+              "label": "Balance",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "contrast": {
+            "label": "Contrast",
+            "widget": "Slider",
+            "value": 0.550000011920929,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "label": "Contrast",
+              "max": 1,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          },
+          "Disorder": {
+            "label": "Disorder",
+            "widget": "Slider",
+            "value": 82,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 18,
+              "description": "",
+              "label": "Disorder",
+              "max": 100,
+              "min": 0,
+              "statustip": "",
+              "step": 1,
+              "visible": true
+            }
+          },
+          "Slope_Blur": {
+            "label": "Marbling",
+            "widget": "Slider",
+            "value": 0.1599999964237213,
+            "enum_values": {},
+            "metadata": {
+              "defaultValue": 0,
+              "description": "",
+              "label": "Marbling",
+              "max": 2,
+              "min": 0,
+              "statustip": "",
+              "step": 0.009999999776482582,
+              "visible": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

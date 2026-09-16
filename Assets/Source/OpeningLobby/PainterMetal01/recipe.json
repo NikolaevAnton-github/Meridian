@@ -1,0 +1,212 @@
+{
+  "candidate": "LobbyPainter-Metal01/WorkerCandidate01",
+  "revision": "QARevision01",
+  "authoring": "New native Painter FillLayer source, three authored fills in one group. No external pixel generation or old opaque dependencies.",
+  "physical_surface": "Opaque charcoal satin coating on architectural metal. Metallic=0 because coating covers the conductor.",
+  "source": "Metal.spp",
+  "mesh_reuse": "Only geometry and material-slot name PainterStone01 reused; no stone texture or layer content.",
+  "base_color_srgb": [
+    0.205,
+    0.215,
+    0.22
+  ],
+  "base_roughness": 0.28,
+  "metallic": 0,
+  "normal": "Painter DirectX normal from native Height; no physical mesh displacement",
+  "ue_specular": 0.5,
+  "ue_F0": 0.04,
+  "ue_world_coverage_cm": 120,
+  "native_uv_repeat": [
+    2,
+    2
+  ],
+  "native_resource": {
+    "uid": 195,
+    "name": "02 | Fine satin roughness",
+    "source_mode": "Split",
+    "material": null,
+    "channels": {
+      "SpecularRoughness": {
+        "type": "SourceSubstance",
+        "resource_url": "resource://starter_assets/noise_bnw_spots_2/bnw_spots_2?version=819c8c6c19ff20ad1c6b9464df87e0191800924c.sbsar",
+        "color": null,
+        "uid": 213
+      }
+    }
+  },
+  "native_parameters": {
+    "uid": 195,
+    "name": "02 | Fine satin roughness",
+    "source_mode": "Split",
+    "channel": "SpecularRoughness",
+    "source_type": "SourceSubstance",
+    "presets": [],
+    "parameters": {
+      "$randomseed": {
+        "label": "Seed",
+        "widget": "RandomSeed",
+        "value": 37,
+        "enum_values": {},
+        "metadata": {
+          "defaultValue": 0,
+          "description": "",
+          "editorMax": 2147483647,
+          "editorMin": -2147483648,
+          "enumValues": {},
+          "label": "Seed",
+          "max": 1,
+          "min": 0,
+          "statustip": "",
+          "step": 0.009999999776482582,
+          "visible": true
+        }
+      },
+      "invert": {
+        "label": "Invert",
+        "widget": "Togglebutton",
+        "value": 0,
+        "enum_values": {},
+        "metadata": {
+          "defaultValue": 0,
+          "description": "",
+          "editorMax": 2147483647,
+          "editorMin": -2147483648,
+          "enumValues": {},
+          "label": "Invert",
+          "labelFalse": "False",
+          "labelTrue": "True",
+          "max": 0,
+          "min": 0,
+          "statustip": "",
+          "step": 0,
+          "visible": true
+        }
+      },
+      "balance": {
+        "label": "Balance",
+        "widget": "Slider",
+        "value": 0.47999998927116394,
+        "enum_values": {},
+        "metadata": {
+          "defaultValue": 0.5,
+          "description": "",
+          "label": "Balance",
+          "max": 1,
+          "min": 0,
+          "statustip": "",
+          "step": 0.009999999776482582,
+          "visible": true
+        }
+      },
+      "contrast": {
+        "label": "Contrast",
+        "widget": "Slider",
+        "value": 0.07999999821186066,
+        "enum_values": {},
+        "metadata": {
+          "defaultValue": 0,
+          "description": "",
+          "label": "Contrast",
+          "max": 1,
+          "min": 0,
+          "statustip": "",
+          "step": 0.009999999776482582,
+          "visible": true
+        }
+      },
+      "scale": {
+        "label": "Scale",
+        "widget": "Slider",
+        "value": 8,
+        "enum_values": {},
+        "metadata": {
+          "defaultValue": 1,
+          "description": "",
+          "editorMax": 2147483647,
+          "editorMin": -2147483648,
+          "enumValues": {},
+          "label": "Scale",
+          "max": 8,
+          "min": 1,
+          "statustip": "",
+          "step": 1,
+          "visible": true
+        }
+      },
+      "disorder": {
+        "label": "Disorder",
+        "widget": "Slider",
+        "value": 0.3100000023841858,
+        "enum_values": {},
+        "metadata": {
+          "defaultValue": 0,
+          "description": "",
+          "editorMax": 3.4028234663852886e+38,
+          "editorMin": -3.4028234663852886e+38,
+          "label": "Disorder",
+          "max": 1,
+          "min": 0,
+          "statustip": "",
+          "step": 0.009999999776482582,
+          "visible": true
+        }
+      },
+      "non_square_expansion": {
+        "label": "Non Square Expansion",
+        "widget": "Togglebutton",
+        "value": 1,
+        "enum_values": {},
+        "metadata": {
+          "defaultValue": 1,
+          "description": "",
+          "editorMax": 2147483647,
+          "editorMin": -2147483648,
+          "enumValues": {},
+          "label": "Non Square Expansion",
+          "labelFalse": "False",
+          "labelTrue": "True",
+          "max": 0,
+          "min": 0,
+          "statustip": "",
+          "step": 0,
+          "visible": true
+        }
+      }
+    }
+  },
+  "native_projection": {
+    "uid": 195,
+    "name": "02 | Fine satin roughness",
+    "mode": "UV",
+    "filtering_mode": "BilinearHQ",
+    "uv_wrapping_mode": "Repeat",
+    "hardness": null,
+    "shape_crop_mode": null,
+    "angle": null,
+    "backface_culling_angle": null,
+    "transform": {
+      "scale_mode": "Factors",
+      "scale": [
+        2,
+        2
+      ],
+      "rotation": 0,
+      "offset": [
+        0.17299999296665192,
+        0.29100000858306885
+      ]
+    },
+    "projection_3d": null,
+    "depth_culling": null,
+    "backface_culling": null
+  },
+  "roughness_layer_opacity": 0.025,
+  "height_layer_opacity": 0.0003,
+  "layer_order_top_to_bottom": [
+    "03 | Microscopic coating texture",
+    "02 | Fine satin roughness",
+    "01 | Opaque charcoal coat"
+  ],
+  "final_native_readback": "Saved/OpeningLobby/PainterMetal01/Worker/Native/finalNativeReadback.json",
+  "regeneration": "Saved/OpeningLobby/PainterMetal01/Worker/exact-regeneration.json"
+}

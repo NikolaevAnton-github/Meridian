@@ -1,0 +1,23 @@
+{
+  "texture_set": "M_A01_Checkpoint",
+  "recipe": [
+    {
+      "type": "fill",
+      "name": "Intact graphite enamel",
+      "base_color": [
+        0.19,
+        0.23,
+        0.21
+      ],
+      "channels": {
+        "Roughness": 0.34,
+        "Metallic": 0.25
+      },
+      "active_channels": [
+        "BaseColor",
+        "Roughness",
+        "Metallic"
+      ]
+    }
+  ]
+}

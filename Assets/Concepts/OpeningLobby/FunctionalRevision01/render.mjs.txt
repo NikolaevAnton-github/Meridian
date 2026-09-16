@@ -1,0 +1,15 @@
+if(process.argv.some(a=>a==='--render'||a.startsWith('--render='))){
+ const requested=process.argv.find(a=>a.startsWith('--render='))?.slice(9);
+ const chrome='C:/Program Files/Google/Chrome/Application/chrome.exe';
+ if(!fs.existsSync(chrome))throw Error('Installed Chrome required for local PNG previews; no installation attempted.');
+ for(const sh of sheets){
+  if(requested&&sh.name!==requested)continue;
+  const html=path.join(worker,`${sh.name}.html`),svgurl=new URL('file:///'+path.join(dir,sh.name+'.svg').replaceAll('\\','/')).href;
+  fs.writeFileSync(html,`<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;padding:0;width:${W}px;height:${H}px;overflow:hidden}img{display:block;width:${W}px;height:${H}px}</style></head><body><img src="${svgurl}"></body></html>`);
+  const args=['--headless=new','--disable-gpu','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-extensions','--disable-sync','--disable-component-update','--hide-scrollbars','--allow-file-access-from-files',`--user-data-dir=${path.join(worker,'BrowserProfile')}`,'--disk-cache-size=1048576','--media-cache-size=1048576','--force-device-scale-factor=1',`--window-size=${W},${H}`,'--run-all-compositor-stages-before-draw','--virtual-time-budget=1200',`--screenshot=${path.join(dir,sh.name+'.png')}`,new URL('file:///'+html.replaceAll('\\','/')).href];
+  const r=spawnSync(chrome,args,{encoding:'utf8',timeout:45000,windowsHide:true});
+  fs.writeFileSync(path.join(worker,`${sh.name}-render.log`),`${r.stdout||''}\n${r.stderr||''}\nExit: ${r.status}\nError: ${r.error||''}`);
+  if(r.status!==0||!fs.existsSync(path.join(dir,sh.name+'.png')))throw Error(`Render failed: ${sh.name}`);
+  console.log(`Rendered ${sh.name}`);
+ }
+}

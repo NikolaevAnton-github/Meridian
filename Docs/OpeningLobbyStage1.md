@@ -1,8 +1,15 @@
 # Opening lobby: Stage 1 handoff
 
-MSQ-5 provides a saved spatial prototype for the owner's layout and movement
-review. Stages 2 and 3, final materials, combat and narrative events are outside
-this handoff.
+MSQ-5 provides a saved spatial prototype with technical acceptance recorded
+on 2026-09-13. The owner subsequently clarified that its layout is not approved.
+This handoff preserves the implementation history and verification evidence;
+it does not authorize further layout or architecture production.
+
+The next task is [lobby concept art](Tasks/OpeningLobbyConceptArt.md). Explicit
+owner approval of a named concept-art version must precede any renewed 3D
+layout, blockout, architecture or modular model work. Preserve the current
+prototype and its evidence while this gate is pending. Stages 2 and 3, final
+materials, combat and narrative events remain outside this handoff.
 
 ## Open and play
 
@@ -112,9 +119,12 @@ wall plinth, but its assertion expected the wall plane 20 cm farther out.
 The corrected check uses the actual plinth face. That diagnostic attempt is
 retained separately as `attempt1-verification.json` and `attempt1-samples.json`.
 
-The owner should review walking speed, mouse sensitivity, the broad center
-aisle, column proportions, security placement and the intended darker final
-atmosphere before authorizing modular art production.
+The previous proposed next step was an owner review of movement and layout
+before modular art production. The owner's subsequent correction replaces that
+sequence with concept art first: the current dimensions, column proportions,
+aisles and security placement remain unapproved prototype choices. A named
+concept-art version must receive explicit owner approval before any renewed
+3D layout/blockout or modular model production.
 
 ## Technical acceptance and usage
 

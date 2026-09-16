@@ -1,0 +1,1535 @@
+{
+  "candidate": "LobbyPainter-Stone01/Correction01",
+  "physical_coverage_cm": [
+    240,
+    240
+  ],
+  "resolution": [
+    2048,
+    2048
+  ],
+  "normal_format": "DirectX",
+  "tangent_space": "PerFragment",
+  "authorship": "Six fresh native Painter Fill layers; no imported texture pixels. Resources are installed native SBSAR building blocks. No smart material inserted.",
+  "tree": {
+    "texture_set": "PainterStone01",
+    "stack": "",
+    "layers": [
+      {
+        "uid": 213,
+        "name": "06 Restrained microrelief",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "Height"
+        ]
+      },
+      {
+        "uid": 204,
+        "name": "05 Subtle mineral roughness",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "SpecularRoughness"
+        ]
+      },
+      {
+        "uid": 195,
+        "name": "04 Polished cut surface",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "BaseMetalness",
+          "SpecularRoughness"
+        ]
+      },
+      {
+        "uid": 186,
+        "name": "03 Broken pale mineral threads",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "BaseColor"
+        ]
+      },
+      {
+        "uid": 177,
+        "name": "02 Interlocking mineral fragments",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "BaseColor"
+        ]
+      },
+      {
+        "uid": 120,
+        "name": "01 Mineral groundmass",
+        "type": "FillLayerNode",
+        "visible": true,
+        "mask": {
+          "present": false,
+          "enabled": false,
+          "background": null,
+          "effects": []
+        },
+        "content_effects": [],
+        "geometry_mask": {
+          "type": "Mesh",
+          "inclusion_list": false,
+          "elements": []
+        },
+        "active_channels": [
+          "BaseColor"
+        ]
+      }
+    ],
+    "sha256": "4716da7ea61dcba0e9735c36353af5832ff703bdcb4ce7bf9999356d33159349"
+  },
+  "fills": {
+    "120": {
+      "sources": {
+        "uid": 120,
+        "name": "01 Mineral groundmass",
+        "source_mode": "Material",
+        "material": {
+          "type": "SourceSubstance",
+          "resource_url": "resource://starter_assets/marble_veined/marble_veined?version=760baf5cfc88c86ba4b45e7b0899861cb4667562.sbsar",
+          "color": null,
+          "uid": 137
+        },
+        "channels": {}
+      },
+      "projection": {
+        "uid": 120,
+        "name": "01 Mineral groundmass",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "offset": [
+            0,
+            0
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      }
+    },
+    "177": {
+      "sources": {
+        "uid": 177,
+        "name": "02 Interlocking mineral fragments",
+        "source_mode": "Split",
+        "material": null,
+        "channels": {
+          "BaseColor": {
+            "type": "SourceSubstance",
+            "resource_url": "resource://starter_assets/marble_fine/marble_fine?version=a6a64677a59297a6f8b6a3dc0667dfffb9860d71.sbsar",
+            "color": null,
+            "uid": 322
+          }
+        }
+      },
+      "projection": {
+        "uid": 177,
+        "name": "02 Interlocking mineral fragments",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            4,
+            4
+          ],
+          "rotation": 0,
+          "offset": [
+            0.12999999523162842,
+            0.27000001072883606
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      }
+    },
+    "186": {
+      "sources": {
+        "uid": 186,
+        "name": "03 Broken pale mineral threads",
+        "source_mode": "Split",
+        "material": null,
+        "channels": {
+          "BaseColor": {
+            "type": "SourceSubstance",
+            "resource_url": "resource://starter_assets/marble_fine/marble_fine?version=a6a64677a59297a6f8b6a3dc0667dfffb9860d71.sbsar",
+            "color": null,
+            "uid": 233
+          }
+        }
+      },
+      "projection": {
+        "uid": 186,
+        "name": "03 Broken pale mineral threads",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            3,
+            3
+          ],
+          "rotation": 0,
+          "offset": [
+            0.3799999952316284,
+            0.09000000357627869
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      }
+    },
+    "195": {
+      "sources": {
+        "uid": 195,
+        "name": "04 Polished cut surface",
+        "source_mode": "Split",
+        "material": null,
+        "channels": {
+          "BaseMetalness": {
+            "type": "SourceUniformColor",
+            "resource_url": null,
+            "color": {
+              "value": [
+                0,
+                0,
+                0
+              ],
+              "color_space": "GenericColorSpace.Raw"
+            },
+            "uid": 295
+          },
+          "SpecularRoughness": {
+            "type": "SourceUniformColor",
+            "resource_url": null,
+            "color": {
+              "value": [
+                0.23999999463558197,
+                0.23999999463558197,
+                0.23999999463558197
+              ],
+              "color_space": "GenericColorSpace.Raw"
+            },
+            "uid": 294
+          }
+        }
+      },
+      "projection": {
+        "uid": 195,
+        "name": "04 Polished cut surface",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "offset": [
+            0,
+            0
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      }
+    },
+    "204": {
+      "sources": {
+        "uid": 204,
+        "name": "05 Subtle mineral roughness",
+        "source_mode": "Split",
+        "material": null,
+        "channels": {
+          "SpecularRoughness": {
+            "type": "SourceSubstance",
+            "resource_url": "resource://starter_assets/grunge_stone_details/grunge_stone_details?version=cff05d984d7468b0c3467dc3e96207c08a3f773d.sbsar",
+            "color": null,
+            "uid": 243
+          }
+        }
+      },
+      "projection": {
+        "uid": 204,
+        "name": "05 Subtle mineral roughness",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "offset": [
+            0.12999999523162842,
+            0.27000001072883606
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      }
+    },
+    "213": {
+      "sources": {
+        "uid": 213,
+        "name": "06 Restrained microrelief",
+        "source_mode": "Split",
+        "material": null,
+        "channels": {
+          "Height": {
+            "type": "SourceSubstance",
+            "resource_url": "resource://starter_assets/grunge_stone_details/grunge_stone_details?version=cff05d984d7468b0c3467dc3e96207c08a3f773d.sbsar",
+            "color": null,
+            "uid": 254
+          }
+        }
+      },
+      "projection": {
+        "uid": 213,
+        "name": "06 Restrained microrelief",
+        "mode": "UV",
+        "filtering_mode": "BilinearHQ",
+        "uv_wrapping_mode": "Repeat",
+        "hardness": null,
+        "shape_crop_mode": null,
+        "angle": null,
+        "backface_culling_angle": null,
+        "transform": {
+          "scale_mode": "Factors",
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "offset": [
+            0.12999999523162842,
+            0.27000001072883606
+          ]
+        },
+        "projection_3d": null,
+        "depth_culling": null,
+        "backface_culling": null
+      }
+    }
+  },
+  "parameters": {
+    "120": {
+      "uid": 120,
+      "name": "01 Mineral groundmass",
+      "source_mode": "Material",
+      "channel": null,
+      "source_type": "SourceSubstance",
+      "presets": [
+        "Gold Marble",
+        "Light Marble",
+        "Brown Marble"
+      ],
+      "parameters": {
+        "$randomseed": {
+          "label": "Seed",
+          "widget": "RandomSeed",
+          "value": 714,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Seed",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "marble_color": {
+          "label": "Marble Color",
+          "widget": "Color",
+          "value": {
+            "type": "Color",
+            "value": [
+              0.0949999988079071,
+              0.1080000028014183,
+              0.10000000149011612
+            ],
+            "color_space": "GenericColorSpace.sRGB"
+          },
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": null,
+            "description": "",
+            "editorMax": null,
+            "editorMin": null,
+            "label": "Marble Color",
+            "max": null,
+            "min": null,
+            "statustip": "",
+            "step": 0,
+            "subLabels": [],
+            "visible": true
+          }
+        },
+        "marble_roughness": {
+          "label": "Marble Roughness",
+          "widget": "Slider",
+          "value": 0.23999999463558197,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0.05000000074505806,
+            "description": "",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Marble Roughness",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "marble_roughness_variation": {
+          "label": "Marble Roughness Variation",
+          "widget": "Slider",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0.75,
+            "description": "",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Marble Roughness Variation",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "cracks_color": {
+          "label": "Cracks Color",
+          "widget": "Color",
+          "value": {
+            "type": "Color",
+            "value": [
+              0.12999999523162842,
+              0.1459999978542328,
+              0.13600000739097595
+            ],
+            "color_space": "GenericColorSpace.sRGB"
+          },
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": null,
+            "description": "",
+            "editorMax": null,
+            "editorMin": null,
+            "label": "Cracks Color",
+            "max": null,
+            "min": null,
+            "statustip": "",
+            "step": 0,
+            "subLabels": [],
+            "visible": true
+          }
+        },
+        "cracks_density": {
+          "label": "Cracks Density",
+          "widget": "Slider",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 1,
+            "description": "",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Cracks Density",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "cracks_deepness": {
+          "label": "Cracks Deepness",
+          "widget": "Slider",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 1,
+            "description": "",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Cracks Deepness",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "channel_diffuse": {
+          "label": "Diffuse",
+          "widget": "Togglebutton",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Diffuse",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "channel_basecolor": {
+          "label": "Base Color",
+          "widget": "Togglebutton",
+          "value": 1,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 1,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Base Color",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "channel_normal": {
+          "label": "Normal",
+          "widget": "Togglebutton",
+          "value": 1,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 1,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Normal",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "channel_specular": {
+          "label": "Specular",
+          "widget": "Togglebutton",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Specular",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "channel_glossiness": {
+          "label": "Glossiness",
+          "widget": "Togglebutton",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Glossiness",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "channel_roughness": {
+          "label": "Roughness",
+          "widget": "Togglebutton",
+          "value": 1,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 1,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Roughness",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "channel_metallic": {
+          "label": "Metallic",
+          "widget": "Togglebutton",
+          "value": 1,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 1,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Metallic",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "channel_height": {
+          "label": "Height",
+          "widget": "Togglebutton",
+          "value": 1,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 1,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Height",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "luminosity": {
+          "label": "Luminosity",
+          "widget": "Slider",
+          "value": 0.5,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0.5,
+            "description": "",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Luminosity",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "contrast": {
+          "label": "Contrast",
+          "widget": "Slider",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Contrast",
+            "max": 1,
+            "min": -1,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "hue_shift": {
+          "label": "Hue Shift",
+          "widget": "Slider",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Hue Shift",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "saturation": {
+          "label": "Saturation",
+          "widget": "Slider",
+          "value": 0.5,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0.5,
+            "description": "",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Saturation",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "normal_intensity": {
+          "label": "Normal Intensity",
+          "widget": "Slider",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0.5,
+            "description": "",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Normal Intensity",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "height_range": {
+          "label": "Height Range",
+          "widget": "Slider",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 1,
+            "description": "",
+            "label": "Height Range",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "height_position": {
+          "label": "Height Position",
+          "widget": "Slider",
+          "value": 0.5,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0.5,
+            "description": "",
+            "label": "Height Position",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        }
+      }
+    },
+    "177": {
+      "uid": 177,
+      "name": "02 Interlocking mineral fragments",
+      "source_mode": "Split",
+      "channel": "BaseColor",
+      "source_type": "SourceSubstance",
+      "presets": [],
+      "parameters": {
+        "$randomseed": {
+          "label": "Seed",
+          "widget": "RandomSeed",
+          "value": 461,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Seed",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "invert": {
+          "label": "Invert",
+          "widget": "Togglebutton",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Invert",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "position": {
+          "label": "Balance",
+          "widget": "Slider",
+          "value": 0.5,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0.5,
+            "description": "",
+            "label": "Balance",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "contrast": {
+          "label": "Contrast",
+          "widget": "Slider",
+          "value": 0.11999999731779099,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "label": "Contrast",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "Disorder": {
+          "label": "Disorder",
+          "widget": "Slider",
+          "value": 78,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 18,
+            "description": "",
+            "label": "Disorder",
+            "max": 100,
+            "min": 0,
+            "statustip": "",
+            "step": 1,
+            "visible": true
+          }
+        },
+        "Slope_Blur": {
+          "label": "Marbling",
+          "widget": "Slider",
+          "value": 0.75,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "label": "Marbling",
+            "max": 2,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        }
+      }
+    },
+    "186": {
+      "uid": 186,
+      "name": "03 Broken pale mineral threads",
+      "source_mode": "Split",
+      "channel": "BaseColor",
+      "source_type": "SourceSubstance",
+      "presets": [],
+      "parameters": {
+        "$randomseed": {
+          "label": "Seed",
+          "widget": "RandomSeed",
+          "value": 1283,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Seed",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "invert": {
+          "label": "Invert",
+          "widget": "Togglebutton",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Invert",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "position": {
+          "label": "Balance",
+          "widget": "Slider",
+          "value": 0.3700000047683716,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0.5,
+            "description": "",
+            "label": "Balance",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "contrast": {
+          "label": "Contrast",
+          "widget": "Slider",
+          "value": 0.23999999463558197,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "label": "Contrast",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "Disorder": {
+          "label": "Disorder",
+          "widget": "Slider",
+          "value": 64,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 18,
+            "description": "",
+            "label": "Disorder",
+            "max": 100,
+            "min": 0,
+            "statustip": "",
+            "step": 1,
+            "visible": true
+          }
+        },
+        "Slope_Blur": {
+          "label": "Marbling",
+          "widget": "Slider",
+          "value": 0.3499999940395355,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "label": "Marbling",
+            "max": 2,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        }
+      }
+    },
+    "204": {
+      "uid": 204,
+      "name": "05 Subtle mineral roughness",
+      "source_mode": "Split",
+      "channel": "SpecularRoughness",
+      "source_type": "SourceSubstance",
+      "presets": [],
+      "parameters": {
+        "$randomseed": {
+          "label": "Seed",
+          "widget": "RandomSeed",
+          "value": 461,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Seed",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "balance": {
+          "label": "Balance",
+          "widget": "Slider",
+          "value": 0.46000000834465027,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0.5,
+            "description": "",
+            "label": "Balance",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "contrast": {
+          "label": "Contrast",
+          "widget": "Slider",
+          "value": 0.14000000059604645,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "label": "Contrast",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "invert": {
+          "label": "Invert",
+          "widget": "Togglebutton",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Invert",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "brush_pattern": {
+          "label": "Brush Pattern",
+          "widget": "Slider",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "label": "Brush Pattern",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "random_mode": {
+          "label": "Random Mode",
+          "widget": "Togglebutton",
+          "value": 1,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "Allows to randomize the result and to create variations.\n",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Random Mode",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "rotation_variation": {
+          "label": "Rotation Variation",
+          "widget": "Slider",
+          "value": 360,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 360,
+            "description": "Randomizes the patches angles.",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Rotation Variation",
+            "max": 360,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        }
+      }
+    },
+    "213": {
+      "uid": 213,
+      "name": "06 Restrained microrelief",
+      "source_mode": "Split",
+      "channel": "Height",
+      "source_type": "SourceSubstance",
+      "presets": [],
+      "parameters": {
+        "$randomseed": {
+          "label": "Seed",
+          "widget": "RandomSeed",
+          "value": 461,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Seed",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "balance": {
+          "label": "Balance",
+          "widget": "Slider",
+          "value": 0.46000000834465027,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0.5,
+            "description": "",
+            "label": "Balance",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "contrast": {
+          "label": "Contrast",
+          "widget": "Slider",
+          "value": 0.14000000059604645,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "label": "Contrast",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "invert": {
+          "label": "Invert",
+          "widget": "Togglebutton",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Invert",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "brush_pattern": {
+          "label": "Brush Pattern",
+          "widget": "Slider",
+          "value": 0,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "",
+            "label": "Brush Pattern",
+            "max": 1,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        },
+        "random_mode": {
+          "label": "Random Mode",
+          "widget": "Togglebutton",
+          "value": 1,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 0,
+            "description": "Allows to randomize the result and to create variations.\n",
+            "editorMax": 2147483647,
+            "editorMin": -2147483648,
+            "enumValues": {},
+            "label": "Random Mode",
+            "labelFalse": "False",
+            "labelTrue": "True",
+            "max": 0,
+            "min": 0,
+            "statustip": "",
+            "step": 0,
+            "visible": true
+          }
+        },
+        "rotation_variation": {
+          "label": "Rotation Variation",
+          "widget": "Slider",
+          "value": 360,
+          "enum_values": {},
+          "metadata": {
+            "defaultValue": 360,
+            "description": "Randomizes the patches angles.",
+            "editorMax": 3.4028234663852886e+38,
+            "editorMin": -3.4028234663852886e+38,
+            "label": "Rotation Variation",
+            "max": 360,
+            "min": 0,
+            "statustip": "",
+            "step": 0.009999999776482582,
+            "visible": true
+          }
+        }
+      }
+    }
+  },
+  "layer_properties": {
+    "120": {
+      "BaseColor": {
+        "uid": 120,
+        "name": "01 Mineral groundmass",
+        "visible": true,
+        "opacity": 1,
+        "blending_mode": "Normal",
+        "channel": "BaseColor"
+      }
+    },
+    "177": {
+      "BaseColor": {
+        "uid": 177,
+        "name": "02 Interlocking mineral fragments",
+        "visible": true,
+        "opacity": 0.4000000059604645,
+        "blending_mode": "Overlay",
+        "channel": "BaseColor"
+      }
+    },
+    "186": {
+      "BaseColor": {
+        "uid": 186,
+        "name": "03 Broken pale mineral threads",
+        "visible": true,
+        "opacity": 0.04500000178813934,
+        "blending_mode": "Screen",
+        "channel": "BaseColor"
+      }
+    },
+    "195": {
+      "BaseMetalness": {
+        "uid": 195,
+        "name": "04 Polished cut surface",
+        "visible": true,
+        "opacity": 1,
+        "blending_mode": "Normal",
+        "channel": "BaseMetalness"
+      },
+      "SpecularRoughness": {
+        "uid": 195,
+        "name": "04 Polished cut surface",
+        "visible": true,
+        "opacity": 1,
+        "blending_mode": "Normal",
+        "channel": "SpecularRoughness"
+      }
+    },
+    "204": {
+      "SpecularRoughness": {
+        "uid": 204,
+        "name": "05 Subtle mineral roughness",
+        "visible": true,
+        "opacity": 0.1599999964237213,
+        "blending_mode": "Overlay",
+        "channel": "SpecularRoughness"
+      }
+    },
+    "213": {
+      "Height": {
+        "uid": 213,
+        "name": "06 Restrained microrelief",
+        "visible": true,
+        "opacity": 0.0020000000949949026,
+        "blending_mode": "Normal",
+        "channel": "Height"
+      }
+    }
+  },
+  "resources": {
+    "count": 5,
+    "resources": [
+      {
+        "name": "marble_fine/marble_fine",
+        "context": "starter_assets",
+        "version": "a6a64677a59297a6f8b6a3dc0667dfffb9860d71.sbsar",
+        "url": "resource://starter_assets/marble_fine/marble_fine?version=a6a64677a59297a6f8b6a3dc0667dfffb9860d71.sbsar"
+      },
+      {
+        "name": "marble_veined/marble_veined",
+        "context": "starter_assets",
+        "version": "760baf5cfc88c86ba4b45e7b0899861cb4667562.sbsar",
+        "url": "resource://starter_assets/marble_veined/marble_veined?version=760baf5cfc88c86ba4b45e7b0899861cb4667562.sbsar"
+      },
+      {
+        "name": "grunge_stone_details/grunge_stone_details",
+        "context": "starter_assets",
+        "version": "cff05d984d7468b0c3467dc3e96207c08a3f773d.sbsar",
+        "url": "resource://starter_assets/grunge_stone_details/grunge_stone_details?version=cff05d984d7468b0c3467dc3e96207c08a3f773d.sbsar"
+      },
+      {
+        "name": "open-pbr",
+        "context": "viewer",
+        "version": "22bb1354e939e6452c3908411b8848488f678d3c.shader",
+        "url": "resource://viewer/open-pbr?version=22bb1354e939e6452c3908411b8848488f678d3c.shader"
+      },
+      {
+        "name": "panorama",
+        "context": "viewer",
+        "version": "df0d611fe5a4c86ca5a36bcc11fc06b363478e03.image",
+        "url": "resource://viewer/panorama?version=df0d611fe5a4c86ca5a36bcc11fc06b363478e03.image"
+      }
+    ]
+  },
+  "revisions": [
+    {
+      "candidate": "LobbyPainter-Stone01/WorkerCandidate01",
+      "scope": "Immutable first candidate and failed Review01; source bytes preserved by controller BeforeCorrection01 archive."
+    },
+    {
+      "candidate": "LobbyPainter-Stone01/Correction01",
+      "scope": "One color recomposition and one allowed adjustment after Trial01; native layers 120 and 177 only. Other layers, ORM and Normal remain exact."
+    }
+  ],
+  "export_preset": "resource://starter_assets/Unreal Engine (Packed)?version=8339356058946582545.spexp",
+  "reopen_audit": {
+    "project": {
+      "open": true,
+      "name": "PainterStone01",
+      "path": "D:/devgames/MeridianSquad/Assets/Source/OpeningLobby/PainterStone01/PainterStone01.spp",
+      "texture_sets": [
+        "PainterStone01"
+      ]
+    },
+    "texture_sets": [
+      {
+        "name": "PainterStone01",
+        "resolution": [
+          2048,
+          2048
+        ],
+        "stacks": [
+          {
+            "name": "",
+            "channels": [
+              "BaseColor",
+              "Height",
+              "SpecularRoughness",
+              "BaseMetalness",
+              "Normal"
+            ]
+          }
+        ]
+      }
+    ],
+    "layer_count": 6,
+    "hidden_layers": [],
+    "outdated_resources": [],
+    "busy": false,
+    "issues": []
+  },
+  "correction": {
+    "R1": "Replace the dominant ring-bearing color source with a parameterized marble_fine mineral network at scale 4, Overlay 0.40. Quiet green-grey ground and reduced large-vein color contrast; independent pale threads unchanged.",
+    "R2": "Native Unreal BaseColor samples the unchanged-resolution Painter export with smooth triangular phase blending at 240 cm texel coverage. Geometry and ORM/Normal sampling are fixed.",
+    "physical_coverage_cm": 240,
+    "final_export": "Saved/OpeningLobby/PainterStone01/Worker/Exports/Correction01/FinalReopened",
+    "native_sampling_source": "Scripts/OpeningLobby/painterstone01_material.py:VARIED_COLOR_CODE",
+    "source_evidence": "Saved/OpeningLobby/PainterStone01/Worker/Correction01/Painter/final-source-evidence.json",
+    "save_reopen_evidence": "Saved/OpeningLobby/PainterStone01/Worker/Correction01/Painter/save-reopen-export-calls.json",
+    "reference_use": "Original OwnerReferences01 column finishes viewed only. No source/reference/rejected pixels imported or externally generated."
+  }
+}

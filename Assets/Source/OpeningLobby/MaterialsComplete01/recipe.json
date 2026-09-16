@@ -1,0 +1,651 @@
+{
+  "candidate": "LobbyMaterials-Complete01/WorkerCandidate01",
+  "source": "Ceiling.spp",
+  "revision": "Initial",
+  "author_qa_revisions": 0,
+  "base_color_srgb": [
+    0.25,
+    0.28,
+    0.265
+  ],
+  "roughness": 0.82,
+  "metallic": 0,
+  "coverage_cm": 120,
+  "roughness_layer_opacity": 0.08,
+  "height_layer_opacity": 0.001,
+  "native": {
+    "142": {
+      "source": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"uid\": 142,\n  \"name\": \"02 | Fine mineral roughness\",\n  \"source_mode\": \"Split\",\n  \"material\": null,\n  \"channels\": {\n    \"SpecularRoughness\": {\n      \"type\": \"SourceSubstance\",\n      \"resource_url\": \"resource://starter_assets/noise_bnw_spots_2/bnw_spots_2?version=819c8c6c19ff20ad1c6b9464df87e0191800924c.sbsar\",\n      \"color\": null,\n      \"uid\": 160\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "uid": 142,
+          "name": "02 | Fine mineral roughness",
+          "source_mode": "Split",
+          "material": null,
+          "channels": {
+            "SpecularRoughness": {
+              "type": "SourceSubstance",
+              "resource_url": "resource://starter_assets/noise_bnw_spots_2/bnw_spots_2?version=819c8c6c19ff20ad1c6b9464df87e0191800924c.sbsar",
+              "color": null,
+              "uid": 160
+            }
+          }
+        },
+        "isError": false
+      },
+      "parameters": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"uid\": 142,\n  \"name\": \"02 | Fine mineral roughness\",\n  \"source_mode\": \"Split\",\n  \"channel\": \"SpecularRoughness\",\n  \"source_type\": \"SourceSubstance\",\n  \"presets\": [],\n  \"parameters\": {\n    \"$randomseed\": {\n      \"label\": \"Seed\",\n      \"widget\": \"RandomSeed\",\n      \"value\": 83,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 0,\n        \"description\": \"\",\n        \"editorMax\": 2147483647,\n        \"editorMin\": -2147483648,\n        \"enumValues\": {},\n        \"label\": \"Seed\",\n        \"max\": 1,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0.009999999776482582,\n        \"visible\": true\n      }\n    },\n    \"invert\": {\n      \"label\": \"Invert\",\n      \"widget\": \"Togglebutton\",\n      \"value\": 0,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 0,\n        \"description\": \"\",\n        \"editorMax\": 2147483647,\n        \"editorMin\": -2147483648,\n        \"enumValues\": {},\n        \"label\": \"Invert\",\n        \"labelFalse\": \"False\",\n        \"labelTrue\": \"True\",\n        \"max\": 0,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0,\n        \"visible\": true\n      }\n    },\n    \"balance\": {\n      \"label\": \"Balance\",\n      \"widget\": \"Slider\",\n      \"value\": 0.5,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 0.5,\n        \"description\": \"\",\n        \"label\": \"Balance\",\n        \"max\": 1,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0.009999999776482582,\n        \"visible\": true\n      }\n    },\n    \"contrast\": {\n      \"label\": \"Contrast\",\n      \"widget\": \"Slider\",\n      \"value\": 0.10000000149011612,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 0,\n        \"description\": \"\",\n        \"label\": \"Contrast\",\n        \"max\": 1,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0.009999999776482582,\n        \"visible\": true\n      }\n    },\n    \"scale\": {\n      \"label\": \"Scale\",\n      \"widget\": \"Slider\",\n      \"value\": 8,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 1,\n        \"description\": \"\",\n        \"editorMax\": 2147483647,\n        \"editorMin\": -2147483648,\n        \"enumValues\": {},\n        \"label\": \"Scale\",\n        \"max\": 8,\n        \"min\": 1,\n        \"statustip\": \"\",\n        \"step\": 1,\n        \"visible\": true\n      }\n    },\n    \"disorder\": {\n      \"label\": \"Disorder\",\n      \"widget\": \"Slider\",\n      \"value\": 0.4300000071525574,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 0,\n        \"description\": \"\",\n        \"editorMax\": 3.4028234663852886e+38,\n        \"editorMin\": -3.4028234663852886e+38,\n        \"label\": \"Disorder\",\n        \"max\": 1,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0.009999999776482582,\n        \"visible\": true\n      }\n    },\n    \"non_square_expansion\": {\n      \"label\": \"Non Square Expansion\",\n      \"widget\": \"Togglebutton\",\n      \"value\": 1,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 1,\n        \"description\": \"\",\n        \"editorMax\": 2147483647,\n        \"editorMin\": -2147483648,\n        \"enumValues\": {},\n        \"label\": \"Non Square Expansion\",\n        \"labelFalse\": \"False\",\n        \"labelTrue\": \"True\",\n        \"max\": 0,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0,\n        \"visible\": true\n      }\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "uid": 142,
+          "name": "02 | Fine mineral roughness",
+          "source_mode": "Split",
+          "channel": "SpecularRoughness",
+          "source_type": "SourceSubstance",
+          "presets": [],
+          "parameters": {
+            "$randomseed": {
+              "label": "Seed",
+              "widget": "RandomSeed",
+              "value": 83,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 0,
+                "description": "",
+                "editorMax": 2147483647,
+                "editorMin": -2147483648,
+                "enumValues": {},
+                "label": "Seed",
+                "max": 1,
+                "min": 0,
+                "statustip": "",
+                "step": 0.009999999776482582,
+                "visible": true
+              }
+            },
+            "invert": {
+              "label": "Invert",
+              "widget": "Togglebutton",
+              "value": 0,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 0,
+                "description": "",
+                "editorMax": 2147483647,
+                "editorMin": -2147483648,
+                "enumValues": {},
+                "label": "Invert",
+                "labelFalse": "False",
+                "labelTrue": "True",
+                "max": 0,
+                "min": 0,
+                "statustip": "",
+                "step": 0,
+                "visible": true
+              }
+            },
+            "balance": {
+              "label": "Balance",
+              "widget": "Slider",
+              "value": 0.5,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 0.5,
+                "description": "",
+                "label": "Balance",
+                "max": 1,
+                "min": 0,
+                "statustip": "",
+                "step": 0.009999999776482582,
+                "visible": true
+              }
+            },
+            "contrast": {
+              "label": "Contrast",
+              "widget": "Slider",
+              "value": 0.10000000149011612,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 0,
+                "description": "",
+                "label": "Contrast",
+                "max": 1,
+                "min": 0,
+                "statustip": "",
+                "step": 0.009999999776482582,
+                "visible": true
+              }
+            },
+            "scale": {
+              "label": "Scale",
+              "widget": "Slider",
+              "value": 8,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 1,
+                "description": "",
+                "editorMax": 2147483647,
+                "editorMin": -2147483648,
+                "enumValues": {},
+                "label": "Scale",
+                "max": 8,
+                "min": 1,
+                "statustip": "",
+                "step": 1,
+                "visible": true
+              }
+            },
+            "disorder": {
+              "label": "Disorder",
+              "widget": "Slider",
+              "value": 0.4300000071525574,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 0,
+                "description": "",
+                "editorMax": 3.4028234663852886e+38,
+                "editorMin": -3.4028234663852886e+38,
+                "label": "Disorder",
+                "max": 1,
+                "min": 0,
+                "statustip": "",
+                "step": 0.009999999776482582,
+                "visible": true
+              }
+            },
+            "non_square_expansion": {
+              "label": "Non Square Expansion",
+              "widget": "Togglebutton",
+              "value": 1,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 1,
+                "description": "",
+                "editorMax": 2147483647,
+                "editorMin": -2147483648,
+                "enumValues": {},
+                "label": "Non Square Expansion",
+                "labelFalse": "False",
+                "labelTrue": "True",
+                "max": 0,
+                "min": 0,
+                "statustip": "",
+                "step": 0,
+                "visible": true
+              }
+            }
+          }
+        },
+        "isError": false
+      },
+      "projection": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"uid\": 142,\n  \"name\": \"02 | Fine mineral roughness\",\n  \"mode\": \"UV\",\n  \"filtering_mode\": \"BilinearHQ\",\n  \"uv_wrapping_mode\": \"Repeat\",\n  \"hardness\": null,\n  \"shape_crop_mode\": null,\n  \"angle\": null,\n  \"backface_culling_angle\": null,\n  \"transform\": {\n    \"scale_mode\": \"Factors\",\n    \"scale\": [\n      2.0,\n      2.0\n    ],\n    \"rotation\": 0.0,\n    \"offset\": [\n      0.13699999451637268,\n      0.3190000057220459\n    ]\n  },\n  \"projection_3d\": null,\n  \"depth_culling\": null,\n  \"backface_culling\": null\n}"
+          }
+        ],
+        "structuredContent": {
+          "uid": 142,
+          "name": "02 | Fine mineral roughness",
+          "mode": "UV",
+          "filtering_mode": "BilinearHQ",
+          "uv_wrapping_mode": "Repeat",
+          "hardness": null,
+          "shape_crop_mode": null,
+          "angle": null,
+          "backface_culling_angle": null,
+          "transform": {
+            "scale_mode": "Factors",
+            "scale": [
+              2,
+              2
+            ],
+            "rotation": 0,
+            "offset": [
+              0.13699999451637268,
+              0.3190000057220459
+            ]
+          },
+          "projection_3d": null,
+          "depth_culling": null,
+          "backface_culling": null
+        },
+        "isError": false
+      }
+    },
+    "151": {
+      "source": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"uid\": 151,\n  \"name\": \"03 | Mineral microtexture\",\n  \"source_mode\": \"Split\",\n  \"material\": null,\n  \"channels\": {\n    \"Height\": {\n      \"type\": \"SourceSubstance\",\n      \"resource_url\": \"resource://starter_assets/noise_bnw_spots_2/bnw_spots_2?version=819c8c6c19ff20ad1c6b9464df87e0191800924c.sbsar\",\n      \"color\": null,\n      \"uid\": 171\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "uid": 151,
+          "name": "03 | Mineral microtexture",
+          "source_mode": "Split",
+          "material": null,
+          "channels": {
+            "Height": {
+              "type": "SourceSubstance",
+              "resource_url": "resource://starter_assets/noise_bnw_spots_2/bnw_spots_2?version=819c8c6c19ff20ad1c6b9464df87e0191800924c.sbsar",
+              "color": null,
+              "uid": 171
+            }
+          }
+        },
+        "isError": false
+      },
+      "parameters": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"uid\": 151,\n  \"name\": \"03 | Mineral microtexture\",\n  \"source_mode\": \"Split\",\n  \"channel\": \"Height\",\n  \"source_type\": \"SourceSubstance\",\n  \"presets\": [],\n  \"parameters\": {\n    \"$randomseed\": {\n      \"label\": \"Seed\",\n      \"widget\": \"RandomSeed\",\n      \"value\": 83,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 0,\n        \"description\": \"\",\n        \"editorMax\": 2147483647,\n        \"editorMin\": -2147483648,\n        \"enumValues\": {},\n        \"label\": \"Seed\",\n        \"max\": 1,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0.009999999776482582,\n        \"visible\": true\n      }\n    },\n    \"invert\": {\n      \"label\": \"Invert\",\n      \"widget\": \"Togglebutton\",\n      \"value\": 0,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 0,\n        \"description\": \"\",\n        \"editorMax\": 2147483647,\n        \"editorMin\": -2147483648,\n        \"enumValues\": {},\n        \"label\": \"Invert\",\n        \"labelFalse\": \"False\",\n        \"labelTrue\": \"True\",\n        \"max\": 0,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0,\n        \"visible\": true\n      }\n    },\n    \"balance\": {\n      \"label\": \"Balance\",\n      \"widget\": \"Slider\",\n      \"value\": 0.5,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 0.5,\n        \"description\": \"\",\n        \"label\": \"Balance\",\n        \"max\": 1,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0.009999999776482582,\n        \"visible\": true\n      }\n    },\n    \"contrast\": {\n      \"label\": \"Contrast\",\n      \"widget\": \"Slider\",\n      \"value\": 0.10000000149011612,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 0,\n        \"description\": \"\",\n        \"label\": \"Contrast\",\n        \"max\": 1,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0.009999999776482582,\n        \"visible\": true\n      }\n    },\n    \"scale\": {\n      \"label\": \"Scale\",\n      \"widget\": \"Slider\",\n      \"value\": 8,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 1,\n        \"description\": \"\",\n        \"editorMax\": 2147483647,\n        \"editorMin\": -2147483648,\n        \"enumValues\": {},\n        \"label\": \"Scale\",\n        \"max\": 8,\n        \"min\": 1,\n        \"statustip\": \"\",\n        \"step\": 1,\n        \"visible\": true\n      }\n    },\n    \"disorder\": {\n      \"label\": \"Disorder\",\n      \"widget\": \"Slider\",\n      \"value\": 0.4300000071525574,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 0,\n        \"description\": \"\",\n        \"editorMax\": 3.4028234663852886e+38,\n        \"editorMin\": -3.4028234663852886e+38,\n        \"label\": \"Disorder\",\n        \"max\": 1,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0.009999999776482582,\n        \"visible\": true\n      }\n    },\n    \"non_square_expansion\": {\n      \"label\": \"Non Square Expansion\",\n      \"widget\": \"Togglebutton\",\n      \"value\": 1,\n      \"enum_values\": {},\n      \"metadata\": {\n        \"defaultValue\": 1,\n        \"description\": \"\",\n        \"editorMax\": 2147483647,\n        \"editorMin\": -2147483648,\n        \"enumValues\": {},\n        \"label\": \"Non Square Expansion\",\n        \"labelFalse\": \"False\",\n        \"labelTrue\": \"True\",\n        \"max\": 0,\n        \"min\": 0,\n        \"statustip\": \"\",\n        \"step\": 0,\n        \"visible\": true\n      }\n    }\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "uid": 151,
+          "name": "03 | Mineral microtexture",
+          "source_mode": "Split",
+          "channel": "Height",
+          "source_type": "SourceSubstance",
+          "presets": [],
+          "parameters": {
+            "$randomseed": {
+              "label": "Seed",
+              "widget": "RandomSeed",
+              "value": 83,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 0,
+                "description": "",
+                "editorMax": 2147483647,
+                "editorMin": -2147483648,
+                "enumValues": {},
+                "label": "Seed",
+                "max": 1,
+                "min": 0,
+                "statustip": "",
+                "step": 0.009999999776482582,
+                "visible": true
+              }
+            },
+            "invert": {
+              "label": "Invert",
+              "widget": "Togglebutton",
+              "value": 0,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 0,
+                "description": "",
+                "editorMax": 2147483647,
+                "editorMin": -2147483648,
+                "enumValues": {},
+                "label": "Invert",
+                "labelFalse": "False",
+                "labelTrue": "True",
+                "max": 0,
+                "min": 0,
+                "statustip": "",
+                "step": 0,
+                "visible": true
+              }
+            },
+            "balance": {
+              "label": "Balance",
+              "widget": "Slider",
+              "value": 0.5,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 0.5,
+                "description": "",
+                "label": "Balance",
+                "max": 1,
+                "min": 0,
+                "statustip": "",
+                "step": 0.009999999776482582,
+                "visible": true
+              }
+            },
+            "contrast": {
+              "label": "Contrast",
+              "widget": "Slider",
+              "value": 0.10000000149011612,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 0,
+                "description": "",
+                "label": "Contrast",
+                "max": 1,
+                "min": 0,
+                "statustip": "",
+                "step": 0.009999999776482582,
+                "visible": true
+              }
+            },
+            "scale": {
+              "label": "Scale",
+              "widget": "Slider",
+              "value": 8,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 1,
+                "description": "",
+                "editorMax": 2147483647,
+                "editorMin": -2147483648,
+                "enumValues": {},
+                "label": "Scale",
+                "max": 8,
+                "min": 1,
+                "statustip": "",
+                "step": 1,
+                "visible": true
+              }
+            },
+            "disorder": {
+              "label": "Disorder",
+              "widget": "Slider",
+              "value": 0.4300000071525574,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 0,
+                "description": "",
+                "editorMax": 3.4028234663852886e+38,
+                "editorMin": -3.4028234663852886e+38,
+                "label": "Disorder",
+                "max": 1,
+                "min": 0,
+                "statustip": "",
+                "step": 0.009999999776482582,
+                "visible": true
+              }
+            },
+            "non_square_expansion": {
+              "label": "Non Square Expansion",
+              "widget": "Togglebutton",
+              "value": 1,
+              "enum_values": {},
+              "metadata": {
+                "defaultValue": 1,
+                "description": "",
+                "editorMax": 2147483647,
+                "editorMin": -2147483648,
+                "enumValues": {},
+                "label": "Non Square Expansion",
+                "labelFalse": "False",
+                "labelTrue": "True",
+                "max": 0,
+                "min": 0,
+                "statustip": "",
+                "step": 0,
+                "visible": true
+              }
+            }
+          }
+        },
+        "isError": false
+      },
+      "projection": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"uid\": 151,\n  \"name\": \"03 | Mineral microtexture\",\n  \"mode\": \"UV\",\n  \"filtering_mode\": \"BilinearHQ\",\n  \"uv_wrapping_mode\": \"Repeat\",\n  \"hardness\": null,\n  \"shape_crop_mode\": null,\n  \"angle\": null,\n  \"backface_culling_angle\": null,\n  \"transform\": {\n    \"scale_mode\": \"Factors\",\n    \"scale\": [\n      2.0,\n      2.0\n    ],\n    \"rotation\": 0.0,\n    \"offset\": [\n      0.13699999451637268,\n      0.3190000057220459\n    ]\n  },\n  \"projection_3d\": null,\n  \"depth_culling\": null,\n  \"backface_culling\": null\n}"
+          }
+        ],
+        "structuredContent": {
+          "uid": 151,
+          "name": "03 | Mineral microtexture",
+          "mode": "UV",
+          "filtering_mode": "BilinearHQ",
+          "uv_wrapping_mode": "Repeat",
+          "hardness": null,
+          "shape_crop_mode": null,
+          "angle": null,
+          "backface_culling_angle": null,
+          "transform": {
+            "scale_mode": "Factors",
+            "scale": [
+              2,
+              2
+            ],
+            "rotation": 0,
+            "offset": [
+              0.13699999451637268,
+              0.3190000057220459
+            ]
+          },
+          "projection_3d": null,
+          "depth_culling": null,
+          "backface_culling": null
+        },
+        "isError": false
+      }
+    },
+    "snapshot": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"texture_set\": \"PainterStone01\",\n  \"stack\": \"\",\n  \"layers\": [\n    {\n      \"uid\": 119,\n      \"name\": \"Complete01 | Fine mineral ceiling plaster\",\n      \"type\": \"GroupLayerNode\",\n      \"visible\": true,\n      \"mask\": {\n        \"present\": false,\n        \"enabled\": false,\n        \"background\": null,\n        \"effects\": []\n      },\n      \"content_effects\": [],\n      \"geometry_mask\": {\n        \"type\": \"Mesh\",\n        \"inclusion_list\": false,\n        \"elements\": []\n      },\n      \"collapsed\": true,\n      \"children\": [\n        {\n          \"uid\": 151,\n          \"name\": \"03 | Mineral microtexture\",\n          \"type\": \"FillLayerNode\",\n          \"visible\": true,\n          \"mask\": {\n            \"present\": false,\n            \"enabled\": false,\n            \"background\": null,\n            \"effects\": []\n          },\n          \"content_effects\": [],\n          \"geometry_mask\": {\n            \"type\": \"Mesh\",\n            \"inclusion_list\": false,\n            \"elements\": []\n          },\n          \"active_channels\": [\n            \"Height\"\n          ]\n        },\n        {\n          \"uid\": 142,\n          \"name\": \"02 | Fine mineral roughness\",\n          \"type\": \"FillLayerNode\",\n          \"visible\": true,\n          \"mask\": {\n            \"present\": false,\n            \"enabled\": false,\n            \"background\": null,\n            \"effects\": []\n          },\n          \"content_effects\": [],\n          \"geometry_mask\": {\n            \"type\": \"Mesh\",\n            \"inclusion_list\": false,\n            \"elements\": []\n          },\n          \"active_channels\": [\n            \"SpecularRoughness\"\n          ]\n        },\n        {\n          \"uid\": 124,\n          \"name\": \"01 | Dark green-grey plaster\",\n          \"type\": \"FillLayerNode\",\n          \"visible\": true,\n          \"mask\": {\n            \"present\": false,\n            \"enabled\": false,\n            \"background\": null,\n            \"effects\": []\n          },\n          \"content_effects\": [],\n          \"geometry_mask\": {\n            \"type\": \"Mesh\",\n            \"inclusion_list\": false,\n            \"elements\": []\n          },\n          \"active_channels\": [\n            \"BaseColor\",\n            \"BaseMetalness\",\n            \"Height\",\n            \"SpecularRoughness\"\n          ]\n        }\n      ]\n    },\n    {\n      \"uid\": 24,\n      \"name\": \"Layer 1\",\n      \"type\": \"PaintLayerNode\",\n      \"visible\": true,\n      \"mask\": {\n        \"present\": false,\n        \"enabled\": false,\n        \"background\": null,\n        \"effects\": []\n      },\n      \"content_effects\": [],\n      \"geometry_mask\": {\n        \"type\": \"Mesh\",\n        \"inclusion_list\": false,\n        \"elements\": []\n      }\n    }\n  ],\n  \"sha256\": \"341e5427c52398f578fd351c3067850293e0cbadb7b1acee5fd7e55ca9c19ddc\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "texture_set": "PainterStone01",
+        "stack": "",
+        "layers": [
+          {
+            "uid": 119,
+            "name": "Complete01 | Fine mineral ceiling plaster",
+            "type": "GroupLayerNode",
+            "visible": true,
+            "mask": {
+              "present": false,
+              "enabled": false,
+              "background": null,
+              "effects": []
+            },
+            "content_effects": [],
+            "geometry_mask": {
+              "type": "Mesh",
+              "inclusion_list": false,
+              "elements": []
+            },
+            "collapsed": true,
+            "children": [
+              {
+                "uid": 151,
+                "name": "03 | Mineral microtexture",
+                "type": "FillLayerNode",
+                "visible": true,
+                "mask": {
+                  "present": false,
+                  "enabled": false,
+                  "background": null,
+                  "effects": []
+                },
+                "content_effects": [],
+                "geometry_mask": {
+                  "type": "Mesh",
+                  "inclusion_list": false,
+                  "elements": []
+                },
+                "active_channels": [
+                  "Height"
+                ]
+              },
+              {
+                "uid": 142,
+                "name": "02 | Fine mineral roughness",
+                "type": "FillLayerNode",
+                "visible": true,
+                "mask": {
+                  "present": false,
+                  "enabled": false,
+                  "background": null,
+                  "effects": []
+                },
+                "content_effects": [],
+                "geometry_mask": {
+                  "type": "Mesh",
+                  "inclusion_list": false,
+                  "elements": []
+                },
+                "active_channels": [
+                  "SpecularRoughness"
+                ]
+              },
+              {
+                "uid": 124,
+                "name": "01 | Dark green-grey plaster",
+                "type": "FillLayerNode",
+                "visible": true,
+                "mask": {
+                  "present": false,
+                  "enabled": false,
+                  "background": null,
+                  "effects": []
+                },
+                "content_effects": [],
+                "geometry_mask": {
+                  "type": "Mesh",
+                  "inclusion_list": false,
+                  "elements": []
+                },
+                "active_channels": [
+                  "BaseColor",
+                  "BaseMetalness",
+                  "Height",
+                  "SpecularRoughness"
+                ]
+              }
+            ]
+          },
+          {
+            "uid": 24,
+            "name": "Layer 1",
+            "type": "PaintLayerNode",
+            "visible": true,
+            "mask": {
+              "present": false,
+              "enabled": false,
+              "background": null,
+              "effects": []
+            },
+            "content_effects": [],
+            "geometry_mask": {
+              "type": "Mesh",
+              "inclusion_list": false,
+              "elements": []
+            }
+          }
+        ],
+        "sha256": "341e5427c52398f578fd351c3067850293e0cbadb7b1acee5fd7e55ca9c19ddc"
+      },
+      "isError": false
+    },
+    "audit": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"project\": {\n    \"open\": true,\n    \"name\": \"Ceiling\",\n    \"path\": \"D:/devgames/MeridianSquad/Assets/Source/OpeningLobby/MaterialsComplete01/Ceiling.spp\",\n    \"texture_sets\": [\n      \"PainterStone01\"\n    ]\n  },\n  \"texture_sets\": [\n    {\n      \"name\": \"PainterStone01\",\n      \"resolution\": [\n        2048,\n        2048\n      ],\n      \"stacks\": [\n        {\n          \"name\": \"\",\n          \"channels\": [\n            \"BaseColor\",\n            \"Height\",\n            \"SpecularRoughness\",\n            \"BaseMetalness\",\n            \"Normal\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"layer_count\": 5,\n  \"hidden_layers\": [],\n  \"outdated_resources\": [],\n  \"busy\": false,\n  \"issues\": []\n}"
+        }
+      ],
+      "structuredContent": {
+        "project": {
+          "open": true,
+          "name": "Ceiling",
+          "path": "D:/devgames/MeridianSquad/Assets/Source/OpeningLobby/MaterialsComplete01/Ceiling.spp",
+          "texture_sets": [
+            "PainterStone01"
+          ]
+        },
+        "texture_sets": [
+          {
+            "name": "PainterStone01",
+            "resolution": [
+              2048,
+              2048
+            ],
+            "stacks": [
+              {
+                "name": "",
+                "channels": [
+                  "BaseColor",
+                  "Height",
+                  "SpecularRoughness",
+                  "BaseMetalness",
+                  "Normal"
+                ]
+              }
+            ]
+          }
+        ],
+        "layer_count": 5,
+        "hidden_layers": [],
+        "outdated_resources": [],
+        "busy": false,
+        "issues": []
+      },
+      "isError": false
+    }
+  },
+  "recipe": [
+    {
+      "type": "group",
+      "name": "Complete01 | Fine mineral ceiling plaster",
+      "children": [
+        {
+          "type": "fill",
+          "name": "03 | Mineral microtexture",
+          "channels": {
+            "Height": 0
+          },
+          "active_channels": [
+            "Height"
+          ]
+        },
+        {
+          "type": "fill",
+          "name": "02 | Fine mineral roughness",
+          "channels": {
+            "Roughness": 0.82
+          },
+          "active_channels": [
+            "Roughness"
+          ]
+        },
+        {
+          "type": "fill",
+          "name": "01 | Dark green-grey plaster",
+          "base_color": [
+            0.25,
+            0.28,
+            0.265
+          ],
+          "channels": {
+            "Roughness": 0.82,
+            "Metallic": 0,
+            "Height": 0
+          },
+          "active_channels": [
+            "BaseColor",
+            "Roughness",
+            "Metallic",
+            "Height"
+          ]
+        }
+      ]
+    }
+  ],
+  "authorship": "Genuine new native Painter Fill layers and procedural resources, no external pixels; accepted materials reused only in UE."
+}

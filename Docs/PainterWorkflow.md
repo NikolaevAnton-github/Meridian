@@ -94,3 +94,63 @@ Detailed reports: `Saved/AgentSetup/PainterProbe/verification.json`,
 The verification manifest records SHA-256 hashes and sizes for the eight new
 source/texture/UE files, totaling about 13.6 MiB. Painter lock files and local
 tool dependencies are excluded from Git; source assets use Git LFS.
+
+## Native layered material authoring
+
+On September 15, 2026, MSQ-22 authored and corrected the lobby stone through
+Painter 12.1.4/API 0.3.5. The existing bridge supports procedural Fill-layer
+authoring; its original 15-tool project allowlist is not the full capability of
+the installed bridge. Do not infer that Painter cannot author a material from
+the basic probe tools alone, or substitute external noise generation for the
+owner-requested Painter workflow.
+
+The controller enabled advanced tools in the Environment Artist's task-local
+Multica `custom_args`, preserving the project/global MCP configuration. A fresh
+native run was required to expose them. The override included resource search,
+Fill source/parameter/projection controls, channel and layer properties, native
+snapshots, save/open and export. Project/mesh/export path roots were also scoped
+to the task through `SP_MCP_PROJECT_ROOTS`, `SP_MCP_MESH_ROOTS` and
+`SP_MCP_EXPORT_ROOTS`. Always verify the live connection, actual tool schemas,
+resource URLs and parameter metadata before authoring. Restore the prior profile
+arguments after the bounded task and review; the next authoring run needs its
+own appropriate tool/path configuration.
+
+Verified constraints of the installed bridge version:
+
+- `create_layer_recipe` creates groups and uniform Fill layers. Assign native
+  procedural resources afterward with `set_fill_resource`.
+- Resource, parameter and projection setters support `FillLayerNode`. They do
+  not provide equivalent authoring for Fill/Generator/Filter effect nodes.
+  `insert_mask_effect(type="fill", resource_url=...)` ignores that resource URL;
+  do not repeat attempts through that unsupported route.
+- `get_fill_parameters` requires the channel in Split mode and no channel in
+  Material mode. Use returned parameter types, ranges and enum values.
+- `set_layer_properties` requires exact runtime channel names. Discover them;
+  names such as `SpecularRoughness` and `BaseMetalness` can differ from aliases
+  accepted by other tools.
+- In the verified run, a `set_fill_channels` update specifying metallic alone
+  reset the omitted uniform roughness. Treat this operation as a replacement:
+  supply all intended uniform values and read them back before export.
+- `Scripts/painter_mcp_client.py` independently enforces the on-disk basic
+  allowlist. Use the freshly exposed native task tools for advanced authoring;
+  a diagnostic-client rejection is not proof of a missing Painter capability.
+
+The genuine source evidence is the editable `.spp`, native layer/resource and
+parameter readback, and exports reproduced after save/close/open. Preserve each
+revision's identity and do not cite an earlier reopen snapshot as final proof.
+The current sample regenerates BaseColor, DirectX Normal and packed ORM exactly.
+Its first visual review failed despite valid native authorship; composition and
+visible repetition were then corrected and independently rechecked. Native
+Painter use alone is not a visual pass. Compare the actual material on the
+intended architecture at walking height, including near, oblique and repeated
+surfaces, under recorded lighting and camera conditions.
+
+Painter window capture had a separate limitation: PrintWindow showed the layer
+UI but a grey preview, and a desktop capture was black. Those images were not
+accepted as viewport-appearance evidence. Native source regeneration established
+provenance; actual Unreal captures established the sample's appearance.
+
+See `Docs/OpeningLobbyPainterStone01.md`, the separate review record, and the
+exact source/export/readback evidence under
+`Saved/OpeningLobby/PainterStone01/Worker/Correction01/`. Initial rejected
+candidate bytes and Review01 remain historical; do not rebaseline them.

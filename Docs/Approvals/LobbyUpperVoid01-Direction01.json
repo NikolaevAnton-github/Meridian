@@ -1,0 +1,27 @@
+{
+  "record_id": "LobbyUpperVoid01-Direction01",
+  "date_local": "2026-09-15",
+  "source": "Owner direct chat: request to execute the next task, followed by a specific upper-lobby darkness direction",
+  "owner_execution_message_english_translation": "Let's do the next task.",
+  "owner_direction_english_translation": "The lobby has a ceiling, but the skyscraper is changing because the parautilitarian villain is inside it. I propose complete darkness at the ceiling, as if the central columns disappear into it. The darkness should begin smoothly and gradually become so deep that nothing is visible. The visible height of the hall may be increased, or it may not be necessary, but it should feel as though there is no ceiling at all.",
+  "decision": "Execute a bounded lighting and atmosphere task with progressive upper darkness and central columns disappearing into it. The main ceiling must not be perceptible. Preserve readable lower circulation and current materials; use existing geometry first.",
+  "supersedes": [
+    "Earlier deferral of all atmosphere work, solely for this named bounded task",
+    "Old reference/current lighting requirements that keep the main ceiling or upper column termination readable"
+  ],
+  "implementation_choice": "First develop the effect at the existing height, using native level-local light and atmosphere/postprocess controls. Height increase is optional in the owner's direction; no architectural change is commissioned by this task specification.",
+  "baseline_candidate": "LobbyMaterials-Complete01/SlabLayout01",
+  "baseline_manifest": "Saved/OpeningLobby/MaterialsComplete01/Worker/SlabLayout01/manifest.json",
+  "baseline_manifest_sha256": "9f2c11c022817c871e8215c9eb95abb1664ad78fa4c28bc94391b66de70abdff",
+  "baseline_map": "/Game/Maps/L_OpeningLobby_PainterStone01",
+  "baseline_map_sha256": "c94331250d378e950ac7780c20bfee0e10145990fb28ac300b38c42477b0b62a",
+  "task": "Docs/Tasks/OpeningLobbyUpperVoid01.md",
+  "preservation": "Existing geometry, 107 material bindings and source bytes, owner edits, collision/gameplay, current glazing and far-field support, frozen candidates and history. Only scheduled light/atmosphere/postprocess properties and new dedicated native atmosphere assets may change.",
+  "glazing": "DEFERRED_BY_OWNER, no optical edits or renewed glass diagnostics",
+  "not_granted": [
+    "Retrospective visual acceptance of SlabLayout01 bytes or exact slab module",
+    "Acceptance of the resulting atmosphere or final lobby walkthrough",
+    "New dressing, damage, fixture models or exterior design",
+    "New narrative mechanics, literal infinite height or consciously controlled trials"
+  ]
+}

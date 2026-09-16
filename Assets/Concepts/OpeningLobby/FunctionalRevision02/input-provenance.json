@@ -1,0 +1,169 @@
+{
+  "inputs": [
+    {
+      "file": "Docs/Tasks/OpeningLobbyFunctionalRevision02.md",
+      "bytes": 8481,
+      "sha256": "ab97a372fd847cd2339c0ffdd2cbaa9b0fbbf32a1a1eb030de22722d0897f1f6"
+    },
+    {
+      "file": "Docs/Approvals/LobbyFunctionalRevision02-OwnerMarkup01.json",
+      "bytes": 2165,
+      "sha256": "51a5ce8af0f241397a165961be8ea2f00f0a080282aec300b8f43a3cace202eb"
+    },
+    {
+      "file": "Docs/Design/GameBrief.md",
+      "bytes": 4261,
+      "sha256": "30ccccf1063814de6f374a722d2c9ec96b41b0e9cde11e9da5dae5927c18f146"
+    },
+    {
+      "file": "Docs/VisualAcceptance.md",
+      "bytes": 6567,
+      "sha256": "e6f7501aac6efda672fefb4ca979b16ad54c96ba2a257bc7b1335cb714ea8cc5"
+    },
+    {
+      "file": ".agents/skills/environment-reference-analysis/SKILL.md",
+      "bytes": 3721,
+      "sha256": "2689d357f032b3e6eeb5e35fe6bfc006d33193680812bb2bcc084e38555761ea"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision02Inputs/OwnerMarkup01.png",
+      "bytes": 110220,
+      "sha256": "fedce738e8218f3a80c5f811b4d2cbab947b96c02d965f45e5355fab02880541"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/OwnerReferences01/01-InnerEnd.png",
+      "bytes": 3268532,
+      "sha256": "52068c1a081d924248369af2d875bd0040c6a3c0e58b287aecd3c4a727e3d665"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/OwnerReferences01/02-EntranceSecurity.png",
+      "bytes": 3427782,
+      "sha256": "90873dcc4d9914383dfb971d6b494665ba975a5b3c2a62e4d5f246d767abaf6f"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/ArchitectureRework01/04-A-sections.png",
+      "bytes": 132460,
+      "sha256": "329446bd52ae0b8b96885dafc089e8f062bad33efe048ea9c406dc898144833e"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/01-plan-circulation.png",
+      "bytes": 115540,
+      "sha256": "4b0f4e1baf1d2871dfa35da6a079ff960439e3ab68b8e53f9abd416a8143ef82"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/01-plan-circulation.svg",
+      "bytes": 24841,
+      "sha256": "c0e575bcd829d056eefdb05790c5856218cb2f466c5b96719700253db4250559"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/02-entrance-checkpoint.png",
+      "bytes": 140325,
+      "sha256": "d3776cbec5c563c12e6ec6375c9129f54519938237f8807cc4c2d350830df9e7"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/02-entrance-checkpoint.svg",
+      "bytes": 12259,
+      "sha256": "deb2395cc03ff362703789d471e7bcb2efd2a641fabb5da81167e86f1291b6ac"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/03-inner-elevator.png",
+      "bytes": 111399,
+      "sha256": "358a22abc9d91e23631a36d9221c80294553b83a8c5a48f80839a41d36400f41"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/03-inner-elevator.svg",
+      "bytes": 9684,
+      "sha256": "2bfb96a7bcd507b4526e401c6d93fb931d13d9d0f6bd515d214734ee9b7fe0a0"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/04-room-faces.png",
+      "bytes": 123546,
+      "sha256": "227a406c44f5b7d250090d55e55e4eb05f251d805c2f223d4729da0015efd936"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/04-room-faces.svg",
+      "bytes": 13916,
+      "sha256": "130f311323d327b5e2e602b6910802b6905aa0ed1415557e8874cacd00da34c7"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/05-spatial-context.png",
+      "bytes": 298476,
+      "sha256": "7842392e10c186d88eda734200fff707350f528109286702bd8c4838a90497a2"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/05-spatial-context.svg",
+      "bytes": 6126176,
+      "sha256": "d1ec1d5586850be1be5d4a0db15dc8f1541804822350f319c36742ed646802f5"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/assemble.mjs",
+      "bytes": 502,
+      "sha256": "2a8a6b6e172982ccd0376397b2be97b9081fd31113e6364d11597fb04eb84c2f"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/audit-text.mjs",
+      "bytes": 3596,
+      "sha256": "f95fe4a735bcbb4d8c5c5a188c0f90f77e56f20489517adbecd965c9499a5a7f"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/design.json",
+      "bytes": 10717,
+      "sha256": "9b6a047fad0b34587f1fa1372f5de9845232e8a2df3bf419303ab772d58f1456"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/drafting.mjs.txt",
+      "bytes": 12060,
+      "sha256": "3c0982f4db5a3839bd63785b0e1ad16edd810b8e4a99fcc71d812782de011dc7"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/freeze.mjs",
+      "bytes": 3897,
+      "sha256": "5b68e973581cacf831d7f97588318137e7cb4879b46334080c5b0a86b4c9922d"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/generate.mjs",
+      "bytes": 33321,
+      "sha256": "54d77bf4ca2ad767ffc9e6e6a82fba8c0ab198a541c42031f3c4b9a6ffddfd93"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/input-provenance.json",
+      "bytes": 3493,
+      "sha256": "6c5c455f38bae1e2c834371e3d168bdbd49fd885a65da23c9488093aeaa6ae89"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/manifest.json",
+      "bytes": 6385,
+      "sha256": "c7828c0bfdebd05705d2a47194b10bd44db437b2c02adc80971d82166c3196eb"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/manifest.sha256",
+      "bytes": 80,
+      "sha256": "bf2d92a5cb8997b1e0c048aba7146e28610c999904a2261a5ffb002ea0947501"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/occlusion.mjs.txt",
+      "bytes": 1716,
+      "sha256": "3edc01ff24a0eb1bb9f5ee64115ac0ab179143596eb2d54e1734564ade20be9c"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/README.md",
+      "bytes": 14196,
+      "sha256": "9fd28dc478db3143896fe3c074006784e8ff48acfed40acc108d41559e70aac2"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/render.mjs.txt",
+      "bytes": 1764,
+      "sha256": "95dff4d236b28aa38cefa8f55a9d429fe36c66e4b2a6f2fda2d4c35f8bd54915"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/sheets.mjs.txt",
+      "bytes": 17778,
+      "sha256": "3f421c1c3470bbe943148d71b7bfd423755f221ddb664eda0d9bfd366f1ecb04"
+    },
+    {
+      "file": "Assets/Concepts/OpeningLobby/FunctionalRevision01/verify.mjs",
+      "bytes": 8889,
+      "sha256": "6286d3730f5f0e5fc72c865e65d124dfae6e83f2338bc9bd3b1a4b5a9aa313e9"
+    }
+  ]
+}

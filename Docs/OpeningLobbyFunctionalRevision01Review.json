@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "issue": "MSQ-17",
+  "issue_id": "01a0a014-6f0b-7198-8a87-02a7f9a880fd",
+  "review_date": "2026-09-14",
+  "candidate": "LobbyFunctional-Revision01/Candidate01",
+  "manifest": "Assets/Concepts/OpeningLobby/FunctionalRevision01/manifest.json",
+  "manifest_sha256": "c7828c0bfdebd05705d2a47194b10bd44db437b2c02adc80971d82166c3196eb",
+  "entries_verified": 29,
+  "visual_verdict": "PASS",
+  "technical_verdict": "PASS",
+  "ready_for_owner_drawing_review": true,
+  "owner_approval": false,
+  "authorizes_3d": false,
+  "required_corrections": [],
+  "critical_unverified": [],
+  "criteria": [
+    {
+      "id": 1,
+      "name": "Four terminal infills, face orientation and joints",
+      "visual": "PASS",
+      "technical": "PASS",
+      "evidence": [
+        "01-plan-circulation.png",
+        "04-room-faces.png",
+        "05-spatial-context.png",
+        "design.json:rooms"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Preserved scale, A architecture and circulation",
+      "visual": "PASS",
+      "technical": "PASS",
+      "evidence": [
+        "01-plan-circulation.png",
+        "05-spatial-context.png",
+        "design.json:shared,retained_A,routes",
+        "source-preservation-audit.json"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Coherent central checkpoint with exactly two lanes",
+      "visual": "PASS",
+      "technical": "PASS",
+      "evidence": [
+        "02-entrance-checkpoint.png",
+        "01-plan-circulation.png",
+        "source-preservation-audit.json:checkpoint_open_intervals"
+      ],
+      "scope": "Central passage only; owner confirmation pending"
+    },
+    {
+      "id": 4,
+      "name": "Large elevator, full window removal and opaque field",
+      "visual": "PASS",
+      "technical": "PASS",
+      "evidence": [
+        "03-inner-elevator.png",
+        "05-spatial-context.png",
+        "design.json:elevator"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Common source, consistent readable proposal sheets",
+      "visual": "PASS",
+      "technical": "PASS",
+      "evidence": [
+        "All five native PNG sheets",
+        "source-preservation-audit.json",
+        "generate.mjs",
+        "design.json",
+        "README.md"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Immutable identity and honest scope",
+      "visual": "PASS",
+      "technical": "PASS",
+      "evidence": [
+        "freeze-check.json",
+        "technical-check.json",
+        "source-preservation-audit.json",
+        "All five proposal footers",
+        "README.md"
+      ]
+    }
+  ],
+  "verification": {
+    "existing_checks_passed": 201,
+    "existing_checks_total": 201,
+    "route_polylines": 11,
+    "route_samples": 9865,
+    "minimum_checkpoint_approach_conservative_margin_m": 0.25623569469334156,
+    "centred_lane_margin_m": 0.41,
+    "source_assembly_matches": true,
+    "derived_bounds_match": true,
+    "derived_bounds_count": 96,
+    "protected_files_passed": 347,
+    "protected_files_total": 347,
+    "protected_normalization": "AGENTS.md managed runtime suffix excluded; terminal newline normalized",
+    "output_bytes": 12774431
+  },
+  "owner_decisions": [
+    "Confirm the 11.2 m central-only checkpoint with open side aisles",
+    "Approve exact new enclosure, wall, door, checkpoint and elevator dimensions, including 0.06 m leaf backing behind X30",
+    "Accept closed terminal crossovers and adjacent-bay alternatives",
+    "Approve 6 x 6 future sign reservation"
+  ],
+  "excluded": [
+    "Owner approval",
+    "3D production or in-engine acceptance",
+    "Actual capsule movement/collision",
+    "Stair/room usability or engineered fit",
+    "Elevator cab/shaft",
+    "Security and door operation",
+    "Branding",
+    "Final materials, lighting and atmosphere"
+  ],
+  "independence": {
+    "first_look_saved_before_author_conclusions": true,
+    "actual_reference_and_candidate_images_inspected": true,
+    "candidate_edited": false,
+    "delegated": false,
+    "issue_comments_or_status_changed": false
+  },
+  "report": "Saved/OpeningLobby/FunctionalRevision01/Review01/report.md",
+  "first_look": "Saved/OpeningLobby/FunctionalRevision01/Review01/first-look.md"
+}

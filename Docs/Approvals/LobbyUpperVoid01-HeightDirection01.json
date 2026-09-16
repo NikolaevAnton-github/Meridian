@@ -1,0 +1,36 @@
+{
+  "record_id": "LobbyUpperVoid01-HeightDirection01",
+  "date_local": "2026-09-16",
+  "source": "Owner direct chat and attached yellow section markup",
+  "owner_message_english_translation": "Continue the darkness task. You misunderstood where it should be. In the attached drawing I marked the height in yellow; yours is much too low. Do not darken the space under the walkways behind the columns, only the main ceiling.",
+  "decision": "Raise the gradual darkness into the marked upper main-hall zone; keep the under-walkway and side-aisle enclosures readable.",
+  "reference": {
+    "path": "Assets/Concepts/OpeningLobby/UpperVoid01/OwnerHeightMarkup01.png",
+    "bytes": 109638,
+    "sha256": "c3c3e3ea7f6556088ff4606ae40c74e4f650de6a51fc38794ad85a57fadbd3cd"
+  },
+  "inferred_working_parameters": {
+    "yellow_band_m": [
+      13.7,
+      15.1
+    ],
+    "yellow_centre_m": 14.4,
+    "first_fade_range_m": [
+      14,
+      17.5
+    ],
+    "status": "Approximate interpretation of hand markup, not new approved geometry dimensions"
+  },
+  "supersedes": [
+    "Original 3.5 to 8.5 m effect placement",
+    "Any original criterion requiring lower side-aisle ceilings/soffits to disappear"
+  ],
+  "task": "Docs/Tasks/OpeningLobbyUpperVoid01HeightCorrection01.md",
+  "preservation": "Current surface material/source bytes and 107 assignments, geometry/owner edits, glass/support, collision/gameplay, exact history. Dedicated atmosphere source/assets may change with exact archive.",
+  "not_granted": [
+    "Atmosphere candidate acceptance",
+    "Geometry changes",
+    "Deferred glass work",
+    "Whole lobby/final walkthrough acceptance"
+  ]
+}

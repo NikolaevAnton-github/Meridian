@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Arial, sans-serif"><rect x="0" y="0" width="1600" height="1000" fill="#f7f5ef" stroke="none" stroke-width="1.5"/>
+<text x="50" y="48" font-size="18" fill="#18776d" text-anchor="start">LOBBYSCALE–REVIEW01  /  02</text>
+<text x="50" y="91" font-size="32" fill="#233637" text-anchor="start">Longitudinal section A / central aisle</text>
+<text x="50" y="127" font-size="19" fill="#233637" text-anchor="start">Y=0 looking +Y. Six piers and the continuous +Y lintel are projected beyond the section plane.</text>
+<line x1="50" y1="149" x2="1550" y2="149" stroke="#8a9a93" stroke-width="1.5" />
+<line x1="50" y1="936" x2="1550" y2="936" stroke="#8a9a93" stroke-width="1.5" />
+<text x="50" y="970" font-size="18" fill="#b85a27" text-anchor="start">PENDING OWNER APPROVAL  •  Dimensioned proposal / metres  •  Schematic, not a gameplay prediction</text>
+<rect x="200" y="320" width="1200" height="360" fill="none" stroke="#233637" stroke-width="3"/>
+<rect x="200" y="320" width="1200" height="136" fill="#d9e2dc" stroke="#233637" stroke-width="1.5"/>
+<rect x="200" y="456" width="1200" height="56" fill="#536969" stroke="#233637" stroke-width="1.5"/>
+<rect x="356" y="512" width="48" height="168" fill="#d9e2dc" stroke="#233637" stroke-width="1.5"/>
+<text x="380" y="708" font-size="17" fill="#233637" text-anchor="middle">X -21</text>
+<rect x="524" y="512" width="48" height="168" fill="#d9e2dc" stroke="#233637" stroke-width="1.5"/>
+<text x="548" y="708" font-size="17" fill="#233637" text-anchor="middle">X -12.6</text>
+<rect x="692" y="512" width="48" height="168" fill="#d9e2dc" stroke="#233637" stroke-width="1.5"/>
+<text x="716" y="708" font-size="17" fill="#233637" text-anchor="middle">X -4.2</text>
+<rect x="860" y="512" width="48" height="168" fill="#d9e2dc" stroke="#233637" stroke-width="1.5"/>
+<text x="884" y="708" font-size="17" fill="#233637" text-anchor="middle">X 4.2</text>
+<rect x="1028" y="512" width="48" height="168" fill="#d9e2dc" stroke="#233637" stroke-width="1.5"/>
+<text x="1052" y="708" font-size="17" fill="#233637" text-anchor="middle">X 12.6</text>
+<rect x="1196" y="512" width="48" height="168" fill="#d9e2dc" stroke="#233637" stroke-width="1.5"/>
+<text x="1220" y="708" font-size="17" fill="#233637" text-anchor="middle">X 21</text>
+<line x1="200" y1="496" x2="1400" y2="496" stroke="#18776d" stroke-width="1" stroke-dasharray="7 5"/>
+<line x1="200" y1="645.6" x2="1400" y2="645.6" stroke="#b85a27" stroke-width="1.5" stroke-dasharray="7 5"/>
+<circle cx="700" cy="646.6" r="2.6" fill="#b85a27"/>
+<line x1="700" y1="649.8" x2="700" y2="665.6" stroke="#b85a27" stroke-width="3.2" />
+<line x1="700" y1="654" x2="694.6" y2="663.2" stroke="#b85a27" stroke-width="1.7999999999999998" />
+<line x1="700" y1="654" x2="705.4" y2="663.2" stroke="#b85a27" stroke-width="1.7999999999999998" />
+<line x1="700" y1="665.6" x2="695.6" y2="680" stroke="#b85a27" stroke-width="2.2" />
+<line x1="700" y1="665.6" x2="704.4" y2="680" stroke="#b85a27" stroke-width="2.2" />
+<circle cx="420" cy="645.6" r="4" fill="#b85a27"/>
+<text x="420" y="627.6" font-size="18" fill="#b85a27" text-anchor="start">C1</text>
+<circle cx="1180" cy="645.6" r="4" fill="#b85a27"/>
+<text x="1180" y="627.6" font-size="18" fill="#b85a27" text-anchor="start">C2</text>
+<circle cx="520" cy="645.6" r="4" fill="#b85a27"/>
+<text x="520" y="627.6" font-size="18" fill="#b85a27" text-anchor="start">C3</text>
+<line x1="200" y1="572" x2="200" y2="324" stroke="#b5d9df" stroke-width="8" />
+<line x1="1400" y1="452" x2="1400" y2="328" stroke="#b5d9df" stroke-width="8" />
+<line x1="200" y1="680" x2="200" y2="627.2" stroke="#b85a27" stroke-width="6" />
+<line x1="1400" y1="680" x2="1400" y2="636.4" stroke="#b85a27" stroke-width="6" />
+<line x1="200" y1="270" x2="1400" y2="270" stroke="#18776d" stroke-width="1.5" />
+<line x1="196" y1="276" x2="204" y2="264" stroke="#18776d" stroke-width="1.5" />
+<line x1="1396" y1="276" x2="1404" y2="264" stroke="#18776d" stroke-width="1.5" />
+<text x="800" y="261" font-size="19" fill="#18776d" text-anchor="middle">60 overall</text>
+<line x1="140" y1="320" x2="140" y2="680" stroke="#18776d" stroke-width="1.5" />
+<line x1="135" y1="324" x2="145" y2="316" stroke="#18776d" stroke-width="1.5" />
+<line x1="135" y1="684" x2="145" y2="676" stroke="#18776d" stroke-width="1.5" />
+<text transform="translate(131,500) rotate(-90)" text-anchor="middle" font-size="19" fill="#18776d">18 central height</text>
+<line x1="1460" y1="512" x2="1460" y2="680" stroke="#18776d" stroke-width="1.5" />
+<line x1="1455" y1="516" x2="1465" y2="508" stroke="#18776d" stroke-width="1.5" />
+<line x1="1455" y1="684" x2="1465" y2="676" stroke="#18776d" stroke-width="1.5" />
+<text transform="translate(1451,596) rotate(-90)" text-anchor="middle" font-size="19" fill="#18776d">8.4 underside / shaft</text>
+<line x1="1515" y1="456" x2="1515" y2="512" stroke="#18776d" stroke-width="1.5" />
+<line x1="1510" y1="460" x2="1520" y2="452" stroke="#18776d" stroke-width="1.5" />
+<line x1="1510" y1="516" x2="1520" y2="508" stroke="#18776d" stroke-width="1.5" />
+<text transform="translate(1506,484) rotate(-90)" text-anchor="middle" font-size="19" fill="#18776d">2.8 lintel</text>
+<line x1="200" y1="735" x2="356" y2="735" stroke="#18776d" stroke-width="1.5" />
+<line x1="196" y1="741" x2="204" y2="729" stroke="#18776d" stroke-width="1.5" />
+<line x1="352" y1="741" x2="360" y2="729" stroke="#18776d" stroke-width="1.5" />
+<text x="278" y="726" font-size="19" fill="#18776d" text-anchor="middle">7.8 end clear</text>
+<line x1="404" y1="735" x2="524" y2="735" stroke="#18776d" stroke-width="1.5" />
+<line x1="400" y1="741" x2="408" y2="729" stroke="#18776d" stroke-width="1.5" />
+<line x1="520" y1="741" x2="528" y2="729" stroke="#18776d" stroke-width="1.5" />
+<text x="464" y="726" font-size="19" fill="#18776d" text-anchor="middle">6 clear</text>
+<line x1="380" y1="780" x2="548" y2="780" stroke="#18776d" stroke-width="1.5" />
+<line x1="376" y1="786" x2="384" y2="774" stroke="#18776d" stroke-width="1.5" />
+<line x1="544" y1="786" x2="552" y2="774" stroke="#18776d" stroke-width="1.5" />
+<text x="464" y="771" font-size="19" fill="#18776d" text-anchor="middle">8.4 bay pitch</text>
+<text x="60" y="835" font-size="19" fill="#233637" text-anchor="start">Projected piers are pale; continuous lintel is dark. Dashed teal: side-aisle ceiling Z 9.2.</text>
+<text x="60" y="865" font-size="19" fill="#233637" text-anchor="start">Human: 1.8 m. Orange dashed eye line: Z 1.72 m; C3 is projected from Y +3.5.</text>
+<text x="60" y="895" font-size="19" fill="#233637" text-anchor="start">Upper infill and ceiling construction are estimates; roof build-up and external connections are unresolved.</text>
+<rect x="1250" y="845" width="100" height="8" fill="#233637" stroke="#233637" stroke-width="1.5"/>
+<rect x="1350" y="845" width="100" height="8" fill="#f7f5ef" stroke="#233637" stroke-width="1.5"/>
+<text x="1250" y="877" font-size="17" fill="#233637" text-anchor="start">0</text>
+<text x="1450" y="877" font-size="17" fill="#233637" text-anchor="end">10 m</text></svg>

@@ -1,0 +1,721 @@
+{
+  "package": "LobbyFunctional-Revision02",
+  "revision": "Candidate01",
+  "status": "pending_independent_review",
+  "units": "metres",
+  "scope": "2D drawing proposal only; no scene, mesh or editor production",
+  "coordinates": "X entrance -30 to inner +30; Y across; Z up. Full plan +X right, +Y up.",
+  "baseline": {
+    "candidate": "LobbyArchitecture-ReworkA01/WorkerCandidate01",
+    "manifest_sha256": "c960e227ba7d8e7112c3510b59c7708a1047ef0ef106deadb4e0f516c8288f21",
+    "map_sha256": "71cfc087c80510313054255d784d1b43c45395d6400c9e0b75e9f64d7be944d0"
+  },
+  "shared": {
+    "hall": {
+      "length": 60,
+      "width": 24,
+      "height": 18,
+      "entrance_x": -30,
+      "inner_x": 30
+    },
+    "piers": {
+      "x": [
+        -21,
+        -12.6,
+        -4.2,
+        4.2,
+        12.6,
+        21
+      ],
+      "abs_y": 6.8,
+      "size": 2.4,
+      "height": 8.4,
+      "pair_count": 6,
+      "pitch": 8.4,
+      "clear_bay": 6
+    },
+    "circulation": {
+      "central_clear": 11.2,
+      "aisle_clear": 4,
+      "aisle_centres_y": [
+        -10,
+        10
+      ],
+      "crossovers_x": [
+        -27,
+        27
+      ],
+      "capsule_radius": 0.34,
+      "capsule_half_height": 0.88
+    },
+    "beam": {
+      "abs_y_min": 5.6,
+      "abs_y_max": 8,
+      "z_min": 8.4,
+      "z_max": 11.2
+    },
+    "aisle_ceiling_z": 9.2,
+    "entrance": {
+      "glass_x": -30,
+      "field_width": 5.2,
+      "lower_height": 5.28,
+      "upper_sill_baseline": 5.4,
+      "upper_head": 17.8,
+      "leaf_count": 2,
+      "leaf_width": 1.04,
+      "leaf_height": 2.64,
+      "leaf_x": -30,
+      "leaf_centre_y": 0,
+      "threshold_z": 0
+    },
+    "inner": {
+      "x": 30,
+      "door_width": 1.04,
+      "door_height": 2.18,
+      "window_width": 2.4,
+      "window_sill": 11.4,
+      "window_height": 6.2
+    },
+    "detector": {
+      "x": -24.6,
+      "y": -1.05,
+      "depth": 0.55,
+      "clear_width": 1.14,
+      "clear_height": 2.28,
+      "post_width": 0.16,
+      "header_height": 0.14
+    },
+    "station": {
+      "x": -24.6,
+      "y": 0.95,
+      "depth": 0.85,
+      "width": 2.2,
+      "height": 0.96,
+      "top_depth": 0.95,
+      "top_width": 2.3,
+      "top_height": 1.02,
+      "top_thickness": 0.06
+    },
+    "floor_strips": {
+      "abs_y": 2.2,
+      "width": 0.64
+    },
+    "human": {
+      "height": 1.8,
+      "eye_height": 1.72,
+      "walk_speed": 3.6,
+      "gameplay_hfov": 90
+    },
+    "door_collar": {
+      "outer_half_width": 1.18,
+      "inner_half_width": 1.04,
+      "head_top": 2.88,
+      "head_bottom": 2.64,
+      "front_x": -29.4,
+      "back_x": -30
+    },
+    "reference_mullions": {
+      "columns": 4,
+      "upper_rows": 6,
+      "width": 0.055,
+      "depth": 0.12,
+      "status": "Schematic drawing subdivisions, not fabrication specification"
+    }
+  },
+  "retained_A": {
+    "name": "Stepped monolithic portal",
+    "intent": "Continuous tall jambs anchor the window; an inset shoulder separates them from engaged end piers and the longitudinal beams.",
+    "portal": {
+      "front_x": -28.4,
+      "back_x": -30,
+      "abs_y_inner": 2.9,
+      "abs_y_outer": 4.6,
+      "z_min": 0,
+      "z_max": 18,
+      "reveal_front_x": -29,
+      "reveal_abs_y_inner": 2.6,
+      "reveal_abs_y_outer": 2.9,
+      "top_band_bottom": 17.8
+    },
+    "shoulder": {
+      "front_x": -29.6,
+      "abs_y_min": 4.6,
+      "abs_y_max": 5.6,
+      "z_min": 0,
+      "z_max": 18
+    },
+    "end_pier": {
+      "front_x": -28.8,
+      "back_x": -30,
+      "abs_y_min": 5.6,
+      "abs_y_max": 8,
+      "height": 11.2
+    },
+    "upper": {
+      "inner_abs_y": 6.2,
+      "outer_abs_y": 8,
+      "bottom_z": 11.2,
+      "top_z": 18,
+      "application": "Uniform secondary section along both colonnades, returning into unchanged inner-end wall. No new floor area or route."
+    },
+    "transom": {
+      "front_x": -28.4,
+      "back_x": -30,
+      "half_width": 2.6,
+      "bottom_z": 5.28,
+      "top_z": 5.4,
+      "role": "Thin datum splice aligned to existing field boundary; not a structural lintel."
+    },
+    "upper_glazing_sill": 5.4,
+    "side_bay": {
+      "x_min": -28.8,
+      "x_max": -22.2,
+      "abs_y_min": 8,
+      "abs_y_max": 12,
+      "soffit_z": 9.2,
+      "edge_bottom_z": 8.4,
+      "edge_width": 0.35,
+      "cross_rib_centres_x": [],
+      "rib_width": 0.4
+    },
+    "terminal_clear_gap": 6.6,
+    "crossover_min_centre_distance": 1.4,
+    "crossover_capsule_margin": 1.06,
+    "tradeoff": "Closest to the primary art's vertical hierarchy and quieter terminal shoulder. The deep jambs narrow the oblique apparent glass width; the thin 0.2 m head zone is a ceiling junction, not evidence of a load-bearing lintel."
+  },
+  "rooms": {
+    "entrance_x": [
+      -30,
+      -19.8
+    ],
+    "inner_x": [
+      19.8,
+      30
+    ],
+    "abs_y": [
+      5.6,
+      12
+    ],
+    "z": [
+      0,
+      8.4
+    ],
+    "wall_thickness": 0.36,
+    "door_recess": 0.24,
+    "door_leaf_thickness": 0.06,
+    "door_width": 1.2,
+    "door_height": 2.4,
+    "frame_width": 0.12,
+    "door_centres_x": {
+      "entrance": -19.8,
+      "inner": 26.1
+    },
+    "doors": [
+      {
+        "id": "E+",
+        "end": "entrance",
+        "sign": 1,
+        "face": "transverse",
+        "centre": [
+          -19.8,
+          10
+        ],
+        "normal": [
+          1,
+          0
+        ]
+      },
+      {
+        "id": "E-",
+        "end": "entrance",
+        "sign": -1,
+        "face": "transverse",
+        "centre": [
+          -19.8,
+          -10
+        ],
+        "normal": [
+          1,
+          0
+        ]
+      },
+      {
+        "id": "I+",
+        "end": "inner",
+        "sign": 1,
+        "face": "hall",
+        "centre": [
+          26.1,
+          5.6
+        ],
+        "normal": [
+          0,
+          -1
+        ]
+      },
+      {
+        "id": "I-",
+        "end": "inner",
+        "sign": -1,
+        "face": "hall",
+        "centre": [
+          26.1,
+          -5.6
+        ],
+        "normal": [
+          0,
+          1
+        ]
+      }
+    ],
+    "interior_status": "Gross visible enclosure only. Empty plan tint is an unknown internal zone, not usable floor or verified clearance.",
+    "top": {
+      "band_abs_y": [
+        5.6,
+        8
+      ],
+      "band_z": 8.4,
+      "aisle_abs_y": [
+        8,
+        12
+      ],
+      "aisle_z": 9.2,
+      "closure_thickness": 0.36,
+      "status": "Proposed closure plates below retained beam and soffit; no floor. Vertical step at |Y|8 contacts retained beam."
+    }
+  },
+  "checkpoint": {
+    "x": -24.6,
+    "depth": 0.9,
+    "half_width": 5.6,
+    "post_width": 0.2,
+    "lane_centres_y": [
+      -4.65,
+      4.65
+    ],
+    "net_width": 1.5,
+    "net_height": 2.4,
+    "header_height": 0.18,
+    "desk_y": [
+      -3.7,
+      3.7
+    ],
+    "desk_height": 1.02,
+    "top_thickness": 0.06,
+    "threshold": 0,
+    "scope": "11.2 m central line; terminal rooms close the side bypass. Exactly two floor-level entrance paths. No security gameplay or anti-jump claim."
+  },
+  "elevator": {
+    "leaf_x": 30,
+    "front_x": 29.4,
+    "opening_width": 3.6,
+    "opening_height": 4.2,
+    "frame_width": 0.4,
+    "outer_width": 4.4,
+    "outer_height": 4.6,
+    "leaf_thickness": 0.06,
+    "threshold": 0,
+    "sign_zone": {
+      "width": 6,
+      "z": [
+        11.4,
+        17.4
+      ],
+      "x": 29.99,
+      "geometry": "flush opaque existing wall, dashed annotation boundary only"
+    },
+    "remove_window": {
+      "width": 2.4,
+      "z": [
+        11.4,
+        17.6
+      ],
+      "all_glass_mullions_transoms": true
+    },
+    "leaf_depth_convention": "Visible closed face at X30, backing X30.06. This 0.06 local leaf thickness is the only draw-bound extension behind the end datum; no shaft/cab envelope."
+  },
+  "routes": {
+    "closed_crossovers_x": [
+      -27,
+      27
+    ],
+    "alternate_bays_x": [
+      [
+        -19.8,
+        -13.8
+      ],
+      [
+        13.8,
+        19.8
+      ]
+    ],
+    "crossing_centres_x": [
+      -16.8,
+      16.8
+    ],
+    "aisle_centres_y": [
+      -10,
+      10
+    ],
+    "capsule_radius": 0.34,
+    "speed": 3.6,
+    "polylines": [
+      {
+        "id": "cross-entry",
+        "points": [
+          [
+            -16.8,
+            -10
+          ],
+          [
+            -16.8,
+            10
+          ]
+        ]
+      },
+      {
+        "id": "cross-inner",
+        "points": [
+          [
+            16.8,
+            -10
+          ],
+          [
+            16.8,
+            10
+          ]
+        ]
+      },
+      {
+        "id": "axis-after-control",
+        "points": [
+          [
+            -21,
+            0
+          ],
+          [
+            28.8,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "checkpoint-4.65",
+        "points": [
+          [
+            -29.3,
+            0
+          ],
+          [
+            -26.6,
+            -4.65
+          ],
+          [
+            -23.3,
+            -4.65
+          ],
+          [
+            -21,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "checkpoint4.65",
+        "points": [
+          [
+            -29.3,
+            0
+          ],
+          [
+            -26.6,
+            4.65
+          ],
+          [
+            -23.3,
+            4.65
+          ],
+          [
+            -21,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "aisle-1",
+        "points": [
+          [
+            -16.8,
+            0
+          ],
+          [
+            -16.8,
+            -10
+          ],
+          [
+            16.8,
+            -10
+          ],
+          [
+            16.8,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "door-approach-E-1",
+        "points": [
+          [
+            -16.8,
+            -10
+          ],
+          [
+            -19.15,
+            -10
+          ]
+        ]
+      },
+      {
+        "id": "door-approach-I-1",
+        "points": [
+          [
+            26.1,
+            0
+          ],
+          [
+            26.1,
+            -4.95
+          ]
+        ]
+      },
+      {
+        "id": "column-pair--12.6-side-1",
+        "points": [
+          [
+            -15.6,
+            0
+          ],
+          [
+            -15.6,
+            -4.6
+          ],
+          [
+            -9.6,
+            -4.6
+          ],
+          [
+            -9.6,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "column-pair-12.6-side-1",
+        "points": [
+          [
+            9.6,
+            0
+          ],
+          [
+            9.6,
+            -4.6
+          ],
+          [
+            15.6,
+            -4.6
+          ],
+          [
+            15.6,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "aisle1",
+        "points": [
+          [
+            -16.8,
+            0
+          ],
+          [
+            -16.8,
+            10
+          ],
+          [
+            16.8,
+            10
+          ],
+          [
+            16.8,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "door-approach-E1",
+        "points": [
+          [
+            -16.8,
+            10
+          ],
+          [
+            -19.15,
+            10
+          ]
+        ]
+      },
+      {
+        "id": "door-approach-I1",
+        "points": [
+          [
+            26.1,
+            0
+          ],
+          [
+            26.1,
+            4.95
+          ]
+        ]
+      },
+      {
+        "id": "column-pair--12.6-side1",
+        "points": [
+          [
+            -15.6,
+            0
+          ],
+          [
+            -15.6,
+            4.6
+          ],
+          [
+            -9.6,
+            4.6
+          ],
+          [
+            -9.6,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "column-pair-12.6-side1",
+        "points": [
+          [
+            9.6,
+            0
+          ],
+          [
+            9.6,
+            4.6
+          ],
+          [
+            15.6,
+            4.6
+          ],
+          [
+            15.6,
+            0
+          ]
+        ]
+      }
+    ],
+    "aisle_extent_x": [
+      -19.8,
+      19.8
+    ],
+    "side_passage_centres_y": [
+      -4.6,
+      4.6
+    ]
+  },
+  "drawing_cameras": {
+    "entrance": {
+      "xyz": [
+        -16,
+        3.5,
+        1.72
+      ],
+      "yaw": 180,
+      "pitch": 13,
+      "hfov": 90,
+      "human_xyz": [
+        -26.3,
+        3.25,
+        0
+      ]
+    },
+    "inner": {
+      "xyz": [
+        16,
+        0,
+        1.72
+      ],
+      "yaw": 0,
+      "pitch": 18,
+      "hfov": 90,
+      "human_xyz": [
+        28,
+        3.3,
+        0
+      ]
+    },
+    "context": {
+      "xyz": [
+        -29,
+        0,
+        1.72
+      ],
+      "yaw": 0,
+      "pitch": 20,
+      "hfov": 90,
+      "human_xyz": [
+        -14.8,
+        0.5,
+        0
+      ]
+    },
+    "aisle": {
+      "xyz": [
+        -10,
+        10,
+        1.72
+      ],
+      "yaw": 180,
+      "pitch": 13,
+      "hfov": 90,
+      "human_xyz": [
+        -18.8,
+        10.9,
+        0
+      ]
+    }
+  },
+  "authority": "OwnerMarkup01 controls topology and four ceiling-height columns. Exact new metres are regularized proposals requiring owner approval. Unmarked checkpoint/elevator proposals are carried forward, not approved.",
+  "data_precedence": "shared and retained_A preserve historical accepted records, including superseded crossovers and narrow side-bay labels. Active rooms, columns, checkpoint, elevator and routes govern this proposal. No historical crossover or terminal-aisle statement authorizes a route through the new room interiors.",
+  "prior_package": {
+    "id": "LobbyFunctional-Revision01/Candidate01",
+    "manifest_sha256": "c7828c0bfdebd05705d2a47194b10bd44db437b2c02adc80971d82166c3196eb",
+    "status": "historical; owner rejected interpretation"
+  },
+  "columns": {
+    "x": [
+      -12.6,
+      12.6
+    ],
+    "y": [
+      -2.4,
+      2.4
+    ],
+    "section": [
+      2.4,
+      2.4
+    ],
+    "z": [
+      0,
+      18
+    ],
+    "status": "Four marked requirements; exact section and Y centres are proposed",
+    "ceiling_joint": "Flush full-section contact at Z18; no capital, no ceiling cut, no new upper beam"
+  }
+}

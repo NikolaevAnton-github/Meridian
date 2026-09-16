@@ -20,3 +20,19 @@ Tools/Patches/*.patch text eol=lf -whitespace
 *.tif filter=lfs diff=lfs merge=lfs -text
 *.tiff filter=lfs diff=lfs merge=lfs -text
 *.wav filter=lfs diff=lfs merge=lfs -text
+
+# Preserve the exact text bytes of the frozen architectural review package.
+Assets/Concepts/OpeningLobby/ArchitectureRework01/*.svg text eol=lf
+Assets/Concepts/OpeningLobby/ArchitectureRework01/*.json text eol=lf
+Assets/Concepts/OpeningLobby/ArchitectureRework01/*.md text eol=lf
+Assets/Concepts/OpeningLobby/ArchitectureRework01/*.mjs text eol=lf
+Assets/Concepts/OpeningLobby/ArchitectureRework01/*.sha256 text eol=lf
+
+# Accepted lobby manifests identify exact native source/reference bytes.
+# Disable newline conversion without changing extension-specific LFS filters.
+Assets/Concepts/OpeningLobby/** -text
+Assets/Source/OpeningLobby/** -text
+Docs/Approvals/** -text
+Docs/OpeningLobby* -text
+Docs/Tasks/OpeningLobby* -text
+Scripts/OpeningLobby/** -text

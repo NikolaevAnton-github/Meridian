@@ -1,0 +1,36 @@
+{
+  "recorded_at_utc": "2026-09-13T15:12:15.607176+00:00",
+  "task": "MSQ-8",
+  "candidate_package": "LobbyArt-Review02",
+  "status": "approved_for_layout_revision",
+  "file": "03-SecurityOblique.png",
+  "bytes": 2354524,
+  "width": 1672,
+  "height": 941,
+  "sha256": "fafb792fa6f9749d2a47a943866ec603b2485a62fb354cff68ddb52f0f9621a9",
+  "prompt_file": "prompt.json",
+  "prompt_sha256": "82e42091920658cd9a2d649238f46eb7d3a3db4d63fb437c8795ce737dd6f4d9",
+  "generation_route": "Controller-operated built-in image_gen, image edit with two ordered references",
+  "reference_order": [
+    "D:/devgames/MeridianSquad/Assets/Concepts/OpeningLobby/OwnerReferences01/02-EntranceSecurity.png",
+    "D:/devgames/MeridianSquad/Assets/Concepts/OpeningLobby/OwnerReferences01/01-InnerEnd.png"
+  ],
+  "reference_hashes": [
+    {
+      "file": "Assets\\Concepts\\OpeningLobby\\OwnerReferences01\\01-InnerEnd.png",
+      "sha256": "52068c1a081d924248369af2d875bd0040c6a3c0e58b287aecd3c4a727e3d665"
+    },
+    {
+      "file": "Assets\\Concepts\\OpeningLobby\\OwnerReferences01\\02-EntranceSecurity.png",
+      "sha256": "90873dcc4d9914383dfb971d6b494665ba975a5b3c2a62e4d5f246d767abaf6f"
+    }
+  ],
+  "references_unchanged": true,
+  "paid_api_fallback_used": false,
+  "owner_approval": {
+    "record": "approval.json",
+    "recorded_at_utc": "2026-09-13T20:00:08.964322+00:00"
+  },
+  "layout_model_work_authorized": "Separate prototype layout revision only; detailed model/material production remains behind its walkthrough review.",
+  "image_usage": "Image tool did not return token or subscription-quota metrics."
+}

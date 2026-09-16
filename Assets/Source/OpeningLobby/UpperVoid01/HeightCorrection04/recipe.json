@@ -1,0 +1,17 @@
+{
+  "tag": "Trial01",
+  "postprocess": "// One static, smooth 3D absorption field. World units are centimeters.\n// Three oblique low-frequency components have wavelengths 4m, 3m and 5m.\n// Their weighted sum lies in [-1,1]; onset therefore remains within 13.7-15.1m.\nfloat3 ray = WorldCm-CameraCm;\nfloat distanceCm = length(ray);\nfloat dz = ray.z;\nfloat t0 = 0.0;\nfloat t1 = 1.0;\nif (abs(dz)>0.001) {\n    float cross = (1370.0-CameraCm.z)/dz;\n    if (dz>0.0) t0=max(t0,cross); else t1=min(t1,cross);\n} else if (CameraCm.z<=1370.0) { return 1.0; }\nt0=saturate(t0); t1=saturate(t1);\nfloat opticalDepth = 0.0;\n[unroll] for (int i=0;i<16;i++) {\n    float t=lerp(t0,t1,(i+0.5)/16.0);\n    float3 p=CameraCm+ray*t;\n    float field=0.55*sin(dot(p,float3(0.72,0.60,0.35))*0.0157079633+0.9)\n               +0.30*sin(dot(p,float3(-0.38,0.86,0.34))*0.0209439510+2.1)\n               +0.15*sin(dot(p,float3(0.25,-0.43,0.867))*0.0125663706-0.7);\n    float onset=1440.0+70.0*field;\n    float h=max(p.z-onset,0.0)/max(1780.0-onset,1.0);\n    float sigma=0.034*(1.0+0.30*field)*h*h;\n    opticalDepth+=sigma;\n}\nopticalDepth*=distanceCm*max(t1-t0,0.0)/16.0;\n// Exact roof concealment at 17.9m, independent of spatial modulation.\nfloat roof=saturate((WorldCm.z-1760.0)/30.0);\nreturn exp(-opticalDepth)*(1.0-roof*roof*(3.0-2.0*roof));",
+  "light_function": "// Reserve direct-light attenuation for the roof; the visible shaft ramp belongs to PP.\nfloat h = saturate((WorldCm.z - 1750.0) / 40.0);\nreturn 1.0-h*h*(3.0-2.0*h);",
+  "diagnostic_direct_output": false,
+  "materials": [
+    {
+      "asset": "/Game/OpeningLobby/UpperVoid01/M_UpperVoid_Extinction.M_UpperVoid_Extinction",
+      "code": "// One static, smooth 3D absorption field. World units are centimeters.\n// Three oblique low-frequency components have wavelengths 4m, 3m and 5m.\n// Their weighted sum lies in [-1,1]; onset therefore remains within 13.7-15.1m.\nfloat3 ray = WorldCm-CameraCm;\nfloat distanceCm = length(ray);\nfloat dz = ray.z;\nfloat t0 = 0.0;\nfloat t1 = 1.0;\nif (abs(dz)>0.001) {\n    float cross = (1370.0-CameraCm.z)/dz;\n    if (dz>0.0) t0=max(t0,cross); else t1=min(t1,cross);\n} else if (CameraCm.z<=1370.0) { return 1.0; }\nt0=saturate(t0); t1=saturate(t1);\nfloat opticalDepth = 0.0;\n[unroll] for (int i=0;i<16;i++) {\n    float t=lerp(t0,t1,(i+0.5)/16.0);\n    float3 p=CameraCm+ray*t;\n    float field=0.55*sin(dot(p,float3(0.72,0.60,0.35))*0.0157079633+0.9)\n               +0.30*sin(dot(p,float3(-0.38,0.86,0.34))*0.0209439510+2.1)\n               +0.15*sin(dot(p,float3(0.25,-0.43,0.867))*0.0125663706-0.7);\n    float onset=1440.0+70.0*field;\n    float h=max(p.z-onset,0.0)/max(1780.0-onset,1.0);\n    float sigma=0.034*(1.0+0.30*field)*h*h;\n    opticalDepth+=sigma;\n}\nopticalDepth*=distanceCm*max(t1-t0,0.0)/16.0;\n// Exact roof concealment at 17.9m, independent of spatial modulation.\nfloat roof=saturate((WorldCm.z-1760.0)/30.0);\nreturn exp(-opticalDepth)*(1.0-roof*roof*(3.0-2.0*roof));"
+    },
+    {
+      "asset": "/Game/OpeningLobby/UpperVoid01/M_UpperVoid_LightTransmission.M_UpperVoid_LightTransmission",
+      "code": "// Reserve direct-light attenuation for the roof; the visible shaft ramp belongs to PP.\nfloat h = saturate((WorldCm.z - 1750.0) / 40.0);\nreturn 1.0-h*h*(3.0-2.0*h);"
+    }
+  ],
+  "lights_changed": false
+}

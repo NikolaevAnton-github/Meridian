@@ -1,0 +1,19 @@
+{
+  "record_id": "LobbyPainterStone01-Acceptance01",
+  "date_local": "2026-09-15",
+  "source": "Owner direct chat after walkthrough",
+  "owner_message_english_translation": "I looked and I like the stone. You can clean up the previous lobby levels; we do not need them. Keep only the current one, and let us start the next materials on the level.",
+  "decision": "Accept the corrected stone material direction; remove obsolete lobby maps and continue material authoring on the current map.",
+  "candidate": "LobbyPainter-Stone01/Correction01",
+  "manifest": "Saved/OpeningLobby/PainterStone01/Worker/Correction01/manifest.json",
+  "manifest_sha256": "69aadd32025c61a93210c4caf4b02fb1bf10c88882b5006300f52aeece66eec1",
+  "map": "/Game/Maps/L_OpeningLobby_PainterStone01",
+  "map_sha256": "1694ce8033c6d3a109b720a37f4d608325d2adbe285b5610dd12937e311d169f",
+  "painter_project": "Assets/Source/OpeningLobby/PainterStone01/PainterStone01.spp",
+  "painter_project_sha256": "6cc3e43b29eb8fb96c753a1790835a806ecc9f716d2308fa6cf61a7e9cb18324",
+  "entries_verified": 154,
+  "supersedes": "Historical requirements to keep obsolete lobby maps in Content and to duplicate the current level for every material candidate.",
+  "preservation": "Keep approved stone bytes, current architecture and owner edits; preserve source/reference/review history and exact retired-map recovery mapping outside Content.",
+  "next_task": "Docs/Tasks/OpeningLobbyPainterFloor01.md",
+  "not_granted": "Whole-lobby materials, final architecture/detail, glass, atmosphere or performance acceptance."
+}

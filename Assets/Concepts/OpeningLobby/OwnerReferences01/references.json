@@ -1,0 +1,35 @@
+{
+  "recorded_at_utc": "2026-09-13T15:01:59.708834+00:00",
+  "task": "MSQ-8",
+  "reference_set": "OwnerReferences01",
+  "source": "Two images attached by the owner in this conversation",
+  "source_origin_verified": false,
+  "copied_without_visual_modification": true,
+  "direction_selected_by_owner": true,
+  "supersedes": "Review01 A/B/C as active visual direction",
+  "new_generation_requested_or_performed": false,
+  "relationship_of_views": "Owner confirmed: opposite views of one hall; glazed entrance/security checkpoint at one end, small opaque door at the other.",
+  "layout_or_model_dispatch": false,
+  "files": [
+    {
+      "file": "01-InnerEnd.png",
+      "bytes": 3268532,
+      "width": 1672,
+      "height": 941,
+      "sha256": "52068c1a081d924248369af2d875bd0040c6a3c0e58b287aecd3c4a727e3d665"
+    },
+    {
+      "file": "02-EntranceSecurity.png",
+      "bytes": 3427782,
+      "width": 1672,
+      "height": 941,
+      "sha256": "90873dcc4d9914383dfb971d6b494665ba975a5b3c2a62e4d5f246d767abaf6f"
+    }
+  ],
+  "relationship_confirmed_by_owner": true,
+  "art_package_approval": {
+    "package": "LobbyArt-Review02",
+    "record": "../Review02/approval.json",
+    "status": "approved"
+  }
+}

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="1200" viewBox="0 0 1600 1200" font-family="Arial, sans-serif"><defs><pattern id="cut" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#c5d0c0"/><path d="M0 9L9 0" stroke="#83957f" stroke-width="1"/></pattern></defs><rect x="0" y="0" width="1600" height="1200" fill="#f6f4ed" stroke="none" stroke-width="1.2" />
+<text x="44" y="37" font-size="16" fill="#187568" text-anchor="start" font-weight="600">MERIDIAN SQUAD   /   LOBBYFUNCTIONAL–REVISION01   /   CANDIDATE01</text>
+<text x="1556" y="37" font-size="22" fill="#187568" text-anchor="end" font-weight="700">03</text>
+<text x="44" y="82" font-size="34" fill="#243c38" text-anchor="start" font-weight="600">A large elevator below an opaque upper wall</text>
+<text x="44" y="119" font-size="18" fill="#60736b" text-anchor="start" font-weight="400">Proposed opening 3.60 x 4.20; remove the full old high window, all mullions and transoms. No cab, shaft or branding.</text>
+<line x1="44" y1="143" x2="1556" y2="143" stroke="#a6b2a7" stroke-width="1.4" />
+<line x1="44" y1="1145" x2="1556" y2="1145" stroke="#a6b2a7" stroke-width="1.4" />
+<text x="44" y="1176" font-size="17" fill="#ae542d" text-anchor="start" font-weight="400">2D ARCHITECTURAL DRAWINGS  •  Metres  •  Functional proposals  •  Pending independent review</text>
+<text x="1556" y="1176" font-size="17" fill="#60736b" text-anchor="end" font-weight="400">Owner approval required before 3D</text>
+<text x="55" y="184" font-size="17" fill="#187568" text-anchor="start" font-weight="700">E</text>
+<text x="98" y="184" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Inner end elevation / look +X</text>
+<rect x="66" y="550.6" width="768" height="294.4" fill="#dce2d7" stroke="#243c38" stroke-width="1.2" />
+<rect x="194" y="269" width="512" height="281.6" fill="#dce2d7" stroke="#243c38" stroke-width="1.2" />
+<rect x="194" y="486.6" width="76.8" height="358.4" fill="#70877a" stroke="#243c38" stroke-width="1.2" />
+<rect x="194" y="269" width="57.6" height="217.6" fill="#dce2d7" stroke="#243c38" stroke-width="1.2" />
+<rect x="629.2" y="486.6" width="76.8" height="358.4" fill="#70877a" stroke="#243c38" stroke-width="1.2" />
+<rect x="648.4" y="269" width="57.6" height="217.6" fill="#dce2d7" stroke="#243c38" stroke-width="1.2" />
+<rect x="379.6" y="697.8" width="140.8" height="147.2" fill="#70877a" stroke="#243c38" stroke-width="1.2" />
+<rect x="392.4" y="710.6" width="115.2" height="134.4" fill="#2b4943" stroke="#243c38" stroke-width="1.2" />
+<line x1="450" y1="845" x2="450" y2="710.6" stroke="#a6b2a7" stroke-width="1.4" />
+<rect x="354" y="288.2" width="192" height="192" fill="none" stroke="#187568" stroke-width="1.6" stroke-dasharray="8 6"/>
+<text x="450" y="381" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">OPAQUE WALL</text>
+<text x="450" y="406" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">Future sign zone</text>
+<text x="450" y="431" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">6.0 x 6.0</text>
+<circle cx="558.8" cy="791.24" r="3.84" fill="#ae542d"/>
+<line x1="558.8" y1="795.72" x2="558.8" y2="821.32" stroke="#ae542d" stroke-width="5.44" />
+<line x1="558.8" y1="802.44" x2="551.12" y2="817.16" stroke="#ae542d" stroke-width="2.56" />
+<line x1="558.8" y1="821" x2="553.04" y2="845" stroke="#ae542d" stroke-width="3.2" />
+<line x1="558.8" y1="802.44" x2="566.48" y2="817.16" stroke="#ae542d" stroke-width="2.56" />
+<line x1="558.8" y1="821" x2="564.56" y2="845" stroke="#ae542d" stroke-width="3.2" />
+<line x1="270.8" y1="789.96" x2="629.2" y2="789.96" stroke="#ae542d" stroke-width="1.2" stroke-dasharray="7 5"/>
+<line x1="392.4" y1="880" x2="507.6" y2="880" stroke="#187568" stroke-width="1.4" />
+<line x1="388.4" y1="885" x2="396.4" y2="875" stroke="#187568" stroke-width="1.4" />
+<line x1="503.6" y1="885" x2="511.6" y2="875" stroke="#187568" stroke-width="1.4" />
+<text x="450" y="871" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">3.60 opening</text>
+<line x1="860" y1="269" x2="860" y2="845" stroke="#187568" stroke-width="1.4" />
+<line x1="855" y1="273" x2="865" y2="265" stroke="#187568" stroke-width="1.4" />
+<line x1="855" y1="849" x2="865" y2="841" stroke="#187568" stroke-width="1.4" />
+<text transform="translate(851 557) rotate(-90)" font-size="17" fill="#187568" text-anchor="middle">18 retained</text>
+<text x="70" y="932" font-size="18" fill="#ae542d" text-anchor="start" font-weight="400">1.8 m human / eye Z 1.72; elevator leaves closed.</text>
+<text x="55" y="980" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Upper zone is a drafting reservation on a flush opaque wall.</text>
+<text x="55" y="1012" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Dashed boundary is annotation only; no new frame or panel joint.</text>
+<text x="55" y="1044" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">The 2.4 x 6.2 window at Z 11.4..17.6 is entirely infilled.</text>
+<text x="55" y="1076" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Nearby room doors face the hall; see sheet 04 for all four faces.</text>
+<text x="950" y="184" font-size="17" fill="#187568" text-anchor="start" font-weight="700">P</text>
+<text x="993" y="184" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Elevator plan / cut Z 1.0</text>
+<rect x="973" y="355" width="504" height="8" fill="#dce2d7" stroke="#243c38" stroke-width="1.2" />
+<rect x="1027" y="301" width="36" height="54" fill="#70877a" stroke="#243c38" stroke-width="1.2" />
+<rect x="1387" y="301" width="36" height="54" fill="#70877a" stroke="#243c38" stroke-width="1.2" />
+<rect x="1063" y="355" width="162" height="5.4" fill="#2b4943" stroke="#243c38" stroke-width="1.2" />
+<rect x="1225" y="355" width="162" height="5.4" fill="#2b4943" stroke="#243c38" stroke-width="1.2" />
+<line x1="1063" y1="405" x2="1387" y2="405" stroke="#187568" stroke-width="1.4" />
+<line x1="1059" y1="410" x2="1067" y2="400" stroke="#187568" stroke-width="1.4" />
+<line x1="1383" y1="410" x2="1391" y2="400" stroke="#187568" stroke-width="1.4" />
+<text x="1225" y="396" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">3.60 nominal opening</text>
+<line x1="1027" y1="445" x2="1423" y2="445" stroke="#187568" stroke-width="1.4" />
+<line x1="1023" y1="450" x2="1031" y2="440" stroke="#187568" stroke-width="1.4" />
+<line x1="1419" y1="450" x2="1427" y2="440" stroke="#187568" stroke-width="1.4" />
+<text x="1225" y="436" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">4.40 outer frame</text>
+<text x="950" y="495" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Front X 29.40; closed leaf plane X 30.00.</text>
+<text x="950" y="525" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Reveal 0.60; no cab or shaft depth specified.</text>
+<text x="950" y="555" font-size="18" fill="#243c38" text-anchor="start" font-weight="400">Frame 0.40; leaf 0.06 behind X 30 datum.</text>
+<text x="950" y="640" font-size="17" fill="#187568" text-anchor="start" font-weight="700">S</text>
+<text x="993" y="640" font-size="23" fill="#243c38" text-anchor="start" font-weight="600">Vertical section at Y 0 / look -Y</text>
+<rect x="1100" y="756" width="39" height="26" fill="url(#cut)" stroke="#243c38" stroke-width="1.2" />
+<rect x="1139" y="782" width="3.9" height="273" fill="#2b4943" stroke="#243c38" stroke-width="1.2" />
+<line x1="960" y1="1055" x2="1220" y2="1055" stroke="#243c38" stroke-width="2" />
+<circle cx="995" cy="945.8" r="7.8" fill="#ae542d"/>
+<line x1="995" y1="954.9" x2="995" y2="1006.9" stroke="#ae542d" stroke-width="11.05" />
+<line x1="995" y1="968.55" x2="979.4" y2="998.45" stroke="#ae542d" stroke-width="5.2" />
+<line x1="995" y1="1006.25" x2="983.3" y2="1055" stroke="#ae542d" stroke-width="6.5" />
+<line x1="995" y1="968.55" x2="1010.6" y2="998.45" stroke="#ae542d" stroke-width="5.2" />
+<line x1="995" y1="1006.25" x2="1006.7" y2="1055" stroke="#ae542d" stroke-width="6.5" />
+<line x1="960" y1="943.2" x2="1210" y2="943.2" stroke="#ae542d" stroke-width="1.2" stroke-dasharray="7 5"/>
+<line x1="1260" y1="782" x2="1260" y2="1055" stroke="#187568" stroke-width="1.4" />
+<line x1="1255" y1="786" x2="1265" y2="778" stroke="#187568" stroke-width="1.4" />
+<line x1="1255" y1="1059" x2="1265" y2="1051" stroke="#187568" stroke-width="1.4" />
+<text transform="translate(1251 918.5) rotate(-90)" font-size="17" fill="#187568" text-anchor="middle">4.20 opening</text>
+<line x1="1100" y1="720" x2="1139" y2="720" stroke="#187568" stroke-width="1.4" />
+<line x1="1096" y1="725" x2="1104" y2="715" stroke="#187568" stroke-width="1.4" />
+<line x1="1135" y1="725" x2="1143" y2="715" stroke="#187568" stroke-width="1.4" />
+<text x="1119.5" y="711" font-size="17" fill="#187568" text-anchor="middle" font-weight="400">0.60 reveal</text>
+<text x="1330" y="815" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">4.60 outer</text>
+<text x="1330" y="847" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">head Z</text>
+<text x="1330" y="879" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">Flush Z 0</text>
+<text x="1330" y="911" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">threshold</text>
+<text x="1330" y="943" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">Interior</text>
+<text x="1330" y="975" font-size="17" fill="#243c38" text-anchor="start" font-weight="400">deferred</text></svg>

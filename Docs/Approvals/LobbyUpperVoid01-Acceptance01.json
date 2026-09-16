@@ -1,0 +1,58 @@
+{
+  "record_id": "LobbyUpperVoid01-Acceptance01",
+  "date_local": "2026-09-16",
+  "source": "Owner direct chat after viewing the current result and controller reporting the remaining close-view limitation",
+  "owner_message_english_translation": "I am satisfied with the result; close the task.",
+  "decision": "Accept the current UpperVoid01 height-corrected atmosphere and close its bounded implementation/review task. No further visual correction is required for this accepted result.",
+  "accepted_live_state": "HeightCorrection03 native map and atmosphere, restored exactly during HeightCorrection04",
+  "handoff_candidate": "LobbyAtmosphere-UpperVoid01/HeightCorrection04",
+  "manifest": {
+    "path": "Saved/OpeningLobby/UpperVoid01/HeightCorrection04/Worker/manifest.json",
+    "bytes": 30564,
+    "sha256": "1c4008bb374db4c3f70a22e210a7756f65682150406d400bca0c98d5c9e7935d"
+  },
+  "map": {
+    "path": "Content/Maps/L_OpeningLobby_PainterStone01.umap",
+    "bytes": 260486,
+    "sha256": "b28fa0f6e8bb80dcc71b4789df9c3e2375a3cf8b1da67021225584e4560fd92f"
+  },
+  "map_package": "/Game/Maps/L_OpeningLobby_PainterStone01",
+  "native_atmosphere_assets": [
+    {
+      "path": "Content/OpeningLobby/UpperVoid01/M_UpperVoid_Extinction.uasset",
+      "bytes": 13880,
+      "sha256": "c27017638cf6de56eafa3eb6bd1ebafba1ee51c20a723f19c86c10c41c8eea1a"
+    },
+    {
+      "path": "Content/OpeningLobby/UpperVoid01/M_UpperVoid_LightTransmission.uasset",
+      "bytes": 11843,
+      "sha256": "45aa97a5d26d10561411fc23d8c4a5f9d62217910a5f2a67dae945a476d684da"
+    }
+  ],
+  "current_editable_source": "Assets/Source/OpeningLobby/UpperVoid01/HeightCorrection03/",
+  "entries_verified": 132,
+  "acceptance_scope": [
+    "High-zone darkness beginning near the owner yellow section mark, concealing the main ceiling",
+    "Readable lower side-aisle ceilings and soffits",
+    "Current appearance of central-column disappearance including the disclosed close-view residual"
+  ],
+  "residual_disposition": {
+    "id": "HC-R1",
+    "status": "CLOSED_BY_OWNER_ACCEPTANCE_WITH_RECORDED_RESIDUAL",
+    "technical_correction_claimed": false,
+    "finding": "Close upward views can still suggest paired column ends. Earlier independent FAIL/open findings remain historical evidence; owner acceptance supersedes the requirement to continue correcting this accepted result."
+  },
+  "review_history": [
+    "Saved/OpeningLobby/UpperVoid01/HeightCorrection01/Review01",
+    "Saved/OpeningLobby/UpperVoid01/HeightCorrection03/Review02"
+  ],
+  "final_review": "Saved/OpeningLobby/UpperVoid01/HeightCorrection04/Review03",
+  "final_review_note": "Already-running bounded review is completing separately. Its technical/visual findings are preserved and do not override this owner acceptance.",
+  "not_accepted": [
+    "The rejected HeightCorrection04 spatial-field trial",
+    "Deferred glass work or optics",
+    "Unrelated architecture, dressing or whole-lobby completion"
+  ],
+  "next_task_authorized": false,
+  "preservation": "Keep accepted live atmosphere bytes, all107bindings, original surface/source bytes, owner geometry/edits, glass/support, gameplay and exact history."
+}

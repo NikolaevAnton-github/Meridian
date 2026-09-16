@@ -9,10 +9,28 @@
   Use Astra for difficult tasks and scripts for repeatable operations.
 - Limit context, concurrent agents and heavy workloads.
   Allow only one agent to change the state of each open editor.
-- Communicate with the user in Russian; write all project content in English,
-  including documentation, code comments, names and commit messages.
+- Use Russian in the owner's direct chat only. Write all project content and
+  internal Multica progress/discussions/reports in English, including
+  documentation, code comments, names and commit messages.
 - The owner selected Multica as the default route for project implementation.
   Direct chat handles requirements, dispatch, acceptance and administration.
+  The controller stays active through dispatched execution, handoff review and
+  bounded corrections to a verified result or a concrete owner decision gate.
+  Ending the direct turn immediately after background dispatch is not completion.
+- Lobby production requires explicit owner approval of a named concept-art
+  version before any renewed 3D layout, blockout, architecture or modular model
+  work. The owner explicitly approved `LobbyArt-Review02` on 2026-09-13,
+  authorizing the separate [layout revision](Tasks/OpeningLobbyLayout02.md).
+  The current Stage 1 layout remains rejected. See the
+  [concept-art task](Tasks/OpeningLobbyConceptArt.md) for the approved art scope.
+- The owner subsequently rejected MSQ-9/Layout02 for insufficient architectural
+  scale and requires at least twice its scale with clear monumentality. MSQ-10
+  completed [scale drawings](OpeningLobbyScaleReview.md), owner-approved on
+  2026-09-14. MSQ-11 implements the separate Layout03 neutral blockout.
+  [Visual acceptance](VisualAcceptance.md) now requires a dimensioned package,
+  an independent visual review and explicit owner approval. Dedicated Multica
+  Spatial Designer and Visual Reviewer profiles use Astra/high/default; existing
+  profiles and user-level Codex settings are unchanged. Runtime concurrency stays one.
 
 ## Stage 1: Codex and Unreal
 
@@ -209,12 +227,120 @@ the registry, and large source files and outputs in files/Git LFS.
    parent MSQ-4. MSQ-5 passed technical acceptance: the saved on-foot prototype
    supports the full entrance/elevator route, side paths and return, with verified
    collision, gravity and mouse look. See [Stage 1 handoff](OpeningLobbyStage1.md).
-   MSQ-6 (architecture and materials) and MSQ-7 (atmosphere and acceptance) remain
-   in backlog pending the owner's Stage 1 layout and movement review.
+   The owner clarified on 2026-09-13 that the current layout is not approved;
+   the technical acceptance and its evidence remain historical results.
+   The owner subsequently explicitly approved `LobbyArt-Review02`: both
+   OwnerReferences01 images and the Review02 entrance security supplement.
+   The [concept-art task](Tasks/OpeningLobbyConceptArt.md) has therefore met its
+   owner approval gate. MSQ-9 implemented the separate
+   [lobby layout revision](Tasks/OpeningLobbyLayout02.md), preserving the
+   rejected Stage 1 prototype and its historical verification evidence.
+   [Layout02](OpeningLobbyLayout02.md) passed controller technical review but
+   was rejected by the owner for insufficient architectural scale. MSQ-9 is
+   initially returned to backlog, unassigned. After the replacement scale was
+   accepted, MSQ-9 was cancelled as superseded; its assets/evidence are preserved.
+   MSQ-10 completed the
+   [dimensioned scale package](OpeningLobbyScaleReview.md); independent visual
+   review passed after a bounded label correction. On 2026-09-14 the owner
+   explicitly approved the complete identified package and authorized proceeding
+   to the [Layout03 neutral blockout](Tasks/OpeningLobbyLayout03.md).
+   MSQ-11/Correction01 passed technical and independent visual review; the owner
+   explicitly accepted its in-game scale on 2026-09-14, deferred detail assessment
+   and authorized continuing. See the [scoped decision](Approvals/LobbyLayout03-Scale01.json).
+   MSQ-6 now follows [Architecture01](Tasks/OpeningLobbyArchitecture01.md) with
+   accepted scale preserved. Its [controller review](OpeningLobbyArchitecture01Review.md)
+   records ten completed execution/review runs and Review04's open fixed-glazing
+   criterion. The owner's later rejection concerns overall architectural quality,
+   beyond fixed glazing. MSQ-12 now develops two dimensioned entrance/colonnade
+   alternatives under [ArchitectureRework01](Tasks/OpeningLobbyArchitectureRework01.md),
+   followed by an independent MSQ-13 review and named owner selection before 3D.
+   MSQ-6 remains incomplete and unassigned; detail acceptance has not been granted.
+   MSQ-7 (atmosphere and final acceptance) remains backlog pending architecture/material
+   review and the owner's detail decision.
    The owner's [game direction](Design/GameBrief.md) and
    [story foundation](Design/StoryCanon.md) are recorded in English.
 7. Use 10–15 real tasks to measure first-pass acceptance, rework, time and
    available subscription usage metrics; use the results to tune model selection.
+
+## Architectural specialization, 2026-09-14
+
+The architectural recovery introduces three project-owned skills under
+`.agents/skills/`, imported and assigned in the existing Multica installation:
+
+- Spatial Designer: `environment-reference-analysis` and
+  `environment-architecture-production`.
+- Environment Artist: `environment-architecture-production`.
+- Visual Reviewer: `environment-architecture-review`.
+
+These skills distinguish primary scale, secondary depth and tertiary detail;
+require actual image inspection, coherent dimensional handoff and independent
+whole-to-part judgement; and permit explicitly authorized creative development
+beyond weak proxy surfaces. Their presence does not establish artistic quality.
+MSQ-12/13 are the first live exercise, not an additional benchmark campaign.
+Both runs are complete. The [identified 2D package](OpeningLobbyArchitectureRework01.md)
+passed independent review, with A recommended. The owner subsequently selected
+A in direct chat; the [external decision](Approvals/LobbyArchitectureRework01-VariantA.json)
+binds the reviewed package. After executor clarification, the owner explicitly
+authorized max-effort production. MSQ-14 implemented the bounded neutral A assembly;
+fresh MSQ-15 visual and technical evidence review passed with no required correction.
+Both ran on Astra/max/standard. The [verified 3D handoff](OpeningLobbyArchitectureReworkA01Review.md)
+is ready for the owner walkthrough; 3D acceptance remains pending, MSQ-6 remains
+incomplete and MSQ-7 backlog. Task-local profiles returned to their prior settings.
+
+The installed model catalog confirmed Astra `max` at standard speed. It is a
+task-local setting for this design/review study, with matching native configuration;
+other roles are unchanged. Existing subscription authentication and single-task
+Multica concurrency remain. Native effort and usage evidence is recorded under
+`Saved/OpeningLobby/ArchitectureRework01/Controller/`, using the existing summarizer
+without adding reasoning to native output a second time.
+After the verified runs, the two profiles returned to their prior high-effort
+baseline while retaining specialized instructions and assigned skills.
+
+## Focused functional lobby revision, 2026-09-14
+
+After walking through ReworkA01, the owner gave positive feedback and requested
+four terminal colonnade enclosures with inverse hall/aisle door orientation,
+a two-lane entrance checkpoint and a larger inner elevator with an opaque upper
+wall for future branding. The remaining architecture and approved scale stay.
+The scoped feedback is recorded in
+`Docs/Approvals/LobbyArchitectureReworkA01-Walkthrough01.json`.
+
+MSQ-16 prepared `LobbyFunctional-Revision01/Candidate01` as five dimensioned 2D
+sheets. Fresh MSQ-17 independently passed visual and technical review with no
+required correction. Both ran on Astra/high/standard through the existing
+subscription and one-task Multica runtime. Actual images, common dimensions,
+route arithmetic and immutable fingerprints were checked. Task-local instructions
+were restored afterward; no run remains active. No 3D/editor mutation occurred.
+
+The [reviewed handoff](OpeningLobbyFunctionalRevision01.md) binds all 29 candidate
+entries and links the sheets, dimensions and verdict. The owner's next decision
+is named-package approval of new dimensions, the 11.2 m central-only checkpoint
+interpretation, closed terminal crossovers/adjacent-bay alternatives and blank
+sign reservation. MSQ-16 remains in review; MSQ-17 is done. Final look/atmosphere
+and overall milestone acceptance remain pending.
+
+## Owner-marked functional correction, 2026-09-14
+
+The owner rejected FunctionalRevision01's narrow-room interpretation and supplied
+yellow plan markup. MSQ-18 prepared LobbyFunctional-Revision02/Candidate01 with
+four full-depth corner rooms, entrance doors in transverse caps, inner doors
+facing the hall and four central columns reaching the 18 m ceiling. The prior
+terminal side-aisle bypass is closed. Old candidate/review bytes remain intact;
+MSQ-16 is cancelled as superseded, not recorded as owner-approved.
+
+Fresh MSQ-19 independently passed visual and technical review with no required
+correction. Both design and review used Astra/high/standard and assigned skills,
+existing subscription authentication and single-task concurrency. The prior
+drawing/occlusion/verification pipeline was reused. Final verification covers
+35 frozen entries, 256 checks, 15 analytic routes and 377 protected original files.
+Profiles were restored; no run remains active. No editor or 3D mutation occurred.
+
+See [the exact five-sheet handoff](OpeningLobbyFunctionalRevision02.md). MSQ-18
+remains in review and MSQ-19 is done. Owner approval is pending for the proposed
+room/door dimensions, four 2.4 m square columns at X +/-12.6 / Y +/-2.4, their
+visual density, roof joints and retained checkpoint/elevator dimensions. The
+new 2.4 m axial and 2.0 m lateral passages are exposed on the drawings; analytic
+clearance is not runtime acceptance. Final materials and atmosphere remain later work.
 
 ## Documentation
 

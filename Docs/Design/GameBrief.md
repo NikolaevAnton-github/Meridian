@@ -25,17 +25,46 @@ prototype has been committed.
 
 ## First owner-visible milestone
 
-An explorable skyscraper entrance lobby inspired by the lobby in The Matrix
-(1999). The owner should be able to start Play in Unreal, move on foot, look
+An explorable skyscraper entrance lobby closely matching the lobby in The Matrix
+(1999). The owner selected the supplied
+[OwnerReferences01 images](../../Assets/Concepts/OpeningLobby/OwnerReferences01/README.md)
+as the visual basis, superseding the initial A/B/C studies. The owner should be
+able to start Play in Unreal, move on foot, look
 around at first-person height, and judge scale and atmosphere.
 
-The immediate deliverable is the lobby walkthrough. Combat, abilities, enemy
-body damage, live environmental destruction, squad-death staging, cinematic
-arrival, surveillance exposition and a complete opening mission are later work.
+The owner explicitly approved `LobbyArt-Review02` on 2026-09-13: the supplied
+reference pair and the [Review02 entrance security supplement](../../Assets/Concepts/OpeningLobby/Review02/README.md).
+The [lobby art task](../Tasks/OpeningLobbyConceptArt.md) has met its owner approval
+gate, authorizing the separate [layout revision](../Tasks/OpeningLobbyLayout02.md).
+The earlier orientation confirmation established that the source pair shows
+opposite ends of one hall; the subsequent explicit approval accepts the identified
+art package. Off-camera connections and the small inner door's function remain
+unresolved. The owner subsequently rejected MSQ-9/Layout02's
+architectural scale and requires a monumental space at least twice as large.
+The [dimensioned scale package](../OpeningLobbyScaleReview.md) passed independent
+review and received explicit owner approval on 2026-09-14, including exact
+dimensions and human-use exceptions. It authorizes the separate
+[Layout03 neutral blockout](../Tasks/OpeningLobbyLayout03.md);
+LobbyArt-Review02 remains the visual basis. After technical and independent
+visual review of Layout03/Correction01, the owner explicitly accepted the
+in-game scale on 2026-09-14 and authorized continuing. Detail assessment is
+deferred; see the [scoped decision](../Approvals/LobbyLayout03-Scale01.json).
+
+The owner rejected the current Stage 1 layout. Its technical acceptance does
+not approve its layout or art direction; preserve that prototype and its evidence.
+MSQ-6 [architecture/material production](../Tasks/OpeningLobbyArchitecture01.md)
+is now authorized with the accepted scale preserved. MSQ-7 atmosphere work
+remains in backlog pending architecture/material review and owner detail acceptance.
+
+The first playable environment milestone remains the lobby walkthrough.
+Combat, abilities, enemy body damage, live environmental destruction,
+squad-death staging, cinematic arrival, surveillance exposition and a complete
+opening mission are later work.
 Static damage can establish the environment without committing to how the
 catastrophe or the protagonist's survival occurs.
 
-Build the space in sequential reviewable stages, with one writer per editor.
+Begin with concept art and dimensioned drawings with explicit owner approval, then build the space
+in sequential reviewable stages, with one writer per editor.
 Use the existing project, Multica and asset registry. Do not duplicate the
 Unreal project or introduce another orchestration system.
 

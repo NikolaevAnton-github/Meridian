@@ -1,0 +1,26 @@
+{
+  "record_id": "LobbyPainterMetal01-Acceptance01",
+  "date_local": "2026-09-15",
+  "source": "Owner direct chat, current materials accepted and complete batch requested",
+  "owner_message_english_translation": "The current materials are accepted. Do all the remaining ones together as a batch. I expect the lobby fully covered with materials.",
+  "decision": "Accept current Stone01, Floor01 and Metal01 material direction; authorize every remaining existing lobby material together, including broad stone/metal rollout, ceiling/soffit and glazing, with independent review and necessary bounded corrections. No separate family approval gates.",
+  "candidate": "LobbyPainter-Metal01/WorkerCandidate01",
+  "manifest": "Saved/OpeningLobby/PainterMetal01/Worker/manifest.json",
+  "manifest_sha256": "d056461ecf7bdaed92cb8ee463d6514c5b76218ef91fee3bdbf50c2c54b36035",
+  "entries_verified": 194,
+  "map": "/Game/Maps/L_OpeningLobby_PainterStone01",
+  "map_sha256": "abc72118717b8333a109fdeeaf1583485a3e7b35badced84204e9fcc130ebc92",
+  "painter_projects": [
+    {
+      "path": "Assets/Source/OpeningLobby/PainterMetal01/Metal.spp",
+      "sha256": "b22dbc14218056ca2bcd10edabcb430d40ec6925ade16e1f3bdc2815345ec12e"
+    }
+  ],
+  "independent_review": "MSQ-27/Review01",
+  "verdict": "Saved/OpeningLobby/PainterMetal01/Review01/verdict.json",
+  "verdict_sha256": "96e519395977e45c5cc6f93df5fef962805d90e63259930c74177d05628fd58b",
+  "preservation": "Accepted 17 material bindings and all existing accepted source/content bytes; current owner geometry, nonmaterial properties and exact history.",
+  "next_task": "Docs/Tasks/OpeningLobbyMaterialsComplete01.md",
+  "scope": "Complete material coverage on the existing lobby, in place. New material bindings and glazing optics are authorized. No new geometry or final atmosphere pass is inferred.",
+  "not_granted": "Advance acceptance of new batch bytes, final architectural detail, atmosphere or performance."
+}

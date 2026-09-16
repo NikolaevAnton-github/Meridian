@@ -1,0 +1,18 @@
+{
+  "version": "Fresh01",
+  "channel_contract": {
+    "BaseColor": "8-bit RGB sRGB reflectance, no baked lighting or AO",
+    "ORM": "8-bit RGB linear: occlusion 1, varying roughness, metallic; no geometry AO invented",
+    "Normal": "8-bit RGB DirectX tangent perturbations for the new world projection graph; tiny physical relief, no displacement",
+    "projection": "Centimetres per tile, same scale on XYZ faces; world position, independent of object UV/scale"
+  },
+  "roles": {
+    "Stone": {"seed": 9152201, "size": 2048, "projection_cm": 400, "method": "dense_mineral", "metallic": 0, "specular": 0.45},
+    "Wall": {"seed": 9152229, "size": 2048, "projection_cm": 530, "method": "dense_mineral", "metallic": 0, "specular": 0.43},
+    "Floor": {"seed": 9152273, "size": 4096, "projection_cm": 1600, "method": "branching_calcite", "metallic": 0, "specular": 0.5},
+    "Strip": {"seed": 9152311, "size": 2048, "projection_cm": 600, "method": "fine_black_aggregate", "metallic": 0, "specular": 0.5},
+    "Ceiling": {"seed": 9152347, "size": 1024, "projection_cm": 240, "method": "quiet_honed_finish", "metallic": 0, "specular": 0.34},
+    "Metal": {"seed": 9152393, "size": 1024, "projection_cm": 160, "method": "directional_machining", "metallic": 0.96, "specular": 0.5},
+    "Door": {"seed": 9152429, "size": 1024, "projection_cm": 200, "method": "directional_machining", "metallic": 1, "specular": 0.5}
+  }
+}

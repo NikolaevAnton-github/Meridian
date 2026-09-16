@@ -1,0 +1,31 @@
+{
+  "record_id": "LobbyPainterFloor01-Acceptance01",
+  "date_local": "2026-09-15",
+  "source": "Owner direct chat after viewing the current materials",
+  "owner_message_english_translation": "I have looked at the materials, they satisfy me; let us continue.",
+  "decision": "Accept the current Floor01 floor/black-strip material direction and continue the next bounded material family.",
+  "candidate": "LobbyPainter-Floor01/WorkerCandidate01",
+  "manifest": "Saved/OpeningLobby/PainterFloor01/Worker/manifest.json",
+  "manifest_sha256": "0b7a2c9733eabc304c60c47ffa64beed93da1d6d0a0c96d8324969de709f9fc1",
+  "entries_verified": 183,
+  "map": "/Game/Maps/L_OpeningLobby_PainterStone01",
+  "map_sha256": "5cc84cac736d24cfe0dedf4c4d1dd0413b3d07f081c9e82e5dd4ab2ca0ae9270",
+  "painter_projects": [
+    {
+      "path": "Assets/Source/OpeningLobby/PainterFloor01/Floor.spp",
+      "bytes": 27625660,
+      "sha256": "c316fb0efc36467d3147980326fbeefc24053305f6ec8ea7def7799f5910f9b0"
+    },
+    {
+      "path": "Assets/Source/OpeningLobby/PainterFloor01/Strip.spp",
+      "bytes": 14369386,
+      "sha256": "5cfde914cf26bd145fe6f53bf7c5fab62c72e1fb5e6a0d6fe2f9a57546939159"
+    }
+  ],
+  "independent_review": "MSQ-25/Review01",
+  "verdict": "Saved/OpeningLobby/PainterFloor01/Review01/verdict.json",
+  "verdict_sha256": "fc99aba2e4efbcdd3b832cb77bcaba8ab71cc206c4eb3ad60f1675a75f505df7",
+  "preservation": "Keep accepted stone and floor bytes and bindings, current owner geometry/edits and exact historical map archives.",
+  "next_task": "Docs/Tasks/OpeningLobbyPainterMetal01.md",
+  "not_granted": "New metal bytes, whole-lobby materials, final architectural detail, glazing, atmosphere or performance acceptance."
+}

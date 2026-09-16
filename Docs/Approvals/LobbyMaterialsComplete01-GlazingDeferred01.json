@@ -1,0 +1,23 @@
+{
+  "record_id": "LobbyMaterialsComplete01-GlazingDeferred01",
+  "date_local": "2026-09-15",
+  "source": "Owner direct chat after the complete-batch request and Correction03 progress",
+  "owner_message_english_translation": "Skip the glass for now; we will work on it separately later.",
+  "decision": "Defer further entrance glazing refinement and its visual acceptance. Complete and independently verify all remaining opaque lobby materials as the current batch. Retain the current saved glazing state without further tuning or rollback.",
+  "supersedes": "The requirement to close Review01 R1 and original criterion 6 before delivering the otherwise complete material batch.",
+  "current_work": "LobbyMaterials-Complete01/Correction03, MSQ-28",
+  "current_map": "/Game/Maps/L_OpeningLobby_PainterStone01",
+  "review_scope": {
+    "included": "Opaque material coverage, broad stone response and Review01 R2, accepted stone/floor/metal preservation, native Painter ceiling, full scene/source/history preservation, genuine captures and clean saved state.",
+    "glazing_visual_criterion_6": "DEFERRED_BY_OWNER",
+    "glazing_R1": "DEFERRED_BY_OWNER, not passed or corrected",
+    "whole_hall_criterion_2": "Assess opaque material palette, hierarchy and coherence; the explicitly deferred glazing appearance is recorded separately and cannot alone fail this narrowed criterion.",
+    "technical_preservation": "Current glass/support identities and safe saved state remain subject to read-only technical verification. No new glass diagnostics or production runs."
+  },
+  "not_granted": [
+    "Owner acceptance of current glazing",
+    "Final atmosphere acceptance",
+    "New architecture or exterior production",
+    "Automatic dispatch of the deferred glazing task"
+  ]
+}

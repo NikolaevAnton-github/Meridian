@@ -1,0 +1,23 @@
+{
+  "decision_id": "LobbyFunctionalRevision02-Production01",
+  "recorded_on": "2026-09-14",
+  "source": "Owner direct chat",
+  "owner_message_english_translation": "I approve the lobby revisions; start.",
+  "decision": "Approve the latest reviewed named drawing package and begin its bounded 3D implementation through Multica",
+  "candidate": "LobbyFunctional-Revision02/Candidate01",
+  "manifest": "Assets/Concepts/OpeningLobby/FunctionalRevision02/manifest.json",
+  "manifest_sha256": "440064e9a1df1180cec92cc3e43be78034b7de30a6e94ef94d0a9d0534b0ecd1",
+  "scope_basis": "The latest pending owner gate is the complete MSQ-18 package after fresh MSQ-19 review; this approval closes that gate, including carried-forward functions and dimensioned route/sightline changes.",
+  "approved_scope": [
+    "Four 10.2 x 6.4 m terminal rooms extend to the outer walls and close terminal side aisles, with the scheduled stepped top closure",
+    "Entrance service doors on transverse caps face the remaining corridors; inner doors face the hall",
+    "Four 2.4 x 2.4 x 18 m columns at X +/-12.6, Y +/-2.4, including 2.4 m axial passage, 2.0 m side gaps and depicted sightline density",
+    "Two 1.5 m checkpoint lanes on the central control line; terminal rooms close the old floor-level bypass",
+    "3.6 x 4.2 m inner elevator opening, 0.6 m reveal and opaque upper wall with blank future name/logo reservation",
+    "Preserve the 60 x 24 x 18 m hall scale and remaining ReworkA01 architecture"
+  ],
+  "three_d_authorized": true,
+  "implementation_task": "Docs/Tasks/OpeningLobbyFunctionalBuild01.md",
+  "not_granted": ["Acceptance of future 3D bytes", "Final materials or atmosphere", "Room/stair interiors", "Elevator cab/shaft or operation", "Branding design", "Full-hall detail production"],
+  "preservation": "Keep the approved drawing package and all historical candidates unchanged; this external record supersedes their historical pending-approval wording."
+}

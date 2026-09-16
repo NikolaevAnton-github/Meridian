@@ -1,0 +1,189 @@
+{
+  "schema": 1,
+  "candidate_id": "LobbyFunctional-Revision02/Candidate01",
+  "status": "pending_independent_review",
+  "base": "project root",
+  "scope": "Immutable 2D proposal only. Pending independent review and named-package owner approval; no 3D authorization.",
+  "manifest_exclusions": [
+    "manifest.json and manifest.sha256 (self-reference)",
+    "Worker transient browser profile, HTML wrappers and render logs",
+    "Worker freeze-verification.json (post-freeze read-only verification receipt)"
+  ],
+  "entries": [
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/01-plan-markup.png",
+      "bytes": 147645,
+      "sha256": "63558cecd814dbe50df521ec34d0fe573e6282ada7773bef49173cf8abae2f02"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/01-plan-markup.svg",
+      "bytes": 174730,
+      "sha256": "bc8bd9631da9ce8249e25d330d72ec9cc9a3e2ef970ce77d1eab6198b8eb4c9b"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/02-rooms-closure.png",
+      "bytes": 133036,
+      "sha256": "d08045ed8161f9944d9d4f3ac322bdfc27b64dfc570baed12cf0505d2706392c"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/02-rooms-closure.svg",
+      "bytes": 19472,
+      "sha256": "93e9e5e3c372a810a03b1e2184865cadefea39e8ec447baea01cc49c278fac1f"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/03-retained-functions.png",
+      "bytes": 133682,
+      "sha256": "3e3a2468da9f674c7fb89462965c4ea648d76ebdf28237b363978b16fe1addcd"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/03-retained-functions.svg",
+      "bytes": 10245,
+      "sha256": "ff07f7a17930b75354738a3f98fd67289139888aae1794b71cf8d66bd2d8f632"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/04-columns-passages.png",
+      "bytes": 119053,
+      "sha256": "64943262a1a448ba02fa130eccab023de72f93b1f2276d0aa6dc48bdd30c7c97"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/04-columns-passages.svg",
+      "bytes": 12613,
+      "sha256": "a42eb2d3d3b5bd06a4f15f5f09cee8dd8358f59d1d0fedbcfb12896ea03736d6"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/05-spatial-context.png",
+      "bytes": 231735,
+      "sha256": "b13550a67d7344b5d08e8c66fe8e7e419edd53c27bac37118478d218e4916911"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/05-spatial-context.svg",
+      "bytes": 482690,
+      "sha256": "c9887ef57d3b002715de6147f49b8b7665cd5a192a51f65be8e9afba495eb4fa"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/assemble.mjs",
+      "bytes": 550,
+      "sha256": "1f15c533be19eaf6b601f0a6dac3a6e4d7f769c5fd0355928e35bb2fc9d39d99"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/audit-text.mjs",
+      "bytes": 3596,
+      "sha256": "2cbcb1a5e6563e063b09bccafb9042646f1d2d1cf285ee675257f8cd0ba2d049"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/design.json",
+      "bytes": 14167,
+      "sha256": "8d81b6bc58770ebd2e5190b5da649f45f6563672a798f12c5f600ea9a9ce576f"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/drafting.mjs.txt",
+      "bytes": 12165,
+      "sha256": "6e6c6328596e5436c92f2477eb191392c5d2105e13b6dcd0c2012d61ae7f4e12"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/freeze.mjs",
+      "bytes": 3897,
+      "sha256": "df813e83f52df92021b265789fc24df374019241a3ab5fa41165b3c45825cb74"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/generate.mjs",
+      "bytes": 31407,
+      "sha256": "acf318409873c1303160519d6809b48dad38b037454f10a3a8e6afc2cb339ffe"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/geometry.mjs.txt",
+      "bytes": 2214,
+      "sha256": "92995952a3df69e65645c64c4518f6f9a7f8de0ddbee94c9a18ba3765f340079"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/input-provenance.json",
+      "bytes": 6589,
+      "sha256": "07016dafc1df46515f7305cfb7169026a17bdd25a1c85440362badb6397e36b7"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/occlusion.mjs.txt",
+      "bytes": 1716,
+      "sha256": "3edc01ff24a0eb1bb9f5ee64115ac0ab179143596eb2d54e1734564ade20be9c"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/OwnerMarkup01.png",
+      "bytes": 110220,
+      "sha256": "fedce738e8218f3a80c5f811b4d2cbab947b96c02d965f45e5355fab02880541"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/README.md",
+      "bytes": 13470,
+      "sha256": "2781d102bc5c4e5dd55bfcb889411f6decdb13a396d2e9fd85ae4533ae37eef7"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/render.mjs.txt",
+      "bytes": 1764,
+      "sha256": "95dff4d236b28aa38cefa8f55a9d429fe36c66e4b2a6f2fda2d4c35f8bd54915"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/retained-functions.mjs.txt",
+      "bytes": 1167,
+      "sha256": "10dda578d120167a7ed19da47d684b4fb3b3ef4ecdd0a5bc0a84a4e9ab5e7b88"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/sheets.mjs.txt",
+      "bytes": 12376,
+      "sha256": "79c980f59fdf7c13124bc77aa8bd413a8db283bdf019ceb792ef46a44724495b"
+    },
+    {
+      "path": "Assets/Concepts/OpeningLobby/FunctionalRevision02/verify.mjs",
+      "bytes": 12389,
+      "sha256": "d98fe7ff37946612eb3fbf3b2fda13fa96ed5fe6fb1b8fa198d8628fe37e0b4a"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision02/Worker/adapt-verification.mjs",
+      "bytes": 7371,
+      "sha256": "5720d3d67e031da754c7d4820f0c2100ae7782e896298976baa0a4957f1efa76"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision02/Worker/drawing-bounds.json",
+      "bytes": 18280,
+      "sha256": "52dd3f47d1eb241772b320f14fc320482341ebc410f8b83fc1e1c57a836487b0"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision02/Worker/finalize-docs.mjs",
+      "bytes": 1882,
+      "sha256": "123a1761b6c0d5e64fa594c64702a8e27b18a143e65a572e3647ef38c6f9255d"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision02/Worker/handoff.md",
+      "bytes": 1305,
+      "sha256": "72ab18dcba8ad76d04feacabb5ef3ed8e254cbddf3d42a8efd1ef0a6ee8e3cd9"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision02/Worker/prepare.mjs",
+      "bytes": 4207,
+      "sha256": "c72e2713254bbc4abee0ff1b99d2e7ece539bf7641ff79363cd1194f8db8f601"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision02/Worker/sheets.json",
+      "bytes": 406,
+      "sha256": "37c35ab1241cdc263491c4f5d50b69d64d80a7ddba3703519d2ec4934096c03c"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision02/Worker/text-audit.json",
+      "bytes": 697,
+      "sha256": "8085f315c091da67a8420de08fbd7f549d661c620c56384391385802522e982e"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision02/Worker/text-records.json",
+      "bytes": 26219,
+      "sha256": "25e6e122eba0f64e90bff30dab3053a455e1dfbe05941218cf5a51e88a45f9f4"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision02/Worker/verification.json",
+      "bytes": 44857,
+      "sha256": "5e44474c22d892590157fcfa0264604c835e43418cde3e64e0a96d4e8d4e2967"
+    },
+    {
+      "path": "Saved/OpeningLobby/FunctionalRevision02/Worker/visual-inspection.md",
+      "bytes": 2830,
+      "sha256": "7a1c4217eae9f7a2d9a65e4678e74e743bfbfb0a8d2f228a45760fdab8b14b73"
+    }
+  ]
+}

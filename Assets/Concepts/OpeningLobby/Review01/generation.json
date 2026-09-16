@@ -1,0 +1,52 @@
+{
+  "generated_at_utc": "2026-09-13T14:49:32.943262+00:00",
+  "task": "MSQ-8",
+  "round": "Review01",
+  "status": "superseded_by_owner_references",
+  "preparation_route": "Multica Codex worker, Astra medium, standard speed",
+  "image_route": "Controller-operated built-in image_gen; separate new-image call per prompt",
+  "image_model": null,
+  "model_note": "The tool did not expose an image-model identifier.",
+  "prompt_file": "prompts.json",
+  "prompts_sha256": "0e61871e0129a4e0b2f92ccce533cffa8abbbeedc0171c13feb76f6c00b8d1da",
+  "reference_attachment": false,
+  "paid_api_fallback_used": false,
+  "image_usage_note": "Built-in image generation did not return token or subscription-quota metrics.",
+  "images": [
+    {
+      "review_id": "Review01-A",
+      "title": "Compressed Stone Hall",
+      "file": "A.png",
+      "bytes": 2396535,
+      "width": 1672,
+      "height": 941,
+      "sha256": "8c4947f5d6162a512ae48462915a0b522d0c891d0a68b476f0b081a46158dcb1",
+      "prompt_id": "A",
+      "approved": false
+    },
+    {
+      "review_id": "Review01-B",
+      "title": "Layered Processional Hall",
+      "file": "B.png",
+      "bytes": 2297175,
+      "width": 1672,
+      "height": 941,
+      "sha256": "ff8c0320fcac5d7c906cb8921239f1333fad5f6f01dc34ca14500cf1fa39a7ed",
+      "prompt_id": "B",
+      "approved": false
+    },
+    {
+      "review_id": "Review01-C",
+      "title": "Civic-Scale Tower Vestibule",
+      "file": "C.png",
+      "bytes": 2352764,
+      "width": 1672,
+      "height": 941,
+      "sha256": "e824431f4dd3278b629044fca411972082c3976947f61f9d8e5580206998a35a",
+      "prompt_id": "C",
+      "approved": false
+    }
+  ],
+  "owner_approval": null,
+  "superseded_by": "OwnerReferences01"
+}

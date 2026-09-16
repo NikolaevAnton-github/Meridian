@@ -1,0 +1,17 @@
+{
+  "record_id": "LobbyFunctionalBuild01-OwnerEdit01",
+  "observed_at_utc": "2026-09-14T21:00:49.713612+00:00",
+  "source": "Owner direct chat after controller reported the map hash change",
+  "owner_message_english_translation": "I made that edit.",
+  "decision": "Preserve the owner-edited current map. Do not restore or overwrite it with the reviewed worker map.",
+  "map": "Content/Maps/L_OpeningLobby_FunctionalBuild01.umap",
+  "observed_sha256": "46972ef30ef07f5a5aaa8cad0f8c026302c1269f1b5e08828e6f87795d168d31",
+  "reviewed_candidate": "LobbyFunctional-Build01/WorkerCandidate01",
+  "reviewed_map_sha256": "9990d2ca10a62a32fcb7d7e38fb324e84d6f52e406601b74ce9689c6b6d08894",
+  "reviewed_manifest_sha256": "63b7d7030310d948d64efbe453b4016edb41e62b8987154da257da5f1380654f",
+  "reviewed_archive": "Saved/OpeningLobby/FunctionalBuild01/Controller/WorkerCandidate01.zip",
+  "reviewed_archive_sha256": "b4eea02a7bdd7785548d6c0bd930d2279a96c76b4c0315dc57d19da2c4f2b48b",
+  "review_scope": "MSQ-21 PASS applies to the worker version before the owner edit, not to the subsequently edited map bytes.",
+  "acceptance_scope": "Confirmation of edit authorship does not establish final 3D or atmosphere acceptance.",
+  "observation_scope": "The observed hash is a snapshot, not a freeze; the owner may continue editing."
+}
