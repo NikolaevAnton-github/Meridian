@@ -1,0 +1,200 @@
+{
+  "manifest_id": "MSQ54-Datum16MetaHumanTrial01-Worker01",
+  "date": "2026-09-17",
+  "state": "Experimental; no production or owner visual acceptance",
+  "files": [
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/.gitattributes",
+      "bytes": 42,
+      "sha256": "d6fd993d9b23e06d5f22d3d0e316b8a250f66a966958e7648e68119aaadcbeff"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Datum16_BodyOnly01.fbx",
+      "bytes": 812668,
+      "sha256": "af056915cec7e693aa5f6a79056e7e500fe1e73a3eba53cd53b9c99cd20ffe86"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Datum16Trial01.blend",
+      "bytes": 2932512,
+      "sha256": "87a8e2a10c5b85db6466405c443a36aedd2a6b637c09720313e675d8aea18ed8"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/input-settings.json",
+      "bytes": 2191,
+      "sha256": "2483ea51af7b1112dbecc2c1ab950b700bd4af7d350057fbf65da35e4245792f"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/provenance.json",
+      "bytes": 4286,
+      "sha256": "c35277ab1e0594c24198d3eb2fc19e23031ba5e0a06c2c59278c9e684db9679e"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/README.md",
+      "bytes": 2870,
+      "sha256": "fbc5acd0d177560436fcc803f6e56d5477c56acefd65bc1c364acc085a9d6726"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/MH_Datum16_Trial01_Body.dna",
+      "bytes": 4531945,
+      "sha256": "6008cb72c0b5245992617852c771e89a4a2d2184ea61c65c402dd513795fdb50"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/MH_Datum16_Trial01_Body.fbx",
+      "bytes": 2823168,
+      "sha256": "a280ec98dd9f5ccddc6d0d5631c42c25796f54bdc103c80b25eb667e585c4585"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/Datum16_APose02_Deformation.blend",
+      "bytes": 6179944,
+      "sha256": "5417057076fc78db87c67044c71c22b6e1321ce1df8994ba3fde6fed37ad26e4"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/Datum16_APose02_Inspection.blend",
+      "bytes": 6102774,
+      "sha256": "87770fb4ac3fe698f9d6306876627f81cf0c311d7fd22e21c0698885036fbd99"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/Datum16_APose03_Deformation.blend",
+      "bytes": 6187274,
+      "sha256": "1bee21493b87cf9d7c4d82a5db794f6a333a0bc5c69bf5c982c50841fa2375b7"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/Datum16_PosedDNA02_Aligned.blend",
+      "bytes": 12617580,
+      "sha256": "0d8014e7547e69dd31c219b5c0ac31d61bdb91bdf5b3a51e6ba26529a2d39a8a"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/Datum16_PosedDNA02_Inspection.blend",
+      "bytes": 12632930,
+      "sha256": "ba77facb461c59ce14e8282966891b86e0e88714a1c6b4af0865c6ada1438ff7"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/Datum16_Solve02_Inspection.blend",
+      "bytes": 6080200,
+      "sha256": "f6794eff111f83a6a610004ac5101fe40cc9ee22dc12ec188efd7583b6bfe499"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/Datum16_Solve02_Posed.dna",
+      "bytes": 7064419,
+      "sha256": "d501fc3c7e7c6a01f77ab732949147744ce8bb419b84b2266a30513e6f6c9a99"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/MH_Datum16_Trial01_Body.fbx",
+      "bytes": 2854976,
+      "sha256": "54758e4046488202d62b5c6745d3dd3108d5e6d7dcd122b2def4b7f6f74f1a7d"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/SK_Datum16_PosedDNA02.fbx",
+      "bytes": 9982768,
+      "sha256": "b95886e616869827baf6b78157f16b3cec59b3b6e40e11a021bfc2f11eb7d041"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MetaHumanTrial01/MH_Datum16_Trial01.uasset",
+      "bytes": 9831210,
+      "sha256": "b7415e630295cee952f7acf3bceff007a578dd78db616efe473543b5d7ec58ed"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MetaHumanTrial01/SM_Datum16_BodyOnly01.uasset",
+      "bytes": 898112,
+      "sha256": "a638f375a88dbf9cdf19959132b4f3574aa8199d50b8e7b7780895aa6921be46"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/DNA/MH_Datum16_Trial01_Body.uasset",
+      "bytes": 4534126,
+      "sha256": "53b3b2de211bc29de9be248a2ccffb00e17a348bdd8fdca7a95a8b7930947a77"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/MH_Datum16_Trial01_Body.uasset",
+      "bytes": 11677401,
+      "sha256": "25f656c9c31b5f52240da62e41b569343795fb40047e26c0a9604e46b494663a"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02.uasset",
+      "bytes": 80181847,
+      "sha256": "8ff2db20766d975c874710eb83e624cd93c897692d87626b61f78416b7af9114"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02_PhysicsAsset.uasset",
+      "bytes": 70226,
+      "sha256": "3d66c99aa25ee9c8e2eef6cffdba312fb747e64b70906e323c007c59ba9e3a8a"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02_Skeleton.uasset",
+      "bytes": 79437,
+      "sha256": "318054ff04b8acadc3adbbe029e43cd9241351b4f53f93baf63a76cd67fed29f"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/Datum16_Solve02_Posed.uasset",
+      "bytes": 7082203,
+      "sha256": "10abaa2da9aba2f268d7c76ebe6ee7c3617946af5c83215576202f411425fc10"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/MH_Datum16_Trial01_Body.uasset",
+      "bytes": 11598963,
+      "sha256": "7cc296d7058e23803dc66ace33df7a482296f24ae63b797515ca69ceed306367"
+    },
+    {
+      "path": "Docs/PlayerCharacter01MetaHumanTrial01.md",
+      "bytes": 16313,
+      "sha256": "e1460d056fde47e71d197e5a33e9d02f2e709680b178397599282fd82aae6145"
+    },
+    {
+      "path": "MeridianSquad.uproject",
+      "bytes": 621,
+      "sha256": "286c5426f2df5471e2f40a6deb07d97fce62d7a4d98430dbe27acac068f01d25"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_blender.py",
+      "bytes": 4655,
+      "sha256": "c29513c0d453123335f3a97b3c5c9d9acbe5e5eb59052cb2e2d7eb3072d61389"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_bootstrap.py",
+      "bytes": 278,
+      "sha256": "71b32dd94840d280e5848df4a58f6c7bf0a13f22edac7ab5fefadeb761827987"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_compare.py",
+      "bytes": 5563,
+      "sha256": "7633cbfdcd2a6f9935e2433fc9991d216bdcb5b611ff5e845a3f3dd4ff13e031"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_deform.py",
+      "bytes": 7009,
+      "sha256": "a52f79705f2209a8d40ce4eff524e0f4cc7ac1b5ead2987e22f5625e8ac2211e"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_evidence.py",
+      "bytes": 11958,
+      "sha256": "339d956ecd3d9aedf8fbf84a9b0bab7fd96c613962da4b113913a4e66d9f20b2"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_handviews.py",
+      "bytes": 3287,
+      "sha256": "0f6f5c5ea1ab8478ea98b1835822323725fa9c9e7c3c5c970740ced38e2a68dc"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_host.py",
+      "bytes": 5548,
+      "sha256": "770858e0981c89561bf4efbe896cab2490db079db6bf802c8f58c4360a8e510c"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_tools.py",
+      "bytes": 797,
+      "sha256": "beabb1dcabeaa49bae4866f9a5cb28a90f2cc7e72d061bbc7c018209873ee9ce"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_unreal.py",
+      "bytes": 24104,
+      "sha256": "d85f82d266576852bc5fe3332c38bcbb8beb646d7f219fa765707872d52e71d0"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_uvcheck.py",
+      "bytes": 1358,
+      "sha256": "7f0bd01f186962deeb419e709c2a60cb3f7b9a567770ae482a21f2fdcf499a1f"
+    }
+  ],
+  "binary_files": 22,
+  "external_evidence": "Saved/PlayerCharacter01/MetaHumanTrial01/Worker/",
+  "exclusions": "Generated logs, image evidence and caches remain under Saved; immutable manifest excludes itself."
+}

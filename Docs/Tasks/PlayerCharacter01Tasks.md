@@ -1,5 +1,23 @@
 # PlayerCharacter01: Multica task family
 
+Latest execution scope, 2026-09-17: the owner authorized
+[Datum16MetaHumanTrial01](PlayerCharacter01MetaHumanTrial01.md) within MSQ-54,
+with Astra/max/standard. The existing selection and rig-contract gates are met.
+This bounded live conformation experiment supersedes historical research-only
+dispatch restrictions below; it does not close the full prototype or dispatch
+successor gameplay/finish tasks.
+
+The bounded trial is now [complete and controller-reviewed](../PlayerCharacter01MetaHumanTrial01Review.md).
+It recommends retaining the original garment and exact 161-bone contract; the
+MetaHuman fit remains experimental reference. MSQ-54 stays incomplete and
+unassigned after closure, with no successor dispatch.
+
+## Historical task updates
+
+The updates below preserve earlier instructions and handoffs. Their "current",
+"latest", pending-selection and await-export statements describe those earlier
+steps; the completed trial and current gates above supersede them.
+
 Current owner direction, 2026-09-17: **Concept02 / Candidate01, 16 / Datum** is
 selected, satisfying MSQ-53's owner-selection gate; **MSQ-52 execution is
 authorized**. See the [exact record](../Approvals/PlayerCharacter01-Datum16Selection01.json)
@@ -78,6 +96,8 @@ the prior scope and the source of continuing concealment/review constraints.
 Scope and technical proposal: [PlayerCharacter01 plan](PlayerCharacter01Plan.md).
 Multica remains the source of task state and execution history. This document
 records the initial task structure, not a second task database.
+
+## Task structure
 
 Parent: [MSQ-50 - Original full-body first-person protagonist and one rifle](http://127.0.0.1:3000/meridiansquad/issues/01a0aa6c-3471-7d3a-a364-f6b69a55969a).
 

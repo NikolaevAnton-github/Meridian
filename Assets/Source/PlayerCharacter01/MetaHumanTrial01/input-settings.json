@@ -1,0 +1,87 @@
+{
+  "blender": "5.2.1 LTS",
+  "original": "Assets\\Source\\PlayerCharacter01\\AI3D\\Tripo\\Datum16UndersuitInput01\\OwnerExports\\tactical+jumpsuit+3d+model.fbx",
+  "initial_bounds_m": {
+    "min": [
+      -0.499755859375,
+      -0.09692385792732239,
+      3.299347017815535e-09
+    ],
+    "max": [
+      0.499755859375,
+      0.09692391008138657,
+      0.94482421875
+    ],
+    "size": [
+      0.99951171875,
+      0.19384776800870895,
+      0.944824215450653
+    ]
+  },
+  "uniform_scale": 1.910872912099167,
+  "experimental_full_bounds_m": {
+    "min": [
+      -0.9549699425697327,
+      -0.18520916998386383,
+      6.304632815812283e-09
+    ],
+    "max": [
+      0.9549699425697327,
+      0.1852092742919922,
+      1.8054389953613281
+    ],
+    "size": [
+      1.9099398851394653,
+      0.370418444275856,
+      1.8054389890566953
+    ]
+  },
+  "body_bounds_m": {
+    "min": [
+      -0.9549699425697327,
+      -0.18520916998386383,
+      6.304632815812283e-09
+    ],
+    "max": [
+      0.9549699425697327,
+      0.1852092742919922,
+      1.6104329824447632
+    ],
+    "size": [
+      1.9099398851394653,
+      0.370418444275856,
+      1.6104329761401304
+    ]
+  },
+  "source_vertices": 22109,
+  "body_vertices": 20574,
+  "hood_vertices_excluded": 1535,
+  "topology_repair": "None; first solve retains garment defects and islands.",
+  "axes": "Blender +Z up, front -Y; source X positive is character-left.",
+  "scale_authority": "Temporary 180.5439 cm diagnostic source-mesh height from MSQ52. Not approved stature.",
+  "preserved_gameplay": {
+    "camera_cm": 170,
+    "capsule_radius_cm": 34,
+    "capsule_half_height_cm": 88,
+    "fov_deg": 90
+  },
+  "export": {
+    "use_selection": true,
+    "object_types": [
+      "MESH"
+    ],
+    "use_mesh_modifiers": true,
+    "add_leaf_bones": false,
+    "bake_anim": false,
+    "axis_forward": "-Y",
+    "axis_up": "Z",
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_NONE",
+    "global_scale": 1.0
+  },
+  "native_layers": [
+    "Original_Untouched_DeclaredUnits",
+    "Datum16_Full_Experimental180_54cm",
+    "Datum16_BodyOnly01"
+  ]
+}

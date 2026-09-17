@@ -1,0 +1,90 @@
+{
+  "candidate_id": "MSQ54-Datum16MetaHumanTrial01-Worker01",
+  "date": "2026-09-17",
+  "status": "Experimental technical result; not production or visual acceptance",
+  "source": {
+    "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/tactical+jumpsuit+3d+model.fbx",
+    "sha256": "fc6340b6f36c529f15dac48ef06dca37aa72a07134b873e9e564f0addc6fa196",
+    "retention": "Untouched original and a separate native Blender layer retained"
+  },
+  "rig_contract": {
+    "id": "MSQ52-RigContract01",
+    "path": "Assets/Source/PlayerCharacter01/AnimationAudit01/rig-contract.json",
+    "sha256": "ba557918290e6e3be0ce1836afac19ff005e4b45fedd203beca43a2a2837e749",
+    "bone_count": 161,
+    "modified": false
+  },
+  "tools": {
+    "unreal": "5.8.1-56057345+++UE5+Release-5.8",
+    "blender": "5.2.1 LTS",
+    "unreal_python": "3.11.8",
+    "transport": "Official Epic MCP via existing Scripts/OpeningLobby/functionalbuild01_client.py",
+    "animation_helpers": "Scripts/PlayerCharacter01/animation_audit01_unreal.py and animation_audit01_client.py, unchanged"
+  },
+  "input": {
+    "settings": "input-settings.json",
+    "uniform_scale": 1.910872912099167,
+    "full_source_diagnostic_height_cm": 180.5439,
+    "approved_stature": false,
+    "hood_island_excluded_vertices": 1535,
+    "body_vertices": 20574,
+    "body_triangles": 40897,
+    "other_topology_repair": "None",
+    "camera_capsule_fov_modified": false
+  },
+  "successful_solve": {
+    "id": "Solve02",
+    "target_parts_type": "BODY_ONLY",
+    "pipeline_name": "body_only",
+    "auto_solve": true,
+    "estimate_body_joints_from_mesh": false,
+    "manual_keypoints": {},
+    "image_size": [1024, 1024],
+    "camera_location_cm": [0, 300, 100],
+    "camera_rotation_pitch_yaw_roll": [0, -90, 0],
+    "camera_fov_deg": 45,
+    "camera_aspect_ratio": 1,
+    "scheduling": "One Slate post-tick after the MCP callback; Creator asset editor open",
+    "seconds": 41.079,
+    "full_settings_evidence": "Saved/PlayerCharacter01/MetaHumanTrial01/Worker/solve02-start.json"
+  },
+  "exports": {
+    "source_pose_dna": "Solve02/SourcePose/Datum16_Solve02_Posed.dna",
+    "source_pose_exported_before_commit": true,
+    "apose_commit_api": "MetaHumanCharacterEditorSubsystem.commit_posed_state_as_a_pose",
+    "apose_body_dna": "Solve02/APose/MH_Datum16_Trial01_Body.dna",
+    "usable_apose_fbx": "Solve02/APose/MH_Datum16_Trial01_Body.fbx",
+    "fbx_exporter": "SkeletalMeshExporterFBX",
+    "fbx_options": {"level_of_detail": false, "export_morph_targets": false, "ascii": false},
+    "unreal_bones": 342,
+    "fbx_armature_bones": 341,
+    "fbx_root_representation": "root is the armature object",
+    "uv_tile": 1002,
+    "maximum_skin_influences": 12,
+    "full_character_assembly": "Not performed",
+    "face_rig": "Not requested; default head is an unapproved scaffold"
+  },
+  "rejected_or_diagnostic_outputs": {
+    "initial_geometry_export": "SourcePose/MH_Datum16_Trial01_Body.fbx is a template A-pose, not the fitted surface",
+    "posed_dna_import": "Default DNAConfigHolder produced Y-up mesh and Z-up bones; retained raw",
+    "aligned_posed_dna": "Mesh-only +90 degrees X for surface comparisons; not a verified production rig",
+    "deformation02": "Rendered poses reset during animation reevaluation; use Deformation03",
+    "early_hand_views": "Retained visibility/camera failures; use Deformation03/Hands04"
+  },
+  "playback": {
+    "candidate": "/Game/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/MH_Datum16_Trial01_Body",
+    "cases": ["TP:Reload", "TP:Reload_Aimed", "TP:Reload_Empty", "TP:Reload_Empty_Aimed"],
+    "source_timing_and_additive_bases_preserved": true,
+    "weapon_attachment": "Hidden original contract rig supplies ik_hand_gun missing from candidate",
+    "interpretation": "Native candidate surface diagnostic; not accepted retargeting or production integration"
+  },
+  "preservation": {
+    "baseline_files": 619,
+    "unchanged": 618,
+    "only_baseline_change": "MeridianSquad.uproject: enable installed MetaHumanCharacter for Editor",
+    "default_engine_ini_preserved": true,
+    "lobby_preserved": true,
+    "editor_final_state": "Closed; no dirty map or content before shutdown",
+    "no_issue_profile_registry_or_commit_writes": true
+  }
+}

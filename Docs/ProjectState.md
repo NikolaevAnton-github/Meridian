@@ -57,14 +57,31 @@ pose need work before binding to the exact rig contract. No UVs or skeleton
 are present. The original export is preserved; static intake establishes no
 deformation, grip or original-model round trip. No fitted body or new controller
 3D generation was made by the input-art delivery or returned-source inspection.
-Subsequent owner-requested [MetaHuman video study](Research/PlayerCharacter01AI3D/MetaHumanVideoStudy01.md)
-recommends a bounded 5.8 From Custom Mesh trial on the preserved body derivative
-before extensive manual retopology. Creator/Core Data and the owner-installed
-Markerless plugin are present; project loading and conversion remain untested.
+The earlier owner-requested [MetaHuman video study](Research/PlayerCharacter01AI3D/MetaHumanVideoStudy01.md)
+recommended a bounded 5.8 From Custom Mesh trial on the preserved body derivative
+before extensive manual retopology. At that research handoff, Creator/Core Data
+and the owner-installed Markerless plugin were present; project loading and
+conversion were still untested.
 Creator fits geometry; Markerless solves motion from footage. Neither the
 161-bone rig contract nor the selected appearance has changed. The
 [research instruction](Approvals/PlayerCharacter01-MetaHumanStudy01.json) permits
-Blender tool-choice discretion. No conversion or production run was dispatched.
+Blender tool-choice discretion. That research step dispatched no conversion or
+production run; the subsequent trial below supersedes that historical state.
+The owner subsequently authorized the next bounded **Datum16MetaHumanTrial01**
+experiment under MSQ-54 with **Astra/max/standard**; see the
+[execution scope](Tasks/PlayerCharacter01MetaHumanTrial01.md) and
+[exact instruction](Approvals/PlayerCharacter01-MetaHumanTrial01.json).
+The trial is now complete and [controller-reviewed](PlayerCharacter01MetaHumanTrial01Review.md);
+see the [measured handoff](PlayerCharacter01MetaHumanTrial01.md).
+Live body-only conformation, separate posed DNA/A-pose exports, finger/deformation
+probes and four TP reloads succeeded diagnostically. Garment/boot construction
+was lost, the candidate has a different 342-bone rig, and right-wrist offsets
+were 3.70–4.99 cm against the source recordings. Keep the original garment and
+MSQ52-RigContract01; use the MetaHuman result only as a shape/skinning reference.
+The full production round trip, FP fit and final assembly remain unverified.
+This supersedes the earlier research-only no-dispatch restriction for this trial.
+No active worker remains, saved execution settings are restored, and no successor
+was dispatched. The production rig and selected appearance remain unchanged.
 The owner alone evaluates this concept batch; no independent concept reviewer or
 MSQ-53 expert run. Later MSQ-60 integrated review remains required.
 
@@ -84,7 +101,9 @@ is unverified. Galleries, exact prompts and manifests remain under
 pending-selection text; immutable package manifests remain unchanged.
 Concept-art tasks used Astra/max/standard and owner-only evaluation; their saved
 profiles/native arguments were restored. Later implementation retains the recorded
-Astra/high/standard baseline unless a new scoped instruction changes it.
+Astra/high/standard baseline unless a new scoped instruction changes it. The
+completed MetaHumanTrial01 run used the explicit Astra/max/standard override;
+the saved profile/native arguments were restored afterward.
 
 ### AI3D production sequence and tasks
 
@@ -95,10 +114,10 @@ task databases. The ordered production approach is:
 
 1. Use the selected Datum16 and completed MSQ52-RigContract01; reconcile the
    authoritative production views during MSQ-54.
-2. Inspect existing owner exports; establish one proportional master and production
-   skeleton. Evaluate the documented MetaHuman conformation option before extensive
-   manual retopology; preserve the existing rig contract until an alternative is
-   validated. Perform only the smallest justified missing AI source trial.
+2. Use the completed MetaHuman trial's recommendation: retain the original garment
+   and exact rig contract, using the experimental fit as a shape/skinning reference.
+   Repair the owner export and establish one proportional master for production;
+   perform only the smallest justified missing AI source trial.
 3. Fit separate armor/components to that master in Blender; resolve joint topology,
    weights and source-pose deformation before the original prototype handoff.
 4. Test first-person presentation, body movement and hand/rifle/reload interaction
@@ -128,7 +147,7 @@ Last verified Multica state, 2026-09-17:
 | MSQ-51 | `done`; concept deliveries preserved. |
 | MSQ-53 | `done`; owner selected Concept02 / Candidate01, 16 / Datum. No expert run. |
 | MSQ-52 | `done`; controller-accepted animation audit and MSQ52-RigContract01. 186 source-identical packages, 82 sequences, 19 representative playback cases; later original-rig/gameplay gates remain. |
-| MSQ-54 | Shoulder input/intake, Datum16UndersuitInput01 and returned Datum16BodyIntake01 inspection delivered. The body is a usable repair base; fitting, joint topology, rigging and motion probes remain outstanding. No active worker. The original body/deformation prototype remains incomplete. |
+| MSQ-54 | Datum16MetaHumanTrial01 complete and controller-reviewed: useful experimental fit, unsuitable visible garment/direct rig replacement. Retain original garment and 161-bone contract. No active worker; full original body/deformation prototype remains incomplete. |
 | MSQ-55 through MSQ-60 | `backlog`; presentation, movement, rifle, finish, integration and final review. |
 
 The [task synchronization audit](Tasks/PlayerCharacter01AI3DTaskAudit01.md) verified

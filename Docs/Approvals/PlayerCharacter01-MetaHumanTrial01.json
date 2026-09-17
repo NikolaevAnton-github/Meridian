@@ -1,0 +1,13 @@
+{
+  "record_id": "PlayerCharacter01-MetaHumanTrial01",
+  "date_local": "2026-09-17",
+  "task": "MSQ-54",
+  "source": "Owner direct chat",
+  "owner_message_original": "Давай следующую задачу по ГГ, вроде это эксперемнт с meta human, уровень максимальный для испольнителя нужен",
+  "owner_message_english_translation": "Let's do the next protagonist task, which I think is the MetaHuman experiment; the executor needs the maximum level.",
+  "authorized_scope": "Execute the next bounded MetaHuman From Custom Mesh trial on a preserved derivative of the returned Datum16 body within MSQ-54, following the completed MetaHumanVideoStudy01 recommendation.",
+  "executor": {"model": "gpt-6-astra", "reasoning": "max", "speed": "standard", "scope": "This experiment and required bounded corrections; restore the saved profile afterward."},
+  "task_specification": "Docs/Tasks/PlayerCharacter01MetaHumanTrial01.md",
+  "preservation": "Retain all owner sources, selected Datum16 appearance, exact MSQ52-RigContract01, existing owner edits and prior evidence. Experimental dimensions and alternate rigs are candidates, not approved production replacements.",
+  "boundary": "The experiment does not close the complete MSQ-54 prototype, authorize successor gameplay/finish tasks or grant final model acceptance. No new paid service, top-up or separately billed API."
+}
