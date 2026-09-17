@@ -1,0 +1,1012 @@
+{
+  "asset": "Datum16MeshUsability01",
+  "artifacts": [
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01.blend",
+      "role": "experimental_source",
+      "sha256": "144b840917ca7457f3e3d3f54245835d82af8cc57b44db8a6306f42923f42631",
+      "size_bytes": 9558520,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01.fbx",
+      "role": "experimental_source",
+      "sha256": "fc7968990840794938be16f770125d9b9aa0562ed5115680d4570acc886eed31",
+      "size_bytes": 2064924,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01_Deformation.blend",
+      "role": "experimental_source",
+      "sha256": "fd9684bf0265f8ea690830404ebe8a15d41f5772aa74f229d79cc0c77e876aea",
+      "size_bytes": 9611339,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02.blend",
+      "role": "experimental_source",
+      "sha256": "4b763d8c191b35f02877ad33b9c34eb1b044c3f25bac60466669d3fdd2e5d256",
+      "size_bytes": 9474756,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02.fbx",
+      "role": "experimental_source",
+      "sha256": "754a5ec9fc589464352f07cbb91f5ac06e7d38be6877143fd63ee0d06bd35349",
+      "size_bytes": 2015932,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02_Deformation.blend",
+      "role": "experimental_source",
+      "sha256": "bcec8949da1ce5313f8eaad2372b2f5b25f7a818431b2667f1ac6a1f085562b5",
+      "size_bytes": 9531140,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03.blend",
+      "role": "experimental_source",
+      "sha256": "2ebd3b97d55ea368d150f23dc2a1935d82c9064f5ffc84707bfd72dbc2cfe458",
+      "size_bytes": 9474732,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03.fbx",
+      "role": "experimental_source",
+      "sha256": "2a25731bb6db568a58ccfa329b15f734174a9a0990fc8f8cfdbc50770893b8ec",
+      "size_bytes": 2015868,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03_Deformation.blend",
+      "role": "experimental_source",
+      "sha256": "a6e711dae183446623202200c61e47bc19e2ccd05901deb358010f1ec8880846",
+      "size_bytes": 9527636,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04.blend",
+      "role": "experimental_source",
+      "sha256": "e8051b5a55c13b0e0ad9febffa56b6e651f799264a0f592f72dfadcf0ea23b4e",
+      "size_bytes": 9473315,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04.fbx",
+      "role": "experimental_source",
+      "sha256": "9ed6015f2139c3c8a73ba8d11dfab610f6084394574d887fb3e7c2b7ce0a2a2f",
+      "size_bytes": 2015740,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04_Deformation.blend",
+      "role": "experimental_source",
+      "sha256": "7e1dfe7ea1fde13367884aef3c5de73d976bc95fd576628dc9204a2b3b79ab25",
+      "size_bytes": 9526484,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04_DeformationFinal.blend",
+      "role": "experimental_source",
+      "sha256": "4b054f59e67c902382f2e6e2ee747143ebad680c3f88d8a39829018ffbe9b9aa",
+      "size_bytes": 9526992,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05.blend",
+      "role": "experimental_source",
+      "sha256": "dee72d3ebb08ff8787941808deab90f015ae817bcbbe56f7ad505ee5b1a7f182",
+      "size_bytes": 9473225,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05.fbx",
+      "role": "experimental_source",
+      "sha256": "fe9153b410986b2add7669f93a00b63824e5da4feaf675b9c77518e9208d3af0",
+      "size_bytes": 2015756,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05_DeformationFinal.blend",
+      "role": "experimental_source",
+      "sha256": "c0b8c700c02939241a9899163e823ede8dc67bee6e0e5a4f4cfbcd25fdb95721",
+      "size_bytes": 9528533,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Donor/MSQ52_Manny161.blend",
+      "role": "experimental_reference_donor",
+      "sha256": "17e34825bb056a27932364d7999af932e0a8f960a316e3671ef2074de32b1487",
+      "size_bytes": 4286890,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Donor/MSQ52_Manny161.fbx",
+      "role": "experimental_reference_donor",
+      "sha256": "811a619fff002bb6e89ac64d975ca72dbef161ab85bf1922dad55bbc2b5eec8e",
+      "size_bytes": 3225184,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/provenance.json",
+      "role": "experimental_source",
+      "sha256": "007c7cd6d5325faa49704d3a5ac0386923ddc2ff1ad260a25631cc6e77e71903",
+      "size_bytes": 2442,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/README.md",
+      "role": "experimental_source",
+      "sha256": "a479cf1f4a4e1aa21b1a9de903ea1b32c1ef1e5bf6bb5c1d79fdbc82dec963d8",
+      "size_bytes": 2451,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/Bind01.json",
+      "role": "experimental_source",
+      "sha256": "83da3a074fa9921bb75ac91558bf7c3a1fd8bbfd324bfbce06418bb3119e0bf2",
+      "size_bytes": 83586,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/Bind02.json",
+      "role": "experimental_source",
+      "sha256": "9329e5fed8449b701cecbf4218fb0b5fb19a82d80b56dfe2a29c7f1bea7a39ee",
+      "size_bytes": 165674,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/Bind03.json",
+      "role": "experimental_source",
+      "sha256": "5032d6a916c446371880ad8f32676dfa51498f76ec0bb057ad28227b9024f2a8",
+      "size_bytes": 165815,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/Bind04.json",
+      "role": "experimental_source",
+      "sha256": "be0d7676557a051084af658076c3ba28aac0d9bcd2e28f0c02581cd2e8505a50",
+      "size_bytes": 166841,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/Bind05.json",
+      "role": "experimental_source",
+      "sha256": "a9b6440c5110d6b7133e063d56c3dae9765f74b8e179504e0b65b006df134ce1",
+      "size_bytes": 166822,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/digit-summary-Bind05.json",
+      "role": "experimental_source",
+      "sha256": "ae071d0e51b081985a2ee78a9955dc0ebdd3b032184478fc6f1f226801831fca",
+      "size_bytes": 6628,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/import-Datum16_Bind05.json",
+      "role": "experimental_source",
+      "sha256": "a610e8dbe79314a336ea5ee38aa04c00ede7194f858452ff3522a907bfdeefea",
+      "size_bytes": 506,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/reload-summary-Bind05.json",
+      "role": "experimental_source",
+      "sha256": "e787f9916b209bab4813ac1d0ac5c8f0ae5cefde30bb6dfebac6c6b295ed3806",
+      "size_bytes": 2159,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/rig-comparison-Datum16_Bind05.json",
+      "role": "experimental_source",
+      "sha256": "e8935225c618da513f2c3b4953eb7014b3ce19b9b6da80d20d74c16e8324ed10",
+      "size_bytes": 58030,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/surface-verification-Bind05.json",
+      "role": "experimental_source",
+      "sha256": "397d850435e131aa53e2bd54f67cd55f99a29d77b54fd572e5c8e528705cd4e3",
+      "size_bytes": 10849,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01.uasset",
+      "role": "experimental_unreal_package",
+      "sha256": "ebc0513bf130205313f40bb70a681d9ef2a9111929ea2ec865aea89fb646a597",
+      "size_bytes": 7107247,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": "/Game/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01_Skeleton.uasset",
+      "role": "experimental_unreal_package",
+      "sha256": "63ab2c3e2ec1334ab47c45fbc66acd2aa95f6dc08b3430390283c573b1120a28",
+      "size_bytes": 42101,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": "/Game/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01_Skeleton"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04.uasset",
+      "role": "experimental_unreal_package",
+      "sha256": "42e654a1539f2060bb347eee8916207bc6b30cc50bc01e4a21605211b1907dd5",
+      "size_bytes": 6974604,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": "/Game/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04_Skeleton.uasset",
+      "role": "experimental_unreal_package",
+      "sha256": "d9ac287711c99cd4cb340e4caeabffa0a5435e5184cb451eb0cdbfb2e2e04c4b",
+      "size_bytes": 41995,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": "/Game/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04_Skeleton"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05.uasset",
+      "role": "experimental_unreal_package",
+      "sha256": "0b131c0fcf5d687f6d625416bcebc7ef37ea39a73271888e82d67f7399f3de95",
+      "size_bytes": 6974632,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": "/Game/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05_Skeleton.uasset",
+      "role": "experimental_unreal_package",
+      "sha256": "10bb0229a55ba2b3060d76a0c4b4ffe0f56a8fe4e97f8dd4c1f2e16b780cf883",
+      "size_bytes": 41994,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": "/Game/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05_Skeleton"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Donor/SKM_Manny.uasset",
+      "role": "experimental_reference_donor",
+      "sha256": "8c5ba225479531465fde03d5f7165f056ea7a223a18245d94a5581fcba68cb65",
+      "size_bytes": 28777759,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": "/Game/Development/PlayerCharacter01/MeshUsability01/Donor/SKM_Manny"
+    },
+    {
+      "path": "Docs/PlayerCharacter01MeshUsability01.md",
+      "role": "assessment_report",
+      "sha256": "18bfb6e7bf2679b06582f418f9ba30f4277354e3bd86afe0836d1ee9ba413ae3",
+      "size_bytes": 17933,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_bind.py",
+      "role": "assessment_script",
+      "sha256": "21a7396b1cddb1de102fdd0d929e8dabdbea654e931e66ae837dd7aa82e61f00",
+      "size_bytes": 12574,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_blender.py",
+      "role": "assessment_script",
+      "sha256": "d98b40320883ad3665c71bd4ac4e2d8a4a2834c351a0c1508e173a76bda8a788",
+      "size_bytes": 1599,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_bootstrap.py",
+      "role": "assessment_script",
+      "sha256": "da8723114b89ca7d92ea460387c76beba67ba0b7f35447c7f7c22520fdddaa8d",
+      "size_bytes": 199,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_deform.py",
+      "role": "assessment_script",
+      "sha256": "ed508b2877926c860013110a8932588bf6175639ee917a303b18331a1431cef6",
+      "size_bytes": 2271,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_evidence.py",
+      "role": "assessment_script",
+      "sha256": "f08774595ea160d13ff48132c3e0f47de415fbaac61a4208de1fdfce5e0a657b",
+      "size_bytes": 9174,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_handinspect.py",
+      "role": "assessment_script",
+      "sha256": "058a27fd57a63d9d8732b420c5540490d6017bde1e25c801267f5a0eed239947",
+      "size_bytes": 1231,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_host.py",
+      "role": "assessment_script",
+      "sha256": "59916a012997349fdbcf441279835c3a0436f5f25fc13e4b150e40e41cc6a22f",
+      "size_bytes": 4372,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_intake.py",
+      "role": "assessment_script",
+      "sha256": "bdccbe88fb7558bbfd33412244c779c7b3b16959995cf235c0e0001058a13b42",
+      "size_bytes": 1567,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_local_flags.py",
+      "role": "assessment_script",
+      "sha256": "1feac1b70f07c611cd20502921cdf280ab58e05136de18ed27f07f09ad21d1ba",
+      "size_bytes": 1096,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_sheets.ps1",
+      "role": "assessment_script",
+      "sha256": "00e72c44d2459482205ab8a883187bc73a1e8c81aa0becd882f1b117fef75174",
+      "size_bytes": 1533,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_tools.py",
+      "role": "assessment_script",
+      "sha256": "fc3c845a5f0e18056b9a2f623e667d679469871ea867183f5f656046b81b99da",
+      "size_bytes": 773,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_unreal.py",
+      "role": "assessment_script",
+      "sha256": "0eedbb76d7746de11179c7f72e04f70bb9fbbb3f4ac526a88e0fd0b09757e5e6",
+      "size_bytes": 8657,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_verify_surface.py",
+      "role": "assessment_script",
+      "sha256": "2bac7d907b13227e7d17b1d1e717cfd11d4367a76cfc0c7e3cefada3c8a45b6b",
+      "size_bytes": 3529,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_views.py",
+      "role": "assessment_script",
+      "sha256": "d533709103031466dde68dfc14f3317cf93b1a72440150c658a1549abd51475f",
+      "size_bytes": 4472,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/manifest.json",
+      "role": "experimental_source",
+      "sha256": "3a180c778b1335abccc6801b65e4defbe25dfb50497e3a0ca71573364449ef31",
+      "size_bytes": 11094,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/Revision01/tactical+jumpsuit+3d+model.fbx",
+      "role": "preserved_owner_revision",
+      "sha256": "fc6340b6f36c529f15dac48ef06dca37aa72a07134b873e9e564f0addc6fa196",
+      "size_bytes": 933904,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/Revision02/tactical+jumpsuit+3d+model.fbx",
+      "role": "preserved_owner_revision",
+      "sha256": "aade1a13585f8639610e42a12cc350619ff4279e33325968f416bb4e8b8e8467",
+      "size_bytes": 1186096,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/SourceRevisions01.json",
+      "role": "preserved_owner_revision",
+      "sha256": "5e18c7c83480e586d129d8d393223dad81c56f7dbce0c24b5aed03a4ecb808e2",
+      "size_bytes": 1375,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/Revisions.md",
+      "role": "preserved_owner_revision",
+      "sha256": "bfabb62d1244f0ec754d03ff0448d036db1045ca0e37006aab034836ffa5a4e7",
+      "size_bytes": 839,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ],
+      "unreal_package": null
+    }
+  ],
+  "dependencies": [
+    {
+      "upstream": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01_Skeleton.uasset",
+      "downstream": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01.uasset",
+      "kind": "unreal_hard_reference",
+      "status": "verified",
+      "evidence": [
+        {
+          "source": "Saved/PlayerCharacter01/MeshUsability01/Worker/packages.json",
+          "note": "Observed native candidate hard reference; no missing /Game dependency. Donor has an explicitly separate missing postprocess dependency. This is not production acceptance."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04_Skeleton.uasset",
+      "downstream": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04.uasset",
+      "kind": "unreal_hard_reference",
+      "status": "verified",
+      "evidence": [
+        {
+          "source": "Saved/PlayerCharacter01/MeshUsability01/Worker/packages.json",
+          "note": "Observed native candidate hard reference; no missing /Game dependency. Donor has an explicitly separate missing postprocess dependency. This is not production acceptance."
+        }
+      ]
+    },
+    {
+      "upstream": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05_Skeleton.uasset",
+      "downstream": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05.uasset",
+      "kind": "unreal_hard_reference",
+      "status": "verified",
+      "evidence": [
+        {
+          "source": "Saved/PlayerCharacter01/MeshUsability01/Worker/packages.json",
+          "note": "Observed native candidate hard reference; no missing /Game dependency. Donor has an explicitly separate missing postprocess dependency. This is not production acceptance."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/Revision02/tactical+jumpsuit+3d+model.fbx",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01.blend",
+      "kind": "topology_preserving_fit_bind",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01.fbx",
+      "kind": "dcc_export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01_Deformation.blend",
+      "kind": "keyed_deformation_derivative",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01.fbx",
+      "downstream": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01.uasset",
+      "kind": "unreal_import",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/Revision02/tactical+jumpsuit+3d+model.fbx",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02.blend",
+      "kind": "topology_preserving_fit_bind",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02.fbx",
+      "kind": "dcc_export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02_Deformation.blend",
+      "kind": "keyed_deformation_derivative",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/Revision02/tactical+jumpsuit+3d+model.fbx",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03.blend",
+      "kind": "topology_preserving_fit_bind",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03.fbx",
+      "kind": "dcc_export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03_Deformation.blend",
+      "kind": "keyed_deformation_derivative",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/Revision02/tactical+jumpsuit+3d+model.fbx",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04.blend",
+      "kind": "topology_preserving_fit_bind",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04.fbx",
+      "kind": "dcc_export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04_Deformation.blend",
+      "kind": "keyed_deformation_derivative",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04_DeformationFinal.blend",
+      "kind": "keyed_deformation_derivative",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04.fbx",
+      "downstream": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04.uasset",
+      "kind": "unreal_import",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/Revision02/tactical+jumpsuit+3d+model.fbx",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05.blend",
+      "kind": "topology_preserving_fit_bind",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05.fbx",
+      "kind": "dcc_export",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05.blend",
+      "downstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05_DeformationFinal.blend",
+      "kind": "keyed_deformation_derivative",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05.fbx",
+      "downstream": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05.uasset",
+      "kind": "unreal_import",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01MeshUsability01.md",
+          "note": "Bounded existing-topology assessment inventory. Preserved rejected/intermediate variants, final diagnostic Bind05 and reference donor are not production or owner visual acceptance. Donor-only missing postprocess dependency and source-drop historical change are explicit in the report."
+        }
+      ]
+    }
+  ]
+}

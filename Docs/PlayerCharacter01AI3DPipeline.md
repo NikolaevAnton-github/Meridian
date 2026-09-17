@@ -2,6 +2,21 @@
 
 Research and planning revision: **2026-09-17 / Pipeline01**.
 
+Current execution update, 2026-09-17: the MetaHuman trial is complete and
+[controller-reviewed](PlayerCharacter01MetaHumanTrial01Review.md). Keep the
+original garment and exact rig; MetaHuman remains a shape/skinning reference.
+The owner supplied improved Revision02 and authorized
+[Datum16MeshUsability01](Tasks/PlayerCharacter01MeshUsability01.md), now
+[complete and controller-reviewed](PlayerCharacter01MeshUsability01Review.md).
+The 56,640-triangle source retains its topology through fitting, binding and a
+measured 161-bone Unreal round trip. Nineteen deformation probes and four TP
+reloads support retaining the bulk mesh. Repair localized glove/cuff, collar and
+boot defects; refine weights and fit before deciding whether shoulder, knee or
+thumb regions need further local topology work. Rifle-surface contact and final
+FP presentation are not passed. Full MSQ-54 remains incomplete; no successor run.
+The research/intake paragraphs below preserve earlier states, not current
+conversion status or a requirement to rebuild the entire returned mesh.
+
 Latest capability study: the owner requested a detailed review of the MetaHuman
 5.8 custom-character tutorial. [MetaHumanVideoStudy01](Research/PlayerCharacter01AI3D/MetaHumanVideoStudy01.md)
 recommends testing From Custom Mesh on a preserved derivative before extensive

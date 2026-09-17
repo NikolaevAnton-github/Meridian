@@ -1,0 +1,267 @@
+{
+  "manifest_id": "MSQ54-Datum16MeshUsability01-Worker01-Bind05",
+  "status": "Diagnostic assessment only; full MSQ-54 incomplete",
+  "files": [
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01.blend",
+      "bytes": 9558520,
+      "sha256": "144b840917ca7457f3e3d3f54245835d82af8cc57b44db8a6306f42923f42631"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01.fbx",
+      "bytes": 2064924,
+      "sha256": "fc7968990840794938be16f770125d9b9aa0562ed5115680d4570acc886eed31"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind01_Deformation.blend",
+      "bytes": 9611339,
+      "sha256": "fd9684bf0265f8ea690830404ebe8a15d41f5772aa74f229d79cc0c77e876aea"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02.blend",
+      "bytes": 9474756,
+      "sha256": "4b763d8c191b35f02877ad33b9c34eb1b044c3f25bac60466669d3fdd2e5d256"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02.fbx",
+      "bytes": 2015932,
+      "sha256": "754a5ec9fc589464352f07cbb91f5ac06e7d38be6877143fd63ee0d06bd35349"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind02_Deformation.blend",
+      "bytes": 9531140,
+      "sha256": "bcec8949da1ce5313f8eaad2372b2f5b25f7a818431b2667f1ac6a1f085562b5"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03.blend",
+      "bytes": 9474732,
+      "sha256": "2ebd3b97d55ea368d150f23dc2a1935d82c9064f5ffc84707bfd72dbc2cfe458"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03.fbx",
+      "bytes": 2015868,
+      "sha256": "2a25731bb6db568a58ccfa329b15f734174a9a0990fc8f8cfdbc50770893b8ec"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind03_Deformation.blend",
+      "bytes": 9527636,
+      "sha256": "a6e711dae183446623202200c61e47bc19e2ccd05901deb358010f1ec8880846"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04.blend",
+      "bytes": 9473315,
+      "sha256": "e8051b5a55c13b0e0ad9febffa56b6e651f799264a0f592f72dfadcf0ea23b4e"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04.fbx",
+      "bytes": 2015740,
+      "sha256": "9ed6015f2139c3c8a73ba8d11dfab610f6084394574d887fb3e7c2b7ce0a2a2f"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04_Deformation.blend",
+      "bytes": 9526484,
+      "sha256": "7e1dfe7ea1fde13367884aef3c5de73d976bc95fd576628dc9204a2b3b79ab25"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind04_DeformationFinal.blend",
+      "bytes": 9526992,
+      "sha256": "4b054f59e67c902382f2e6e2ee747143ebad680c3f88d8a39829018ffbe9b9aa"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05.blend",
+      "bytes": 9473225,
+      "sha256": "dee72d3ebb08ff8787941808deab90f015ae817bcbbe56f7ad505ee5b1a7f182"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05.fbx",
+      "bytes": 2015756,
+      "sha256": "fe9153b410986b2add7669f93a00b63824e5da4feaf675b9c77518e9208d3af0"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Datum16_Bind05_DeformationFinal.blend",
+      "bytes": 9528533,
+      "sha256": "c0b8c700c02939241a9899163e823ede8dc67bee6e0e5a4f4cfbcd25fdb95721"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Donor/MSQ52_Manny161.blend",
+      "bytes": 4286890,
+      "sha256": "17e34825bb056a27932364d7999af932e0a8f960a316e3671ef2074de32b1487"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Donor/MSQ52_Manny161.fbx",
+      "bytes": 3225184,
+      "sha256": "811a619fff002bb6e89ac64d975ca72dbef161ab85bf1922dad55bbc2b5eec8e"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/provenance.json",
+      "bytes": 2442,
+      "sha256": "007c7cd6d5325faa49704d3a5ac0386923ddc2ff1ad260a25631cc6e77e71903"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/README.md",
+      "bytes": 2451,
+      "sha256": "a479cf1f4a4e1aa21b1a9de903ea1b32c1ef1e5bf6bb5c1d79fdbc82dec963d8"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/Bind01.json",
+      "bytes": 83586,
+      "sha256": "83da3a074fa9921bb75ac91558bf7c3a1fd8bbfd324bfbce06418bb3119e0bf2"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/Bind02.json",
+      "bytes": 165674,
+      "sha256": "9329e5fed8449b701cecbf4218fb0b5fb19a82d80b56dfe2a29c7f1bea7a39ee"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/Bind03.json",
+      "bytes": 165815,
+      "sha256": "5032d6a916c446371880ad8f32676dfa51498f76ec0bb057ad28227b9024f2a8"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/Bind04.json",
+      "bytes": 166841,
+      "sha256": "be0d7676557a051084af658076c3ba28aac0d9bcd2e28f0c02581cd2e8505a50"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/Bind05.json",
+      "bytes": 166822,
+      "sha256": "a9b6440c5110d6b7133e063d56c3dae9765f74b8e179504e0b65b006df134ce1"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/digit-summary-Bind05.json",
+      "bytes": 6628,
+      "sha256": "ae071d0e51b081985a2ee78a9955dc0ebdd3b032184478fc6f1f226801831fca"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/import-Datum16_Bind05.json",
+      "bytes": 506,
+      "sha256": "a610e8dbe79314a336ea5ee38aa04c00ede7194f858452ff3522a907bfdeefea"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/reload-summary-Bind05.json",
+      "bytes": 2159,
+      "sha256": "e787f9916b209bab4813ac1d0ac5c8f0ae5cefde30bb6dfebac6c6b295ed3806"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/rig-comparison-Datum16_Bind05.json",
+      "bytes": 58030,
+      "sha256": "e8935225c618da513f2c3b4953eb7014b3ce19b9b6da80d20d74c16e8324ed10"
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/MeshUsability01/Settings/surface-verification-Bind05.json",
+      "bytes": 10849,
+      "sha256": "397d850435e131aa53e2bd54f67cd55f99a29d77b54fd572e5c8e528705cd4e3"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01.uasset",
+      "bytes": 7107247,
+      "sha256": "ebc0513bf130205313f40bb70a681d9ef2a9111929ea2ec865aea89fb646a597"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01_Skeleton.uasset",
+      "bytes": 42101,
+      "sha256": "63ab2c3e2ec1334ab47c45fbc66acd2aa95f6dc08b3430390283c573b1120a28"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04.uasset",
+      "bytes": 6974604,
+      "sha256": "42e654a1539f2060bb347eee8916207bc6b30cc50bc01e4a21605211b1907dd5"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04_Skeleton.uasset",
+      "bytes": 41995,
+      "sha256": "d9ac287711c99cd4cb340e4caeabffa0a5435e5184cb451eb0cdbfb2e2e04c4b"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05.uasset",
+      "bytes": 6974632,
+      "sha256": "0b131c0fcf5d687f6d625416bcebc7ef37ea39a73271888e82d67f7399f3de95"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05_Skeleton.uasset",
+      "bytes": 41994,
+      "sha256": "10bb0229a55ba2b3060d76a0c4b4ffe0f56a8fe4e97f8dd4c1f2e16b780cf883"
+    },
+    {
+      "path": "Content/Development/PlayerCharacter01/MeshUsability01/Donor/SKM_Manny.uasset",
+      "bytes": 28777759,
+      "sha256": "8c5ba225479531465fde03d5f7165f056ea7a223a18245d94a5581fcba68cb65"
+    },
+    {
+      "path": "Docs/PlayerCharacter01MeshUsability01.md",
+      "bytes": 17933,
+      "sha256": "18bfb6e7bf2679b06582f418f9ba30f4277354e3bd86afe0836d1ee9ba413ae3"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_bind.py",
+      "bytes": 12574,
+      "sha256": "21a7396b1cddb1de102fdd0d929e8dabdbea654e931e66ae837dd7aa82e61f00"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_blender.py",
+      "bytes": 1599,
+      "sha256": "d98b40320883ad3665c71bd4ac4e2d8a4a2834c351a0c1508e173a76bda8a788"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_bootstrap.py",
+      "bytes": 199,
+      "sha256": "da8723114b89ca7d92ea460387c76beba67ba0b7f35447c7f7c22520fdddaa8d"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_deform.py",
+      "bytes": 2271,
+      "sha256": "ed508b2877926c860013110a8932588bf6175639ee917a303b18331a1431cef6"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_evidence.py",
+      "bytes": 9174,
+      "sha256": "f08774595ea160d13ff48132c3e0f47de415fbaac61a4208de1fdfce5e0a657b"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_handinspect.py",
+      "bytes": 1231,
+      "sha256": "058a27fd57a63d9d8732b420c5540490d6017bde1e25c801267f5a0eed239947"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_host.py",
+      "bytes": 4372,
+      "sha256": "59916a012997349fdbcf441279835c3a0436f5f25fc13e4b150e40e41cc6a22f"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_intake.py",
+      "bytes": 1567,
+      "sha256": "bdccbe88fb7558bbfd33412244c779c7b3b16959995cf235c0e0001058a13b42"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_local_flags.py",
+      "bytes": 1096,
+      "sha256": "1feac1b70f07c611cd20502921cdf280ab58e05136de18ed27f07f09ad21d1ba"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_sheets.ps1",
+      "bytes": 1533,
+      "sha256": "00e72c44d2459482205ab8a883187bc73a1e8c81aa0becd882f1b117fef75174"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_tools.py",
+      "bytes": 773,
+      "sha256": "fc3c845a5f0e18056b9a2f623e667d679469871ea867183f5f656046b81b99da"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_unreal.py",
+      "bytes": 8657,
+      "sha256": "0eedbb76d7746de11179c7f72e04f70bb9fbbb3f4ac526a88e0fd0b09757e5e6"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_verify_surface.py",
+      "bytes": 3529,
+      "sha256": "2bac7d907b13227e7d17b1d1e717cfd11d4367a76cfc0c7e3cefada3c8a45b6b"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/mesh_usability01_views.py",
+      "bytes": 4472,
+      "sha256": "d533709103031466dde68dfc14f3317cf93b1a72440150c658a1549abd51475f"
+    }
+  ],
+  "controller_git_attribute_actions": []
+}

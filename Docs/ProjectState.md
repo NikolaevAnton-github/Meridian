@@ -80,8 +80,24 @@ were 3.70–4.99 cm against the source recordings. Keep the original garment and
 MSQ52-RigContract01; use the MetaHuman result only as a shape/skinning reference.
 The full production round trip, FP fit and final assembly remain unverified.
 This supersedes the earlier research-only no-dispatch restriction for this trial.
-No active worker remains, saved execution settings are restored, and no successor
-was dispatched. The production rig and selected appearance remain unchanged.
+That run ended with no active worker and its saved execution settings restored.
+The production rig and selected appearance remain unchanged.
+The owner then supplied an improved body export and authorized
+**Datum16MeshUsability01** within MSQ-54; see the
+[current assessment task](Tasks/PlayerCharacter01MeshUsability01.md) and
+[exact instruction](Approvals/PlayerCharacter01-MeshUsability01.json).
+The assessment is now [complete and controller-reviewed](PlayerCharacter01MeshUsability01Review.md).
+Revision02 has 24,264 quads and 8,112 triangles (56,640 triangulated). Bind05
+retains its original topology and completed the 161-bone round trip, 19 evaluated
+deformation probes and four synchronized TP reloads. Retain the bulk mesh;
+blanket retopology is not justified. Local glove/cuff, collar and boot defects
+need repair; shoulder/knee deformation, thumb/web fit and rifle contact remain
+unresolved or failed. The close FP probe is diagnostic only.
+Both named revisions and the owner-replaced drop/config edits are preserved;
+the historical drop registry discrepancy remains explicit and unchanged.
+This supersedes earlier mandatory-retopology language. Astra/high/standard
+execution was verified and saved settings restored. MSQ-54 remains incomplete
+and unassigned, with no active worker or successor gameplay/finishing dispatch.
 The owner alone evaluates this concept batch; no independent concept reviewer or
 MSQ-53 expert run. Later MSQ-60 integrated review remains required.
 
@@ -147,7 +163,7 @@ Last verified Multica state, 2026-09-17:
 | MSQ-51 | `done`; concept deliveries preserved. |
 | MSQ-53 | `done`; owner selected Concept02 / Candidate01, 16 / Datum. No expert run. |
 | MSQ-52 | `done`; controller-accepted animation audit and MSQ52-RigContract01. 186 source-identical packages, 82 sequences, 19 representative playback cases; later original-rig/gameplay gates remain. |
-| MSQ-54 | Datum16MetaHumanTrial01 complete and controller-reviewed: useful experimental fit, unsuitable visible garment/direct rig replacement. Retain original garment and 161-bone contract. No active worker; full original body/deformation prototype remains incomplete. |
+| MSQ-54 | MeshUsability01 complete and reviewed: retain Revision02 bulk topology; localized repair, fit/weights, joint quality and contact work remain. The 161-bone round trip and four TP reloads were tested. Full prototype remains `in_progress`, unassigned, with no active worker. |
 | MSQ-55 through MSQ-60 | `backlog`; presentation, movement, rifle, finish, integration and final review. |
 
 The [task synchronization audit](Tasks/PlayerCharacter01AI3DTaskAudit01.md) verified

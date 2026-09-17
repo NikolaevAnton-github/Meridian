@@ -1,0 +1,309 @@
+{
+  "topology": {
+    "vertices": 28332,
+    "edges": 60797,
+    "polygons": 32376,
+    "exact_original_vertex_order_edge_and_polygon_indices": true
+  },
+  "native": {
+    "vertices": 29084,
+    "triangles": 56640,
+    "blender_to_native": {
+      "max_cm": 0.00014887879660818726,
+      "p95_cm": 8.856857311911881e-05,
+      "median_cm": 3.079576345044188e-05
+    },
+    "native_to_blender": {
+      "max_cm": 0.00014887879660818726,
+      "p95_cm": 8.880956011125818e-05,
+      "median_cm": 3.083081537624821e-05
+    }
+  },
+  "digit_label_definition": "Distal source-space components beyond |X|0.455; Y bands 0.0132/0.029/0.044. Thumb |X|0.435-0.450, Z<0.742,Y<0. Labels independent of skin groups.",
+  "digit_counts": {
+    "l_index": 309,
+    "l_middle": 316,
+    "l_pinky": 267,
+    "l_ring": 312,
+    "l_thumb": 105,
+    "r_index": 309,
+    "r_middle": 315,
+    "r_pinky": 272,
+    "r_ring": 310,
+    "r_thumb": 105
+  },
+  "probes": [
+    {
+      "name": "rest",
+      "maximum_displacement_cm": 0.0,
+      "edges_stretched_over_2x": 0,
+      "edges_compressed_below_half": 0,
+      "max_edge_stretch": 1.0,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios."
+    },
+    {
+      "name": "arm_raise",
+      "maximum_displacement_cm": 107.49956842585004,
+      "edges_stretched_over_2x": 69,
+      "edges_compressed_below_half": 53,
+      "max_edge_stretch": 12.880828152942689,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios."
+    },
+    {
+      "name": "cross_body",
+      "maximum_displacement_cm": 107.97096634103316,
+      "edges_stretched_over_2x": 64,
+      "edges_compressed_below_half": 20,
+      "max_edge_stretch": 9.991791504197293,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios."
+    },
+    {
+      "name": "elbow_twist",
+      "maximum_displacement_cm": 44.85468608143808,
+      "edges_stretched_over_2x": 2,
+      "edges_compressed_below_half": 12,
+      "max_edge_stretch": 2.233899430496469,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios."
+    },
+    {
+      "name": "deep_crouch",
+      "maximum_displacement_cm": 72.03763321688467,
+      "edges_stretched_over_2x": 252,
+      "edges_compressed_below_half": 409,
+      "max_edge_stretch": 13.936759583769339,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios."
+    },
+    {
+      "name": "ankle_flex",
+      "maximum_displacement_cm": 8.694353568299176,
+      "edges_stretched_over_2x": 16,
+      "edges_compressed_below_half": 17,
+      "max_edge_stretch": 3.227554282790474,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios."
+    },
+    {
+      "name": "wrist_flex",
+      "maximum_displacement_cm": 14.555114862420174,
+      "edges_stretched_over_2x": 52,
+      "edges_compressed_below_half": 9,
+      "max_edge_stretch": 15.950657151823735,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios."
+    },
+    {
+      "name": "cross_body_right",
+      "maximum_displacement_cm": 107.97095248604019,
+      "edges_stretched_over_2x": 58,
+      "edges_compressed_below_half": 14,
+      "max_edge_stretch": 9.263771655979061,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios."
+    },
+    {
+      "name": "elbow_twist_right",
+      "maximum_displacement_cm": 44.854807026363964,
+      "edges_stretched_over_2x": 2,
+      "edges_compressed_below_half": 9,
+      "max_edge_stretch": 2.6751103135086307,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios."
+    },
+    {
+      "name": "l_thumb",
+      "maximum_displacement_cm": 10.344887607966259,
+      "edges_stretched_over_2x": 41,
+      "edges_compressed_below_half": 0,
+      "max_edge_stretch": 10.98974081752374,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios.",
+      "source_defined_digit_displacement_cm": {
+        "l_index": 0.0,
+        "l_middle": 0.0,
+        "l_pinky": 0.0,
+        "l_ring": 0.0,
+        "l_thumb": 10.344887607966259,
+        "r_index": 0.0,
+        "r_middle": 0.0,
+        "r_pinky": 0.0,
+        "r_ring": 0.0,
+        "r_thumb": 0.0
+      }
+    },
+    {
+      "name": "l_index",
+      "maximum_displacement_cm": 8.43366881982487,
+      "edges_stretched_over_2x": 7,
+      "edges_compressed_below_half": 0,
+      "max_edge_stretch": 6.9272707490438075,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios.",
+      "source_defined_digit_displacement_cm": {
+        "l_index": 8.43366881982487,
+        "l_middle": 0.0,
+        "l_pinky": 0.0,
+        "l_ring": 0.0,
+        "l_thumb": 0.0,
+        "r_index": 0.0,
+        "r_middle": 0.0,
+        "r_pinky": 0.0,
+        "r_ring": 0.0,
+        "r_thumb": 0.0
+      }
+    },
+    {
+      "name": "l_middle",
+      "maximum_displacement_cm": 8.579659424839898,
+      "edges_stretched_over_2x": 11,
+      "edges_compressed_below_half": 1,
+      "max_edge_stretch": 5.487988711992788,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios.",
+      "source_defined_digit_displacement_cm": {
+        "l_index": 0.0,
+        "l_middle": 8.579659424839898,
+        "l_pinky": 0.0,
+        "l_ring": 0.0,
+        "l_thumb": 0.0,
+        "r_index": 0.0,
+        "r_middle": 0.0,
+        "r_pinky": 0.0,
+        "r_ring": 0.0,
+        "r_thumb": 0.0
+      }
+    },
+    {
+      "name": "l_ring",
+      "maximum_displacement_cm": 8.235932138574592,
+      "edges_stretched_over_2x": 10,
+      "edges_compressed_below_half": 1,
+      "max_edge_stretch": 4.457843346653649,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios.",
+      "source_defined_digit_displacement_cm": {
+        "l_index": 0.0,
+        "l_middle": 0.0,
+        "l_pinky": 0.0,
+        "l_ring": 8.235932138574592,
+        "l_thumb": 0.0,
+        "r_index": 0.0,
+        "r_middle": 0.0,
+        "r_pinky": 0.0,
+        "r_ring": 0.0,
+        "r_thumb": 0.0
+      }
+    },
+    {
+      "name": "l_pinky",
+      "maximum_displacement_cm": 7.473366782975198,
+      "edges_stretched_over_2x": 18,
+      "edges_compressed_below_half": 0,
+      "max_edge_stretch": 5.03036702283466,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios.",
+      "source_defined_digit_displacement_cm": {
+        "l_index": 0.0,
+        "l_middle": 0.0,
+        "l_pinky": 7.473366782975198,
+        "l_ring": 0.0,
+        "l_thumb": 0.0,
+        "r_index": 0.0,
+        "r_middle": 0.0,
+        "r_pinky": 0.0,
+        "r_ring": 0.0,
+        "r_thumb": 0.0
+      }
+    },
+    {
+      "name": "r_thumb",
+      "maximum_displacement_cm": 10.344662593469833,
+      "edges_stretched_over_2x": 41,
+      "edges_compressed_below_half": 0,
+      "max_edge_stretch": 10.989790932706295,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios.",
+      "source_defined_digit_displacement_cm": {
+        "l_index": 0.0,
+        "l_middle": 0.0,
+        "l_pinky": 0.0,
+        "l_ring": 0.0,
+        "l_thumb": 0.0,
+        "r_index": 0.0,
+        "r_middle": 0.0,
+        "r_pinky": 0.0,
+        "r_ring": 0.0,
+        "r_thumb": 10.344662593469833
+      }
+    },
+    {
+      "name": "r_index",
+      "maximum_displacement_cm": 8.433686971590932,
+      "edges_stretched_over_2x": 7,
+      "edges_compressed_below_half": 0,
+      "max_edge_stretch": 6.92674412169372,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios.",
+      "source_defined_digit_displacement_cm": {
+        "l_index": 0.0,
+        "l_middle": 0.0,
+        "l_pinky": 0.0,
+        "l_ring": 0.0,
+        "l_thumb": 0.0,
+        "r_index": 8.433686971590932,
+        "r_middle": 0.0,
+        "r_pinky": 0.0,
+        "r_ring": 0.0,
+        "r_thumb": 0.0
+      }
+    },
+    {
+      "name": "r_middle",
+      "maximum_displacement_cm": 8.5797833067054,
+      "edges_stretched_over_2x": 11,
+      "edges_compressed_below_half": 1,
+      "max_edge_stretch": 5.4875357034132515,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios.",
+      "source_defined_digit_displacement_cm": {
+        "l_index": 0.0,
+        "l_middle": 0.0,
+        "l_pinky": 0.0,
+        "l_ring": 0.0,
+        "l_thumb": 0.0,
+        "r_index": 0.0,
+        "r_middle": 8.5797833067054,
+        "r_pinky": 0.0,
+        "r_ring": 0.0,
+        "r_thumb": 0.0
+      }
+    },
+    {
+      "name": "r_ring",
+      "maximum_displacement_cm": 8.236025358709185,
+      "edges_stretched_over_2x": 9,
+      "edges_compressed_below_half": 0,
+      "max_edge_stretch": 4.458023541275745,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios.",
+      "source_defined_digit_displacement_cm": {
+        "l_index": 0.0,
+        "l_middle": 0.0,
+        "l_pinky": 0.0,
+        "l_ring": 0.0,
+        "l_thumb": 0.0,
+        "r_index": 0.0,
+        "r_middle": 0.0,
+        "r_pinky": 0.0,
+        "r_ring": 8.236025358709185,
+        "r_thumb": 0.0
+      }
+    },
+    {
+      "name": "r_pinky",
+      "maximum_displacement_cm": 7.4732871822437,
+      "edges_stretched_over_2x": 16,
+      "edges_compressed_below_half": 0,
+      "max_edge_stretch": 3.6277456349332726,
+      "caveat": "Edge strain is a deformation diagnostic, not attribution to topology; small pre-existing edges amplify ratios.",
+      "source_defined_digit_displacement_cm": {
+        "l_index": 0.0,
+        "l_middle": 0.0,
+        "l_pinky": 0.0,
+        "l_ring": 0.0,
+        "l_thumb": 0.0,
+        "r_index": 0.0,
+        "r_middle": 0.0,
+        "r_pinky": 7.4732871822437,
+        "r_ring": 0.0,
+        "r_thumb": 0.0
+      }
+    }
+  ]
+}

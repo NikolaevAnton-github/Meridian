@@ -1,6 +1,18 @@
 # PlayerCharacter01: Multica task family
 
-Latest execution scope, 2026-09-17: the owner authorized
+Current delivered assessment, 2026-09-17: the owner authorized
+[Datum16MeshUsability01](PlayerCharacter01MeshUsability01.md) on the improved
+owner body export Revision02. It is [complete and controller-reviewed](../PlayerCharacter01MeshUsability01Review.md):
+56,640 native triangles, unchanged original topology, a measured 161-bone round
+trip, 19 deformation probes and four synchronized TP reloads. Retain bulk
+topology; repair local glove/cuff, collar and boot defects. Shoulder/knee quality,
+thumb/web fitting and weapon-surface contact remain unresolved or failed.
+Astra/high/standard native execution was verified and exact saved settings
+restored. Full MSQ-54 stays in_progress and unassigned, with no active worker;
+the redundant queued evidence correction was canceled without execution after
+Bind05/Detail05 resolved its findings. No successor is dispatched.
+
+Previous execution scope, 2026-09-17: the owner authorized
 [Datum16MetaHumanTrial01](PlayerCharacter01MetaHumanTrial01.md) within MSQ-54,
 with Astra/max/standard. The existing selection and rig-contract gates are met.
 This bounded live conformation experiment supersedes historical research-only
@@ -10,7 +22,7 @@ successor gameplay/finish tasks.
 The bounded trial is now [complete and controller-reviewed](../PlayerCharacter01MetaHumanTrial01Review.md).
 It recommends retaining the original garment and exact 161-bone contract; the
 MetaHuman fit remains experimental reference. MSQ-54 stays incomplete and
-unassigned after closure, with no successor dispatch.
+was unassigned after that closure, before the current mesh-assessment instruction.
 
 ## Historical task updates
 

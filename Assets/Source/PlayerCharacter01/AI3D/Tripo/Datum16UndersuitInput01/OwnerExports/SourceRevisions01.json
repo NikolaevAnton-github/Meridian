@@ -1,0 +1,23 @@
+{
+  "date_local": "2026-09-17",
+  "task": "MSQ-54 / Datum16MeshUsability01",
+  "owner_drop_path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/tactical+jumpsuit+3d+model.fbx",
+  "owner_drop_sha256": "aade1a13585f8639610e42a12cc350619ff4279e33325968f416bb4e8b8e8467",
+  "revision_01_source": "Recovered exact previously committed Git LFS object; owner working file was not overwritten.",
+  "revision_02_source": "Exact copy of the newly owner-supplied file at task start.",
+  "registration_boundary": "The old registered drop path changed before this task. Do not rebaseline its historical record. Register named revision paths separately; leave the owner drop and unrelated config edits out of the task commit.",
+  "revisions": [
+    {
+      "revision": "Revision01",
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/Revision01/tactical+jumpsuit+3d+model.fbx",
+      "bytes": 933904,
+      "sha256": "fc6340b6f36c529f15dac48ef06dca37aa72a07134b873e9e564f0addc6fa196"
+    },
+    {
+      "revision": "Revision02",
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/Revision02/tactical+jumpsuit+3d+model.fbx",
+      "bytes": 1186096,
+      "sha256": "aade1a13585f8639610e42a12cc350619ff4279e33325968f416bb4e8b8e8467"
+    }
+  ]
+}

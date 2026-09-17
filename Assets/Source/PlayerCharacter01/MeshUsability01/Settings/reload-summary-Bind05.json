@@ -1,0 +1,65 @@
+[
+  {
+    "case": "Contact04-TP-Reload",
+    "samples": 13,
+    "end_s": 3.6666667461395264,
+    "max_time_difference_s": 0.0,
+    "right_wrist_source_difference_cm": [
+      1.3252516807877234e-05,
+      0.00872472115741983
+    ],
+    "max_reference_phase_error_s": 0.03554725646972656,
+    "images": [
+      "Compatibility05/Playback/Contact04-TP-Reload/frame-000.png",
+      "Compatibility05/Playback/Contact04-TP-Reload/frame-001.png",
+      "Compatibility05/Playback/Contact04-TP-Reload/frame-002.png"
+    ]
+  },
+  {
+    "case": "Contact04-TP-Reload_Aimed",
+    "samples": 13,
+    "end_s": 3.6666667461395264,
+    "max_time_difference_s": 0.0,
+    "right_wrist_source_difference_cm": [
+      4.064198468371046e-06,
+      0.0023444675833609956
+    ],
+    "max_reference_phase_error_s": 0.024894684553146362,
+    "images": [
+      "Compatibility05/Playback/Contact04-TP-Reload_Aimed/frame-000.png",
+      "Compatibility05/Playback/Contact04-TP-Reload_Aimed/frame-001.png",
+      "Compatibility05/Playback/Contact04-TP-Reload_Aimed/frame-002.png"
+    ]
+  },
+  {
+    "case": "Contact04-TP-Reload_Empty",
+    "samples": 13,
+    "end_s": 3.6666667461395264,
+    "max_time_difference_s": 0.0,
+    "right_wrist_source_difference_cm": [
+      1.4127821976729985e-05,
+      0.01006158095572965
+    ],
+    "max_reference_phase_error_s": 0.030104637145996094,
+    "images": [
+      "Compatibility05/Playback/Contact04-TP-Reload_Empty/frame-000.png",
+      "Compatibility05/Playback/Contact04-TP-Reload_Empty/frame-001.png"
+    ]
+  },
+  {
+    "case": "Contact04-TP-Reload_Empty_Aimed",
+    "samples": 13,
+    "end_s": 3.6666667461395264,
+    "max_time_difference_s": 0.0,
+    "right_wrist_source_difference_cm": [
+      4.2354136404545395e-06,
+      0.002306721586870643
+    ],
+    "max_reference_phase_error_s": 0.025445938110351562,
+    "images": [
+      "Compatibility05/Playback/Contact04-TP-Reload_Empty_Aimed/frame-000.png",
+      "Compatibility05/Playback/Contact04-TP-Reload_Empty_Aimed/frame-001.png",
+      "Compatibility05/Playback/Contact04-TP-Reload_Empty_Aimed/frame-002.png"
+    ]
+  }
+]

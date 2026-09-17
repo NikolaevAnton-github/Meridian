@@ -1,0 +1,15 @@
+{
+  "record_id": "PlayerCharacter01-MeshUsability01",
+  "date_local": "2026-09-17",
+  "task": "MSQ-54",
+  "source": "Owner direct chat after discussion of the Tripo quad export and unnecessary blanket retopology",
+  "owner_message_original": "Давай проверим текущую сетку, я если что загрузил чуть более удачный вариант в папаку OwnerExports",
+  "owner_message_english_translation": "Let's check the current mesh; I uploaded a somewhat better version to the OwnerExports folder.",
+  "authorized_scope": "Inspect the newly supplied body mesh and test the existing topology on the exact MSQ52 rig using preserved derivatives. Perform only bounded fitting, binding and necessary local corrections needed for a valid assessment; distinguish topology defects from fit/weight errors. Compare with the prior source and identify the minimum justified repair.",
+  "task_specification": "Docs/Tasks/PlayerCharacter01MeshUsability01.md",
+  "source_revision": "Datum16UndersuitInput01 / OwnerExports / Revision02",
+  "source_sha256": "aade1a13585f8639610e42a12cc350619ff4279e33325968f416bb4e8b8e8467",
+  "executor": {"model": "gpt-6-astra", "reasoning": "high", "speed": "standard", "basis": "Standing implementation baseline; the earlier max override was scoped to the completed MetaHuman experiment. Save and restore actual profile/native arguments."},
+  "preservation": "The owner replaced the existing drop file. Keep its new bytes and both named source revisions; never restore old bytes over the owner file or rebaseline historical registry records. Preserve owner DefaultEditor.ini and DefaultEngine.ini edits, accepted rig, prior experiment and lobby.",
+  "boundary": "No blanket retopology, new AI generation, final armor/materials, rig replacement, successor gameplay task or visual acceptance. A bounded mesh assessment does not complete full MSQ-54. No separately billed APIs, purchases or top-ups."
+}

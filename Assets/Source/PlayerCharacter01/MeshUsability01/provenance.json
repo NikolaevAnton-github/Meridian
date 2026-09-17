@@ -1,0 +1,57 @@
+{
+  "source_revision": "Datum16UndersuitInput01/OwnerExports/Revision02",
+  "source_sha256": "aade1a13585f8639610e42a12cc350619ff4279e33325968f416bb4e8b8e8467",
+  "rig_contract_sha256": "ba557918290e6e3be0ce1836afac19ff005e4b45fedd203beca43a2a2837e749",
+  "donor_copy": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "8C5BA225479531465FDE03D5F7165F056EA7A223A18245D94A5581FCBA68CB65",
+      "Path": "D:\\devgames\\Weapon\\TacticalFPSAnimations\\Common\\Characters\\Mannequins\\Meshes\\SKM_Manny.uasset"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "8C5BA225479531465FDE03D5F7165F056EA7A223A18245D94A5581FCBA68CB65",
+      "Path": "D:\\devgames\\MeridianSquad\\Content\\Development\\PlayerCharacter01\\MeshUsability01\\Donor\\SKM_Manny.uasset"
+    }
+  ],
+  "reused_helpers": [
+    {
+      "path": "Scripts/PlayerCharacter01/body_intake01.py",
+      "sha256": "6876305e0e1490a880287a25e95c153345a89a065f53a298404888d1a01d6b5b"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/shoulder_intake01.py",
+      "sha256": "3cdb4d08ddf079537880f74f2f69e8abc9f137962cdf403d3de007e728cdc8ed"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/animation_audit01_unreal.py",
+      "sha256": "71714c26c2c479f74833c0ad2d5d2eff74244a4ad6ea5fd2eb14e917b9936ebe"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/animation_audit01_client.py",
+      "sha256": "2bcf8e52645cf5ed14575ab1ff2447714c92dec89674151d57ad353e82a192a4"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_deform.py",
+      "sha256": "a52f79705f2209a8d40ce4eff524e0f4cc7ac1b5ead2987e22f5625e8ac2211e"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_host.py",
+      "sha256": "770858e0981c89561bf4efbe896cab2490db079db6bf802c8f58c4360a8e510c"
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/metahuman_trial01_evidence.py",
+      "sha256": "339d956ecd3d9aedf8fbf84a9b0bab7fd96c613962da4b113913a4e66d9f20b2"
+    },
+    {
+      "path": "Scripts/OpeningLobby/functionalbuild01_client.py",
+      "sha256": "1f5d0423c08df80a660baf468e7d7b6e41d646bfc93de12a633f801268f59fc0"
+    }
+  ],
+  "software": {
+    "blender": "5.2.1 LTS / 9e2066aef7ef",
+    "unreal": "5.8.1 / CL56057345",
+    "transport": "official Epic MCP http://127.0.0.1:8000/mcp"
+  },
+  "scope": "Diagnostic existing-topology assessment; no visual acceptance, no blanket retopology, no successor"
+}

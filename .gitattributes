@@ -51,3 +51,7 @@ Scripts/PlayerCharacter01/body_intake01.py -text
 MeridianSquad.uproject -text
 Docs/PlayerCharacter01MetaHumanTrial01.md -text
 Scripts/PlayerCharacter01/metahuman_trial01_*.py -text
+
+# Preserve exact report/script fingerprints of the current-mesh usability trial.
+Docs/PlayerCharacter01MeshUsability01*.md -text
+Scripts/PlayerCharacter01/mesh_usability01_* -text

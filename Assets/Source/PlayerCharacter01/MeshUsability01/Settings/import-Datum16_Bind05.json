@@ -1,0 +1,13 @@
+{
+  "paths": [
+    "/Game/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05_Skeleton.Datum16_Bind05_Skeleton",
+    "/Game/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05.Datum16_Bind05"
+  ],
+  "state": {
+    "project": "../../../../devgames/MeridianSquad/MeridianSquad.uproject",
+    "engine": "5.8.1-56057345+++UE5+Release-5.8",
+    "world": "/Game/Maps/L_OpeningLobby_PainterStone01.L_OpeningLobby_PainterStone01",
+    "dirty_maps": [],
+    "dirty_content": []
+  }
+}
