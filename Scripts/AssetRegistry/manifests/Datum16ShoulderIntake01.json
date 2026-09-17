@@ -1,0 +1,91 @@
+{
+  "asset": "Datum16ShoulderManual01",
+  "artifacts": [
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png",
+      "role": "ai3d_input_candidate",
+      "sha256": "da2987ffd2f924a0d24cf88c4ce937382e35a29a46fd8847ec3aa6b9933773f3",
+      "size_bytes": 1642152,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/OwnerExports/armor+shoulder+plate+3d+model.fbx",
+      "role": "owner_returned_ai3d_source",
+      "sha256": "c1be7d5f1e82b955c9367f5335e45f1e191177bf298ba0112eb9604575d65078",
+      "size_bytes": 134960,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01ShoulderIntake01.md",
+          "note": "Controller-reviewed bounded source intake. Inventory only; no production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderIntake01/provenance.json",
+      "role": "source_intake_provenance",
+      "sha256": "1c15c5a232389916695cca7062aab12e2f7e2c9f5e5f609f33f4bb488d9ef4ec",
+      "size_bytes": 1713,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01ShoulderIntake01.md",
+          "note": "Controller-reviewed bounded source intake. Inventory only; no production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Docs/PlayerCharacter01ShoulderIntake01.md",
+      "role": "source_intake_report",
+      "sha256": "a20a248d2158885fcac32374adc349f9c94fb142c701f05702d628a098170e2a",
+      "size_bytes": 14135,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01ShoulderIntake01.md",
+          "note": "Controller-reviewed bounded source intake. Inventory only; no production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/shoulder_intake01.py",
+      "role": "source_inspection_script",
+      "sha256": "3cdb4d08ddf079537880f74f2f69e8abc9f137962cdf403d3de007e728cdc8ed",
+      "size_bytes": 17486,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01ShoulderIntake01.md",
+          "note": "Controller-reviewed bounded source intake. Inventory only; no production geometry or owner visual acceptance."
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png",
+      "downstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/OwnerExports/armor+shoulder+plate+3d+model.fbx",
+      "kind": "intended_ai3d_input",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderIntake01/provenance.json",
+          "note": "StartHere was requested for the owner-operated trial; no actual job/input record was supplied."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/OwnerExports/armor+shoulder+plate+3d+model.fbx",
+      "downstream": "Docs/PlayerCharacter01ShoulderIntake01.md",
+      "kind": "source_inspection",
+      "status": "verified",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01ShoulderIntake01.md",
+          "note": "Report identifies the exact owner FBX hash and records inspected Blender import and geometry evidence."
+        }
+      ]
+    }
+  ]
+}

@@ -2,11 +2,16 @@
 
 Research and planning revision: **2026-09-17 / Pipeline01**.
 
-Current bounded execution: the owner will operate Tripo for the first component
-pilot. [Datum16ShoulderManual01](PlayerCharacter01TripoManualPilot01.md) supplies
+Current bounded execution: the owner operated the first component pilot and
+returned its FBX. [Datum16ShoulderIntake01](PlayerCharacter01ShoulderIntake01.md)
+records the completed local inspection: useful shell reference, with topology,
+normal and inner-surface repair required before body fitting. Source bytes are
+preserved; actual job settings and input identity remain unverified.
+[Datum16ShoulderManual01](PlayerCharacter01TripoManualPilot01.md) supplies
 one recommended single-image shoulder-cap input, settings and export instructions.
 Its additional views are reference-only because projection/landmark consistency
-was not established. This preparation creates no 3D source or fitted body master.
+was not established. The input preparation created no 3D source; the returned
+owner export does not establish a fitted body master.
 One common proportional body remains required for assembly; generating an entire
 character with AI is optional. The full MSQ-54 prototype remains outstanding.
 
