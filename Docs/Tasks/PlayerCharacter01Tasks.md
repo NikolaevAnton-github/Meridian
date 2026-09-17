@@ -1,5 +1,18 @@
 # PlayerCharacter01: Multica task family
 
+Current owner direction, 2026-09-17: **Concept02 / Candidate01, 16 / Datum** is
+selected, satisfying MSQ-53's owner-selection gate; **MSQ-52 execution is
+authorized**. See the [exact record](../Approvals/PlayerCharacter01-Datum16Selection01.json)
+and [bounded audit task](PlayerAnimationAudit01.md). Historical pending-selection
+and no-run statements below describe earlier operations. Only MSQ-52 is
+dispatched by this instruction; original modeling still needs its rig contract.
+
+MSQ-52 is now complete after controller verification. The
+[accepted technical handoff](../PlayerAnimationAudit01.md) supplies
+`MSQ52-RigContract01`, selected clips, measured reload timing and explicit
+movement gaps. MSQ-54 remains backlog; its next work includes reference
+reconciliation and the original rigged prototype, without reopening MSQ-53.
+
 Live Multica synchronization verified on 2026-09-17:
 MSQ-50 and MSQ-52 through MSQ-60 now contain the AI3D workflow checklists,
 provider constraints, existing-web-subscription exception and canonical source

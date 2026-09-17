@@ -1,0 +1,293 @@
+{
+  "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Aimed": {
+    "samples": [
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Idle_Loop_Aimed.A_TFA_FP_AR_Idle_Loop_Aimed",
+        "sample_value": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_F_Loop_Aimed.A_TFA_FP_AR_Walk_F_Loop_Aimed",
+        "sample_value": [
+          0.0,
+          100.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_Strafe_R_Loop_Aimed.A_TFA_FP_AR_Walk_Strafe_R_Loop_Aimed",
+        "sample_value": [
+          100.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_B_Loop_Aimed.A_TFA_FP_AR_Walk_B_Loop_Aimed",
+        "sample_value": [
+          0.0,
+          -100.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_Strafe_L_Loop_Aimed.A_TFA_FP_AR_Walk_Strafe_L_Loop_Aimed",
+        "sample_value": [
+          -100.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      }
+    ],
+    "parameters": [
+      {
+        "display_name": "Horizontal",
+        "min": -100.0,
+        "max": 100.0,
+        "grid_num": 4
+      },
+      {
+        "display_name": "Vertical",
+        "min": -100.0,
+        "max": 100.0,
+        "grid_num": 4
+      },
+      {
+        "display_name": "None",
+        "min": 0.0,
+        "max": 100.0,
+        "grid_num": 4
+      }
+    ]
+  },
+  "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Crouched": {
+    "samples": [
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_B_Loop_Standing.A_TFA_FP_AR_Walk_B_Loop_Standing",
+        "sample_value": [
+          0.0,
+          -100.0,
+          0.0
+        ],
+        "rate_scale": 0.800000011920929
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_Strafe_L_Loop_Standing.A_TFA_FP_AR_Walk_Strafe_L_Loop_Standing",
+        "sample_value": [
+          -100.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 0.800000011920929
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_Strafe_R_Loop_Standing.A_TFA_FP_AR_Walk_Strafe_R_Loop_Standing",
+        "sample_value": [
+          100.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 0.800000011920929
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_F_Loop_Standing.A_TFA_FP_AR_Walk_F_Loop_Standing",
+        "sample_value": [
+          0.0,
+          100.0,
+          0.0
+        ],
+        "rate_scale": 0.800000011920929
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Idle_Loop_Crouched.A_TFA_FP_AR_Idle_Loop_Crouched",
+        "sample_value": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      }
+    ],
+    "parameters": [
+      {
+        "display_name": "Horizontal",
+        "min": -100.0,
+        "max": 100.0,
+        "grid_num": 4
+      },
+      {
+        "display_name": "Vertical",
+        "min": -100.0,
+        "max": 100.0,
+        "grid_num": 4
+      },
+      {
+        "display_name": "None",
+        "min": 0.0,
+        "max": 100.0,
+        "grid_num": 4
+      }
+    ]
+  },
+  "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Standing": {
+    "samples": [
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_B_Loop_Standing.A_TFA_FP_AR_Walk_B_Loop_Standing",
+        "sample_value": [
+          0.0,
+          -100.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_Strafe_L_Loop_Standing.A_TFA_FP_AR_Walk_Strafe_L_Loop_Standing",
+        "sample_value": [
+          -100.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_Strafe_R_Loop_Standing.A_TFA_FP_AR_Walk_Strafe_R_Loop_Standing",
+        "sample_value": [
+          100.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_F_Loop_Standing.A_TFA_FP_AR_Walk_F_Loop_Standing",
+        "sample_value": [
+          0.0,
+          100.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Idle_Loop_Standing.A_TFA_FP_AR_Idle_Loop_Standing",
+        "sample_value": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      }
+    ],
+    "parameters": [
+      {
+        "display_name": "Horizontal",
+        "min": -100.0,
+        "max": 100.0,
+        "grid_num": 4
+      },
+      {
+        "display_name": "Vertical",
+        "min": -100.0,
+        "max": 100.0,
+        "grid_num": 4
+      },
+      {
+        "display_name": "None",
+        "min": 0.0,
+        "max": 100.0,
+        "grid_num": 4
+      }
+    ]
+  },
+  "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/BS_TFA_FP_AR_Transition_Crouch_End": {
+    "samples": [
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_End.A_TFA_FP_AR_Transition_Crouch_End",
+        "sample_value": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_End_Aimed.A_TFA_FP_AR_Transition_Crouch_End_Aimed",
+        "sample_value": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      }
+    ],
+    "parameters": [
+      {
+        "display_name": "AimAlpha",
+        "min": 0.0,
+        "max": 1.0,
+        "grid_num": 2
+      },
+      {
+        "display_name": "None",
+        "min": 0.0,
+        "max": 100.0,
+        "grid_num": 4
+      },
+      {
+        "display_name": "None",
+        "min": 0.0,
+        "max": 100.0,
+        "grid_num": 4
+      }
+    ]
+  },
+  "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/BS_TFA_FP_AR_Transition_Crouch_Start": {
+    "samples": [
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_Start.A_TFA_FP_AR_Transition_Crouch_Start",
+        "sample_value": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      },
+      {
+        "animation": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_Start_Aimed.A_TFA_FP_AR_Transition_Crouch_Start_Aimed",
+        "sample_value": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "rate_scale": 1.0
+      }
+    ],
+    "parameters": [
+      {
+        "display_name": "AimAlpha",
+        "min": 0.0,
+        "max": 1.0,
+        "grid_num": 2
+      },
+      {
+        "display_name": "None",
+        "min": 0.0,
+        "max": 100.0,
+        "grid_num": 4
+      },
+      {
+        "display_name": "None",
+        "min": 0.0,
+        "max": 100.0,
+        "grid_num": 4
+      }
+    ]
+  }
+}

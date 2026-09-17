@@ -1,0 +1,11 @@
+{
+  "record_id": "TaskClosureCommits01",
+  "date_local": "2026-09-17",
+  "source": "Owner direct chat after MSQ-52 completion",
+  "owner_message_original": "Делай коммит после закрытия задачи пожалуйста всегда",
+  "owner_message_english_translation": "Please always make a commit after closing a task.",
+  "decision": "Make a local Git commit of verified task-scoped changes after each task closure, before the final owner handoff.",
+  "scope": "Standing project workflow instruction, including the just-completed MSQ-52 and Datum16 selection.",
+  "responsibility": "The controller creates the closure commit; a worker may do so only when explicitly delegated.",
+  "preservation": "Keep unrelated owner edits out of the task commit, retain Git LFS for binary assets, and never commit credentials or generated diagnostic data."
+}

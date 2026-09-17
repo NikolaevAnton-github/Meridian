@@ -1,0 +1,23 @@
+{
+  "record_id": "PlayerCharacter01-Datum16Selection01",
+  "date_local": "2026-09-17",
+  "source": "Owner direct chat with Codex",
+  "owner_message_original": "1) Datum16 - это наш выбор 2) MSQ-52 давай делать",
+  "owner_message_english_translation": "1) Datum16 is our choice. 2) Let's do MSQ-52.",
+  "decision": "Select Datum16 as the original protagonist design and execute MSQ-52 through Multica.",
+  "selected_package": "PlayerArt-Concept02 / Candidate01",
+  "selected_variant_id": "16",
+  "selected_variant_name": "Datum",
+  "canonical_design_image": "Assets/Concepts/PlayerCharacter01/Concept02/16.png",
+  "image_sha256": "ee9ff6799379808ccd74e752cf816a54a205c2e1f3f3c8a959fba1e69083280b",
+  "manifest": "Assets/Concepts/PlayerCharacter01/Concept02/manifest.json",
+  "manifest_sha256": "f3cde36ab8677eda002f9376aaf68f20c155a45eb5c0e9ffbd2591b083375eb5",
+  "identity_resolution": "Datum16 uniquely identifies variant 16 / Datum in Concept02 / Candidate01. The controller resolved the owner's short name against the existing manifest.",
+  "derived_input_packages_preserved": ["Datum16TrellisInput01", "Datum16MultiView01", "Datum16MultiViewTpose01"],
+  "reference_authority": "The original concept establishes design identity. Datum16MultiViewTpose01 is the latest owner-directed pose input; inferred hidden details and cross-view geometric consistency still require reconciliation during MSQ-54.",
+  "concept_selection_gate": "MSQ-53 satisfied by explicit owner selection; no independent concept reviewer or expert run.",
+  "execution_authorized": ["MSQ-52"],
+  "production_modeling_prerequisite_remaining": "Complete the MSQ-52 rig contract before MSQ-54; this instruction dispatches MSQ-52 only.",
+  "preservation": "Keep all original concept/derived package bytes and immutable manifests, rejected candidates and owner experiments. Historical pending fields are superseded by this record, not rewritten.",
+  "final_integrated_character_accepted": false
+}

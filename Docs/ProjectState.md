@@ -22,9 +22,15 @@ subscriptions plus free Hunyuan3D Studio, and integration into the production
 sequence. Research and task synchronization are delivered; no production model,
 new generation or worker run resulted from that preparation.
 
-**Before production modeling:** record the owner's explicit package/version/variant
-selection in MSQ-53 and `Docs/Approvals/`, and complete the MSQ-52 rig contract.
-Both remain pending. Datum16 is a planning example, not an approved final design.
+**Selected design:** the owner chose **Concept02 / Candidate01, 16 / Datum**
+and authorized MSQ-52 on 2026-09-17. See the
+[exact decision](Approvals/PlayerCharacter01-Datum16Selection01.json) and
+[animation audit execution scope](Tasks/PlayerAnimationAudit01.md).
+MSQ-53's named design-selection gate is satisfied. MSQ-52's technical audit and
+`MSQ52-RigContract01` are complete and controller-verified; see the
+[handoff](PlayerAnimationAudit01.md). MSQ-54 is the next production stage and must
+reconcile derived reference views and validate the original-model round trip.
+This owner instruction dispatched MSQ-52 only; MSQ-54 has not been dispatched.
 The owner alone evaluates this concept batch; no independent concept reviewer or
 MSQ-53 expert run. Later MSQ-60 integrated review remains required.
 
@@ -40,7 +46,8 @@ MSQ-53 expert run. Later MSQ-60 integrated review remains required.
 
 The art is input preparation. Hidden surfaces are inferred and exact 3D consistency
 is unverified. Galleries, exact prompts and manifests remain under
-`Assets/Concepts/PlayerCharacter01/`. No delivered package grants modeling approval.
+`Assets/Concepts/PlayerCharacter01/`. The selection record above supersedes old
+pending-selection text; immutable package manifests remain unchanged.
 Concept-art tasks used Astra/max/standard and owner-only evaluation; their saved
 profiles/native arguments were restored. Later implementation retains the recorded
 Astra/high/standard baseline unless a new scoped instruction changes it.
@@ -52,7 +59,8 @@ Read the [production pipeline](PlayerCharacter01AI3DPipeline.md),
 Their existing task family covers the work; do not create parallel provider/armor
 task databases. The ordered production approach is:
 
-1. Resolve the named concept selection, authoritative references and rig contract.
+1. Use the selected Datum16 and completed MSQ52-RigContract01; reconcile the
+   authoritative production views during MSQ-54.
 2. Inspect existing owner exports; establish one proportional master and production
    skeleton, then perform the smallest justified AI source trial.
 3. Fit separate armor/components to that master in Blender; resolve joint topology,
@@ -82,8 +90,8 @@ Last verified Multica state, 2026-09-17:
 | --- | --- |
 | MSQ-50 | `in_progress`; parent board state, not evidence of an active worker. |
 | MSQ-51 | `done`; concept deliveries preserved. |
-| MSQ-53 | `in_review`; named owner selection pending. |
-| MSQ-52 | `backlog`; animation audit and rig contract pending; can be prepared independently of final appearance selection when dispatched. |
+| MSQ-53 | `done`; owner selected Concept02 / Candidate01, 16 / Datum. No expert run. |
+| MSQ-52 | `done`; controller-accepted animation audit and MSQ52-RigContract01. 186 source-identical packages, 82 sequences, 19 representative playback cases; later original-rig/gameplay gates remain. |
 | MSQ-54 through MSQ-60 | `backlog`; original model, presentation, movement, rifle, finish, integration and final review. |
 
 The [task synchronization audit](Tasks/PlayerCharacter01AI3DTaskAudit01.md) verified
@@ -132,6 +140,10 @@ editor state. Use the relevant acceptance manifest and inspect current bytes whe
 needed; do not infer live identity from old paragraphs saying "current map".
 
 ## Tooling and instruction maintenance
+
+The owner requires a local Git commit of verified task changes after each task
+closure, before final handoff. The controller owns this step; see
+[the standing instruction](Approvals/TaskClosureCommits01.json) and AGENTS.md.
 
 The owner permits launching existing apps and local services needed for authorized
 work without repeated confirmation. At the 2026-09-17 audit, Multica database/API/web

@@ -1,0 +1,546 @@
+[
+  {
+    "package": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Reload",
+    "loaded": true,
+    "sequence_length": 3.6666667461395264,
+    "slot_anim_tracks": [
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE2A0A0) {slot_name: \"DefaultSlot\", anim_track: {anim_segments: ((AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload.A_TFA_FP_AR_Reload'\",AnimEndTime=3.666667))}}>",
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE29C60) {slot_name: \"Aiming\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Aimed.A_TFA_FP_AR_Reload_Aimed'\",AnimEndTime=3.666667))}}>"
+    ],
+    "composite_sections": {
+      "unavailable": "AnimMontage: Failed to find property 'composite_sections' for attribute 'composite_sections' on 'AnimMontage'"
+    },
+    "blend_in": "<Struct 'AlphaBlend' (0x000001F815D7DE80) {}>",
+    "blend_out": "<Struct 'AlphaBlend' (0x000001F815D7DEB8) {}>",
+    "notifies": [
+      {
+        "notify_name": "ANS_LeftHandGrip_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 0.036239445209503174,
+        "duration": 2.2700798511505127
+      },
+      {
+        "notify_name": "AN_UnlockActions_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 2.631934404373169,
+        "duration": 0.0
+      }
+    ],
+    "slots": [
+      {
+        "slot_name": "DefaultSlot",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE2A730) {anim_segments: ((AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload.A_TFA_FP_AR_Reload'\",AnimEndTime=3.666667))}>"
+      },
+      {
+        "slot_name": "Aiming",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE2DB90) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Aimed.A_TFA_FP_AR_Reload_Aimed'\",AnimEndTime=3.666667))}>"
+      }
+    ]
+  },
+  {
+    "package": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Reload_Empty",
+    "loaded": true,
+    "sequence_length": 3.6666667461395264,
+    "slot_anim_tracks": [
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE2D180) {slot_name: \"DefaultSlot\", anim_track: {anim_segments: ((AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty.A_TFA_FP_AR_Reload_Empty'\",AnimEndTime=3.666667))}}>",
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE216A0) {slot_name: \"Aiming\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty_Aimed.A_TFA_FP_AR_Reload_Empty_Aimed'\",AnimEndTime=3.666667))}}>"
+    ],
+    "composite_sections": {
+      "unavailable": "AnimMontage: Failed to find property 'composite_sections' for attribute 'composite_sections' on 'AnimMontage'"
+    },
+    "blend_in": "<Struct 'AlphaBlend' (0x000001F815D74100) {}>",
+    "blend_out": "<Struct 'AlphaBlend' (0x000001F815D74138) {}>",
+    "notifies": [
+      {
+        "notify_name": "ANS_TFA_LeftHandGrip_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 9.999999747378752e-05,
+        "duration": 2.6560540199279785
+      },
+      {
+        "notify_name": "AN_UnlockActions_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 2.949777364730835,
+        "duration": 0.0
+      }
+    ],
+    "slots": [
+      {
+        "slot_name": "DefaultSlot",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE20C50) {anim_segments: ((AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty.A_TFA_FP_AR_Reload_Empty'\",AnimEndTime=3.666667))}>"
+      },
+      {
+        "slot_name": "Aiming",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE29110) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty_Aimed.A_TFA_FP_AR_Reload_Empty_Aimed'\",AnimEndTime=3.666667))}>"
+      }
+    ]
+  },
+  {
+    "package": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/AM_TFA_TP_AR_Reload",
+    "loaded": true,
+    "sequence_length": 3.6666667461395264,
+    "slot_anim_tracks": [
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE2DC40) {slot_name: \"DefaultSlot\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload.A_TFA_TP_AR_Reload'\",AnimEndTime=3.666667))}}>",
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE24400) {slot_name: \"Aiming\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Aimed.A_TFA_TP_AR_Reload_Aimed'\",AnimEndTime=3.666667))}}>"
+    ],
+    "composite_sections": {
+      "unavailable": "AnimMontage: Failed to find property 'composite_sections' for attribute 'composite_sections' on 'AnimMontage'"
+    },
+    "blend_in": "<Struct 'AlphaBlend' (0x000001F815D7D780) {}>",
+    "blend_out": "<Struct 'AlphaBlend' (0x000001F815D7D7B8) {}>",
+    "notifies": [
+      {
+        "notify_name": "ANS_TFA_LeftHandGrip_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": -9.999999747378752e-05,
+        "duration": 2.2099411487579346
+      },
+      {
+        "notify_name": "AN_UnlockActions_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 2.566666603088379,
+        "duration": 0.0
+      }
+    ],
+    "slots": [
+      {
+        "slot_name": "DefaultSlot",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE2B850) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload.A_TFA_TP_AR_Reload'\",AnimEndTime=3.666667))}>"
+      },
+      {
+        "slot_name": "Aiming",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE2E5D0) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Aimed.A_TFA_TP_AR_Reload_Aimed'\",AnimEndTime=3.666667))}>"
+      }
+    ]
+  },
+  {
+    "package": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/AM_TFA_TP_AR_Reload_Empty",
+    "loaded": true,
+    "sequence_length": 3.6666667461395264,
+    "slot_anim_tracks": [
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE2D980) {slot_name: \"DefaultSlot\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Empty.A_TFA_TP_AR_Reload_Empty'\",AnimEndTime=3.666667))}}>",
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE24400) {slot_name: \"Aiming\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Empty_Aimed.A_TFA_TP_AR_Reload_Empty_Aimed'\",AnimEndTime=3.666667))}}>"
+    ],
+    "composite_sections": {
+      "unavailable": "AnimMontage: Failed to find property 'composite_sections' for attribute 'composite_sections' on 'AnimMontage'"
+    },
+    "blend_in": "<Struct 'AlphaBlend' (0x000001F815D74F00) {}>",
+    "blend_out": "<Struct 'AlphaBlend' (0x000001F815D74F38) {}>",
+    "notifies": [
+      {
+        "notify_name": "ANS_TFA_LeftHandGrip_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": -9.999999747378752e-05,
+        "duration": 2.5311646461486816
+      },
+      {
+        "notify_name": "AN_UnlockActions_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 2.799999952316284,
+        "duration": 0.0
+      }
+    ],
+    "slots": [
+      {
+        "slot_name": "DefaultSlot",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE22F10) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Empty.A_TFA_TP_AR_Reload_Empty'\",AnimEndTime=3.666667))}>"
+      },
+      {
+        "slot_name": "Aiming",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE20770) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Empty_Aimed.A_TFA_TP_AR_Reload_Empty_Aimed'\",AnimEndTime=3.666667))}>"
+      }
+    ]
+  },
+  {
+    "package": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload",
+    "loaded": true,
+    "sequence_length": 3.6666667461395264,
+    "slot_anim_tracks": [
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE22620) {slot_name: \"DefaultSlot\", anim_track: {anim_segments: ((AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload.A_TFA_FP_WEP_AR_Reload'\",AnimEndTime=3.666667))}}>",
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE24360) {slot_name: \"Aiming\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Aimed.A_TFA_FP_WEP_AR_Reload_Aimed'\",AnimEndTime=3.666667))}}>"
+    ],
+    "composite_sections": {
+      "unavailable": "AnimMontage: Failed to find property 'composite_sections' for attribute 'composite_sections' on 'AnimMontage'"
+    },
+    "blend_in": "<Struct 'AlphaBlend' (0x000001F815D79880) {}>",
+    "blend_out": "<Struct 'AlphaBlend' (0x000001F815D798B8) {}>",
+    "notifies": [
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload.AM_TFA_FP_WEP_AR_Reload:AnimNotify_PlaySound_2",
+        "notify_state_class": null,
+        "time": 0.08429799973964691,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload.AM_TFA_FP_WEP_AR_Reload:AnimNotify_PlaySound_7",
+        "notify_state_class": null,
+        "time": 0.12952232360839844,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "ANS_ShowReserveMag_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 0.45513737201690674,
+        "duration": 3.2115297317504883
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload.AM_TFA_FP_WEP_AR_Reload:AnimNotify_PlaySound_4",
+        "notify_state_class": null,
+        "time": 0.5767764449119568,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload.AM_TFA_FP_WEP_AR_Reload:AnimNotify_PlaySound_6",
+        "notify_state_class": null,
+        "time": 0.684273898601532,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload.AM_TFA_FP_WEP_AR_Reload:AnimNotify_PlaySound_5",
+        "notify_state_class": null,
+        "time": 0.8470814228057861,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload.AM_TFA_FP_WEP_AR_Reload:AnimNotify_PlaySound_3",
+        "notify_state_class": null,
+        "time": 1.6942836046218872,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload.AM_TFA_FP_WEP_AR_Reload:AnimNotify_PlaySound_8",
+        "notify_state_class": null,
+        "time": 2.1495416164398193,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "ANS_HideMainMag_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 2.520380973815918,
+        "duration": 1.1462855339050293
+      }
+    ],
+    "slots": [
+      {
+        "slot_name": "DefaultSlot",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE21850) {anim_segments: ((AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload.A_TFA_FP_WEP_AR_Reload'\",AnimEndTime=3.666667))}>"
+      },
+      {
+        "slot_name": "Aiming",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE2EB10) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Aimed.A_TFA_FP_WEP_AR_Reload_Aimed'\",AnimEndTime=3.666667))}>"
+      }
+    ]
+  },
+  {
+    "package": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Empty",
+    "loaded": true,
+    "sequence_length": 3.6666667461395264,
+    "slot_anim_tracks": [
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE2D260) {slot_name: \"DefaultSlot\", anim_track: {anim_segments: ((AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty.A_TFA_FP_WEP_AR_Reload_Empty'\",AnimEndTime=3.666667))}}>",
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE22540) {slot_name: \"Aiming\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty_Aimed.A_TFA_FP_WEP_AR_Reload_Empty_Aimed'\",AnimEndTime=3.666667))}}>"
+    ],
+    "composite_sections": {
+      "unavailable": "AnimMontage: Failed to find property 'composite_sections' for attribute 'composite_sections' on 'AnimMontage'"
+    },
+    "blend_in": "<Struct 'AlphaBlend' (0x000001F815D78E00) {}>",
+    "blend_out": "<Struct 'AlphaBlend' (0x000001F815D78E38) {}>",
+    "notifies": [
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Empty.AM_TFA_FP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_9",
+        "notify_state_class": null,
+        "time": 0.06017836928367615,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Empty.AM_TFA_FP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_2",
+        "notify_state_class": null,
+        "time": 0.17776158452033997,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "ANS_HideMainMag_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 0.4333333373069763,
+        "duration": 3.2333333492279053
+      },
+      {
+        "notify_name": "AN_DropMagazine_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 0.4333333373069763,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Empty.AM_TFA_FP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_10",
+        "notify_state_class": null,
+        "time": 0.7325131893157959,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "ANS_ShowReserveMag_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 0.8608154058456421,
+        "duration": 2.8058509826660156
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Empty.AM_TFA_FP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_1",
+        "notify_state_class": null,
+        "time": 1.0551133155822754,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Empty.AM_TFA_FP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_6",
+        "notify_state_class": null,
+        "time": 1.3626385927200317,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Empty.AM_TFA_FP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_8",
+        "notify_state_class": null,
+        "time": 1.968644380569458,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Empty.AM_TFA_FP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_5",
+        "notify_state_class": null,
+        "time": 2.408827781677246,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Empty.AM_TFA_FP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_7",
+        "notify_state_class": null,
+        "time": 2.613844633102417,
+        "duration": 0.0
+      }
+    ],
+    "slots": [
+      {
+        "slot_name": "DefaultSlot",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE23DF0) {anim_segments: ((AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty.A_TFA_FP_WEP_AR_Reload_Empty'\",AnimEndTime=3.666667))}>"
+      },
+      {
+        "slot_name": "Aiming",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE20570) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty_Aimed.A_TFA_FP_WEP_AR_Reload_Empty_Aimed'\",AnimEndTime=3.666667))}>"
+      }
+    ]
+  },
+  {
+    "package": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload",
+    "loaded": true,
+    "sequence_length": 3.6666667461395264,
+    "slot_anim_tracks": [
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE2D8E0) {slot_name: \"DefaultSlot\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload.A_TFA_TP_WEP_AR_Reload'\",AnimEndTime=3.666667))}}>",
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE29360) {slot_name: \"Aiming\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Aimed.A_TFA_TP_WEP_AR_Reload_Aimed'\",AnimEndTime=3.666667))}}>"
+    ],
+    "composite_sections": {
+      "unavailable": "AnimMontage: Failed to find property 'composite_sections' for attribute 'composite_sections' on 'AnimMontage'"
+    },
+    "blend_in": "<Struct 'AlphaBlend' (0x000001F815D7A300) {}>",
+    "blend_out": "<Struct 'AlphaBlend' (0x000001F815D7A338) {}>",
+    "notifies": [
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload.AM_TFA_TP_WEP_AR_Reload:AnimNotify_PlaySound_11",
+        "notify_state_class": null,
+        "time": 0.07406960427761078,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload.AM_TFA_TP_WEP_AR_Reload:AnimNotify_PlaySound_8",
+        "notify_state_class": null,
+        "time": 0.11929380148649216,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "ANS_ShowReserveMag_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 0.25615039467811584,
+        "duration": 3.4105165004730225
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload.AM_TFA_TP_WEP_AR_Reload:AnimNotify_PlaySound_13",
+        "notify_state_class": null,
+        "time": 0.566547691822052,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload.AM_TFA_TP_WEP_AR_Reload:AnimNotify_PlaySound_7",
+        "notify_state_class": null,
+        "time": 0.6740458607673645,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload.AM_TFA_TP_WEP_AR_Reload:AnimNotify_PlaySound_9",
+        "notify_state_class": null,
+        "time": 0.8368527889251709,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload.AM_TFA_TP_WEP_AR_Reload:AnimNotify_PlaySound_12",
+        "notify_state_class": null,
+        "time": 1.6840561628341675,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "ANS_HideMainMag_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 1.9445247650146484,
+        "duration": 1.7221417427062988
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload.AM_TFA_TP_WEP_AR_Reload:AnimNotify_PlaySound_10",
+        "notify_state_class": null,
+        "time": 2.1393134593963623,
+        "duration": 0.0
+      }
+    ],
+    "slots": [
+      {
+        "slot_name": "DefaultSlot",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE2F350) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload.A_TFA_TP_WEP_AR_Reload'\",AnimEndTime=3.666667))}>"
+      },
+      {
+        "slot_name": "Aiming",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE221F0) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Aimed.A_TFA_TP_WEP_AR_Reload_Aimed'\",AnimEndTime=3.666667))}>"
+      }
+    ]
+  },
+  {
+    "package": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload_Empty",
+    "loaded": true,
+    "sequence_length": 3.6666667461395264,
+    "slot_anim_tracks": [
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE2E0E0) {slot_name: \"DefaultSlot\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Empty.A_TFA_TP_WEP_AR_Reload_Empty'\",AnimEndTime=3.666667))}}>",
+      "<Struct 'SlotAnimationTrack' (0x000001F93FE2B880) {slot_name: \"Aiming\", anim_track: {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Empty_Aimed.A_TFA_TP_WEP_AR_Reload_Empty_Aimed'\",AnimEndTime=3.666667))}}>"
+    ],
+    "composite_sections": {
+      "unavailable": "AnimMontage: Failed to find property 'composite_sections' for attribute 'composite_sections' on 'AnimMontage'"
+    },
+    "blend_in": "<Struct 'AlphaBlend' (0x000001F815D7BB80) {}>",
+    "blend_out": "<Struct 'AlphaBlend' (0x000001F815D7BBB8) {}>",
+    "notifies": [
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload_Empty.AM_TFA_TP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_11",
+        "notify_state_class": null,
+        "time": 0.06673081964254379,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload_Empty.AM_TFA_TP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_16",
+        "notify_state_class": null,
+        "time": 0.18431533873081207,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "AN_DropMagazine_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 0.35071033239364624,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "ANS_HideMainMag_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 0.3507198691368103,
+        "duration": 3.3159468173980713
+      },
+      {
+        "notify_name": "ANS_ShowReserveMag_C",
+        "notify": null,
+        "notify_state_class": null,
+        "time": 0.5727205872535706,
+        "duration": 3.0939459800720215
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload_Empty.AM_TFA_TP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_12",
+        "notify_state_class": null,
+        "time": 0.7390655875205994,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload_Empty.AM_TFA_TP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_17",
+        "notify_state_class": null,
+        "time": 1.0616657733917236,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload_Empty.AM_TFA_TP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_14",
+        "notify_state_class": null,
+        "time": 1.3691924810409546,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload_Empty.AM_TFA_TP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_15",
+        "notify_state_class": null,
+        "time": 1.9751968383789062,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload_Empty.AM_TFA_TP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_10",
+        "notify_state_class": null,
+        "time": 2.4153807163238525,
+        "duration": 0.0
+      },
+      {
+        "notify_name": "PlaySound",
+        "notify": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/AM_TFA_TP_WEP_AR_Reload_Empty.AM_TFA_TP_WEP_AR_Reload_Empty:AnimNotify_PlaySound_13",
+        "notify_state_class": null,
+        "time": 2.6203982830047607,
+        "duration": 0.0
+      }
+    ],
+    "slots": [
+      {
+        "slot_name": "DefaultSlot",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE2F570) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Empty.A_TFA_TP_WEP_AR_Reload_Empty'\",AnimEndTime=3.666667))}>"
+      },
+      {
+        "slot_name": "Aiming",
+        "anim_track": "<Struct 'AnimTrack' (0x000001F93FE2C5B0) {anim_segments: ((CachedPlayLength=3.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Empty_Aimed.A_TFA_TP_WEP_AR_Reload_Empty_Aimed'\",AnimEndTime=3.666667))}>"
+      }
+    ]
+  }
+]

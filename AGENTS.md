@@ -34,6 +34,11 @@ instructions supersede earlier guidance within their stated scope.
 - Track code, configuration, accepted decisions and asset sources in Git; use
   Git LFS for binary assets. Keep generated data and large logs outside Git.
   Never put credentials in tracked files or tool output.
+- After closing each task, the controller must commit its verified, task-scoped
+  changes locally before the final owner handoff. Include the task ID in an
+  English commit message; preserve unrelated owner edits. Workers leave the
+  closure commit to the controller unless explicitly delegated. See the
+  [standing owner instruction](Docs/Approvals/TaskClosureCommits01.json).
 
 ## Execution and tools
 

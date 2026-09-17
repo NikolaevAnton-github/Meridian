@@ -1,0 +1,373 @@
+[
+  {
+    "key": "Contact04-FP-Reload",
+    "samples": 82,
+    "duration": 3.6666667461395264,
+    "first_time": 0.008333500474691391,
+    "last_time": 3.6666667461395264,
+    "complete": true,
+    "max_character_weapon_time_delta_s": 0.0,
+    "right_wrist_in_rifle_root_at_start_cm": [
+      -3.4507624768042136,
+      -9.639129773959809,
+      -6.265848752685964
+    ],
+    "right_wrist_max_displacement_from_start_in_rifle_root_cm": 0.08025004676017414,
+    "index03_joint_to_trigger_bone_distance_cm": [
+      1.8709999064902614,
+      2.983155823671623
+    ],
+    "interpretation": "Bone origins, not glove/trigger surfaces; contact observations, not a zero-distance surface-contact acceptance test.",
+    "first_visibility_transitions": {
+      "0.008334": {
+        "main": true,
+        "reserve": false
+      },
+      "0.499029": {
+        "main": true,
+        "reserve": true
+      },
+      "2.560598": {
+        "main": false,
+        "reserve": true
+      }
+    }
+  },
+  {
+    "key": "Contact04-FP-Reload_Aimed",
+    "samples": 81,
+    "duration": 3.6666667461395264,
+    "first_time": 0.008333399891853333,
+    "last_time": 3.6666667461395264,
+    "complete": true,
+    "max_character_weapon_time_delta_s": 0.0,
+    "right_wrist_in_rifle_root_at_start_cm": [
+      -3.452154368812868,
+      -9.645654488875477,
+      -6.253442890910154
+    ],
+    "right_wrist_max_displacement_from_start_in_rifle_root_cm": 0.0034140156014354065,
+    "index03_joint_to_trigger_bone_distance_cm": [
+      1.888247544632296,
+      3.5266047836334122
+    ],
+    "interpretation": "Bone origins, not glove/trigger surfaces; contact observations, not a zero-distance surface-contact acceptance test.",
+    "first_visibility_transitions": {
+      "0.008333": {
+        "main": true,
+        "reserve": false
+      },
+      "0.498587": {
+        "main": true,
+        "reserve": true
+      },
+      "2.545249": {
+        "main": false,
+        "reserve": true
+      }
+    }
+  },
+  {
+    "key": "Contact04-FP-Reload_Empty",
+    "samples": 79,
+    "duration": 3.6666667461395264,
+    "first_time": 0.008333399891853333,
+    "last_time": 3.6666667461395264,
+    "complete": true,
+    "max_character_weapon_time_delta_s": 0.0,
+    "right_wrist_in_rifle_root_at_start_cm": [
+      -3.445706609443343,
+      -9.645675012736206,
+      -6.251377497105881
+    ],
+    "right_wrist_max_displacement_from_start_in_rifle_root_cm": 0.05385446909765936,
+    "index03_joint_to_trigger_bone_distance_cm": [
+      1.868339616883277,
+      2.969146732340914
+    ],
+    "interpretation": "Bone origins, not glove/trigger surfaces; contact observations, not a zero-distance surface-contact acceptance test.",
+    "first_visibility_transitions": {
+      "0.008333": {
+        "main": true,
+        "reserve": false
+      },
+      "0.464165": {
+        "main": false,
+        "reserve": false
+      },
+      "0.888425": {
+        "main": false,
+        "reserve": true
+      }
+    }
+  },
+  {
+    "key": "Contact04-FP-Reload_Empty_Aimed",
+    "samples": 82,
+    "duration": 3.6666667461395264,
+    "first_time": 0.008333500474691391,
+    "last_time": 3.6666667461395264,
+    "complete": true,
+    "max_character_weapon_time_delta_s": 0.0,
+    "right_wrist_in_rifle_root_at_start_cm": [
+      -3.4517847496943665,
+      -9.645957486720377,
+      -6.254029001800641
+    ],
+    "right_wrist_max_displacement_from_start_in_rifle_root_cm": 0.0031540989109035186,
+    "index03_joint_to_trigger_bone_distance_cm": [
+      1.8885305299350756,
+      3.2351861933399837
+    ],
+    "interpretation": "Bone origins, not glove/trigger surfaces; contact observations, not a zero-distance surface-contact acceptance test.",
+    "first_visibility_transitions": {
+      "0.008334": {
+        "main": true,
+        "reserve": false
+      },
+      "0.439855": {
+        "main": false,
+        "reserve": false
+      },
+      "0.861971": {
+        "main": false,
+        "reserve": true
+      }
+    }
+  },
+  {
+    "key": "Contact04-TP-Reload",
+    "samples": 76,
+    "duration": 3.6666667461395264,
+    "first_time": 0.008333500474691391,
+    "last_time": 3.6666667461395264,
+    "complete": true,
+    "max_character_weapon_time_delta_s": 0.0,
+    "right_wrist_in_rifle_root_at_start_cm": [
+      -3.453772726083759,
+      -9.640052614931431,
+      -6.282888386141096
+    ],
+    "right_wrist_max_displacement_from_start_in_rifle_root_cm": 0.04575414690844375,
+    "index03_joint_to_trigger_bone_distance_cm": [
+      1.8704013441977312,
+      2.8081435255569245
+    ],
+    "interpretation": "Bone origins, not glove/trigger surfaces; contact observations, not a zero-distance surface-contact acceptance test.",
+    "first_visibility_transitions": {
+      "0.008334": {
+        "main": true,
+        "reserve": false
+      },
+      "0.258413": {
+        "main": true,
+        "reserve": true
+      },
+      "1.972567": {
+        "main": false,
+        "reserve": true
+      }
+    }
+  },
+  {
+    "key": "Contact04-TP-Reload_Aimed",
+    "samples": 78,
+    "duration": 3.6666667461395264,
+    "first_time": 0.008333399891853333,
+    "last_time": 3.6666667461395264,
+    "complete": true,
+    "max_character_weapon_time_delta_s": 0.0,
+    "right_wrist_in_rifle_root_at_start_cm": [
+      -3.4522449840811786,
+      -9.643503799540616,
+      -6.255598424258464
+    ],
+    "right_wrist_max_displacement_from_start_in_rifle_root_cm": 0.012036694569761404,
+    "index03_joint_to_trigger_bone_distance_cm": [
+      1.8725040036317513,
+      3.0773850304207673
+    ],
+    "interpretation": "Bone origins, not glove/trigger surfaces; contact observations, not a zero-distance surface-contact acceptance test.",
+    "first_visibility_transitions": {
+      "0.008333": {
+        "main": true,
+        "reserve": false
+      },
+      "0.290018": {
+        "main": true,
+        "reserve": true
+      },
+      "1.987952": {
+        "main": false,
+        "reserve": true
+      }
+    }
+  },
+  {
+    "key": "Contact04-TP-Reload_Empty",
+    "samples": 79,
+    "duration": 3.6666667461395264,
+    "first_time": 0.008333399891853333,
+    "last_time": 3.6666667461395264,
+    "complete": true,
+    "max_character_weapon_time_delta_s": 0.0,
+    "right_wrist_in_rifle_root_at_start_cm": [
+      -3.446639032968941,
+      -9.641072006671571,
+      -6.251259386237508
+    ],
+    "right_wrist_max_displacement_from_start_in_rifle_root_cm": 0.030638628584632902,
+    "index03_joint_to_trigger_bone_distance_cm": [
+      1.8504263252057123,
+      3.0845565179404173
+    ],
+    "interpretation": "Bone origins, not glove/trigger surfaces; contact observations, not a zero-distance surface-contact acceptance test.",
+    "first_visibility_transitions": {
+      "0.008333": {
+        "main": true,
+        "reserve": false
+      },
+      "0.383139": {
+        "main": false,
+        "reserve": false
+      },
+      "0.624823": {
+        "main": false,
+        "reserve": true
+      }
+    }
+  },
+  {
+    "key": "Contact04-TP-Reload_Empty_Aimed",
+    "samples": 77,
+    "duration": 3.6666667461395264,
+    "first_time": 0.008333496749401093,
+    "last_time": 3.6666667461395264,
+    "complete": true,
+    "max_character_weapon_time_delta_s": 0.0,
+    "right_wrist_in_rifle_root_at_start_cm": [
+      -3.4520873876242817,
+      -9.644459705395171,
+      -6.253590332375263
+    ],
+    "right_wrist_max_displacement_from_start_in_rifle_root_cm": 0.013157789357632402,
+    "index03_joint_to_trigger_bone_distance_cm": [
+      1.8625844105598182,
+      3.0800929317626116
+    ],
+    "interpretation": "Bone origins, not glove/trigger surfaces; contact observations, not a zero-distance surface-contact acceptance test.",
+    "first_visibility_transitions": {
+      "0.008333": {
+        "main": true,
+        "reserve": false
+      },
+      "0.398083": {
+        "main": false,
+        "reserve": false
+      },
+      "0.637042": {
+        "main": false,
+        "reserve": true
+      }
+    }
+  },
+  {
+    "key": "Local-MF_Rifle_Jog_Bwd",
+    "samples": 42,
+    "duration": 1.7999999523162842,
+    "first_time": 0.008817199617624283,
+    "last_time": 1.7999999523162842,
+    "complete": true,
+    "left_foot_motion_extent_cm": 46.75705458723296
+  },
+  {
+    "key": "Local-MF_Rifle_Jog_Fwd",
+    "samples": 38,
+    "duration": 1.5333333015441895,
+    "first_time": 0.008970998227596283,
+    "last_time": 1.5333333015441895,
+    "complete": true,
+    "left_foot_motion_extent_cm": 71.57202131538345
+  },
+  {
+    "key": "Local-MF_Rifle_Jog_Left",
+    "samples": 16,
+    "duration": 0.46666666865348816,
+    "first_time": 0.008488599210977554,
+    "last_time": 0.46666666865348816,
+    "complete": true,
+    "left_foot_motion_extent_cm": 47.14763910056698
+  },
+  {
+    "key": "Local-MF_Rifle_Jog_Right",
+    "samples": 28,
+    "duration": 1.0666667222976685,
+    "first_time": 0.009054798632860184,
+    "last_time": 1.0666667222976685,
+    "complete": true,
+    "left_foot_motion_extent_cm": 83.73244202732259
+  },
+  {
+    "key": "Local-MF_Rifle_Walk_Bwd",
+    "samples": 30,
+    "duration": 1.2000000476837158,
+    "first_time": 0.009241700172424316,
+    "last_time": 1.2000000476837158,
+    "complete": true,
+    "left_foot_motion_extent_cm": 53.04092938567346
+  },
+  {
+    "key": "Local-MF_Rifle_Walk_Fwd",
+    "samples": 36,
+    "duration": 1.5333333015441895,
+    "first_time": 0.010168101638555527,
+    "last_time": 1.5333333015441895,
+    "complete": true,
+    "left_foot_motion_extent_cm": 56.92974382209379
+  },
+  {
+    "key": "Local-MF_Rifle_Walk_Left",
+    "samples": 30,
+    "duration": 1.2333333492279053,
+    "first_time": 0.009680300951004028,
+    "last_time": 1.2333333492279053,
+    "complete": true,
+    "left_foot_motion_extent_cm": 56.688903706568944
+  },
+  {
+    "key": "Local-MF_Rifle_Walk_Right",
+    "samples": 36,
+    "duration": 1.5,
+    "first_time": 0.00948910042643547,
+    "last_time": 1.5,
+    "complete": true,
+    "left_foot_motion_extent_cm": 75.70082637603728
+  },
+  {
+    "key": "Local-MM_Rifle_Jump_Fall_Land",
+    "samples": 14,
+    "duration": 0.4000000059604645,
+    "first_time": 0.008716899901628494,
+    "last_time": 0.4000000059604645,
+    "complete": true,
+    "left_foot_motion_extent_cm": 42.11143680220615
+  },
+  {
+    "key": "Local-MM_Rifle_Jump_Fall_Loop",
+    "samples": 64,
+    "duration": 3.0,
+    "first_time": 0.017935000360012054,
+    "last_time": 3.0,
+    "complete": true,
+    "left_foot_motion_extent_cm": 25.750263691431844
+  },
+  {
+    "key": "Local-MM_Rifle_Jump_Start",
+    "samples": 12,
+    "duration": 0.23333333432674408,
+    "first_time": 0.009181298315525055,
+    "last_time": 0.23333333432674408,
+    "complete": true,
+    "left_foot_motion_extent_cm": 33.65694825171391
+  }
+]

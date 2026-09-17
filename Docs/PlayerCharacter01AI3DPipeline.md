@@ -2,6 +2,18 @@
 
 Research and planning revision: **2026-09-17 / Pipeline01**.
 
+Subsequent owner decision on 2026-09-17: **Concept02 / Candidate01, 16 / Datum**
+is selected and MSQ-52 execution is authorized. See the
+[selection record](Approvals/PlayerCharacter01-Datum16Selection01.json).
+Historical planning-only/pending-selection statements below remain evidence of
+the research scope; the rig contract and reference reconciliation still precede
+model production, and this instruction dispatches MSQ-52 only.
+
+MSQ-52 subsequently completed its controller-verified audit and
+`MSQ52-RigContract01`; use the [handoff](PlayerAnimationAudit01.md) for actual
+skeleton, pose, source dimensions, clip coverage and reload-event constraints.
+The proposed original-model export profile still needs an MSQ-54 round trip.
+
 Task synchronization completed and verified on 2026-09-17: the
 [Multica audit](Tasks/PlayerCharacter01AI3DTaskAudit01.md) applied this workflow
 to the existing MSQ-50 and MSQ-52 through MSQ-60 descriptions, preserving the

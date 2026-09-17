@@ -1,5 +1,17 @@
 # PlayerCharacter01: visible first-person body integration plan
 
+Current owner direction, 2026-09-17: **Concept02 / Candidate01, 16 / Datum** is
+selected and **MSQ-52 is authorized for execution**. See the
+[exact decision](../Approvals/PlayerCharacter01-Datum16Selection01.json) and
+[bounded audit task](PlayerAnimationAudit01.md). This supersedes the historical
+pending-selection and no-dispatch wording below. MSQ-54 still requires the
+completed rig contract and coherent production reference views.
+
+MSQ-52 subsequently completed its controller-verified technical audit:
+[handoff](../PlayerAnimationAudit01.md), `MSQ52-RigContract01`, 186 selected
+packages and 82 sequences. Use that measured contract before the MSQ-54 original
+prototype; original-model deformation, retargeting and gameplay remain later gates.
+
 Latest workflow update, 2026-09-17: integrate the owner's existing Tripo Studio
 and Meshy subscriptions plus Hunyuan3D Studio through
 [AI-assisted production Pipeline01](../PlayerCharacter01AI3DPipeline.md).

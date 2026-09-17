@@ -33,6 +33,7 @@ Assets/Concepts/OpeningLobby/ArchitectureRework01/*.sha256 text eol=lf
 Assets/Concepts/OpeningLobby/** -text
 Assets/Concepts/PlayerCharacter01/** -text
 Assets/Source/OpeningLobby/** -text
+Assets/Source/PlayerCharacter01/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 Docs/Approvals/** -text
 Docs/OpeningLobby* -text
 Docs/Tasks/OpeningLobby* -text

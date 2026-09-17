@@ -1,0 +1,552 @@
+{
+  "/Game/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Meshes/SKM_FP_Manny_Simple": {
+    "weapon_r_muzzle": {
+      "socket_name": "weapon_r_muzzle",
+      "bone_name": "weapon_r",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C65A0) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "foot_r_Socket": {
+      "socket_name": "foot_r_Socket",
+      "bone_name": "foot_r",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C6AE0) {pitch: 0.000000, yaw: -90.000000, roll: -90.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "foot_l_Socket": {
+      "socket_name": "foot_l_Socket",
+      "bone_name": "foot_l",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C6BA0) {pitch: 0.000000, yaw: 90.000000, roll: -90.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_HelmetCamera": {
+      "socket_name": "SOCKET_HelmetCamera",
+      "bone_name": "head",
+      "relative_location": [
+        9.212483251843514,
+        3.098306035100352,
+        -13.85298076937094
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C28E0) {pitch: -0.000000, yaw: 89.998892, roll: -89.999997}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_CameraFP": {
+      "socket_name": "SOCKET_CameraFP",
+      "bone_name": "head",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C6DE0) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Hand_L_Throw": {
+      "socket_name": "SOCKET_Hand_L_Throw",
+      "bone_name": "ik_hand_l",
+      "relative_location": [
+        7.586846395549242,
+        -3.8724134090720024,
+        -0.35533567723988957
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C4B60) {pitch: 23.891304, yaw: -71.579815, roll: 2.329250}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "headSocket": {
+      "socket_name": "headSocket",
+      "bone_name": "head",
+      "relative_location": [
+        -4.309637601387016,
+        7.606935684952444,
+        -1.8504950200874497e-05
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C67E0) {pitch: 0.000073, yaw: 79.999516, roll: -179.999849}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_ChestCamera": {
+      "socket_name": "SOCKET_ChestCamera",
+      "bone_name": "spine_04",
+      "relative_location": [
+        28.93752452157275,
+        14.919320221351537,
+        -2.7801081492857116
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C68A0) {pitch: -20.051972, yaw: 87.981988, roll: -86.993072}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "/Game/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Meshes/SKM_Manny": {
+    "weapon_r_muzzle": {
+      "socket_name": "weapon_r_muzzle",
+      "bone_name": "weapon_r",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C65A0) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "foot_r_Socket": {
+      "socket_name": "foot_r_Socket",
+      "bone_name": "foot_r",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C6AE0) {pitch: 0.000000, yaw: -90.000000, roll: -90.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "foot_l_Socket": {
+      "socket_name": "foot_l_Socket",
+      "bone_name": "foot_l",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C6BA0) {pitch: 0.000000, yaw: 90.000000, roll: -90.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_HelmetCamera": {
+      "socket_name": "SOCKET_HelmetCamera",
+      "bone_name": "head",
+      "relative_location": [
+        9.212483251843514,
+        3.098306035100352,
+        -13.85298076937094
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C28E0) {pitch: -0.000000, yaw: 89.998892, roll: -89.999997}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_CameraFP": {
+      "socket_name": "SOCKET_CameraFP",
+      "bone_name": "head",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C6DE0) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Hand_L_Throw": {
+      "socket_name": "SOCKET_Hand_L_Throw",
+      "bone_name": "ik_hand_l",
+      "relative_location": [
+        7.586846395549242,
+        -3.8724134090720024,
+        -0.35533567723988957
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C4B60) {pitch: 23.891304, yaw: -71.579815, roll: 2.329250}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "headSocket": {
+      "socket_name": "headSocket",
+      "bone_name": "head",
+      "relative_location": [
+        -4.309637601387016,
+        7.606935684952444,
+        -1.8504950200874497e-05
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C67E0) {pitch: 0.000073, yaw: 79.999516, roll: -179.999849}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_ChestCamera": {
+      "socket_name": "SOCKET_ChestCamera",
+      "bone_name": "spine_04",
+      "relative_location": [
+        28.93752452157275,
+        14.919320221351537,
+        -2.7801081492857116
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C68A0) {pitch: -20.051972, yaw: 87.981988, roll: -86.993072}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "/Game/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Meshes/SKM_Manny_Simple": {
+    "weapon_r_muzzle": {
+      "socket_name": "weapon_r_muzzle",
+      "bone_name": "weapon_r",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C65A0) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "foot_r_Socket": {
+      "socket_name": "foot_r_Socket",
+      "bone_name": "foot_r",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C6AE0) {pitch: 0.000000, yaw: -90.000000, roll: -90.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "foot_l_Socket": {
+      "socket_name": "foot_l_Socket",
+      "bone_name": "foot_l",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C6BA0) {pitch: 0.000000, yaw: 90.000000, roll: -90.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_HelmetCamera": {
+      "socket_name": "SOCKET_HelmetCamera",
+      "bone_name": "head",
+      "relative_location": [
+        9.212483251843514,
+        3.098306035100352,
+        -13.85298076937094
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C28E0) {pitch: -0.000000, yaw: 89.998892, roll: -89.999997}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_CameraFP": {
+      "socket_name": "SOCKET_CameraFP",
+      "bone_name": "head",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C6DE0) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Hand_L_Throw": {
+      "socket_name": "SOCKET_Hand_L_Throw",
+      "bone_name": "ik_hand_l",
+      "relative_location": [
+        7.586846395549242,
+        -3.8724134090720024,
+        -0.35533567723988957
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C4B60) {pitch: 23.891304, yaw: -71.579815, roll: 2.329250}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "headSocket": {
+      "socket_name": "headSocket",
+      "bone_name": "head",
+      "relative_location": [
+        -4.309637601387016,
+        7.606935684952444,
+        -1.8504950200874497e-05
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C67E0) {pitch: 0.000073, yaw: 79.999516, roll: -179.999849}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_ChestCamera": {
+      "socket_name": "SOCKET_ChestCamera",
+      "bone_name": "spine_04",
+      "relative_location": [
+        28.93752452157275,
+        14.919320221351537,
+        -2.7801081492857116
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F8549C68A0) {pitch: -20.051972, yaw: 87.981988, roll: -86.993072}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SK_TFA_AR": {
+    "SOCKET_Handguard": {
+      "socket_name": "SOCKET_Handguard",
+      "bone_name": "Handguard",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F9DF73F7E0) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Magazine_Reserve": {
+      "socket_name": "SOCKET_Magazine_Reserve",
+      "bone_name": "Magazine_Reserve",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F9DF73F060) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Magazine": {
+      "socket_name": "SOCKET_Magazine",
+      "bone_name": "Magazine",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F84ADF3320) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Bullet_Chambered": {
+      "socket_name": "SOCKET_Bullet_Chambered",
+      "bone_name": "Bullet_Chambered",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F84ADF4660) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Scope": {
+      "socket_name": "SOCKET_Scope",
+      "bone_name": "Scope",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F84ADF4740) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Sight_Rear": {
+      "socket_name": "SOCKET_Sight_Rear",
+      "bone_name": "Sight_Rear",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F84ADF4BA0) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Eject_Casing": {
+      "socket_name": "SOCKET_Eject_Casing",
+      "bone_name": "Eject_Casing",
+      "relative_location": [
+        1.4154846736804125,
+        7.164507174678004e-06,
+        -0.32405265266767336
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F84ADF4AC0) {pitch: -7.396742, yaw: 0.000132, roll: 0.000898}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Muzzle": {
+      "socket_name": "SOCKET_Muzzle",
+      "bone_name": "Root",
+      "relative_location": [
+        2.52228484563651e-06,
+        55.19754153414862,
+        4.674325030581451
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F84ADF4120) {pitch: 0.000315, yaw: 89.999997, roll: -0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_GunCamera": {
+      "socket_name": "SOCKET_GunCamera",
+      "bone_name": "Root",
+      "relative_location": [
+        -8.868461857595696,
+        42.8063234695375,
+        4.182399609092037
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F84ADF4040) {pitch: -0.000447, yaw: -89.999997, roll: -0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Casing_Jammed": {
+      "socket_name": "SOCKET_Casing_Jammed",
+      "bone_name": "Casing_Jammed",
+      "relative_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F84ADF3F60) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Laser": {
+      "socket_name": "SOCKET_Laser",
+      "bone_name": "Grip",
+      "relative_location": [
+        -2.646991338649929,
+        36.54757802265942,
+        3.595208626889887
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F9DF73FDE0) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "SOCKET_Grip": {
+      "socket_name": "SOCKET_Grip",
+      "bone_name": "Root",
+      "relative_location": [
+        -1.697007867562661e-08,
+        29.836199527879828,
+        1.0
+      ],
+      "relative_rotation": "<Struct 'Rotator' (0x000001F9DF73FEA0) {pitch: 0.000000, yaw: 0.000000, roll: 0.000000}>",
+      "relative_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SK_TFA_AR_Magazine": {},
+  "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SK_TFA_AR_Magazine_Transparent": {}
+}
