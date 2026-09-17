@@ -42,6 +42,14 @@ normal and inner-surface repair plus body fitting. Its 3,176 polygons comprise
 2,375 quads and 801 triangles; 123 boundary edges remain. The untouched source
 is retained in OwnerExports. No controller Tripo generation or complete body
 prototype was authorized or performed by this preparation and intake.
+The owner then requested a whole-character Tripo input wearing the coverall
+without external armor. **Datum16UndersuitInput01** delivers one front T-pose
+PNG with gloves, boots and an opaque soft under-helmet hood; see the
+[package](../Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/README.md)
+and [bounded task](Tasks/PlayerCharacter01UndersuitInput01.md). The hood and
+previously hidden cloth construction are inferred; this does not replace the
+selected final helmet. The owner operates Tripo and returns the untouched FBX.
+No fitted body or new 3D generation was made by this input-art delivery.
 The owner alone evaluates this concept batch; no independent concept reviewer or
 MSQ-53 expert run. Later MSQ-60 integrated review remains required.
 
@@ -103,7 +111,7 @@ Last verified Multica state, 2026-09-17:
 | MSQ-51 | `done`; concept deliveries preserved. |
 | MSQ-53 | `done`; owner selected Concept02 / Candidate01, 16 / Datum. No expert run. |
 | MSQ-52 | `done`; controller-accepted animation audit and MSQ52-RigContract01. 186 source-identical packages, 82 sequences, 19 representative playback cases; later original-rig/gameplay gates remain. |
-| MSQ-54 | Manual-input preparation and returned-FBX intake delivered; source retained for repair/fitting. No active worker. The original body/deformation prototype remains incomplete. |
+| MSQ-54 | Shoulder input/intake and Datum16UndersuitInput01 delivered; awaiting the owner's whole-character foundation export. No active worker. The original body/deformation prototype remains incomplete. |
 | MSQ-55 through MSQ-60 | `backlog`; presentation, movement, rifle, finish, integration and final review. |
 
 The [task synchronization audit](Tasks/PlayerCharacter01AI3DTaskAudit01.md) verified

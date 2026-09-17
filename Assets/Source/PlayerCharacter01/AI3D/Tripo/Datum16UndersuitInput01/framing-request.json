@@ -1,0 +1,7 @@
+{
+  "tool": "built-in imagegen",
+  "prompt": "Edit this exact image ONLY to improve framing for a single-image 3D reconstruction input. Preserve the same character, every garment panel, seam, cloth fold, hood, gloves, boots, body proportions, full frontal T-pose, arm and hand orientation, lighting and colors. Zoom out uniformly so the complete figure fits comfortably within the square canvas, with a clear pure opaque white margin of approximately 7 percent of the canvas on EACH side, including above the head, beyond BOTH fingertips and below the soles. Do not crop any part. Do not stretch or change the figure. Keep both arms straight and horizontal at shoulder height with palms down. Preserve the fully opaque cloth hood concealing all skin and eyes. Keep all armor, helmet shell, equipment, text and weapons absent. Pure white background, no floor, cast shadow, labels, extra views or new objects. Return one square image.",
+  "referenced_image_paths": [
+    "D:/devgames/MeridianSquad/Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/Attempts/01-TightFraming.png"
+  ]
+}

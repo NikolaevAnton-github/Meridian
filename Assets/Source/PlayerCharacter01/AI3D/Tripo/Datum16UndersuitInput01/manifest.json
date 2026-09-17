@@ -1,0 +1,156 @@
+{
+  "package": "Datum16UndersuitInput01",
+  "task": "MSQ-54",
+  "date_local": "2026-09-17",
+  "tool": "built-in imagegen",
+  "owner_request_original": "Хорошо, сгенерируй изображение для tripo",
+  "owner_request_english": "Okay, generate an image for Tripo.",
+  "scope": "One full-body original Datum16 coverall input without external armor; fully concealed face. No 3D generation.",
+  "sources": [
+    {
+      "reference": 1,
+      "path": "Assets/Concepts/PlayerCharacter01/Concept02/16.png",
+      "sha256": "ee9ff6799379808ccd74e752cf816a54a205c2e1f3f3c8a959fba1e69083280b",
+      "role": "Authoritative selected Datum16 design identity, lean human proportions, visible olive/charcoal cloth and tactical boot character. Do not reproduce its armor, helmet, equipment, sheet layout, lettering or ground. Garment surfaces hidden by armor are not established by this reference."
+    },
+    {
+      "reference": 2,
+      "path": "Assets/Concepts/PlayerCharacter01/Datum16MultiViewTpose01/16-Datum-Front.png",
+      "sha256": "57fd4d147704abe2399167fb67286585f727e040793756a4896fa593ee49e415",
+      "role": "Latest owner-corrected frontal T-pose: straight horizontal arms at shoulder height, palms down and whole-body alignment. Increase framing margins and clarify relaxed finger separation. Its armor bulk and concealed garment construction are not undersuit specifications; exact dimensions and projection are unverified."
+    }
+  ],
+  "images": [
+    {
+      "path": "Attempts/01-TightFraming.png",
+      "width": 1254,
+      "height": 1254,
+      "size_bytes": 1218004,
+      "sha256": "4128a78a7fa74c6d175458af223bc7738f7020a51c26fcda009b88eb7bd0d1b6",
+      "disposition": "preserved_initial_attempt_tight_margins",
+      "border": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5012,
+        "exact_opaque_white_fraction": 0.130886,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.091,
+          254.041,
+          254.157
+        ],
+        "corner_rgba": {
+          "top_left": [
+            254,
+            255,
+            255,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "path": "Inputs/01-StartHere-FrontTpose.png",
+      "width": 1254,
+      "height": 1254,
+      "size_bytes": 1069577,
+      "sha256": "7ce666c05ef41ea06025494c43c4196740ca0e831e8d3be77707854628cc9df5",
+      "disposition": "single_image_upload",
+      "border": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5012,
+        "exact_opaque_white_fraction": 0.164405,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.142,
+          254.084,
+          254.196
+        ],
+        "corner_rgba": {
+          "top_left": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            254,
+            254,
+            255
+          ]
+        }
+      }
+    }
+  ],
+  "construction": "Opaque soft under-helmet hood and cloth beneath armor are inferred. The final selected helmet/computer remains unchanged.",
+  "controller_visual_checks": [
+    "one complete front T-pose figure",
+    "straight horizontal arms, palms down",
+    "head/fingertips/soles clear of canvas edges",
+    "cloth coverall, gloves and boots",
+    "all skin and eyes concealed",
+    "no external armor, gear, weapons, text or ground shadow"
+  ],
+  "limitations": [
+    "Single front illustration; unseen surfaces and depth unverified",
+    "Finger topology/separation unverified",
+    "No approved physical dimensions",
+    "T-pose art requires later A-pose rig reconciliation",
+    "No production mesh or owner visual acceptance"
+  ],
+  "owner_visual_accepted": false,
+  "multica_author_run": "01a0afc6-37f0-7748-98d2-f1517af8fc42",
+  "protected_files_unchanged": 178
+}

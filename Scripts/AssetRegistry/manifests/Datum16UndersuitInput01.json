@@ -1,0 +1,139 @@
+{
+  "asset": "Datum16UndersuitInput01",
+  "artifacts": [
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/Attempts/01-TightFraming.png",
+      "role": "input_package_evidence",
+      "sha256": "4128a78a7fa74c6d175458af223bc7738f7020a51c26fcda009b88eb7bd0d1b6",
+      "size_bytes": 1218004,
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Built-in imagegen input preparation; declared reference derivation and inferred hidden construction. Not production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/framing-request.json",
+      "role": "input_package_evidence",
+      "sha256": "10838cbc20b90c4643117f46491b54792e7f11e0455b465104915f4b71ffdaae",
+      "size_bytes": 1099,
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Built-in imagegen input preparation; declared reference derivation and inferred hidden construction. Not production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/generation-request.json",
+      "role": "input_package_evidence",
+      "sha256": "f4a1654391d057b103f8cb38230fe5a4093678227227cd1c1d2275e66c175570",
+      "size_bytes": 2263,
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Built-in imagegen input preparation; declared reference derivation and inferred hidden construction. Not production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/Inputs/01-StartHere-FrontTpose.png",
+      "role": "ai3d_input_candidate",
+      "sha256": "7ce666c05ef41ea06025494c43c4196740ca0e831e8d3be77707854628cc9df5",
+      "size_bytes": 1069577,
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Built-in imagegen input preparation; declared reference derivation and inferred hidden construction. Not production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+      "role": "input_package_evidence",
+      "sha256": "3688043b4ad086929f4becc09e5cb506bc367114f8476377ae1ba5bb0bf64a4e",
+      "size_bytes": 5033,
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Built-in imagegen input preparation; declared reference derivation and inferred hidden construction. Not production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/README.md",
+      "role": "input_package_evidence",
+      "sha256": "4325d821d20593c0d204cf438357a67541b9ec76dcc751edef4676133f1b4e0f",
+      "size_bytes": 366,
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Built-in imagegen input preparation; declared reference derivation and inferred hidden construction. Not production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/prompt.json",
+      "role": "input_package_evidence",
+      "sha256": "935e89f7922a4788367da6953119631067a1a32f72e187620641c74bc9921e63",
+      "size_bytes": 3151,
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Built-in imagegen input preparation; declared reference derivation and inferred hidden construction. Not production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/README.md",
+      "role": "input_package_evidence",
+      "sha256": "0833ec81e4c947d7b39e58ca8e9019c7fb63b09ba35f5c9d567c1421ce979ef5",
+      "size_bytes": 1843,
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Built-in imagegen input preparation; declared reference derivation and inferred hidden construction. Not production geometry or owner visual acceptance."
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/prompt.json",
+      "downstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/Attempts/01-TightFraming.png",
+      "kind": "imagegen_prompt",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Controller submitted the retained prompt/reference request and retained exact returned PNG bytes; generative correspondence is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/Attempts/01-TightFraming.png",
+      "downstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/Inputs/01-StartHere-FrontTpose.png",
+      "kind": "imagegen_framing_edit",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Controller submitted the retained prompt/reference request and retained exact returned PNG bytes; generative correspondence is declared."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/framing-request.json",
+      "downstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/Inputs/01-StartHere-FrontTpose.png",
+      "kind": "imagegen_prompt",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Controller submitted the retained prompt/reference request and retained exact returned PNG bytes; generative correspondence is declared."
+        }
+      ]
+    }
+  ]
+}

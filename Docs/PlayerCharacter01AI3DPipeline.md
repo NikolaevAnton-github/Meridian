@@ -2,6 +2,13 @@
 
 Research and planning revision: **2026-09-17 / Pipeline01**.
 
+Latest input delivery: the owner requested the whole-character coverall foundation
+image. [Datum16UndersuitInput01](../Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/README.md)
+contains one front T-pose PNG without external armor, with gloves, boots and a
+fully opaque soft under-helmet hood. The hidden cloth/hood construction is inferred;
+the selected final helmet remains unchanged. The owner operates Tripo and returns
+the source for inspection. No fitted body or 3D generation resulted from this art.
+
 Current bounded execution: the owner operated the first component pilot and
 returned its FBX. [Datum16ShoulderIntake01](PlayerCharacter01ShoulderIntake01.md)
 records the completed local inspection: useful shell reference, with topology,
