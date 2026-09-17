@@ -2,6 +2,16 @@
 
 Research and planning revision: **2026-09-17 / Pipeline01**.
 
+Latest capability study: the owner requested a detailed review of the MetaHuman
+5.8 custom-character tutorial. [MetaHumanVideoStudy01](Research/PlayerCharacter01AI3D/MetaHumanVideoStudy01.md)
+recommends testing From Custom Mesh on a preserved derivative before extensive
+manual retopology. The installed Creator/Core Data and separate Markerless
+motion-capture plugin are confirmed, but project loading and conversion are not.
+This revises the presumed order of manual work; it does not replace the selected
+Datum16 appearance or the exact MSQ52 rig contract. The existing body can be the
+first test input; another generation is not yet justified. No production trial
+or change of rig was executed by this research.
+
 Latest source intake: the owner returned the generated whole-character coverall
 FBX. [Datum16BodyIntake01](PlayerCharacter01BodyIntake01.md) records a usable
 repair base with 24,974 polygons, a full clothed silhouette and five separated
@@ -88,11 +98,16 @@ the whole character's proportions, then make or replace selected components
 around that reference. A generated whole-body mesh can supply a useful volume or
 detail source even if its final topology needs rebuilding.
 
-Three routes are available, chosen per component:
+Four routes are available, chosen per component:
 
 1. Keep a generated component whose shape, topology and fit pass inspection.
 2. Retopologize or rebuild over a useful generated high-detail source.
 3. Model a simple or failed component directly in Blender from the approved art.
+4. Fit standard MetaHuman topology/rig to a suitable original humanoid source,
+   preserving its selected appearance and validating the garment surface and
+   animation integration. This is a proposed option, not a proven conversion of
+   the returned coverall. Keep source-pose bake output separate from final A-pose
+   assembly, and preserve the existing contract until any alternative is verified.
 
 The third route is particularly reasonable for crisp overlapping plates,
 straps and small mechanical features. Repeated AI attempts are not automatically

@@ -1,0 +1,14 @@
+{
+  "record_id": "PlayerCharacter01-MetaHumanStudy01",
+  "date_local": "2026-09-17",
+  "task": "MSQ-54",
+  "source": "Owner direct chat",
+  "owner_message_original": "MetaHuman Animator Markerless Motion Capture Plugin я установил если что. Blender можешь использовать по своему усмотрению, я просто спросил, а вот MetaHuman возможно имеет смысл - https://www.youtube.com/watch?v=4w7oA4oJMqs, изуч досканально видео",
+  "owner_message_english_translation": "I installed the MetaHuman Animator Markerless Motion Capture Plugin, just so you know. You can use Blender at your discretion; I was only asking. MetaHuman may make sense: https://www.youtube.com/watch?v=4w7oA4oJMqs. Study the video thoroughly.",
+  "authorized_scope": "Detailed study of the supplied video and its applicability to the original protagonist, including read-only verification of installed capabilities and primary documentation.",
+  "blender_tool_choice": "Controller discretion; no requirement to use MCP instead of background Blender.",
+  "owner_reports_installed": "MetaHuman Animator Markerless Motion Capture Plugin",
+  "design_status": "Datum16 remains selected. Considering MetaHuman does not select a replacement appearance or accept a converted model.",
+  "execution_status": "Research only. No character conversion, source upload, motion solve, plugin installation or production-rig replacement is recorded by this instruction.",
+  "preservation": "Retain the original Tripo FBX, all input/concept packages, MSQ52 rig-contract evidence and unrelated owner edits. Any future alternative rig must be a named derived candidate with validated animation compatibility."
+}

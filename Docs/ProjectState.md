@@ -57,6 +57,14 @@ pose need work before binding to the exact rig contract. No UVs or skeleton
 are present. The original export is preserved; static intake establishes no
 deformation, grip or original-model round trip. No fitted body or new controller
 3D generation was made by the input-art delivery or returned-source inspection.
+Subsequent owner-requested [MetaHuman video study](Research/PlayerCharacter01AI3D/MetaHumanVideoStudy01.md)
+recommends a bounded 5.8 From Custom Mesh trial on the preserved body derivative
+before extensive manual retopology. Creator/Core Data and the owner-installed
+Markerless plugin are present; project loading and conversion remain untested.
+Creator fits geometry; Markerless solves motion from footage. Neither the
+161-bone rig contract nor the selected appearance has changed. The
+[research instruction](Approvals/PlayerCharacter01-MetaHumanStudy01.json) permits
+Blender tool-choice discretion. No conversion or production run was dispatched.
 The owner alone evaluates this concept batch; no independent concept reviewer or
 MSQ-53 expert run. Later MSQ-60 integrated review remains required.
 
@@ -88,7 +96,9 @@ task databases. The ordered production approach is:
 1. Use the selected Datum16 and completed MSQ52-RigContract01; reconcile the
    authoritative production views during MSQ-54.
 2. Inspect existing owner exports; establish one proportional master and production
-   skeleton, then perform the smallest justified AI source trial.
+   skeleton. Evaluate the documented MetaHuman conformation option before extensive
+   manual retopology; preserve the existing rig contract until an alternative is
+   validated. Perform only the smallest justified missing AI source trial.
 3. Fit separate armor/components to that master in Blender; resolve joint topology,
    weights and source-pose deformation before the original prototype handoff.
 4. Test first-person presentation, body movement and hand/rifle/reload interaction
