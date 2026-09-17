@@ -56,9 +56,12 @@ instructions supersede earlier guidance within their stated scope.
   do not rebuild the benchmark harness or repeat A/B runs for routine assets.
   Track native input, cache and output separately.
 - Optimize for a verified result including rework. Use Astra for difficult work;
-  use other models when appropriate and available. Prefer standard speed and
-  task-appropriate reasoning, not maximum by default. Apply task-local settings
-  within their scope and restore saved profiles/native arguments after the task.
+  use other models when appropriate and available. All project executors and
+  reviewers must use **max reasoning**, at standard speed, per the
+  [standing owner instruction](Docs/Approvals/WorkerReviewerMax01.json).
+  Verify both configured profiles/native arguments and actual execution settings;
+  a profile label alone is insufficient. Restore task-local settings afterward
+  without reverting this standing max requirement to an older saved level.
 - Delegate bounded independent tasks with focused context and concise findings;
   save full logs under `Saved/`.
 - One writer per running Unreal/Blender/Substance instance, coordinated for the

@@ -8,6 +8,12 @@ See [the closure decision](Approvals/LobbyDeferred01-OwnerClosure01.json) and
 
 ## Constraints and decisions
 
+- Current standing owner instruction, 2026-09-17: all project executors and
+  reviewers use max reasoning at standard speed. Verify actual native settings;
+  retain max when restoring other task-local profile values. See
+  [WorkerReviewerMax01](Approvals/WorkerReviewerMax01.json). Earlier high/medium
+  execution records below remain historical evidence, not current defaults.
+
 - Ryzen 9800X3D, 32 GB RAM, RTX 5090. Project disk budget: at most 250 GB.
 - Use only the existing $200/month Codex subscription. Paid APIs and additional
   cloud subscriptions are excluded. Available local models are allowed.

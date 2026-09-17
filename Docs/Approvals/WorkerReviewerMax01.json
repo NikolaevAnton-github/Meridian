@@ -1,0 +1,12 @@
+{
+  "record_id": "WorkerReviewerMax01",
+  "date_local": "2026-09-17",
+  "source": "Owner direct chat while MSQ-54 Datum16BodyRepair01 was being started",
+  "owner_message_original": "Исполнители должны работать в max, не забывай и проверяющие",
+  "owner_message_english_translation": "Executors must work in max; do not forget reviewers too.",
+  "decision": "Use max reasoning for all project executors and reviewers. This is a standing project requirement, superseding earlier high/medium or task-appropriate reasoning defaults.",
+  "execution": "Keep the existing standard-speed and subscription constraints. Verify configured reasoning and native execution; profile names alone are not evidence. Apply max explicitly to delegated reviewers as well as production workers.",
+  "current_run_correction": "Cancel the initial BodyRepair01 high-effort run, retain its execution history and any partial work, then continue the same bounded task in a verified max-effort run without concurrent production writers.",
+  "restoration": "Restore other task-local profile values after the task, but retain max reasoning in both the profile and native custom arguments. Do not restore a superseded high/medium effort baseline.",
+  "historical_evidence": "Earlier verified runs remain recorded with their actual settings. This instruction does not rewrite historical execution evidence or expand production/design scope."
+}
