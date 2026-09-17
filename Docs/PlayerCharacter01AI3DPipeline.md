@@ -2,14 +2,24 @@
 
 Research and planning revision: **2026-09-17 / Pipeline01**.
 
-Latest input delivery: the owner requested the whole-character coverall foundation
+Latest source intake: the owner returned the generated whole-character coverall
+FBX. [Datum16BodyIntake01](PlayerCharacter01BodyIntake01.md) records a usable
+repair base with 24,974 polygons, a full clothed silhouette and five separated
+digit forms per hand. Boot/ankle and collar topology defects, hand/joint flow,
+dimensions and source-pose conversion remain before rigging. The source has no
+UVs or skeleton. Original bytes are preserved; actual job/settings and the
+intended input-to-output relationship remain unverified. No fitting, deformation
+test or original-model round trip was performed. Full MSQ-54 remains incomplete.
+
+Input delivery: the owner requested the whole-character coverall foundation
 image. [Datum16UndersuitInput01](../Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/README.md)
 contains one front T-pose PNG without external armor, with gloves, boots and a
 fully opaque soft under-helmet hood. The hidden cloth/hood construction is inferred;
-the selected final helmet remains unchanged. The owner operates Tripo and returns
-the source for inspection. No fitted body or 3D generation resulted from this art.
+the selected final helmet remains unchanged. The owner operated Tripo and returned
+the source for the intake above. No fitted body or controller 3D generation
+resulted from this art.
 
-Current bounded execution: the owner operated the first component pilot and
+Earlier component intake: the owner operated the first component pilot and
 returned its FBX. [Datum16ShoulderIntake01](PlayerCharacter01ShoulderIntake01.md)
 records the completed local inspection: useful shell reference, with topology,
 normal and inner-surface repair required before body fitting. Source bytes are

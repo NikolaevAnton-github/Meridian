@@ -1,0 +1,91 @@
+{
+  "asset": "Datum16UndersuitInput01",
+  "artifacts": [
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/Inputs/01-StartHere-FrontTpose.png",
+      "role": "ai3d_input_candidate",
+      "sha256": "7ce666c05ef41ea06025494c43c4196740ca0e831e8d3be77707854628cc9df5",
+      "size_bytes": 1069577,
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/manifest.json",
+          "note": "Built-in imagegen input preparation; declared reference derivation and inferred hidden construction. Not production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/tactical+jumpsuit+3d+model.fbx",
+      "role": "owner_returned_ai3d_source",
+      "sha256": "fc6340b6f36c529f15dac48ef06dca37aa72a07134b873e9e564f0addc6fa196",
+      "size_bytes": 933904,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01BodyIntake01.md",
+          "note": "Controller-reviewed bounded source intake. Inventory only; no production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16BodyIntake01/provenance.json",
+      "role": "source_intake_provenance",
+      "sha256": "984856f37fd30ddfeab7b20082219cf1ae24ebdfdfef5f498b4af9aa2dbfc339",
+      "size_bytes": 2094,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01BodyIntake01.md",
+          "note": "Controller-reviewed bounded source intake. Inventory only; no production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Docs/PlayerCharacter01BodyIntake01.md",
+      "role": "source_intake_report",
+      "sha256": "704dd19ca51e1208752a9aec928a0d590e245228103375e8c77283db99117b3b",
+      "size_bytes": 14314,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01BodyIntake01.md",
+          "note": "Controller-reviewed bounded source intake. Inventory only; no production geometry or owner visual acceptance."
+        }
+      ]
+    },
+    {
+      "path": "Scripts/PlayerCharacter01/body_intake01.py",
+      "role": "source_inspection_script",
+      "sha256": "6876305e0e1490a880287a25e95c153345a89a065f53a298404888d1a01d6b5b",
+      "size_bytes": 11547,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01BodyIntake01.md",
+          "note": "Controller-reviewed bounded source intake. Inventory only; no production geometry or owner visual acceptance."
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/Inputs/01-StartHere-FrontTpose.png",
+      "downstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/tactical+jumpsuit+3d+model.fbx",
+      "kind": "intended_ai3d_input",
+      "status": "unverified",
+      "evidence": [
+        {
+          "source": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16BodyIntake01/provenance.json",
+          "note": "StartHere was requested for the owner-operated trial; no actual job/input record was supplied."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/OwnerExports/tactical+jumpsuit+3d+model.fbx",
+      "downstream": "Docs/PlayerCharacter01BodyIntake01.md",
+      "kind": "source_inspection",
+      "status": "verified",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01BodyIntake01.md",
+          "note": "Report identifies the exact owner FBX hash and records inspected Blender import and geometry evidence."
+        }
+      ]
+    }
+  ]
+}

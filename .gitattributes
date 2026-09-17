@@ -42,3 +42,7 @@ Scripts/OpeningLobby/** -text
 # Preserve exact report/script fingerprints registered for the shoulder intake.
 Docs/PlayerCharacter01ShoulderIntake01.md -text
 Scripts/PlayerCharacter01/shoulder_intake01.py -text
+
+# Preserve exact report/script fingerprints registered for the body intake.
+Docs/PlayerCharacter01BodyIntake01.md -text
+Scripts/PlayerCharacter01/body_intake01.py -text

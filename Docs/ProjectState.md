@@ -48,8 +48,15 @@ PNG with gloves, boots and an opaque soft under-helmet hood; see the
 [package](../Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/README.md)
 and [bounded task](Tasks/PlayerCharacter01UndersuitInput01.md). The hood and
 previously hidden cloth construction are inferred; this does not replace the
-selected final helmet. The owner operates Tripo and returns the untouched FBX.
-No fitted body or new 3D generation was made by this input-art delivery.
+selected final helmet. The owner subsequently returned the untouched body FBX.
+The bounded [Datum16BodyIntake01 inspection](PlayerCharacter01BodyIntake01.md)
+finds a usable repair base: a complete coverall with hood, gloves and boots,
+24,974 polygons (18,983 quads and 5,991 triangles), and five separated digit
+forms per hand. Boot/ankle and collar defects, joint topology, dimensions and
+pose need work before binding to the exact rig contract. No UVs or skeleton
+are present. The original export is preserved; static intake establishes no
+deformation, grip or original-model round trip. No fitted body or new controller
+3D generation was made by the input-art delivery or returned-source inspection.
 The owner alone evaluates this concept batch; no independent concept reviewer or
 MSQ-53 expert run. Later MSQ-60 integrated review remains required.
 
@@ -111,7 +118,7 @@ Last verified Multica state, 2026-09-17:
 | MSQ-51 | `done`; concept deliveries preserved. |
 | MSQ-53 | `done`; owner selected Concept02 / Candidate01, 16 / Datum. No expert run. |
 | MSQ-52 | `done`; controller-accepted animation audit and MSQ52-RigContract01. 186 source-identical packages, 82 sequences, 19 representative playback cases; later original-rig/gameplay gates remain. |
-| MSQ-54 | Shoulder input/intake and Datum16UndersuitInput01 delivered; awaiting the owner's whole-character foundation export. No active worker. The original body/deformation prototype remains incomplete. |
+| MSQ-54 | Shoulder input/intake, Datum16UndersuitInput01 and returned Datum16BodyIntake01 inspection delivered. The body is a usable repair base; fitting, joint topology, rigging and motion probes remain outstanding. No active worker. The original body/deformation prototype remains incomplete. |
 | MSQ-55 through MSQ-60 | `backlog`; presentation, movement, rifle, finish, integration and final review. |
 
 The [task synchronization audit](Tasks/PlayerCharacter01AI3DTaskAudit01.md) verified
