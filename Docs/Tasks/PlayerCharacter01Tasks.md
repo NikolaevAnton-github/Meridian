@@ -7,11 +7,17 @@ and [bounded audit task](PlayerAnimationAudit01.md). Historical pending-selectio
 and no-run statements below describe earlier operations. Only MSQ-52 is
 dispatched by this instruction; original modeling still needs its rig contract.
 
+Latest scoped owner instruction, 2026-09-17: prepare the first input package for
+owner-operated Tripo generation. The bounded MSQ-54 handoff is
+[Datum16ShoulderManual01](../PlayerCharacter01TripoManualPilot01.md), with one
+recommended single-image input and four reference-only views. Await the owner's
+FBX before source inspection/fitting; the full MSQ-54 prototype is not complete.
+
 MSQ-52 is now complete after controller verification. The
 [accepted technical handoff](../PlayerAnimationAudit01.md) supplies
 `MSQ52-RigContract01`, selected clips, measured reload timing and explicit
-movement gaps. MSQ-54 remains backlog; its next work includes reference
-reconciliation and the original rigged prototype, without reopening MSQ-53.
+movement gaps. MSQ-54's original rigged prototype remains outstanding after its
+bounded manual-input preparation; do not reopen MSQ-53.
 
 Live Multica synchronization verified on 2026-09-17:
 MSQ-50 and MSQ-52 through MSQ-60 now contain the AI3D workflow checklists,

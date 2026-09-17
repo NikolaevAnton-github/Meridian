@@ -1,0 +1,410 @@
+{
+  "package": "Datum16ShoulderManual01",
+  "task": "MSQ-54",
+  "prepared_at_utc": "2026-09-17T13:49:34.031108+00:00",
+  "scope": "Owner-operated Tripo input preparation only",
+  "design_authority": "Concept02 / Candidate01, 16 / Datum",
+  "primary_source": "Assets/Concepts/PlayerCharacter01/Concept02/16.png",
+  "primary_source_sha256": "ee9ff6799379808ccd74e752cf816a54a205c2e1f3f3c8a959fba1e69083280b",
+  "recommended_input": "Inputs/01-StartHere-Outer45.png",
+  "recommended_mode": "single image",
+  "combined_multiview_recommended": false,
+  "cross_view_findings": "Nominal Front/profiles are partly oblique; fastener and edge landmarks vary. Back includes inferred hardware. ReferenceOnly views must not be combined as calibrated multiview.",
+  "hidden_surfaces": "Inferred shallow concavity, thickness and rear continuation; not approved measured construction.",
+  "body_master_fitted": false,
+  "three_dimensional_consistency_verified": false,
+  "production_mesh_created": false,
+  "tripo_generation_performed_by_controller": false,
+  "owner_visual_acceptance": "pending",
+  "independent_concept_review_performed": false,
+  "creation": "Multica Concept Art prompts; controller built-in imagegen; 6 renders including preserved correction attempt.",
+  "image_bytes_modified_by_packaging": false,
+  "protected_source_files_verified": 150,
+  "images": [
+    {
+      "id": "StartHere",
+      "file": "Attempts/StartHere01.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1674485,
+      "sha256": "34a34c02ebb7b4f5bb2c89f63ac73ab6879c4c10282e0b1cc32b5f4713ee50c5",
+      "disposition": "Preserved; controller requests shallower curvature before canonical input.",
+      "border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5012,
+        "exact_opaque_white_fraction": 0.068835,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          253.981,
+          253.887,
+          254.019
+        ],
+        "corner_rgba": {
+          "top_left": [
+            254,
+            254,
+            255,
+            255
+          ],
+          "top_right": [
+            255,
+            254,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            253,
+            253,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "id": "StartHere",
+      "file": "Inputs/01-StartHere-Outer45.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1642152,
+      "sha256": "da2987ffd2f924a0d24cf88c4ce937382e35a29a46fd8847ec3aa6b9933773f3",
+      "disposition": "Canonical single-image pilot input; shallower return wall.",
+      "border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5012,
+        "exact_opaque_white_fraction": 0.086393,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.046,
+          254.033,
+          254.119
+        ],
+        "corner_rgba": {
+          "top_left": [
+            254,
+            255,
+            254,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            253,
+            253,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "id": "Front",
+      "file": "ReferenceOnly/02-Front.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1710499,
+      "sha256": "79f0498457aca4c2ef223877204d1b217fba08052f1e577bcbd071f56435c053",
+      "disposition": "Reference only; not approved for combined multiview upload because projection/landmark consistency is not established.",
+      "border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5012,
+        "exact_opaque_white_fraction": 0.082602,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.036,
+          254.013,
+          254.089
+        ],
+        "corner_rgba": {
+          "top_left": [
+            255,
+            255,
+            254,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "id": "Left",
+      "file": "ReferenceOnly/03-Left.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1177012,
+      "sha256": "f985ea703b7affb64033e6a6affc87ba04087e1bcd7bfd2d8a2c18b99db37df4",
+      "disposition": "Reference only; not approved for combined multiview upload because projection/landmark consistency is not established.",
+      "border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5012,
+        "exact_opaque_white_fraction": 0.131883,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.109,
+          254.066,
+          254.176
+        ],
+        "corner_rgba": {
+          "top_left": [
+            254,
+            255,
+            255,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            253,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "id": "Right",
+      "file": "ReferenceOnly/04-Right.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1178377,
+      "sha256": "198d3dbeaa27245cf4fbd042138606ef0f867912e453541e0be645cd6049e027",
+      "disposition": "Reference only; not approved for combined multiview upload because projection/landmark consistency is not established.",
+      "border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5012,
+        "exact_opaque_white_fraction": 0.10834,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.063,
+          254.02,
+          254.145
+        ],
+        "corner_rgba": {
+          "top_left": [
+            253,
+            255,
+            255,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "id": "Back",
+      "file": "ReferenceOnly/05-Back.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1493952,
+      "sha256": "4d2695f72ca307cff77e13164a53af33766d0ac117501a25c9cf336cd809b732",
+      "disposition": "Reference only; not approved for combined multiview upload because projection/landmark consistency is not established.",
+      "border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5012,
+        "exact_opaque_white_fraction": 0.064645,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.027,
+          253.932,
+          254.024
+        ],
+        "corner_rgba": {
+          "top_left": [
+            254,
+            255,
+            255,
+            255
+          ],
+          "top_right": [
+            255,
+            254,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    }
+  ],
+  "supporting_files": [
+    {
+      "file": "generation-notes.template.json",
+      "sha256": "3583bedc9ba13beeac2c090a281e68b5c2d01fdc86f3126db4c9872dee9293dc",
+      "bytes": 470
+    },
+    {
+      "file": "index.html",
+      "sha256": "f29dc3c2e52615dd982a9d2e69a2d72cfc4084d60d2f023fea003e4d5f60d40e",
+      "bytes": 5403
+    },
+    {
+      "file": "OwnerExports/README.md",
+      "sha256": "f86d7099da86b763d6ff9c819ffe2ab792c32effea8ac573ff8c8f46a28ade01",
+      "bytes": 445
+    },
+    {
+      "file": "prompts.json",
+      "sha256": "2e80281e9d118c9b78dc37f1e7c5a70ff30a1be2f618ce894cf239c4223f1ae9",
+      "bytes": 7411
+    },
+    {
+      "file": "README.md",
+      "sha256": "c2fa26b8ea1e53f1cdac078014a24614f3e081f9a527dd2b5eb45cf29aafd96b",
+      "bytes": 5381
+    },
+    {
+      "file": "render-requests.json",
+      "sha256": "b6690d175540113e96821b94de625f327e69a75ae3e29e3003ecf65024d691a2",
+      "bytes": 10767
+    },
+    {
+      "file": "settings.json",
+      "sha256": "aa89a9c63599a106e76f29a062dde7a66b4e01d2b92bdb0d7aa38d11ad205a17",
+      "bytes": 1224
+    },
+    {
+      "file": "tripo-prompt.txt",
+      "sha256": "47d082595546d4f0d996d88b78eedfb2d57c810f64df1da03634e3958114dc2a",
+      "bytes": 376
+    }
+  ],
+  "border_check_limit": "Edge pixel samples do not prove all background pixels or artistic/geometric fidelity."
+}

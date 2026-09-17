@@ -1,0 +1,64 @@
+[
+  {
+    "id": "StartHere",
+    "filename": "01-StartHere-Outer45.png",
+    "request": {
+      "prompt": "Use case: precise-object-edit. Asset type: isolated game armor component input for image-to-3D, not a character concept sheet. Using Concept02/16.png as design authority, isolate the wearer's RIGHT shoulder cap: the large rigid deltoid plate on the image-left shoulder of the front figure. Render one complete cap in an outer-right three-quarter product view, top up, broad outside face and shallow curved edge thickness clearly readable. Preserve the source's restrained angular outline, clipped corners, broad faceted face, modest chamfers, dark gunmetal finish, subtle wear and visible recessed rim-fastener arrangement. The crown and bent side portions belong to one continuous shell, not overlapping extra plates. Complete only the occluded continuation as a simple shallow concave interior with modest wall thickness and an open body-facing side; do not make a solid lump or deep bowl. Supporting T-pose images establish placement only, not replacement design details. Center the entire object in a square image with ample white margin, pure opaque white background, neutral soft illumination and no ground or cast shadow. No body, sleeve, straps, torso harness, separate arm armor, extra objects, layered wings, text, labels, dimensions or collage. Do not enlarge into a fantasy pauldron or add decoration.\nOutput one square 1536 x 1536 image, highest available quality. Reference image 1 is the selected original character design. Extract only its wearer-right deltoid cap (screen-left on the front full-body figure). Keep its compact original proportions and large-plane construction.",
+      "referenced_image_paths": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Concept02/16.png"
+      ]
+    }
+  },
+  {
+    "id": "StartHere",
+    "attempt": 2,
+    "filename": "01-StartHere-Outer45.png",
+    "request": {
+      "prompt": "Use case: precise-object-edit. Correct the isolated shoulder cap in image 1 to match the much shallower shoulder plate in reference image 2 (wearer's RIGHT shoulder, image-left on the front full-body figure). Keep its overall angular outer-face outline, top-up orientation, restrained bevels, gunmetal and rim fasteners. Change only the excessive wraparound depth: make this a shallow curved armor sheet over the deltoid, with modest bent crown and very short edge returns. Remove the long hanging inner/right return wall that currently turns it into a deep U-shaped bucket. The rear is open; no opposite side wall hanging as low as the front, no closed backing or deep bowl. Preserve a believable thin continuous shell and visible short edge thickness. Keep the outside broad plane dominant, with only a shallow lip visible behind it. Show the same outer three-quarter angle as image 1 so the reduced depth is immediately readable. No new decorations, anatomy, cloth, straps, additional parts, captions or collage. One complete object centered with white margins, pure opaque white background, soft neutral light, no ground shadow. Square image 1536x1536.",
+      "referenced_image_paths": [
+        "D:/devgames/MeridianSquad/Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Attempts/StartHere01.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Concept02/16.png"
+      ]
+    }
+  },
+  {
+    "id": "Front",
+    "filename": "02-Front.png",
+    "request": {
+      "prompt": "Use case: precise-object-edit. Asset type: single game armor component construction view. Use the generated 01-StartHere-Outer45.png as the same-object anchor. Show its single complete shoulder cap square-on to the broad OUTSIDE face, near-orthographic Front view, top up. Change only the camera; preserve the anchor's angular silhouette, clipped corners, faceted crown, shallow curvature, modest continuous shell thickness, chamfers, exact fastener arrangement and subdued worn dark gunmetal. Keep the shell's body-facing cavity open behind it; do not flatten the object into a plaque or add separate plates. Preserve asymmetry and show only details visible from this camera; no mirroring or invented fasteners. Center the complete object in square framing with ample white margin, pure opaque white background, neutral soft illumination, no ground or cast shadow. No anatomy, sleeve, straps, harness, separate arm armor, extra object, decoration, text, labels, dimensions or collage.\nCamera target: Component-local Front: near-orthographic camera at -Y looking toward +Y, square to the broad outer face; +Z up and +X screen-right. Zero elevation and roll.\nThe reference is the canonical SHALLOW cap: preserve its short crown lip; never restore a deep full-height return wall. Output one square 1536x1536 image. Change only camera and newly visible plain interior; retain all established shell landmarks.",
+      "referenced_image_paths": [
+        "D:/devgames/MeridianSquad/Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png"
+      ]
+    }
+  },
+  {
+    "id": "Left",
+    "filename": "03-Left.png",
+    "request": {
+      "prompt": "Use case: precise-object-edit. Asset type: single game armor component construction view. Use the generated 01-StartHere-Outer45.png as the same-object anchor. Move the camera to the object's LEFT side for a near-orthographic true profile, top up: the outside convex face points toward image-right and the inside concavity opens toward image-left. Keep the object fixed in its local orientation; do not mirror the Right image. Show the entire cap, including the crown, descending edge and modest continuous wall thickness. Preserve the anchor's angular bends, clipped outline, shallow shell depth, chamfers, fastener positions and subdued worn dark gunmetal. Let edge-on surfaces and occlusion hide details naturally; do not turn the broad face toward camera or add hardware to reveal it. Any newly exposed interior is a simple inferred shallow concave continuation, with no padding, mounts or backing slab. One centered complete object, square image, ample white margin, pure opaque white background, neutral soft illumination, no ground or cast shadow. No body, sleeve, straps, separate armor, extra objects, text, labels, dimensions or collage.\nCamera target: Component-local Left: near-orthographic camera at -X looking toward +X, 90 degrees from Front; +Z up. Outside/front (-Y) projects to screen-right; inside/back (+Y) projects to screen-left. Zero elevation and roll.\nThe reference is the canonical SHALLOW cap: preserve its short crown lip; never restore a deep full-height return wall. Output one square 1536x1536 image. Change only camera and newly visible plain interior; retain all established shell landmarks.",
+      "referenced_image_paths": [
+        "D:/devgames/MeridianSquad/Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png"
+      ]
+    }
+  },
+  {
+    "id": "Right",
+    "filename": "04-Right.png",
+    "request": {
+      "prompt": "Use case: precise-object-edit. Asset type: single game armor component construction view. Use the generated 01-StartHere-Outer45.png as the same-object anchor. Move the camera to the object's RIGHT side for a near-orthographic true profile, top up: the outside convex face points toward image-left and the inside concavity opens toward image-right. Keep the object fixed in its local orientation; do not mirror the Left image. Show the entire cap, including the crown, descending edge and modest continuous wall thickness. Preserve the anchor's angular bends, clipped outline, shallow shell depth, chamfers, fastener positions and subdued worn dark gunmetal. Let edge-on surfaces and occlusion hide details naturally; do not turn the broad face toward camera or add hardware to reveal it. Any newly exposed interior is a simple inferred shallow concave continuation, with no padding, mounts or backing slab. One centered complete object, square image, ample white margin, pure opaque white background, neutral soft illumination, no ground or cast shadow. No body, sleeve, straps, separate armor, extra objects, text, labels, dimensions or collage.\nCamera target: Component-local Right: near-orthographic camera at +X looking toward -X, 90 degrees from Front opposite Left; +Z up. Outside/front (-Y) projects to screen-left; inside/back (+Y) projects to screen-right. Zero elevation and roll.\nThe reference is the canonical SHALLOW cap: preserve its short crown lip; never restore a deep full-height return wall. Output one square 1536x1536 image. Change only camera and newly visible plain interior; retain all established shell landmarks.",
+      "referenced_image_paths": [
+        "D:/devgames/MeridianSquad/Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png"
+      ]
+    }
+  },
+  {
+    "id": "Back",
+    "filename": "05-Back.png",
+    "request": {
+      "prompt": "Use case: precise-object-edit. Asset type: single game armor component construction view. Use the generated 01-StartHere-Outer45.png as the same-object anchor. Show the same complete shoulder cap from directly behind, looking into its open body-facing INTERIOR, near-orthographic Back view with top up. Reveal one shallow concave metal shell whose inside follows the anchor's exterior facets, clipped perimeter, crown and modest continuous wall thickness. This hidden surface is a restrained construction inference: use a plain dark gunmetal interior, with no invented liner, mounting system, extra fasteners, ribs, hollow box closure or backing slab. Preserve the anchor's exterior design, rim, chamfers, curvature, material and existing fastener positions where actually visible; do not copy the outside face onto the inside or mirror the whole object. Center the entire cap with ample white margin in a square image, pure opaque white background, neutral soft illumination sufficient to read the concavity, no ground or cast shadow. No anatomy, sleeve, straps, separate armor, additional objects, decorative pattern, text, labels, dimensions or collage.\nCamera target: Component-local Back: near-orthographic camera at +Y looking toward -Y into the open concavity; +Z up, +X screen-left. Opposite Front, zero elevation and roll.\nThe reference is the canonical SHALLOW cap: preserve its short crown lip; never restore a deep full-height return wall. Output one square 1536x1536 image. Change only camera and newly visible plain interior; retain all established shell landmarks.",
+      "referenced_image_paths": [
+        "D:/devgames/MeridianSquad/Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png"
+      ]
+    }
+  }
+]

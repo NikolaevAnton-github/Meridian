@@ -1,0 +1,259 @@
+{
+  "asset": "Datum16ShoulderManual01",
+  "artifacts": [
+    {
+      "path": "Assets/Concepts/PlayerCharacter01/Concept02/16.png",
+      "role": "selected_design_reference",
+      "sha256": "ee9ff6799379808ccd74e752cf816a54a205c2e1f3f3c8a959fba1e69083280b",
+      "size_bytes": 2345444,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Attempts/StartHere01.png",
+      "role": "input_package_evidence",
+      "sha256": "34a34c02ebb7b4f5bb2c89f63ac73ab6879c4c10282e0b1cc32b5f4713ee50c5",
+      "size_bytes": 1674485,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/generation-notes.template.json",
+      "role": "input_package_evidence",
+      "sha256": "3583bedc9ba13beeac2c090a281e68b5c2d01fdc86f3126db4c9872dee9293dc",
+      "size_bytes": 470,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/index.html",
+      "role": "input_package_evidence",
+      "sha256": "f29dc3c2e52615dd982a9d2e69a2d72cfc4084d60d2f023fea003e4d5f60d40e",
+      "size_bytes": 5403,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png",
+      "role": "ai3d_input_candidate",
+      "sha256": "da2987ffd2f924a0d24cf88c4ce937382e35a29a46fd8847ec3aa6b9933773f3",
+      "size_bytes": 1642152,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/manifest.json",
+      "role": "input_package_evidence",
+      "sha256": "518e6481b965f5060bf5a62da7d578a7e5a7cf8ce572e87c546cdf485276242a",
+      "size_bytes": 11240,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/OwnerExports/README.md",
+      "role": "input_package_evidence",
+      "sha256": "f86d7099da86b763d6ff9c819ffe2ab792c32effea8ac573ff8c8f46a28ade01",
+      "size_bytes": 445,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/prompts.json",
+      "role": "input_package_evidence",
+      "sha256": "2e80281e9d118c9b78dc37f1e7c5a70ff30a1be2f618ce894cf239c4223f1ae9",
+      "size_bytes": 7411,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/README.md",
+      "role": "input_package_evidence",
+      "sha256": "c2fa26b8ea1e53f1cdac078014a24614f3e081f9a527dd2b5eb45cf29aafd96b",
+      "size_bytes": 5381,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/ReferenceOnly/02-Front.png",
+      "role": "reference_only_illustration",
+      "sha256": "79f0498457aca4c2ef223877204d1b217fba08052f1e577bcbd071f56435c053",
+      "size_bytes": 1710499,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/ReferenceOnly/03-Left.png",
+      "role": "reference_only_illustration",
+      "sha256": "f985ea703b7affb64033e6a6affc87ba04087e1bcd7bfd2d8a2c18b99db37df4",
+      "size_bytes": 1177012,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/ReferenceOnly/04-Right.png",
+      "role": "reference_only_illustration",
+      "sha256": "198d3dbeaa27245cf4fbd042138606ef0f867912e453541e0be645cd6049e027",
+      "size_bytes": 1178377,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/ReferenceOnly/05-Back.png",
+      "role": "reference_only_illustration",
+      "sha256": "4d2695f72ca307cff77e13164a53af33766d0ac117501a25c9cf336cd809b732",
+      "size_bytes": 1493952,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/render-requests.json",
+      "role": "input_package_evidence",
+      "sha256": "b6690d175540113e96821b94de625f327e69a75ae3e29e3003ecf65024d691a2",
+      "size_bytes": 10767,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/settings.json",
+      "role": "input_package_evidence",
+      "sha256": "aa89a9c63599a106e76f29a062dde7a66b4e01d2b92bdb0d7aa38d11ad205a17",
+      "size_bytes": 1224,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/tripo-prompt.txt",
+      "role": "input_package_evidence",
+      "sha256": "47d082595546d4f0d996d88b78eedfb2d57c810f64df1da03634e3958114dc2a",
+      "size_bytes": 376,
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "upstream": "Assets/Concepts/PlayerCharacter01/Concept02/16.png",
+      "downstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png",
+      "kind": "imagegen_reference",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png",
+      "downstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/ReferenceOnly/02-Front.png",
+      "kind": "imagegen_reference",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png",
+      "downstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/ReferenceOnly/03-Left.png",
+      "kind": "imagegen_reference",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png",
+      "downstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/ReferenceOnly/04-Right.png",
+      "kind": "imagegen_reference",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/Inputs/01-StartHere-Outer45.png",
+      "downstream": "Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16ShoulderManual01/ReferenceOnly/05-Back.png",
+      "kind": "imagegen_reference",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Docs/PlayerCharacter01TripoManualPilot01.md",
+          "note": "Inventory of a bounded input-art handoff; neither 3D geometry nor owner visual acceptance. Declared derivation only."
+        }
+      ]
+    }
+  ]
+}

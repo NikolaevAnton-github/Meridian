@@ -1,0 +1,14 @@
+{
+  "record_id": "PlayerCharacter01-TripoManualPilot01",
+  "date_local": "2026-09-17",
+  "source": "Owner direct chat with Codex",
+  "owner_message_original": "Давай пока с моим участием, подготовь, что от меня требуется",
+  "owner_message_english_translation": "Let's do it with my participation for now; prepare what is required from me.",
+  "context": "The preceding proposal offered a prepared image/settings package for the owner to generate and export a first shoulder component in Tripo.",
+  "authorized_scope": "Prepare the first owner-operated Tripo component input and instruction package inside MSQ-54.",
+  "operator": "Owner performs Tripo generation and export for now; controller prepares inputs and later inspects the returned source.",
+  "first_component": "Datum16 wearer-right shoulder armor cap, selected as the bounded pilot from the preceding plan.",
+  "execution_boundary": "No controller Tripo uploads or credit-consuming generation; no automatic dispatch of the complete MSQ-54 model or successor tasks.",
+  "design_authority": "PlayerCharacter01-Datum16Selection01; original Concept02/16.png remains authoritative.",
+  "acceptance": "Derived component art and hidden-surface interpretations are not final owner-approved 3D geometry; MSQ-54 remains incomplete."
+}

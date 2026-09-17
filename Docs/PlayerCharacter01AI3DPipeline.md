@@ -2,6 +2,14 @@
 
 Research and planning revision: **2026-09-17 / Pipeline01**.
 
+Current bounded execution: the owner will operate Tripo for the first component
+pilot. [Datum16ShoulderManual01](PlayerCharacter01TripoManualPilot01.md) supplies
+one recommended single-image shoulder-cap input, settings and export instructions.
+Its additional views are reference-only because projection/landmark consistency
+was not established. This preparation creates no 3D source or fitted body master.
+One common proportional body remains required for assembly; generating an entire
+character with AI is optional. The full MSQ-54 prototype remains outstanding.
+
 Subsequent owner decision on 2026-09-17: **Concept02 / Candidate01, 16 / Datum**
 is selected and MSQ-52 execution is authorized. See the
 [selection record](Approvals/PlayerCharacter01-Datum16Selection01.json).

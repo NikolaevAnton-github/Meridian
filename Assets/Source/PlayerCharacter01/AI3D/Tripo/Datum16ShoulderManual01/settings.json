@@ -1,0 +1,31 @@
+{
+  "package": "Datum16ShoulderManual01",
+  "task": "MSQ-54",
+  "operator": "owner",
+  "provider": "Tripo Studio web",
+  "mode": "Smart Mesh",
+  "model": "P2.0 - Preview",
+  "first_attempt_input_mode": "single image",
+  "first_attempt_input": "Inputs/01-StartHere-Outer45.png",
+  "topology": "Quad",
+  "target_faces": 3000,
+  "target_is_recommendation_not_measured_output": true,
+  "texture": false,
+  "auto_rig": false,
+  "animation": false,
+  "generate_in_parts": false,
+  "privacy": "Private",
+  "requested_first_attempts": 1,
+  "preferred_export": "FBX preserving quads if offered",
+  "export_destination": "OwnerExports/",
+  "actual_generation_performed_by_controller": false,
+  "credit_quote": "Read current web UI before the owner starts; no fixed price assumed.",
+  "reference_view_map_do_not_upload_together": {
+    "Front": "ReferenceOnly/02-Front.png",
+    "Left": "ReferenceOnly/03-Left.png",
+    "Right": "ReferenceOnly/04-Right.png",
+    "Back": "ReferenceOnly/05-Back.png"
+  },
+  "combined_multiview_recommended": false,
+  "reference_view_note": "Illustrated profiles remain oblique and fastener/edge landmarks vary. Preserve these as construction references only. Use StartHere alone for the owner pilot."
+}

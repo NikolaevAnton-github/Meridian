@@ -30,7 +30,13 @@ MSQ-53's named design-selection gate is satisfied. MSQ-52's technical audit and
 `MSQ52-RigContract01` are complete and controller-verified; see the
 [handoff](PlayerAnimationAudit01.md). MSQ-54 is the next production stage and must
 reconcile derived reference views and validate the original-model round trip.
-This owner instruction dispatched MSQ-52 only; MSQ-54 has not been dispatched.
+The original selection instruction dispatched MSQ-52 only. The owner subsequently
+requested an owner-operated Tripo input package: the bounded MSQ-54 preparation
+is delivered as [Datum16ShoulderManual01](PlayerCharacter01TripoManualPilot01.md).
+Use its single StartHere image for the first manual shoulder-cap generation;
+the additional illustrated views are reference-only, not a validated Multi-view
+set. The next step is the owner's returned FBX. No controller Tripo generation
+or complete body-prototype run was authorized or performed by this preparation.
 The owner alone evaluates this concept batch; no independent concept reviewer or
 MSQ-53 expert run. Later MSQ-60 integrated review remains required.
 
@@ -92,7 +98,8 @@ Last verified Multica state, 2026-09-17:
 | MSQ-51 | `done`; concept deliveries preserved. |
 | MSQ-53 | `done`; owner selected Concept02 / Candidate01, 16 / Datum. No expert run. |
 | MSQ-52 | `done`; controller-accepted animation audit and MSQ52-RigContract01. 186 source-identical packages, 82 sequences, 19 representative playback cases; later original-rig/gameplay gates remain. |
-| MSQ-54 through MSQ-60 | `backlog`; original model, presentation, movement, rifle, finish, integration and final review. |
+| MSQ-54 | Bounded manual-input preparation delivered; awaiting owner Tripo export. The original body/deformation prototype remains incomplete. |
+| MSQ-55 through MSQ-60 | `backlog`; presentation, movement, rifle, finish, integration and final review. |
 
 The [task synchronization audit](Tasks/PlayerCharacter01AI3DTaskAudit01.md) verified
 description-only updates to MSQ-50 and MSQ-52 through MSQ-60. All 33 non-target records

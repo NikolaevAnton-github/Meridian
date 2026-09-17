@@ -1,0 +1,16 @@
+{
+  "package": "Datum16ShoulderManual01",
+  "status": "template_not_a_generation_record",
+  "generated_at_local": null,
+  "provider_task_url_or_id": null,
+  "input_filenames": [],
+  "model": null,
+  "topology": null,
+  "target_faces": null,
+  "reported_output_faces": null,
+  "texture_enabled": null,
+  "privacy": null,
+  "credits_used": null,
+  "downloaded_files": [],
+  "notes": "Fill only known values; no account identifiers, credentials or signed download URLs."
+}
