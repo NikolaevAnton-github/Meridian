@@ -31,6 +31,7 @@ Assets/Concepts/OpeningLobby/ArchitectureRework01/*.sha256 text eol=lf
 # Accepted lobby manifests identify exact native source/reference bytes.
 # Disable newline conversion without changing extension-specific LFS filters.
 Assets/Concepts/OpeningLobby/** -text
+Assets/Concepts/PlayerCharacter01/** -text
 Assets/Source/OpeningLobby/** -text
 Docs/Approvals/** -text
 Docs/OpeningLobby* -text

@@ -1,0 +1,522 @@
+{
+  "package": "Datum16MultiView01",
+  "character": "16 / Datum",
+  "purpose": "Eight separate white-background input-art views",
+  "packaged_at_utc": "2026-09-16T19:03:22.128086+00:00",
+  "owner_selection": "PENDING",
+  "visual_evaluator": "Owner only",
+  "independent_art_review_performed": false,
+  "modeling_approval": false,
+  "external_3d_generation_performed": false,
+  "three_dimensional_consistency_verified": false,
+  "hidden_surfaces": "Inferred illustration; not verified production geometry",
+  "background_target": "Opaque white",
+  "image_bytes_modified_by_packaging": false,
+  "generation": "Built-in imagegen; Multica Concept Art prompt preparation",
+  "prompts": {
+    "file": "prompts.json",
+    "sha256": "34e36703e58892fa38fa84776ce8f9ca15d6ce91867d0b70d73c67aad95ef04e"
+  },
+  "exact_render_requests": {
+    "file": "render-requests.json",
+    "sha256": "17b01d47d820ff8c811df8530876f4134a8d46038fc860a308c63bd0e4042b0d"
+  },
+  "camera_convention": "Labels follow the owner's direction thumbnails. Left faces image-left and shows the wearer's left side; Right faces image-right and shows the wearer's right side.",
+  "source_preservation": {
+    "verified": true,
+    "checked_file_count": 62,
+    "baseline": "Saved/PlayerCharacter01/Datum16MultiView01/Controller/protected-before.json",
+    "baseline_sha256": "1381f40044431d6b5a6c0677355c2dc603e743d8dd43310dea98e1e6a6edefc1"
+  },
+  "statistics_limit": "Border samples describe edge pixels only; they do not establish full-background purity, correct anatomy, camera accuracy, or visual acceptance.",
+  "images": [
+    {
+      "view": "Front",
+      "label": "Front",
+      "file": "16-Datum-Front.png",
+      "camera_convention": "Front camera; the wearer faces the viewer.",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGB",
+      "png_bit_depth": 8,
+      "png_color_type": 2,
+      "bytes": 1677389,
+      "sha256": "33a3ff9eb371ad4bcc3e268be68b276cace288b5a07138aa5377e1a80bbfb234",
+      "white_border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5116,
+        "exact_opaque_white_fraction": 0.131353,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.069,
+          254.045,
+          254.192
+        ],
+        "corner_rgba": {
+          "top_left": [
+            254,
+            255,
+            255,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            254,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "view": "Left45",
+      "label": "Left 45 degrees",
+      "file": "16-Datum-Left45.png",
+      "camera_convention": "Three-quarter front view turned toward image-left, showing more of the wearer's left side.",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGB",
+      "png_bit_depth": 8,
+      "png_color_type": 2,
+      "bytes": 1652094,
+      "sha256": "83eb74aeff3d961c58afa8d325fb09f84d287ec2b138f8c064863ac9d256554f",
+      "white_border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5116,
+        "exact_opaque_white_fraction": 0.131744,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          250,
+          250,
+          250
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.058,
+          254.037,
+          254.169
+        ],
+        "corner_rgba": {
+          "top_left": [
+            254,
+            255,
+            255,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "view": "Right45",
+      "label": "Right 45 degrees",
+      "file": "16-Datum-Right45.png",
+      "camera_convention": "Three-quarter front view turned toward image-right, showing more of the wearer's right side and the computer housing.",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGB",
+      "png_bit_depth": 8,
+      "png_color_type": 2,
+      "bytes": 1636941,
+      "sha256": "3beb7c2161dcf71e81424aeac35ccb35307115aa2fbb8ec1e0809620ba122779",
+      "white_border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5116,
+        "exact_opaque_white_fraction": 0.122557,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.043,
+          254.026,
+          254.184
+        ],
+        "corner_rgba": {
+          "top_left": [
+            254,
+            255,
+            255,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            254,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "view": "Left",
+      "label": "Left profile",
+      "file": "16-Datum-Left.png",
+      "camera_convention": "Nose points image-left; the wearer's left side is visible.",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGB",
+      "png_bit_depth": 8,
+      "png_color_type": 2,
+      "bytes": 1363522,
+      "sha256": "38d76720f4625a2ea155cacbf9ce1d23f4ec1ae91f6e901f00f0f9be296b0a93",
+      "white_border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5116,
+        "exact_opaque_white_fraction": 0.147967,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.107,
+          254.067,
+          254.214
+        ],
+        "corner_rgba": {
+          "top_left": [
+            253,
+            255,
+            254,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            254,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "view": "Right",
+      "label": "Right profile",
+      "file": "16-Datum-Right.png",
+      "camera_convention": "Nose points image-right; the wearer's right side and computer housing are visible.",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGB",
+      "png_bit_depth": 8,
+      "png_color_type": 2,
+      "bytes": 1360116,
+      "sha256": "60746171cfd18d62e3991a3f072a67dbe304833abe115d80f2df48895a62d859",
+      "white_border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5116,
+        "exact_opaque_white_fraction": 0.141321,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.104,
+          254.06,
+          254.211
+        ],
+        "corner_rgba": {
+          "top_left": [
+            253,
+            255,
+            254,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            254,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "view": "Back",
+      "label": "Back",
+      "file": "16-Datum-Back.png",
+      "camera_convention": "Rear camera; the wearer faces away from the viewer.",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGB",
+      "png_bit_depth": 8,
+      "png_color_type": 2,
+      "bytes": 1638994,
+      "sha256": "2d57ca3cfd41d524b3f177851d739be46be90f3eb2201d1d5fc487e64cb676c9",
+      "white_border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5116,
+        "exact_opaque_white_fraction": 0.123925,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.059,
+          254.041,
+          254.158
+        ],
+        "corner_rgba": {
+          "top_left": [
+            254,
+            255,
+            255,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            254,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "view": "Top",
+      "label": "Top",
+      "file": "16-Datum-Top.png",
+      "camera_convention": "Overhead projection looking down from above the head; strong foreshortening is expected.",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "png_bit_depth": 8,
+      "png_color_type": 2,
+      "bytes": 1194872,
+      "sha256": "a20a5224d6485379b3b8d66d4a9e205f10fc9175631dbc0016ca17a25d302125",
+      "white_border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5012,
+        "exact_opaque_white_fraction": 0.14984,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.094,
+          254.069,
+          254.173
+        ],
+        "corner_rgba": {
+          "top_left": [
+            254,
+            255,
+            254,
+            255
+          ],
+          "top_right": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bottom_left": [
+            254,
+            253,
+            253,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "view": "Bottom",
+      "label": "Bottom",
+      "file": "16-Datum-Bottom.png",
+      "camera_convention": "Underfoot projection looking up from beneath the feet; strong foreshortening is expected.",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "png_bit_depth": 8,
+      "png_color_type": 2,
+      "bytes": 1222344,
+      "sha256": "122188c182eac5a178d1ff973fd9fa191ebb505075c79f5f6d2bf80f7f09ca68",
+      "white_border_statistics": {
+        "method": "Unique outermost edge pixels read with System.Drawing; no image changes saved",
+        "sample_count": 5012,
+        "exact_opaque_white_fraction": 0.152434,
+        "near_opaque_white_fraction_rgb_min_245": 1,
+        "opaque_fraction": 1,
+        "rgb_min": [
+          253,
+          253,
+          253
+        ],
+        "rgb_max": [
+          255,
+          255,
+          255
+        ],
+        "rgb_mean": [
+          254.108,
+          254.065,
+          254.177
+        ],
+        "corner_rgba": {
+          "top_left": [
+            253,
+            255,
+            255,
+            255
+          ],
+          "top_right": [
+            254,
+            255,
+            254,
+            255
+          ],
+          "bottom_left": [
+            254,
+            254,
+            254,
+            255
+          ],
+          "bottom_right": [
+            254,
+            253,
+            254,
+            255
+          ]
+        }
+      }
+    }
+  ]
+}

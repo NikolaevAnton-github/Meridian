@@ -1,0 +1,193 @@
+{
+  "tool": "built-in image_gen",
+  "mode": "reference-guided image editing",
+  "source_package": "../Datum16MultiView01",
+  "generation_history": [
+    {
+      "id": "01_helmet",
+      "filename": "parts/01_helmet.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: the complete closed helmet including opaque black wraparound visor, faceted lower face/chin armor, segmented crown and original side electronics housings. Helmet only, no neck scarf or shoulders. Three-quarter front view matching the supplied Left profile side; camera slightly above visor so front and that side and crown are visible. Keep visor completely opaque. Preserve asymmetry of side equipment from references; do not invent logos, antennae, exposed face or a new helmet shape.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "02_undersuit",
+      "filename": "parts/02_undersuit.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: The complete ONE-PIECE soft textile undersuit only, as a naturally filled invisible-mannequin garment with the original human proportions, relaxed symmetrical A-pose arms about 25 degrees from sides and straight slightly separated legs. Keep the original charcoal/olive tactical fabric, torso center seam, shaped knee/elbow tailoring and high soft folded neck collar. Remove helmet, every metal armor plate, harness, straps, belt, pouches, gloves and boots. No hands, feet, head or visible supporting mannequin; empty neck, wrist and ankle openings. Show full garment head-on front with only a tiny three-quarter angle (10 degrees), shoulders to ankle cuffs, one coherent continuous garment, no detached pieces. Reconstruct fabric beneath armor conservatively with simple seam continuity. This soft suit is the anatomical base; DO NOT imprint the old armor silhouettes or bolts into the fabric.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "07_forearm_L",
+      "filename": "parts/07_forearm_L.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: Only the anatomical LEFT forearm armored bracer worn between elbow and wrist. The left sleeve on the supplied Left profile identifies the exterior plates. Extract the long angular gunmetal forearm shell with its narrow adjacent side plate, inset dark channels, small fasteners and original wrist fastening band. Preserve its tapered forearm fit, broad toward elbow and narrower at wrist. Show one bracer as a wearable curved shell at an exterior front-side three-quarter angle, proximal end at top, wrist end bottom, subtle glimpse of dark inner backing. No hand, glove, sleeve fabric extending outside, elbow cap, upper arm or other parts. Do not close or cap the arm opening with armor. Keep all plates on this single bracer in their original relative placement.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "08_glove_L",
+      "filename": "parts/08_glove_L.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: Only ONE anatomical LEFT full-finger tactical glove, wrist cuff through all five fingertips. Show the BACK OF HAND (dorsal) in near-straight-on view with a slight side angle, wrist opening at top, fingertips down, THUMB ON IMAGE-RIGHT (left glove dorsal convention). Fingers naturally gently extended and slightly separated with white gaps, thumb relaxed outward; no fist. Preserve the four rounded gunmetal knuckle protectors, black/charcoal leather and fabric panels, articulated finger padding, reinforced thumb and original short wrist closure from supplied character. Exactly four long fingers plus one opposable thumb, complete clean silhouette, no forearm armor or sleeve, no exposed skin or mannequin. Do not turn fingers into metal robot fingers; this is a soft wearable glove with dorsal protectors.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "03_torso_front",
+      "filename": "parts/03_torso_front.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: The complete torso armor carrier and harness ONLY, as worn from shoulders to waist: one large polygonal gunmetal breastplate with its exact horizontal slot pattern, EXACTLY THREE separate horizontal abdominal lames below it, original narrow side plates and webbing side fasteners, two original shoulder straps with rectangular buckles. Include the rear carrier shell unobtrusively behind front to imply a wearable hollow vest with open neck and armholes. Front three-quarter camera just 15 degrees off straight frontal so breastplate and three lames are fully readable. This must look like the character's existing armor vest removed from the body. Remove helmet, neck scarf, arms, shoulder caps, sleeves, hip belt, pouches and trousers. Fabric backing only where required by the vest; preserve plate gaps. No invented high collar, extra chest plate, pouches, shoulders or new plates. The three abdominal plates remain separate with flexible dark gaps.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "04_shoulder_L",
+      "filename": "parts/04_shoulder_L.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: ONE anatomical LEFT shoulder armor cap, extracted exactly from the supplied character's left profile: a low-profile angular curved gunmetal pauldron with beveled perimeter and original sparse black fasteners, thin dark padded backing. Three-quarter exterior view from slightly above reveals its domed shoulder contour and thickness. Keep original faceted panel arrangement, no additional stacked fantasy shoulder pieces. No sleeve, upper-arm guard, arm, torso, harness or hanging straps not visible in original. One standalone wearable shoulder shell.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "05_upper_arm_L",
+      "filename": "parts/05_upper_arm_L.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: ONE small anatomical LEFT upper-arm armor guard: the compact vertically oriented faceted gunmetal shield located midway between shoulder and elbow in the source Left profile. Preserve the six-sided-ish clipped outline, bevels, tiny fasteners and shallow central face; include close-fitting black backing and only minimal original webbing attachment behind it. Front three-quarter view at 20 degrees so thickness visible. No shoulder cap, sleeve, skin, elbow, forearm or large new housing. This is the small upper-arm plate, NOT the much larger shoulder armor.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "07_forearm_L",
+      "revision": 2,
+      "filename": "parts/07_forearm_L.png",
+      "prompt": "Use case: precise-object-edit. Edit ONLY the FIRST image (isolated forearm bracer); other images are source design references. Remove the separate SHORT SHIELD-SHAPED METAL CAP at the upper/proximal end: that cap belongs to the separately modeled elbow pad. Preserve the long main forearm plate below it, narrow side plate, lower wrist band, material, silhouette and original camera. Shorten the upper textile extension to end just above the main long plate with a clean open forearm rim. Result must be one elbow-free forearm bracer, with ONE long central armor panel and its narrow side panel plus wrist closure. Do not introduce new armor or change other details. Complete object with generous margins, pure white opaque background, neutral even light, no label. No elbow cap anywhere in image.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/parts/07_forearm_L.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "08_glove_L",
+      "revision": 2,
+      "filename": "parts/08_glove_L.png",
+      "prompt": "Use case: precise-object-edit. Edit ONLY the FIRST image (single isolated left glove); others are original character references. Preserve the exact glove, five fingers, finger lengths, pose, dorsal view, four rounded knuckle protectors, lower small dorsal hand panel and stitching. Change only the UPPER WRIST CUFF: remove its bright rectangular metal armor plate and replace that plate area with plain dark charcoal flexible textile/leather and a simple soft hook-and-loop wrist closure, consistent with the original character's black glove. That metal wrist bracelet belongs to the separate forearm bracer and must not be duplicated on the glove. No new metal or armor at the wrist. Keep the same framing and clean pure opaque white background. One left glove, dorsal side, wrist top, fingertips down, thumb image-right.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/parts/08_glove_L.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "06_elbow_L",
+      "filename": "parts/06_elbow_L.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: ONE anatomical LEFT elbow armor cap with close-fitting dark padded backing and its simple attachment strap, separate from the forearm bracer. Use the elbow protector visible at the left profile elbow and rear view as the design: compact polygonal gunmetal cap, slanted beveled sides, tiny perimeter fasteners, curved to cup the elbow tip. Show exterior at three-quarter angle, only this small elbow cup and backing. No long forearm plates, sleeves, arm, glove, shoulder or kneepad. Preserve the compact angular shape; do not enlarge it into a long guard.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "09_belt",
+      "filename": "parts/09_belt.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: The complete utility waist belt ONLY as a closed wearable oval ring, three-quarter front product view from slightly above. Keep the source's black woven webbing, central rectangular dark buckle, gunmetal rectangular belt fittings, and the existing small matching armored utility pouches at the left and right hips. Preserve original plain practical layout: central buckle flanked by a rectangular metal keeper on each side and a small dark armored flap pouch at each hip. No extra pouches added at front, no magazines, weapons, holsters, tools, hanging leg straps or body. The rear arc may be conservatively reconstructed as plain webbing. The belt assembly must form one coherent wearable loop on white, not separate scattered objects.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "10_thigh_L",
+      "filename": "parts/10_thigh_L.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: ONE anatomical LEFT outer-thigh armor assembly. Match the left thigh visible on the character's Front image-right and Left profile: the large elongated angular outer thigh shield, its adjacent narrow stack of smaller segmented outer plates, dark backing and the single original black thigh strap with rectangular buckle. Keep the two neighboring plate regions together as one mounted thigh assembly, with clear seam gaps. Show exterior three-quarter view, hip end up, knee end down. No hip belt, hand, glove, trousers, leg anatomy, kneepad or shin guard. The assembly must be short enough to end above the knee and show its curved thigh fit. Do not invent a pouch or pistol holster.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "11_knee_L",
+      "filename": "parts/11_knee_L.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: ONE anatomical LEFT knee protector with its original angular gunmetal kneecap plate, dark flexible padded backing and a black retention strap. Match the source front and side knee region precisely: faceted elongated shield with clipped corners and small black perimeter fasteners, broader above and tapered below. Three-quarter exterior view showing curved knee cup and modest thickness. Knee pad ONLY; no thigh plate, shin plate, trousers, boot, human leg or elbow guard. Retention strap forms a sensible loop behind the cap, not additional armor.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "12_shin_L",
+      "filename": "parts/12_shin_L.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: ONE anatomical LEFT shin armor assembly / greave ONLY. Faithfully extract the long angular gunmetal front shin plate with its raised center facets, lower V-like ankle clearance and original small elongated slots at upper edges; preserve the narrow adjacent side shield and dark padded backing/retention elements from source left leg. Long tapered shell follows shin, broad at top, narrowing toward ankle. Three-quarter exterior view showing front and outer side, vertical knee end up and ankle end down. No knee cap, trousers, leg, boot, foot or thigh guard. Keep a clean open curved rear suitable for fitting over a trouser leg, not a solid metal cylinder or a complete armored boot.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png"
+      ]
+    },
+    {
+      "id": "13_boot_L",
+      "filename": "parts/13_boot_L.png",
+      "prompt": "Use case: precise-object-edit / isolated game asset reference. These supplied images are identity references of the SAME Datum armored operative, not different designs. Extract and faithfully reconstruct only the requested equipment part. Preserve exact visible polygon shapes, panel layout, proportions, bevels, seams, charcoal/olive fabric and worn gunmetal materials from the input; no redesign or invented decoration. Hidden surfaces may be conservatively completed only to make a plausible standalone item. One isolated object per image on pure opaque white #FFFFFF, softly even neutral lighting, no ground shadow, no text, labels, grid, collage, human body, exposed flesh or neighboring equipment. High-resolution square product view, object occupies about 80% canvas with safe margins, sharp physically plausible detail, minimal perspective. This is an image reference for image-to-3D, not an exploded diagram or a multi-view sheet.\nRequested object: ONE anatomical LEFT tactical boot ONLY, faithful to the supplied character's boot. Show front-outside three-quarter view with TOE POINTING IMAGE-LEFT and heel image-right, camera slightly above ankle level. Preserve dark charcoal leather, curved reinforced toe cap, original stitched quarter panels, black lacing through metal eyelets, modest high ankle and top ankle fastening band, chunky black rubber lug sole. Complete boot from sole to ankle cuff, no shin armor, trouser leg, person, second boot or floating sole. Match the original grounded utilitarian boot proportions, no exaggerated platform or new logos. Image 4 is sole design reference only; output remains normal three-quarter boot product view.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Bottom.png"
+      ]
+    },
+    {
+      "id": "03b_torso_back",
+      "filename": "parts/03b_torso_back.png",
+      "prompt": "Use case: precise-object-edit / companion view. Image 1 is the isolated Datum armor vest whose construction and proportions must remain fixed. Image 2 is the original character BACK and is authoritative for the rear armor design; image 3 supports side connections. Show the SAME vest alone turned to a nearly straight REAR view with slight 10-degree angle. One large polygonal back plate with the rear reference's horizontal slots, EXACTLY THREE separate horizontal lumbar lames beneath it, original two shoulder harness straps and side attachment straps. Preserve image 1's dark textile backing, armhole openings, overall vest length, buckles and worn gunmetal material. Rear slot placement must follow image 2, not invent another design. No character, neck scarf, helmet, arms, shoulder caps, belt, pouches, trousers or front-view inset. One isolated wearable vest only, white opaque background, no floor shadow, centered full silhouette, consistent neutral lighting, 80% square frame. Supporting inferred reference, no dimension text.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/parts/03_torso_front.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Back.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Left.png"
+      ],
+      "role": "auxiliary_view"
+    },
+    {
+      "id": "08b_glove_L_palm",
+      "filename": "parts/08b_glove_L_palm.png",
+      "prompt": "Use case: precise-object-edit / companion view. Image 1 is the exact isolated anatomical LEFT glove to preserve; image 2 shows source character palms for palm padding design. Rotate the SAME glove to show its PALM SIDE at nearly straight-on angle. Wrist opening remains at TOP, fingertips point DOWN, and because this is the palm view of that same LEFT glove its THUMB MUST NOW BE ON IMAGE-LEFT. Match exact four finger lengths and separation from image 1, five digits total, including the distinctive shorter pinky now at image-right. Keep the same plain soft black wrist cuff and hook-and-loop closure: no new metal wrist plate. Render black leather palm with reinforced heel and thenar pads and subtle finger flexion seams from source; rounded metal knuckle armor belongs on the opposite dorsal side and must not appear across the palm. Whole clean glove, no arm or other object, pure opaque white background, neutral even light, centered square product view, no text.",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/parts/08_glove_L.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Bottom.png"
+      ],
+      "role": "auxiliary_view"
+    },
+    {
+      "id": "13b_boot_L_sole",
+      "filename": "parts/13b_boot_L_sole.png",
+      "inputs": [
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/parts/13_boot_L.png",
+        "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16MultiView01/16-Datum-Bottom.png"
+      ],
+      "prompt": "Use case: precise-object-edit / companion view. Image 1 is the isolated LEFT tactical boot to preserve. Image 2 is the original character underside and shows the reference lug pattern. Show ONE SAME LEFT BOOT viewed squarely from directly UNDERNEATH, with entire sole facing the viewer: TOE AT TOP, HEEL AT BOTTOM. Preserve the boot's sole outline, foot arch/left-foot handedness and chunky perimeter lugs. Sole pattern from image 2: dark rubber, broad angular central tread blocks, small diagonal texture within recesses, rugged edge lugs and a defined heel. Only a thin glimpse of upper boot may appear behind sole perimeter; do not show side or front view or a separate detached sole. No second boot, no person or leg, no labels. Center the complete uncropped outsole silhouette in a square canvas with white opaque background and neutral even light. Conservative geometrically plausible tread, no added logos.",
+      "role": "auxiliary_view"
+    }
+  ]
+}

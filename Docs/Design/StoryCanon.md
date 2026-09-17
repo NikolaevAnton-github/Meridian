@@ -8,7 +8,10 @@ MeridianSquad repository and do not establish a final game title.
 
 ## World: fixed facts
 
-The setting is the near future. People with extraordinary abilities have
+The setting is the near future, in **2043**, fixed by the owner's character-concept
+direction on 2026-09-16. See
+[PlayerArtConcept01-Direction01](../Approvals/PlayerArtConcept01-Direction01.json).
+People with extraordinary abilities have
 appeared. They are classified by ability strength and danger; they are
 eliminated or held in a special prison on a remote ocean island.
 
@@ -17,6 +20,17 @@ The protagonist is a member. Exactly four people occupy the highest danger
 category. This is a headcount, not four classes or a promised set of bosses.
 One of the four can reshape surrounding space through thought. His escape
 and subsequent attack initiate the story.
+
+## Protagonist equipment: owner direction
+
+On 2026-09-16, the owner specified a computer inside the protagonist's helmet
+that renders the interface/HUD. See
+[PlayerArtConcept02-Direction01](../Approvals/PlayerArtConcept02-Direction01.json).
+This is equipment direction, separate from the protagonist's innate abilities;
+the helmet computer is not established as their source. The computer can present
+a local interface while the protagonist has no external command contact after
+isolation. It does not restore that contact or supply new orders. Interface
+layout, displayed information, controls and other UI mechanics remain unspecified.
 
 ## Fixed sequence
 
@@ -96,8 +110,9 @@ characters and universes do not enter this setting. Earlier ideas of a literal
 building-body, immortality through the tower, or consciously maintaining a
 refuge after isolation are no longer the operative explanation.
 
-Morrow Tower is a working name only. Open details include the building's age,
-exact year, the fugitive's name and biography, specific revenge target, prison,
+Morrow Tower is a working name only. The exact year was previously open and is
+now fixed as 2043. Open details include the building's age,
+the fugitive's name and biography, specific revenge target, prison,
 classification scales and agencies, PMC composition, cause of the head wound,
 the squad's death and protagonist's survival, and the consequences of the
 target's death. Revenge, intentional attack and subsequent loss of control

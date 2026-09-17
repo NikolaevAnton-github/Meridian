@@ -1,0 +1,121 @@
+{
+  "package": "PlayerArt-Concept02 / Candidate01",
+  "year": 2043,
+  "state": "AWAITING_OWNER_SELECTION",
+  "visual_evaluator": "Owner only",
+  "generation": "Built-in imagegen with Concept01 01 and 08 art references; Multica Astra/max/standard creative preparation",
+  "references": [
+    {
+      "path": "Assets/Concepts/PlayerCharacter01/Concept01/01.png",
+      "sha256": "1d4b0797654e148d160cfb2089b77d79c57397b8568690d360878045fe6ec105"
+    },
+    {
+      "path": "Assets/Concepts/PlayerCharacter01/Concept01/08.png",
+      "sha256": "cae48359876532068f874e0f104b06688ff4c08711b51724832d7aa9d1668843"
+    }
+  ],
+  "preparation_sha256": "ec30ab3c5e514450166f02830493ff2a7aba85f33bef5bbb7dd18f00eeec2315",
+  "requests_sha256": "1d9383d6db6216790b44a953ad2f184b78bc826f8773d47604f8c88cc3d53708",
+  "images": [
+    {
+      "id": "16",
+      "name": "Datum",
+      "file": "16.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2345444,
+      "sha256": "ee9ff6799379808ccd74e752cf816a54a205c2e1f3f3c8a959fba1e69083280b",
+      "prompt_sha256": "5a07e4e49d246fb5f60c82599e4cdc093d9e5f3c49b950701360673bb2744781"
+    },
+    {
+      "id": "17",
+      "name": "Traverse",
+      "file": "17.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2292035,
+      "sha256": "3912ae545b27a755c2e71ec4e55eca469a5a0da0c2e16d7a82ee70dbefb63a23",
+      "prompt_sha256": "1ba50cd33830a51a5a125953982f965a35388114bafc1a3ad1416b47f8af40b3"
+    },
+    {
+      "id": "18",
+      "name": "Laminate",
+      "file": "18.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2347021,
+      "sha256": "e5c34dbf6327a509d6eac67f64c029fe81193eff619af4e77dd5ea87357bd2d1",
+      "prompt_sha256": "607ef4a56073ca8496919ab5414fc4f809b893b072b6b0689993ac1c3d023b5e"
+    },
+    {
+      "id": "19",
+      "name": "Splitline",
+      "file": "19.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2315154,
+      "sha256": "0f49c9d0aa034cbf0c6390f135f943483bbfc98c46c5a68ac9c55ca062031532",
+      "prompt_sha256": "e5da2bc8ce295235e9d9e54b42d0073f5fe4a0bdbaecd71058f39f8d6fc5a1f3"
+    },
+    {
+      "id": "20",
+      "name": "Mantle",
+      "file": "20.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2385547,
+      "sha256": "fd2c53daf842fad6956736274c8a0515c78d9aceea76eae9de7b686ec970adc4",
+      "prompt_sha256": "996787f7879aa3616335cd4f8148bfe0839b1c9d093b94a1a750b52418991e74"
+    },
+    {
+      "id": "21",
+      "name": "Keel",
+      "file": "21.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2294456,
+      "sha256": "83184a9108fa0adbfb7255bae79d5435d73b8a0decf0b435f2ca0718edd8b417",
+      "prompt_sha256": "52d01b683c18038895ada6607ee0612daf063ef296357ee8999bf2ff7a5c38d1"
+    },
+    {
+      "id": "22",
+      "name": "Course",
+      "file": "22.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2297042,
+      "sha256": "44f7185fd4d282faecd66594cff9a8932c8b27049809d480ba4bbfe609e1c61c",
+      "prompt_sha256": "5b60ab6bf64e1c5f4451075fd52858faf5d8b234f9a16c96a2e3569047e18e59"
+    },
+    {
+      "id": "23",
+      "name": "Offset",
+      "file": "23.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2278098,
+      "sha256": "059e1111813920f2c0d66d3b2703a525afcf9ce32d58e7e0719f5a65882da865",
+      "prompt_sha256": "76e56f653e615ae4ba7d5de2938c36cf14d39a3c2dd610aec46d3a0409748dab"
+    },
+    {
+      "id": "24",
+      "name": "Facet",
+      "file": "24.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2365043,
+      "sha256": "fd15755bedf2b1108e32f8a7d38cb09965a352723d71488a77e6346a50512442",
+      "prompt_sha256": "076633b66ede605eadfa71205dc57252ebd904fd0ce317e57f9129479d226e87"
+    },
+    {
+      "id": "25",
+      "name": "Chevron",
+      "file": "25.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2300652,
+      "sha256": "88e66057341a12bba8e3696b85727d592216243c5ef9698c00a5e839df71fef6",
+      "prompt_sha256": "cf0785fcb7bd84b3f300adf4e5d6515c34a843acbbae9420c0bd944127e3574f"
+    }
+  ]
+}

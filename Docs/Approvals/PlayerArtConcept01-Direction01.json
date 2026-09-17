@@ -1,0 +1,38 @@
+{
+  "record_id": "PlayerArtConcept01-Direction01",
+  "date_local": "2026-09-16",
+  "source": "Owner direct chat requesting protagonist concept art after creation of the PlayerCharacter01 task family",
+  "owner_direction_english_paraphrase": "Create at least fifteen protagonist concept alternatives, all with concealed faces. Use the highest artist level, account for the lore and the year 2043, and leave evaluation entirely to the owner without an independent expert.",
+  "wording_type": "English paraphrase, not an exact quotation",
+  "decision": "Authorize the bounded MSQ-51 original protagonist concept batch and make MSQ-53 the owner-only named concept selection gate.",
+  "scope": {
+    "setting_year": 2043,
+    "minimum_original_variants": 15,
+    "face_requirement": "Every variant has a fully concealed face.",
+    "lore": "Respect Docs/Design/StoryCanon.md and Docs/Design/GameBrief.md; the protagonist is a MERIDIAN parautilitarian in a realistic dark near-future setting. Unresolved biography, uniform and equipment details remain design proposals.",
+    "concept_artist_configuration": "Astra/max/standard",
+    "configuration_basis": "Operational selection implementing the owner's request for the highest artist level.",
+    "evaluation": "Owner only; no independent expert evaluation or MSQ-53 expert run for this concept batch."
+  },
+  "authorized_execution_task": "MSQ-51",
+  "owner_selection_gate": "MSQ-53",
+  "other_tasks_dispatched_by_this_direction": false,
+  "final_character_design_approved": false,
+  "original_modeling_authorized": false,
+  "gates": [
+    "The owner must explicitly select an identified concept package, version and variant before original character modeling.",
+    "Original modeling also retains the MSQ-52 animation audit and rig-contract prerequisite.",
+    "The later MSQ-60 independent integrated gameplay review remains unchanged."
+  ],
+  "supersedes_for_current_concept_batch": [
+    "The initial two-or-three-concept target in PlayerCharacter01 planning.",
+    "The initial Astra/high/standard concept-artist setting.",
+    "The initial independent concept-review step in MSQ-53 and the task-creation record.",
+    "The earlier unresolved exact setting year in StoryCanon.md."
+  ],
+  "preservation": "Preserve the initial task-creation record and all prior evidence. Do not reopen deferred lobby work or mutate gameplay, scene assets or original animation sources.",
+  "task_brief": "Docs/Tasks/PlayerArtConcept01.md",
+  "plan": "Docs/Tasks/PlayerCharacter01Plan.md",
+  "task_index": "Docs/Tasks/PlayerCharacter01Tasks.md",
+  "art_root": "Assets/Concepts/PlayerCharacter01/Concept01"
+}

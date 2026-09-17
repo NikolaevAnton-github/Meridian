@@ -1,0 +1,162 @@
+{
+  "package": "PlayerArt-Concept01 / Candidate01",
+  "year": 2043,
+  "state": "AWAITING_OWNER_SELECTION",
+  "visual_evaluator": "Owner only",
+  "generation": "Built-in imagegen; Multica Astra/max/standard creative development",
+  "preparation_sha256": "7dde975c446ebb9f344d80eb8be993c19642ac73ad3766d7c1aa52be62977208",
+  "generation_requests_sha256": "ffc6fe194d0bfb5d5b55c0119c0d74b1d4b442525c5bcd88b97e666ee906ea8d",
+  "first_variant_note": "01 rendered from the artist brief matrix and shared sheet direction before prompt file handoff; exact controller request retained. 02-15 use common_prompt plus artist variant prompt.",
+  "images": [
+    {
+      "id": "01",
+      "name": "Cutline",
+      "file": "01.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2328724,
+      "sha256": "1d4b0797654e148d160cfb2089b77d79c57397b8568690d360878045fe6ec105",
+      "prompt_sha256": "508cd0a1d0de051274cfbaa4fbd92eab6779c8a08683d0adb81b124bff39b9be"
+    },
+    {
+      "id": "02",
+      "name": "Fold",
+      "file": "02.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2290196,
+      "sha256": "4c606a216e39ab9292f2ead11bccff38e24d8d272d922a94068bf0b213e96f4f",
+      "prompt_sha256": "9a2aa63e95579c8e8d304123ad6c5cb06ecaceb68c3c71d320c15a28f2aeb98e"
+    },
+    {
+      "id": "03",
+      "name": "Long Panel",
+      "file": "03.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2083675,
+      "sha256": "25de4e2be21253b75df69a4b1063a79c3702dd5f66dc12d24773a23b8ae9b9ea",
+      "prompt_sha256": "c18baed5b86b5f9f987d5bbf4fa9b23ed84ad75c0d68482ee74cf3f1c49d4c1e"
+    },
+    {
+      "id": "04",
+      "name": "Webbing",
+      "file": "04.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2233711,
+      "sha256": "4cf625719dcbfe88f0199453a623f58eedd5a2929c82577df415113d5332f38a",
+      "prompt_sha256": "09f36a72e0b9c11c815aa1285951fe9131a7a9c6cb7f09557e4f97f2f1dedf80"
+    },
+    {
+      "id": "05",
+      "name": "Channel",
+      "file": "05.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2153550,
+      "sha256": "007f4863ce1d129f679f6837c0ccd9c4b3fecb2feea6c6a60fb2a064aeb8d917",
+      "prompt_sha256": "a50605464342da9e082ac05dd42aec2b7daa6515dad9b333ebdbc5f7ba199ed3"
+    },
+    {
+      "id": "06",
+      "name": "Rain Yoke",
+      "file": "06.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2144509,
+      "sha256": "cb51974ebabb8d9e58078bce858307961ad808c4f551f68f1c0160660db88883",
+      "prompt_sha256": "3028312ddb37a471ccf891b82be0f2b2ee143148dd985a2377ee85398473ffe7"
+    },
+    {
+      "id": "07",
+      "name": "Bib",
+      "file": "07.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2189874,
+      "sha256": "21361f5e7115df722e64d3193d6f6384ef3b5d2d8a762c1f223949688bde14ba",
+      "prompt_sha256": "f9028c76eec2b0c4092bc8ddd0d83905c8b15324ae4d8e8b727c816ce32dc12e"
+    },
+    {
+      "id": "08",
+      "name": "Overlap",
+      "file": "08.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2193569,
+      "sha256": "cae48359876532068f874e0f104b06688ff4c08711b51724832d7aa9d1668843",
+      "prompt_sha256": "27175179c4090a54cade461f017ee9634d7411c4ecbceeacaab24c7518ba6985"
+    },
+    {
+      "id": "09",
+      "name": "Edge Guards",
+      "file": "09.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2052767,
+      "sha256": "138f925d2e8a5906d6a3b3d2c6e50706591a6bdb9e3d8d4fcd4488a735da13bc",
+      "prompt_sha256": "61e33c16114c4f5da9496d6441bc13bfa9ea1dbe12d29af136f17d14d42b1d90"
+    },
+    {
+      "id": "10",
+      "name": "Knit",
+      "file": "10.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2293574,
+      "sha256": "298ff95ba0bcb9518e34bae0116423e84686ac55df159c97751e25c1dfac01fd",
+      "prompt_sha256": "d9caf5438b7b965d17f2fe8d19a685ae7a7f3d27d2b4addf357a0c2bb4a4875b"
+    },
+    {
+      "id": "11",
+      "name": "Blouson",
+      "file": "11.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2134942,
+      "sha256": "5a7f056611424dd7dcf496ded1e9cc9b381cf102df3ebc12d951b8f58a2ac3f2",
+      "prompt_sha256": "6153426339418027c79c0ff356b4975061a3a25e9772e3de6f4e2ee72590dd9c"
+    },
+    {
+      "id": "12",
+      "name": "Split Vest",
+      "file": "12.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2180504,
+      "sha256": "f98b7a8b6790186d38ccd18184821e2037227f24bed50d6d4a2898bbdbfaf8b8",
+      "prompt_sha256": "a8a04a06cb21b9ed1207c3e67f6718079ff3443cf16a483a906e29033d78e677"
+    },
+    {
+      "id": "13",
+      "name": "Seam Seal",
+      "file": "13.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2182060,
+      "sha256": "6539b655fc9e97cc19d5ba4f2c44b3638f6d77c294dcd627f1c772f5c7284daf",
+      "prompt_sha256": "a429d901611fb80e5326aa2a10d1e6ac8969643a2070a0bafc6bd2d0616c6644"
+    },
+    {
+      "id": "14",
+      "name": "Field Tailor",
+      "file": "14.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2190766,
+      "sha256": "31a13da7fa45ef96719127d0a50da6da0cf95501469ca54a9f53e6f8f3cfce91",
+      "prompt_sha256": "9575f9448fb71f6d2e58bdbfef52c4a8e2120a2e2e54c704ce5aa9f15bcd5486"
+    },
+    {
+      "id": "15",
+      "name": "Hip Guard",
+      "file": "15.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2191541,
+      "sha256": "0dc22660405030c2a5dd28b8a96bbe1601c502f0d829547ee5c8baac6e67180e",
+      "prompt_sha256": "edd0056cef922ad5ce7f2fef4cfd47436dc74b75dfccbb01eb3d021052108ceb"
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "revision": "camera-angle-02",
+  "changed_image_ids": [
+    "05_upper_arm_L",
+    "07_forearm_L",
+    "10_thigh_L"
+  ],
+  "unchanged_image_count": 13,
+  "primary_image_count": 13,
+  "reference_image_count": 3,
+  "checks": [
+    {
+      "id": "01_helmet",
+      "path": "01_Для_Meshy_4K/01_Шлем_целиком.png",
+      "sha256": "9399367A7AC26829087CFFF8CDADFD023764C6FD9140299C831FD21687EA2351",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "02_undersuit",
+      "path": "01_Для_Meshy_4K/02_Мягкий_комбинезон_без_брони.png",
+      "sha256": "C30D663E7323209C43A46BCDFACDBD7A7A1950BE33A9804D48843C5C7249A4A1",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "03_torso_front",
+      "path": "01_Для_Meshy_4K/03_Бронежилет_целиком_вид_спереди.png",
+      "sha256": "1C8363B018845520DBCECD681062112DDE9B3E192866DAD9546AFDC08223F579",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "03b_torso_back",
+      "path": "02_Справочные_виды_Blender/03_Бронежилет_вид_сзади_справочный.png",
+      "sha256": "A22549DD2BAFE6872C4248A95A84B02AFFA3FFBE7991B5B7914FDD1CFA2DD416",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "04_shoulder_L",
+      "path": "01_Для_Meshy_4K/04_Левый_наплечник.png",
+      "sha256": "92D5842AF116648F5D8FD2E34AE2FEC208C1173BCF5F0D865C1C1A66293DD800",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "05_upper_arm_L",
+      "path": "01_Для_Meshy_4K/05_Защита_левого_плеча_между_наплечником_и_локтем.png",
+      "sha256": "E11CED1DACAF50452F092E45F6B3974C856E43D88C092571152A7CB62D22AB1E",
+      "changed": true,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "06_elbow_L",
+      "path": "01_Для_Meshy_4K/06_Левый_налокотник.png",
+      "sha256": "F0F0F3C02DA6C7D445F3FB834895227F09BC835FCAA226C6ED7A0AF09349731A",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "07_forearm_L",
+      "path": "01_Для_Meshy_4K/07_Левый_наруч_защита_предплечья.png",
+      "sha256": "4D3F05F4442B2B59D5794C0041DCA858306C2B6687BA4CF57B40FF1188DA073C",
+      "changed": true,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "08_glove_L",
+      "path": "01_Для_Meshy_4K/08_Левая_перчатка_тыльная_сторона.png",
+      "sha256": "A7418FFD0A4A7E0DBCB259BF8A4EC942BE61C5F506EF5157D0438083390D54CD",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "08b_glove_L_palm",
+      "path": "02_Справочные_виды_Blender/08_Левая_перчатка_ладонь_справочный.png",
+      "sha256": "4BA43DB4FE0C1760585BB5546AA98995BB8C316D2EC24B2392D5C6E083E241A1",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "09_belt",
+      "path": "01_Для_Meshy_4K/09_Пояс_с_подсумками.png",
+      "sha256": "F8CA7C6EF31F1F44CBC51F0CCFCD7A2604AAE9875EC81549B45C60AC16B7C061",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "10_thigh_L",
+      "path": "01_Для_Meshy_4K/10_Защита_левого_бедра.png",
+      "sha256": "22C68B7E3D22FE978FBC8B0F488A80EFC0671CBED747F731728F60B3FAC84232",
+      "changed": true,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "11_knee_L",
+      "path": "01_Для_Meshy_4K/11_Левый_наколенник.png",
+      "sha256": "53816490033D8B3EDB86FA2FDE1673704D8BCD50B1EFFFB096AC1D8BAFF23C09",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "12_shin_L",
+      "path": "01_Для_Meshy_4K/12_Защита_левой_голени.png",
+      "sha256": "09061B076CB84C63A52CAC40C2B601BCAF1E755BD8E1A70B0B6D071CB0A9D0D8",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "13_boot_L",
+      "path": "01_Для_Meshy_4K/13_Левый_ботинок.png",
+      "sha256": "19FA0AC765D2CD8C1C034DFE327E69A9191B9D3631A9B24471CA36C00D37ACD9",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    },
+    {
+      "id": "13b_boot_L_sole",
+      "path": "02_Справочные_виды_Blender/13_Левый_ботинок_подошва_справочный.png",
+      "sha256": "4701FE9132EBABD8B55539B53578D8E71976DD21628CAAA3F60CA10EC03B0D2C",
+      "changed": false,
+      "manifest_matches": true,
+      "dimensions_match": true
+    }
+  ],
+  "previous_versions": [
+    {
+      "id": "05_upper_arm_L",
+      "preserved": true
+    },
+    {
+      "id": "07_forearm_L",
+      "preserved": true
+    },
+    {
+      "id": "10_thigh_L",
+      "preserved": true
+    }
+  ],
+  "original_concepts": [
+    {
+      "path": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16MultiView01\\16-Datum-Back.png",
+      "preserved": true
+    },
+    {
+      "path": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16MultiView01\\16-Datum-Bottom.png",
+      "preserved": true
+    },
+    {
+      "path": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16MultiView01\\16-Datum-Front.png",
+      "preserved": true
+    },
+    {
+      "path": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16MultiView01\\16-Datum-Left.png",
+      "preserved": true
+    },
+    {
+      "path": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16MultiView01\\16-Datum-Left45.png",
+      "preserved": true
+    },
+    {
+      "path": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16MultiView01\\16-Datum-Right.png",
+      "preserved": true
+    },
+    {
+      "path": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16MultiView01\\16-Datum-Right45.png",
+      "preserved": true
+    },
+    {
+      "path": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16MultiView01\\16-Datum-Top.png",
+      "preserved": true
+    }
+  ],
+  "gallery_local_links": 23,
+  "broken_gallery_links": [],
+  "tool": "built-in image_gen",
+  "three_dimensional_generation_performed": false
+}

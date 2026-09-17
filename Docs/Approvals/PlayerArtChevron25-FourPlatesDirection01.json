@@ -1,0 +1,60 @@
+{
+  "record_id": "PlayerArtChevron25-FourPlatesDirection01",
+  "date_local": "2026-09-16",
+  "source": "Owner direct chat responding to Chevron25Refine01 / 25A",
+  "owner_direction_english_paraphrase": "The owner rejects the 25A interpretation and clarifies that the cuirass should have four plates physically overlapping one another, as the shoulder plates do.",
+  "wording_type": "English paraphrase, not an exact quotation",
+  "decision": "Authorize one focused concept revision, 25B, with exactly four broad cuirass plates using real shoulder-style shingle overlap. Preserve the rest of the preferred Chevron design.",
+  "rejection_scope": "The rejection concerns 25A's interpretation of the cuirass layering, not the older overall Chevron design.",
+  "references": [
+    {
+      "role": "Rejected cuirass-layering interpretation; retain as unchanged history",
+      "package": "Chevron25Refine01 / 25A",
+      "file": "Assets/Concepts/PlayerCharacter01/Chevron25Refine01/25A.png",
+      "manifest": "Assets/Concepts/PlayerCharacter01/Chevron25Refine01/manifest.json",
+      "sha256": "4de35009fc488f0da6c4f2ad4f5f6a2be93f3755598bcb187be463a32956b3c0"
+    },
+    {
+      "role": "Prior preferred overall design; preserve unchanged",
+      "package": "PlayerArt-Concept02 / Candidate01",
+      "id": "25",
+      "name": "Chevron",
+      "file": "Assets/Concepts/PlayerCharacter01/Concept02/25.png",
+      "manifest": "Assets/Concepts/PlayerCharacter01/Concept02/manifest.json",
+      "sha256": "88e66057341a12bba8e3696b85727d592216243c5ef9698c00a5e839df71fef6"
+    }
+  ],
+  "reference_identity_verification": "Both existing image SHA-256 values were computed from the files and matched their manifests without modifying image or manifest bytes.",
+  "scope": {
+    "revision_id": "25B",
+    "revision_count": 1,
+    "cuirass_plate_count": 4,
+    "requested_change": "Exactly four broad cuirass plates stacked with actual shoulder-style shingle overlap, with each successive plate visibly overlapping the adjacent plate rather than merely suggesting layering through surface seams.",
+    "preserve": [
+      "The remaining preferred Chevron design outside the focused cuirass change.",
+      "Closed helmet and fully concealed face.",
+      "Helmet computer rendering the interface/HUD, separate from innate powers and without restoring external command contact.",
+      "Established 2043 MERIDIAN lore.",
+      "Mobile human proportions and the existing armor direction without a tank-like silhouette."
+    ],
+    "concept_artist_configuration": "Astra/max/standard, inherited from the current concept direction",
+    "evaluation": "Owner only; no independent expert concept evaluation or MSQ-53 expert run."
+  },
+  "authorized_execution_task": "MSQ-51",
+  "owner_selection_gate": "MSQ-53",
+  "new_task_created_by_this_record": false,
+  "other_tasks_dispatched_by_this_direction": false,
+  "final_character_design_approved": false,
+  "original_modeling_authorized": false,
+  "gates": [
+    "Explicit owner approval of an identified final concept package, version and variant remains required before original character modeling.",
+    "Original modeling retains the MSQ-52 animation audit and rig-contract prerequisite.",
+    "Later MSQ-60 independent integrated gameplay review remains unchanged."
+  ],
+  "supersedes": "The interpretation of modest cuirass layering used for 25A. The owner's clarified four-plate construction is the current bounded direction; the earlier record remains historical.",
+  "preservation": "Preserve 25.png, 25A.png, their manifests and all previous source, prompt, report and approval bytes. Save 25B separately. Do not mutate gameplay, lobby assets or unrelated character design.",
+  "prior_direction": "Docs/Approvals/PlayerArtChevron25-LayerDirection01.json",
+  "task_brief": "Docs/Tasks/PlayerArtChevron25Refine02.md",
+  "art_root": "Assets/Concepts/PlayerCharacter01/Chevron25Refine02",
+  "output_image": "Assets/Concepts/PlayerCharacter01/Chevron25Refine02/25B.png"
+}

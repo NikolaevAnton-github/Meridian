@@ -1,0 +1,15 @@
+{
+  "package": "Chevron25Refine01 / 25A",
+  "owner_selection": "PENDING",
+  "source": "Assets\\Concepts\\PlayerCharacter01\\Concept02\\25.png",
+  "source_sha256": "88e66057341a12bba8e3696b85727d592216243c5ef9698c00a5e839df71fef6",
+  "image": "25A.png",
+  "image_sha256": "4de35009fc488f0da6c4f2ad4f5f6a2be93f3755598bcb187be463a32956b3c0",
+  "bytes": 2133563,
+  "width": 1536,
+  "height": 1024,
+  "prompt_sha256": "33ca12c1f32dce4889f3b97fdf200a49589bcc8c399fb2913e3fea04e0d94760",
+  "generation": "Built-in imagegen edit; Multica Concept Art Astra/max/standard preparation",
+  "requested_change": "Modest physically overlapping chevron cuirass plates; preserve remaining design",
+  "visual_evaluator": "Owner only"
+}

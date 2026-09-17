@@ -12,7 +12,8 @@ project/repository name; a final public game title has not been established.
 
 ## Fixed product direction
 
-- A realistic first-person shooter in a dark near-future setting.
+- A realistic first-person shooter in a dark near-future setting, in **2043**
+  (owner direction on 2026-09-16).
 - Shooting is the highest gameplay priority. The owner wants strong perceived
   impact, enemy body destruction, and extensive environmental destruction.
 - Player abilities: time slowdown, force push, and telekinesis. Their costs,
@@ -28,6 +29,22 @@ enemy reactions, sound, particles, decals, physics and damage behavior. These
 are future implementation areas, not systems already present in the project.
 No multiplayer scope or target shipping platform beyond the current Windows
 prototype has been committed.
+
+Latest protagonist continuation, 2026-09-16: the owner prefers Concept01 variants
+01 and 08 and requests ten further directions with more armor while remaining
+mobile, plus a closed helmet containing a computer for the interface. See
+[Concept02 direction](../Approvals/PlayerArtConcept02-Direction01.json) and
+[task](../Tasks/PlayerArtConcept02.md). This is a direction preference, not final
+modeling approval. The 2043 setting and owner-only concept evaluation remain.
+
+Initial protagonist concept direction, 2026-09-16: produce at least 15 original
+MERIDIAN protagonist alternatives with fully concealed faces, respecting the
+story canon and 2043 setting. The concept artist uses Astra/max/standard; the
+owner alone evaluates this concept batch, with no independent expert review.
+See [the direction record](../Approvals/PlayerArtConcept01-Direction01.json) and
+[concept task](../Tasks/PlayerArtConcept01.md). This authorizes MSQ-51 concept
+execution only. A named owner selection is still required before modeling;
+later integrated gameplay review remains unchanged.
 
 ## First owner-visible milestone
 

@@ -1,0 +1,15 @@
+{
+  "package": "Chevron25Refine02 / 25B",
+  "owner_selection": "PENDING",
+  "source": "Assets\\Concepts\\PlayerCharacter01\\Chevron25Refine01\\25A.png",
+  "source_sha256": "4de35009fc488f0da6c4f2ad4f5f6a2be93f3755598bcb187be463a32956b3c0",
+  "image": "25B.png",
+  "image_sha256": "f7da8be0fe6ded76c67042b35494bfd4b6025c11b7ee60a2f6fdfa3bb0ffb8b1",
+  "bytes": 2035213,
+  "width": 1536,
+  "height": 1024,
+  "prompt_sha256": "ae85c359ca42c80f09285defe3305821ad676d1a4783dc016bbb95c7d98cf091",
+  "generation": "Built-in imagegen edit; Multica Concept Art Astra/max/standard preparation",
+  "requested_change": "Exactly four cuirass plates overlapping like the shoulder lames; preserve remaining design",
+  "visual_evaluator": "Owner only"
+}

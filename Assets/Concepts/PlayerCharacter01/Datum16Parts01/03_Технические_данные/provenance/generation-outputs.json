@@ -1,0 +1,89 @@
+[
+  {
+    "id": "01_helmet",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-485f9715-0851-4012-b547-bdd0f03a221d.png",
+    "filename": "parts/01_helmet.png"
+  },
+  {
+    "id": "02_undersuit",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-9d961593-4975-4124-a8d5-c5c1bc03e5bd.png",
+    "filename": "parts/02_undersuit.png"
+  },
+  {
+    "id": "07_forearm_L",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-36e94559-450c-49f7-811a-a88768dd62ec.png",
+    "filename": "parts/07_forearm_L.png",
+    "previous_source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-aa2f245e-f112-4694-b21e-6288c731b164.png",
+    "revision": 2
+  },
+  {
+    "id": "08_glove_L",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-beb1a136-238b-4f46-8f7c-662f188e5e82.png",
+    "filename": "parts/08_glove_L.png",
+    "previous_source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-7be8e1be-bdd0-47d9-a68f-4f4df6dfe1a3.png",
+    "revision": 2
+  },
+  {
+    "id": "03_torso_front",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-5483597c-56ce-4745-a068-bd9fefeda146.png",
+    "filename": "parts/03_torso_front.png"
+  },
+  {
+    "id": "04_shoulder_L",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-6d8c3742-e84b-4cf1-bd3e-4313bde65b04.png",
+    "filename": "parts/04_shoulder_L.png"
+  },
+  {
+    "id": "05_upper_arm_L",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-e90c6a3d-5def-471d-a55c-68f0ce6f7eae.png",
+    "filename": "parts/05_upper_arm_L.png"
+  },
+  {
+    "id": "06_elbow_L",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-230de1c6-4d6e-44ec-8d2c-f73e9d370872.png",
+    "filename": "parts/06_elbow_L.png"
+  },
+  {
+    "id": "09_belt",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-47edeae2-5a5c-4847-af63-cb08b27e7e93.png",
+    "filename": "parts/09_belt.png"
+  },
+  {
+    "id": "10_thigh_L",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-032e1f64-fb01-4009-b80c-2a50522210ce.png",
+    "filename": "parts/10_thigh_L.png"
+  },
+  {
+    "id": "11_knee_L",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-5b2551ad-11b0-4101-abbe-6eff98bdc58f.png",
+    "filename": "parts/11_knee_L.png"
+  },
+  {
+    "id": "12_shin_L",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-34ebaf63-19bc-4162-809d-5d1321d20eaa.png",
+    "filename": "parts/12_shin_L.png"
+  },
+  {
+    "id": "13_boot_L",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-9b3f5c0a-7082-453e-bd9e-f959d3b4ca61.png",
+    "filename": "parts/13_boot_L.png"
+  },
+  {
+    "id": "03b_torso_back",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-a13521aa-0f09-4ce1-8ba5-aa799f6dbc4f.png",
+    "filename": "parts/03b_torso_back.png",
+    "role": "auxiliary_view"
+  },
+  {
+    "id": "08b_glove_L_palm",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-e435d8b1-8599-4f75-82d4-2d14a3d4f844.png",
+    "filename": "parts/08b_glove_L_palm.png",
+    "role": "auxiliary_view"
+  },
+  {
+    "id": "13b_boot_L_sole",
+    "filename": "parts/13b_boot_L_sole.png",
+    "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-be0b053f-989d-4001-b404-87360a4ed826.png",
+    "role": "auxiliary_view"
+  }
+]

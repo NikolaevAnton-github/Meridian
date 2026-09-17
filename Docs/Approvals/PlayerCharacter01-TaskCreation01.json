@@ -1,0 +1,31 @@
+{
+  "record_id": "PlayerCharacter01-TaskCreation01",
+  "date_local": "2026-09-16",
+  "source": "Owner direct chat after refining the original-character and weapon-animation plan",
+  "owner_message_english_translation": "Let's create tasks.",
+  "decision": "Create a separate Multica task family for the agreed original full-body first-person protagonist and one-rifle integration plan.",
+  "task_creation_authorized": true,
+  "production_run_dispatched": false,
+  "implementation_dispatch_authorized_by_this_record": false,
+  "final_character_design_approved": false,
+  "owner_scope": {
+    "model": "Create a unique original protagonist, including coherent body and first-person arms; do not substitute a ready-made character.",
+    "presentation": "Visible body on look-down, correct movement, complete shadow, and stepping legs during camera turns.",
+    "animation_reuse": "Existing D:/devgames/Weapon pack and suitable free Fab/Epic animation assets are allowed, subject to quality review.",
+    "weapon": "One rifle; ordinary/nonempty and empty reloads, each with an aimed variant; selected arm locomotion for running, jumping and crouching.",
+    "environment": "Integrate gameplay into the current lobby while preserving its scene, assets, owner edits and historical evidence. Existing environment tasks remain closed."
+  },
+  "multica_parent": "MSQ-50",
+  "multica_children": ["MSQ-51", "MSQ-52", "MSQ-53", "MSQ-54", "MSQ-55", "MSQ-56", "MSQ-57", "MSQ-58", "MSQ-59", "MSQ-60"],
+  "initial_status": "backlog",
+  "initial_assignment": "unassigned",
+  "new_run_count": 0,
+  "gates": [
+    "Independent concept review followed by explicit owner selection of an exact named art package before original model production.",
+    "Animation audit rig contract and deformation checks before final detail and materials.",
+    "Fresh independent final review and bounded corrections before owner playtest; final appearance acceptance remains the owner's decision."
+  ],
+  "plan": "Docs/Tasks/PlayerCharacter01Plan.md",
+  "task_index": "Docs/Tasks/PlayerCharacter01Tasks.md",
+  "creation_evidence": "Saved/PlayerCharacter01/TaskSetup01/verification.json"
+}

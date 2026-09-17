@@ -1,0 +1,130 @@
+[
+  {
+    "id": "01_helmet",
+    "old_path": "parts/01_helmet.png",
+    "path": "01_Для_Meshy_4K/01_Шлем_целиком.png",
+    "title": "Шлем целиком",
+    "generate": true,
+    "note": "Shell, visor and side modules."
+  },
+  {
+    "id": "02_undersuit",
+    "old_path": "parts/02_undersuit.png",
+    "path": "01_Для_Meshy_4K/02_Мягкий_комбинезон_без_брони.png",
+    "title": "Мягкий комбинезон без брони",
+    "generate": true,
+    "note": "One continuous garment; derive sleeves from it."
+  },
+  {
+    "id": "03_torso_front",
+    "old_path": "parts/03_torso_front.png",
+    "path": "01_Для_Meshy_4K/03_Бронежилет_целиком_вид_спереди.png",
+    "title": "Бронежилет целиком — вид спереди",
+    "generate": true,
+    "note": "Keep three abdominal lames separate in Blender."
+  },
+  {
+    "id": "04_shoulder_L",
+    "old_path": "parts/04_shoulder_L.png",
+    "path": "01_Для_Meshy_4K/04_Левый_наплечник.png",
+    "title": "Левый наплечник",
+    "generate": true,
+    "note": "Uppermost cap over the shoulder joint."
+  },
+  {
+    "id": "05_upper_arm_L",
+    "old_path": "parts/05_upper_arm_L.png",
+    "path": "01_Для_Meshy_4K/05_Защита_левого_плеча_между_наплечником_и_локтем.png",
+    "title": "Накладка между левым наплечником и локтем",
+    "generate": true,
+    "note": "Small plate on the upper arm."
+  },
+  {
+    "id": "06_elbow_L",
+    "old_path": "parts/06_elbow_L.png",
+    "path": "01_Для_Meshy_4K/06_Левый_налокотник.png",
+    "title": "Левый налокотник",
+    "generate": true,
+    "note": "Separate elbow cup."
+  },
+  {
+    "id": "07_forearm_L",
+    "old_path": "parts/07_forearm_L.png",
+    "path": "01_Для_Meshy_4K/07_Левый_наруч_защита_предплечья.png",
+    "title": "Левый наруч — защита предплечья",
+    "generate": true,
+    "note": "Wrist to elbow protection; priority for first-person."
+  },
+  {
+    "id": "08_glove_L",
+    "old_path": "parts/08_glove_L.png",
+    "path": "01_Для_Meshy_4K/08_Левая_перчатка_тыльная_сторона.png",
+    "title": "Левая перчатка — тыльная сторона",
+    "generate": true,
+    "note": "Use this one view for generation; palm is a Blender reference."
+  },
+  {
+    "id": "09_belt",
+    "old_path": "parts/09_belt.png",
+    "path": "01_Для_Meshy_4K/09_Пояс_с_подсумками.png",
+    "title": "Пояс с подсумками",
+    "generate": true,
+    "note": "One complete belt assembly."
+  },
+  {
+    "id": "10_thigh_L",
+    "old_path": "parts/10_thigh_L.png",
+    "path": "01_Для_Meshy_4K/10_Защита_левого_бедра.png",
+    "title": "Защита левого бедра",
+    "generate": true,
+    "note": "Upper leg above the knee."
+  },
+  {
+    "id": "11_knee_L",
+    "old_path": "parts/11_knee_L.png",
+    "path": "01_Для_Meshy_4K/11_Левый_наколенник.png",
+    "title": "Левый наколенник",
+    "generate": true,
+    "note": "Knee cup."
+  },
+  {
+    "id": "12_shin_L",
+    "old_path": "parts/12_shin_L.png",
+    "path": "01_Для_Meshy_4K/12_Защита_левой_голени.png",
+    "title": "Защита левой голени",
+    "generate": true,
+    "note": "Lower leg between knee and ankle."
+  },
+  {
+    "id": "13_boot_L",
+    "old_path": "parts/13_boot_L.png",
+    "path": "01_Для_Meshy_4K/13_Левый_ботинок.png",
+    "title": "Левый ботинок",
+    "generate": true,
+    "note": "Complete boot including sole."
+  },
+  {
+    "id": "03b_torso_back",
+    "old_path": "parts/03b_torso_back.png",
+    "path": "02_Справочные_виды_Blender/03_Бронежилет_вид_сзади_справочный.png",
+    "title": "Бронежилет сзади — справочный вид",
+    "generate": false,
+    "note": "Blender reference only for selected single-image route."
+  },
+  {
+    "id": "08b_glove_L_palm",
+    "old_path": "parts/08b_glove_L_palm.png",
+    "path": "02_Справочные_виды_Blender/08_Левая_перчатка_ладонь_справочный.png",
+    "title": "Ладонь перчатки — справочный вид",
+    "generate": false,
+    "note": "Blender reference only for selected single-image route."
+  },
+  {
+    "id": "13b_boot_L_sole",
+    "old_path": "parts/13b_boot_L_sole.png",
+    "path": "02_Справочные_виды_Blender/13_Левый_ботинок_подошва_справочный.png",
+    "title": "Подошва ботинка — справочный вид",
+    "generate": false,
+    "note": "Blender reference only for selected single-image route."
+  }
+]

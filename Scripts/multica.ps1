@@ -1,7 +1,7 @@
 # Start and stop the pinned local Multica components; task scheduling stays in Multica.
 [CmdletBinding()]
 param(
-    [ValidateSet('Start', 'Stop', 'Status', 'StartApi', 'StartWeb', 'StartRuntime')]
+    [ValidateSet('Start', 'StartServices', 'Stop', 'Status', 'StartApi', 'StartWeb', 'StartRuntime')]
     [string]$Action = 'Status'
 )
 
@@ -98,7 +98,8 @@ function Wait-Http([string]$Url, [string]$Name, [int]$Port) {
     throw "Health check timed out: $Url. Inspect Saved/Multica logs."
 }
 
-if ($Action -eq 'Start') {
+# Administrative access needs the services but does not need a task worker.
+if ($Action -in @('Start', 'StartServices')) {
     $pg = Get-NetTCPConnection -State Listen -LocalPort 15432 -ErrorAction SilentlyContinue
     if (-not $pg) { Invoke-PgControl 'start' }
     elseif ($pg.LocalAddress -ne '127.0.0.1' -or
@@ -108,7 +109,7 @@ if ($Action -eq 'Start') {
     }
 }
 
-if ($Action -in @('Start', 'StartApi')) {
+if ($Action -in @('Start', 'StartServices', 'StartApi')) {
     $apiEnvironment = @{}
     foreach ($property in $settings.environment.PSObject.Properties) {
         $apiEnvironment[$property.Name] = [string]$property.Value
@@ -119,7 +120,7 @@ if ($Action -in @('Start', 'StartApi')) {
     Wait-Http 'http://127.0.0.1:8080/health' 'api' 8080
 }
 
-if ($Action -in @('Start', 'StartWeb')) {
+if ($Action -in @('Start', 'StartServices', 'StartWeb')) {
     $webEnvironment = @{
         REMOTE_API_URL = 'http://127.0.0.1:8080'; NEXT_TELEMETRY_DISABLED = '1'
         NODE_OPTIONS = '--max-old-space-size=1024'; NODE_ENV = 'production'

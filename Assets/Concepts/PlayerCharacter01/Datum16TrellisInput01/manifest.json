@@ -1,0 +1,22 @@
+{
+  "package": "Datum16TrellisInput01",
+  "purpose": "Experimental single-image 3D input preparation",
+  "owner_selection": "PENDING",
+  "source": "Assets\\Concepts\\PlayerCharacter01\\Concept02\\16.png",
+  "source_sha256": "ee9ff6799379808ccd74e752cf816a54a205c2e1f3f3c8a959fba1e69083280b",
+  "image": "16-Datum-TrellisInput01.png",
+  "image_sha256": "1a07e354a795a553ce0484296ab460314d462418084bd53add7ce65b5023d3c7",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "mode": "RGB",
+  "background": "Clean white opaque background; Space performs background removal",
+  "prompt_sha256": "c6031783f532c240f8e8d8914b9fdd5c754cb396d416fd75982aeef9205f57dc",
+  "background_correction_prompt_sha256": "a5b34d0d320e9ab4d17ad165a78f2afb3a671ca3fd5116271e9cbe2b8e920c7c",
+  "generation": "Built-in imagegen; Multica Concept Art Astra/max/standard preparation; built-in background correction",
+  "previous_packages_unchanged": true,
+  "returned_image_bytes_preserved": true,
+  "external_3d_generation_performed": false,
+  "modeling_approval": false
+}

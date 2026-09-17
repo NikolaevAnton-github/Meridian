@@ -1,0 +1,51 @@
+{
+  "record_id": "PlayerArtConcept02-Direction01",
+  "date_local": "2026-09-16",
+  "source": "Owner direct chat after viewing PlayerArt-Concept01 / Candidate01",
+  "owner_direction_english_paraphrase": "The owner likes Concept01 variants 01 and 08 and requests ten additional protagonist art variants in that direction, with more armor but without a tank-like appearance. The helmet contains a computer that renders the interface.",
+  "wording_type": "English paraphrase, not an exact quotation",
+  "decision": "Authorize a further bounded MSQ-51 concept batch, PlayerArt-Concept02, based on the owner's preferred Concept01 variants. This is directional preference, not final named approval for original modeling.",
+  "reference_package": "PlayerArt-Concept01 / Candidate01",
+  "reference_manifest": "Assets/Concepts/PlayerCharacter01/Concept01/manifest.json",
+  "preferred_reference_variants": [
+    {
+      "id": "01",
+      "name": "Cutline",
+      "file": "Assets/Concepts/PlayerCharacter01/Concept01/01.png",
+      "sha256": "1d4b0797654e148d160cfb2089b77d79c57397b8568690d360878045fe6ec105"
+    },
+    {
+      "id": "08",
+      "name": "Overlap",
+      "file": "Assets/Concepts/PlayerCharacter01/Concept01/08.png",
+      "sha256": "cae48359876532068f874e0f104b06688ff4c08711b51724832d7aa9d1668843"
+    }
+  ],
+  "reference_identity_verification": "Both image SHA-256 values were read from the Concept01 manifest and independently matched to the existing image files without modifying them.",
+  "scope": {
+    "additional_original_variants": 10,
+    "visual_direction": "Develop the owner's preferred 01 and 08 direction with more armor while avoiding a tank-like silhouette.",
+    "helmet_equipment": "A computer inside the helmet renders the interface/HUD. This equipment is separate from the protagonist's innate powers and does not restore external command contact. Interface information, layout, controls and mechanics remain unspecified.",
+    "setting_year": 2043,
+    "face_requirement": "Every variant retains a fully concealed face.",
+    "lore": "Respect Docs/Design/StoryCanon.md and Docs/Design/GameBrief.md, including the protagonist's MERIDIAN membership, local information gathering and loss of external command contact.",
+    "concept_artist_configuration": "Astra/max/standard",
+    "evaluation": "Owner only; no independent expert concept evaluation or MSQ-53 expert run."
+  },
+  "authorized_execution_task": "MSQ-51",
+  "owner_selection_gate": "MSQ-53",
+  "other_tasks_dispatched_by_this_direction": false,
+  "final_character_design_approved": false,
+  "original_modeling_authorized": false,
+  "gates": [
+    "The owner must explicitly select an identified final concept package, version and variant before original character modeling; liking Concept01 variants 01 and 08 establishes direction only.",
+    "Original modeling also retains the MSQ-52 animation audit and rig-contract prerequisite.",
+    "The later MSQ-60 independent integrated gameplay review remains unchanged."
+  ],
+  "preservation": "Keep Concept01 images, manifest, prompts, reports and prior direction records unchanged. Preserve current gameplay, lobby assets, owner edits and historical evidence.",
+  "prior_direction": "Docs/Approvals/PlayerArtConcept01-Direction01.json",
+  "task_brief": "Docs/Tasks/PlayerArtConcept02.md",
+  "plan": "Docs/Tasks/PlayerCharacter01Plan.md",
+  "task_index": "Docs/Tasks/PlayerCharacter01Tasks.md",
+  "art_root": "Assets/Concepts/PlayerCharacter01/Concept02"
+}

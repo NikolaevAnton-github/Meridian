@@ -1,0 +1,54 @@
+{
+  "revision": "camera-angle-02",
+  "tool": "built-in image_gen",
+  "purpose": "Owner-requested camera redraw for single-image Meshy inputs",
+  "items": [
+    {
+      "id": "05_upper_arm_L",
+      "name": "05_Защита_левого_плеча_между_наплечником_и_локтем.png",
+      "prompt": "Use case: precise-object-edit. The input image is the exact edit target and sole design authority. Change CAMERA ANGLE AND PRESENTATION ONLY. Keep the same single anatomical-left armor item, same silhouette in 3D, exact number and arrangement of metal plates, fasteners, cutouts, padding, textile backing and straps, same gunmetal/charcoal materials and wear. Do not redesign, mirror, add new armor, attach another body part or simplify away existing parts. This image will be used ALONE for image-to-3D: prioritize readable volumes and complete contours in a near-orthographic product render. Pure opaque white #FFFFFF background, soft even neutral lighting without blown highlights, no ground shadow, text, arrows, diagram, collage or inset views. Entire item centered upright in a square frame, approximately 80-85% frame height with a generous margin on every side.\nSpecific new camera: Rephotograph this small upper-arm shield from directly in front of its MAIN OUTER METAL FACE, with just 10-15 degrees of yaw. The broad shield surface should be centered, vertically upright, nearly symmetrical in projection and almost full width, showing its central ridge and beveled side flanges clearly. Keep the compact padded rim visible all around. Both sides of the backing should be understandable; allow only the existing two narrow black strap loops to peek unobtrusively from behind instead of dominating image-left. Camera height at shield mid-height, no top-down tilt. No foreshortening of the long axis. Preserve the original five visible main fasteners and shield edge cuts. Distinctly more front-facing than the input; no new parts.\nMaintain physical plate widths and fabric amount; achieve the improvement by camera movement, not by remodeling.",
+      "input": "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/03_Технические_данные/Ракурс_02/До_изменения/05_Защита_левого_плеча_между_наплечником_и_локтем.png",
+      "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-66e4a199-795c-4a70-9398-777df551edcb.png",
+      "candidate": "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/03_Технические_данные/Ракурс_02/Результаты/05_Защита_левого_плеча_между_наплечником_и_локтем.png",
+      "attempt": 1,
+      "selected": true,
+      "camera_ru": "Почти фронтальный вид наружной пластины.",
+      "output_path": "01_Для_Meshy_4K/05_Защита_левого_плеча_между_наплечником_и_локтем.png"
+    },
+    {
+      "id": "07_forearm_L",
+      "name": "07_Левый_наруч_защита_предплечья.png",
+      "prompt": "Use case: precise-object-edit. The input image is the exact edit target and sole design authority. Change CAMERA ANGLE AND PRESENTATION ONLY. Keep the same single anatomical-left armor item, same silhouette in 3D, exact number and arrangement of metal plates, fasteners, cutouts, padding, textile backing and straps, same gunmetal/charcoal materials and wear. Do not redesign, mirror, add new armor, attach another body part or simplify away existing parts. This image will be used ALONE for image-to-3D: prioritize readable volumes and complete contours in a near-orthographic product render. Pure opaque white #FFFFFF background, soft even neutral lighting without blown highlights, no ground shadow, text, arrows, diagram, collage or inset views. Entire item centered upright in a square frame, approximately 80-85% frame height with a generous margin on every side.\nSpecific new camera: Rephotograph the forearm bracer by rotating the camera AROUND to face the LONG GUNMETAL ARMOR PANEL directly. In the input the side/back cloth occupies most of the frame and the armor is narrow on image-right; correct this by centering the main metal front face so the metal panel and its adjacent existing narrow side plate occupy the majority (about two thirds) of the visible width. A restrained front-exterior three-quarter angle (about 15-20 degrees from plate normal), not a side view. Keep elbow end at top, wrist cuff at bottom, vertical axis straight. Show the armor face clearly and a narrow strip of side construction; slight 5-degree elevation permits a modest glimpse into the proximal opening. Retain the original wrist closure and curved open-ended textile sleeve backing. Avoid presenting the large bare fabric back to camera. No separate elbow pad, no hand, no extra upper armor cap. The NEW view must visibly differ from the input.\nMaintain physical plate widths and fabric amount; achieve the improvement by camera movement, not by remodeling.",
+      "input": "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/03_Технические_данные/Ракурс_02/До_изменения/07_Левый_наруч_защита_предплечья.png",
+      "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-3337e36c-4d5b-4098-9953-7a984549f113.png",
+      "candidate": "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/03_Технические_данные/Ракурс_02/Результаты/07_попытка_01.png",
+      "attempt": 1,
+      "selected": false,
+      "selection_note": "Camera change too small; superseded by attempt 2."
+    },
+    {
+      "id": "07_forearm_L",
+      "name": "07_Левый_наруч_защита_предплечья.png",
+      "prompt": "Edit the supplied image by ROTATING THE ENTIRE OBJECT ABOUT ITS VERTICAL AXIS, approximately 60 degrees, to produce a STRAIGHT FRONT ELEVATION OF THE EXTERIOR METAL FACE. The old camera looks at the cloth side. The NEW camera must face the middle of the long metal shield square-on. The raised central ridge of that shield must run down the CENTER of the image, with the left and right metal facets seen at comparable widths. The wrist armor closure is centered directly below it. Cloth remains physically unchanged but becomes a narrow border behind the two sides of the forward metal panel due to camera rotation. Maintain the SAME actual metal panel widths, shape, five fasteners, lower cutout, side panels, charcoal textile sleeve, seams and wrist strap. Do not enlarge the armor or remove the textile. Show the long axis exactly upright; elbow end above, wrist below. Near-orthographic view, camera at mid height, no tilt, no top-down angle, do not expose a large oval upper opening. Preserve all design details, materials and wear from this anatomical-left forearm bracer. Single isolated item only; no hand, elbow pad or mannequin. Full object uncropped with margin, around 82% image height, pure opaque white background, even neutral product lighting. NO text, diagram, arrows or multiple views. This must be an OBVIOUSLY DIFFERENT VIEW, with the metal shield centered and facing the viewer.",
+      "input": "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/03_Технические_данные/Ракурс_02/До_изменения/07_Левый_наруч_защита_предплечья.png",
+      "attempt": 2,
+      "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-88fa8c5d-21ca-4c52-aaf2-a253ccb018e9.png",
+      "candidate": "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/03_Технические_данные/Ракурс_02/Результаты/07_Левый_наруч_защита_предплечья.png",
+      "selected": true,
+      "camera_ru": "Фронтальный вид основной бронепластины и манжеты.",
+      "output_path": "01_Для_Meshy_4K/07_Левый_наруч_защита_предплечья.png"
+    },
+    {
+      "id": "10_thigh_L",
+      "name": "10_Защита_левого_бедра.png",
+      "prompt": "Use case: precise-object-edit. The input image is the exact edit target and sole design authority. Change CAMERA ANGLE AND PRESENTATION ONLY. Keep the same single anatomical-left armor item, same silhouette in 3D, exact number and arrangement of metal plates, fasteners, cutouts, padding, textile backing and straps, same gunmetal/charcoal materials and wear. Do not redesign, mirror, add new armor, attach another body part or simplify away existing parts. This image will be used ALONE for image-to-3D: prioritize readable volumes and complete contours in a near-orthographic product render. Pure opaque white #FFFFFF background, soft even neutral lighting without blown highlights, no ground shadow, text, arrows, diagram, collage or inset views. Entire item centered upright in a square frame, approximately 80-85% frame height with a generous margin on every side.\nSpecific new camera: Rephotograph this thigh armor from an exterior-front view oriented toward the BISECTOR of the large main shield and its adjacent narrow column of segmented plates, so BOTH plate regions are fully legible side by side. Aim for near-frontal overall presentation with only about 15 degrees of yaw: main broad plate image-left, adjacent original segmented plate column image-right. Keep all of the column's plates, their dark separating seams and lower tips visible, with no mutual occlusion and minimal shortening. Keep hip end at top and knee end bottom, long axis perfectly vertical. The main plate should show nearly its full width. Retain the same actual bend around the thigh; do not flatten or spread the assembly into an exploded view. The black fastening strap and buckle should be a secondary small detail peeking from the left edge, not stretched out. Camera at mid-height, minimal pitch, full uncropped padded backing outline.\nMaintain physical plate widths and fabric amount; achieve the improvement by camera movement, not by remodeling.",
+      "input": "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/03_Технические_данные/Ракурс_02/До_изменения/10_Защита_левого_бедра.png",
+      "attempt": 1,
+      "source": "C:\\Users\\Origa\\.codex\\generated_images\\01a0ac65-f939-7940-a15e-12e04ba1a6e8\\exec-ca357f56-ff81-416d-bf98-ce60d193e541.png",
+      "candidate": "D:/devgames/MeridianSquad/Assets/Concepts/PlayerCharacter01/Datum16Parts01/03_Технические_данные/Ракурс_02/Результаты/10_Защита_левого_бедра.png",
+      "selected": true,
+      "camera_ru": "Более прямой вид большой пластины и соседних сегментов.",
+      "output_path": "01_Для_Meshy_4K/10_Защита_левого_бедра.png"
+    }
+  ]
+}

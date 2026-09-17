@@ -1,0 +1,2 @@
+# Preserve exact instruction snapshots through Git without newline conversion.
+*-before-compaction.md -text

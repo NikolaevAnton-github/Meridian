@@ -1,0 +1,45 @@
+{
+  "record_id": "PlayerArtChevron25-LayerDirection01",
+  "date_local": "2026-09-16",
+  "source": "Owner direct chat after viewing PlayerArt-Concept02 / Candidate01",
+  "owner_direction_english_paraphrase": "Variant 25 looks fresher to the owner. Develop it with modest layering and overlap of the cuirass plates.",
+  "wording_type": "English paraphrase, not an exact quotation",
+  "decision": "Authorize one focused concept revision, 25A, based on variant 25 (Chevron). This records directional preference and a bounded plate-construction change, not final modeling acceptance.",
+  "reference_package": "PlayerArt-Concept02 / Candidate01",
+  "reference_manifest": "Assets/Concepts/PlayerCharacter01/Concept02/manifest.json",
+  "reference_variant": {
+    "id": "25",
+    "name": "Chevron",
+    "file": "Assets/Concepts/PlayerCharacter01/Concept02/25.png",
+    "sha256": "88e66057341a12bba8e3696b85727d592216243c5ef9698c00a5e839df71fef6"
+  },
+  "reference_identity_verification": "The source image SHA-256 was read from the Concept02 manifest and independently matched to the existing 25.png file without modifying it.",
+  "scope": {
+    "revision_id": "25A",
+    "revision_count": 1,
+    "requested_change": "Introduce modest layering and overlap of the cuirass plates while retaining the preferred Chevron direction.",
+    "preserve": [
+      "Fully closed helmet and concealed face.",
+      "Helmet computer rendering the interface/HUD, separate from innate powers and without restoring external command contact.",
+      "Realistic 2043 MERIDIAN setting and established story canon.",
+      "Mobile human proportions and the prior direction for more armor without a tank-like silhouette."
+    ],
+    "concept_artist_configuration": "Astra/max/standard, inherited from the current concept direction",
+    "evaluation": "Owner only; no independent expert concept evaluation or MSQ-53 expert run."
+  },
+  "authorized_execution_task": "MSQ-51",
+  "owner_selection_gate": "MSQ-53",
+  "other_tasks_dispatched_by_this_direction": false,
+  "final_character_design_approved": false,
+  "original_modeling_authorized": false,
+  "gates": [
+    "Explicit owner approval of an identified final concept package, version and variant remains required before original character modeling.",
+    "Original modeling retains the MSQ-52 animation audit and rig-contract prerequisite.",
+    "Later MSQ-60 independent integrated gameplay review remains unchanged."
+  ],
+  "preservation": "Preserve all prior source bytes, including Concept01 and Concept02 images, manifests, prompts, reports and approval records. Save 25A separately; do not overwrite 25.png or mutate gameplay or lobby assets.",
+  "prior_direction": "Docs/Approvals/PlayerArtConcept02-Direction01.json",
+  "task_brief": "Docs/Tasks/PlayerArtChevron25Refine01.md",
+  "art_root": "Assets/Concepts/PlayerCharacter01/Chevron25Refine01",
+  "output_image": "Assets/Concepts/PlayerCharacter01/Chevron25Refine01/25A.png"
+}

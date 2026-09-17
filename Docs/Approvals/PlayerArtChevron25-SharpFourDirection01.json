@@ -1,0 +1,61 @@
+{
+  "record_id": "PlayerArtChevron25-SharpFourDirection01",
+  "date_local": "2026-09-16",
+  "source": "Owner direct chat responding to Chevron25Refine02 / 25B",
+  "owner_direction_english_paraphrase": "Make the four cuirass plates sharper like the original variant 25, while retaining their physical shoulder-style overlap from 25B.",
+  "wording_type": "English paraphrase, not an exact quotation",
+  "decision": "Authorize one focused concept revision, 25C / Chevron25Refine03, combining exactly four physically overlapping cuirass plates with the sharper plate shapes of original variant 25. This is a bounded design direction, not final modeling approval.",
+  "references": [
+    {
+      "role": "Four-plate physical overlap reference and current revision source; preserve unchanged",
+      "package": "Chevron25Refine02 / 25B",
+      "file": "Assets/Concepts/PlayerCharacter01/Chevron25Refine02/25B.png",
+      "manifest": "Assets/Concepts/PlayerCharacter01/Chevron25Refine02/manifest.json",
+      "sha256": "f7da8be0fe6ded76c67042b35494bfd4b6025c11b7ee60a2f6fdfa3bb0ffb8b1"
+    },
+    {
+      "role": "Sharper cuirass plate shape reference; preserve unchanged",
+      "package": "PlayerArt-Concept02 / Candidate01",
+      "id": "25",
+      "name": "Chevron",
+      "file": "Assets/Concepts/PlayerCharacter01/Concept02/25.png",
+      "manifest": "Assets/Concepts/PlayerCharacter01/Concept02/manifest.json",
+      "sha256": "88e66057341a12bba8e3696b85727d592216243c5ef9698c00a5e839df71fef6"
+    }
+  ],
+  "reference_identity_verification": "Both existing image SHA-256 values were computed from the files and matched the supplied source identities without modifying either file.",
+  "scope": {
+    "revision_id": "25C",
+    "revision_package": "Chevron25Refine03",
+    "revision_count": 1,
+    "cuirass_plate_count": 4,
+    "requested_change": "Sharpen the outlines and chevron forms of the four cuirass plates using original variant 25 as the shape reference, while retaining the real shoulder-style shingle overlap directed for 25B.",
+    "preserve": [
+      "Exactly four broad cuirass plates with physical overlap.",
+      "The remaining preferred Chevron design outside the focused cuirass shape change.",
+      "Closed helmet and fully concealed face.",
+      "Helmet computer rendering the interface/HUD, separate from innate powers and without restoring external command contact.",
+      "Established 2043 MERIDIAN lore.",
+      "Mobile human proportions and the existing armor direction without a tank-like silhouette."
+    ],
+    "concept_artist_configuration": "Astra/max/standard, inherited from the current concept direction",
+    "evaluation": "Owner only; no independent expert concept evaluation or MSQ-53 expert run."
+  },
+  "authorized_execution_task": "MSQ-51",
+  "owner_selection_gate": "MSQ-53",
+  "new_task_created_by_this_record": false,
+  "other_tasks_dispatched_by_this_direction": false,
+  "final_character_design_approved": false,
+  "original_modeling_authorized": false,
+  "gates": [
+    "Explicit owner approval of an identified final concept package, version and variant remains required before original character modeling.",
+    "Original modeling retains the MSQ-52 animation audit and rig-contract prerequisite.",
+    "Later MSQ-60 independent integrated gameplay review remains unchanged."
+  ],
+  "relationship_to_prior_direction": "Retains the four-plate count and physical overlap from PlayerArtChevron25-FourPlatesDirection01 and adds the owner's sharper original-25 shape direction. Earlier records remain historical evidence.",
+  "preservation": "Preserve original 25.png, 25A.png, 25B.png, their manifests and all previous source, prompt, report and approval bytes. Save 25C separately. Do not mutate gameplay, lobby assets or unrelated character design.",
+  "prior_direction": "Docs/Approvals/PlayerArtChevron25-FourPlatesDirection01.json",
+  "task_brief": "Docs/Tasks/PlayerArtChevron25Refine03.md",
+  "art_root": "Assets/Concepts/PlayerCharacter01/Chevron25Refine03",
+  "output_image": "Assets/Concepts/PlayerCharacter01/Chevron25Refine03/25C.png"
+}

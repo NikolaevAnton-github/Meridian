@@ -1,0 +1,25 @@
+{
+  "package": "Chevron25Refine03 / 25C",
+  "owner_selection": "PENDING",
+  "sources": [
+    {
+      "path": "Assets\\Concepts\\PlayerCharacter01\\Chevron25Refine02\\25B.png",
+      "sha256": "f7da8be0fe6ded76c67042b35494bfd4b6025c11b7ee60a2f6fdfa3bb0ffb8b1",
+      "role": "Edit target; four-plate construction"
+    },
+    {
+      "path": "Assets\\Concepts\\PlayerCharacter01\\Concept02\\25.png",
+      "sha256": "88e66057341a12bba8e3696b85727d592216243c5ef9698c00a5e839df71fef6",
+      "role": "Sharp chevron shape reference only"
+    }
+  ],
+  "image": "25C.png",
+  "image_sha256": "80fa3f3a0ad8464e2afa014076c6ed532dd53a06872667bf6d9aca3ff72a9952",
+  "bytes": 2028733,
+  "width": 1536,
+  "height": 1024,
+  "prompt_sha256": "8413ba5702efe6e3745547cf0648756907cc085c70e6e651571b78ae67174a54",
+  "generation": "Built-in imagegen edit; Multica Concept Art Astra/max/standard preparation",
+  "requested_change": "Sharp angular V edges like original 25, retaining exactly four physically overlapping cuirass plates from 25B",
+  "visual_evaluator": "Owner only"
+}

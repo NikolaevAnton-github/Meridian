@@ -1,0 +1,6 @@
+{
+  "prompt": "Precise background-only correction of the supplied isolated full-body operative 16. Replace EVERY gray-and-white checkerboard pixel behind the character, including between the arms and torso and between the legs, with a perfectly uniform SOLID PURE WHITE background (#FFFFFF). Deliver a conventional opaque white-background image, NOT transparency and NOT a simulated transparency checkerboard. No floor, ground plane, shadow, gradient, texture or pattern. Preserve the existing character's identity, armor shapes and counts, helmet and opaque visor, all suit materials and colors, proportions, pose, hand details, framing and lighting exactly. One complete character from helmet top to boot soles; no labels, text, border or additional views. This is an image-to-3D input photo, so silhouette edges and the open gaps around the limbs must be clean and unmistakable. Do not redesign, add or remove any part of the operative. Maintain the current 1024x1536 portrait framing.",
+  "referenced_image_paths": [
+    "D:/devgames/MeridianSquad/Saved/PlayerCharacter01/Datum16TrellisInput01/Controller/first-attempt-checkerboard.png"
+  ]
+}

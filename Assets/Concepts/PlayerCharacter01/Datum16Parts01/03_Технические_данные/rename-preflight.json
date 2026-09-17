@@ -1,0 +1,98 @@
+[
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\01_helmet.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\01_Шлем_целиком.png",
+    "path_length": 110,
+    "sha256": "9399367A7AC26829087CFFF8CDADFD023764C6FD9140299C831FD21687EA2351"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\02_undersuit.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\02_Мягкий_комбинезон_без_брони.png",
+    "path_length": 125,
+    "sha256": "C30D663E7323209C43A46BCDFACDBD7A7A1950BE33A9804D48843C5C7249A4A1"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\03_torso_front.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\03_Бронежилет_целиком_вид_спереди.png",
+    "path_length": 128,
+    "sha256": "1C8363B018845520DBCECD681062112DDE9B3E192866DAD9546AFDC08223F579"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\04_shoulder_L.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\04_Левый_наплечник.png",
+    "path_length": 113,
+    "sha256": "92D5842AF116648F5D8FD2E34AE2FEC208C1173BCF5F0D865C1C1A66293DD800"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\05_upper_arm_L.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\05_Защита_левого_плеча_между_наплечником_и_локтем.png",
+    "path_length": 144,
+    "sha256": "3D5CA7576EA32880088AEDEBAE81328A7BC8096EA84AA0EC9662D00630AAAEC7"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\06_elbow_L.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\06_Левый_налокотник.png",
+    "path_length": 114,
+    "sha256": "F0F0F3C02DA6C7D445F3FB834895227F09BC835FCAA226C6ED7A0AF09349731A"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\07_forearm_L.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\07_Левый_наруч_защита_предплечья.png",
+    "path_length": 127,
+    "sha256": "D1E1C7DA0D912926720A1B9AC17D7E154CFAE5E78FE9D7D4F9F9F8F851BA4141"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\08_glove_L.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\08_Левая_перчатка_тыльная_сторона.png",
+    "path_length": 128,
+    "sha256": "A7418FFD0A4A7E0DBCB259BF8A4EC942BE61C5F506EF5157D0438083390D54CD"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\09_belt.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\09_Пояс_с_подсумками.png",
+    "path_length": 115,
+    "sha256": "F8CA7C6EF31F1F44CBC51F0CCFCD7A2604AAE9875EC81549B45C60AC16B7C061"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\10_thigh_L.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\10_Защита_левого_бедра.png",
+    "path_length": 117,
+    "sha256": "BB160B43BCFDCED4B5558EABA6D76CD755CE17086C9C8E996046676FCB2617A1"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\11_knee_L.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\11_Левый_наколенник.png",
+    "path_length": 114,
+    "sha256": "53816490033D8B3EDB86FA2FDE1673704D8BCD50B1EFFFB096AC1D8BAFF23C09"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\12_shin_L.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\12_Защита_левой_голени.png",
+    "path_length": 117,
+    "sha256": "09061B076CB84C63A52CAC40C2B601BCAF1E755BD8E1A70B0B6D071CB0A9D0D8"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\13_boot_L.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\01_Для_Meshy_4K\\13_Левый_ботинок.png",
+    "path_length": 111,
+    "sha256": "19FA0AC765D2CD8C1C034DFE327E69A9191B9D3631A9B24471CA36C00D37ACD9"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\03b_torso_back.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\02_Справочные_виды_Blender\\03_Бронежилет_вид_сзади_справочный.png",
+    "path_length": 140,
+    "sha256": "A22549DD2BAFE6872C4248A95A84B02AFFA3FFBE7991B5B7914FDD1CFA2DD416"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\08b_glove_L_palm.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\02_Справочные_виды_Blender\\08_Левая_перчатка_ладонь_справочный.png",
+    "path_length": 141,
+    "sha256": "4BA43DB4FE0C1760585BB5546AA98995BB8C316D2EC24B2392D5C6E083E241A1"
+  },
+  {
+    "from": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\parts\\13b_boot_L_sole.png",
+    "to": "D:\\devgames\\MeridianSquad\\Assets\\Concepts\\PlayerCharacter01\\Datum16Parts01\\02_Справочные_виды_Blender\\13_Левый_ботинок_подошва_справочный.png",
+    "path_length": 141,
+    "sha256": "4701FE9132EBABD8B55539B53578D8E71976DD21628CAAA3F60CA10EC03B0D2C"
+  }
+]

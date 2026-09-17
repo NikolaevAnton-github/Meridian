@@ -1,0 +1,9 @@
+Image 1 (25B.png) is the edit target. Image 2 (original Concept02/25.png) is a shape reference only: borrow its crisp, deep angular chevrons without transferring its plate count or other design.
+
+Edit only the front and visible rear cuirass on image 1. Retain EXACTLY FOUR broad structural plates on EACH cuirass. Reshape every plate's lower edge into two straight diagonal segments meeting at a pronounced, sharp downward V, with decisive angular outer corners like image 2. Replace 25B's shallow softened edges while retaining broad protective faces.
+
+Keep real shoulder-style overlap: plate 1 overlaps plate 2, plate 2 overlaps plate 3, and plate 3 overlaps plate 4. Show four distinct faces and three readable overhangs per cuirass, with thin exposed metal edges, visible thickness and tight contact shadows demonstrating physical occlusion. Match front and rear construction coherently. Retain compact fit and torso mobility; avoid added bulk, rounded edges, tiny scales, ornamental spikes, engraved-only chevrons, three plates or a fifth belly plate.
+
+Preserve image 1's shoulder lames, helmet, onboard computer, opaque visor, HUD, concealed face and eyes, all other equipment, armor, cloth, proportions, poses, colors, wear, lighting, background and four-panel layout. Keep MERIDIAN / 2043 and its lore unchanged; helmet/HUD remain ordinary equipment.
+
+Change only the variant header to "25C / CHEVRON - SHARP FOUR"; preserve other text. Produce one complete sheet matching image 1's dimensions and framing.
