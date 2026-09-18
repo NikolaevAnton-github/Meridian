@@ -1,0 +1,11 @@
+{
+  "record_id": "PurchasedArms02-OwnerScope01",
+  "date_local": "2026-09-18",
+  "source": "Owner direct chat after playing the PurchasedArms01 lobby",
+  "owner_message_original": "Так я чуть побегал по лобби с нашиши новыми руками. Заметил пару багов когда идешь и начинается перезарядка, после окончания у нас идет движение вперед, но анимация покачивания останавливается на время и потом продолжается, а так же после перезарядки происходит еще какой-то баг, типо если ты в прицеливании, то рука отходит немного влево, а если без, то после перезарядки винтовка будто бы опускается. А так в целом нужно из купленного пакета с винтовкой перенести весь функционал, со всем мувментом, стрельбой. Кроме ненужной арены автора и его подсказок.",
+  "owner_message_english_translation": "I ran around the lobby with our new arms and noticed bugs: when reloading while walking, forward movement continues after reload but the bobbing animation pauses briefly and then resumes; after reload the hand moves slightly left when aiming, and without aiming the rifle appears to lower. Transfer all functionality from the purchased rifle pack, including all movement and shooting, except the author's unnecessary arena and hints.",
+  "decision": "Fix the reported reload recovery defects and integrate the purchased rifle pack's complete actual gameplay and movement functionality into the retained lobby. Exclude the vendor arena and tutorial hints. Inspect the source pack and document feature parity rather than inferring features from animation names.",
+  "supersedes": "PurchasedArms01 restrictions excluding shooting, ammunition, empty reloads, special movement and other supplied rifle gameplay are superseded within this new task. Historical reports remain unchanged.",
+  "preserved_constraints": "Original protagonist and environment architecture remain paused. Preserve owner lobby edits, source vendor bytes, existing evidence and unrelated work. Keep purchased player presentation shadowless. Existing subscription only, no purchases; one production writer; max reasoning and standard speed; controller review and local task-scoped commit before handoff.",
+  "acceptance": "The bug report is not visual acceptance of the prior candidate. Technical verification, independent integrated review and owner play acceptance remain distinct."
+}

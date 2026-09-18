@@ -4,15 +4,16 @@
 #include "Animation/AnimInstance.h"
 #include "PurchasedArmsAnimInstance.generated.h"
 
-/** Runtime evaluation of the supplied poses, including local-space additive reloads. */
+/** Source animation graph host with evaluated-frame telemetry for recovery checks. */
 UCLASS(Transient)
 class MERIDIANSQUAD_API UPurchasedArmsAnimInstance : public UAnimInstance
 {
     GENERATED_BODY()
 public:
+    virtual void NativePostEvaluateAnimation() override;
     UFUNCTION(BlueprintPure, Category="Lobby|Verification")
     FString GetEvaluationState() const;
-protected:
-    virtual FAnimInstanceProxy* CreateAnimInstanceProxy() override;
-    virtual void DestroyAnimInstanceProxy(FAnimInstanceProxy* InProxy) override;
+private:
+    uint64 Evaluations = 0;
+    float EvaluatedWorldTime = 0.f;
 };

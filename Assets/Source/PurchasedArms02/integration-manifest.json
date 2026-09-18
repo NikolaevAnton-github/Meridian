@@ -1,0 +1,3060 @@
+{
+  "task": "MSQ-62",
+  "date": "2026-09-18",
+  "files": [
+    {
+      "path": "Assets/Source/PurchasedArms02/source-manifest.json",
+      "sha256": "82660f216b1193d6f044d59c5bc6a7d72964bdda9f22bae42cea5cdfaf1d5a74",
+      "size_bytes": 298504,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Config/DefaultInput.ini",
+      "sha256": "8c6d496c0b76a4f8b709e4a943261632ed5bccbc71437cd5414d90dc058d4500",
+      "size_bytes": 9614,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": false
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_001.uasset",
+      "sha256": "5bea9c0c981c67e359a26c0c7cfa6ee61ecda2942cbfaa9f4ec740b8e6e31a2d",
+      "size_bytes": 30186,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_002.uasset",
+      "sha256": "e142387ad3a4cfbb96808ff790162c9cb95a54567bfa05a0c3783b2683685e58",
+      "size_bytes": 29956,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_003.uasset",
+      "sha256": "2d9769575c8a9dc46a5889b90b7cbb2d735dfe16e26f4d414f2d90904ff56d57",
+      "size_bytes": 27512,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_004.uasset",
+      "sha256": "b44d8529e1fdc8721bbb6e832483810ee906a17faeae0d84702cc4e4a03a75cd",
+      "size_bytes": 30064,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_005.uasset",
+      "sha256": "defbf3329c81e13dc7dc671e4d258d269140ba43914091eac5ce094528a7a79a",
+      "size_bytes": 29429,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_006.uasset",
+      "sha256": "e5cf4b4acfff116876170f182be026394d7736bcf1ed701642f1554ba5d0e8fa",
+      "size_bytes": 28809,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_007.uasset",
+      "sha256": "5fc91e1a69e02fdf2ef4956e81c0faf68f5a46de1b94f7eb065a744e934873b1",
+      "size_bytes": 31316,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_Cue.uasset",
+      "sha256": "8723a7d859fe8a2cf23bae81122cabd8103e2ef1af42f5f11980cdc87d0e56ee",
+      "size_bytes": 13572,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footstep_001.uasset",
+      "sha256": "ded3d3c0957c0f093e183ba75a88845c027b2d64d12f0c8e79635f403d7944b6",
+      "size_bytes": 22017,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footstep_002.uasset",
+      "sha256": "c66ab8f73a4ddfc36b3f2ef962036e982e66a9462f6e26e4edf1a51987ea12b5",
+      "size_bytes": 21734,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footstep_003.uasset",
+      "sha256": "e959348ce38a1415858f8250a4f511feac2058ceaddf451fea5714750e6b027d",
+      "size_bytes": 22938,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footstep_004.uasset",
+      "sha256": "7deee031269ececcb572c94301825143b364022393f8b977d4a922bca85a8e73",
+      "size_bytes": 20664,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footstep_005.uasset",
+      "sha256": "5ea79023316a03a2c905c59c866c5148383ec44d744d2133781bc47633e4a5dc",
+      "size_bytes": 20681,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footstep_006.uasset",
+      "sha256": "0914bc0fce94b5573e428ffc74c4f425366011dd7dadc3312ecf7a55bc44878a",
+      "size_bytes": 23025,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footstep_007.uasset",
+      "sha256": "52ac71f7a4c415f28abaadd1be458ce662b9e168f793ce209b39b682d53e897b",
+      "size_bytes": 20315,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footstep_008.uasset",
+      "sha256": "b0645323daf0655656bc76b5a68b05138ec2a950d8719fcc55add524d84a38c5",
+      "size_bytes": 20636,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footstep_009.uasset",
+      "sha256": "ba417794350907cf2b44ed8f808d049eed11d1654b012036cc143a77b7c1bfc4",
+      "size_bytes": 20263,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footstep_010.uasset",
+      "sha256": "b323cb486f3a11d6639aa90286c2d0a2541e0d054c130a495dd3296c930d6fd9",
+      "size_bytes": 21162,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footsteps_Cue.uasset",
+      "sha256": "c2497af827f7efe6c3e9d900f6b56f78fc1a873124e9d3dc4912e0759e89edb1",
+      "size_bytes": 29537,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_AdrenalineRush_001.uasset",
+      "sha256": "51affafd14b8f1d61a0b165b566944d405f5bdb597439c73fa889448e922c96d",
+      "size_bytes": 83468,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_AdrenalineRush_002.uasset",
+      "sha256": "4525967790b6ad795ad25a97fe13a7cf56b61a72bf062442f3ddedb12dde0cd0",
+      "size_bytes": 68335,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_AdrenalineRush_Cue.uasset",
+      "sha256": "f7abba25b71019327ad14fe55c221a1a271c727cd93decaf240242cf876a9f9e",
+      "size_bytes": 7436,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_BiteCap_001.uasset",
+      "sha256": "2284daefc51f009af7f89565a891a282e8cfc7fb62e8233c2e802aa8aa2e0241",
+      "size_bytes": 17338,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_BiteCap_002.uasset",
+      "sha256": "73092712c1d97e6dd909c6f67b0aa6235e416ed49acc2becf3a8b8a413569f6a",
+      "size_bytes": 19858,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_BiteCap_Cue.uasset",
+      "sha256": "9ae38e96649c1379a9798a27c502597ad0a83a5f86880d4f29f1c701f34f59ea",
+      "size_bytes": 7373,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Bounce_001.uasset",
+      "sha256": "62e27287e2806c55fcd47e2dfe8890bc0fa495bbacf26dbe179bc44a23f5a776",
+      "size_bytes": 12389,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Bounce_002.uasset",
+      "sha256": "63fc7a7a223519398b043ca1982f6fd023d3d0e94c20cec498c56950ccb39d9e",
+      "size_bytes": 8938,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Bounce_003.uasset",
+      "sha256": "11f3aa76e530b155294c040911a2956f8736d152098ffc80d3ccf1dcf5ce666e",
+      "size_bytes": 10428,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Bounce_004.uasset",
+      "sha256": "cd0a1ac2c2bf55e4b05b9f82d992873012aff921a7ff59dbb118a1c6601f6e22",
+      "size_bytes": 12359,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Bounce_005.uasset",
+      "sha256": "ef3eceb0bb1910b510daee6a04cbdb1fb2d3e313a221f84a2befcedfe699fee7",
+      "size_bytes": 11924,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Bounce_006.uasset",
+      "sha256": "ce4e59ab557f9326efe4e0faebfc7ecacabbd605b0bc2ddcfdbe0b46fb7f839f",
+      "size_bytes": 16262,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Bounce_007.uasset",
+      "sha256": "5683f371b1317a4e8edccfecfde39b28e6f15f1c2998100a3766ed99825625e9",
+      "size_bytes": 11638,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Bounce_008.uasset",
+      "sha256": "9a7569f6fa8153bec937ce3f4a3b60732c3ab121f384141009a0272e0297481a",
+      "size_bytes": 14030,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Bounce_009.uasset",
+      "sha256": "845a3ef800408cbacda4198548cdbe6fe215ed976311786172e0463ad00f07a5",
+      "size_bytes": 14965,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Handling_001.uasset",
+      "sha256": "5344bfdbe6c813ed2129b188882faeddb7b5422c46543c35eb7c4bbf3a353579",
+      "size_bytes": 8462,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Handling_002.uasset",
+      "sha256": "d8cf4073ceb46836f8e0336530c6670e5e554fc9f85840f188328e148fcb82d0",
+      "size_bytes": 10160,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Handling_003.uasset",
+      "sha256": "623153a67a8e78e9ecd0f5eee088dfc86fc77b546ab1b0b35281c0ac1924caf1",
+      "size_bytes": 11060,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Handling_004.uasset",
+      "sha256": "7c19b1d7f04a0c852e03b293caf5d422036a3c8f07e6ac8f53a43462214197c4",
+      "size_bytes": 8335,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Handling_005.uasset",
+      "sha256": "a9ab2358a9ff7486605a3fd73e131d1cf690c96ef98f454c599fb5209c6416ed",
+      "size_bytes": 8571,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Handling_006.uasset",
+      "sha256": "de5d264b32d59c8c70203276ca5f45f6355c626815d39119f26b17efe95c4d7e",
+      "size_bytes": 13863,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Handling_007.uasset",
+      "sha256": "987162b87cd4a5847505da33f24bb758b979fbd90de5ae2677d655a5445393d2",
+      "size_bytes": 7697,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Handling_008.uasset",
+      "sha256": "5baf491edf957be5cc53500afbd83c8efaf6a8286eedf529946895330bcfae47",
+      "size_bytes": 9353,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Handling_Cue.uasset",
+      "sha256": "264f0934261fc1cde7ef513b62c2f452de714e38528331c14494ce70e930a35d",
+      "size_bytes": 14948,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Inject_001.uasset",
+      "sha256": "b9f979be779f9f55c724e4cb752687d61b1c745aeb5838d49d7130047c4d8fca",
+      "size_bytes": 29548,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Inject_002.uasset",
+      "sha256": "8b9227e1895f0c6e35aff7d63ecce50a8be5cd011199112fabf4042cdc9c9009",
+      "size_bytes": 28643,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Inject_Cue.uasset",
+      "sha256": "23d0e6df108d904678be47a8f6c773d4cb912c4b274abd5e8241b90d6b1f7a8a",
+      "size_bytes": 7364,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_PhysicsBounce_Cue.uasset",
+      "sha256": "6b048d0b6e1a11d86bc918df55e0cc59f7b64cbeaca7fa91fced9388c0bcc23b",
+      "size_bytes": 16198,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Spit_001.uasset",
+      "sha256": "cb2357ea2e46e44c37b3d1c148dd0b30235e8780c933f3b648a8e2913bddacaf",
+      "size_bytes": 23491,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Spit_002.uasset",
+      "sha256": "b0514f7d64b45572fa5f668e9215f6a60cbcdc276d17bcc4f6dbd69796062204",
+      "size_bytes": 20920,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Spit_Cue.uasset",
+      "sha256": "7467d92fc29eaca7305b3060ff5e8d5c35c7feb5b5c24c0cfb7b51f592b89cdf",
+      "size_bytes": 7346,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Stab_001.uasset",
+      "sha256": "d21d5b92ef67b23771d1ee095ad5dbea3caff163c1134043050f896baa9363e1",
+      "size_bytes": 31741,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Stab_002.uasset",
+      "sha256": "043b9c480637f7a6b1c4cba40b706a503ded65cbe44c6e78bedc1e7cc6206cef",
+      "size_bytes": 32051,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Heal/A_TFA_Syringe_Stab_Cue.uasset",
+      "sha256": "73ef9872f3699631a29067b285622fb3194e37ce5051b8b27c14a01dc5be0d3c",
+      "size_bytes": 7346,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Melee/A_TFA_Melee_Impact_001.uasset",
+      "sha256": "4db106bcd5e29c655f4f58991d758736e291891d9019d00835780a073088fd32",
+      "size_bytes": 35825,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Melee/A_TFA_Melee_Impact_002.uasset",
+      "sha256": "69c5b6b5cafa0e292bc4bcee3cbe7141b87e344d61f1395111170c94a527005d",
+      "size_bytes": 38163,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Melee/A_TFA_Melee_Impact_003.uasset",
+      "sha256": "88fd2a7dcdf9dac499e351bc6be80c11999bfcb72597e637cc986c0268cc60bd",
+      "size_bytes": 41910,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Melee/A_TFA_Melee_Impact_004.uasset",
+      "sha256": "a05d46701855947c7a73137e3d81a9a1bc9c711e1d1ec1a49bab5fe9b8f475cf",
+      "size_bytes": 45291,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Melee/A_TFA_Melee_Impact_Cue.uasset",
+      "sha256": "3e3fcc77cbb8ccb552d8cd66e6d1f7668682bce31b3c70fefc779017b786f54b",
+      "size_bytes": 11137,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Melee/A_TFA_Melee_Whoosh_001.uasset",
+      "sha256": "ff2d3d8f6a6ad9c5225c0949ced1443892c44c2ce8b6f3497c3fc48b35cae803",
+      "size_bytes": 44677,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Melee/A_TFA_Melee_Whoosh_002.uasset",
+      "sha256": "cac9b7b9b86bd1801f2cff81e94d9c11ae62a1bace73e45bff7b196bd059afba",
+      "size_bytes": 46949,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Melee/A_TFA_Melee_Whoosh_003.uasset",
+      "sha256": "abf0ca84ce2c29dc0dfdceadc5fcfa139711336f50ab67496d652e8d09f59d5f",
+      "size_bytes": 42788,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Melee/A_TFA_Melee_Whoosh_004.uasset",
+      "sha256": "6af32e5f4477c7687597ff50a291bc5189f2cb1cdd7f47dae01761935c6c8c75",
+      "size_bytes": 44172,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Melee/A_TFA_Melee_Whoosh_Cue.uasset",
+      "sha256": "0374efd30c9fd910d1322e4c3e69a9de0011ed0b274a406af5684a58d06945e1",
+      "size_bytes": 12166,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/AudioClasses/SC_TFA_Master.uasset",
+      "sha256": "c745b4c6ac00920dae4472745973c93e80c9fae33ed07f7884c1f4c81c8a328c",
+      "size_bytes": 1350,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Materials/Instances/MI_Manny_01.uasset",
+      "sha256": "e84ed17190a8f93545b3c4f464cc5dc34e7ffe8e4d82d96387eefdd15053a808",
+      "size_bytes": 16310,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Materials/Instances/MI_Manny_02.uasset",
+      "sha256": "68e087f15a74df4e1faba7c2908ae8c98de2975585ede55195c09dc5f6a6e390",
+      "size_bytes": 15522,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Materials/M_Mannequin.uasset",
+      "sha256": "5d8b52cfbb824ce43e87ee154e2a0434f05d823c8fd391f30a3b799facb399c6",
+      "size_bytes": 36039,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Meshes/SKEL_TFA_Mannequin.uasset",
+      "sha256": "fc84127a85e6d7af7a0284e4576daba49ca1e827fe098ad744af561ceafd4ae8",
+      "size_bytes": 192464,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Meshes/SKM_FP_Manny_Simple.uasset",
+      "sha256": "9b0601be5ecbf4afa29ca58ec58289a02ae578e0631e8993e93d5e657aaee54a",
+      "size_bytes": 4922185,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset",
+      "sha256": "01750249c333e3b05e40e76c166cdd7d8d3969ea0f0cd9d1855e19eea1741202",
+      "size_bytes": 5740702,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Textures/Manny/T_Manny_01_MSR_MSK.uasset",
+      "sha256": "0b38fdd4925247ce96d3a7d741aa8ce7e219a066cdaa74074f63bf6af2fb8cbc",
+      "size_bytes": 11038579,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Textures/Manny/T_Manny_01_N.uasset",
+      "sha256": "842701bed7e7225caeb692219c4e598ca59b7aee1648fc535099186767a88db5",
+      "size_bytes": 7198646,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset",
+      "sha256": "4ce664b95c977c5054c8d5e57264ec5046bfa92ed6b0bc6f3887df98b3e0ab95",
+      "size_bytes": 9033890,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Textures/Manny/T_Manny_02_MSR_MSK.uasset",
+      "sha256": "6a05418b44e64b269d4b0c25b6cf6a08f3b29ffb45644d2b0947d00ca516c24b",
+      "size_bytes": 13678005,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Textures/Manny/T_Manny_02_N.uasset",
+      "sha256": "4ff447b527fbcffcfb3d58cc38185dbede691d5860144b267f00079fe4936fc9",
+      "size_bytes": 7269745,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Animation/ANS_TFA_BlockADS.uasset",
+      "sha256": "e7fc4a6a175e4a4c4c59f283e2478d32a0e77f6b886117e36df04cebdb921849",
+      "size_bytes": 45683,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Animation/ANS_TFA_HideMainMag.uasset",
+      "sha256": "c11005f20ab8d0bfa7cdefc96072dd91550539e132ec31af4eadade92e960351",
+      "size_bytes": 38621,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Animation/ANS_TFA_LeftHandGrip.uasset",
+      "sha256": "371efb8c36f7c6f3c1607ad8888a08980da2b7172ad2c8a333330f76a0bdbb99",
+      "size_bytes": 44233,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Animation/ANS_TFA_ShowReserveMag.uasset",
+      "sha256": "38731b9cd7004c808b8ae779869d71a24dbd294e4a59d26da69f4e96843d6b29",
+      "size_bytes": 38687,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Animation/AN_TFA_DropMagazine.uasset",
+      "sha256": "64967e722e81c8ac9ad7429df6d69e77a175940e195c86d78f983beeeb746c61",
+      "size_bytes": 40750,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Animation/AN_TFA_EjectCasing.uasset",
+      "sha256": "fa083be6b36716316665d3a43033b3aa7aeb07cf6a1f68308d159f9eaf00c7e2",
+      "size_bytes": 69190,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Animation/AN_TFA_SpawnObjectAttached.uasset",
+      "sha256": "db9382c11294b4a3f034b30e422deb3020dd6ecd3490278d549639f93e992eb4",
+      "size_bytes": 54331,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Animation/AN_TFA_ThrowPhysicsObject.uasset",
+      "sha256": "aab4ad45cd860e786d39860620f447f63ce7b95456221950899af2ac2c6408ba",
+      "size_bytes": 58147,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Animation/AN_TFA_UnlockActions.uasset",
+      "sha256": "94968c2f263b820d911d082f919c7242b0bb2747dcf072a1519f59a834eb04a5",
+      "size_bytes": 28091,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Animation/BPI_TFA_AnimationState.uasset",
+      "sha256": "f1da4ca7349c99caac25c516b38f4a150661e299aaabeddade1001771bb634be",
+      "size_bytes": 11138,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Characters/ABP_TFA_FP_BaseCharacter.uasset",
+      "sha256": "5b7a53f454cd8670eb9f93c5ad808d1921be50d987c7b0c25debb307af95da9d",
+      "size_bytes": 1212753,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Characters/BP_TFA_BaseCharacter.uasset",
+      "sha256": "166df767de2fbc43b19218521afce1996217b574121400f796391f4668daff00",
+      "size_bytes": 2014842,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Configs/BP_TFA_BaseConfig.uasset",
+      "sha256": "4d798543b0b9e24b55a8117b5f04b7b9ec4bfa0cf9b0535c84f8cf76129ead32",
+      "size_bytes": 201972,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Data/E_TFA_CameraPerspectives.uasset",
+      "sha256": "254d660b6b15e2fabf81e1bd97532dc4a7e95d8edebb52756c33fe7ed3591a21",
+      "size_bytes": 3894,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Data/E_TFA_FireMode.uasset",
+      "sha256": "d9b2b143576a19e7d01379e151fe27952ec3393bc798a1f72239916e47272bf1",
+      "size_bytes": 2854,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Data/E_TFA_GripAttachment.uasset",
+      "sha256": "998c04e1b90c596a95489b2000f0d660a79de59fb990e7d4ba692dae9f1a02db",
+      "size_bytes": 2952,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Data/E_TFA_Stance.uasset",
+      "sha256": "ea48ca3178cf05c30e94770698969647e5df2bc62f340146c88acc23c15bcaf2",
+      "size_bytes": 2496,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Data/S_TFA_SpringData.uasset",
+      "sha256": "cec2a803f5f116a081a44b0b23af288c218f4933441c4c41914dd2a54d0eb874",
+      "size_bytes": 5104,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_ADS.uasset",
+      "sha256": "57480761ea9c7ccaa76df1d300d7e6721acd24c981c8159c271837be29f072f8",
+      "size_bytes": 1835,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_CantedAiming.uasset",
+      "sha256": "ca73269be5b3016b1c6f00a5f2791b251a83132b451c0aedecb1f81f81c8d893",
+      "size_bytes": 1880,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Crouch.uasset",
+      "sha256": "70983f5128734781ea4d48523bcbf97f32906ebb4bc07debbaba51b4d7182110",
+      "size_bytes": 1776,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Equip.uasset",
+      "sha256": "25a03e653404e3f930bf9fdb6a7d0a38f47f9e98b605cbdb696eeedb1d7e8fb6",
+      "size_bytes": 1771,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Fire.uasset",
+      "sha256": "386d7b54b0cd0c127535b44c11686a3fc7d5df04790d6f31415b6b59d3ecc7ff",
+      "size_bytes": 1763,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_FireModeSwitch.uasset",
+      "sha256": "b4a83ffd013e19c67f8cf3bc7d0507a3b0386500a196e451df197bcb6261e61b",
+      "size_bytes": 1816,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_GrenadeThrow.uasset",
+      "sha256": "1cc1c680270d670c65520da658e07620c2bb07f94abb92abda5c02c7a258f373",
+      "size_bytes": 1806,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Heal.uasset",
+      "sha256": "195789631c5f6bc78f2f742a36cf51621f5ce815654fe785da0ff7d3e4d7ade6",
+      "size_bytes": 1766,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Inspecting.uasset",
+      "sha256": "f1076853a5a7f3cb98eb881c5a4c14d15a4b973d2672ad04741f21610a747854",
+      "size_bytes": 1935,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Interact.uasset",
+      "sha256": "ee431f8589af2991cd08520bc9005a815eabd49ad075a2512c8e357b98b470a7",
+      "size_bytes": 1786,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Melee.uasset",
+      "sha256": "33e9bf8493772ba5fcbe89519ece76f82d875a48487eeff42faf0598b3404748",
+      "size_bytes": 1771,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Move.uasset",
+      "sha256": "33c470082d1394e1ea91ff069f28ace57d7fb099a5825cc84b36aca8fe5c4001",
+      "size_bytes": 2092,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_RandomizeAttachments.uasset",
+      "sha256": "b6f2066f296b056393c8aba3d56aae7b67d58ed80bb9f2905eff2f75c5549a4e",
+      "size_bytes": 1846,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Reload_Empty.uasset",
+      "sha256": "9c58505975ab311adee0785ac1eb2c6c3a6a134a8a8bcb851246a13e1eda6877",
+      "size_bytes": 1806,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Reload_MagCheck.uasset",
+      "sha256": "36bf172f91fa1b75109c06947e45a80f08fa9020b8206d710d8509cb902e7505",
+      "size_bytes": 1960,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Reload_Quick.uasset",
+      "sha256": "22f8203d891b38301131bd05b080c1781eaaffef1122c6cd5a0f08ce58fbf7be",
+      "size_bytes": 1806,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Run.uasset",
+      "sha256": "2a023dc5b7993a6477c8075cc7642457ae57bed79732ed7ffb518cd87d3045c5",
+      "size_bytes": 1891,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_Sprint.uasset",
+      "sha256": "2f54528ea555eec2c8188a6a2bd9ee642a5c3d40bf1d546ecd2410054dfb9748",
+      "size_bytes": 1906,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IA_TFA_WeaponJam.uasset",
+      "sha256": "830c96be9bc97bec2659c10786bfb5675df500cf82a69986371dd2ceb0477444",
+      "size_bytes": 1791,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IMC_TFA_Default.uasset",
+      "sha256": "ff6f19ed2da2dc3ed0467365e20140aeab9c3c3a0c550411b5c113300c6db149",
+      "size_bytes": 13249,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Weapons/BP_TFA_Attachment_Laser.uasset",
+      "sha256": "4b9f57ade383446ecd43f6a131a808feb8b13f8af8c43d5456e8789067396fc0",
+      "size_bytes": 162411,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Weapons/BP_TFA_BaseMagazine.uasset",
+      "sha256": "74c01a05a178f91057f9059255c2bc8afd4dc116d73fcd184de8a2c09c677f55",
+      "size_bytes": 184330,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Weapons/BP_TFA_BasePhysicsObject.uasset",
+      "sha256": "d6d6ab4a04bc23507ab6526904896b6e5c22b28778fc834737076ffbe09d085c",
+      "size_bytes": 80271,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Weapons/BP_TFA_BaseWeapon.uasset",
+      "sha256": "98ddefad1be7448439597199b3381015c54c58e7729565c8fa3edf022ecd3a8e",
+      "size_bytes": 639764,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Weapons/BP_TFA_PhysicsCasing.uasset",
+      "sha256": "1ce9730a15ce17d51dee8adf415b8a4113a68c3f2281ea6b2b584c9d05ecdaac",
+      "size_bytes": 34714,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Weapons/BP_TFA_PhysicsMagazine.uasset",
+      "sha256": "23220a55a491b7b47b758389aa2cda07db6a03254e0be6d1a180b0ddca65351b",
+      "size_bytes": 34803,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Weapons/MI_TFA_LaserBeam.uasset",
+      "sha256": "825613823e435800e396b1c5bc15a76be306e3746a7b6f1ea8dd19e69df0f0dd",
+      "size_bytes": 9860,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Weapons/SM_TFA_LaserBeam.uasset",
+      "sha256": "7ec2826f43326eb65c00666d7be860f12e735a9fb835b5f02be01581abe3071d",
+      "size_bytes": 18265,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Materials/M_TFA_Glass_Master.uasset",
+      "sha256": "6ec15fc8910fef29528f741ee04e5fdf536729791d72d173dc383c45da80a6b5",
+      "size_bytes": 19042,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Materials/M_TFA_Glow_Master.uasset",
+      "sha256": "eb63191b52a92d125d48e5ea85ac9bbc0c147045b73e0bf172230098b40db411",
+      "size_bytes": 14760,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Materials/M_TFA_Weapon_Master.uasset",
+      "sha256": "39b44a689e6ac878f1eaf8710ca72e112281523be0040cadc7657903ca7832dd",
+      "size_bytes": 35106,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Animations/A_TFA_FP_PROP_Syringe_Heal.uasset",
+      "sha256": "1f8f2942666faa51f11d6017bdf0d59d36c06656453baf7b68eca25a2618cac9",
+      "size_bytes": 82190,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Blueprints/BP_TFA_PhysicsSyringe.uasset",
+      "sha256": "31be0136a82dbb4281db7c5568bcf4bffca0ac1931c19634dae366915401bd97",
+      "size_bytes": 34003,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Blueprints/BP_TFA_PhysicsSyringeCap.uasset",
+      "sha256": "2c621c5704055d58817b904f954d43bf7ef9c7d759db48dd230d78a085769861",
+      "size_bytes": 34266,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Blueprints/BP_TFA_Syringe.uasset",
+      "sha256": "c5a530f2b9ea1f74f0c62f045bb0ba6c2235b5cfc111dfb3807834f9fe9370ba",
+      "size_bytes": 26352,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Materials/MI_TFA_Syringe.uasset",
+      "sha256": "bcfe70ff7437f33ae371ddad10ffe6ff506f545181d279a49974091ab6a733b3",
+      "size_bytes": 15742,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Meshes/PHYS_TFA_Syringe.uasset",
+      "sha256": "17ad2ddeabb48466c8d1cc80849b2decccbea66cc8519afc381171a18900cec1",
+      "size_bytes": 7408,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Meshes/SKEL_TFA_Syringe.uasset",
+      "sha256": "230d3a9da7b4481ced3ab72e7c41dda841796b83c55dd662c627381329ad8063",
+      "size_bytes": 7096,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Meshes/SK_TFA_Syringe.uasset",
+      "sha256": "648ffb10aa34b36df4c17bc8fd2c9040a14898256dd04a0c3bc333cb68496670",
+      "size_bytes": 483900,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Meshes/SM_Syringe.uasset",
+      "sha256": "a9f1bd8f556c31c0355c6c8c6ed850d57cb595b2c1c444c09e979c7d593c7dcf",
+      "size_bytes": 93319,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Meshes/SM_TFA_Syringe_Cap.uasset",
+      "sha256": "b68de16ec594db25fe71460dc99883747103db4f7c01679751153bc2f3697aa3",
+      "size_bytes": 30749,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Textures/T_TFA_Syringe_D.uasset",
+      "sha256": "8645014d4cc16e2dfcabaa41fb3db28ec5c93c60a176d654c86d612f8c7aac06",
+      "size_bytes": 3341280,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Textures/T_TFA_Syringe_N.uasset",
+      "sha256": "9013f49e8561749b20c1ea2eca72a3ef3736ad025e1bf06d33e6f7d2e818965a",
+      "size_bytes": 18237754,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/Props/Textures/T_TFA_Syringe_ORM.uasset",
+      "sha256": "95f30da519049aca53d500aa9fd64326fd4d2b6d1c4a8f0446b2663bed2a18b0",
+      "size_bytes": 16115100,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Emitters/NE_TFA_MuzzleFlash_Flame.uasset",
+      "sha256": "85872d2dd27b6ac9266b61fded3aeb1c362ad7e31caa8c878c16a994825bd040",
+      "size_bytes": 75648,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Emitters/NE_TFA_MuzzleFlash_Smoke.uasset",
+      "sha256": "d3c4fcc81fd14f9a4939aafed0d945a1cb6d2ac60e2e90586c9ad3bf6e483e37",
+      "size_bytes": 92169,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Materials/MI_TFA_BodycamFisheye.uasset",
+      "sha256": "0ba1fdeb4f8d4aee899b4495c89e78457e8ede46498e2e96c693a5877271b05e",
+      "size_bytes": 8329,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Materials/MI_TFA_MuzzleFlash_Flame.uasset",
+      "sha256": "8f31538e26a4454e5c13c5da7a30492d6ac339b0f28c519da8477cf89772fd90",
+      "size_bytes": 12524,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Materials/MI_TFA_MuzzleFlash_Smoke.uasset",
+      "sha256": "7adbd0ce818a8fbf2b990b1a50889512ddb19d2ac790f797e0169609a3a9eab2",
+      "size_bytes": 11278,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Materials/MI_TFA_MuzzleFlash_Smoke_Side.uasset",
+      "sha256": "e1916d855f27002249b2974a9469d1ed8ebbe30a1a68c04c8c3f66eb8d7ca536",
+      "size_bytes": 9844,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Materials/M_TFA_BodycamFisheye.uasset",
+      "sha256": "f31f14e42fba30a55115ed350f3ee19c4b4d1b476c89d0c05c2ddd417643e05d",
+      "size_bytes": 30419,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Materials/M_TFA_VFX_MuzzleFlash.uasset",
+      "sha256": "b86ad64bcfdafaad392aa926e2c2d3298244f734f8a0bffb31a5641be2b0a60d",
+      "size_bytes": 18451,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Systems/NS_TFA_MuzzleFlash.uasset",
+      "sha256": "5f390b6ce592b738e8712616049f78600c82b9139708aa11b842840355907310",
+      "size_bytes": 824581,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Textures/T_TFA_MuzzleFlash_Flame_E.uasset",
+      "sha256": "44ce663bd46c20161b3a14d3b08e4ff7ce42be260a4d8bd31138689b26be2c2e",
+      "size_bytes": 2921930,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Textures/T_TFA_MuzzleFlash_Smoke_A.uasset",
+      "sha256": "fe437962dd553134a2e1582bf33248111fcb250f36bc115741859f9bb00a2f85",
+      "size_bytes": 4942647,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Textures/T_TFA_MuzzleFlash_Smoke_Side_A.uasset",
+      "sha256": "d2ea90f2071f46e416b5d52c33d0ea1935962bbe10b7f4caf6a7c7e3283704a1",
+      "size_bytes": 3540747,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_ClearJam_MagSwipe.uasset",
+      "sha256": "4d370b17e6b51074cdea1cc5a20330b3c5f2980d5db01e8a8cc1f1d27876f1a2",
+      "size_bytes": 15630,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_ClearJam_Rack.uasset",
+      "sha256": "28480fa4f23b9c3c37ef5ee6a998cd0fc7ae522d03908d5d4261876933725cd6",
+      "size_bytes": 15531,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_FireModeSwitch.uasset",
+      "sha256": "7ceede0879969587abc9b06989fdf201eb316c6201ceca60c1073b79d0dce02a",
+      "size_bytes": 18090,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Fire_Auto.uasset",
+      "sha256": "4b247b0fd62d0087051b0ef10fd3b2da49713475e5d063df6e433089cc8c47aa",
+      "size_bytes": 12695,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Fire_Empty.uasset",
+      "sha256": "fd5c626502bc9bad654f2ca81923cb29b1d9601b03906f2375e12b10e40c4a48",
+      "size_bytes": 14647,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Fire_Semi.uasset",
+      "sha256": "d9be0766ccc2f758578720f6591956ee7f3b102dd0147c3cc6640a76059e9149",
+      "size_bytes": 12807,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Grenade_Throw_Quick.uasset",
+      "sha256": "6e5aa379164785c272f473b1c52dfd8110f375761f2dfc5b346968bde279c80c",
+      "size_bytes": 24294,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_MagCheck.uasset",
+      "sha256": "7c4dae43bdd539a8e6fb09f5db29708819d61f21e6c9308c7c0241cc03e20b85",
+      "size_bytes": 14582,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Melee_Bash_F.uasset",
+      "sha256": "af9b179290f66c736259dea167db06c47c5ed64bede09e6d335379e6d2d185f2",
+      "size_bytes": 24306,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Melee_Swing_L.uasset",
+      "sha256": "b35377266a5c447f3604e8c2e469350922f2efbe0ab596cae1432d21a92b560f",
+      "size_bytes": 20874,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Melee_Swing_R.uasset",
+      "sha256": "868a6c93fc3835638b7609109f0e993c14152e315a2869ed247b328cb030c74b",
+      "size_bytes": 20853,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Reload.uasset",
+      "sha256": "3116f63f854fe1fb19180b30298a3ae00d5672ddf8a979ce9a5a5ac838c0e88d",
+      "size_bytes": 14678,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Reload_Empty.uasset",
+      "sha256": "a5c1a4d78c08c83b7afafa8fcffd9dccd59f7b04c970a9aa7c1789f1df839e1b",
+      "size_bytes": 14528,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/AM_TFA_FP_AR_Reload_Quick.uasset",
+      "sha256": "f19fa54aaa01b258cd9187c22e91730bd0ac27281955cb3a6aae31023f473ec8",
+      "size_bytes": 14340,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_ClearJam_MagSwipe.uasset",
+      "sha256": "08a481c5b952d32ff1c2018115fa554297adb77d9190cd33ae9971a5bfac3ede",
+      "size_bytes": 668521,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_ClearJam_Rack.uasset",
+      "sha256": "0eb50e1e3104fe29bafba83e2b415239218d1a8516e0c291212298d57ced9ab0",
+      "size_bytes": 479394,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_FireModeSwitch.uasset",
+      "sha256": "0148daf3aa175af538075af24e0a1e08e9baa6f7acc66205fb11007ffe561b61",
+      "size_bytes": 127065,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Aimed.uasset",
+      "sha256": "d86b0b2de616503bf11a0f58da33a754a1674b15dafc109dfdb2a482dc26048a",
+      "size_bytes": 147312,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Auto.uasset",
+      "sha256": "f9183ee5dcf770e3817b0d2d393d2c26cfa36de6d932b00a316e972a488cf8d9",
+      "size_bytes": 150225,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Empty.uasset",
+      "sha256": "79b3880015c3a83f9c8569293f27d90f4af2b059823f44789984f913ecee5ab7",
+      "size_bytes": 130766,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Semi.uasset",
+      "sha256": "a4e9e4cc33f6ee4d7812e0d1479f6bb9723107f0af43aa5d3aa805b3868ddeed",
+      "size_bytes": 123308,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Grenade_Throw_Quick.uasset",
+      "sha256": "6d8b49e2d121839a0dc78707bb3031c61e197e6cc044af39f76d1423964009ef",
+      "size_bytes": 384442,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_MagCheck.uasset",
+      "sha256": "743d07e3d6f9e57720d3e335079f30726e72dd119b7e3eedef8ffc0f909c718a",
+      "size_bytes": 560824,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_MagCheck_Aimed.uasset",
+      "sha256": "48f402bfabc53704848bee7dd98de8b3601fd0317b2d62f13e6a4bcaf6ca143a",
+      "size_bytes": 543084,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Melee_Bash_F.uasset",
+      "sha256": "bf98a6991a4f9a0cd43599938caebc9fccfbad394c4a2311b7048933f33ba423",
+      "size_bytes": 385604,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Melee_Swing_L.uasset",
+      "sha256": "9872753489476a32b7275fd4a62b1e0ef8db9eb66059aa21b87f70017ed1fb5b",
+      "size_bytes": 375427,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Melee_Swing_R.uasset",
+      "sha256": "6cb67ca0dbcc49ef5957985ebf878303e70fc020de7f648282285fa8ee4d876d",
+      "size_bytes": 384547,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload.uasset",
+      "sha256": "bef7a341e76f9508082917d4f55cc042ca0eca5adc6a297862caa6eac42e667d",
+      "size_bytes": 451471,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Aimed.uasset",
+      "sha256": "f9c2ca36c6209db1993fbe11eb68eb1c20cd99c07b7bac1ae8023881c1d75f85",
+      "size_bytes": 437329,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty.uasset",
+      "sha256": "2b9c1c1e3713423864da36a529c110b5f05bdebc8b6e9ad90ef947668b3ffe35",
+      "size_bytes": 483418,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty_Aimed.uasset",
+      "sha256": "28062fc79331cdbe6fb8cacbf4b86a25744f4b3472fabe4fb6f97a7641b7ebc5",
+      "size_bytes": 465709,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Quick.uasset",
+      "sha256": "171e737c528d56805e55d28bad08cd3f14962efddef8f1d0f48e8474be23eda8",
+      "size_bytes": 364046,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Quick_Aimed.uasset",
+      "sha256": "9d83b369a40324ce9f3e0c197801130d55315f4d41e0c8ed63abe528bae4ab36",
+      "size_bytes": 364052,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/AM_TFA_FP_AR_GripChange.uasset",
+      "sha256": "d1a6208109d3005154efb5950730822da60bb469f33084cb2cc285c556e12098",
+      "size_bytes": 13934,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/AM_TFA_FP_AR_Heal_Syringe.uasset",
+      "sha256": "135e78d9fd60cd90616653796e6e4e0ea5904fc12e6158291d652c1892f208bf",
+      "size_bytes": 48968,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/AM_TFA_FP_AR_Inspect.uasset",
+      "sha256": "07b04025a6f52a34204ced70466142bb12351586bceab629490c809045468a05",
+      "size_bytes": 15806,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/AM_TFA_FP_AR_Inspect_Empty.uasset",
+      "sha256": "3d8351e85bc5cd9180818f7efde620dc46bc3558159760ee9873a7322e1849be",
+      "size_bytes": 28830,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/AM_TFA_FP_AR_Interact_Grab.uasset",
+      "sha256": "9e6e443134f8b2c16be093e038f4c2effdb206a27100730ded2bc6cebd8ef8d5",
+      "size_bytes": 22551,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/AM_TFA_FP_AR_Interact_Punch.uasset",
+      "sha256": "72f58dcee3f90abdb23f0c0255b6a428fe45c629fc3a28d3877ff184084ff1be",
+      "size_bytes": 24333,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/AM_TFA_FP_AR_Interact_Push.uasset",
+      "sha256": "c7849897adee4b4244520ae7c08e48ace14ea8d15f8d67396a679addf7a53156",
+      "size_bytes": 20812,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/A_TFA_FP_AR_GripChange.uasset",
+      "sha256": "acc4f4833cc95f281052d2c7c2450560139b0ec0e5e42583f4bc4948c7a959cf",
+      "size_bytes": 144667,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/A_TFA_FP_AR_Heal_Syringe.uasset",
+      "sha256": "4b8e016b9928ffafc7b8e50b73ed3820ae9abaf07315d64a88f287d8a500ce55",
+      "size_bytes": 675695,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/A_TFA_FP_AR_Inspect.uasset",
+      "sha256": "a673da47ffd0a753a7e328dba7dd55eff8e75624ffc7eaffcb34e3e2ac10ebb7",
+      "size_bytes": 869836,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/A_TFA_FP_AR_Inspect_Empty.uasset",
+      "sha256": "5aa4bfa939e3a919a7951f69891c3f86bfd99a8fb72d418772c342b6efa4c344",
+      "size_bytes": 608923,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/A_TFA_FP_AR_Interact_Grab.uasset",
+      "sha256": "aa2e2fbdb3bad0ac7ba79e9a6e145200e54cde2bcfc99e3bd991696447e9b6eb",
+      "size_bytes": 282303,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/A_TFA_FP_AR_Interact_Punch.uasset",
+      "sha256": "99b1817aced990a1cdd52ec8e98632a20c3a014073ebf79ea281bb30359a6a00",
+      "size_bytes": 298692,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Interactions/A_TFA_FP_AR_Interact_Push.uasset",
+      "sha256": "9919a030fbf58fc853a4797305437705f3837ca4ad81cb7e36911492f428a7cd",
+      "size_bytes": 282297,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/AM_TFA_FP_AR_Jump_Full.uasset",
+      "sha256": "ac6d91755cf5c78b29ca757859210de053dfe03f3aa89fa8af771f227ec0ecd6",
+      "size_bytes": 20857,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Idle_Loop_Aimed.uasset",
+      "sha256": "d28cce82d1185edcc447a1a4b461d83c4c4def4d70b1f4b8740496caccd2bce1",
+      "size_bytes": 150312,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Idle_Loop_Crouched.uasset",
+      "sha256": "3cce4724779bc2adc00f30db53baef52cd722b89d46bd7c84afbf1a3cc539289",
+      "size_bytes": 154049,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Idle_Loop_Standing.uasset",
+      "sha256": "b8538f1c63f19e9777d9300bf57abec1cd1e3808851c122bb2fde4d53ad5a71d",
+      "size_bytes": 151980,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_Full.uasset",
+      "sha256": "0014a096d45b1ad0beca9f21d3cf0964423fc4db1830af691da390d78663cfaf",
+      "size_bytes": 142598,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Run_F_Loop.uasset",
+      "sha256": "b46a9b6a5e7fdfbf6a608382b8d709e26389173667562140a7c8d0b822b9dc28",
+      "size_bytes": 116691,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Sprint_F_Loop.uasset",
+      "sha256": "70f63644cfd81d2b5fa2384bd50ec7df884dcaae4d9e3c87ce2a05395ea41471",
+      "size_bytes": 133206,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_B_Loop_Aimed.uasset",
+      "sha256": "2fbbb1eaa90ee0a27711a6c694979611cbbfa8c2e5e239d1e0d1af8b73b4b84a",
+      "size_bytes": 117517,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_B_Loop_Standing.uasset",
+      "sha256": "00a2fc3e5982316eec6fdb8b7f71fbe5d91b39d4eaac6350b43fc5f0af0678de",
+      "size_bytes": 117988,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_F_Loop_Aimed.uasset",
+      "sha256": "24c1037dd310643d8ac5ceb8282c6a81650fb652598dccde84aa1d0e7d01dd75",
+      "size_bytes": 117512,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_F_Loop_Standing.uasset",
+      "sha256": "023edb332933c2cfe9eb9cc35e35e47072e3299cca0b71dd8a0e8792ed5cb2fc",
+      "size_bytes": 118050,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_Strafe_L_Loop_Aimed.uasset",
+      "sha256": "3eeb0fd34cc6382f015d6ba09bfd1c5badf23c0b5f6d7fd4843fab710660b44e",
+      "size_bytes": 117478,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_Strafe_L_Loop_Standing.uasset",
+      "sha256": "48f5b093d0c6f714a6b63112335e06a9b4aa50bc6c9f3c4e3bb1970d70956ccf",
+      "size_bytes": 118044,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_Strafe_R_Loop_Aimed.uasset",
+      "sha256": "8eb3ae3c5b99940066f07dd2025f82d46bba7245b3da054a35336aa31722150c",
+      "size_bytes": 118156,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Walk_Strafe_R_Loop_Standing.uasset",
+      "sha256": "f167aecc1cca594ab2a80b202f58ae144cc9befe986377c2a765214c1f8cea74",
+      "size_bytes": 118112,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Aimed.uasset",
+      "sha256": "50f305545a206a29fd3037ef6428af9751dca6a6532a3ba16308655134b8d825",
+      "size_bytes": 14335,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Crouched.uasset",
+      "sha256": "0acc700e98ca0ce24cb4a4e5ea2381dab28a5a70bd08e743de15d0d6edbe52be",
+      "size_bytes": 14450,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Standing.uasset",
+      "sha256": "344d1ccd1528515431f38141bcb0199b5873679432c995c9921b7a1b4026ea96",
+      "size_bytes": 14634,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Poses/A_TFA_FP_AR_Aim_Pose.uasset",
+      "sha256": "5f37bf852bc3b4a97a1092d2b9d4779b739c828c5b601eddf4017600f118d616",
+      "size_bytes": 92008,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Poses/A_TFA_FP_AR_Aim_Pose_Grip_Angled.uasset",
+      "sha256": "57be6c562a4ac73f71e3050403e1fd8de0590efe746170fa3c035c888100e331",
+      "size_bytes": 92116,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Poses/A_TFA_FP_AR_Aim_Pose_Grip_Vertical.uasset",
+      "sha256": "2cdd1817d1636b6d369daafb49d164bb6e8ae7384c70cec50c5aa6956376bdca",
+      "size_bytes": 92094,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Poses/A_TFA_FP_AR_Idle_Pose_Grip_Angled.uasset",
+      "sha256": "8040245849c56a24e24d73bdcfa83f35ea465022351d96f837250f4ae42fdfa0",
+      "size_bytes": 92161,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Poses/A_TFA_FP_AR_Idle_Pose_Grip_Vertical.uasset",
+      "sha256": "a09fce13bd17794de01ddc950880416a2aae51ff6ae45538355eedcd9efcbb59",
+      "size_bytes": 92162,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Poses/A_TFA_FP_AR_Idle_Pose_Standing.uasset",
+      "sha256": "a5f495be3ba56889be38500b8e79a71d459fc8e41d55847e5027884c32495070",
+      "size_bytes": 92078,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/AM_TFA_FP_AR_Equip.uasset",
+      "sha256": "71409290aee21c91ed5032c6f0073a492699bd4ef822971c15f7a72a6a5cc75b",
+      "size_bytes": 15679,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Equip.uasset",
+      "sha256": "493a0c7b6b3660a2db23cbf27ae4d8ea391b568ddc43bee83cf59059bf498531",
+      "size_bytes": 324424,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_End.uasset",
+      "sha256": "2745815ca4abea28d2461baee5b335a9cb4025db61bb8e7d06c7b5acdb400b1b",
+      "size_bytes": 138067,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_End_Aimed.uasset",
+      "sha256": "96e739d3e32217c1cee07fd70e0cc58849f617b930a2d4283d3c3987a17ff570",
+      "size_bytes": 138109,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_Start.uasset",
+      "sha256": "c558d492239b20022f0d0ff6fe2fb622214f6f1a8146314a39893f623533b314",
+      "size_bytes": 132309,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_Start_Aimed.uasset",
+      "sha256": "0b7730cf1368132f0bdb3ee1660b92768a3ac2649a953237186668adcd51a6fc",
+      "size_bytes": 132357,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Run_End.uasset",
+      "sha256": "723529ef1f5fbe631fbaec533846bcd23368c2fbece79cf1841cea17a8453b3b",
+      "size_bytes": 135233,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Walk_End.uasset",
+      "sha256": "c30618972ed6ee4e89e394fe0fbd66d98a1318c544e6e432e01e3693a0c3a03d",
+      "size_bytes": 127598,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/BS_TFA_FP_AR_Transition_Crouch_End.uasset",
+      "sha256": "4afbc6d40635afd01de5686ce985ca161ab5b4ed96314e133b9ec4d2e51592b4",
+      "size_bytes": 8592,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/BS_TFA_FP_AR_Transition_Crouch_Start.uasset",
+      "sha256": "8c12b8a7a022f031237de8dc849067f3aff99fa63484d7577b6bf0dfca404663",
+      "size_bytes": 8609,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/Common/A_TFA_AR_Magazine_FireDepletion.uasset",
+      "sha256": "1614cf17728ea868113bcca66bca14a661e8cffef3904e2a0790d8d7494a6f9b",
+      "size_bytes": 257323,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/Common/A_TFA_WEP_AR_FireModeStates.uasset",
+      "sha256": "4d82ffbba0e2b67d0b0ee2f6e0cd02940b5e0ffce16bf9550928e273097da378",
+      "size_bytes": 27196,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/Common/A_TFA_WEP_AR_Reference.uasset",
+      "sha256": "abab15cc78f5f053ae4c9c3d07d2b5ce71dc89e1402176bf045cbc8ee792dd9a",
+      "size_bytes": 26848,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_ClearJam_MagSwipe.uasset",
+      "sha256": "166fdf16beecb8b753973e3c4389d8f3d339b7d4199c5008733085d9358b2d17",
+      "size_bytes": 29868,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_ClearJam_Rack.uasset",
+      "sha256": "162bda3fd12f4eca4d0eee58bdf3d789b62ea16a4e6d69d174cf1ad4dc8402cb",
+      "size_bytes": 27334,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Equip.uasset",
+      "sha256": "2fb1485ad41a7a390a2e2d2dfb3698d1230f9273a6cf40c391f57ef4cb71606a",
+      "size_bytes": 18439,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Fire.uasset",
+      "sha256": "c70dfdf9714e4e5bfb81f6c834e5a295d6210bbb967e5d206803c15520b56ac6",
+      "size_bytes": 17702,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Inspect.uasset",
+      "sha256": "bce3e8baf955d1c077bc1229771a2f82d13aee7c4ef01853b63acc07ec18b6e9",
+      "size_bytes": 27852,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_MagCheck.uasset",
+      "sha256": "e7423c1dc81bd4e6d036f5c3968ca0c3093092221c93cb1ebac1eeceeeb6afbb",
+      "size_bytes": 25520,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload.uasset",
+      "sha256": "6e19f850d3b195ae19f0cf0769c65ccdd42969f6562c5fff530b60678213f130",
+      "size_bytes": 26052,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Empty.uasset",
+      "sha256": "4ad82376d8ffe1ae63b0f104e122e3cb7a1636cc0a2e98c51f1c9a2ed993153d",
+      "size_bytes": 29283,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/AM_TFA_FP_WEP_AR_Reload_Quick.uasset",
+      "sha256": "fad611eb0002b9054d881e31bd062121a618894f2e4a05695b0d489724558d5a",
+      "size_bytes": 29383,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_ClearJam_MagSwipe.uasset",
+      "sha256": "523a482a41fdc87b167211fa33320302f069fd2cee3fa8a1543bc1e343c17343",
+      "size_bytes": 133035,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_ClearJam_Rack.uasset",
+      "sha256": "161845ad839a8c092f3c79952f791020902abe9dd1128ce0539e82735e05f260",
+      "size_bytes": 68550,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Equip.uasset",
+      "sha256": "b185dd61b289453e54ef976672bf35b76995e651822d111821288dc30dc607ef",
+      "size_bytes": 50248,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Fire.uasset",
+      "sha256": "8ea733ef152fbff1c455bea244d45e843e83f3cc05191c1a27cd96948d49c9a1",
+      "size_bytes": 35542,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Inspect.uasset",
+      "sha256": "cd56ad18e56edf3d063e7f227c3492321df87681a5fdb8ace48c0f354c5bc247",
+      "size_bytes": 69282,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_MagCheck.uasset",
+      "sha256": "4151283e174747919281e5345d6b6a7252481321f05cff39e50f2626014591b6",
+      "size_bytes": 66482,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_MagCheck_Aimed.uasset",
+      "sha256": "feacb0e14f1eac867eb2acb94d9767832bee1d3203b4dd8fe76e271f3d000a7a",
+      "size_bytes": 66507,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload.uasset",
+      "sha256": "a282cc97a41a6e34a018aa01e2c6c819caa74d30e15da7d070040d8dc6255c48",
+      "size_bytes": 80807,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Aimed.uasset",
+      "sha256": "67a496fa23644b6d97aea322917aebe8f67ed42916c07a2b7ebfe6bb5775411b",
+      "size_bytes": 80869,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty.uasset",
+      "sha256": "87adee73fd0128816fd264e63af35a6edc236c76cbbf4014be84c7997c336b3f",
+      "size_bytes": 94843,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty_Aimed.uasset",
+      "sha256": "fffe1b966eee81b5c48d72ad0d4874e5e5c6b3b4991a724a00c399481abf4efd",
+      "size_bytes": 94885,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Quick.uasset",
+      "sha256": "cd0380723424425c9c3d305ac897f50b98e1085f0da8a9cd744199568d863068",
+      "size_bytes": 73430,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Quick_Aimed.uasset",
+      "sha256": "495ae9e5607a941ebaff6cc88a343c885fc11151cf20edcd459c3dfd37d71d1a",
+      "size_bytes": 73362,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_EmptyCasing_001.uasset",
+      "sha256": "0e34d537be47d9c3c59c7a7f779fa22ea088d6d06baaa1f2d8d6fce1ded8c80e",
+      "size_bytes": 56088,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_EmptyCasing_002.uasset",
+      "sha256": "7b3874f1b348267ab583de62b1f7f550b12a70c656293efb11986c83da61f922",
+      "size_bytes": 54281,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_EmptyCasing_003.uasset",
+      "sha256": "9fccf731f52419b986b764d7c3010fd8fa15f2c058b39b84fb542b02b16a6a1e",
+      "size_bytes": 75572,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_EmptyCasing_004.uasset",
+      "sha256": "1e2631ee73e920a382a0985c0aced0e50e3e6e226f5c53283a674eabf4f7cb78",
+      "size_bytes": 69162,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_EmptyCasing_005.uasset",
+      "sha256": "aba4d28e36dfd76df8b453a13038b653d69724670cfe8de97f0b4144ffa2cbe9",
+      "size_bytes": 55692,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_EmptyCasing_006.uasset",
+      "sha256": "1be83b736d6110c0ea8e5fd71553eb2575a533e5312d64f4865e4823e5b13b82",
+      "size_bytes": 67411,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_EmptyCasing_007.uasset",
+      "sha256": "2131b70bc112162911ae00929cee9e2a176b2d93668714ece3af2d7e111a1287",
+      "size_bytes": 97499,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_EmptyCasing_Cue.uasset",
+      "sha256": "3d4b661baa12805c6d9c51a82dd77a8cf9a03c26712ad80c19faa8286a5ac7f3",
+      "size_bytes": 15034,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Empty_Cue.uasset",
+      "sha256": "69fd992c33846a5d512dd3b1f530e413ba5b441a786ca6b938d1dff65236e52e",
+      "size_bytes": 9953,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_001.uasset",
+      "sha256": "c3894aa0131a65a721adb6f3cc903dda90d0dcd7f356c256c9e64cc49ddb48cb",
+      "size_bytes": 75096,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_002.uasset",
+      "sha256": "3731aaf3d8e85484d18749e992a692740a6b900c7758e3c1a42c1d2646f3e725",
+      "size_bytes": 72225,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_003.uasset",
+      "sha256": "39cf7731c4a2330d3b0960b1b8046fbbca196d6b681872ae2e250a307bbb9208",
+      "size_bytes": 79750,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_004.uasset",
+      "sha256": "561885a52c4cf4cf6cc1ba0b7bfe7cc47a29bb9e077b392c74be91d5e9e815db",
+      "size_bytes": 75435,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_005.uasset",
+      "sha256": "212e221cc12f3e158d1f80eefdb59ac8547cacb752da28914581ce78590af644",
+      "size_bytes": 77160,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_006.uasset",
+      "sha256": "c1473c67f0b9f8faaea853f81b5cdff99aee9de26eca7d81be7e55a8ae18225b",
+      "size_bytes": 78429,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_007.uasset",
+      "sha256": "4632370848924093a169aea22e815cb14f02c68976534846bc8778547ca67434",
+      "size_bytes": 80293,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_008.uasset",
+      "sha256": "5f3b1ce09c6f456ba212bf688e865f6ee76af69d34bcb1186f04c5fc662f40c1",
+      "size_bytes": 75301,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_009.uasset",
+      "sha256": "fb8d9c7ce1a20aeba42056414a5500d2ecd36b20b9f023407bf954920e3fbbd2",
+      "size_bytes": 80779,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_010.uasset",
+      "sha256": "31e3eb9fd8cfddf238908a3e6e175592e6b780357867a9a9a36b4c8ebf0ae40c",
+      "size_bytes": 73218,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_Cue.uasset",
+      "sha256": "8c6133737d5af77fecf3ddd6dd4772529f7bb91bcfc05f4fc436dc372936a4e8",
+      "size_bytes": 17559,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Tail_Long_001.uasset",
+      "sha256": "c5a7581ee14a52d3b8c85b454bd490ccdcac85b92b46e44c259c19586d98ec8e",
+      "size_bytes": 285515,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Tail_Long_002.uasset",
+      "sha256": "ba752e786d1faec2e168fbfa2980bb5b34060da97ec7834d9849dfa5c6155bf0",
+      "size_bytes": 286604,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Tail_Long_003.uasset",
+      "sha256": "02074ed5ca153f8b66a99ea70b6b3ff77836ed6005b79bc5fda4d8ab3239dd1a",
+      "size_bytes": 323611,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Tail_Long_004.uasset",
+      "sha256": "9b0d051ec4e3b8d0377c54fcc1c0eada0c274fabb74f3f1bd764b836857b2400",
+      "size_bytes": 278999,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Tail_Long_005.uasset",
+      "sha256": "c2c22f79e594cab8401c6b8494fd08ba49695c68bd85b2935e665630a4f080ba",
+      "size_bytes": 298274,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Tail_Long_Cue.uasset",
+      "sha256": "1f81ca179b9c96bff2784619073699b05565f6053d93bd3dbfab558e76e1afca",
+      "size_bytes": 11234,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Close_001.uasset",
+      "sha256": "89a62f57138c1e057f6a448b1d9c3f3f5bedaf79a522b8248fae8da72b2e0339",
+      "size_bytes": 27763,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Close_002.uasset",
+      "sha256": "b579bbf676dee44de9b4383e14c925861f2706753be2d58793964736898f730e",
+      "size_bytes": 28031,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Close_003.uasset",
+      "sha256": "0821c2985d61f488758506ba252151c087f56d6d8f5e0be18cc838e10f24966b",
+      "size_bytes": 31681,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Close_004.uasset",
+      "sha256": "db695ad3e5e02aee048acce986cd48745c360fb16a30174289e08e79c4a42caa",
+      "size_bytes": 33283,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Close_005.uasset",
+      "sha256": "f87ab3f983f6c62162836b8b7ea147d7a28d5badafc009695e1698c12ad129e9",
+      "size_bytes": 35355,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Close_006.uasset",
+      "sha256": "993eece58e0e12ae28e3a12270b6ef695e0459ab68f85193f042a9ca9f9b45de",
+      "size_bytes": 33986,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Close_Cue.uasset",
+      "sha256": "0ed25ab27f1a2e99754815a5e6a7c605e73a4b973f88b81f92573d1e8e45fe38",
+      "size_bytes": 13752,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Open_001.uasset",
+      "sha256": "1f736f008967afd324f48a5b82e3321a3b3781f07f07c21b09fb845d30280b61",
+      "size_bytes": 36498,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Open_002.uasset",
+      "sha256": "dd7fdd377ee7f91fc0297105ff9ff22bf0893a58ed7b000baa7260b5def505df",
+      "size_bytes": 35869,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Open_003.uasset",
+      "sha256": "35d4287e14abb068271429bb354bc5cac171592bab644e6c6715d1f49d1d8824",
+      "size_bytes": 34924,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Open_004.uasset",
+      "sha256": "d7d5a989586d4bbb3d1f405cddb98ab2b71204b6228f6e515ebc90b3034539b7",
+      "size_bytes": 41778,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Open_005.uasset",
+      "sha256": "849ce3facf200a2f1fb7fb1774a2c03a425ed7be59d82afc9d66f61e55515b76",
+      "size_bytes": 36926,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Open_006.uasset",
+      "sha256": "17a2a6dd88dc53addca294b6d0bcad8dfcc5d07f7beda1a62557aa959959f874",
+      "size_bytes": 35035,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Bolt/A_TFA_AR_Bolt_Open_Cue.uasset",
+      "sha256": "08328f9fb11053ecdfe5e50577a2d5f10a36b139b13afaf6c9ed41ee4193314e",
+      "size_bytes": 14764,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_AimIn_001.uasset",
+      "sha256": "e6c0d340bc945cc3a81b2175b4c1e5fa788f06c165ac16c1350191a6ccd1cf54",
+      "size_bytes": 43805,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_AimIn_002.uasset",
+      "sha256": "4dc957321b6847bbd41f5c5fc1ae637f818b7d6dc4d6c5bf3896ff7d244f4ee8",
+      "size_bytes": 39050,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_AimIn_003.uasset",
+      "sha256": "d76cdec70fa93da21c8f8df8f2eff32a47b2d9997b6419f2154e1dc069dd901c",
+      "size_bytes": 39815,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_AimIn_004.uasset",
+      "sha256": "3842fe6a4b587ac1d8650f5c9e50d77ffead074cd4f505c50c73f3d73fc4c274",
+      "size_bytes": 34163,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_AimIn_Cue.uasset",
+      "sha256": "287c8087f89cb3335fd39c8e3b33fd1d9ef7056dc6bdd8ca80c1397f7231f1b4",
+      "size_bytes": 20889,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_001.uasset",
+      "sha256": "b867820b05152d77bee5175887011b4a2f708d96333e6323833e173c97044a64",
+      "size_bytes": 17837,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_002.uasset",
+      "sha256": "295aa3cd0f1b47c9f6627243eec57418762f7a9e8fb4b73d859b6fd43a3a0252",
+      "size_bytes": 17063,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_003.uasset",
+      "sha256": "47521e4b5b54c488ed5ff000fc4d6726ef70a11669b917b9a482cb09c4587315",
+      "size_bytes": 14728,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_004.uasset",
+      "sha256": "f6f22e2790f9c2c3290012f1dd0240033f56b121bc5074dd99853303395305fb",
+      "size_bytes": 14000,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_005.uasset",
+      "sha256": "27fd42e34b04a031cdec4c53bb46e56bc67591e60fd36a2e5c0153c06905ce25",
+      "size_bytes": 16317,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_006.uasset",
+      "sha256": "db9caf1a9d932df8a6cba0c01dfd7b23dbec06c30159507a58f8069feae683ec",
+      "size_bytes": 12997,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_007.uasset",
+      "sha256": "a4ef0a7a4b25982532edb934179fb0ca1e4d29d0a96f58c0f443353dd7effe77",
+      "size_bytes": 15996,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_008.uasset",
+      "sha256": "51b3a0dc95c3553a581b64d54a5fea6f91cec57b36d47d59f08d6cadaf189294",
+      "size_bytes": 16706,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_009.uasset",
+      "sha256": "f10c73b3ba22aa06aa9e014eb11e58de2942b93b223ce5a0e1e8e75afd640e5e",
+      "size_bytes": 17267,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_010.uasset",
+      "sha256": "6502a396cea6744810f9a78ab07649457a852d74d83bb606be5f36203a49a7ca",
+      "size_bytes": 14142,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_011.uasset",
+      "sha256": "68e59f771fa22e0b2f32a7ecf012955142f3cd5dfe6fa6b509b18a76e171bdf3",
+      "size_bytes": 13645,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_012.uasset",
+      "sha256": "253c750486c88179a1967fa8e151bd95ecbd6eba8ae8eca43a03077b5edafa32",
+      "size_bytes": 14558,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_013.uasset",
+      "sha256": "34b75c9c0d459b5896e23489e75a08578fa5238d6888a12adcb439edad2d69ea",
+      "size_bytes": 17914,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_014.uasset",
+      "sha256": "410fd1c116195dc062ae239b996ebeb8b60430f49b9e01bf143d83975584617c",
+      "size_bytes": 16116,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_015.uasset",
+      "sha256": "1f279d3b35c71e34565892e99c41d3ca7009d4ca3996d358e7bee74403f89889",
+      "size_bytes": 24449,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_016.uasset",
+      "sha256": "b1c056abe43a983870acfb4e4c8eb334269ace53c58800aecc1e7e7672bbca66",
+      "size_bytes": 17161,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Click_Cue.uasset",
+      "sha256": "5eb1896e4633476e89023ba35c95a0baac111150687d61c60952cc1a66447261",
+      "size_bytes": 25183,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Handling_001.uasset",
+      "sha256": "cdc140ab58895037b93d4bfce6aa9a2a27b8828dba929796b92599a8b0af400c",
+      "size_bytes": 35089,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Handling_002.uasset",
+      "sha256": "b3e2175abb7e8db71d3cfb15b7d4da67420cc3b39f97f1235cf7c84dd595aa2f",
+      "size_bytes": 31263,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Handling_003.uasset",
+      "sha256": "dd67c5213d40a9a21d7419afb5d4e580944c7c3e7509861d10f80275b6489577",
+      "size_bytes": 35201,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Handling_004.uasset",
+      "sha256": "7a8f617ba8ceab565d5e3903f17a289d2d1ddd523f9a8727c696a9d61b465bff",
+      "size_bytes": 32680,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Handling_005.uasset",
+      "sha256": "c9ec1c4fdfbc2345c29e6a7e0d20f261d2cb94590dfef9ddf0ca04c3e83452b0",
+      "size_bytes": 38291,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Handling_Cue.uasset",
+      "sha256": "d819388743e645aabfd2e36892a736fa4990274dcb1ca5e4012cb6a1f1308059",
+      "size_bytes": 11208,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Malfunction_001.uasset",
+      "sha256": "c5b045788328fa47d7e916a8704a3e2ce77a5189ce6772e2c737921bd7399356",
+      "size_bytes": 29143,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Malfunction_002.uasset",
+      "sha256": "4f448a7b00cb4a40109b0c2c2fe2d762a8999c45ba7a8819a7d46691cda9cef6",
+      "size_bytes": 35068,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Foley/A_TFA_AR_Malfunction_Cue.uasset",
+      "sha256": "d7649a631879985e519a9e0593409bc268320189194b75ade92b59051491ec36",
+      "size_bytes": 8637,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Insert_001.uasset",
+      "sha256": "5f488dd1a66404eae415eb4ae8238d319527652e5e744b32a3a077a6b0ee8ca0",
+      "size_bytes": 45451,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Insert_002.uasset",
+      "sha256": "742e53691cb1d1647a4ceb91f5cae8016047219d48ef23dfd9a1c8d2f20772f0",
+      "size_bytes": 44515,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Insert_003.uasset",
+      "sha256": "004b0a81d2241f25b893a070914dbf08523b7536c6c129a14c41f4b6542ecb9c",
+      "size_bytes": 45198,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Insert_004.uasset",
+      "sha256": "6b95a917a7cf81ef563ccb14d8208a856bde2727ccade2d39e2a5039f1f5b6e0",
+      "size_bytes": 47037,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Insert_005.uasset",
+      "sha256": "02515d055797a9cd9d6b2aa25ffbd81f5a6d19d3fcb8e9a989b419c8a7e7f896",
+      "size_bytes": 44254,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Insert_Cue.uasset",
+      "sha256": "5c2957c0d9773956abab1c5ba49debeb6bbd4f5bd904f1ebbbb0263b61151136",
+      "size_bytes": 11259,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Empty_001.uasset",
+      "sha256": "161d9aa7a02abda2281eef0062d0e4db763d9f4a9ea144ddb3d2f4b48a7dcf02",
+      "size_bytes": 33278,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Empty_002.uasset",
+      "sha256": "65070381c48f5ed12e1dbef0360865c74cc06a14fb43da9df82b816241f63aa3",
+      "size_bytes": 31184,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Empty_003.uasset",
+      "sha256": "d2204bc5e35d9150aa14cc10f3f890574d2ea146592fde4791ac3e9f5e7e99d0",
+      "size_bytes": 32577,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Empty_004.uasset",
+      "sha256": "1ee92d2a5bd20ca3539b63cc324f6bd6bdbd3ee11995d60b4ef3c60035c94bb9",
+      "size_bytes": 32167,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Empty_005.uasset",
+      "sha256": "c5a1ce9721cbb3e0ce3764043f2f265274d181eb8bcf649f01f3d889ed35eab0",
+      "size_bytes": 30994,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Empty_Cue.uasset",
+      "sha256": "aea534a2c01f5716979313b7b952fdd7859598b4a527e4b70bbb351446336b83",
+      "size_bytes": 11349,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Full_001.uasset",
+      "sha256": "f9e2017fdf4179672c178dfc74bd0639244c0a9191cba1029de567065fb26458",
+      "size_bytes": 34036,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Full_002.uasset",
+      "sha256": "8b444bee268e013eb1c2ddea7af5416290af7aa801b3f4e0dbf9642c2c1cab45",
+      "size_bytes": 31923,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Full_003.uasset",
+      "sha256": "60877103eb7509bd7a9138eef57823406e34b1ab069533d1561fcba8be10fe4a",
+      "size_bytes": 32699,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Full_004.uasset",
+      "sha256": "3304ad5d8b82849de7d676bafa9a11298891365858f4476fb01723be624f9375",
+      "size_bytes": 32758,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Full_005.uasset",
+      "sha256": "4f4806b0f836bbfc72dd1c67cb8955da10393e85e195c4d00df478a432ea51f9",
+      "size_bytes": 32042,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Handling/Magazine/A_TFA_AR_Mag_Remove_Full_Cue.uasset",
+      "sha256": "859dc690273bf90ec44ae22dca12f45f9676fd8b4933b4aa7f605b828ff5b48d",
+      "size_bytes": 11384,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Impacts/A_TFA_AR_GunSmack_001.uasset",
+      "sha256": "392295a33ac06c5d156d6b19d13d60f5a532062eda871028c9599fba9cf72ae0",
+      "size_bytes": 23182,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Impacts/A_TFA_AR_GunSmack_002.uasset",
+      "sha256": "2675375849ef550797b98739c15cd626217fd5a390e3ac884ae4c0920f697ba7",
+      "size_bytes": 22620,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Impacts/A_TFA_AR_GunSmack_Cue.uasset",
+      "sha256": "6e275ee6cc96e56b671274952fb331f16b3cf132062a1d985642d6805f4d2636",
+      "size_bytes": 8676,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Impacts/A_TFA_AR_Mag_GroundBounce_001.uasset",
+      "sha256": "e4127d8269592c8f86ab52a741b3275a30c4e79676b837240723c5128f5e6028",
+      "size_bytes": 39000,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Impacts/A_TFA_AR_Mag_GroundBounce_002.uasset",
+      "sha256": "185f489c10f00d4028ff63e22a902343034771335b5df6846a0fc51df41829ec",
+      "size_bytes": 37293,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Impacts/A_TFA_AR_Mag_GroundBounce_003.uasset",
+      "sha256": "f4a23e7c5fa710d7d43ff58ce022f4b945f3045cf254f50e36e832d2e78aa245",
+      "size_bytes": 41364,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Impacts/A_TFA_AR_Mag_GroundBounce_004.uasset",
+      "sha256": "09c0a1248aac6c0e41e2359712d36bcc4ae6106ac0661d9dc36a0310e815d9cf",
+      "size_bytes": 45438,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Impacts/A_TFA_AR_Mag_GroundBounce_Cue.uasset",
+      "sha256": "9db9dc42e58d02f00947d7d3fc2351ce931e0d46a1d7f40c2bf3be013b96d45d",
+      "size_bytes": 9995,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Demo/Data/DA_TFA_AssaultRifle.uasset",
+      "sha256": "4983e123ab056caf238736fa7297319550a6c29e0333c341f51ecb713be08146",
+      "size_bytes": 23243,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Materials/MI_TFA_AR_01.uasset",
+      "sha256": "c598176dc3386fc0d058c55c273c0d5913633906d22e4264c56aa29f879263e7",
+      "size_bytes": 13824,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Materials/MI_TFA_AR_02.uasset",
+      "sha256": "e1880847b84a41d4cf4d5604913fde18d4e58e7de95f5bcc89bb8f23cfc17cfc",
+      "size_bytes": 15375,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Materials/MI_TFA_AR_03.uasset",
+      "sha256": "e99da918927e6c746133b65d0c36e36dcc64f382e01d169140ef2b2626ccda8f",
+      "size_bytes": 16038,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Materials/MI_TFA_AR_04.uasset",
+      "sha256": "e9d37b422f0f3c218970e54b3fccfe72eda312892cb7c8c6c52949e67fcb8e72",
+      "size_bytes": 16643,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Materials/MI_TFA_AR_ATT_01.uasset",
+      "sha256": "02314f365c10ed0da3921c17e5a9d997f3cfae7fa3f6b224c9cdae09a3cf21c2",
+      "size_bytes": 14520,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Materials/MI_TFA_AR_ATT_02.uasset",
+      "sha256": "2295d4e0570551801006f68115d10c7c738151a47040b3782d22f12b21e8e995",
+      "size_bytes": 15246,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Materials/MI_TFA_AR_ATT_03.uasset",
+      "sha256": "42cfa5c6241d59162ba326ae134aa4e1f6b1d70715e05d8cd99be90ee1952cf0",
+      "size_bytes": 15471,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Materials/MI_TFA_AR_Scope_Glass.uasset",
+      "sha256": "d2d5e0923b5c1c6d8ca2a39793f9ab5d16cfe9b003189bb14bc69e1c4db1512c",
+      "size_bytes": 10849,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/ABP_TFA_AR.uasset",
+      "sha256": "f3ae827011628fff72f3c54dbc01e3603788df7c49ef47e32c1ca412eaf6519c",
+      "size_bytes": 198991,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/ABP_TFA_AR_Magazine.uasset",
+      "sha256": "aff7a61eca248ef185a750f140beeec00f4a37dbb4e32cacd951b41265445a4f",
+      "size_bytes": 93570,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/PHYS_TFA_AR.uasset",
+      "sha256": "25f102a8851358daacc1a2ad73a904f790c8f4252db86f1fc26d916e509dfe47",
+      "size_bytes": 12861,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/PHYS_TFA_AR_Magazine.uasset",
+      "sha256": "ea02d74ef829d7e976ae1967811ef9058f85e96dd68f2edc735187b41c0587b9",
+      "size_bytes": 12815,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SKEL_TFA_AR.uasset",
+      "sha256": "68bb5aa7572c7512e61c847cef048c79ac893ba0e2a2b17c1be12330445659ca",
+      "size_bytes": 14689,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SKEL_TFA_AR_Magazine.uasset",
+      "sha256": "5dc6534e074ebe850267e8ac63cfa3a62762e4a4ef91f09fd164900fe7f2601c",
+      "size_bytes": 15710,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SK_TFA_AR.uasset",
+      "sha256": "efced765233a453b905db941a0659b8695d94b0144e36a8d355ca36fb43bd872",
+      "size_bytes": 2956145,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SK_TFA_AR_Magazine_Transparent.uasset",
+      "sha256": "74433252e45c092fa6d9f6a347634c83eb02e213bf1d95cc80e227830035fb5f",
+      "size_bytes": 1648910,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_ATT_Grip_Angled.uasset",
+      "sha256": "d8dc3f1b42354112c8bcf65787c6a7acec6b1d0208f9113b3efa957a045a545a",
+      "size_bytes": 42446,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_ATT_Grip_Vertical.uasset",
+      "sha256": "3d885b5b1fa0b3982f93343d631f86991fafc58bce6830cf79216190b80bd227",
+      "size_bytes": 64041,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_ATT_Laser.uasset",
+      "sha256": "5e8017b278f825abd7bbeade6d3e23863ef08e46bccf769afa1e2c01434d0944",
+      "size_bytes": 189455,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_ATT_Sight_Front.uasset",
+      "sha256": "a6e9f481e13d01b9fb3b53e6901fd7d6a5cdf9e1e04a3f4fc5f72ee9c9c4d214",
+      "size_bytes": 65345,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_ATT_Sight_Rear.uasset",
+      "sha256": "fff2e726568379836fa5d832e5af380c96371559ae99466550f649a9046c7dda",
+      "size_bytes": 87894,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_ATT_Silencer.uasset",
+      "sha256": "44450c8bbc6e078f6e3e6f4dc5bb69b97c506184e15330e4ccac989a5572748d",
+      "size_bytes": 134815,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Bullet.uasset",
+      "sha256": "0c282e65b4901d8b3d6f45238f06c9715c6c57b6a9ef220faac4b3ccabd3ad2c",
+      "size_bytes": 39916,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Bullet_Casing.uasset",
+      "sha256": "dffb849c9de8eed2c188dc8b194ac718151f44d1fe69a1dbab472dd10e412e3a",
+      "size_bytes": 31648,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Handguard_Default.uasset",
+      "sha256": "d9c9cee2e0c181e4a0eef6d1f9f6dc22d62064e3ce40e1f5c157fbabacf6e093",
+      "size_bytes": 236149,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Magazine_Transparent_Empty.uasset",
+      "sha256": "e8a68611c4ab9f43a497bc0c52f3e067e7bd72d30cecddb747686f0becb0a2ad",
+      "size_bytes": 372692,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_01_D.uasset",
+      "sha256": "ee21419d834e0791817b4c82c66aefcd4a4a537f2b51f05cff3a8d8415627432",
+      "size_bytes": 5957237,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_01_N.uasset",
+      "sha256": "83f412935aeb322b117410fe4245f1868a5cd695b307ccc48d48a13dc6aa8cb1",
+      "size_bytes": 29747395,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_01_ORM.uasset",
+      "sha256": "7736284acb6c9891529cd9085b52e05273445ab6936a925ca83bf3a33d711042",
+      "size_bytes": 14182177,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_02_D.uasset",
+      "sha256": "583d1484dc809adf1e714285897ad421478f9cfb9b1201d3eb666f3332bf9ab2",
+      "size_bytes": 8832438,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_02_N.uasset",
+      "sha256": "96e662813f395d1874154a55c644ed9ce143515ac948a96a3b66fb79ea0fe252",
+      "size_bytes": 26194251,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_02_ORM.uasset",
+      "sha256": "db816c22cb3ecee6b04b173e91f45ec27c80e281aab03cb96ac8dfd7bce28ddb",
+      "size_bytes": 18019637,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_03_D.uasset",
+      "sha256": "57688e79186cb63b4b1c439c140b797f37452c41796786d8506517657450ea0f",
+      "size_bytes": 13765503,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_03_N.uasset",
+      "sha256": "bd2f71db9bade8e89ca724f53d40ee28a2ebd68bd9be7f80c2d92e4167f5b984",
+      "size_bytes": 25864533,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_03_ORM.uasset",
+      "sha256": "1b3c07af465519140703cfc7b99b4f3f3620157f8805d1b4860a999caeb923fa",
+      "size_bytes": 21579524,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_04_D.uasset",
+      "sha256": "6e4d03fd1c1f5b25d97d7abe525e1c36e20df00241ff3a3c0064ff2cea1d8706",
+      "size_bytes": 12861648,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_04_N.uasset",
+      "sha256": "747f6234f9f0f5fca3ec484562868a3f9438b62cbc47f6bf08947e59274f2589",
+      "size_bytes": 22713295,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_04_ORM.uasset",
+      "sha256": "87a6dc2b796ecfaa32473a9658cba365a538686e598c57216aace4f180f72cc8",
+      "size_bytes": 17549250,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_Attachments_01_D.uasset",
+      "sha256": "f800c781316041090fea586f27abe1a4e3427ae7f9f8fc887ccc30038affcf67",
+      "size_bytes": 10304866,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_Attachments_01_N.uasset",
+      "sha256": "0f0741008a6741b43f6c099f8dd0bddf3a48ef0b5975a22ea886f6fc1ebf62d0",
+      "size_bytes": 19223514,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_Attachments_01_ORM.uasset",
+      "sha256": "d4d677013173daac3de01af80766633838811838ccef6ce089c580f03ff74abe",
+      "size_bytes": 18104280,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_Attachments_02_D.uasset",
+      "sha256": "7d8642bca2dbf0b6c0eae621408162fee6e95e638bc6537dac8daac05318be41",
+      "size_bytes": 11271111,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_Attachments_02_N.uasset",
+      "sha256": "8ecc56a805f37cbbf3e94ae56fda2ffd45afca2aa24e5162437b24767a482295",
+      "size_bytes": 27339174,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_Attachments_02_ORM.uasset",
+      "sha256": "07efe9a60e862ceab7b0f0c96d0ac9fe08509958408949ef6bc47cd68a3dea59",
+      "size_bytes": 19033775,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_Attachments_03_D.uasset",
+      "sha256": "66d4a1c106192c4c54485442aefdcb18ef5ee542a51815f054e2e74ecd48ee08",
+      "size_bytes": 13489383,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_Attachments_03_N.uasset",
+      "sha256": "3f53b3f247c1ca71a13cbeb8c8b84512eaa648fa0a505d20c210cf5307985780",
+      "size_bytes": 28379299,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Textures/T_TFA_AR_Attachments_03_ORM.uasset",
+      "sha256": "d621d9aa126a8c5b2143474be1d42775aa1fa720808ebe8c5603cff842021cca",
+      "size_bytes": 17168114,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": true
+    },
+    {
+      "path": "Docs/PurchasedArms02.md",
+      "sha256": "36e6df68f7f5abe6f2ebd76c98eadf4ad51f54de98998f3579511bb093ae166e",
+      "size_bytes": 21257,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Docs/PurchasedArms02Review.md",
+      "sha256": "8e7cf07fbae13c5b46c8f628628af7e909f38f8e59b162a9b550ffc95caae39b",
+      "size_bytes": 7607,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/adapt.py",
+      "sha256": "bec581d83988aacd7c23fcdf3efcd50b796150fba3d527d6fc3c35a5630d0ad1",
+      "size_bytes": 5581,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/analyze_actions.py",
+      "sha256": "0f8cab5bfb1e4495583c6c8ff0708ccb5cb8a4884f618da979eccfd566f49111",
+      "size_bytes": 2155,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/analyze_correction.py",
+      "sha256": "8237514f2cc48accce2f0ddc431d78e5160645ddad4ed370ff0f62d144d04b2e",
+      "size_bytes": 3755,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/analyze_final.py",
+      "sha256": "b68e1bbdcbf4693967a361fd84492f8e1b7a8d1f03bfb008ccd1d6ff67da295d",
+      "size_bytes": 5596,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/analyze_recovery.py",
+      "sha256": "2688176b9e3a28f6807ec3e56f9c55b85ad2e86be6457f8eba2139a40835eb9d",
+      "size_bytes": 3634,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/bootstrap.py",
+      "sha256": "1fc6bb64dac2fef7acabef88afea61c287a4193167ed3d4c634e5faa3c11dfc8",
+      "size_bytes": 186,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/capsule_fix.py",
+      "sha256": "8ad2d85362cb7376cbf3b6eac3d0ea3adb4429767fee3fc9ea9101cf9d52d3b9",
+      "size_bytes": 1534,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/capture02.py",
+      "sha256": "093dc7d1d7822fd4929a0aeaa162cba9ff8656b7251f2cbd7a4939de079ad3a4",
+      "size_bytes": 4147,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/cleanup02.py",
+      "sha256": "07ffc3eb9f69e812220c28c7f210ff3fca4c9406de297564a066621a885560fa",
+      "size_bytes": 1924,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/client.py",
+      "sha256": "7b4ab3208dab3f9c0ba8d346be4bca4bb9eca459e2a3435859aaadbbb80444c0",
+      "size_bytes": 982,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/finalize.py",
+      "sha256": "9d84f09c6d21e2c16644c3585080236e3dafdbbd5308d39412f66cba89522632",
+      "size_bytes": 2890,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/handoff.py",
+      "sha256": "dd74a23f1a0ce0e0fa93748b4392e86631cf72f640f80313bdcdb3c9ac6f721a",
+      "size_bytes": 2378,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/prepare_cases03.py",
+      "sha256": "01bb61db958549586003682d6055d5da628a65a003004538e764aa53c651bacd",
+      "size_bytes": 1910,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/prepare_correction.py",
+      "sha256": "ead07eb11749eefbf047e4d495dccd95374052035aba98fa1dede779a0e9dea4",
+      "size_bytes": 754,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/prepare_videos.py",
+      "sha256": "deb67ffd5aaa3d21115b03b69e27707353d1e87bdbc587c2afe170085297a91e",
+      "size_bytes": 1009,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/preserve.py",
+      "sha256": "97a52c1924e1e78bbc454642d7f1ee1a4889c56cd82720bcdf8542ec978d3d13",
+      "size_bytes": 504,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/read_graphs.py",
+      "sha256": "f086816a26e55295bf785e33dddcd998048f86c199474f4bc61013f03f3206bc",
+      "size_bytes": 1504,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/recovery02.py",
+      "sha256": "5af27f6cb6b1c01f691d434a82b348f3fe26ee483cd8dfc767c7d50b3271ebf8",
+      "size_bytes": 2583,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/refine02.py",
+      "sha256": "bb25617caf7cc7e68520a5275c03788ae6f70dbb50a3ffc9c63afac661b6f754",
+      "size_bytes": 741,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/run_cases.py",
+      "sha256": "b273b70d19da1118295cc8ac197726759ecf0bbdc3f54acac94367d9b963bde3",
+      "size_bytes": 1309,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/run_walk.py",
+      "sha256": "f0be297c3a63157e90ca56e28c56bb0c1d1821e84aec293607494f47f14a9268",
+      "size_bytes": 619,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/stage.py",
+      "sha256": "5140b7d1c5ef9d4e25fdc1f502366b62d312f35277620b41c8fc150a09108d9d",
+      "size_bytes": 2316,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/tools02.py",
+      "sha256": "98446249eb916133ca81e64fcecfe9e890784a41b870dbe3299ac3408938bcbf",
+      "size_bytes": 791,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/unreal02.py",
+      "sha256": "51a6bc66a31221da26f219665307cd9104382617677be623bcd7943c961dd203",
+      "size_bytes": 11309,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/verify02.py",
+      "sha256": "78a87ede4a8ed710237db4d96d6bc0a19290f73ee13b9644a46f84d584e0e272",
+      "size_bytes": 6217,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/video_cases.py",
+      "sha256": "c9ea7573489da9cd4cb0fd411720290872cfd09b7cf6fdbce69d7fb006d4f075",
+      "size_bytes": 1731,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Scripts/PurchasedArms02/walk02.py",
+      "sha256": "ca3d14dd56a58d3a0194d456c14cbfdee236670998a74028f4467e7c3ae6478e",
+      "size_bytes": 1740,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Source/MeridianSquad/OpeningLobbyCharacter.cpp",
+      "sha256": "a6b91eca0c1e8fd228b7279fb0ac3ee01ce6af48312cb47a7018385910274355",
+      "size_bytes": 17678,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": false
+    },
+    {
+      "path": "Source/MeridianSquad/OpeningLobbyCharacter.h",
+      "sha256": "9999c924748741ef985d2a075d9fb161980050f68871f8cf817e416ed3a3e3e9",
+      "size_bytes": 2003,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": false
+    },
+    {
+      "path": "Source/MeridianSquad/OpeningLobbyGameMode.cpp",
+      "sha256": "45b6286d2f5760f6a8688d8a4c95fe13d8128bd3d9d7cfe4e9994408679b8854",
+      "size_bytes": 432,
+      "preexisting_registry_identity": false,
+      "matches_historical_registry": null
+    },
+    {
+      "path": "Source/MeridianSquad/PurchasedArmsAnimInstance.cpp",
+      "sha256": "17073cc762b71e99241220c18a1fa6463505070ad797f5aacf3839384ab767bc",
+      "size_bytes": 1646,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": false
+    },
+    {
+      "path": "Source/MeridianSquad/PurchasedArmsAnimInstance.h",
+      "sha256": "0ae151f7fb2c620f22c3d92b67b4e7713d9c4e37621190aed6b6f4e118adbcc2",
+      "size_bytes": 567,
+      "preexisting_registry_identity": true,
+      "matches_historical_registry": false
+    }
+  ],
+  "map_sha256": "b28fa0f6e8bb80dcc71b4789df9c3e2375a3cf8b1da67021225584e4560fd92f",
+  "note": "Reviewed integration revision. Existing path identities and earlier accepted fingerprints remain unchanged in PostgreSQL; this separate immutable inventory records the current authorized revision. Technical/controller review is separate from owner visual acceptance."
+}

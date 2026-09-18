@@ -5,11 +5,9 @@
 #include "OpeningLobbyCharacter.generated.h"
 
 class UCameraComponent;
-class UAnimSequence;
-class UStaticMeshComponent;
-struct FPurchasedArmsAnimProxy;
+class UAnimMontage;
 
-/** Minimal purchased-arms walkthrough; no vendor gameplay framework. */
+/** Collision-aware lobby adapter for the supplied rifle gameplay Blueprints. */
 UCLASS()
 class MERIDIANSQUAD_API AOpeningLobbyCharacter : public ACharacter
 {
@@ -19,57 +17,41 @@ public:
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
     virtual void CalcCamera(float DeltaSeconds, FMinimalViewInfo& OutResult) override;
-    virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+    virtual void SetupPlayerInputComponent(UInputComponent* Input) override;
+    virtual void Landed(const FHitResult& Hit) override;
+    virtual void OnStartCrouch(float HalfHeightAdjust, float ScaledHalfHeightAdjust) override;
+    virtual void OnEndCrouch(float HalfHeightAdjust, float ScaledHalfHeightAdjust) override;
 
-    /** PIE-only test input enters the controller's normal key binding pipeline. */
     UFUNCTION(BlueprintCallable, Category="Lobby|Verification")
     bool ProbeKey(FName KeyName, float Amount, bool Pressed);
-
     UFUNCTION(BlueprintPure, Category="Lobby|Verification")
     FString GetProbeState() const;
+    UFUNCTION(BlueprintCallable, Category="Lobby|Verification")
+    bool ProbeFixture(FName Kind);
 
 private:
-    friend struct FPurchasedArmsAnimProxy;
     UPROPERTY(VisibleAnywhere, Category="Camera")
     TObjectPtr<UCameraComponent> FirstPersonCamera;
-    UPROPERTY(VisibleAnywhere, Category="Presentation")
-    TObjectPtr<USkeletalMeshComponent> Rifle;
-    UPROPERTY(VisibleAnywhere, Category="Presentation")
-    TObjectPtr<USkeletalMeshComponent> MainMagazine;
-    UPROPERTY(VisibleAnywhere, Category="Presentation")
-    TObjectPtr<USkeletalMeshComponent> ReserveMagazine;
-    UPROPERTY(VisibleAnywhere, Category="Presentation")
-    TObjectPtr<UStaticMeshComponent> Handguard;
-    UPROPERTY(VisibleAnywhere, Category="Presentation")
-    TObjectPtr<UStaticMeshComponent> RearSight;
-    UPROPERTY(VisibleAnywhere, Category="Presentation")
-    TObjectPtr<UStaticMeshComponent> FrontSight;
-    // Idle, forward, back, left, right, then the same five aimed clips.
     UPROPERTY()
-    TArray<TObjectPtr<UAnimSequence>> LocomotionClips;
-    UPROPERTY()
-    TArray<TObjectPtr<UAnimSequence>> ReloadClips;
-    UPROPERTY()
-    TArray<TObjectPtr<UAnimSequence>> RifleReloadClips;
-    UPROPERTY()
-    TArray<TObjectPtr<UAnimSequence>> BasePoses;
-    bool bAimRequested = false;
-    bool bReloading = false;
-    float AimAlpha = 0.f;
-    float ReloadAimAlpha = 0.f;
-    float ReloadTime = 0.f;
-    float ReloadDuration = 0.f;
+    TObjectPtr<UAnimMontage> JumpMontage;
     float AnimationTime = 0.f;
-    FVector2D MoveBlend = FVector2D::ZeroVector;
-    int32 ReloadStarts = 0;
-    int32 ReloadCompletions = 0;
-    void AimPressed();
-    void AimReleased();
-    void Reload();
+    float CameraHeight = 82.f;
+    int32 MoveBindingSamples = 0;
+    int32 LookBindingSamples = 0;
+    int32 JumpStarts = 0;
+    int32 Landings = 0;
+    bool bJumpPresentation = false;
+    bool bSourceReady = false;
+    bool bCrouchRequested = false;
+    uint8 ReportedStance = 0;
     void MoveForward(float Value);
     void MoveRight(float Value);
     void LookYaw(float Value);
     void LookPitch(float Value);
-    int32 MoveBindingSamples = 0;
-    int32 LookBindingSamples = 0;
+    void JumpPressed();
+    void JumpReleased();
+    void ToggleCameraAnimation();
+    void RestoreMeshAnchor();
+    void ConfigureAssembly();
+    void CallSource(FName Function);
 };

@@ -13,7 +13,27 @@ Verify native execution as well as saved profiles. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
-## Current focus: purchased arms lobby walkthrough
+## Current focus: integrated purchased rifle gameplay
+
+On 2026-09-18, after playing PurchasedArms01, the owner reported post-reload bobbing
+pauses, aimed left drift and a hip rifle dip, and requested all purchased rifle-pack
+functionality including full movement and shooting, excluding the vendor arena and
+tutorial hints. [PurchasedArms02 / MSQ-62](Tasks/PurchasedArms02.md) is the active scope; its
+[exact owner instruction](Approvals/PurchasedArms02-OwnerScope01.json) supersedes
+the minimal gameplay exclusions below. Original protagonist and environment
+architecture remain paused. Keep the retained lobby and shadowless presentation.
+
+MSQ-62 now integrates the supplied rifle action/animation graphs with real lobby
+movement, fixing the reload tail/pose handover and crouch collision restoration.
+The final authored-camera toggle is verified and defaults off. See
+[controls, feature parity and source limitations](PurchasedArms02.md) and the
+[controller review](PurchasedArms02Review.md). The retained lobby is ready for Play;
+technical/controller verification is separate from owner visual acceptance.
+The purchased bundle supplies shooting/action presentation, not a damage/health
+system or finite ammunition economy. Its arena, tutorial UI and body showcase
+controls remain excluded. Historical sources and unrelated owner edits are preserved.
+
+## PurchasedArms01 baseline and preserved history
 
 On 2026-09-18 the owner requested that all original-protagonist changes be rolled
 out of the active game for now, and that the purchased arms and animations be

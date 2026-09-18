@@ -1,38 +1,68 @@
 #include "OpeningLobbyCharacter.h"
-#include "PurchasedArmsAnimInstance.h"
-#include "Animation/AnimSequence.h"
+#include "Animation/AnimInstance.h"
+#include "Animation/AnimMontage.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
+#include "Components/LightComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/SkeletalMesh.h"
-#include "UObject/ConstructorHelpers.h"
+#include "Engine/StaticMeshActor.h"
+#include "EnhancedInputSubsystems.h"
+#include "InputMappingContext.h"
+#include "EngineUtils.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "InputKeyEventArgs.h"
+#include "UObject/UnrealType.h"
 
 namespace
 {
-void ConfigurePresentation(UPrimitiveComponent* Component)
+bool Flag(const UObject* Object, FName Name)
 {
-    Component->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-    Component->SetGenerateOverlapEvents(false);
-    Component->SetCastShadow(false);
-    Component->bCastDynamicShadow = false;
-    Component->bCastStaticShadow = false;
-    Component->bCastHiddenShadow = false;
-    Component->bCastContactShadow = false;
-    Component->bAffectDynamicIndirectLighting = false;
-    Component->bAffectDistanceFieldLighting = false;
-    Component->SetOnlyOwnerSee(true);
-    Component->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::FirstPerson);
+    const FBoolProperty* P = Object ? FindFProperty<FBoolProperty>(Object->GetClass(), Name) : nullptr;
+    return P && P->GetPropertyValue_InContainer(Object);
 }
-
-template<typename T> T* PurchasedAsset(const FString& RelativePath)
+void SetFlag(UObject* Object, FName Name, bool Value)
 {
-    ConstructorHelpers::FObjectFinder<T> Asset(*(TEXT("/Game/InfimaGames/TacticalFPSAnimations/") + RelativePath));
-    return Asset.Object;
+    if (FBoolProperty* P = FindFProperty<FBoolProperty>(Object->GetClass(), Name)) P->SetPropertyValue_InContainer(Object, Value);
+}
+UObject* ObjectValue(const UObject* Object, FName Name)
+{
+    const FObjectPropertyBase* P = Object ? FindFProperty<FObjectPropertyBase>(Object->GetClass(), Name) : nullptr;
+    return P ? P->GetObjectPropertyValue_InContainer(Object) : nullptr;
+}
+uint8 ByteValue(const UObject* Object, FName Name)
+{
+    const FByteProperty* P = Object ? FindFProperty<FByteProperty>(Object->GetClass(), Name) : nullptr;
+    return P ? P->GetPropertyValue_InContainer(Object) : 0;
+}
+void SetByte(UObject* Object, FName Name, uint8 Value)
+{
+    if (FByteProperty* P = FindFProperty<FByteProperty>(Object->GetClass(), Name)) P->SetPropertyValue_InContainer(Object, Value);
+}
+template<typename T> void SetStruct(UObject* Object, FName Name, const T& Value)
+{
+    if (FStructProperty* P = FindFProperty<FStructProperty>(Object->GetClass(), Name))
+        *P->ContainerPtrToValuePtr<T>(Object) = Value;
+}
+void Shadowless(UPrimitiveComponent* Part, bool FirstPerson)
+{
+    Part->SetCastShadow(false);
+    Part->bCastDynamicShadow = false;
+    Part->bCastStaticShadow = false;
+    Part->bCastHiddenShadow = false;
+    Part->bCastContactShadow = false;
+    Part->bAffectDynamicIndirectLighting = false;
+    Part->bAffectDistanceFieldLighting = false;
+    if (FirstPerson)
+    {
+        Part->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::FirstPerson);
+        Part->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        Part->SetGenerateOverlapEvents(false);
+    }
+    else Part->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::None);
 }
 }
 
@@ -41,122 +71,206 @@ AOpeningLobbyCharacter::AOpeningLobbyCharacter()
     PrimaryActorTick.bCanEverTick = true;
     GetCapsuleComponent()->InitCapsuleSize(34.f, 88.f);
     BaseEyeHeight = 82.f;
+    CrouchedEyeHeight = 50.f;
     bUseControllerRotationYaw = true;
-    GetCharacterMovement()->bOrientRotationToMovement = false;
-    GetCharacterMovement()->MaxWalkSpeed = 360.f;
-    GetCharacterMovement()->MaxAcceleration = 1800.f;
-    GetCharacterMovement()->BrakingDecelerationWalking = 1800.f;
-    GetCharacterMovement()->GravityScale = 1.f;
-    GetCharacterMovement()->MaxStepHeight = 35.f;
-    GetCharacterMovement()->JumpZVelocity = 320.f;
+    auto* Movement = GetCharacterMovement();
+    Movement->bOrientRotationToMovement = false;
+    Movement->MaxWalkSpeed = 360.f;
+    Movement->MaxWalkSpeedCrouched = 180.f;
+    Movement->MaxAcceleration = 1800.f;
+    Movement->BrakingDecelerationWalking = 1800.f;
+    Movement->GravityScale = 1.f;
+    Movement->MaxStepHeight = 35.f;
+    Movement->JumpZVelocity = 320.f;
+    Movement->GetNavAgentPropertiesRef().bCanCrouch = true;
+    Movement->SetCrouchedHalfHeight(56.f);
     FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
     FirstPersonCamera->SetupAttachment(GetCapsuleComponent());
-    FirstPersonCamera->SetRelativeLocation(FVector(0.f, 0.f, 82.f));
+    FirstPersonCamera->SetRelativeLocation(FVector(0, 0, 82));
     FirstPersonCamera->bUsePawnControlRotation = true;
     FirstPersonCamera->FieldOfView = 90.f;
     FirstPersonCamera->bEnableFirstPersonScale = true;
     FirstPersonCamera->FirstPersonScale = .3f;
+}
 
-    USkeletalMeshComponent* Arms = GetMesh();
-    Arms->SetupAttachment(FirstPersonCamera);
-    Arms->SetRelativeLocation(FVector(-.663123f, 0.f, -162.5751f));
-    Arms->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
-    Arms->SetSkeletalMeshAsset(PurchasedAsset<USkeletalMesh>(TEXT("Common/Characters/Mannequins/Meshes/SKM_FP_Manny_Simple")));
-    Arms->SetAnimInstanceClass(UPurchasedArmsAnimInstance::StaticClass());
-    ConfigurePresentation(Arms);
-
-    const FString MeshRoot = TEXT("Weapons/AssaultRifle/Meshes/");
-    Rifle = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("PurchasedRifle"));
-    Rifle->SetupAttachment(Arms, TEXT("ik_hand_gun"));
-    Rifle->SetSkeletalMeshAsset(PurchasedAsset<USkeletalMesh>(MeshRoot + TEXT("SK_TFA_AR")));
-    Rifle->SetAnimInstanceClass(UPurchasedArmsAnimInstance::StaticClass());
-    MainMagazine = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MainMagazine"));
-    MainMagazine->SetupAttachment(Rifle, TEXT("SOCKET_Magazine"));
-    ReserveMagazine = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("ReserveMagazine"));
-    ReserveMagazine->SetupAttachment(Rifle, TEXT("SOCKET_Magazine_Reserve"));
-    for (USkeletalMeshComponent* Magazine : {MainMagazine.Get(), ReserveMagazine.Get()})
-        Magazine->SetSkeletalMeshAsset(PurchasedAsset<USkeletalMesh>(MeshRoot + TEXT("SK_TFA_AR_Magazine")));
-    ReserveMagazine->SetVisibility(false);
-    Handguard = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RifleHandguard"));
-    Handguard->SetupAttachment(Rifle, TEXT("SOCKET_Handguard"));
-    Handguard->SetStaticMesh(PurchasedAsset<UStaticMesh>(MeshRoot + TEXT("SM_TFA_AR_Handguard_Default")));
-    RearSight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RifleRearSight"));
-    RearSight->SetupAttachment(Rifle, TEXT("SOCKET_Sight_Rear"));
-    RearSight->SetStaticMesh(PurchasedAsset<UStaticMesh>(MeshRoot + TEXT("SM_TFA_AR_ATT_Sight_Rear")));
-    FrontSight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RifleFrontSight"));
-    FrontSight->SetupAttachment(Handguard, TEXT("SOCKET_Sight_Front"));
-    FrontSight->SetStaticMesh(PurchasedAsset<UStaticMesh>(MeshRoot + TEXT("SM_TFA_AR_ATT_Sight_Front")));
-    for (UPrimitiveComponent* Part : TArray<UPrimitiveComponent*>{Rifle.Get(), MainMagazine.Get(), ReserveMagazine.Get(), Handguard.Get(), RearSight.Get(), FrontSight.Get()})
-        ConfigurePresentation(Part);
-    for (USkeletalMeshComponent* Part : {Arms, Rifle.Get(), MainMagazine.Get(), ReserveMagazine.Get()})
-    {
-        Part->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
-        Part->bEnableUpdateRateOptimizations = false;
-    }
-
-    const FString FP = TEXT("Weapons/AssaultRifle/Animations/Character/FP/");
-    for (const FString& Stance : {FString(TEXT("Standing")), FString(TEXT("Aimed"))})
-        for (const FString& Motion : {FString(TEXT("Idle")), FString(TEXT("Walk_F")), FString(TEXT("Walk_B")), FString(TEXT("Walk_Strafe_L")), FString(TEXT("Walk_Strafe_R"))})
-            LocomotionClips.Add(PurchasedAsset<UAnimSequence>(FP + TEXT("Locomotion/A_TFA_FP_AR_") + Motion + TEXT("_Loop_") + Stance));
-    BasePoses.Add(PurchasedAsset<UAnimSequence>(FP + TEXT("Poses/A_TFA_FP_AR_Idle_Pose_Standing")));
-    BasePoses.Add(PurchasedAsset<UAnimSequence>(FP + TEXT("Poses/A_TFA_FP_AR_Aim_Pose")));
-    for (const FString& Suffix : {FString(), FString(TEXT("_Aimed"))})
-    {
-        ReloadClips.Add(PurchasedAsset<UAnimSequence>(FP + TEXT("Combat/A_TFA_FP_AR_Reload") + Suffix));
-        RifleReloadClips.Add(PurchasedAsset<UAnimSequence>(TEXT("Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload") + Suffix));
-    }
+void AOpeningLobbyCharacter::CallSource(FName Name)
+{
+    if (UFunction* Function = FindFunction(Name)) ProcessEvent(Function, nullptr);
 }
 
 void AOpeningLobbyCharacter::BeginPlay()
 {
     Super::BeginPlay();
-    // One owner clock, then arms, rifle and socket-attached magazine transforms.
+    auto* Movement = GetCharacterMovement();
+    GetCapsuleComponent()->SetCapsuleSize(34.f, 88.f);
+    Movement->SetMovementMode(MOVE_Walking);
+    Movement->MaxAcceleration = 1800.f;
+    Movement->BrakingDecelerationWalking = 1800.f;
+    Movement->GravityScale = 1.f;
+    Movement->MaxStepHeight = 35.f;
+    Movement->JumpZVelocity = 320.f;
+    Movement->GetNavAgentPropertiesRef().bCanCrouch = true;
+    Movement->SetCrouchedHalfHeight(56.f);
+    bUseControllerRotationYaw = true;
+    GetMesh()->AttachToComponent(FirstPersonCamera, FAttachmentTransformRules::KeepRelativeTransform);
+    GetMesh()->SetRelativeLocation(FVector(-.663123f, 0.f, -162.5751f));
+    GetMesh()->SetRelativeRotation(FRotator(0,-90,0));
+    GetMesh()->SetSkeletalMeshAsset(LoadObject<USkeletalMesh>(nullptr, TEXT("/Game/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Meshes/SKM_FP_Manny_Simple.SKM_FP_Manny_Simple")));
+    GetMesh()->SetAnimInstanceClass(LoadClass<UAnimInstance>(nullptr, TEXT("/Game/InfimaGames/TacticalFPSAnimations/Common/Core/Characters/ABP_TFA_FP_BaseCharacter.ABP_TFA_FP_BaseCharacter_C")));
     GetMesh()->AddTickPrerequisiteActor(this);
-    Rifle->AddTickPrerequisiteComponent(GetMesh());
-    MainMagazine->AddTickPrerequisiteComponent(Rifle);
-    ReserveMagazine->AddTickPrerequisiteComponent(Rifle);
-    ReloadDuration = ReloadClips[0] ? ReloadClips[0]->GetPlayLength() : 0.f;
+    // Despite its name, the supplied AnimBP bool blends the head to reference pose when true.
+    // Keep that lock on by default; L releases it and selects the authored head camera.
+    SetFlag(this, TEXT("bAnimateCamera"), true);
+    if (auto* SourceCamera = Cast<UCameraComponent>(ObjectValue(this, TEXT("CameraFP"))))
+        SourceCamera->SetFieldOfView(90.f);
+    CallSource(TEXT("SpawnWeapon"));
+    bSourceReady = ObjectValue(this, TEXT("CurrentWeaponActor")) != nullptr;
+    if (auto* PC = Cast<APlayerController>(Controller))
+    {
+        EnableInput(PC);
+        if (auto* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer()))
+            if (auto* Mapping = LoadObject<UInputMappingContext>(nullptr, TEXT("/Game/InfimaGames/TacticalFPSAnimations/Common/Core/Inputs/IMC_TFA_Default.IMC_TFA_Default")))
+                Subsystem->AddMappingContext(Mapping, 0);
+    }
+    JumpMontage = LoadObject<UAnimMontage>(nullptr, TEXT("/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/AM_TFA_FP_AR_Jump_Full.AM_TFA_FP_AR_Jump_Full"));
+    ConfigureAssembly();
+}
+
+void AOpeningLobbyCharacter::ConfigureAssembly()
+{
+    TArray<AActor*> Attached;
+    GetAttachedActors(Attached, true, true);
+    Attached.Add(this);
+    for (AActor* Actor : Attached)
+    {
+        for (UActorComponent* Component : Actor->GetComponents())
+        {
+            if (auto* Light = Cast<ULightComponent>(Component)) Light->SetVisibility(false);
+            if (auto* Part = Cast<UPrimitiveComponent>(Component); Part && Part != GetCapsuleComponent())
+            {
+                Shadowless(Part, true);
+                if (auto* Skinned = Cast<USkeletalMeshComponent>(Part))
+                {
+                    Skinned->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+                    Skinned->bEnableUpdateRateOptimizations = false;
+                    if (Skinned != GetMesh()) Skinned->AddTickPrerequisiteComponent(GetMesh());
+                }
+            }
+        }
+    }
+    // Dropped casings, magazines and syringe props keep source physics but cast no shadows.
+    for (TActorIterator<AActor> It(GetWorld()); It; ++It)
+        if (It->GetClass()->GetPathName().Contains(TEXT("BP_TFA_Physics")))
+            for (UActorComponent* Component : It->GetComponents())
+                if (auto* Part = Cast<UPrimitiveComponent>(Component)) Shadowless(Part, false);
 }
 
 void AOpeningLobbyCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     AnimationTime += DeltaSeconds;
-    const FVector LocalVelocity = GetActorRotation().UnrotateVector(GetVelocity()) / GetCharacterMovement()->MaxWalkSpeed;
-    MoveBlend = FMath::Vector2DInterpTo(MoveBlend, FVector2D(LocalVelocity.X, LocalVelocity.Y), DeltaSeconds, 12.f);
-    if (bReloading)
+    if (!bSourceReady) return;
+    auto* Movement = GetCharacterMovement();
+    const uint8 RequestedStance = ByteValue(this, TEXT("CurrentStance"));
+    if (RequestedStance != ReportedStance) bCrouchRequested = RequestedStance == 1;
+    if (bCrouchRequested) Crouch(); else UnCrouch();
+    // A blocked stand request remains pending while the source graph follows the achieved capsule stance.
+    ReportedStance = bIsCrouched ? 1 : 0;
+    SetByte(this, TEXT("CurrentStance"), ReportedStance);
+    FTransform CrouchOffset = FTransform::Identity;
+    if (bIsCrouched && !Flag(this, TEXT("bIsAiming")))
+        if (UObject* Config = ObjectValue(this, TEXT("WeaponConfig")))
+            if (const FStructProperty* P = FindFProperty<FStructProperty>(Config->GetClass(), TEXT("OffsetCrouch")))
+                CrouchOffset = *P->ContainerPtrToValuePtr<FTransform>(Config);
+    SetStruct(this, TEXT("TargetCrouchOffset"), CrouchOffset);
+    Movement->MaxWalkSpeed = Flag(this, TEXT("bIsSprinting")) ? 720.f : Flag(this, TEXT("bIsRunning")) ? 540.f : 360.f;
+    Movement->MaxWalkSpeedCrouched = 180.f;
+    const FVector Local = GetActorRotation().UnrotateVector(GetVelocity());
+    // Source blend-space axes are strafe/forward; 100 and 200 are animation units.
+    const float Scale = Flag(this, TEXT("bIsRunning")) ? 200.f / 540.f : 100.f / 360.f;
+    SetStruct(this, TEXT("SimulatedVelocity"), FVector(Local.Y * Scale, Local.X * Scale, 0));
+    SetFlag(this, TEXT("bIsWalking"), Local.Size2D() > 1.f);
+    if (Local.Size2D() <= 1.f && Movement->IsMovingOnGround())
     {
-        ReloadTime = FMath::Min(ReloadTime + DeltaSeconds, ReloadDuration);
-        if (ReloadTime >= ReloadDuration)
-        {
-            bReloading = false;
-            ++ReloadCompletions;
-        }
+        // Held enhanced inputs request speed again when movement resumes; a wall stop must not run in place.
+        SetFlag(this, TEXT("bIsRunning"), false);
+        SetFlag(this, TEXT("bIsSprinting"), false);
     }
-    if (!bReloading) AimAlpha = FMath::FInterpConstantTo(AimAlpha, bAimRequested ? 1.f : 0.f, DeltaSeconds, 5.f);
-    // Fit the supplied iron sights to the fixed lobby camera without changing eye height or FOV.
-    GetMesh()->SetRelativeLocation(FVector(-.663123f, 0.f, -162.5751f + .85f * (bReloading ? ReloadAimAlpha : AimAlpha)));
-    // The two authored weapon sockets carry the hand-off; no vendor notify objects or dropped actors.
-    MainMagazine->SetVisibility(!bReloading || ReloadTime < 2.520381f);
-    ReserveMagazine->SetVisibility(bReloading && ReloadTime >= .455137f);
+    CallSource(TEXT("Procedural Offsets"));
+    if (bJumpPresentation && Movement->IsFalling() && JumpMontage)
+    {
+        // The vendor full-jump montage has one Default section. Hold its airborne
+        // phase for a long fall; collision landing releases the authored recovery.
+        if (auto* Anim = GetMesh()->GetAnimInstance())
+            if (Anim->Montage_GetPosition(JumpMontage) >= .65f)
+                Anim->Montage_Pause(JumpMontage);
+    }
+    CameraHeight = FMath::FInterpTo(CameraHeight, bIsCrouched ? 50.f : 82.f, DeltaSeconds, 14.f);
+    FirstPersonCamera->SetRelativeLocation(FVector(0, 0, CameraHeight));
+    if (const auto* SourceCamera = Cast<UCameraComponent>(ObjectValue(this, TEXT("CameraFP"))))
+        FirstPersonCamera->FieldOfView = SourceCamera->FieldOfView;
+    // CharacterMovement adjusts the inherited mesh during crouch. Restore its camera-space contract.
+    RestoreMeshAnchor();
+    ConfigureAssembly();
 }
 
 void AOpeningLobbyCharacter::CalcCamera(float DeltaSeconds, FMinimalViewInfo& OutResult)
 {
-    Super::CalcCamera(DeltaSeconds, OutResult);
-    // The scaled first-person presentation needs a close plane to retain wrists and the rear sight.
+    FirstPersonCamera->GetCameraView(DeltaSeconds, OutResult);
+    if (!Flag(this, TEXT("bAnimateCamera")))
+        if (const auto* SourceCamera = Cast<UCameraComponent>(ObjectValue(this, TEXT("CameraFP"))))
+        {
+            OutResult.Location = SourceCamera->GetComponentLocation();
+            OutResult.Rotation = SourceCamera->GetComponentRotation();
+        }
     OutResult.PerspectiveNearClipPlane = .1f;
+    // Notify-spawned primitives also receive the policy before this frame is rendered.
+    ConfigureAssembly();
 }
 
-void AOpeningLobbyCharacter::AimPressed() { bAimRequested = true; }
-void AOpeningLobbyCharacter::AimReleased() { bAimRequested = false; }
-void AOpeningLobbyCharacter::Reload()
+void AOpeningLobbyCharacter::RestoreMeshAnchor()
 {
-    if (bReloading || ReloadDuration <= 0.f) return;
-    bReloading = true;
-    ReloadTime = 0.f;
-    ReloadAimAlpha = AimAlpha;
-    ++ReloadStarts;
+    GetMesh()->SetRelativeLocation(FVector(-.663123f, 0.f, -162.5751f));
+    GetMesh()->SetRelativeRotation(FRotator(0,-90,0));
+}
+void AOpeningLobbyCharacter::OnStartCrouch(float A, float B)
+{
+    Super::OnStartCrouch(A, B);
+    RestoreMeshAnchor();
+}
+void AOpeningLobbyCharacter::OnEndCrouch(float A, float B)
+{
+    Super::OnEndCrouch(A, B);
+    RestoreMeshAnchor();
+}
+void AOpeningLobbyCharacter::ToggleCameraAnimation()
+{
+    SetFlag(this, TEXT("bAnimateCamera"), !Flag(this, TEXT("bAnimateCamera")));
+}
+
+void AOpeningLobbyCharacter::JumpPressed()
+{
+    if (Flag(this, TEXT("bIsBusy")) || Flag(this, TEXT("bIsRunning")) || Flag(this, TEXT("bIsSprinting")) || bIsCrouched || !GetCharacterMovement()->IsMovingOnGround()) return;
+    Jump();
+    ++JumpStarts;
+    bJumpPresentation = true;
+    CallSource(TEXT("PlayJump"));
+}
+void AOpeningLobbyCharacter::JumpReleased() { StopJumping(); }
+void AOpeningLobbyCharacter::Landed(const FHitResult& Hit)
+{
+    Super::Landed(Hit);
+    ++Landings;
+    if (bJumpPresentation && JumpMontage)
+    {
+        // Play the authored landing tail when the capsule actually contacts the floor.
+        if (auto* Anim = GetMesh()->GetAnimInstance())
+        {
+            Anim->Montage_SetPosition(JumpMontage, .85f);
+            Anim->Montage_Resume(JumpMontage);
+        }
+    }
+    bJumpPresentation = false;
 }
 
 void AOpeningLobbyCharacter::SetupPlayerInputComponent(UInputComponent* Input)
@@ -166,11 +280,10 @@ void AOpeningLobbyCharacter::SetupPlayerInputComponent(UInputComponent* Input)
     Input->BindAxis(TEXT("LobbyRight"), this, &AOpeningLobbyCharacter::MoveRight);
     Input->BindAxis(TEXT("LobbyYaw"), this, &AOpeningLobbyCharacter::LookYaw);
     Input->BindAxis(TEXT("LobbyPitch"), this, &AOpeningLobbyCharacter::LookPitch);
-    Input->BindAction(TEXT("LobbyAim"), IE_Pressed, this, &AOpeningLobbyCharacter::AimPressed);
-    Input->BindAction(TEXT("LobbyAim"), IE_Released, this, &AOpeningLobbyCharacter::AimReleased);
-    Input->BindAction(TEXT("LobbyReload"), IE_Pressed, this, &AOpeningLobbyCharacter::Reload);
+    Input->BindAction(TEXT("LobbyJump"), IE_Pressed, this, &AOpeningLobbyCharacter::JumpPressed);
+    Input->BindAction(TEXT("LobbyJump"), IE_Released, this, &AOpeningLobbyCharacter::JumpReleased);
+    Input->BindAction(TEXT("LobbyCameraAnimation"), IE_Pressed, this, &AOpeningLobbyCharacter::ToggleCameraAnimation);
 }
-
 void AOpeningLobbyCharacter::MoveForward(float Value)
 {
     if (Controller && !FMath::IsNearlyZero(Value))
@@ -195,31 +308,56 @@ void AOpeningLobbyCharacter::LookPitch(float Value)
 {
     if (!FMath::IsNearlyZero(Value)) { ++LookBindingSamples; AddControllerPitchInput(Value); }
 }
-
 bool AOpeningLobbyCharacter::ProbeKey(FName KeyName, float Amount, bool Pressed)
 {
 #if WITH_EDITOR
     if (GetWorld() && GetWorld()->WorldType == EWorldType::PIE)
-    {
-        if (APlayerController* PC = Cast<APlayerController>(Controller))
+        if (auto* PC = Cast<APlayerController>(Controller))
         {
             const FKey Key(KeyName);
             if (Key.IsValid())
                 return PC->InputKey(FInputKeyEventArgs::CreateSimulated(Key, Key.IsAxis1D() ? IE_Axis : (Pressed ? IE_Pressed : IE_Released), Amount));
         }
+#endif
+    return false;
+}
+bool AOpeningLobbyCharacter::ProbeFixture(FName Kind)
+{
+#if WITH_EDITOR
+    // Isolated PIE geometry for clearance/long-fall acceptance; it never changes the editor map.
+    if (GetWorld() && GetWorld()->WorldType == EWorldType::PIE && (Kind == TEXT("ceiling") || Kind == TEXT("platform")))
+    {
+        FVector Location = GetActorLocation();
+        const bool Platform = Kind == TEXT("platform");
+        Location.Z = Platform ? 310.f : 148.f;
+        auto* Fixture = GetWorld()->SpawnActor<AStaticMeshActor>(Location, FRotator::ZeroRotator);
+        Fixture->SetMobility(EComponentMobility::Movable);
+        Fixture->GetStaticMeshComponent()->SetStaticMesh(LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube")));
+        Fixture->GetStaticMeshComponent()->SetCollisionProfileName(TEXT("BlockAll"));
+        Fixture->SetActorScale3D(Platform ? FVector(6,6,.2f) : FVector(3,3,.2f));
+        if (Platform) SetActorLocation(Location + FVector(0,0,100), false, nullptr, ETeleportType::TeleportPhysics);
+        return true;
     }
 #endif
     return false;
 }
-
 FString AOpeningLobbyCharacter::GetProbeState() const
 {
-    const UCharacterMovementComponent* M = GetCharacterMovement();
-    return FString::Printf(TEXT("{\"walking\":%s,\"falling\":%s,\"gravity_scale\":%.3f,\"gravity_z\":%.3f,\"walkable_floor\":%s,\"floor_distance\":%.3f,\"capsule_radius\":%.3f,\"capsule_half_height\":%.3f,\"eye_above_capsule_bottom\":%.3f,\"fov\":%.3f,\"move_binding_samples\":%d,\"look_binding_samples\":%d,\"aim_requested\":%s,\"aim_alpha\":%.6f,\"reloading\":%s,\"reload_time\":%.6f,\"reload_aim_alpha\":%.6f,\"reload_starts\":%d,\"reload_completions\":%d,\"animation_time\":%.6f,\"move_blend\":[%.6f,%.6f]}"),
-        M->IsMovingOnGround() ? TEXT("true") : TEXT("false"), M->IsFalling() ? TEXT("true") : TEXT("false"), M->GravityScale, M->GetGravityZ(),
-        M->CurrentFloor.IsWalkableFloor() ? TEXT("true") : TEXT("false"), M->CurrentFloor.FloorDist,
+    const auto* M = GetCharacterMovement();
+    UObject* Weapon = ObjectValue(this, TEXT("CurrentWeaponActor"));
+    int32 Ammo = -1;
+    if (const FIntProperty* P = Weapon ? FindFProperty<FIntProperty>(Weapon->GetClass(), TEXT("AmmoCount")) : nullptr)
+        Ammo = P->GetPropertyValue_InContainer(Weapon);
+    const UAnimInstance* Anim = GetMesh()->GetAnimInstance();
+    const UAnimMontage* Montage = Anim ? Anim->GetCurrentActiveMontage() : nullptr;
+    const FString Action = Montage ? Montage->GetName() : FString();
+    return FString::Printf(TEXT("{\"walking\":%s,\"falling\":%s,\"walkable_floor\":%s,\"floor_distance\":%.3f,\"capsule_radius\":%.3f,\"capsule_half_height\":%.3f,\"fov\":%.3f,\"move_binding_samples\":%d,\"look_binding_samples\":%d,\"animation_time\":%.6f,\"busy\":%s,\"aim_requested\":%s,\"reloading\":%s,\"reload_time\":%.6f,\"montage\":\"%s\",\"running\":%s,\"sprinting\":%s,\"crouched\":%s,\"ammo\":%d,\"fire_mode\":%d,\"grip\":%d,\"jump_starts\":%d,\"landings\":%d}"),
+        M->IsMovingOnGround()?TEXT("true"):TEXT("false"), M->IsFalling()?TEXT("true"):TEXT("false"),
+        M->CurrentFloor.IsWalkableFloor()?TEXT("true"):TEXT("false"), M->CurrentFloor.FloorDist,
         GetCapsuleComponent()->GetScaledCapsuleRadius(), GetCapsuleComponent()->GetScaledCapsuleHalfHeight(),
-        FirstPersonCamera->GetRelativeLocation().Z + GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), FirstPersonCamera->FieldOfView, MoveBindingSamples, LookBindingSamples,
-        bAimRequested ? TEXT("true") : TEXT("false"), AimAlpha, bReloading ? TEXT("true") : TEXT("false"), ReloadTime, ReloadAimAlpha,
-        ReloadStarts, ReloadCompletions, AnimationTime, MoveBlend.X, MoveBlend.Y);
+        FirstPersonCamera->FieldOfView, MoveBindingSamples, LookBindingSamples, AnimationTime,
+        Flag(this,TEXT("bIsBusy"))?TEXT("true"):TEXT("false"), Flag(this,TEXT("bIsAiming"))?TEXT("true"):TEXT("false"),
+        Action.Contains(TEXT("Reload"))?TEXT("true"):TEXT("false"), Montage?Anim->Montage_GetPosition(Montage):0.f,
+        *Action, Flag(this,TEXT("bIsRunning"))?TEXT("true"):TEXT("false"), Flag(this,TEXT("bIsSprinting"))?TEXT("true"):TEXT("false"),
+        bIsCrouched?TEXT("true"):TEXT("false"), Ammo, ByteValue(this,TEXT("CurrentFireMode")), ByteValue(this,TEXT("CurrentGrip")), JumpStarts, Landings);
 }
