@@ -1,0 +1,10 @@
+{
+  "record_id": "PurchasedArms05-OwnerScope01",
+  "date_local": "2026-09-18",
+  "source": "Owner direct chat after playing the PurchasedArms04 lobby",
+  "owner_message_original": "так я побегал по лобби после добавления прыжка после бега на shift. Во первых у нас анимация приземления наступает слишом быстро после прыжка с сукорением. Во вторых убери прыжо на такстический без на alt. В третьих после начала любого из двуз прыжком я должен иметь возможность сразу входить в прицел и стрелять.",
+  "owner_message_english_translation": "I ran around the lobby after the Shift running jump was added. First, the landing animation starts too early after the accelerated jump. Second, remove jumping during tactical sprint on Alt. Third, immediately after either of the two jumps starts I must be able to aim and shoot.",
+  "decision": "Correct premature landing presentation; retain ordinary and Shift jumps, prohibit takeoff during Alt tactical sprint; permit immediate airborne aiming and firing for both remaining jump types.",
+  "interpretation": "Remove jumping on Alt means no tactical-sprint takeoff, not a third jump tier. The controller offered an optional clarification; this is the working interpretation unless the owner supplies a correction.",
+  "scope": "PurchasedArms05 over PurchasedArms04. Keep existing ordinary/Shift trajectories, coherent weapon presentation, unrelated action gates, heading-independent aiming, retained lobby and shadowless presentation. FocusedVerification01 applies. Original character and environment work remain paused."
+}

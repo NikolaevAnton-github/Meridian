@@ -13,8 +13,9 @@ instructions supersede earlier guidance within their stated scope.
 - Codex may launch existing applications and local project services needed for
   authorized work without asking again. Starting a service does not authorize
   unrelated execution, purchases or a pending design selection.
-- Current scope: [PurchasedArms04](Docs/Tasks/PurchasedArms04.md) adds a slightly
-  higher and farther jump from Shift sprint over the PurchasedArms03 baseline.
+- Current scope: [PurchasedArms05](Docs/Tasks/PurchasedArms05.md) corrects landing
+  timing, prohibits Alt tactical-sprint jumps, and enables immediate airborne
+  aiming and firing after ordinary and Shift jumps over PurchasedArms04.
   Original modeling and its successors are paused;
   lobby architecture remains deferred. Preserve character sources and evidence.
   The protagonist concept batch is evaluated by the owner alone; do not dispatch

@@ -31,8 +31,10 @@ FString UPurchasedArmsAnimInstance::GetEvaluationState() const
             if (!Property->Struct->IsChildOf(FAnimNode_AssetPlayerBase::StaticStruct())) continue;
             const auto* Player = Property->ContainerPtrToValuePtr<FAnimNode_AssetPlayerBase>(this);
             if (!Players.IsEmpty()) Players += TEXT(",");
-            Players += FString::Printf(TEXT("{\"node\":\"%s\",\"phase\":%.6f,\"weight\":%.6f}"),
-                *Property->GetName(), Player->GetAccumulatedTime(), Player->GetCachedBlendWeight());
+            const auto* Asset = Player->GetAnimAsset();
+            Players += FString::Printf(TEXT("{\"node\":\"%s\",\"asset\":\"%s\",\"phase\":%.6f,\"weight\":%.6f}"),
+                *Property->GetName(), Asset ? *Asset->GetPathName() : TEXT(""),
+                Player->GetAccumulatedTime(), Player->GetCachedBlendWeight());
         }
     }
     return FString::Printf(TEXT("{\"evaluations\":%llu,\"world_time\":%.6f,\"montage\":\"%s\",\"action_time\":%.6f,\"hip_weight\":%.6f,\"aim_weight\":%.6f,\"players\":[%s]}"),

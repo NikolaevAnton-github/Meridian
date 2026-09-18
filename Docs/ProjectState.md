@@ -13,7 +13,25 @@ Verify native execution as well as saved profiles. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
-## Current gameplay baseline: jump from Shift sprint
+## Current gameplay baseline: airborne actions and physical landing
+
+After playing PurchasedArms04 on 2026-09-18, the owner reported premature landing
+motion after the Shift jump, requested removal of jumping during Alt tactical
+sprint, and required immediate aiming and firing after ordinary and Shift takeoff.
+[PurchasedArms05 / MSQ-65](Tasks/PurchasedArms05.md) implements the correction; see
+[exact owner scope](Approvals/PurchasedArms05-OwnerScope01.json).
+Focused checks pass after correcting a post-contact Run End overlay and a canceled
+takeoff edge. Ordinary and Shift jumps permit immediate airborne ADS and firing,
+including held Shift and continuous fire through landing. Alt rejects Space at
+activation and during tactical sprint. A genuine flight phase is held until floor
+contact; ordinary/Shift trajectories remain unchanged. See
+[implementation](PurchasedArms05.md) and [controller review](PurchasedArms05Review.md).
+The retained lobby is ready for Play. Technical/controller verification is separate
+from owner visual acceptance. Original character and environment work remain paused.
+The earlier PurchasedArms04 timing conclusion and Alt jump behavior below are
+superseded; their evidence remains preserved.
+
+## Previous gameplay baseline: jump from Shift sprint
 
 The owner requests a slightly higher and farther jump from Shift fast movement.
 [PurchasedArms04 / MSQ-64](Tasks/PurchasedArms04.md) adds it over the PurchasedArms03
