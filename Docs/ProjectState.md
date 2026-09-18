@@ -13,12 +13,25 @@ Verify native execution as well as saved profiles. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
-## Current focus: integrated purchased rifle gameplay
+## Current focus: heading-independent rifle aiming
+
+After the next lobby play session on 2026-09-18, the owner reported increasing
+rifle aiming misalignment when turning away from the initial spawn heading.
+[PurchasedArms03 / MSQ-63](Tasks/PurchasedArms03.md) corrects the ADS translation
+from world coordinates to the camera-attached mesh basis. The focused heading,
+aim re-entry, canted and pitch checks pass; the saved AnimBP loads in a fresh
+editor with the retained lobby ready for Play. See the
+[implementation](PurchasedArms03.md) and [controller review](PurchasedArms03Review.md).
+The [exact instruction](Approvals/PurchasedArms03-OwnerScope01.json) explicitly
+limits verification to directly affected behavior; do not repeat the full movement
+or action matrix from MSQ-62. Original character and environment work stay paused.
+
+## Integrated purchased rifle gameplay baseline
 
 On 2026-09-18, after playing PurchasedArms01, the owner reported post-reload bobbing
 pauses, aimed left drift and a hip rifle dip, and requested all purchased rifle-pack
 functionality including full movement and shooting, excluding the vendor arena and
-tutorial hints. [PurchasedArms02 / MSQ-62](Tasks/PurchasedArms02.md) is the active scope; its
+tutorial hints. [PurchasedArms02 / MSQ-62](Tasks/PurchasedArms02.md) provides the baseline; its
 [exact owner instruction](Approvals/PurchasedArms02-OwnerScope01.json) supersedes
 the minimal gameplay exclusions below. Original protagonist and environment
 architecture remain paused. Keep the retained lobby and shadowless presentation.

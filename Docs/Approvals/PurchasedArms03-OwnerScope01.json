@@ -1,0 +1,13 @@
+{
+  "record_id": "PurchasedArms03-OwnerScope01",
+  "date_local": "2026-09-18",
+  "source": "Owner direct chat after playing the integrated purchased-rifle lobby",
+  "owner_message_original": "Так побегалд по лобби, в целом все не плохо, но есть один баг большой. На первом скрине это прицеливание прямо, то есть туда откуда появился персонаж. А на втором прицеливание в обратную сторону. То есть чем дальше ты поварачиваешься от первоночальной оси, тем хуже ставноится. Сделаю пометку, что не нужно прогонять все тесты на мувмент и движения. Проверяй только то что прямо затронуто в исправлении.",
+  "decision": "Fix heading-dependent rifle aiming misalignment. Verify only behavior directly affected by the fix; do not repeat all movement or motion tests.",
+  "scope": "PurchasedArms03 follows PurchasedArms02. Preserve retained lobby, source gameplay and previous evidence. Original protagonist and environment production remain paused.",
+  "owner_attachments": [
+    "ai-chat-custom-attachment-temp-file-420c6b16-7338-4c80-9499-20d0aae0e97b-17283631754212669283.png",
+    "ai-chat-custom-attachment-temp-file-420c6b16-7338-4c80-9499-20d0aae0e97b-15971682333563316128.png"
+  ],
+  "acceptance": "The general positive play report is not approval of a new visual design or authorization to resume deferred work."
+}

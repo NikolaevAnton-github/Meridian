@@ -65,3 +65,7 @@ Docs/PurchasedArms01*.md -text
 Assets/Source/PurchasedArms01/** -text
 Assets/Archive/PurchasedArms01/*.json -text
 Docs/Archive/ProjectState/2026-09-18-BeforePurchasedArms01.md -text
+
+# Preserve the registered heading-fix revision manifest exactly.
+Assets/Source/PurchasedArms03/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+Docs/PurchasedArms03Review.md -text

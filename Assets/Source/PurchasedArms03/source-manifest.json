@@ -1,0 +1,21 @@
+{
+  "task": "MSQ-63",
+  "revision": "PurchasedArms03-ADSComponentSpace01",
+  "base_manifest": "Assets/Source/PurchasedArms02/source-manifest.json",
+  "base_manifest_sha256": "82660f216b1193d6f044d59c5bc6a7d72964bdda9f22bae42cea5cdfaf1d5a74",
+  "scope": "One active-package override of the 400-package PurchasedArms02 baseline; all other package hashes remain unchanged.",
+  "files": [
+    {
+      "package": "/Game/InfimaGames/TacticalFPSAnimations/Common/Core/Characters/ABP_TFA_FP_BaseCharacter",
+      "destination": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Characters/ABP_TFA_FP_BaseCharacter.uasset",
+      "source": "D:\\devgames\\Weapon\\TacticalFPSAnimations\\Common\\Core\\Characters\\ABP_TFA_FP_BaseCharacter.uasset",
+      "source_sha256": "e6dd30dc83d1113312de19dc104f08b9e25cef927120a0f3ef9d2cdfd7877c1b",
+      "previous_active_sha256": "5b7a53f454cd8670eb9f93c5ad808d1921be50d987c7b0c25debb307af95da9d",
+      "active_sha256": "1688fbf28b0b1545df4cb9a0f8aab14df076f9649c0e9e808292280d026973e8",
+      "active_bytes": 1214868,
+      "rollback": "Saved/PurchasedArms03/Worker/Rollback/Content/InfimaGames/TacticalFPSAnimations/Common/Core/Characters/ABP_TFA_FP_BaseCharacter.uasset",
+      "change": "ADS translation uses component space after a +90-degree yaw basis conversion; source rotation, spring, recoil and IK are unchanged."
+    }
+  ],
+  "acceptance": "Technical worker handoff only; controller registration/review and owner acceptance remain separate."
+}

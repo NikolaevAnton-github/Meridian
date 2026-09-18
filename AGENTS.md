@@ -13,9 +13,10 @@ instructions supersede earlier guidance within their stated scope.
 - Codex may launch existing applications and local project services needed for
   authorized work without asking again. Starting a service does not authorize
   unrelated execution, purchases or a pending design selection.
-- Current scope: [PurchasedArms02](Docs/Tasks/PurchasedArms02.md) extends purchased
-  rifle gameplay and fixes reload recovery after PurchasedArms01 replaced active
-  original-protagonist work. Original modeling and its successors are paused;
+- Current scope: [PurchasedArms03](Docs/Tasks/PurchasedArms03.md) fixes heading-dependent
+  rifle aiming over the PurchasedArms02 gameplay baseline. Verify only directly
+  affected behavior for this correction, per the owner's scoped instruction.
+  Original modeling and its successors are paused;
   lobby architecture remains deferred. Preserve character sources and evidence.
   The protagonist concept batch is evaluated by the owner alone; do not dispatch
   an independent concept reviewer. Later integrated review is separate.

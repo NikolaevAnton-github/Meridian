@@ -1,0 +1,20 @@
+{
+    "asset":  "PurchasedArms03",
+    "artifacts":  [
+                      {
+                          "path":  "Assets/Source/PurchasedArms03/source-manifest.json",
+                          "sha256":  "a04ed013eba50e755333c46e190ddd801152fd0f063cff524020f8bf365073d4",
+                          "size_bytes":  1513,
+                          "role":  "purchased_rifle_ads_revision_manifest",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PurchasedArms03Review.md",
+                                               "note":  "MSQ-63 controller-reviewed ADS coordinate-space correction. The manifest records the active binary revision; historical registry fingerprints remain immutable and owner visual acceptance is separate."
+                                           }
+                                       ]
+                      }
+                  ],
+    "dependencies":  [
+
+                     ]
+}
