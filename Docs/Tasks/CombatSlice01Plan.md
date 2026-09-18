@@ -6,7 +6,7 @@ gameplay progression and proceed sequentially. See the
 
 Multica issue: **MSQ-67**.
 
-Execution update: the owner has now authorized **MSQ-68 only** and fixed the
+The MSQ-68 execution instruction authorized that child and fixed the
 [projectile/time/self-hit policy](../Approvals/CombatFoundation01-OwnerScope01.json).
 All bullets have finite flight and follow world slowdown/stop; player movement
 remains normal and own bullets can injure the player. Build these seams in stage 1;
@@ -18,6 +18,12 @@ Stage 1 implementation and bounded corrections are verified on 2026-09-19; see
 MSQ-69 and successors remain undispatched. This parent remains coordination for
 the unfinished stages; it is not a request to start the whole family.
 
+On 2026-09-19 the owner requested **MSQ-82 / CombatTiming01 next**, immediately
+after MSQ-68 and before MSQ-69. See the [exact order decision](../Approvals/CombatTiming01-NextTask01.json).
+The inserted stage 2 addresses the remaining FPS-dependent firing limit and
+correct per-bullet timing. Stages 3-15 retain the former relative order, and
+MSQ-69 depends on MSQ-82. Task preparation creates no new production run.
+
 ## Outcome and starting point
 
 Build a reviewable first combat slice in the retained lobby, followed by a
@@ -28,11 +34,11 @@ goals, not completion of full-game AI, extensive destruction or a whole mission.
 
 Read [ProjectState](../ProjectState.md), [GameBrief](../Design/GameBrief.md),
 the relevant child task and its prerequisite handoff. Read
-[StoryCanon](../Design/StoryCanon.md) for episode work. The current baseline is
-PurchasedArms02 with PurchasedArms03-06 corrections. Its movement and rifle
-presentation work; hit/damage, health and finite reserve ammunition are absent
-from the documented baseline. Reloads and the empty-fire selector still use
-demonstration semantics. Do not treat gestures as working mechanics.
+[StoryCanon](../Design/StoryCanon.md) for episode work. The original starting
+baseline was PurchasedArms02 with PurchasedArms03-06 corrections. Verified
+MSQ-68 now adds finite-flight damage, ammunition and reload accounting. MSQ-82
+refines their timing before enemy work. Player health and abilities remain later
+stages; other vendor gestures are not working mechanics.
 
 ## Ordered tasks
 
@@ -42,19 +48,20 @@ task database. Every child has a unique native stage and a recorded predecessor.
 | Stage | Multica | Task | Reviewable result |
 | --- | --- | --- | --- |
 | 1 | MSQ-68 | [CombatFoundation01](CombatFoundation01.md) | Rifle hits, damageable target and real ammunition/reloads. |
-| 2 | MSQ-69 | [EnemyPrototype01](EnemyPrototype01.md) | Audited reusable enemy prototype, rig and damage-region contract. |
-| 3 | MSQ-70 | [EnemyCombat01](EnemyCombat01.md) | One enemy senses, moves, shoots, reacts and dies. |
-| 4 | MSQ-71 | [PlayerSurvival01](PlayerSurvival01.md) | Player health, death and reliable fight restart. |
-| 5 | MSQ-72 | [LobbyEncounter01](LobbyEncounter01.md) | A small encounter with cover, completion and reset. |
-| 6 | MSQ-73 | [EnemyBodyDamage01](EnemyBodyDamage01.md) | A bounded regional damage and dismemberment sample. |
-| 7 | MSQ-74 | [EnvironmentDestruction01](EnvironmentDestruction01.md) | Selected destructible objects with correct cover and debris behavior. |
-| 8 | MSQ-75 | [TimeSlow01](TimeSlow01.md) | World slowdown/stop, normal player movement and reliable restoration. |
-| 9 | MSQ-76 | [ForcePush01](ForcePush01.md) | Directional push with explicit eligibility and recovery. |
-| 10 | MSQ-77 | [Telekinesis01](Telekinesis01.md) | Acquire, hold, release and throw suitable objects. |
-| 11 | MSQ-78 | [CombatIntegration01](CombatIntegration01.md) | The encounter works with damage, destruction and abilities together. |
-| 12 | MSQ-79 | [OpeningEpisodeDesign01](OpeningEpisodeDesign01.md) | Named beat sheet, route and surveillance storyboard for owner selection. |
-| 13 | MSQ-80 | [OpeningEpisode01](OpeningEpisode01.md) | The selected exploration, combat, recording and progression sequence. |
-| 14 | MSQ-81 | [GameplaySliceReview01](GameplaySliceReview01.md) | Independent integrated review and owner-ready playable handoff. |
+| 2 | MSQ-82 | [CombatTiming01](CombatTiming01.md) | Stable firing cadence and correctly timed bullets across FPS changes and bounded hitches. |
+| 3 | MSQ-69 | [EnemyPrototype01](EnemyPrototype01.md) | Audited reusable enemy prototype, rig and damage-region contract. |
+| 4 | MSQ-70 | [EnemyCombat01](EnemyCombat01.md) | One enemy senses, moves, shoots, reacts and dies. |
+| 5 | MSQ-71 | [PlayerSurvival01](PlayerSurvival01.md) | Player health, death and reliable fight restart. |
+| 6 | MSQ-72 | [LobbyEncounter01](LobbyEncounter01.md) | A small encounter with cover, completion and reset. |
+| 7 | MSQ-73 | [EnemyBodyDamage01](EnemyBodyDamage01.md) | A bounded regional damage and dismemberment sample. |
+| 8 | MSQ-74 | [EnvironmentDestruction01](EnvironmentDestruction01.md) | Selected destructible objects with correct cover and debris behavior. |
+| 9 | MSQ-75 | [TimeSlow01](TimeSlow01.md) | World slowdown/stop, normal player movement and reliable restoration. |
+| 10 | MSQ-76 | [ForcePush01](ForcePush01.md) | Directional push with explicit eligibility and recovery. |
+| 11 | MSQ-77 | [Telekinesis01](Telekinesis01.md) | Acquire, hold, release and throw suitable objects. |
+| 12 | MSQ-78 | [CombatIntegration01](CombatIntegration01.md) | The encounter works with damage, destruction and abilities together. |
+| 13 | MSQ-79 | [OpeningEpisodeDesign01](OpeningEpisodeDesign01.md) | Named beat sheet, route and surveillance storyboard for owner selection. |
+| 14 | MSQ-80 | [OpeningEpisode01](OpeningEpisode01.md) | The selected exploration, combat, recording and progression sequence. |
+| 15 | MSQ-81 | [GameplaySliceReview01](GameplaySliceReview01.md) | Independent integrated review and owner-ready playable handoff. |
 
 ## Sequential execution and gates
 

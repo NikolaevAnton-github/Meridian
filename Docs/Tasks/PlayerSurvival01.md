@@ -1,7 +1,7 @@
 # PlayerSurvival01: health, death and combat restart
 
 Multica issue: **MSQ-71**.
-Stage 4 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 5 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [EnemyCombat01](EnemyCombat01.md).
 
 ## Scope

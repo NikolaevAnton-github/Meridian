@@ -1,7 +1,7 @@
 # EnemyBodyDamage01: regional damage and a dismemberment sample
 
 Multica issue: **MSQ-73**.
-Stage 6 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 7 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [LobbyEncounter01](LobbyEncounter01.md).
 Additional gate: EnemyPrototype01's verified damage-ready editable asset contract.
 

@@ -1,7 +1,7 @@
 # EnemyCombat01: one functioning combat opponent
 
 Multica issue: **MSQ-70**.
-Stage 3 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 4 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [EnemyPrototype01](EnemyPrototype01.md), with its asset contract.
 
 ## Scope

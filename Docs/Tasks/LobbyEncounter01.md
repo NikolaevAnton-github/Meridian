@@ -1,7 +1,7 @@
 # LobbyEncounter01: a short repeatable lobby firefight
 
 Multica issue: **MSQ-72**.
-Stage 5 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 6 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [PlayerSurvival01](PlayerSurvival01.md).
 
 ## Scope

@@ -1,7 +1,7 @@
 # CombatIntegration01: integrated combat slice and feel
 
 Multica issue: **MSQ-78**.
-Stage 11 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 12 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [Telekinesis01](Telekinesis01.md), using the completed combat/damage
 handoffs from stages 1-10.
 

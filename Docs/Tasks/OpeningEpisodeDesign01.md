@@ -1,7 +1,7 @@
 # OpeningEpisodeDesign01: bounded opening episode design
 
 Multica issue: **MSQ-79**.
-Stage 12 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 13 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [CombatIntegration01](CombatIntegration01.md).
 Read [StoryCanon](../Design/StoryCanon.md) and [GameBrief](../Design/GameBrief.md).
 

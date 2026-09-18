@@ -1,7 +1,7 @@
 # ForcePush01: directional force push
 
 Multica issue: **MSQ-76**.
-Stage 9 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 10 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [TimeSlow01](TimeSlow01.md).
 
 ## Scope

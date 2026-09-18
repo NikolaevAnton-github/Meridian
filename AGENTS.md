@@ -16,7 +16,8 @@ instructions supersede earlier guidance within their stated scope.
 - Current scope: MSQ-68 combat foundation is verified within the sequential
   [CombatSlice01 task family](Docs/Tasks/CombatSlice01Plan.md), under the
   [projectile/time/self-hit decision](Docs/Approvals/CombatFoundation01-OwnerScope01.json).
-  Successors remain undispatched; see ProjectState for the reviewed handoff.
+  [MSQ-82 combat timing](Docs/Tasks/CombatTiming01.md) is the owner's next task,
+  before MSQ-69. Successors remain undispatched; see ProjectState for current scope.
   PurchasedArms06 is the retained rifle presentation baseline.
   Original modeling and its successors are paused;
   lobby architecture remains deferred. Preserve character sources and evidence.

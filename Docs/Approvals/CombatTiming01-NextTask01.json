@@ -1,0 +1,21 @@
+{
+  "record_id": "CombatTiming01-NextTask01",
+  "date_local": "2026-09-19",
+  "source": "Owner direct chat after discussing the remaining FPS dependence of MSQ-68 rifle cadence",
+  "owner_message_original": "заведи задачу на дороботку, взять её следующей надо",
+  "owner_message_english_translation": "Create a task for the improvement; we need to take it next.",
+  "decision": "Create CombatTiming01 and take it next, immediately after verified MSQ-68 and before MSQ-69 / EnemyPrototype01.",
+  "requested_improvement": "Preserve rifle cadence and correct per-bullet timing across ordinary frame-rate changes and a bounded hitch window, instead of the current one-shot-per-frame limitation.",
+  "task_creation_authorized": true,
+  "execution_order": ["MSQ-68", "MSQ-82", "MSQ-69"],
+  "preparation_dispatches_production": false,
+  "dispatch_note": "This administrative preparation creates no production run. The owner's instruction to take this task next persists; it is not authorization to dispatch the remaining family together.",
+  "planning_detail": "Frame-rate cases, hitch durations, temporal consistency checks and the bounded catch-up contract are controller acceptance proposals for the requested improvement, not additional quoted owner requirements.",
+  "preservation": "Retain the verified MSQ-68 collision/ammunition foundation and fixed world-time/self-hit policy, PurchasedArms06 presentation, owner configuration, lobby and historical evidence. Player health, enemies and the player-facing time ability remain later tasks.",
+  "task": "Docs/Tasks/CombatTiming01.md",
+  "parent": "MSQ-67",
+  "multica_issue": "MSQ-82",
+  "native_stage": 2,
+  "priority": "high",
+  "creation_evidence": "Saved/CombatSlice01/CombatTiming01/Planning/verification.json"
+}

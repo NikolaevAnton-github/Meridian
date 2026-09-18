@@ -1,7 +1,7 @@
 # TimeSlow01: controllable world slowdown and stop
 
 Multica issue: **MSQ-75**.
-Stage 8 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 9 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [EnvironmentDestruction01](EnvironmentDestruction01.md).
 
 ## Scope

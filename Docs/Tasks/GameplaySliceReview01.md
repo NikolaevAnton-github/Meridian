@@ -1,7 +1,7 @@
 # GameplaySliceReview01: independent integrated acceptance review
 
 Multica issue: **MSQ-81**.
-Stage 14 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 15 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [OpeningEpisode01](OpeningEpisode01.md), with an identified candidate.
 
 ## Scope

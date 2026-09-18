@@ -13,7 +13,19 @@ Verify native execution as well as saved profiles. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
-## Current scope: MSQ-68 combat foundation verified
+## Current scope: MSQ-82 combat timing is next
+
+After the MSQ-68 handoff, the owner requested a follow-up for the remaining
+frame-rate dependence of firing and explicitly placed it next. **MSQ-82 /
+CombatTiming01** is prepared as stage 2, high priority, before MSQ-69; see the
+[task](Tasks/CombatTiming01.md) and [exact order decision](Approvals/CombatTiming01-NextTask01.json).
+It covers timestamped shots and bullet births, bounded catch-up, low-FPS/hitch
+checks, and preservation of the stop/self-hit and reload contracts. MSQ-69 now
+depends on MSQ-82; subsequent native stages shift by one without changing their
+relative order. This preparation creates no production run. Take MSQ-82 next
+through the existing one-worker Multica route; successors remain undispatched.
+
+## Verified baseline: MSQ-68 combat foundation
 
 The owner authorized **MSQ-68 / CombatFoundation01** implementation, with
 [fixed projectile/time/self-hit rules](Approvals/CombatFoundation01-OwnerScope01.json).

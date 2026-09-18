@@ -1,7 +1,7 @@
 # EnvironmentDestruction01: bounded destructible objects and cover
 
 Multica issue: **MSQ-74**.
-Stage 7 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 8 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [EnemyBodyDamage01](EnemyBodyDamage01.md).
 
 ## Scope

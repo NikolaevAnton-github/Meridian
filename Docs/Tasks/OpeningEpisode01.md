@@ -1,7 +1,7 @@
 # OpeningEpisode01: playable exploration, recording and progression
 
 Multica issue: **MSQ-80**.
-Stage 13 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 14 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [OpeningEpisodeDesign01](OpeningEpisodeDesign01.md).
 Gate: owner's identified selection of the episode package and required asset scope.
 

@@ -1,8 +1,8 @@
 # EnemyPrototype01: reusable enemy asset and damage contract
 
 Multica issue: **MSQ-69**.
-Stage 2 of [CombatSlice01](CombatSlice01Plan.md).
-Predecessor: [CombatFoundation01](CombatFoundation01.md).
+Stage 3 of [CombatSlice01](CombatSlice01Plan.md).
+Predecessor: [CombatTiming01 / MSQ-82](CombatTiming01.md).
 
 ## Scope
 

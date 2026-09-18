@@ -1,7 +1,7 @@
 # Telekinesis01: acquire, hold and throw objects
 
 Multica issue: **MSQ-77**.
-Stage 10 of [CombatSlice01](CombatSlice01Plan.md).
+Stage 11 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [ForcePush01](ForcePush01.md).
 
 ## Scope
