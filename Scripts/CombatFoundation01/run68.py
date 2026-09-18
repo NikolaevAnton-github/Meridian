@@ -23,10 +23,10 @@ def run(case):
             work('frame_rate', str(case['fps']))
         epic('EditorToolset.EditorAppToolset', 'StartPIE', {'options': options})
         if case.get('video_pid'):
-            (OUT / 'Video').mkdir(exist_ok=True)
+            (OUT / 'Video').mkdir(parents=True, exist_ok=True)
             capture_log = (OUT / 'Video' / (case['name'] + '.capture.log')).open('x', encoding='utf-8')
             process = subprocess.Popen([sys.executable, str(ROOT / 'Scripts/CombatFoundation01/video68.py'),
-                                        str(case['video_pid']), case['name'], str(case['duration'] + 2)],
+                                        str(case['video_pid']), case['name'], str(case['duration'] + 2), str(OUT / 'Video')],
                                        creationflags=subprocess.CREATE_NO_WINDOW, stdout=capture_log, stderr=subprocess.STDOUT)
             ready = OUT / 'Video' / (case['name'] + '.ready.json')
             deadline = time.monotonic() + 15

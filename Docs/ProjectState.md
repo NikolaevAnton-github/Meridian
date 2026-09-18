@@ -13,17 +13,28 @@ Verify native execution as well as saved profiles. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
-## Current scope: MSQ-82 combat timing is next
+## Current scope: MSQ-82 combat timing verified
 
-After the MSQ-68 handoff, the owner requested a follow-up for the remaining
-frame-rate dependence of firing and explicitly placed it next. **MSQ-82 /
-CombatTiming01** is prepared as stage 2, high priority, before MSQ-69; see the
-[task](Tasks/CombatTiming01.md) and [exact order decision](Approvals/CombatTiming01-NextTask01.json).
-It covers timestamped shots and bullet births, bounded catch-up, low-FPS/hitch
-checks, and preservation of the stop/self-hit and reload contracts. MSQ-69 now
-depends on MSQ-82; subsequent native stages shift by one without changing their
-relative order. This preparation creates no production run. Take MSQ-82 next
-through the existing one-worker Multica route; successors remain undispatched.
+The owner placed **MSQ-82 / CombatTiming01** next after MSQ-68 and authorized
+execution; see the [task](Tasks/CombatTiming01.md),
+[order decision](Approvals/CombatTiming01-NextTask01.json), and
+[start record](Approvals/CombatTiming01-OwnerStart01.json). One Multica worker
+implemented timestamped shots, distinct bullet births/residual flight and bounded
+catch-up through 250 ms. Focused build/runtime and independent/controller checks
+pass, including 446 evaluator assertions; see [implementation](CombatTiming01.md)
+and [controller review](CombatTiming01Review.md). Controlled and actual low-FPS
+cadence agree with the 85 ms schedule. Reset spacing, quick taps and the final
+round's presentation are corrected. Stop/self-hit and finite ammunition remain.
+
+The retained procedural recoil still recovers more slowly at 10 FPS and produces
+a transient ADS sight displacement; the reports document measured evidence and
+causal limits. This timing closure does not claim that visual limitation is fixed
+or confer owner play/visual acceptance. Owner configuration, assets and historical
+evidence are preserved. A newly opened owner PIE session is left untouched.
+
+MSQ-69 depends on this completed stage 2 and remains undispatched, as do later
+stages. The parent remains open for the sequential family. No successor is
+authorized by this snapshot or the technical closure.
 
 ## Verified baseline: MSQ-68 combat foundation
 

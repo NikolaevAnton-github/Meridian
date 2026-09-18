@@ -1,0 +1,5 @@
+[
+  {"name":"OneRound10","fps":10,"duration":2.8,"capture":true,"pose_detail":true,"events":[[0.1,"V",1],[0.2,"V",0],[0.5,"@ammo",[1,0]],[0.8,"LeftMouseButton",1],[1.4,"LeftMouseButton",0],[1.8,"LeftMouseButton",1],[2.0,"LeftMouseButton",0]]},
+  {"name":"ADSRelease10","fps":10,"duration":4.6,"capture":true,"pose_detail":true,"events":[[0.1,"V",1],[0.2,"V",0],[0.5,"RightMouseButton",1],[1.2,"LeftMouseButton",1],[2.0,"LeftMouseButton",0],[4.0,"RightMouseButton",0]]},
+  {"name":"ADSRelease60","fps":60,"duration":4.6,"capture":true,"pose_detail":true,"events":[[0.1,"V",1],[0.2,"V",0],[0.5,"RightMouseButton",1],[1.2,"LeftMouseButton",1],[2.0,"LeftMouseButton",0],[4.0,"RightMouseButton",0]]}
+]

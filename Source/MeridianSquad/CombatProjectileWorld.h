@@ -6,6 +6,7 @@
 
 class ACharacter;
 class ACombatTarget;
+class UCombatRifleComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_SevenParams(FCombatBulletHit, int64, ShotId, FName, ShooterIdentity, AActor*, Shooter,
     AActor*, Victim, float, Damage, FVector, Position, bool, bSelfHit);
@@ -47,9 +48,13 @@ public:
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     FString ProbeCorrections();
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
+    FString ProbeTiming(const FString& Configuration);
+    UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     bool ProbeCover(FName Kind);
 
     int64 Launch(AActor* Shooter, const FVector& Position, const FVector& Velocity, float Damage);
+    int64 LaunchTimed(AActor* Shooter, const FVector& Position, const FVector& Velocity, float Damage, double Time);
+    double GetFiringClock() const { return FiringClock; }
     void ClearProjectiles();
     void BuildQuery(FCollisionQueryParams& Query, const AActor* Ignore = nullptr) const;
     int32 GetActiveCount() const { return Bullets.Num(); }
@@ -82,6 +87,8 @@ private:
         float Age = 0.f;
         float Travel = 0.f;
         double Born = 0.0;
+        double BirthTime = 0.0;
+        uint64 EligibleFrame = 0;
         bool bLaunchClear = false;
         bool bFirstAdvance = true;
         TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> BirthCapsules;
@@ -104,6 +111,32 @@ private:
     int32 RejectedCount = 0;
     uint64 ResetGeneration = 0;
     bool bAdvancing = false;
+    static constexpr double MaxFrameTime = .250;
+    static constexpr double MaxStepTime = .010;
+    static constexpr int32 MaxFrameSteps = 32;
+    static constexpr int32 MaxFrameBirths = 6;
+    double FiringClock = 0.0;
+    double FrameStart = 0.0;
+    double FrameEnd = 0.0;
+    double LastFrameDelta = 0.0;
+    double LastContactTime = -1.0;
+    double DroppedTime = 0.0;
+    uint64 FrameSerial = 0;
+    bool bProcessingFrame = false;
+    int32 LastFrameSteps = 0;
+    int32 LastFrameBirths = 0;
+    int32 PeakFrameSteps = 0;
+    int32 OverloadFrames = 0;
+    int32 GeometryBarriers = 0;
+    TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> FrameStartCapsules;
+    TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> FrameEndCapsules;
+    struct FBlockerSample
+    {
+        FTransform Transform;
+        FVector Extent;
+    };
+    TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample> PreviousBlockers;
+    bool bHaveBlockerSample = false;
     bool bProbeResetPending = false;
     int32 ProbeResetCallbacks = 0;
     FVector ProbeSpawnPosition = FVector::ZeroVector;
@@ -111,6 +144,12 @@ private:
     void ProbeHitReset(int64 ShotId, FName ShooterIdentity, AActor* Shooter, AActor* Victim,
         float Damage, FVector Position, bool bSelfHit);
     void Advance(float WorldDelta, double RealNow);
+    void AdvanceFrame(double WorldDelta, double RealNow, UCombatRifleComponent* Rifle);
+    void AdvanceSegment(double StartTime, double EndTime, double RealNow);
+    TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> SampleCapsules() const;
+    TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> CapsulesAt(double Time) const;
+    TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample> SampleBlockers() const;
+    bool BlockersMatch(const TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample>& Samples) const;
     void RecordCapsules();
     void ResolveHit(const FBullet& Bullet, const FHitResult& Hit, double Now);
 };

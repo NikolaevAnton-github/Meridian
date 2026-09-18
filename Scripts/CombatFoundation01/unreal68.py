@@ -28,6 +28,12 @@ def write(name, value):
 
 def action(operation, argument):
     global _performance_before
+    if operation.startswith('timing_'):
+        import timing82
+        if operation == 'timing_reload':
+            importlib.reload(timing82)
+            return {'reloaded': 'timing82'}
+        return timing82.action(operation.removeprefix('timing_'), argument)
     if operation == 'performance':
         obj = u.get_default_object(u.load_class(None, '/Script/UnrealEd.EditorPerformanceSettings'))
         if argument == 'restore':
@@ -150,6 +156,14 @@ def sample():
     pc = u.GameplayStatics.get_player_controller(world, 0)
     result.update(aim_key_down=pc.is_input_key_down(_aim_key),
                   frame_rate_limit=u.SystemLibrary.get_console_variable_float_value('t.MaxFPS'))
+    if verify02.RUN and verify02.RUN['config'].get('pose_detail'):
+        camera_transform = u.Transform(camera.get_camera_location(), camera.get_camera_rotation())
+        result['pose'] = {
+            'offsets': {name: verify02.transform(pawn.get_editor_property(name)) for name in
+                        ['TargetAimDownSightsOffset', 'CurrentAimDownSightsOffset', 'TargetRecoil', 'CurrentRecoil']},
+            'gun_camera': verify02.transform(pawn.mesh.get_socket_transform('ik_hand_gun',
+                u.RelativeTransformSpace.RTS_WORLD).make_relative(camera_transform)),
+            'evaluation': json.loads(pawn.mesh.get_anim_instance().get_evaluation_state())}
     return result
 
 def tick(delta):
@@ -183,6 +197,9 @@ def tick(delta):
                 simulation.set_editor_property('max_projectiles', value)
             elif key == '@cover':
                 assert simulation.probe_cover(value)
+            elif key == '@hitch':
+                assert 0 <= value <= .6
+                time.sleep(value)
             else:
                 r['pawn'].probe_key(key, abs(value), value > 0)
                 if value > 0 and not key.startswith('Mouse'):

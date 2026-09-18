@@ -1,0 +1,12 @@
+{
+  "record_id": "CombatTiming01-OwnerStart01",
+  "date_local": "2026-09-19",
+  "source": "Owner direct chat after preparing MSQ-82 as the next combat task",
+  "owner_message_original": "Давай задачу на испрвдение механики расчетов",
+  "owner_message_english_translation": "Let's take the task to correct the calculation mechanics.",
+  "decision": "Execute the already prepared MSQ-82 / CombatTiming01 next, following the persistent next-task instruction.",
+  "scope": "Bounded frame-rate-independent rifle scheduling and correct projectile birth/flight timing under Docs/Tasks/CombatTiming01.md, including focused verification, review, bounded corrections and controller closure commit.",
+  "interpretation": "The short request refers to the existing next calculation/timing task in ProjectState, not to a new combat scope.",
+  "execution": "One existing Multica Unreal executor, Astra/max/standard, with actual native settings verified. No successor dispatch.",
+  "preservation": "Retain owner edits, the MSQ-68 time/self-hit contract, PurchasedArms06 presentation, lobby assets and historical evidence."
+}

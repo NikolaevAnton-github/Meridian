@@ -66,7 +66,9 @@ bool CapsuleContact(const FVector& Start, const FVector& End, double Radius, dou
 ACombatProjectileWorld::ACombatProjectileWorld()
 {
     PrimaryActorTick.bCanEverTick = true;
-    PrimaryActorTick.TickGroup = TG_PostPhysics;
+    // Camera updates follow PostPhysics. Sample it and character movement once
+    // at the same end boundary, then reconstruct this local combat interval.
+    PrimaryActorTick.TickGroup = TG_PostUpdateWork;
     SetActorEnableCollision(false);
 }
 void ACombatProjectileWorld::BeginPlay()
@@ -106,6 +108,12 @@ void ACombatProjectileWorld::BuildQuery(FCollisionQueryParams& Query, const AAct
 }
 int64 ACombatProjectileWorld::Launch(AActor* Shooter, const FVector& Position, const FVector& Velocity, float Damage)
 {
+    // Listener-created rounds start at the next frame boundary. They may not
+    // inherit a substep whose collision queries have already completed.
+    return LaunchTimed(Shooter, Position, Velocity, Damage, bProcessingFrame ? FrameEnd : FiringClock);
+}
+int64 ACombatProjectileWorld::LaunchTimed(AActor* Shooter, const FVector& Position, const FVector& Velocity, float Damage, double Time)
+{
     if (Bullets.Num() >= FMath::Clamp(MaxProjectiles, 1, 256) || Position.ContainsNaN() ||
         Velocity.ContainsNaN() || Velocity.IsNearlyZero() || !FMath::IsFinite(Damage) || Damage <= 0.f)
     {
@@ -121,21 +129,17 @@ int64 ACombatProjectileWorld::Launch(AActor* Shooter, const FVector& Position, c
     Bullet.Velocity = Velocity;
     Bullet.Damage = Damage;
     Bullet.Born = FPlatformTime::Seconds();
+    Bullet.BirthTime = Time;
+    Bullet.EligibleFrame = FrameSerial + (bAdvancing || !bProcessingFrame ? 1 : 0);
     // New rounds cannot contact capsule motion that happened before their birth.
     // Keep per-round samples so firing never truncates older suspended rounds' history.
-    for (TActorIterator<ACharacter> It(GetWorld()); It; ++It)
-    {
-        const auto* Capsule = It->GetCapsuleComponent();
-        Bullet.BirthCapsules.Add(*It, {Capsule->GetComponentLocation(), Capsule->GetScaledCapsuleRadius(),
-            Capsule->GetScaledCapsuleHalfHeight()});
-    }
+    Bullet.BirthCapsules = bProcessingFrame ? CapsulesAt(Time) : SampleCapsules();
     Bullet.bLaunchClear = true;
     if (const ACharacter* Character = Cast<ACharacter>(Shooter))
     {
-        const auto* Capsule = Character->GetCapsuleComponent();
-        const float R = Capsule->GetScaledCapsuleRadius();
-        Bullet.bLaunchClear = CapsuleDistanceSquared(Position - Capsule->GetComponentLocation(),
-            Capsule->GetScaledCapsuleHalfHeight() - R) > FMath::Square(R + BulletRadius + 2.f);
+        if (const auto* Capsule = Bullet.BirthCapsules.Find(const_cast<ACharacter*>(Character)))
+            Bullet.bLaunchClear = CapsuleDistanceSquared(Position - Capsule->Center,
+                Capsule->HalfHeight - Capsule->Radius) > FMath::Square(Capsule->Radius + BulletRadius + 2.f);
     }
     Bullets.Add(Bullet);
     ++LaunchedCount;
@@ -143,18 +147,63 @@ int64 ACombatProjectileWorld::Launch(AActor* Shooter, const FVector& Position, c
 }
 void ACombatProjectileWorld::RecordCapsules()
 {
-    PreviousCapsules.Reset();
+    PreviousCapsules = SampleCapsules();
+}
+TMap<TWeakObjectPtr<ACharacter>, ACombatProjectileWorld::FCapsuleSample> ACombatProjectileWorld::SampleCapsules() const
+{
+    TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> Samples;
     for (TActorIterator<ACharacter> It(GetWorld()); It; ++It)
     {
         const auto* Capsule = It->GetCapsuleComponent();
-        PreviousCapsules.Add(*It, {Capsule->GetComponentLocation(), Capsule->GetScaledCapsuleRadius(), Capsule->GetScaledCapsuleHalfHeight()});
+        if (Capsule->IsQueryCollisionEnabled())
+            Samples.Add(*It, {Capsule->GetComponentLocation(), Capsule->GetScaledCapsuleRadius(), Capsule->GetScaledCapsuleHalfHeight()});
     }
+    return Samples;
+}
+TMap<TWeakObjectPtr<ACharacter>, ACombatProjectileWorld::FCapsuleSample> ACombatProjectileWorld::CapsulesAt(double Time) const
+{
+    auto Samples = FrameEndCapsules;
+    const double Alpha = FrameEnd > FrameStart ? FMath::Clamp((Time - FrameStart) / (FrameEnd - FrameStart), 0.0, 1.0) : 1.0;
+    for (auto& Entry : Samples)
+        if (const auto* Old = FrameStartCapsules.Find(Entry.Key))
+        {
+            Entry.Value.Center = FMath::Lerp(Old->Center, Entry.Value.Center, Alpha);
+            // Crouch-size transitions use a conservative envelope throughout.
+            Entry.Value.Radius = FMath::Max(Old->Radius, Entry.Value.Radius);
+            Entry.Value.HalfHeight = FMath::Max(Old->HalfHeight, Entry.Value.HalfHeight);
+        }
+    return Samples;
+}
+TMap<TWeakObjectPtr<UPrimitiveComponent>, ACombatProjectileWorld::FBlockerSample> ACombatProjectileWorld::SampleBlockers() const
+{
+    TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample> Samples;
+    for (TActorIterator<AActor> It(GetWorld()); It; ++It)
+    {
+        if (It->IsA<ACharacter>() || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics"))) continue;
+        TInlineComponentArray<UPrimitiveComponent*> Parts(*It);
+        for (UPrimitiveComponent* Part : Parts)
+            if (Part->IsQueryCollisionEnabled() && Part->GetCollisionResponseToChannel(ECC_Visibility) == ECR_Block)
+                Samples.Add(Part, {Part->GetComponentTransform(), Part->Bounds.BoxExtent});
+    }
+    return Samples;
+}
+bool ACombatProjectileWorld::BlockersMatch(const TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample>& Samples) const
+{
+    if (!bHaveBlockerSample) return true;
+    if (Samples.Num() != PreviousBlockers.Num()) return false;
+    for (const auto& Entry : Samples)
+    {
+        const auto* Old = PreviousBlockers.Find(Entry.Key);
+        if (!Old || !Old->Transform.Equals(Entry.Value.Transform, 1.e-6) || !Old->Extent.Equals(Entry.Value.Extent, 1.e-4)) return false;
+    }
+    return true;
 }
 void ACombatProjectileWorld::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     const double Now = FPlatformTime::Seconds();
-    Advance(DeltaSeconds, Now);
+    ACharacter* Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+    AdvanceFrame(DeltaSeconds, Now, Player ? Player->FindComponentByClass<UCombatRifleComponent>() : nullptr);
     Impacts.RemoveAll([&](const FImpact& Impact) { return Now - Impact.Born > .3; });
     for (const FImpact& Impact : Impacts)
     {
@@ -182,12 +231,105 @@ void ACombatProjectileWorld::Tick(float DeltaSeconds)
 }
 void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
 {
+    // Retained low-level probe seam: one explicitly requested collision step.
+    if (bAdvancing || bProcessingFrame) return;
+    ++FrameSerial;
+    FrameStart = FiringClock;
+    FrameEnd = FrameStart + FMath::Max(0.f, WorldDelta);
+    FrameStartCapsules = PreviousCapsules;
+    FrameEndCapsules = SampleCapsules();
+    AdvanceSegment(FrameStart, FrameEnd, RealNow);
+    FiringClock = FrameEnd;
+    RecordCapsules();
+}
+void ACombatProjectileWorld::AdvanceFrame(double WorldDelta, double RealNow, UCombatRifleComponent* Rifle)
+{
+    if (bProcessingFrame || bAdvancing || !FMath::IsFinite(WorldDelta) || WorldDelta < 0.0) return;
+    TGuardValue<bool> FrameGuard(bProcessingFrame, true);
+    ++FrameSerial;
+    FrameStart = FiringClock;
+    FrameEnd = FrameStart + WorldDelta;
+    LastFrameDelta = WorldDelta;
+    LastFrameSteps = LastFrameBirths = 0;
+    FrameStartCapsules = PreviousCapsules;
+    FrameEndCapsules = SampleCapsules();
+    FVector View = FVector::ZeroVector, StartView = FVector::ZeroVector;
+    FQuat Rotation = FQuat::Identity, StartRotation = FQuat::Identity;
+    if (Rifle)
+    {
+        Rifle->SampleView(View, Rotation);
+        StartView = Rifle->bHaveViewSample ? Rifle->PreviousView : View;
+        StartRotation = Rifle->bHaveViewSample ? Rifle->PreviousViewRotation : Rotation;
+        Rifle->PrepareTimingFrame(FrameStart, FrameEnd);
+    }
+    const auto Blockers = SampleBlockers();
+    bool bHistoryValid = BlockersMatch(Blockers);
+    for (const auto& Entry : FrameEndCapsules)
+        if (const auto* Old = FrameStartCapsules.Find(Entry.Key))
+            bHistoryValid &= FVector::DistSquared(Old->Center, Entry.Value.Center) <= FMath::Square(250.0);
+    const bool bOverload = WorldDelta > MaxFrameTime + 1.e-8;
+    bool bCanceled = bOverload || !bHistoryValid;
+    if (bCanceled)
+    {
+        // There is no trustworthy transform history for skipped time or moving
+        // arbitrary geometry. Fail closed instead of tracing a past world using
+        // today's blockers. No delayed ammunition debit or trigger debt survives.
+        if (bOverload) ++OverloadFrames; else ++GeometryBarriers;
+        DroppedTime += WorldDelta;
+        ClearProjectiles();
+        if (Rifle) Rifle->CancelFiringSession();
+    }
+    const uint64 Generation = ResetGeneration;
+    double Cursor = FrameStart;
+    while (!bCanceled && Cursor < FrameEnd - 1.e-8)
+    {
+        FiringClock = Cursor;
+        if (Rifle && Rifle->GetDueTime() <= Cursor + 1.e-8)
+        {
+            if (LastFrameBirths >= MaxFrameBirths) { bCanceled = true; break; }
+            const double Birth = FMath::Max(FrameStart, Rifle->GetDueTime());
+            const double Alpha = FMath::Clamp((Birth - FrameStart) / WorldDelta, 0.0, 1.0);
+            Rifle->EmitScheduledShot(Birth, FMath::Lerp(StartView, View, Alpha), FQuat::Slerp(StartRotation, Rotation, Alpha));
+            ++LastFrameBirths;
+        }
+        const double GridEnd = FrameStart + (FMath::FloorToDouble((Cursor - FrameStart) / MaxStepTime + 1.e-7) + 1.0) * MaxStepTime;
+        double Next = FMath::Min(FrameEnd, GridEnd);
+        if (Rifle) Next = FMath::Min(Next, Rifle->GetDueTime());
+        if (LastFrameSteps >= MaxFrameSteps || Next <= Cursor) { bCanceled = true; break; }
+        AdvanceSegment(Cursor, Next, RealNow);
+        ++LastFrameSteps;
+        Cursor = Next;
+        // Reset cancels births later in this interval as well as pending hits.
+        bCanceled = Generation != ResetGeneration || IsActorBeingDestroyed();
+    }
+    if (bCanceled && Generation == ResetGeneration && Cursor < FrameEnd && !bOverload && bHistoryValid)
+    {
+        ++OverloadFrames;
+        DroppedTime += FrameEnd - Cursor;
+        ClearProjectiles();
+        if (Rifle) Rifle->CancelFiringSession();
+    }
+    FiringClock = FrameEnd;
+    PeakFrameSteps = FMath::Max(PeakFrameSteps, LastFrameSteps);
+    if (Rifle)
+    {
+        if (bCanceled && Generation != ResetGeneration) Rifle->CancelFiringSession();
+        Rifle->PreviousView = View;
+        Rifle->PreviousViewRotation = Rotation;
+        Rifle->bHaveViewSample = true;
+        Rifle->FinishTimingFrame(bCanceled);
+    }
+    RecordCapsules();
+    PreviousBlockers = SampleBlockers();
+    bHaveBlockerSample = true;
+}
+void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, double RealNow)
+{
     if (bAdvancing) return;
     TGuardValue<bool> AdvancingGuard(bAdvancing, true);
-    if (Bullets.IsEmpty()) { RecordCapsules(); return; }
-    struct FPendingHit { FBullet Bullet; FHitResult Hit; };
+    if (Bullets.IsEmpty()) return;
+    struct FPendingHit { FBullet Bullet; FHitResult Hit; double Time; };
     TArray<FPendingHit> PendingHits;
-    const float SimDelta = FMath::Max(0.f, WorldDelta) * ProjectileTimeScale;
     FCollisionQueryParams Query(SCENE_QUERY_STAT(CombatBullet), true);
     BuildQuery(Query);
     // Query the whole step before any damage or user callback can remove cover.
@@ -196,6 +338,7 @@ void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
     for (int32 Index = Bullets.Num() - 1; Index >= 0; --Index)
     {
         FBullet& Bullet = Bullets[Index];
+        if (Bullet.EligibleFrame > FrameSerial) continue;
         if (RealNow - Bullet.Born >= FMath::Max(1.f, MaxRealAge))
         {
             Bullets.RemoveAtSwap(Index);
@@ -205,22 +348,31 @@ void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
         const float RemainingTime = FMath::Max(0.f, MaxSimulationAge - Bullet.Age);
         const float RemainingTravel = FMath::Max(0.f, MaxTravel - Bullet.Travel);
         const double Speed = Bullet.Velocity.Size();
+        const double FlightStart = FMath::Max(StartTime, Bullet.BirthTime);
+        if (FlightStart > EndTime + 1.e-8) continue;
+        const double Duration = FMath::Max(0.0, EndTime - FlightStart);
+        const float SimDelta = Duration * ProjectileTimeScale;
         const float Step = FMath::Min3(SimDelta, RemainingTime, float(RemainingTravel / Speed));
+        const double FlightDuration = ProjectileTimeScale > 0.f ? FMath::Min(Duration, double(Step) / ProjectileTimeScale) : Duration;
+        const auto StartCapsules = CapsulesAt(FlightStart);
+        const auto EndCapsules = CapsulesAt(FlightStart + FlightDuration);
         const FVector Start = Bullet.Position;
         const FVector End = Start + Bullet.Velocity * Step;
         FHitResult Hit;
         bool bHit = GetWorld()->SweepSingleByChannel(Hit, Start, End, FQuat::Identity, ECC_Visibility,
             FCollisionShape::MakeSphere(BulletRadius), Query);
         double Earliest = bHit ? Hit.Time : 2.0;
-        for (TActorIterator<ACharacter> It(GetWorld()); It; ++It)
+        for (const auto& Entry : EndCapsules)
         {
-            auto* Capsule = It->GetCapsuleComponent();
+            ACharacter* Character = Entry.Key.Get();
+            if (!IsValid(Character)) continue;
+            auto* Capsule = Character->GetCapsuleComponent();
             if (!Capsule->IsQueryCollisionEnabled()) continue;
-            const FVector Center = Capsule->GetComponentLocation();
-            const FCapsuleSample Current{Center, Capsule->GetScaledCapsuleRadius(), Capsule->GetScaledCapsuleHalfHeight()};
-            const FCapsuleSample* Old = Bullet.bFirstAdvance ? Bullet.BirthCapsules.Find(*It) : PreviousCapsules.Find(*It);
+            const FCapsuleSample& Current = Entry.Value;
+            const FVector Center = Current.Center;
+            const FCapsuleSample* Old = Bullet.bFirstAdvance ? Bullet.BirthCapsules.Find(Character) : StartCapsules.Find(Character);
             if (!Old) Old = &Current;
-            if (*It == Bullet.Shooter.Get() && !Bullet.bLaunchClear)
+            if (Character == Bullet.Shooter.Get() && !Bullet.bLaunchClear)
             {
                 // Immunity lasts only while still inside the launch capsule. A
                 // 200 cm flight without clearance retires this invalid launch.
@@ -235,7 +387,7 @@ void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
             {
                 Earliest = ContactTime;
                 const FVector Point = FMath::Lerp(Start, End, ContactTime);
-                Hit = FHitResult(*It, Capsule, Point, (Point - FMath::Lerp(Old->Center, Center, ContactTime)).GetSafeNormal());
+                Hit = FHitResult(Character, Capsule, Point, (Point - FMath::Lerp(Old->Center, Center, ContactTime)).GetSafeNormal());
                 Hit.bBlockingHit = true;
                 Hit.Time = ContactTime;
                 Hit.ImpactPoint = Point;
@@ -244,7 +396,7 @@ void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
         }
         if (bHit)
         {
-            PendingHits.Add({Bullet, Hit});
+            PendingHits.Add({Bullet, Hit, FlightStart + FlightDuration * Hit.Time});
             Bullets.RemoveAtSwap(Index);
             continue;
         }
@@ -259,12 +411,9 @@ void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
             ++RetiredCount;
         }
     }
-    // Record before delivery: a callback may launch a fresh round, clear the
-    // simulation, or move a character. None belongs to this completed step.
-    RecordCapsules();
     PendingHits.Sort([](const FPendingHit& A, const FPendingHit& B)
     {
-        return A.Hit.Time == B.Hit.Time ? A.Bullet.Id < B.Bullet.Id : A.Hit.Time < B.Hit.Time;
+        return A.Time == B.Time ? A.Bullet.Id < B.Bullet.Id : A.Time < B.Time;
     });
     const uint64 Generation = ResetGeneration;
     for (int32 Index = 0; Index < PendingHits.Num(); ++Index)
@@ -274,6 +423,8 @@ void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
             RetiredCount += PendingHits.Num() - Index;
             break;
         }
+        LastContactTime = PendingHits[Index].Time;
+        FiringClock = PendingHits[Index].Time;
         ResolveHit(PendingHits[Index].Bullet, PendingHits[Index].Hit, RealNow);
     }
 }
@@ -316,6 +467,7 @@ void ACombatProjectileWorld::ClearProjectiles()
     Bullets.Reset();
     Impacts.Reset();
     RecordCapsules();
+    bHaveBlockerSample = false;
 }
 void ACombatProjectileWorld::ResetTargets()
 {
@@ -337,6 +489,15 @@ FString ACombatProjectileWorld::GetCombatState() const
 {
     auto Root = MakeShared<FJsonObject>();
     Root->SetNumberField(TEXT("scale"), ProjectileTimeScale);
+    Root->SetNumberField(TEXT("firing_clock"), FiringClock);
+    Root->SetNumberField(TEXT("frame_delta"), LastFrameDelta);
+    Root->SetNumberField(TEXT("frame_steps"), LastFrameSteps);
+    Root->SetNumberField(TEXT("frame_birth_attempts"), LastFrameBirths);
+    Root->SetNumberField(TEXT("peak_steps"), PeakFrameSteps);
+    Root->SetNumberField(TEXT("overload_frames"), OverloadFrames);
+    Root->SetNumberField(TEXT("geometry_barriers"), GeometryBarriers);
+    Root->SetNumberField(TEXT("dropped_time"), DroppedTime);
+    Root->SetNumberField(TEXT("last_contact_time"), LastContactTime);
     Root->SetNumberField(TEXT("active"), Bullets.Num());
     Root->SetNumberField(TEXT("launched"), LaunchedCount);
     Root->SetNumberField(TEXT("hits"), HitCount);
@@ -354,6 +515,7 @@ FString ACombatProjectileWorld::GetCombatState() const
     {
         auto Row = MakeShared<FJsonObject>();
         Row->SetNumberField(TEXT("id"), B.Id);
+        Row->SetNumberField(TEXT("birth_time"), B.BirthTime);
         Row->SetStringField(TEXT("shooter"), B.ShooterIdentity.ToString());
         Row->SetField(TEXT("position"), JsonVector(B.Position));
         Row->SetField(TEXT("velocity"), JsonVector(B.Velocity));

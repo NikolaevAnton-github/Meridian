@@ -123,6 +123,9 @@ void UCombatRifleComponent::BindInput(UEnhancedInputComponent* Input)
 }
 bool UCombatRifleComponent::CanAct() const
 {
+#if WITH_EDITOR
+    if (bTimingProbe) return !bReloading;
+#endif
     return bReady && !bReloading && !Flag(Character, TEXT("bIsBusy")) &&
         !Flag(Character, TEXT("bIsRunning")) && !Flag(Character, TEXT("bIsSprinting"));
 }
@@ -142,42 +145,105 @@ bool UCombatRifleComponent::PlayPair(UAnimMontage* Hands, UAnimMontage* Weapon)
 void UCombatRifleComponent::FirePressed()
 {
     if (bFireHeld) return;
+    ++InputPressCount;
+    LastPressSample = GFrameCounter;
     bFireHeld = true;
     bDryForPress = false;
-    TryShot();
+    const double Now = FiringNow();
+    ++FiringSession;
+    // One timestamped press is independent of the eventual held-auto state.
+    // All edges in this sample share Now; further same-sample presses cannot
+    // earn another shot inside the weapon's minimum spacing.
+    if (!bSemiPending && Now + 1.e-8 >= NextAllowedShotTime)
+    {
+        bSemiPending = true;
+        PendingPressTime = Now;
+        PendingPressSession = FiringSession;
+    }
+    bCadenceActive = true;
+    NextShotTime = FMath::Max(Now, NextAllowedShotTime);
 }
 void UCombatRifleComponent::FireReleased()
 {
+    if (bFireHeld)
+    {
+        ++InputReleaseCount;
+        LastReleaseSample = GFrameCounter;
+    }
     bFireHeld = false;
     bDryForPress = false;
+    bCadenceActive = false;
+    ++FiringSession;
     SetInt(Character, TEXT("RecoilRampCount"), 0);
 }
-bool UCombatRifleComponent::TryShot()
+double UCombatRifleComponent::FiringNow()
 {
-    const double Now = GetWorld()->GetTimeSeconds();
-    if (!CanAct() || Now + 1.e-6 < NextShotTime)
+    if (!Simulation.IsValid()) Simulation = ACombatProjectileWorld::Find(GetWorld());
+    return Simulation.IsValid() ? Simulation->GetFiringClock() : 0.0;
+}
+void UCombatRifleComponent::SampleView(FVector& View, FQuat& Rotation) const
+{
+#if WITH_EDITOR
+    if (bTimingProbe) { View = ProbeView; Rotation = ProbeRotation; return; }
+#endif
+    FRotator Rotator;
+    Character->GetActorEyesViewPoint(View, Rotator);
+    if (const auto* PC = Cast<APlayerController>(Character->GetController())) PC->GetPlayerViewPoint(View, Rotator);
+    Rotation = Rotator.Quaternion();
+}
+void UCombatRifleComponent::PrepareTimingFrame(double Start, double End)
+{
+    TimingFrameEnd = End;
+    FrameShotCount = 0;
+    bDryFeedbackPending = false;
+    // Input is sampled at the left boundary. Animation unlocks/commits observed
+    // later in the frame cannot authorize shots earlier in that interval.
+    bFrameCanFire = bAllowedAtFrameStart && CanAct() && !bTimingBarrier;
+    bTimingBarrier = false;
+    if (!bFrameCanFire)
     {
-        ++BlockedShotCount;
-        return false;
+        NextShotTime = End;
+        bCadenceActive = false;
+        bSemiPending = false;
+        return;
     }
+    if (bFireHeld && !bCadenceActive)
+    {
+        NextShotTime = FMath::Max(Start, NextAllowedShotTime);
+        bCadenceActive = true;
+    }
+}
+double UCombatRifleComponent::GetDueTime() const
+{
+    if (!bFrameCanFire || bTimingBarrier) return TNumericLimits<double>::Max();
+    const double Press = bSemiPending ? PendingPressTime : TNumericLimits<double>::Max();
+    const double Automatic = bAutomatic && bFireHeld && !bDryForPress ? NextShotTime : TNumericLimits<double>::Max();
+    const double Due = FMath::Min(Press, Automatic);
+    return Due < TimingFrameEnd - 1.e-8 ? Due : TNumericLimits<double>::Max();
+}
+bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, const FQuat& Rotation)
+{
+    const uint64 ShotSession = bSemiPending ? PendingPressSession : FiringSession;
+    bSemiPending = false;
+    // Every attempted event consumes its schedule slot, including a capacity
+    // rejection. No denied round is retained as debt or charged ammunition.
+    const double Interval = FMath::Max(.05, double(ShotInterval));
+    NextShotTime = Now + Interval;
     if (Magazine <= 0)
     {
         StatusText = Reserve > 0 ? TEXT("EMPTY  |  R: RELOAD") : TEXT("EMPTY  |  NO RESERVE");
         if (!bDryForPress && Now >= NextDryTime)
         {
-            bDryForPress = true;
             NextDryTime = Now + .3;
-            if (PlayPair(ConfigMontage(TEXT("FP_FireEmpty")), nullptr)) ++DryFireCount;
+            ++DryFeedbackRequests;
+            bDryFeedbackPending = true;
         }
+        bDryForPress = true;
         return false;
     }
     if (!Simulation.IsValid()) Simulation = ACombatProjectileWorld::Find(GetWorld());
     if (!Simulation.IsValid()) { StatusText = TEXT("PROJECTILE SIMULATION UNAVAILABLE"); return false; }
-    FVector View;
-    FRotator Rotation;
-    Character->GetActorEyesViewPoint(View, Rotation);
-    if (const auto* PC = Cast<APlayerController>(Character->GetController())) PC->GetPlayerViewPoint(View, Rotation);
-    const FVector Forward = Rotation.Vector();
+    const FVector Forward = Rotation.GetForwardVector();
     const FVector Muzzle = View + Rotation.RotateVector(FVector(55, 12, -8));
     FCollisionQueryParams Query(SCENE_QUERY_STAT(CombatAim), true);
     Simulation->BuildQuery(Query, Character);
@@ -192,28 +258,74 @@ bool UCombatRifleComponent::TryShot()
     const FVector Start = bCover || bVeryNear ? View : Muzzle;
     FVector Direction = bCover ? (Muzzle - View).GetSafeNormal() : (AimPoint - Start).GetSafeNormal();
     if (Direction.IsNearlyZero()) Direction = Forward;
-    const int64 Id = Simulation->Launch(Character, Start, Direction * FMath::Clamp(BulletSpeed, 1.f, 200000.f), Damage);
+    const FVector Velocity = Direction * FMath::Clamp(BulletSpeed, 1.f, 200000.f);
+    const int64 Id = Simulation->LaunchTimed(Character, Start, Velocity, Damage, Now);
     if (!Id) { StatusText = TEXT("PROJECTILE CAPACITY  |  WAIT"); return false; }
     // Reservation succeeded: this is the only ammunition-decrementing path.
     --Magazine;
     ++ShotCount;
     LastShotId = Id;
     LastShotTime = Now;
-    const double Interval = FMath::Max(.05f, ShotInterval);
-    // Retain the 85 ms source timer phase at normal frame rates, but never
-    // replay a backlog of shots after a hitch or an action lock.
-    NextShotTime = Now - NextShotTime <= Interval ? NextShotTime + Interval : Now + Interval;
-    SyncPresentation();
-    PlayPair(ConfigMontage(bAutomatic ? TEXT("FP_FireAuto") : TEXT("FP_FireSemi")), ConfigMontage(TEXT("FP_WEP_Fire")));
-    Call(Character, TEXT("AddRecoil"));
-    Call(Character, TEXT("SpawnMuzzleFlash"));
+    NextAllowedShotTime = NextShotTime;
+    ++FrameShotCount;
+    MaxFrameShotCount = FMath::Max(MaxFrameShotCount, FrameShotCount);
+    if (RecentShots.Num() == 128) RecentShots.RemoveAt(0);
+    RecentShots.Add({Id, Now, Start, Velocity, ShotSession});
     StatusText.Empty();
     return true;
+}
+void UCombatRifleComponent::FinishTimingFrame(bool bCanceled)
+{
+    SyncPresentation();
+    if (bCanceled || !CanAct()) return;
+#if WITH_EDITOR
+    if (bTimingProbe) return;
+#endif
+    if (FrameShotCount == 0)
+    {
+        if (bDryFeedbackPending && PlayPair(ConfigMontage(TEXT("FP_FireEmpty")), nullptr)) ++DryFireCount;
+        return;
+    }
+    // Accepted fire wins over a later empty request in this same frame. The
+    // empty latch/HUD still update, but its montage must not acquire a busy
+    // lock and suppress the accepted round's recoil, sound and muzzle flash.
+    // One rendered-frame presentation represents all accepted births. Authored
+    // sound/notifies and recoil run once, never as an overdue montage stack.
+    UAnimMontage* FireMontage = ConfigMontage(bAutomatic ? TEXT("FP_FireAuto") : TEXT("FP_FireSemi"));
+    if (PlayPair(FireMontage, ConfigMontage(TEXT("FP_WEP_Fire"))) && !bReloading &&
+        Character->GetMesh()->GetAnimInstance()->GetCurrentActiveMontage() == FireMontage)
+    {
+        // The vendor helper sets busy until the fire montage's first mesh
+        // update. Previously that happened in this same PrePhysics frame.
+        // Post-camera presentation must not turn it into a one-frame gameplay
+        // lock and discard the next frame's authoritative shot interval.
+        SetFlag(Character, TEXT("bIsBusy"), false);
+    }
+    Call(Character, TEXT("AddRecoil"));
+    Call(Character, TEXT("SpawnMuzzleFlash"));
+    if (!bFireHeld) SetInt(Character, TEXT("RecoilRampCount"), 0);
+    // Post-camera creation must also respect the retained 64-component limit
+    // in this frame, not wait for the next PrePhysics retirement pass.
+    RetireProps();
+    ++PresentationCount;
+}
+void UCombatRifleComponent::CancelFiringSession()
+{
+    FireReleased();
+    bSemiPending = false;
+    bDryFeedbackPending = false;
+    bFrameCanFire = false;
+    FrameShotCount = 0;
+    // Discard obsolete intent without shortening an accepted launch's cooldown.
+    NextShotTime = FMath::Max(FiringNow(), NextAllowedShotTime);
 }
 void UCombatRifleComponent::ChangeFireMode()
 {
     if (!CanAct() || bFireHeld) return;
     bAutomatic = !bAutomatic;
+    bSemiPending = false;
+    bCadenceActive = false;
+    ++FiringSession;
     SyncPresentation();
     PlayPair(ConfigMontage(TEXT("FP_FireMode")), nullptr);
 }
@@ -234,6 +346,8 @@ bool UCombatRifleComponent::RequestReload(bool Quick)
     if (!Instance) return false;
     ReloadInstanceId = Instance->GetInstanceID();
     bReloading = true;
+    bTimingBarrier = true;
+    bCadenceActive = false;
     bTransferDone = false;
     ++ReloadCount;
     StatusText = TEXT("RELOADING");
@@ -250,6 +364,8 @@ void UCombatRifleComponent::CommitReload(USkeletalMeshComponent* Mesh, UAnimSequ
     TransferredRounds += Transfer;
     ++TransferCount;
     bReloading = false;
+    bTimingBarrier = true;
+    bCadenceActive = false;
     SetFlag(Character, TEXT("bIsBusy"), false);
     StatusText.Empty();
     SyncPresentation();
@@ -258,6 +374,8 @@ void UCombatRifleComponent::CancelReload()
 {
     if (!bReloading || !Character) return;
     bReloading = false;
+    bTimingBarrier = true;
+    bCadenceActive = false;
     ++CanceledReloadCount;
     ReloadInstanceId = INDEX_NONE;
     auto* Anim = Character->GetMesh()->GetAnimInstance();
@@ -373,7 +491,7 @@ void UCombatRifleComponent::TickComponent(float Delta, ELevelTick TickType, FAct
         if (!Instance || !Instance->IsActive() || Instance->IsStopped()) CancelReload();
         else SetFlag(Character, TEXT("bIsBusy"), true);
     }
-    if (bFireHeld && bAutomatic && !bDryForPress && GetWorld()->GetTimeSeconds() >= NextShotTime) TryShot();
+    bAllowedAtFrameStart = CanAct();
     SyncPresentation();
     RetireProps();
 }
@@ -383,6 +501,7 @@ void UCombatRifleComponent::ResetTargets()
 }
 void UCombatRifleComponent::ClearTransientFeedback()
 {
+    CancelFiringSession();
     TArray<AActor*> Assembly;
     if (Character)
     {
@@ -440,6 +559,11 @@ FString UCombatRifleComponent::GetRifleState() const
     Root->SetBoolField(TEXT("fire_held"), bFireHeld);
     Root->SetNumberField(TEXT("shots"), ShotCount);
     Root->SetNumberField(TEXT("dry_fire"), DryFireCount);
+    Root->SetNumberField(TEXT("dry_feedback_requests"), DryFeedbackRequests);
+    Root->SetNumberField(TEXT("input_presses"), InputPressCount);
+    Root->SetNumberField(TEXT("input_releases"), InputReleaseCount);
+    Root->SetNumberField(TEXT("last_press_sample"), LastPressSample);
+    Root->SetNumberField(TEXT("last_release_sample"), LastReleaseSample);
     Root->SetNumberField(TEXT("reloads"), ReloadCount);
     Root->SetNumberField(TEXT("transfers"), TransferCount);
     Root->SetNumberField(TEXT("transferred_rounds"), TransferredRounds);
@@ -447,6 +571,25 @@ FString UCombatRifleComponent::GetRifleState() const
     Root->SetNumberField(TEXT("blocked_shots"), BlockedShotCount);
     Root->SetNumberField(TEXT("last_shot_id"), LastShotId);
     Root->SetNumberField(TEXT("last_shot_time"), LastShotTime);
+    Root->SetNumberField(TEXT("next_shot_time"), NextShotTime);
+    Root->SetNumberField(TEXT("frame_shots"), FrameShotCount);
+    Root->SetNumberField(TEXT("max_frame_shots"), MaxFrameShotCount);
+    Root->SetNumberField(TEXT("presentations"), PresentationCount);
+    Root->SetNumberField(TEXT("firing_session"), FiringSession);
+    TArray<TSharedPtr<FJsonValue>> Shots;
+    for (const auto& Shot : RecentShots)
+    {
+        auto Row = MakeShared<FJsonObject>();
+        Row->SetNumberField(TEXT("id"), Shot.Id);
+        Row->SetNumberField(TEXT("time"), Shot.Time);
+        Row->SetNumberField(TEXT("session"), Shot.Session);
+        auto Vector = [](const FVector& V) { return TArray<TSharedPtr<FJsonValue>>{
+            MakeShared<FJsonValueNumber>(V.X), MakeShared<FJsonValueNumber>(V.Y), MakeShared<FJsonValueNumber>(V.Z)}; };
+        Row->SetArrayField(TEXT("position"), Vector(Shot.Position));
+        Row->SetArrayField(TEXT("velocity"), Vector(Shot.Velocity));
+        Shots.Add(MakeShared<FJsonValueObject>(Row));
+    }
+    Root->SetArrayField(TEXT("recent_shots"), Shots);
     Root->SetNumberField(TEXT("props"), PropBirths.Num());
     Root->SetNumberField(TEXT("effects"), EffectBirths.Num());
     Root->SetNumberField(TEXT("reload_instance"), ReloadInstanceId);

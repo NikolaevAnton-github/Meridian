@@ -66,7 +66,16 @@ public:
     void CommitReload(USkeletalMeshComponent* Mesh, UAnimSequenceBase* Animation, int32 InstanceId);
     void ClearTransientFeedback();
 
+    // The projectile coordinator owns the interval after movement/camera sampling.
+    void PrepareTimingFrame(double Start, double End);
+    double GetDueTime() const;
+    bool EmitScheduledShot(double Time, const FVector& View, const FQuat& Rotation);
+    void FinishTimingFrame(bool bCanceled);
+    void CancelFiringSession();
+    void SampleView(FVector& Position, FQuat& Rotation) const;
+
 private:
+    friend class ACombatProjectileWorld;
     UPROPERTY(Transient)
     TObjectPtr<AOpeningLobbyCharacter> Character;
     UPROPERTY(Transient)
@@ -89,6 +98,42 @@ private:
     double NextShotTime = 0.0;
     double NextDryTime = 0.0;
     double LastShotTime = -1.0;
+    double NextAllowedShotTime = 0.0;
+    double PendingPressTime = 0.0;
+    uint64 PendingPressSession = 0;
+    int32 DryFeedbackRequests = 0;
+    bool bDryFeedbackPending = false;
+    int32 InputPressCount = 0;
+    int32 InputReleaseCount = 0;
+    uint64 LastPressSample = 0;
+    uint64 LastReleaseSample = 0;
+    double TimingFrameEnd = 0.0;
+    bool bSemiPending = false;
+    bool bCadenceActive = false;
+    bool bTimingBarrier = false;
+    bool bAllowedAtFrameStart = false;
+    bool bFrameCanFire = false;
+    bool bHaveViewSample = false;
+    FVector PreviousView = FVector::ZeroVector;
+    FQuat PreviousViewRotation = FQuat::Identity;
+    int32 FrameShotCount = 0;
+    int32 PresentationCount = 0;
+    int32 MaxFrameShotCount = 0;
+    uint64 FiringSession = 0;
+    struct FShotRecord
+    {
+        int64 Id;
+        double Time;
+        FVector Position;
+        FVector Velocity;
+        uint64 Session;
+    };
+    TArray<FShotRecord> RecentShots;
+#if WITH_EDITOR
+    bool bTimingProbe = false;
+    FVector ProbeView = FVector::ZeroVector;
+    FQuat ProbeRotation = FQuat::Identity;
+#endif
     bool bFireHeld = false;
     bool bDryForPress = false;
     bool bInspectForPress = false;
@@ -100,7 +145,7 @@ private:
     void SyncPresentation();
     void RestoreMagazines();
     void RetireProps();
-    bool TryShot();
+    double FiringNow();
     void FirePressed();
     void FireReleased();
     void ChangeFireMode();

@@ -24,6 +24,12 @@ The inserted stage 2 addresses the remaining FPS-dependent firing limit and
 correct per-bullet timing. Stages 3-15 retain the former relative order, and
 MSQ-69 depends on MSQ-82. Task preparation creates no new production run.
 
+Stage 2 implementation and bounded corrections are technically verified on
+2026-09-19; see [CombatTiming01 controller review](../CombatTiming01Review.md).
+The retained low-FPS procedural recoil limitation is documented separately from
+cadence/projectile acceptance. Owner play/visual acceptance remains separate;
+MSQ-69 and successors remain undispatched.
+
 ## Outcome and starting point
 
 Build a reviewable first combat slice in the retained lobby, followed by a
