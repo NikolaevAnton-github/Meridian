@@ -55,3 +55,13 @@ Scripts/PlayerCharacter01/metahuman_trial01_*.py -text
 # Preserve exact report/script fingerprints of the current-mesh usability trial.
 Docs/PlayerCharacter01MeshUsability01*.md -text
 Scripts/PlayerCharacter01/mesh_usability01_* -text
+
+# Preserve exact PurchasedArms01 runtime, archive and review fingerprints.
+Source/MeridianSquad/OpeningLobbyCharacter.* -text
+Source/MeridianSquad/PurchasedArmsAnimInstance.* -text
+Config/DefaultInput.ini -text
+Scripts/PurchasedArms01/** -text
+Docs/PurchasedArms01*.md -text
+Assets/Source/PurchasedArms01/** -text
+Assets/Archive/PurchasedArms01/*.json -text
+Docs/Archive/ProjectState/2026-09-18-BeforePurchasedArms01.md -text

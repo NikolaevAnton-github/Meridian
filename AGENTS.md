@@ -13,10 +13,11 @@ instructions supersede earlier guidance within their stated scope.
 - Codex may launch existing applications and local project services needed for
   authorized work without asking again. Starting a service does not authorize
   unrelated execution, purchases or a pending design selection.
-- Current gates: lobby work is deferred by the owner; original character
-  modeling requires MSQ-53 named owner selection and the MSQ-52 rig contract.
-  The current protagonist concept batch is evaluated by the owner alone; do not
-  dispatch an independent concept reviewer. Later integrated review is separate.
+- Current scope: [PurchasedArms01](Docs/Tasks/PurchasedArms01.md) replaces active
+  original-protagonist work. Original modeling and its successors are paused;
+  lobby architecture remains deferred. Preserve character sources and evidence.
+  The protagonist concept batch is evaluated by the owner alone; do not dispatch
+  an independent concept reviewer. Later integrated review is separate.
 
 ## Budget and preservation
 

@@ -1,5 +1,12 @@
 # PlayerCharacter01: AI-assisted character production pipeline
 
+Owner scope update, 2026-09-18: **PAUSED_BY_OWNER**. The original-protagonist
+plan below is preserved history and is not authorized for execution. Current work
+is MSQ-61 / PurchasedArms01: purchased arms, movement, aiming and reloads in the
+retained lobby, without player shadows. See Docs/ProjectState.md and
+Docs/Approvals/PurchasedArms01-OwnerScope01.json. All older continuation wording
+below is superseded until the owner explicitly resumes original-character work.
+
 Research and planning revision: **2026-09-17 / Pipeline01**.
 
 Current execution update, 2026-09-17: the MetaHuman trial is complete and

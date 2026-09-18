@@ -1,5 +1,12 @@
 # PlayerCharacter01: visible first-person body integration plan
 
+Owner scope update, 2026-09-18: **PAUSED_BY_OWNER**. The original-protagonist
+plan below is preserved history and is not authorized for execution. Current work
+is MSQ-61 / PurchasedArms01: purchased arms, movement, aiming and reloads in the
+retained lobby, without player shadows. See Docs/ProjectState.md and
+Docs/Approvals/PurchasedArms01-OwnerScope01.json. All older continuation wording
+below is superseded until the owner explicitly resumes original-character work.
+
 Current owner direction, 2026-09-17: **Concept02 / Candidate01, 16 / Datum** is
 selected and **MSQ-52 is authorized for execution**. See the
 [exact decision](../Approvals/PlayerCharacter01-Datum16Selection01.json) and

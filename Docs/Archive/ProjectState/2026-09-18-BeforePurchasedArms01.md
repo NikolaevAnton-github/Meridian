@@ -1,0 +1,305 @@
+# MeridianSquad current project state
+
+Updated 2026-09-18. This is a navigation snapshot of current scope and decisions,
+not a second task database or a new execution authorization. Read the relevant
+linked task before work and verify live Multica/editor state when needed. Later
+explicit owner instructions take precedence within their scope. When dated summaries
+conflict, follow later scoped owner decisions and preserved approval records, not a
+report's "latest" label.
+
+Current execution requirement: **all project executors and reviewers use max
+reasoning at standard speed**. See [the standing owner instruction](Approvals/WorkerReviewerMax01.json).
+Verify native execution as well as saved profiles. Earlier high/medium settings
+below describe historical runs and are superseded for future work; profile
+restoration must retain the new max requirement.
+
+## Current focus: original protagonist and one rifle
+
+The owner requested an original full-body first-person protagonist, original FP
+arms and one rifle. Existing/free animations may be reused after quality and
+provenance review; a stock character is not the delivered model. Preserve the
+original weapon sources, all concept packages and existing owner experiments.
+The setting is fixed at **2043**. Faces and eyes remain concealed; the helmet's
+computer/HUD is ordinary equipment, not the source of powers or restored command
+contact. Use [GameBrief](Design/GameBrief.md) and [StoryCanon](Design/StoryCanon.md).
+
+The owner requested research into the newly purchased Tripo Studio and Meshy web
+subscriptions plus free Hunyuan3D Studio, and integration into the production
+sequence. Research and task synchronization are delivered; no production model,
+new generation or worker run resulted from that preparation.
+
+**Selected design:** the owner chose **Concept02 / Candidate01, 16 / Datum**
+and authorized MSQ-52 on 2026-09-17. See the
+[exact decision](Approvals/PlayerCharacter01-Datum16Selection01.json) and
+[animation audit execution scope](Tasks/PlayerAnimationAudit01.md).
+MSQ-53's named design-selection gate is satisfied. MSQ-52's technical audit and
+`MSQ52-RigContract01` are complete and controller-verified; see the
+[handoff](PlayerAnimationAudit01.md). MSQ-54 is the next production stage and must
+reconcile derived reference views and validate the original-model round trip.
+The original selection instruction dispatched MSQ-52 only. The owner subsequently
+requested an owner-operated Tripo input package: the bounded MSQ-54 preparation
+is delivered as [Datum16ShoulderManual01](PlayerCharacter01TripoManualPilot01.md).
+Use its single StartHere image for the first manual shoulder-cap generation;
+the additional illustrated views are reference-only, not a validated Multi-view
+set. The owner subsequently returned the FBX; the bounded
+[Datum16ShoulderIntake01 inspection](PlayerCharacter01ShoulderIntake01.md) is
+complete. It imports successfully and has a concave shell, but needs topology,
+normal and inner-surface repair plus body fitting. Its 3,176 polygons comprise
+2,375 quads and 801 triangles; 123 boundary edges remain. The untouched source
+is retained in OwnerExports. No controller Tripo generation or complete body
+prototype was authorized or performed by this preparation and intake.
+The owner then requested a whole-character Tripo input wearing the coverall
+without external armor. **Datum16UndersuitInput01** delivers one front T-pose
+PNG with gloves, boots and an opaque soft under-helmet hood; see the
+[package](../Assets/Source/PlayerCharacter01/AI3D/Tripo/Datum16UndersuitInput01/README.md)
+and [bounded task](Tasks/PlayerCharacter01UndersuitInput01.md). The hood and
+previously hidden cloth construction are inferred; this does not replace the
+selected final helmet. The owner subsequently returned the untouched body FBX.
+The bounded [Datum16BodyIntake01 inspection](PlayerCharacter01BodyIntake01.md)
+finds a usable repair base: a complete coverall with hood, gloves and boots,
+24,974 polygons (18,983 quads and 5,991 triangles), and five separated digit
+forms per hand. Boot/ankle and collar defects, joint topology, dimensions and
+pose need work before binding to the exact rig contract. No UVs or skeleton
+are present. The original export is preserved; static intake establishes no
+deformation, grip or original-model round trip. No fitted body or new controller
+3D generation was made by the input-art delivery or returned-source inspection.
+The earlier owner-requested [MetaHuman video study](Research/PlayerCharacter01AI3D/MetaHumanVideoStudy01.md)
+recommended a bounded 5.8 From Custom Mesh trial on the preserved body derivative
+before extensive manual retopology. At that research handoff, Creator/Core Data
+and the owner-installed Markerless plugin were present; project loading and
+conversion were still untested.
+Creator fits geometry; Markerless solves motion from footage. Neither the
+161-bone rig contract nor the selected appearance has changed. The
+[research instruction](Approvals/PlayerCharacter01-MetaHumanStudy01.json) permits
+Blender tool-choice discretion. That research step dispatched no conversion or
+production run; the subsequent trial below supersedes that historical state.
+The owner subsequently authorized the next bounded **Datum16MetaHumanTrial01**
+experiment under MSQ-54 with **Astra/max/standard**; see the
+[execution scope](Tasks/PlayerCharacter01MetaHumanTrial01.md) and
+[exact instruction](Approvals/PlayerCharacter01-MetaHumanTrial01.json).
+The trial is now complete and [controller-reviewed](PlayerCharacter01MetaHumanTrial01Review.md);
+see the [measured handoff](PlayerCharacter01MetaHumanTrial01.md).
+Live body-only conformation, separate posed DNA/A-pose exports, finger/deformation
+probes and four TP reloads succeeded diagnostically. Garment/boot construction
+was lost, the candidate has a different 342-bone rig, and right-wrist offsets
+were 3.70–4.99 cm against the source recordings. Keep the original garment and
+MSQ52-RigContract01; use the MetaHuman result only as a shape/skinning reference.
+The full production round trip, FP fit and final assembly remain unverified.
+This supersedes the earlier research-only no-dispatch restriction for this trial.
+That run ended with no active worker and its saved execution settings restored.
+The production rig and selected appearance remain unchanged.
+The owner then supplied an improved body export and authorized
+**Datum16MeshUsability01** within MSQ-54; see the
+[current assessment task](Tasks/PlayerCharacter01MeshUsability01.md) and
+[exact instruction](Approvals/PlayerCharacter01-MeshUsability01.json).
+The assessment is now [complete and controller-reviewed](PlayerCharacter01MeshUsability01Review.md).
+Revision02 has 24,264 quads and 8,112 triangles (56,640 triangulated). Bind05
+retains its original topology and completed the 161-bone round trip, 19 evaluated
+deformation probes and four synchronized TP reloads. Retain the bulk mesh;
+blanket retopology is not justified. Local glove/cuff, collar and boot defects
+need repair; shoulder/knee deformation, thumb/web fit and rifle contact remain
+unresolved or failed. The close FP probe is diagnostic only.
+Both named revisions and the owner-replaced drop/config edits are preserved;
+the historical drop registry discrepancy remains explicit and unchanged.
+This supersedes earlier mandatory-retopology language. Astra/high/standard
+execution was verified and saved settings restored.
+The owner then requested continued protagonist production. The next authorized
+MSQ-54 increment is **Datum16BodyRepair01**: local structural repairs, thumb/web
+and joint fit/weights, exact-rig regression and actual rifle contact evidence.
+See the [execution scope](Tasks/PlayerCharacter01BodyRepair01.md) and
+[exact continuation instruction](Approvals/PlayerCharacter01-BodyRepair01.json).
+Primary Repair08 is frozen and [controller-reviewed](PlayerCharacter01BodyRepair01Review.md),
+with 70 artifact/1,549 evidence hashes verified. It remains visually rejected.
+The serial Astra/max/standard [Correction01](Tasks/PlayerCharacter01BodyRepair01Correction01.md)
+is frozen as C08. The controller verified all 94 artifact/2,347 evidence hashes,
+including 6,286 preserved files from its resumed turn. Independent max reviews
+confirm improved exposed hand tabs, sampled opposition and the front-knee repair.
+Two medial knee fold strips still intersect at 140 degrees. The controller's next
+bounded [Correction02](Tasks/PlayerCharacter01BodyRepair01Correction02.md) addresses
+those connected patches and the exact remaining construction/contact evidence.
+Prior restricted trials do not establish an intrinsic rig limitation. Preserve
+all primary/Correction01 frozen bytes, historical candidates and owner edits.
+Actual native max execution was verified. Full MSQ-54 and owner visual acceptance
+remain incomplete; successor gameplay/finishing is not dispatched.
+Correction02's numerical trials remain unapplied and preserved. The controller
+resumed it after an idle-boundary interruption to deliver the independent
+collision-locality diagnosis. Named curves involve174 right/172 left polygons;
+their component labels alone do not establish independent editable constraints.
+Actual rig-path tests exposed intermediate boundary penetrations. The revised
+PathBoundary21 support contains396 right/391 left upper-sheet polygons, with
+clear sampled boundaries after a denser motion check. The subsequent Contour26
+target remains rejected: it fails before140 degrees and introduces severe
+interior stretching and near-collapse. A second DCC-idle interruption delivered
+that independent quality review; the same Correction02 now resumes at verified
+Astra/max/standard with7,761 prior files preserved. That turn completed as an
+explicitly incomplete checkpoint: its targets still fail collision/shape checks.
+Independent review identifies a hard support cutoff in Loft44, not an intrinsic
+rig limitation. The subsequent joint rest/weight continuation preserved7,839
+prior files and ran at verified Astra/max/standard. Its equations/taper check
+out, but Metric56 still fails clearance despite lower penetration energy.
+The controller paused it at DCC idle and removed its own no-morph restriction
+after an independent authority audit: a local mesh corrective is permitted
+within this same repair while preserving the exact rig, source clips and
+protected regions. Its initial corrective constructions remain rejected.
+Independent review identifies restrictive displacement/contact-history
+continuation and an exactly mapped filled disk across the boot entry. The
+controller paused at DCC idle after OpenBoot72 to deliver both findings.
+That continuation protected12,968 prior files, including the isolated numerical
+runtime inputs. After the next DCC-idle review handoff, the same repair now
+continues at verified Astra/max/standard with14,128 prior files protected. It must prove
+actual native activation in an isolated development fixture; gameplay integration
+remains deferred.
+The current continuation has repaired both boot entries in the lower-pose
+construction checks and produced a right-fold checkpoint at119.921875degrees,
+independently reviewed as clear/settled at finite checks and visually plausible
+in all16 matched gray/wire views. This is a scoped checkpoint pass. The independent
+right-boot rest review passes within its shown scope. The left seed is checked
+through100degrees. Bilateral140degree/path, exported/native surface and actual
+corrective activation verification remain incomplete. The source builder is
+prepared but unexecuted; current construction is not a frozen model.
+The controller delivered completed checkpoint, source-certificate and native
+mapping reviews in the new continuation. The independently verified Trace153/
+Feasible155 same-state comparison resolves the123.171875degree solver conflict
+without changing final geometric limits. Subsequent construction has accepted
+right-side samples above125degrees. Restoration and settlement fixes preserve
+the final guards; the remaining bilateral/path/native obligations still apply.
+A compact coupled local cloth repair is permitted where justified. No Correction02 model is accepted
+or frozen. Preserve the checkpoint report unchanged; see the controller review
+for the exact scope and failed evidence.
+The new all-copy construction and ContactVisible02 correspondence views have
+scoped independent reviews; no additional hand deformation is justified.
+The owner alone evaluates this concept batch; no independent concept reviewer or
+MSQ-53 expert run. Later MSQ-60 integrated review remains required.
+
+### Delivered art
+
+| Package | Current meaning and evidence |
+| --- | --- |
+| Concept01 and Concept02 | 15 original concepts plus 10 armored variants, IDs 01-25; [Concept01](PlayerArtConcept01.md), [Concept02](PlayerArtConcept02.md). Preference for 01/08 did not select the final model. |
+| Chevron25Refine03 / 25C | Four angular V-shaped overlapping cuirass plates; [task and package links](Tasks/PlayerArtChevron25Refine03.md). Earlier 25/25A/25B remain preserved; 25A's layering interpretation was rejected. |
+| Datum16TrellisInput01 | Isolated white-background single-figure input and TRELLIS.2 usage notes; [task](Tasks/PlayerArtDatum16TrellisInput01.md). No TRELLIS installation or generation was performed. |
+| Datum16MultiView01 | Eight separate white-background views; [task](Tasks/PlayerArtDatum16MultiView01.md). Prior A-pose package remains unchanged. |
+| Datum16MultiViewTpose01 | Eight separate 1254 x 1254 PNGs, horizontal straight arms at shoulder height, palms down; Front/Back/profiles/45-degree/axial views; [task](Tasks/PlayerArtDatum16MultiViewTpose01.md). All 75 prior package files were preserved. |
+
+The art is input preparation. Hidden surfaces are inferred and exact 3D consistency
+is unverified. Galleries, exact prompts and manifests remain under
+`Assets/Concepts/PlayerCharacter01/`. The selection record above supersedes old
+pending-selection text; immutable package manifests remain unchanged.
+Concept-art tasks used Astra/max/standard and owner-only evaluation; their saved
+profiles/native arguments were restored. The historical implementation baseline
+was Astra/high/standard, with an explicit max override for MetaHumanTrial01.
+The owner's standing max instruction now supersedes those historical defaults
+for every executor and reviewer, including profile restoration.
+
+### AI3D production sequence and tasks
+
+Read the [production pipeline](PlayerCharacter01AI3DPipeline.md),
+[plan](Tasks/PlayerCharacter01Plan.md) and [task index](Tasks/PlayerCharacter01Tasks.md).
+Their existing task family covers the work; do not create parallel provider/armor
+task databases. The ordered production approach is:
+
+1. Use the selected Datum16 and completed MSQ52-RigContract01; reconcile the
+   authoritative production views during MSQ-54.
+2. Use the completed MetaHuman trial's recommendation: retain the original garment
+   and exact rig contract, using the experimental fit as a shape/skinning reference.
+   Repair the owner export and establish one proportional master for production;
+   perform only the smallest justified missing AI source trial.
+3. Fit separate armor/components to that master in Blender; resolve joint topology,
+   weights and source-pose deformation before the original prototype handoff.
+4. Test first-person presentation, body movement and hand/rifle/reload interaction
+   through MSQ-55/56/57. Return geometry failures to MSQ-54.
+5. Finalize UVs, bakes, native Painter materials and LODs in MSQ-58 only after the
+   preceding deformation, presentation and gameplay probes succeed; integrate,
+   independently review and correct the identified final candidate in MSQ-59/60.
+
+The canonical editable source root is `Assets/Source/PlayerCharacter01/`; selected
+AI inputs/exports belong under `AI3D/<provider>/<candidate>/` inside that root.
+Use existing Tripo/Meshy **web allowances only** within the scoped task. No new
+purchases, top-ups or separately billed API usage are authorized. Read the dated
+provider research and verify changing capabilities/terms before execution:
+
+- [Tripo](Research/PlayerCharacter01AI3D/TripoResearch01.md): segment before quads/rig.
+- [Meshy](Research/PlayerCharacter01AI3D/MeshyResearch01.md): multiview and Smart
+  Topology are separate routes.
+- [Hunyuan3D](Research/PlayerCharacter01AI3D/HunyuanResearch01.md): hosted V3.1 exposes
+  2-8 views; free quotas are temporary and hosted commercial-output terms still
+  require verification. Do not infer hosted rights from local-model licensing.
+
+Last verified Multica state, 2026-09-18:
+
+| Tasks | State / scope |
+| --- | --- |
+| MSQ-50 | `in_progress`; parent board state, not evidence of an active worker. |
+| MSQ-51 | `done`; concept deliveries preserved. |
+| MSQ-53 | `done`; owner selected Concept02 / Candidate01, 16 / Datum. No expert run. |
+| MSQ-52 | `done`; controller-accepted animation audit and MSQ52-RigContract01. 186 source-identical packages, 82 sequences, 19 representative playback cases; later original-rig/gameplay gates remain. |
+| MSQ-54 | MeshUsability01 complete and reviewed; BodyRepair01 primary and Correction01 frozen, with Correction02 running serially at Astra/max/standard. Preserve improved C08 hands/front knee; resolve medial knee strips and bounded construction/contact evidence. Full prototype remains `in_progress`. |
+| MSQ-55 through MSQ-60 | `backlog`; presentation, movement, rifle, finish, integration and final review. |
+
+The [task synchronization audit](Tasks/PlayerCharacter01AI3DTaskAudit01.md) verified
+description-only updates to MSQ-50 and MSQ-52 through MSQ-60. All 33 non-target records
+(including MSQ-51), all statuses/assignments/dependencies/stages and player run histories were
+preserved; zero issues or runs were added. Multica remains the source of live state.
+
+## Lobby: retained and deferred
+
+The owner closed remaining lobby work on 2026-09-16, deferring it until gameplay
+has been integrated and a new owner scope is supplied. **Do not resume old lobby
+directions or dispatch their backlog.** MSQ-4/6/7/14/20/28/30 are administratively
+cancelled with `CLOSED_BY_OWNER_DEFERRAL`; this neither rejects retained assets nor
+grants visual acceptance or completes deferred verification. See
+[deferral summary](OpeningLobbyDeferred01.md) and
+[exact owner closure](Approvals/LobbyDeferred01-OwnerClosure01.json).
+
+- MSQ-31/32 are done. The owner accepted UpperVoid01's height-corrected atmosphere:
+  accepted bytes are HeightCorrection03, restored exactly during HeightCorrection04.
+  HC04's spatial trial remains rejected history. HC-R1 was closed by owner acceptance,
+  not technically eliminated. See [review](OpeningLobbyUpperVoid01Review.md) and
+  [acceptance](Approvals/LobbyUpperVoid01-Acceptance01.json).
+- The retained lobby map is `/Game/Maps/L_OpeningLobby_PainterStone01`. Earlier maps
+  were archived outside `Content` and retired with owner authorization. For any
+  newly authorized edit, work on this map in place with a bounded rollback snapshot;
+  preserve owner geometry/edits, sources and history. See
+  [map-retention decision](Approvals/LobbyPainterStone01-Acceptance01.json) and
+  [owner-edit record](Approvals/LobbyFunctionalBuild01-OwnerEdit01.json).
+- Preserve all 107 material bindings, accepted stone/floor/metal assets and current
+  slab variants, lighting/atmosphere, glass/support and gameplay. SlabLayout01 passed
+  its scoped opaque review; that is not owner acceptance of the slab candidate.
+  Its 120 x 240 cm slabs / 5 mm joints were working dimensions, not exact owner-approved
+  sizes. Glass and unrelated final walkthrough work remain outside UpperVoid acceptance.
+  See [material review](OpeningLobbyMaterialsComplete01Review.md).
+- Glass remains deferred. Recorded slab planning limits were 450 MB per batch and
+  2.4 GB for the lobby; the hard total project cap is still 250 GB. These limits do
+  not dispatch deferred work. Preserve failed Painter evidence and genuine native
+  sources; use [PainterWorkflow](PainterWorkflow.md) for any authorized continuation.
+- Preserve the accepted overall scale and named drawing/production decisions. Read
+  [visual acceptance](VisualAcceptance.md) and the relevant linked approval before
+  any new environment scope. Older proxy envelopes do not automatically constrain
+  a new design proposal; dimensional changes require explicit owner review.
+
+Historical map hashes identify specific earlier candidates, not the current live
+editor state. Use the relevant acceptance manifest and inspect current bytes when
+needed; do not infer live identity from old paragraphs saying "current map".
+
+## Tooling and instruction maintenance
+
+The owner requires a local Git commit of verified task changes after each task
+closure, before final handoff. The controller owns this step; see
+[the standing instruction](Approvals/TaskClosureCommits01.json) and AGENTS.md.
+
+The owner permits launching existing apps and local services needed for authorized
+work without repeated confirmation. At the 2026-09-17 audit, Multica database/API/web
+were started on loopback ports 15432/8080/3000 while the task runtime stayed stopped.
+Check actual state before use. Administrative startup and the process-scoped
+PowerShell invocation are documented in the [audit](Tasks/PlayerCharacter01AI3DTaskAudit01.md).
+No task execution follows merely from bringing services online.
+
+Use [AgentDevelopment](AgentDevelopment.md) for verified tooling history,
+[AssetRegistry](AssetRegistry.md) for the separate `meridian_assets` database and
+[registry acceptance](AssetRegistryAcceptance.md) for evidence semantics. Check live
+versions/connections; historical successful integration does not prove availability.
+
+Keep durable rules in [AGENTS.md](../AGENTS.md), replace stale scope in this snapshot,
+and keep detailed task/approval evidence in its existing files. The
+[instruction archive](Archive/AgentInstructions/README.md) preserves the exact
+pre-compaction file for historical lookup; it is not an active instruction source.

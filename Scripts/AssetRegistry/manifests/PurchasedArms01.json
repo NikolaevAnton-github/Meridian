@@ -1,0 +1,1698 @@
+{
+  "asset": "PurchasedArms01",
+  "artifacts": [
+    {
+      "path": "Source/MeridianSquad/OpeningLobbyCharacter.h",
+      "sha256": "f19d5b02c1aefb05742fc8591f1727f2f030e60ef6d21cf1d6ce222e3728c2db",
+      "size_bytes": 2743,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Source/MeridianSquad/OpeningLobbyCharacter.cpp",
+      "sha256": "b9200d6c32323ff82c7429341079a3d311116b9e15abb5a0c014bc5fc7089635",
+      "size_bytes": 11813,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Source/MeridianSquad/PurchasedArmsAnimInstance.h",
+      "sha256": "1f534aebbc5d72508bff2dae29ef4b32928fc651886468698494f608e44ae964",
+      "size_bytes": 600,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Source/MeridianSquad/PurchasedArmsAnimInstance.cpp",
+      "sha256": "54147104033ffa753831d3402f820e152b79689b15bbde7bde0e6d1df0b9347a",
+      "size_bytes": 7128,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Config/DefaultInput.ini",
+      "sha256": "05d3c9954f90c00bac5e04ba4b76081a2301d1ddd12898d828fc28b0e2a2ac15",
+      "size_bytes": 9502,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Scripts/PurchasedArms01/analyze.py",
+      "sha256": "9d04834e916a8bb4df1231368c8342ca87ecc4d08a975f211e2dc6d1eab3ca5c",
+      "size_bytes": 9043,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Scripts/PurchasedArms01/bootstrap.py",
+      "sha256": "faa2be6925f2a7bfb1f060f723f9b587a5265bbe446785ed91819702ffb2d1c5",
+      "size_bytes": 275,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Scripts/PurchasedArms01/client.py",
+      "sha256": "c741d51687a09a922d5a378e56e34992097bbe3aa453196c903992f2f27ae02d",
+      "size_bytes": 849,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Scripts/PurchasedArms01/preserve.py",
+      "sha256": "5f5cbc7ecb855fb8a2b54d1576349a5b17b1ccfb669f6ecc54128e8f967ddd27",
+      "size_bytes": 4762,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Scripts/PurchasedArms01/purchased_arms_tools.py",
+      "sha256": "11b03f8619f4a65ee642858ff43ca6d517bb8fca21187868e0d1428ff5245e0b",
+      "size_bytes": 664,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Scripts/PurchasedArms01/purchased_arms_unreal.py",
+      "sha256": "ab0f7352e1e7630bf44ce51cc89ba3c0427a1130ea85284b0d3d80010eee7b57",
+      "size_bytes": 20278,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Scripts/PurchasedArms01/purchased_arms_walk.py",
+      "sha256": "e98f1efdb9045391007923f5d8743cdd3e5f709ae5d7de074fdfd5cc9470a1b4",
+      "size_bytes": 4267,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Docs/PurchasedArms01.md",
+      "sha256": "c9592e806c14f8bd15050a16572f21d4001d42e52177f6e896aacd5b5c3953e1",
+      "size_bytes": 12228,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Docs/PurchasedArms01Review.md",
+      "sha256": "1c85ea9536da0e634faa596457bcdcfa0e5daf4e9375175ec4003389650138d9",
+      "size_bytes": 5496,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PurchasedArms01/runtime-manifest.json",
+      "sha256": "f2f40b44d7f2a8994560a63900c6696aa3a4ac5b5606da152acc85f8dbdc1009",
+      "size_bytes": 37882,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/manifest.json",
+      "sha256": "7be1d2e9f34e5d8e07d584a4ec11f58665daada6466d5a9ef10a6fd9ad83d55a",
+      "size_bytes": 49461,
+      "role": "purchased_arms_runtime_or_evidence",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd.uasset",
+      "sha256": "0fd489f5c8d4d63e84f8a25c2db46c3ae54eae828212b2a32622726e593b5d3c",
+      "size_bytes": 582054,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Left.uasset",
+      "sha256": "c3939c4aa298e6be0834256ef6f642cff0465a40d676ec7e464aaf504b44f729",
+      "size_bytes": 458365,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Right.uasset",
+      "sha256": "907cb106c1c466aac0b38753b7551af73a09c082a652c82c43df5418eb33b089",
+      "size_bytes": 458272,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd.uasset",
+      "sha256": "287d39883a65ccf6f89d91c7ca13b23184f04ae6eb5cc3867dd7ef7cfb35ec1c",
+      "size_bytes": 516328,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Left.uasset",
+      "sha256": "4103ea6388d484e8f71cd30b955c3c954750d922a0c030bf3d902bdb3e02c13d",
+      "size_bytes": 384314,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Right.uasset",
+      "sha256": "2ca8d8ec88d086d4cb6027a2eefdde258142587bca40e98dee021abe9c8824f8",
+      "size_bytes": 384322,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Left.uasset",
+      "sha256": "4feaf1bd5b370e28f5dce611b28d955bbf84bbeb72b7e22972a0e143022621a7",
+      "size_bytes": 296415,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Right.uasset",
+      "sha256": "e3c5cae5448dbb8c4e3bda5406202a8e55b08247695082270e1fef3dbdd6e533",
+      "size_bytes": 420984,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Apex.uasset",
+      "sha256": "39acbd6bcfc5ec2795ee2497bb353fbe954766bda545c3318c3cd6ee5f1ee008",
+      "size_bytes": 228355,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Land.uasset",
+      "sha256": "ce74e83b9b88fa3722951c1c6b2cc36ae7159b8141f5347e5b47d760cee41c42",
+      "size_bytes": 179028,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Loop.uasset",
+      "sha256": "d17c0a4fe1d9bb970b3208909e1c35b7183568c7968a0d6d0de391cca216b472",
+      "size_bytes": 645680,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_RecoveryAdditive.uasset",
+      "sha256": "9d663743ac0fd361303751c55688a34053fbed145aaa88a004abd7b02533d5e5",
+      "size_bytes": 294517,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start.uasset",
+      "sha256": "925f27182be45054a1bbb5d458cb53d38773b356dd61e18b82fa9a72880dc8e7",
+      "size_bytes": 146783,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start_Loop.uasset",
+      "sha256": "c2da3d291df2070e1aaa62a45e445a7979948489b9e811e0d17f94b3e627d14e",
+      "size_bytes": 441727,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd.uasset",
+      "sha256": "e1400dc7a7bfca224e0aa7796e5c230236ad634c808b2a1540cbad8903fa897b",
+      "size_bytes": 449720,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Left.uasset",
+      "sha256": "8d535eb181e756f56974efae068f34da050747fd8836fe2bb5f0c693f51325c2",
+      "size_bytes": 332682,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Right.uasset",
+      "sha256": "6e0bd9b3ba2e982ac9ffd60a643dab78cf886d194a26af518170a02dc4f3eac0",
+      "size_bytes": 332577,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd.uasset",
+      "sha256": "540a6a77c48027e13be84d483c6afd18d82fb115b7532334597ebefe2249ecd0",
+      "size_bytes": 490267,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Left.uasset",
+      "sha256": "f7797a7841cb86c3dc9e68dcdf968e538c9a7335abb1b0d9db95e0983b2226d7",
+      "size_bytes": 384794,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Right.uasset",
+      "sha256": "787c7b69a054c6f2850503c016a2ef2fade7ad0941375c8e521c3534bf695d12",
+      "size_bytes": 384793,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Left.uasset",
+      "sha256": "a99d18722e504801616e1c0c495711c43c2d82c4465f7f388cdae8a45502bd1e",
+      "size_bytes": 453120,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Right.uasset",
+      "sha256": "2c2c12d6a959d69c96962ca340bdfe984942df621ee2ff7e7e955662ddaee52a",
+      "size_bytes": 510650,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Materials/M_Mannequin.uasset",
+      "sha256": "d7ffe412d906380bd5bd4462f464b2a1fe48fdb79b9077f29bd0f958a782035c",
+      "size_bytes": 59292,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Materials/Manny/MI_Manny_01_New.uasset",
+      "sha256": "9f1e4ed382304d020b750c81505140fc1de4d339b0909430adb5380a6bb89b65",
+      "size_bytes": 17963,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Materials/Manny/MI_Manny_02_New.uasset",
+      "sha256": "26389db06f0b7928b487494bef3320d6b0e6bccd58193bccedd67c2c89132a46",
+      "size_bytes": 18706,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_01.uasset",
+      "sha256": "62a3050ef24b823f9fe84ac5d9c477099494982d35dafcc3d8078f32b0d4a865",
+      "size_bytes": 11184,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_02.uasset",
+      "sha256": "6aec77489fdfab0e1ea299de60fbd4f332face4495bbbd20b97fb0308bb9c5b4",
+      "size_bytes": 10718,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+      "sha256": "be9f011191ee1887b97cd13bce09886a6066c2fd62c619991070ec142184e1bf",
+      "size_bytes": 15825101,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Meshes/SKM_Quinn_Simple.uasset",
+      "sha256": "1ef45d92507a76d74a5e06737f94cad40eb7d5f5769dfbb63f7f74e784a178c6",
+      "size_bytes": 16252577,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset",
+      "sha256": "22029d47455f24471195b26a0e04a1e1389f27d6a924e88c9f46a0f600c9a530",
+      "size_bytes": 191198,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+      "sha256": "c0ceaf003947088ff076555b81a46e5ccb11149c94025eb2a9e74263fbaa0d67",
+      "size_bytes": 301538,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_01_BN.uasset",
+      "sha256": "2f623209571ecbd8185b5b463786be033c3284190b4fc7b249e8d1d2ed995fd8",
+      "size_bytes": 1422785,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset",
+      "sha256": "6ae0f4f9908c30ecc9aedf1ebb442e4983e526a7832ec791542064c7853f9999",
+      "size_bytes": 699555,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA.uasset",
+      "sha256": "3e42e888aed8aefff68da7d7dda4f177c5647b19473e4e913f61375c1319abd8",
+      "size_bytes": 712594,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_02_BN.uasset",
+      "sha256": "c9575d21c9e2872b3358c0efb9e202535ce2efce94c338b9d3bd04cb9831e353",
+      "size_bytes": 20999487,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset",
+      "sha256": "474728713232c6833f55c041548f555bc62c5c49e74082a5d16e68a5ce488cfe",
+      "size_bytes": 1036712,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA.uasset",
+      "sha256": "6697972eaf2dfe201923dba6a302f024b0ef4c4e46b4ecf578178717098e8277",
+      "size_bytes": 1059559,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_D.uasset",
+      "sha256": "04e5ed207b7df0d2ad1bbc668916bcf170545fc2a72875e49ec99c6e2667002f",
+      "size_bytes": 674768,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_MRA.uasset",
+      "sha256": "0988d4d9f25597224910e1043591cb2a089a8607a4fe4a63cbc68f3eb2ab473e",
+      "size_bytes": 791597,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_N.uasset",
+      "sha256": "10fbe9ac3e18e0a890d19756d3470ca372a1aeaffefbe9a22d6b0e6182293551",
+      "size_bytes": 1263741,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_D.uasset",
+      "sha256": "f0ccb2f465894c6f9ff4dd142351ed33186c5f861283a75f3e08d1531a253c49",
+      "size_bytes": 943331,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_MRA.uasset",
+      "sha256": "9f7e495cbe0430aed7084b5508f87186f98346eb04f003734c9b378891da7887",
+      "size_bytes": 974099,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_N.uasset",
+      "sha256": "0bc26466e9fdc954cc276bb6ac1350e22c3dabbe1b54b6bf78ed5ae2e339d9fc",
+      "size_bytes": 1524635,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Shared/T_UE_Logo_M.uasset",
+      "sha256": "34e6fa3414c04a86b7a5287e5569ea9d6e53c319d6e7dbfc8b09dab5b70611a6",
+      "size_bytes": 59927,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C04.uasset",
+      "sha256": "afc7c506d706c4e3005c786f8e8354de2fa2438b23df2963f65077532188bf59",
+      "size_bytes": 6937597,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C04_Skeleton.uasset",
+      "sha256": "c56a60bc8cf4a4e99940067297dd06f4bf5015f231892a1018cf697d6db12621",
+      "size_bytes": 41989,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C08.uasset",
+      "sha256": "3e00aa154ef42a4ae32d8596075d832628defb13b61826e46f424685a8954bcd",
+      "size_bytes": 6939784,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C08_Skeleton.uasset",
+      "sha256": "59db7de87bc71c73fdf37b964721885874b2d6e0c806b6c2a6c0f9ee80cd7248",
+      "size_bytes": 41998,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair06.uasset",
+      "sha256": "1f8ff66de0200cf56736aa2d6a39d0eed53d533d5acb242c2d5cb5adbc669ec6",
+      "size_bytes": 6915170,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair06_Skeleton.uasset",
+      "sha256": "52609b26f9b351623e1eafe21f87560a4f645442e1f6982a423e227e906b8c55",
+      "size_bytes": 41986,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair07.uasset",
+      "sha256": "b067237d453bcafab741645b48f2a0f7c8c080dd6e028cb714c41f9692d68e71",
+      "size_bytes": 6915220,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair07_Skeleton.uasset",
+      "sha256": "e4ace31c215fc38ce6251bffa6edd5b9500550dad401c13315d1fbb437f86b64",
+      "size_bytes": 42386,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair08.uasset",
+      "sha256": "26249bc12e27559344daf777fac378d203ae74d31a01781a679db49357fd16f3",
+      "size_bytes": 6915420,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair08_Skeleton.uasset",
+      "sha256": "0d245667e32f8b172549bd1dea5e1f46768f3f406c0b9cf74d41dfbd7181a434",
+      "size_bytes": 42386,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01.uasset",
+      "sha256": "ebc0513bf130205313f40bb70a681d9ef2a9111929ea2ec865aea89fb646a597",
+      "size_bytes": 7107247,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01_Skeleton.uasset",
+      "sha256": "63ab2c3e2ec1334ab47c45fbc66acd2aa95f6dc08b3430390283c573b1120a28",
+      "size_bytes": 42101,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04.uasset",
+      "sha256": "42e654a1539f2060bb347eee8916207bc6b30cc50bc01e4a21605211b1907dd5",
+      "size_bytes": 6974604,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04_Skeleton.uasset",
+      "sha256": "d9ac287711c99cd4cb340e4caeabffa0a5435e5184cb451eb0cdbfb2e2e04c4b",
+      "size_bytes": 41995,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05.uasset",
+      "sha256": "0b131c0fcf5d687f6d625416bcebc7ef37ea39a73271888e82d67f7399f3de95",
+      "size_bytes": 6974632,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05_Skeleton.uasset",
+      "sha256": "10bb0229a55ba2b3060d76a0c4b4ffe0f56a8fe4e97f8dd4c1f2e16b780cf883",
+      "size_bytes": 41994,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Donor/SKM_Manny.uasset",
+      "sha256": "8c5ba225479531465fde03d5f7165f056ea7a223a18245d94a5581fcba68cb65",
+      "size_bytes": 28777759,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/MH_Datum16_Trial01.uasset",
+      "sha256": "b7415e630295cee952f7acf3bceff007a578dd78db616efe473543b5d7ec58ed",
+      "size_bytes": 9831210,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/SM_Datum16_BodyOnly01.uasset",
+      "sha256": "a638f375a88dbf9cdf19959132b4f3574aa8199d50b8e7b7780895aa6921be46",
+      "size_bytes": 898112,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/DNA/MH_Datum16_Trial01_Body.uasset",
+      "sha256": "53b3b2de211bc29de9be248a2ccffb00e17a348bdd8fdca7a95a8b7930947a77",
+      "size_bytes": 4534126,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/MH_Datum16_Trial01_Body.uasset",
+      "sha256": "25f656c9c31b5f52240da62e41b569343795fb40047e26c0a9604e46b494663a",
+      "size_bytes": 11677401,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02.uasset",
+      "sha256": "8ff2db20766d975c874710eb83e624cd93c897692d87626b61f78416b7af9114",
+      "size_bytes": 80181847,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02_PhysicsAsset.uasset",
+      "sha256": "3d66c99aa25ee9c8e2eef6cffdba312fb747e64b70906e323c007c59ba9e3a8a",
+      "size_bytes": 70226,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02_Skeleton.uasset",
+      "sha256": "318054ff04b8acadc3adbbe029e43cd9241351b4f53f93baf63a76cd67fed29f",
+      "size_bytes": 79437,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/Datum16_Solve02_Posed.uasset",
+      "sha256": "10abaa2da9aba2f268d7c76ebe6ee7c3617946af5c83215576202f411425fc10",
+      "size_bytes": 7082203,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/MH_Datum16_Trial01_Body.uasset",
+      "sha256": "7cc296d7058e23803dc66ace33df7a482296f24ae63b797515ca69ceed306367",
+      "size_bytes": 11598963,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_Cue.uasset",
+      "sha256": "8723a7d859fe8a2cf23bae81122cabd8103e2ef1af42f5f11980cdc87d0e56ee",
+      "size_bytes": 13572,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+      "sha256": "967653511cfe421434e7d27061ce8b02ae5455a0e032273bdd064ed2a9b241a0",
+      "size_bytes": 15846660,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+      "sha256": "303b8446e469a48927d6bcf62121e825168659c92ce87165c5da181cc190f794",
+      "size_bytes": 66104,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Aimed.uasset",
+      "sha256": "d86b0b2de616503bf11a0f58da33a754a1674b15dafc109dfdb2a482dc26048a",
+      "size_bytes": 147312,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Auto.uasset",
+      "sha256": "f9183ee5dcf770e3817b0d2d393d2c26cfa36de6d932b00a316e972a488cf8d9",
+      "size_bytes": 150225,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Empty.uasset",
+      "sha256": "79b3880015c3a83f9c8569293f27d90f4af2b059823f44789984f913ecee5ab7",
+      "size_bytes": 130766,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Semi.uasset",
+      "sha256": "a4e9e4cc33f6ee4d7812e0d1479f6bb9723107f0af43aa5d3aa805b3868ddeed",
+      "size_bytes": 123308,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty.uasset",
+      "sha256": "2b9c1c1e3713423864da36a529c110b5f05bdebc8b6e9ad90ef947668b3ffe35",
+      "size_bytes": 483418,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty_Aimed.uasset",
+      "sha256": "28062fc79331cdbe6fb8cacbf4b86a25744f4b3472fabe4fb6f97a7641b7ebc5",
+      "size_bytes": 465709,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Idle_Loop_Crouched.uasset",
+      "sha256": "3cce4724779bc2adc00f30db53baef52cd722b89d46bd7c84afbf1a3cc539289",
+      "size_bytes": 154049,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_End.uasset",
+      "sha256": "69fde0be52fd3478fc1740bd89b76ce3c4a67c6eb2842a8514daf3fb69b1db4b",
+      "size_bytes": 128771,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_Falling_Loop.uasset",
+      "sha256": "2ae8ece584e305476af587b1965de09dd7dd0b290415e2eb570886b6804bfc13",
+      "size_bytes": 116902,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_Full.uasset",
+      "sha256": "0014a096d45b1ad0beca9f21d3cf0964423fc4db1830af691da390d78663cfaf",
+      "size_bytes": 142598,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_Start.uasset",
+      "sha256": "4b55cb80ce5571b3c1a194dccf2862b438c54b31614950e2ac9ad693dbce5c88",
+      "size_bytes": 108690,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Run_F_Loop.uasset",
+      "sha256": "b46a9b6a5e7fdfbf6a608382b8d709e26389173667562140a7c8d0b822b9dc28",
+      "size_bytes": 116691,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Sprint_F_Loop.uasset",
+      "sha256": "70f63644cfd81d2b5fa2384bd50ec7df884dcaae4d9e3c87ce2a05395ea41471",
+      "size_bytes": 133206,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Aimed.uasset",
+      "sha256": "50f305545a206a29fd3037ef6428af9751dca6a6532a3ba16308655134b8d825",
+      "size_bytes": 14335,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Crouched.uasset",
+      "sha256": "0acc700e98ca0ce24cb4a4e5ea2381dab28a5a70bd08e743de15d0d6edbe52be",
+      "size_bytes": 14450,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Standing.uasset",
+      "sha256": "344d1ccd1528515431f38141bcb0199b5873679432c995c9921b7a1b4026ea96",
+      "size_bytes": 14634,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Equip.uasset",
+      "sha256": "493a0c7b6b3660a2db23cbf27ae4d8ea391b568ddc43bee83cf59059bf498531",
+      "size_bytes": 324424,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Holster.uasset",
+      "sha256": "39cfa97c9a6fe51c17d0a036140c27b36a7d66023a9d840dc76a43558418696a",
+      "size_bytes": 108796,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_End.uasset",
+      "sha256": "2745815ca4abea28d2461baee5b335a9cb4025db61bb8e7d06c7b5acdb400b1b",
+      "size_bytes": 138067,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_End_Aimed.uasset",
+      "sha256": "96e739d3e32217c1cee07fd70e0cc58849f617b930a2d4283d3c3987a17ff570",
+      "size_bytes": 138109,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_Start.uasset",
+      "sha256": "c558d492239b20022f0d0ff6fe2fb622214f6f1a8146314a39893f623533b314",
+      "size_bytes": 132309,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_Start_Aimed.uasset",
+      "sha256": "0b7730cf1368132f0bdb3ee1660b92768a3ac2649a953237186668adcd51a6fc",
+      "size_bytes": 132357,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Run_End.uasset",
+      "sha256": "723529ef1f5fbe631fbaec533846bcd23368c2fbece79cf1841cea17a8453b3b",
+      "size_bytes": 135233,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Walk_End.uasset",
+      "sha256": "c30618972ed6ee4e89e394fe0fbd66d98a1318c544e6e432e01e3693a0c3a03d",
+      "size_bytes": 127598,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/BS_TFA_FP_AR_Transition_Crouch_End.uasset",
+      "sha256": "4afbc6d40635afd01de5686ce985ca161ab5b4ed96314e133b9ec4d2e51592b4",
+      "size_bytes": 8592,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/BS_TFA_FP_AR_Transition_Crouch_Start.uasset",
+      "sha256": "8c12b8a7a022f031237de8dc849067f3aff99fa63484d7577b6bf0dfca404663",
+      "size_bytes": 8609,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Fire.uasset",
+      "sha256": "f06d4b83da0a78f53413f9dc7f1dd0a6153b05cb4d7ec557c64a1c96b11815bf",
+      "size_bytes": 179326,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Fire_Empty.uasset",
+      "sha256": "a81f00de32383af2513687a6cf0ba58dd5a2eaaaf2298bf0658e3dabd8f6bb25",
+      "size_bytes": 145614,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload.uasset",
+      "sha256": "ab9267eb2601ac79768b6cc136d7c1680daf7af0d8364df21b48f2d0053bba08",
+      "size_bytes": 807128,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Aimed.uasset",
+      "sha256": "58101de5f622bc6d7bf9587d168da2beb4a5d4fc846bdc6716095fae6c8da7d2",
+      "size_bytes": 807116,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Empty.uasset",
+      "sha256": "a071a71dd0021574c900bb34898064a5c6f5944b400355ceb182b424002003bc",
+      "size_bytes": 778642,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Empty_Aimed.uasset",
+      "sha256": "7b0e16845da4fbdfb9f3c5a189c9b8a5f2bfa913e2a6c38078ba50517648d88b",
+      "size_bytes": 839024,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Locomotion/A_TFA_TP_AR_Idle_Loop.uasset",
+      "sha256": "68305f0ec67b9d34de11a2b116a4398b9dffe02e273aaeba148f436561870195",
+      "size_bytes": 472443,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Poses/A_TFA_TP_AR_Aim_Pose.uasset",
+      "sha256": "c11b107ffcdb0e23cbd5018f57c1d78cd330358ddaa718e987d358f3a1741893",
+      "size_bytes": 92416,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Poses/A_TFA_TP_AR_Idle_Pose.uasset",
+      "sha256": "97c4a240e2e97a9695c7406150d70c5294636bf7a2dff64e1a47ed664aae642a",
+      "size_bytes": 92541,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Equip.uasset",
+      "sha256": "431e4754ec029fbf5072c376dd3c3ea20ad9fe5af6f98bf6a298bfbaa404492c",
+      "size_bytes": 524841,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Holster.uasset",
+      "sha256": "3704e03e061268a8dabbe37c2cf22b0049f9c75cf8a016562c11ab8e24654820",
+      "size_bytes": 146116,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Transition_Aim_End.uasset",
+      "sha256": "8005f9a8619861348b1e2acec968af5823229e02491822795ec44b8ff30179f5",
+      "size_bytes": 152838,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Transition_Aim_Start.uasset",
+      "sha256": "6390deb1f9d4f4a582b60b62c4bc7c75051ae5f6e8483ec617496a4cbbd52c32",
+      "size_bytes": 158951,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/Common/A_TFA_AR_Magazine_FireDepletion.uasset",
+      "sha256": "1614cf17728ea868113bcca66bca14a661e8cffef3904e2a0790d8d7494a6f9b",
+      "size_bytes": 257323,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/Common/A_TFA_WEP_AR_Reference.uasset",
+      "sha256": "abab15cc78f5f053ae4c9c3d07d2b5ce71dc89e1402176bf045cbc8ee792dd9a",
+      "size_bytes": 26848,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Equip.uasset",
+      "sha256": "b185dd61b289453e54ef976672bf35b76995e651822d111821288dc30dc607ef",
+      "size_bytes": 50248,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Fire.uasset",
+      "sha256": "8ea733ef152fbff1c455bea244d45e843e83f3cc05191c1a27cd96948d49c9a1",
+      "size_bytes": 35542,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty.uasset",
+      "sha256": "87adee73fd0128816fd264e63af35a6edc236c76cbbf4014be84c7997c336b3f",
+      "size_bytes": 94843,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty_Aimed.uasset",
+      "sha256": "fffe1b966eee81b5c48d72ad0d4874e5e5c6b3b4991a724a00c399481abf4efd",
+      "size_bytes": 94885,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload.uasset",
+      "sha256": "fbfd10c5039ec043ad8b7590dc1fcb5410385a3edbc688d60b42a910a0bdcfe4",
+      "size_bytes": 80943,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Aimed.uasset",
+      "sha256": "8b0078cd02cdf9de4295d45eebf993e6140d355c05ad62875c88393e198b464d",
+      "size_bytes": 87989,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Empty.uasset",
+      "sha256": "df28cc79120f3fa35b3727eea46d20c67bd39383c9be2df2df95bd73291fd93e",
+      "size_bytes": 91339,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Empty_Aimed.uasset",
+      "sha256": "043eef6b088945d1ce76c095291d7a7d035415b766f193c4ba971ee047a31254",
+      "size_bytes": 94933,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Bullet.uasset",
+      "sha256": "0c282e65b4901d8b3d6f45238f06c9715c6c57b6a9ef220faac4b3ccabd3ad2c",
+      "size_bytes": 39916,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Magazine_Empty.uasset",
+      "sha256": "bc3a293a7614a640bdac2e496bcbe1c0186f32acb8168afa5d24e7f1ee7368d9",
+      "size_bytes": 298338,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Magazine_Full.uasset",
+      "sha256": "fdfc6718d94e9c9383c90eeeefd801f4c168299053cb307a3f0d044a705332a5",
+      "size_bytes": 312903,
+      "role": "preserved_inactive_native_package",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms01Review.md",
+          "note": "Reviewed MSQ-61 scoped inventory. Inactive archive is byte-preserved, not a new acceptance of original protagonist work. Owner visual acceptance is separate."
+        }
+      ]
+    }
+  ],
+  "dependencies": []
+}

@@ -1,0 +1,756 @@
+{
+  "task": "MSQ-61",
+  "restore": "With the editor closed, move each archived file to its original path after verifying SHA-256 and absence of a conflicting file.",
+  "files": [
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd.uasset",
+      "bytes": 582054,
+      "sha256": "0fd489f5c8d4d63e84f8a25c2db46c3ae54eae828212b2a32622726e593b5d3c"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Left.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Left.uasset",
+      "bytes": 458365,
+      "sha256": "c3939c4aa298e6be0834256ef6f642cff0465a40d676ec7e464aaf504b44f729"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Right.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Right.uasset",
+      "bytes": 458272,
+      "sha256": "907cb106c1c466aac0b38753b7551af73a09c082a652c82c43df5418eb33b089"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd.uasset",
+      "bytes": 516328,
+      "sha256": "287d39883a65ccf6f89d91c7ca13b23184f04ae6eb5cc3867dd7ef7cfb35ec1c"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Left.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Left.uasset",
+      "bytes": 384314,
+      "sha256": "4103ea6388d484e8f71cd30b955c3c954750d922a0c030bf3d902bdb3e02c13d"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Right.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Right.uasset",
+      "bytes": 384322,
+      "sha256": "2ca8d8ec88d086d4cb6027a2eefdde258142587bca40e98dee021abe9c8824f8"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Left.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Left.uasset",
+      "bytes": 296415,
+      "sha256": "4feaf1bd5b370e28f5dce611b28d955bbf84bbeb72b7e22972a0e143022621a7"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Right.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Right.uasset",
+      "bytes": 420984,
+      "sha256": "e3c5cae5448dbb8c4e3bda5406202a8e55b08247695082270e1fef3dbdd6e533"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Apex.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Apex.uasset",
+      "bytes": 228355,
+      "sha256": "39acbd6bcfc5ec2795ee2497bb353fbe954766bda545c3318c3cd6ee5f1ee008"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Land.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Land.uasset",
+      "bytes": 179028,
+      "sha256": "ce74e83b9b88fa3722951c1c6b2cc36ae7159b8141f5347e5b47d760cee41c42"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Loop.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Loop.uasset",
+      "bytes": 645680,
+      "sha256": "d17c0a4fe1d9bb970b3208909e1c35b7183568c7968a0d6d0de391cca216b472"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_RecoveryAdditive.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_RecoveryAdditive.uasset",
+      "bytes": 294517,
+      "sha256": "9d663743ac0fd361303751c55688a34053fbed145aaa88a004abd7b02533d5e5"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start.uasset",
+      "bytes": 146783,
+      "sha256": "925f27182be45054a1bbb5d458cb53d38773b356dd61e18b82fa9a72880dc8e7"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start_Loop.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start_Loop.uasset",
+      "bytes": 441727,
+      "sha256": "c2da3d291df2070e1aaa62a45e445a7979948489b9e811e0d17f94b3e627d14e"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd.uasset",
+      "bytes": 449720,
+      "sha256": "e1400dc7a7bfca224e0aa7796e5c230236ad634c808b2a1540cbad8903fa897b"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Left.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Left.uasset",
+      "bytes": 332682,
+      "sha256": "8d535eb181e756f56974efae068f34da050747fd8836fe2bb5f0c693f51325c2"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Right.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Right.uasset",
+      "bytes": 332577,
+      "sha256": "6e0bd9b3ba2e982ac9ffd60a643dab78cf886d194a26af518170a02dc4f3eac0"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd.uasset",
+      "bytes": 490267,
+      "sha256": "540a6a77c48027e13be84d483c6afd18d82fb115b7532334597ebefe2249ecd0"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Left.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Left.uasset",
+      "bytes": 384794,
+      "sha256": "f7797a7841cb86c3dc9e68dcdf968e538c9a7335abb1b0d9db95e0983b2226d7"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Right.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Right.uasset",
+      "bytes": 384793,
+      "sha256": "787c7b69a054c6f2850503c016a2ef2fade7ad0941375c8e521c3534bf695d12"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Left.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Left.uasset",
+      "bytes": 453120,
+      "sha256": "a99d18722e504801616e1c0c495711c43c2d82c4465f7f388cdae8a45502bd1e"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Right.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Right.uasset",
+      "bytes": 510650,
+      "sha256": "2c2c12d6a959d69c96962ca340bdfe984942df621ee2ff7e7e955662ddaee52a"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Materials/M_Mannequin.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Materials/M_Mannequin.uasset",
+      "bytes": 59292,
+      "sha256": "d7ffe412d906380bd5bd4462f464b2a1fe48fdb79b9077f29bd0f958a782035c"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Materials/Manny/MI_Manny_01_New.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Materials/Manny/MI_Manny_01_New.uasset",
+      "bytes": 17963,
+      "sha256": "9f1e4ed382304d020b750c81505140fc1de4d339b0909430adb5380a6bb89b65"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Materials/Manny/MI_Manny_02_New.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Materials/Manny/MI_Manny_02_New.uasset",
+      "bytes": 18706,
+      "sha256": "26389db06f0b7928b487494bef3320d6b0e6bccd58193bccedd67c2c89132a46"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_01.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_01.uasset",
+      "bytes": 11184,
+      "sha256": "62a3050ef24b823f9fe84ac5d9c477099494982d35dafcc3d8078f32b0d4a865"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_02.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_02.uasset",
+      "bytes": 10718,
+      "sha256": "6aec77489fdfab0e1ea299de60fbd4f332face4495bbbd20b97fb0308bb9c5b4"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+      "bytes": 15825101,
+      "sha256": "be9f011191ee1887b97cd13bce09886a6066c2fd62c619991070ec142184e1bf"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Meshes/SKM_Quinn_Simple.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Meshes/SKM_Quinn_Simple.uasset",
+      "bytes": 16252577,
+      "sha256": "1ef45d92507a76d74a5e06737f94cad40eb7d5f5769dfbb63f7f74e784a178c6"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset",
+      "bytes": 191198,
+      "sha256": "22029d47455f24471195b26a0e04a1e1389f27d6a924e88c9f46a0f600c9a530"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+      "bytes": 301538,
+      "sha256": "c0ceaf003947088ff076555b81a46e5ccb11149c94025eb2a9e74263fbaa0d67"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_BN.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_01_BN.uasset",
+      "bytes": 1422785,
+      "sha256": "2f623209571ecbd8185b5b463786be033c3284190b4fc7b249e8d1d2ed995fd8"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset",
+      "bytes": 699555,
+      "sha256": "6ae0f4f9908c30ecc9aedf1ebb442e4983e526a7832ec791542064c7853f9999"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA.uasset",
+      "bytes": 712594,
+      "sha256": "3e42e888aed8aefff68da7d7dda4f177c5647b19473e4e913f61375c1319abd8"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_BN.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_02_BN.uasset",
+      "bytes": 20999487,
+      "sha256": "c9575d21c9e2872b3358c0efb9e202535ce2efce94c338b9d3bd04cb9831e353"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset",
+      "bytes": 1036712,
+      "sha256": "474728713232c6833f55c041548f555bc62c5c49e74082a5d16e68a5ce488cfe"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA.uasset",
+      "bytes": 1059559,
+      "sha256": "6697972eaf2dfe201923dba6a302f024b0ef4c4e46b4ecf578178717098e8277"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_D.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_D.uasset",
+      "bytes": 674768,
+      "sha256": "04e5ed207b7df0d2ad1bbc668916bcf170545fc2a72875e49ec99c6e2667002f"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_MRA.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_MRA.uasset",
+      "bytes": 791597,
+      "sha256": "0988d4d9f25597224910e1043591cb2a089a8607a4fe4a63cbc68f3eb2ab473e"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_N.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_N.uasset",
+      "bytes": 1263741,
+      "sha256": "10fbe9ac3e18e0a890d19756d3470ca372a1aeaffefbe9a22d6b0e6182293551"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_D.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_D.uasset",
+      "bytes": 943331,
+      "sha256": "f0ccb2f465894c6f9ff4dd142351ed33186c5f861283a75f3e08d1531a253c49"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_MRA.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_MRA.uasset",
+      "bytes": 974099,
+      "sha256": "9f7e495cbe0430aed7084b5508f87186f98346eb04f003734c9b378891da7887"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_N.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_N.uasset",
+      "bytes": 1524635,
+      "sha256": "0bc26466e9fdc954cc276bb6ac1350e22c3dabbe1b54b6bf78ed5ae2e339d9fc"
+    },
+    {
+      "original": "Content/Characters/Mannequins/Textures/Shared/T_UE_Logo_M.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Characters/Mannequins/Textures/Shared/T_UE_Logo_M.uasset",
+      "bytes": 59927,
+      "sha256": "34e6fa3414c04a86b7a5287e5569ea9d6e53c319d6e7dbfc8b09dab5b70611a6"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C04.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C04.uasset",
+      "bytes": 6937597,
+      "sha256": "afc7c506d706c4e3005c786f8e8354de2fa2438b23df2963f65077532188bf59"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C04_Skeleton.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C04_Skeleton.uasset",
+      "bytes": 41989,
+      "sha256": "c56a60bc8cf4a4e99940067297dd06f4bf5015f231892a1018cf697d6db12621"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C08.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C08.uasset",
+      "bytes": 6939784,
+      "sha256": "3e00aa154ef42a4ae32d8596075d832628defb13b61826e46f424685a8954bcd"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C08_Skeleton.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Correction01/Datum16_C08_Skeleton.uasset",
+      "bytes": 41998,
+      "sha256": "59db7de87bc71c73fdf37b964721885874b2d6e0c806b6c2a6c0f9ee80cd7248"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair06.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair06.uasset",
+      "bytes": 6915170,
+      "sha256": "1f8ff66de0200cf56736aa2d6a39d0eed53d533d5acb242c2d5cb5adbc669ec6"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair06_Skeleton.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair06_Skeleton.uasset",
+      "bytes": 41986,
+      "sha256": "52609b26f9b351623e1eafe21f87560a4f645442e1f6982a423e227e906b8c55"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair07.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair07.uasset",
+      "bytes": 6915220,
+      "sha256": "b067237d453bcafab741645b48f2a0f7c8c080dd6e028cb714c41f9692d68e71"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair07_Skeleton.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair07_Skeleton.uasset",
+      "bytes": 42386,
+      "sha256": "e4ace31c215fc38ce6251bffa6edd5b9500550dad401c13315d1fbb437f86b64"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair08.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair08.uasset",
+      "bytes": 6915420,
+      "sha256": "26249bc12e27559344daf777fac378d203ae74d31a01781a679db49357fd16f3"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair08_Skeleton.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/BodyRepair01/Datum16_Repair08_Skeleton.uasset",
+      "bytes": 42386,
+      "sha256": "0d245667e32f8b172549bd1dea5e1f46768f3f406c0b9cf74d41dfbd7181a434"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01.uasset",
+      "bytes": 7107247,
+      "sha256": "ebc0513bf130205313f40bb70a681d9ef2a9111929ea2ec865aea89fb646a597"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01_Skeleton.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind01_Skeleton.uasset",
+      "bytes": 42101,
+      "sha256": "63ab2c3e2ec1334ab47c45fbc66acd2aa95f6dc08b3430390283c573b1120a28"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04.uasset",
+      "bytes": 6974604,
+      "sha256": "42e654a1539f2060bb347eee8916207bc6b30cc50bc01e4a21605211b1907dd5"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04_Skeleton.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind04_Skeleton.uasset",
+      "bytes": 41995,
+      "sha256": "d9ac287711c99cd4cb340e4caeabffa0a5435e5184cb451eb0cdbfb2e2e04c4b"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05.uasset",
+      "bytes": 6974632,
+      "sha256": "0b131c0fcf5d687f6d625416bcebc7ef37ea39a73271888e82d67f7399f3de95"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05_Skeleton.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Datum16_Bind05_Skeleton.uasset",
+      "bytes": 41994,
+      "sha256": "10bb0229a55ba2b3060d76a0c4b4ffe0f56a8fe4e97f8dd4c1f2e16b780cf883"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MeshUsability01/Donor/SKM_Manny.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MeshUsability01/Donor/SKM_Manny.uasset",
+      "bytes": 28777759,
+      "sha256": "8c5ba225479531465fde03d5f7165f056ea7a223a18245d94a5581fcba68cb65"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MetaHumanTrial01/MH_Datum16_Trial01.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/MH_Datum16_Trial01.uasset",
+      "bytes": 9831210,
+      "sha256": "b7415e630295cee952f7acf3bceff007a578dd78db616efe473543b5d7ec58ed"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MetaHumanTrial01/SM_Datum16_BodyOnly01.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/SM_Datum16_BodyOnly01.uasset",
+      "bytes": 898112,
+      "sha256": "a638f375a88dbf9cdf19959132b4f3574aa8199d50b8e7b7780895aa6921be46"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/DNA/MH_Datum16_Trial01_Body.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/DNA/MH_Datum16_Trial01_Body.uasset",
+      "bytes": 4534126,
+      "sha256": "53b3b2de211bc29de9be248a2ccffb00e17a348bdd8fdca7a95a8b7930947a77"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/MH_Datum16_Trial01_Body.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/APose/MH_Datum16_Trial01_Body.uasset",
+      "bytes": 11677401,
+      "sha256": "25f656c9c31b5f52240da62e41b569343795fb40047e26c0a9604e46b494663a"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02.uasset",
+      "bytes": 80181847,
+      "sha256": "8ff2db20766d975c874710eb83e624cd93c897692d87626b61f78416b7af9114"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02_PhysicsAsset.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02_PhysicsAsset.uasset",
+      "bytes": 70226,
+      "sha256": "3d66c99aa25ee9c8e2eef6cffdba312fb747e64b70906e323c007c59ba9e3a8a"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02_Skeleton.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/GeneratedFromDNA/SK_Datum16_PosedDNA02_Skeleton.uasset",
+      "bytes": 79437,
+      "sha256": "318054ff04b8acadc3adbbe029e43cd9241351b4f53f93baf63a76cd67fed29f"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/Datum16_Solve02_Posed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/Datum16_Solve02_Posed.uasset",
+      "bytes": 7082203,
+      "sha256": "10abaa2da9aba2f268d7c76ebe6ee7c3617946af5c83215576202f411425fc10"
+    },
+    {
+      "original": "Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/MH_Datum16_Trial01_Body.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/Development/PlayerCharacter01/MetaHumanTrial01/Solve02/SourcePose/MH_Datum16_Trial01_Body.uasset",
+      "bytes": 11598963,
+      "sha256": "7cc296d7058e23803dc66ace33df7a482296f24ae63b797515ca69ceed306367"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_Cue.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Cloth_Cue.uasset",
+      "bytes": 13572,
+      "sha256": "8723a7d859fe8a2cf23bae81122cabd8103e2ef1af42f5f11980cdc87d0e56ee"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+      "bytes": 15846660,
+      "sha256": "967653511cfe421434e7d27061ce8b02ae5455a0e032273bdd064ed2a9b241a0"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Common/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+      "bytes": 66104,
+      "sha256": "303b8446e469a48927d6bcf62121e825168659c92ce87165c5da181cc190f794"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Aimed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Aimed.uasset",
+      "bytes": 147312,
+      "sha256": "d86b0b2de616503bf11a0f58da33a754a1674b15dafc109dfdb2a482dc26048a"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Auto.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Auto.uasset",
+      "bytes": 150225,
+      "sha256": "f9183ee5dcf770e3817b0d2d393d2c26cfa36de6d932b00a316e972a488cf8d9"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Empty.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Empty.uasset",
+      "bytes": 130766,
+      "sha256": "79b3880015c3a83f9c8569293f27d90f4af2b059823f44789984f913ecee5ab7"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Semi.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Fire_Semi.uasset",
+      "bytes": 123308,
+      "sha256": "a4e9e4cc33f6ee4d7812e0d1479f6bb9723107f0af43aa5d3aa805b3868ddeed"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty.uasset",
+      "bytes": 483418,
+      "sha256": "2b9c1c1e3713423864da36a529c110b5f05bdebc8b6e9ad90ef947668b3ffe35"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty_Aimed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Combat/A_TFA_FP_AR_Reload_Empty_Aimed.uasset",
+      "bytes": 465709,
+      "sha256": "28062fc79331cdbe6fb8cacbf4b86a25744f4b3472fabe4fb6f97a7641b7ebc5"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Idle_Loop_Crouched.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Idle_Loop_Crouched.uasset",
+      "bytes": 154049,
+      "sha256": "3cce4724779bc2adc00f30db53baef52cd722b89d46bd7c84afbf1a3cc539289"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_End.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_End.uasset",
+      "bytes": 128771,
+      "sha256": "69fde0be52fd3478fc1740bd89b76ce3c4a67c6eb2842a8514daf3fb69b1db4b"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_Falling_Loop.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_Falling_Loop.uasset",
+      "bytes": 116902,
+      "sha256": "2ae8ece584e305476af587b1965de09dd7dd0b290415e2eb570886b6804bfc13"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_Full.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_Full.uasset",
+      "bytes": 142598,
+      "sha256": "0014a096d45b1ad0beca9f21d3cf0964423fc4db1830af691da390d78663cfaf"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_Start.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Jump_Start.uasset",
+      "bytes": 108690,
+      "sha256": "4b55cb80ce5571b3c1a194dccf2862b438c54b31614950e2ac9ad693dbce5c88"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Run_F_Loop.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Run_F_Loop.uasset",
+      "bytes": 116691,
+      "sha256": "b46a9b6a5e7fdfbf6a608382b8d709e26389173667562140a7c8d0b822b9dc28"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Sprint_F_Loop.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/A_TFA_FP_AR_Sprint_F_Loop.uasset",
+      "bytes": 133206,
+      "sha256": "70f63644cfd81d2b5fa2384bd50ec7df884dcaae4d9e3c87ce2a05395ea41471"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Aimed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Aimed.uasset",
+      "bytes": 14335,
+      "sha256": "50f305545a206a29fd3037ef6428af9751dca6a6532a3ba16308655134b8d825"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Crouched.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Crouched.uasset",
+      "bytes": 14450,
+      "sha256": "0acc700e98ca0ce24cb4a4e5ea2381dab28a5a70bd08e743de15d0d6edbe52be"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Standing.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Locomotion/BS_TFA_FP_AR_Locomotion_Standing.uasset",
+      "bytes": 14634,
+      "sha256": "344d1ccd1528515431f38141bcb0199b5873679432c995c9921b7a1b4026ea96"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Equip.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Equip.uasset",
+      "bytes": 324424,
+      "sha256": "493a0c7b6b3660a2db23cbf27ae4d8ea391b568ddc43bee83cf59059bf498531"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Holster.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Holster.uasset",
+      "bytes": 108796,
+      "sha256": "39cfa97c9a6fe51c17d0a036140c27b36a7d66023a9d840dc76a43558418696a"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_End.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_End.uasset",
+      "bytes": 138067,
+      "sha256": "2745815ca4abea28d2461baee5b335a9cb4025db61bb8e7d06c7b5acdb400b1b"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_End_Aimed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_End_Aimed.uasset",
+      "bytes": 138109,
+      "sha256": "96e739d3e32217c1cee07fd70e0cc58849f617b930a2d4283d3c3987a17ff570"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_Start.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_Start.uasset",
+      "bytes": 132309,
+      "sha256": "c558d492239b20022f0d0ff6fe2fb622214f6f1a8146314a39893f623533b314"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_Start_Aimed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Crouch_Start_Aimed.uasset",
+      "bytes": 132357,
+      "sha256": "0b7730cf1368132f0bdb3ee1660b92768a3ac2649a953237186668adcd51a6fc"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Run_End.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Run_End.uasset",
+      "bytes": 135233,
+      "sha256": "723529ef1f5fbe631fbaec533846bcd23368c2fbece79cf1841cea17a8453b3b"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Walk_End.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/A_TFA_FP_AR_Transition_Walk_End.uasset",
+      "bytes": 127598,
+      "sha256": "c30618972ed6ee4e89e394fe0fbd66d98a1318c544e6e432e01e3693a0c3a03d"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/BS_TFA_FP_AR_Transition_Crouch_End.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/BS_TFA_FP_AR_Transition_Crouch_End.uasset",
+      "bytes": 8592,
+      "sha256": "4afbc6d40635afd01de5686ce985ca161ab5b4ed96314e133b9ec4d2e51592b4"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/BS_TFA_FP_AR_Transition_Crouch_Start.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/FP/Transitions/BS_TFA_FP_AR_Transition_Crouch_Start.uasset",
+      "bytes": 8609,
+      "sha256": "8c12b8a7a022f031237de8dc849067f3aff99fa63484d7577b6bf0dfca404663"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Fire.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Fire.uasset",
+      "bytes": 179326,
+      "sha256": "f06d4b83da0a78f53413f9dc7f1dd0a6153b05cb4d7ec557c64a1c96b11815bf"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Fire_Empty.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Fire_Empty.uasset",
+      "bytes": 145614,
+      "sha256": "a81f00de32383af2513687a6cf0ba58dd5a2eaaaf2298bf0658e3dabd8f6bb25"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload.uasset",
+      "bytes": 807128,
+      "sha256": "ab9267eb2601ac79768b6cc136d7c1680daf7af0d8364df21b48f2d0053bba08"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Aimed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Aimed.uasset",
+      "bytes": 807116,
+      "sha256": "58101de5f622bc6d7bf9587d168da2beb4a5d4fc846bdc6716095fae6c8da7d2"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Empty.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Empty.uasset",
+      "bytes": 778642,
+      "sha256": "a071a71dd0021574c900bb34898064a5c6f5944b400355ceb182b424002003bc"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Empty_Aimed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Combat/A_TFA_TP_AR_Reload_Empty_Aimed.uasset",
+      "bytes": 839024,
+      "sha256": "7b0e16845da4fbdfb9f3c5a189c9b8a5f2bfa913e2a6c38078ba50517648d88b"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Locomotion/A_TFA_TP_AR_Idle_Loop.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Locomotion/A_TFA_TP_AR_Idle_Loop.uasset",
+      "bytes": 472443,
+      "sha256": "68305f0ec67b9d34de11a2b116a4398b9dffe02e273aaeba148f436561870195"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Poses/A_TFA_TP_AR_Aim_Pose.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Poses/A_TFA_TP_AR_Aim_Pose.uasset",
+      "bytes": 92416,
+      "sha256": "c11b107ffcdb0e23cbd5018f57c1d78cd330358ddaa718e987d358f3a1741893"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Poses/A_TFA_TP_AR_Idle_Pose.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Poses/A_TFA_TP_AR_Idle_Pose.uasset",
+      "bytes": 92541,
+      "sha256": "97c4a240e2e97a9695c7406150d70c5294636bf7a2dff64e1a47ed664aae642a"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Equip.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Equip.uasset",
+      "bytes": 524841,
+      "sha256": "431e4754ec029fbf5072c376dd3c3ea20ad9fe5af6f98bf6a298bfbaa404492c"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Holster.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Holster.uasset",
+      "bytes": 146116,
+      "sha256": "3704e03e061268a8dabbe37c2cf22b0049f9c75cf8a016562c11ab8e24654820"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Transition_Aim_End.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Transition_Aim_End.uasset",
+      "bytes": 152838,
+      "sha256": "8005f9a8619861348b1e2acec968af5823229e02491822795ec44b8ff30179f5"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Transition_Aim_Start.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Character/TP/Transitions/A_TFA_TP_AR_Transition_Aim_Start.uasset",
+      "bytes": 158951,
+      "sha256": "6390deb1f9d4f4a582b60b62c4bc7c75051ae5f6e8483ec617496a4cbbd52c32"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/Common/A_TFA_AR_Magazine_FireDepletion.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/Common/A_TFA_AR_Magazine_FireDepletion.uasset",
+      "bytes": 257323,
+      "sha256": "1614cf17728ea868113bcca66bca14a661e8cffef3904e2a0790d8d7494a6f9b"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/Common/A_TFA_WEP_AR_Reference.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/Common/A_TFA_WEP_AR_Reference.uasset",
+      "bytes": 26848,
+      "sha256": "abab15cc78f5f053ae4c9c3d07d2b5ce71dc89e1402176bf045cbc8ee792dd9a"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Equip.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Equip.uasset",
+      "bytes": 50248,
+      "sha256": "b185dd61b289453e54ef976672bf35b76995e651822d111821288dc30dc607ef"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Fire.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Fire.uasset",
+      "bytes": 35542,
+      "sha256": "8ea733ef152fbff1c455bea244d45e843e83f3cc05191c1a27cd96948d49c9a1"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty.uasset",
+      "bytes": 94843,
+      "sha256": "87adee73fd0128816fd264e63af35a6edc236c76cbbf4014be84c7997c336b3f"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty_Aimed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/FP/A_TFA_FP_WEP_AR_Reload_Empty_Aimed.uasset",
+      "bytes": 94885,
+      "sha256": "fffe1b966eee81b5c48d72ad0d4874e5e5c6b3b4991a724a00c399481abf4efd"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload.uasset",
+      "bytes": 80943,
+      "sha256": "fbfd10c5039ec043ad8b7590dc1fcb5410385a3edbc688d60b42a910a0bdcfe4"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Aimed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Aimed.uasset",
+      "bytes": 87989,
+      "sha256": "8b0078cd02cdf9de4295d45eebf993e6140d355c05ad62875c88393e198b464d"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Empty.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Empty.uasset",
+      "bytes": 91339,
+      "sha256": "df28cc79120f3fa35b3727eea46d20c67bd39383c9be2df2df95bd73291fd93e"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Empty_Aimed.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Animations/Weapon/TP/A_TFA_TP_WEP_AR_Reload_Empty_Aimed.uasset",
+      "bytes": 94933,
+      "sha256": "043eef6b088945d1ce76c095291d7a7d035415b766f193c4ba971ee047a31254"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Bullet.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Bullet.uasset",
+      "bytes": 39916,
+      "sha256": "0c282e65b4901d8b3d6f45238f06c9715c6c57b6a9ef220faac4b3ccabd3ad2c"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Magazine_Empty.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Magazine_Empty.uasset",
+      "bytes": 298338,
+      "sha256": "bc3a293a7614a640bdac2e496bcbe1c0186f32acb8168afa5d24e7f1ee7368d9"
+    },
+    {
+      "original": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Magazine_Full.uasset",
+      "archived": "Assets/Archive/PurchasedArms01/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SM_TFA_AR_Magazine_Full.uasset",
+      "bytes": 312903,
+      "sha256": "fdfc6718d94e9c9383c90eeeefd801f4c168299053cb307a3f0d044a705332a5"
+    }
+  ]
+}

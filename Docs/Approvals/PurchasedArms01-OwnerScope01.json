@@ -1,0 +1,10 @@
+{
+  "record_id": "PurchasedArms01-OwnerScope01",
+  "date_local": "2026-09-18",
+  "source": "Owner direct chat",
+  "owner_message_original": "откати пока все изменения связанные с ГГ, прям все, давай просто добавим купленные руки и их анимации на карту, так что бы они не отрбрасывали тени пока что, так как тела нет. Все лишнее из пакета следует убрать, оставить только мувмент, что бы двигаться по лобби, прицеливание, перезарядки тоже можно оставить.",
+  "owner_message_english_translation": "For now roll back all changes related to the protagonist, absolutely all of them. Let's simply add the purchased arms and their animations to the map, without casting shadows for now because there is no body. Remove everything unnecessary from the pack; leave only movement to move around the lobby. Aiming and reloads can stay too.",
+  "scope": "Pause original protagonist production and remove its integration and development assets from active game content. Preserve sources and prior evidence as inactive history. Integrate purchased first-person arms and one rifle, movement, aiming and reloads into the retained lobby, with component shadows disabled and unnecessary package content/gameplay excluded.",
+  "supersedes": "All earlier instructions to continue MSQ-54 BodyRepair01/Correction02 or dispatch original-protagonist successors. The original-art requirement is suspended for this purchased-arms walkthrough. Deferred lobby architecture remains deferred.",
+  "preservation": "Do not destructively reset the repository or erase source/history/owner edits. Use a reversible archive for removed active assets; preserve the current lobby."
+}

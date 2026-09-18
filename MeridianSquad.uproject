@@ -12,11 +12,6 @@
 	],
 	"Plugins": [
 		{
-			"Name": "MetaHumanCharacter",
-			"Enabled": true,
-			"TargetAllowList": ["Editor"]
-		},
-		{
 			"Name": "ModelContextProtocol",
 			"Enabled": true,
 			"TargetAllowList": ["Editor"]
