@@ -1,0 +1,10 @@
+{
+  "record_id": "PurchasedArms06-OwnerScope01",
+  "date_local": "2026-09-18",
+  "source": "Owner direct chat after playing the retained lobby",
+  "owner_message_original": "Я побегал по лобби и мне в целом все нравится, только вот дульное пламя от выстрела прям какое то тусклое, чуть бы поярче его сделать.",
+  "owner_message_english_translation": "I ran around the lobby and generally like everything, but the muzzle flame when firing looks rather dim; make it a little brighter.",
+  "decision": "Make a modest brightness-only adjustment to the current rifle muzzle flame and verify actual shooting in the retained lobby.",
+  "interpretation": "The owner reports general satisfaction with the played gameplay baseline. This does not identify or accept paused environment or original-character candidates, nor pre-approve the new flash tuning.",
+  "preservation": "Preserve existing gameplay, lobby lighting and geometry, source assets, prior evidence and unrelated owner edits. Apply the standing focused-verification and task-closure-commit requirements."
+}

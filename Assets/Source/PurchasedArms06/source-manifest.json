@@ -1,0 +1,21 @@
+{
+    "task":  "MSQ-66",
+    "revision":  "PurchasedArms06-MuzzleFlame120",
+    "base_manifest":  "Assets/Source/PurchasedArms02/source-manifest.json",
+    "base_manifest_sha256":  "82660f216b1193d6f044d59c5bc6a7d72964bdda9f22bae42cea5cdfaf1d5a74",
+    "scope":  "One muzzle-flash system override; prior ADS and native gameplay revisions remain current.",
+    "files":  [
+                  {
+                      "package":  "/Game/InfimaGames/TacticalFPSAnimations/Common/VFX/Systems/NS_TFA_MuzzleFlash",
+                      "destination":  "Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Systems/NS_TFA_MuzzleFlash.uasset",
+                      "source":  "D:/devgames/Weapon/TacticalFPSAnimations/Common/VFX/Systems/NS_TFA_MuzzleFlash.uasset",
+                      "source_sha256":  "5f390b6ce592b738e8712616049f78600c82b9139708aa11b842840355907310",
+                      "previous_active_sha256":  "5f390b6ce592b738e8712616049f78600c82b9139708aa11b842840355907310",
+                      "active_sha256":  "e6a74ae3ef8e9f49abb695cd83b324578a7061fe3cc4774a3d8948bdb962e166",
+                      "active_bytes":  818840,
+                      "rollback":  "Saved/PurchasedArms06/Worker/Rollback/Content/InfimaGames/TacticalFPSAnimations/Common/VFX/Systems/NS_TFA_MuzzleFlash.uasset",
+                      "change":  "Flame InitializeParticle Color RandomRangeLinearColor Minimum and Maximum RGB multiplied by 1.2; alpha and other authored values unchanged."
+                  }
+              ],
+    "acceptance":  "Scoped technical/controller and independent visual review pass; owner acceptance of new tuning remains separate."
+}

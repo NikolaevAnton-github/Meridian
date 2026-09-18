@@ -1,0 +1,20 @@
+{
+    "asset":  "PurchasedArms06",
+    "artifacts":  [
+                      {
+                          "path":  "Assets/Source/PurchasedArms06/source-manifest.json",
+                          "sha256":  "b232385709df17c8520ade61ca19bbe0c3c2c011e92fc296cb13df7e107fc06e",
+                          "size_bytes":  1669,
+                          "role":  "purchased_rifle_muzzle_flame_revision_manifest",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PurchasedArms06Review.md",
+                                               "note":  "MSQ-66 reviewed muzzle-flame RGB gain revision. Historical package fingerprints remain immutable; registration is not owner acceptance."
+                                           }
+                                       ]
+                      }
+                  ],
+    "dependencies":  [
+
+                     ]
+}

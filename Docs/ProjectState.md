@@ -13,6 +13,18 @@ Verify native execution as well as saved profiles. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
+## Current scoped adjustment: muzzle flame brightness
+
+After playing the lobby on 2026-09-18, the owner reports general satisfaction and
+requests a slightly brighter rifle muzzle flame. [PurchasedArms06](Tasks/PurchasedArms06.md)
+is a bounded brightness adjustment over PurchasedArms05; see the
+[exact feedback](Approvals/PurchasedArms06-OwnerScope01.json). MSQ-66 increases the
+existing flame RGB by 20%, preserving alpha, size, timing, smoke and gameplay.
+Focused hip/ADS visual review and saved-package reload pass; see
+[implementation](PurchasedArms06.md) and [controller review](PurchasedArms06Review.md).
+The later owner-owned PIE session is left untouched. Owner acceptance of the
+new tuning remains separate. Lobby lighting and all paused work stay preserved.
+
 ## Current gameplay baseline: airborne actions and physical landing
 
 After playing PurchasedArms04 on 2026-09-18, the owner reported premature landing
