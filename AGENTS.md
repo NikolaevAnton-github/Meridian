@@ -13,9 +13,8 @@ instructions supersede earlier guidance within their stated scope.
 - Codex may launch existing applications and local project services needed for
   authorized work without asking again. Starting a service does not authorize
   unrelated execution, purchases or a pending design selection.
-- Current scope: [PurchasedArms03](Docs/Tasks/PurchasedArms03.md) fixes heading-dependent
-  rifle aiming over the PurchasedArms02 gameplay baseline. Verify only directly
-  affected behavior for this correction, per the owner's scoped instruction.
+- Current scope: [PurchasedArms04](Docs/Tasks/PurchasedArms04.md) adds a slightly
+  higher and farther jump from Shift sprint over the PurchasedArms03 baseline.
   Original modeling and its successors are paused;
   lobby architecture remains deferred. Preserve character sources and evidence.
   The protagonist concept batch is evaluated by the owner alone; do not dispatch
@@ -81,6 +80,10 @@ instructions supersede earlier guidance within their stated scope.
 - Define acceptance criteria, make a bounded change and verify it. Repeat failed
   actions only with new evidence; after two equivalent failures change the
   diagnostic approach. Avoid redundant passing tests.
+- For animation and gameplay corrections, verify only behavior directly affected
+  by the change and its related transitions. Do not run the full animation or
+  feature matrix. This is a standing owner instruction for future tasks; see
+  [focused verification](Docs/Approvals/FocusedVerification01.json).
 - Before environment layout or model production, create a separate concept-art
   task and obtain explicit owner approval of an identified art version. Environment
   preproduction requires dimensioned plans/sections with human scale, approved as

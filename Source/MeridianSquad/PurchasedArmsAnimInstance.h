@@ -10,7 +10,10 @@ class MERIDIANSQUAD_API UPurchasedArmsAnimInstance : public UAnimInstance
 {
     GENERATED_BODY()
 public:
+    virtual void NativeUpdateAnimation(float DeltaSeconds) override;
     virtual void NativePostEvaluateAnimation() override;
+    UPROPERTY(Transient, BlueprintReadOnly, Category="Lobby|Presentation")
+    bool bUseOrdinaryJumpBase = false;
     UFUNCTION(BlueprintPure, Category="Lobby|Verification")
     FString GetEvaluationState() const;
 private:

@@ -1,0 +1,9 @@
+{
+  "record_id": "FocusedVerification01",
+  "date_local": "2026-09-18",
+  "source": "Owner direct chat during the sprint-jump request",
+  "owner_message_original": "Да и себе пометь на будущее, что полные прогоны всех анимация совершать не надо, проверяем только то, что затрагивает непосредственно.",
+  "owner_message_english_translation": "Also note for the future that full runs of all animations are unnecessary; we check only what is directly affected.",
+  "decision": "Standing rule: verify only directly affected behavior and related transitions for animation/gameplay changes. Do not repeat full animation or feature sweeps.",
+  "scope": "Current sprint-jump task and future work. Supersedes older broad regression instructions unless a later explicit owner instruction requests such coverage. Appropriate compile/load checks remain within scope."
+}

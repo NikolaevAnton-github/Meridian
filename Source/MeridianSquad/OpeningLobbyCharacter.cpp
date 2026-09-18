@@ -19,6 +19,9 @@
 
 namespace
 {
+constexpr float OrdinaryJumpZVelocity = 320.f;
+constexpr float FastJumpMultiplier = 1.1f;
+
 bool Flag(const UObject* Object, FName Name)
 {
     const FBoolProperty* P = Object ? FindFProperty<FBoolProperty>(Object->GetClass(), Name) : nullptr;
@@ -81,7 +84,7 @@ AOpeningLobbyCharacter::AOpeningLobbyCharacter()
     Movement->BrakingDecelerationWalking = 1800.f;
     Movement->GravityScale = 1.f;
     Movement->MaxStepHeight = 35.f;
-    Movement->JumpZVelocity = 320.f;
+    Movement->JumpZVelocity = OrdinaryJumpZVelocity;
     Movement->GetNavAgentPropertiesRef().bCanCrouch = true;
     Movement->SetCrouchedHalfHeight(56.f);
     FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
@@ -108,7 +111,7 @@ void AOpeningLobbyCharacter::BeginPlay()
     Movement->BrakingDecelerationWalking = 1800.f;
     Movement->GravityScale = 1.f;
     Movement->MaxStepHeight = 35.f;
-    Movement->JumpZVelocity = 320.f;
+    Movement->JumpZVelocity = OrdinaryJumpZVelocity;
     Movement->GetNavAgentPropertiesRef().bCanCrouch = true;
     Movement->SetCrouchedHalfHeight(56.f);
     bUseControllerRotationYaw = true;
@@ -184,6 +187,12 @@ void AOpeningLobbyCharacter::Tick(float DeltaSeconds)
                 CrouchOffset = *P->ContainerPtrToValuePtr<FTransform>(Config);
     SetStruct(this, TEXT("TargetCrouchOffset"), CrouchOffset);
     Movement->MaxWalkSpeed = Flag(this, TEXT("bIsSprinting")) ? 720.f : Flag(this, TEXT("bIsRunning")) ? 540.f : 360.f;
+    if (bJumpPresentation && Movement->IsFalling())
+    {
+        // Releasing the speed key in flight must not brake away the takeoff momentum.
+        // This only retains a speed cap; CharacterMovement still owns velocity and collision.
+        Movement->MaxWalkSpeed = FMath::Max(Movement->MaxWalkSpeed, JumpPlanarSpeed);
+    }
     Movement->MaxWalkSpeedCrouched = 180.f;
     const FVector Local = GetActorRotation().UnrotateVector(GetVelocity());
     // Source blend-space axes are strafe/forward; 100 and 200 are animation units.
@@ -250,17 +259,34 @@ void AOpeningLobbyCharacter::ToggleCameraAnimation()
 
 void AOpeningLobbyCharacter::JumpPressed()
 {
-    if (Flag(this, TEXT("bIsBusy")) || Flag(this, TEXT("bIsRunning")) || Flag(this, TEXT("bIsSprinting")) || bIsCrouched || !GetCharacterMovement()->IsMovingOnGround()) return;
+    auto* Movement = GetCharacterMovement();
+    if (Flag(this, TEXT("bIsBusy")) || bIsCrouched || !Movement->IsMovingOnGround() || !CanJump()) return;
+    const bool bWasRunning = Flag(this, TEXT("bIsRunning"));
+    const bool bWasSprinting = Flag(this, TEXT("bIsSprinting"));
+    const float PlanarSpeed = GetVelocity().Size2D();
+    // Require achieved fast movement, not just a held key or a run request at a wall.
+    const bool bFastJump = (bWasRunning || bWasSprinting) && PlanarSpeed > 360.f;
+    Movement->JumpZVelocity = OrdinaryJumpZVelocity * (bFastJump ? FastJumpMultiplier : 1.f);
+    JumpPlanarSpeed = bFastJump ? PlanarSpeed : 0.f;
     Jump();
     ++JumpStarts;
     bJumpPresentation = true;
+    bJumpFromFastMovement = bWasRunning || bWasSprinting;
+    // PlayJump and its shared montage wrapper synchronously reject run/sprint.
+    // Admit this jump only, preserving the source busy/notifies and all other action gates.
+    SetFlag(this, TEXT("bIsRunning"), false);
+    SetFlag(this, TEXT("bIsSprinting"), false);
     CallSource(TEXT("PlayJump"));
+    SetFlag(this, TEXT("bIsRunning"), bWasRunning);
+    SetFlag(this, TEXT("bIsSprinting"), bWasSprinting);
 }
 void AOpeningLobbyCharacter::JumpReleased() { StopJumping(); }
 void AOpeningLobbyCharacter::Landed(const FHitResult& Hit)
 {
     Super::Landed(Hit);
     ++Landings;
+    GetCharacterMovement()->JumpZVelocity = OrdinaryJumpZVelocity;
+    JumpPlanarSpeed = 0.f;
     if (bJumpPresentation && JumpMontage)
     {
         // Play the authored landing tail when the capsule actually contacts the floor.
@@ -271,6 +297,19 @@ void AOpeningLobbyCharacter::Landed(const FHitResult& Hit)
         }
     }
     bJumpPresentation = false;
+}
+
+bool AOpeningLobbyCharacter::NeedsOrdinaryJumpBase() const
+{
+    const auto* Anim = GetMesh()->GetAnimInstance();
+    if (bJumpFromFastMovement && Anim && JumpMontage)
+    {
+        // Include paused flight and the entire blend-out, after IsFalling and
+        // Montage_IsActive have ended. Never alter the physical movement flags.
+        if (const auto* Instance = Anim->GetInstanceForMontage(JumpMontage))
+            return Instance->IsActive() || Instance->GetWeight() > ZERO_ANIMWEIGHT_THRESH;
+    }
+    return false;
 }
 
 void AOpeningLobbyCharacter::SetupPlayerInputComponent(UInputComponent* Input)

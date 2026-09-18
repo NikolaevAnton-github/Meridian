@@ -33,10 +33,10 @@ def capture(hwnd):
     ctypes.windll.user32.GetWindowRect(ctypes.c_void_p(hwnd),ctypes.byref(rect))
     return ImageGrab.grab(bbox=(rect.left,rect.top,rect.right,rect.bottom),all_screens=True)
 
-def main():
+def main(output_root=None):
     ctypes.windll.user32.SetProcessDPIAware()
     pid,name,duration = int(sys.argv[1]),sys.argv[2],float(sys.argv[3])
-    root = Path(__file__).resolve().parents[2] / 'Saved/PurchasedArms02/Worker/Video'
+    root = Path(output_root) if output_root else Path(__file__).resolve().parents[2] / 'Saved/PurchasedArms02/Worker/Video'
     root.mkdir(parents=True,exist_ok=True)
     path = root / (name+'.mp4')
     assert not path.exists()

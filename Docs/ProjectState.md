@@ -13,7 +13,25 @@ Verify native execution as well as saved profiles. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
-## Current focus: heading-independent rifle aiming
+## Current gameplay baseline: jump from Shift sprint
+
+The owner requests a slightly higher and farther jump from Shift fast movement.
+[PurchasedArms04 / MSQ-64](Tasks/PurchasedArms04.md) adds it over the PurchasedArms03
+baseline; see the [exact scope](Approvals/PurchasedArms04-OwnerScope01.json).
+The owner also made [focused verification](Approvals/FocusedVerification01.json)
+a standing rule: check only directly affected behavior and related transitions,
+without full animation/feature sweeps. Original character and environment work
+remain paused.
+
+The focused checks and bounded presentation correction pass: Shift + Space now
+retains 540 cm/s travel, raises takeoff from 320 to 352 cm/s, and uses a compatible
+jump base through landing. Measured apex is about 63 cm versus 52 cm for ordinary
+jumping. Shift release preserves airborne momentum; the next ordinary jump resets
+correctly. See [implementation](PurchasedArms04.md) and
+[controller review](PurchasedArms04Review.md). The retained lobby is ready for Play.
+Technical/controller verification is separate from owner visual acceptance.
+
+## Heading-independent rifle aiming baseline
 
 After the next lobby play session on 2026-09-18, the owner reported increasing
 rifle aiming misalignment when turning away from the initial spawn heading.

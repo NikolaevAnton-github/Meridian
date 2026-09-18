@@ -1,0 +1,21 @@
+{
+  "task": "MSQ-64",
+  "revision": "PurchasedArms04-CompatibleJumpBase01",
+  "base_manifest": "Assets/Source/PurchasedArms03/source-manifest.json",
+  "base_manifest_sha256": "a04ed013eba50e755333c46e190ddd801152fd0f063cff524020f8bf365073d4",
+  "scope": "One AnimBP revision over PurchasedArms03. The existing ADS basis conversion remains intact; all other Content packages and source animation clips are unchanged.",
+  "files": [
+    {
+      "package": "/Game/InfimaGames/TacticalFPSAnimations/Common/Core/Characters/ABP_TFA_FP_BaseCharacter",
+      "destination": "Content/InfimaGames/TacticalFPSAnimations/Common/Core/Characters/ABP_TFA_FP_BaseCharacter.uasset",
+      "source": "D:\\devgames\\Weapon\\TacticalFPSAnimations\\Common\\Core\\Characters\\ABP_TFA_FP_BaseCharacter.uasset",
+      "source_sha256": "e6dd30dc83d1113312de19dc104f08b9e25cef927120a0f3ef9d2cdfd7877c1b",
+      "previous_active_sha256": "1688fbf28b0b1545df4cb9a0f8aab14df076f9649c0e9e808292280d026973e8",
+      "active_sha256": "9f8af62c17f6500ad50aaa876960ad2d47ef5fc8526e08df200844da4e1002b1",
+      "active_bytes": 1246437,
+      "rollback": "Saved/PurchasedArms04/Worker/Correction01/Rollback/Content/InfimaGames/TacticalFPSAnimations/Common/Core/Characters/ABP_TFA_FP_BaseCharacter.uasset",
+      "change": "Seven existing locomotion/run-end transition conditions consume the native animation-only jump-base guard through flight and landing blend-out."
+    }
+  ],
+  "acceptance": "Worker technical/visual correction handoff only; controller review, registry and owner acceptance remain separate."
+}

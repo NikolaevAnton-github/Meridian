@@ -1,8 +1,17 @@
 #include "PurchasedArmsAnimInstance.h"
+#include "OpeningLobbyCharacter.h"
 #include "Animation/AnimMontage.h"
 #include "Animation/AnimNode_AssetPlayerBase.h"
 #include "Animation/AnimBlueprintGeneratedClass.h"
 #include "UObject/UnrealType.h"
+
+void UPurchasedArmsAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
+{
+    Super::NativeUpdateAnimation(DeltaSeconds);
+    const auto* Character = Cast<AOpeningLobbyCharacter>(TryGetPawnOwner());
+    // Game-thread snapshot consumed by the source animation transition rules.
+    bUseOrdinaryJumpBase = Character && Character->NeedsOrdinaryJumpBase();
+}
 
 void UPurchasedArmsAnimInstance::NativePostEvaluateAnimation()
 {

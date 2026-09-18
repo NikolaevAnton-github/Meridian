@@ -9,13 +9,13 @@ from client import epic,work
 ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'Saved/PurchasedArms02/Worker'
 
-def run(case,pid):
+def run(case,pid,capture_script=None):
     work('performance')
     assert not work('state','before-'+case['name'])['pie']
     epic('EditorToolset.EditorAppToolset','StartPIE',{'options':{'bSimulate':False,'playMode':'PlayMode_InViewPort','warmupSeconds':.5,
         'startTransform':{'location':{'x':-1600,'y':0,'z':100},'rotation':{'pitch':0,'yaw':0,'roll':0},'scale':{'x':1,'y':1,'z':1}}}})
     ready=OUT/'Video'/(case['name']+'.ready.json')
-    process=subprocess.Popen([sys.executable,str(ROOT/'Scripts/PurchasedArms02/capture02.py'),str(pid),case['name'],str(case['duration']+2)],
+    process=subprocess.Popen([sys.executable,str(capture_script or ROOT/'Scripts/PurchasedArms02/capture02.py'),str(pid),case['name'],str(case['duration']+2)],
         creationflags=subprocess.CREATE_NO_WINDOW)
     deadline=time.monotonic()+10
     while not ready.exists():

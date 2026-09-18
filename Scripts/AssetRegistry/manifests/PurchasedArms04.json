@@ -1,0 +1,18 @@
+{
+  "asset": "PurchasedArms04",
+  "artifacts": [
+    {
+      "path": "Assets/Source/PurchasedArms04/source-manifest.json",
+      "sha256": "13f878c45d4741a780ce459f3411dde3db2828f82ed36e0615999cb51ae58780",
+      "size_bytes": 1599,
+      "role": "purchased_rifle_sprint_jump_revision_manifest",
+      "evidence": [
+        {
+          "source": "Docs/PurchasedArms04Review.md",
+          "note": "MSQ-64 controller-reviewed sprint-jump presentation revision. Historical registered fingerprints remain immutable; owner visual acceptance is separate."
+        }
+      ]
+    }
+  ],
+  "dependencies": []
+}

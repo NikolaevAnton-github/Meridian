@@ -1,0 +1,9 @@
+{
+  "record_id": "PurchasedArms04-OwnerScope01",
+  "date_local": "2026-09-18",
+  "source": "Owner direct chat after PurchasedArms03",
+  "owner_message_original": "По поводу движения нашего персонажа по лобби, хотелоь бы видеть прыжок и после спринта, который на shift. Он само собой должен быть чуть дальше и выше.",
+  "owner_message_english_translation": "Regarding our character's movement through the lobby, I would like a jump from sprinting on Shift too. Naturally it should be a little farther and higher.",
+  "decision": "Enable a jump from the actual Shift fast-movement state, with modestly higher takeoff and farther travel than the ordinary jump, retaining normal jump behavior and coherent landing recovery.",
+  "scope": "Purchased lobby gameplay only, over PurchasedArms03. No remapping of Shift or Alt, new art, original protagonist work or lobby architecture. Verification follows FocusedVerification01."
+}

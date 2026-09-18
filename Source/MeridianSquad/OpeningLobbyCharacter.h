@@ -29,6 +29,9 @@ public:
     UFUNCTION(BlueprintCallable, Category="Lobby|Verification")
     bool ProbeFixture(FName Kind);
 
+    /** A fast jump needs the ordinary animation base until its landing tail finishes. */
+    bool NeedsOrdinaryJumpBase() const;
+
 private:
     UPROPERTY(VisibleAnywhere, Category="Camera")
     TObjectPtr<UCameraComponent> FirstPersonCamera;
@@ -36,11 +39,13 @@ private:
     TObjectPtr<UAnimMontage> JumpMontage;
     float AnimationTime = 0.f;
     float CameraHeight = 82.f;
+    float JumpPlanarSpeed = 0.f;
     int32 MoveBindingSamples = 0;
     int32 LookBindingSamples = 0;
     int32 JumpStarts = 0;
     int32 Landings = 0;
     bool bJumpPresentation = false;
+    bool bJumpFromFastMovement = false;
     bool bSourceReady = false;
     bool bCrouchRequested = false;
     uint8 ReportedStance = 0;
