@@ -1,0 +1,43 @@
+{
+  "record_id": "CombatSlice01-TaskCreation01",
+  "date_local": "2026-09-18",
+  "source": "Owner direct chat after the proposed combat and opening episode progression",
+  "owner_message_original": "Давай подготовим задачи для всего этого, будем действовать последовательно",
+  "owner_message_english_translation": "Let's prepare tasks for all of this; we will proceed sequentially.",
+  "decision": "Prepare a sequential Multica task family covering meaningful rifle hits and ammunition, enemies and player survival, a short lobby encounter, body and environment damage, time slowdown, force push, telekinesis, and a bounded opening episode.",
+  "task_creation_authorized": true,
+  "production_run_dispatched": false,
+  "implementation_dispatch_authorized_by_this_record": false,
+  "planning_detail": "The 14-stage breakdown, prototype counts and configurable tuning are controller planning choices, not separately quoted owner requirements or final balance decisions.",
+  "owner_scope": {
+    "sequence": "Proceed one bounded task at a time, with verification and corrections before advancing.",
+    "baseline": "Build on the purchased first-person arms/rifle and existing movement in the retained lobby.",
+    "combat": "Real hits, damage and ammunition; a functioning enemy; player health and restart; a short encounter using cover.",
+    "damage_and_abilities": "Representative enemy body damage and environmental destruction, followed by time slowdown, force push and telekinesis as separate tasks.",
+    "episode": "Plan and then implement the opening exploration, surveillance information and progression using fixed StoryCanon facts, with unresolved staging kept as proposals."
+  },
+  "preservation": "Original protagonist modeling and deferred lobby architecture remain paused. Preparing gameplay tasks does not approve new art, structural changes, purchases or unresolved story staging.",
+  "initial_status": "backlog",
+  "initial_assignment": "unassigned",
+  "new_run_count": 0,
+  "plan": "Docs/Tasks/CombatSlice01Plan.md",
+  "creation_evidence": "Saved/CombatSlice01/TaskSetup01/verification.json",
+  "multica_parent": "MSQ-67",
+  "multica_children": [
+    "MSQ-68",
+    "MSQ-69",
+    "MSQ-70",
+    "MSQ-71",
+    "MSQ-72",
+    "MSQ-73",
+    "MSQ-74",
+    "MSQ-75",
+    "MSQ-76",
+    "MSQ-77",
+    "MSQ-78",
+    "MSQ-79",
+    "MSQ-80",
+    "MSQ-81"
+  ],
+  "dependency_representation": "Native parent/stage plus existing metadata.depends_on convention. No automatic dependency enforcement or successor dispatch."
+}

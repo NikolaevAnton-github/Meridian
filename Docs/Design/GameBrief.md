@@ -1,5 +1,14 @@
 # Game direction
 
+Gameplay planning update, 2026-09-18: the owner requested preparation of a
+sequential task family for combat, representative body/environment damage,
+time slowdown, force push, telekinesis and a bounded opening episode. See
+[CombatSlice01](../Tasks/CombatSlice01Plan.md) and the
+[exact decision](../Approvals/CombatSlice01-TaskCreation01.json). Tasks are prepared
+as unassigned backlog; this does not dispatch implementation, approve new art or
+settle unspecified ability rules/story staging. Purchased arms remain the baseline;
+original protagonist work and deferred lobby architecture stay paused.
+
 Current lobby scheduling, 2026-09-16: the owner closed all remaining lobby tasks
 and deferred further work until a new owner list after gameplay integration.
 See [the closure decision](../Approvals/LobbyDeferred01-OwnerClosure01.json).

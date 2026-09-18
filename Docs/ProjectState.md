@@ -13,7 +13,33 @@ Verify native execution as well as saved profiles. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
-## Current scoped adjustment: muzzle flame brightness
+## Current scope: sequential combat and opening episode task preparation
+
+On 2026-09-18, the owner requested tasks for the proposed gameplay progression
+and sequential execution; see the [exact task-creation decision](Approvals/CombatSlice01-TaskCreation01.json).
+The [CombatSlice01 plan](Tasks/CombatSlice01Plan.md) covers rifle hits/damage and
+finite ammunition; enemy asset readiness and combat; player health/restart;
+a small lobby encounter; representative body/environment damage; time slowdown,
+force push and telekinesis; integrated combat; episode design/implementation;
+and independent final review.
+
+This is administrative preparation, not a production dispatch. Parent **MSQ-67**
+and children **MSQ-68 through MSQ-81** are verified unassigned backlog with one
+ordered stage per child and zero runs. See the [setup verification](CombatSlice01TaskSetup01.md). Multica owns
+live status; stage/depends_on metadata is descriptive and the controller must
+verify prerequisites before explicitly dispatching each authorized run. The
+parent is coordination only. Use one production worker, max reasoning and standard
+speed, focused checks and task-scoped closure commits.
+
+Prototype defaults remain tunable proposals. Damage-ready enemy sources and the
+named episode design are explicit later gates. New art/modeling, structural lobby
+changes and unresolved narrative staging are not approved by task preparation.
+Original protagonist work and deferred lobby architecture remain paused. Existing
+owner edits, accepted assets, source/evidence history and the retained lobby stay
+preserved. The first prepared implementation is **MSQ-68 / CombatFoundation01**; no gameplay
+or editor changes were made while preparing this task family.
+
+## Latest rifle presentation baseline: muzzle flame brightness
 
 After playing the lobby on 2026-09-18, the owner reports general satisfaction and
 requests a slightly brighter rifle muzzle flame. [PurchasedArms06](Tasks/PurchasedArms06.md)
