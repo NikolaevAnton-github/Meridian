@@ -1,0 +1,24 @@
+{
+  "record_id": "CombatFoundation01-OwnerScope01",
+  "date_local": "2026-09-18",
+  "source": "Owner direct chat after discussing hitscan, projectile flight and time control",
+  "owner_message_original": "игрок двигается как обычно, а все остальное замедляется, во время останвоки так же, наши пули могут так же ранить и нас. Просто нужно заложиться на это при проектировании системы попаданий. А так начнем задачу давай",
+  "owner_message_english_translation": "The player moves normally while everything else slows down; the same applies during a stop. Our bullets can also injure us. Just account for this when designing the hit system. Let's start the task.",
+  "decision": "Authorize MSQ-68 implementation with finite-flight bullets designed for world slowdown and complete stop, normal player movement, and self-hit eligibility.",
+  "implementation_authorized": "MSQ-68 / CombatFoundation01 only; complete focused implementation, review, corrections and local task closure commit.",
+  "fixed_rules": {
+    "player_movement": "Remains normal while the rest of the world slows or stops.",
+    "bullets": "All bullets, including player-fired bullets, follow world simulation time and can remain suspended at zero world time.",
+    "self_damage": "A player's own bullets can injure that player. Shooter attribution must not imply permanent collision or damage immunity.",
+    "foundation": "Use finite-flight simulation and collision-time damage rather than immediate hitscan damage decorated by delayed visuals. Preserve a separate time-policy seam for the later ability."
+  },
+  "controller_design_implications": [
+    "Sweep projectile travel to avoid tunneling; use gameplay coordinates independent of first-person rendering scale.",
+    "Keep moving-player contact with stationary bullets detectable. Define bounded geometric launch clearance without permanent owner exclusion.",
+    "Distinguish simulation aging from real-time safety limits and bound active bullet/effect counts without silently restoring ammunition or moving stopped bullets.",
+    "Verify the projectile clock seam at normal, reduced and exactly zero scale without implementing the player-facing time ability in MSQ-68."
+  ],
+  "later_tasks": "PlayerSurvival01 connects self-hit events to player health; TimeSlow01 implements coherent world slowdown/stop with normal player movement. Input, cost, duration and detailed non-movement action timing remain prototype design choices to document.",
+  "preservation": "PurchasedArms06 baseline, retained lobby and owner edits remain preserved. No new art, architecture, purchases, enemy implementation, player health UI or time-ability production is added to MSQ-68.",
+  "task": "Docs/Tasks/CombatFoundation01.md"
+}

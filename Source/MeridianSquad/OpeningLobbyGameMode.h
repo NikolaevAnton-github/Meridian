@@ -9,4 +9,5 @@ class MERIDIANSQUAD_API AOpeningLobbyGameMode : public AGameModeBase
     GENERATED_BODY()
 public:
     AOpeningLobbyGameMode();
+    virtual void BeginPlay() override;
 };

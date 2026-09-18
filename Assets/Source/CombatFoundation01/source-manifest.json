@@ -1,0 +1,21 @@
+{
+  "task": "MSQ-68",
+  "revision": "CombatFoundation01-AuthoritativeMagazine",
+  "base_manifest": "Assets/Source/PurchasedArms02/source-manifest.json",
+  "base_manifest_sha256": "82660f216b1193d6f044d59c5bc6a7d72964bdda9f22bae42cea5cdfaf1d5a74",
+  "scope": "One magazine Animation Blueprint count adapter for authoritative finite ammunition; PurchasedArms06 rifle presentation remains the baseline.",
+  "files": [
+    {
+      "package": "/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/ABP_TFA_AR_Magazine",
+      "destination": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/ABP_TFA_AR_Magazine.uasset",
+      "source": "D:/devgames/Weapon/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/ABP_TFA_AR_Magazine.uasset",
+      "source_sha256": "1192cf2a97d4ba0695ef7c2877e45d8391cd741a39a77e0f83ef1e9e13b5e3e2",
+      "previous_active_sha256": "aff7a61eca248ef185a750f140beeec00f4a37dbb4e32cacd951b41265445a4f",
+      "active_sha256": "bc96bc6301e42e72a07815fd4a91117eea649577d3f4d9b094d833694ee5c824",
+      "active_bytes": 95527,
+      "rollback": "Saved/CombatSlice01/CombatFoundation01/Worker/Rollback/Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/ABP_TFA_AR_Magazine.uasset",
+      "change": "Read GetCombatMagazineRounds from the native AnimInstance adapter: the main magazine shows authoritative rounds and the spare shows min(capacity, magazine + reserve). Native gameplay owns ammunition; this package only presents it."
+    }
+  ],
+  "acceptance": "Scoped technical/controller and independent review are documented in Docs/CombatFoundation01Review.md. Revision registration is not owner visual or play acceptance; historical fingerprints remain immutable."
+}

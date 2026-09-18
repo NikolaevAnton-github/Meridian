@@ -13,9 +13,11 @@ instructions supersede earlier guidance within their stated scope.
 - Codex may launch existing applications and local project services needed for
   authorized work without asking again. Starting a service does not authorize
   unrelated execution, purchases or a pending design selection.
-- Current scope: prepare the sequential [CombatSlice01 task family](Docs/Tasks/CombatSlice01Plan.md)
-  for combat, destruction, abilities and the opening episode; task preparation
-  does not dispatch production. PurchasedArms06 is the retained rifle baseline.
+- Current scope: MSQ-68 combat foundation is verified within the sequential
+  [CombatSlice01 task family](Docs/Tasks/CombatSlice01Plan.md), under the
+  [projectile/time/self-hit decision](Docs/Approvals/CombatFoundation01-OwnerScope01.json).
+  Successors remain undispatched; see ProjectState for the reviewed handoff.
+  PurchasedArms06 is the retained rifle presentation baseline.
   Original modeling and its successors are paused;
   lobby architecture remains deferred. Preserve character sources and evidence.
   The protagonist concept batch is evaluated by the owner alone; do not dispatch

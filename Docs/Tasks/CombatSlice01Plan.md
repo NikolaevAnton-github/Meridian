@@ -6,6 +6,18 @@ gameplay progression and proceed sequentially. See the
 
 Multica issue: **MSQ-67**.
 
+Execution update: the owner has now authorized **MSQ-68 only** and fixed the
+[projectile/time/self-hit policy](../Approvals/CombatFoundation01-OwnerScope01.json).
+All bullets have finite flight and follow world slowdown/stop; player movement
+remains normal and own bullets can injure the player. Build these seams in stage 1;
+player health and the ability remain in their later stages. The original task
+creation record and setup evidence remain historical, unchanged.
+
+Stage 1 implementation and bounded corrections are verified on 2026-09-19; see
+[CombatFoundation01 controller review](../CombatFoundation01Review.md).
+MSQ-69 and successors remain undispatched. This parent remains coordination for
+the unfinished stages; it is not a request to start the whole family.
+
 ## Outcome and starting point
 
 Build a reviewable first combat slice in the retained lobby, followed by a
@@ -36,7 +48,7 @@ task database. Every child has a unique native stage and a recorded predecessor.
 | 5 | MSQ-72 | [LobbyEncounter01](LobbyEncounter01.md) | A small encounter with cover, completion and reset. |
 | 6 | MSQ-73 | [EnemyBodyDamage01](EnemyBodyDamage01.md) | A bounded regional damage and dismemberment sample. |
 | 7 | MSQ-74 | [EnvironmentDestruction01](EnvironmentDestruction01.md) | Selected destructible objects with correct cover and debris behavior. |
-| 8 | MSQ-75 | [TimeSlow01](TimeSlow01.md) | Usable time slowdown with reliable restoration. |
+| 8 | MSQ-75 | [TimeSlow01](TimeSlow01.md) | World slowdown/stop, normal player movement and reliable restoration. |
 | 9 | MSQ-76 | [ForcePush01](ForcePush01.md) | Directional push with explicit eligibility and recovery. |
 | 10 | MSQ-77 | [Telekinesis01](Telekinesis01.md) | Acquire, hold, release and throw suitable objects. |
 | 11 | MSQ-78 | [CombatIntegration01](CombatIntegration01.md) | The encounter works with damage, destruction and abilities together. |
@@ -46,7 +58,7 @@ task database. Every child has a unique native stage and a recorded predecessor.
 
 ## Sequential execution and gates
 
-- This change prepares tasks only. Create the parent and all children as
+- The original setup prepared tasks only. It created the parent and all children as
   **backlog, unassigned**, with no production run. The parent is a coordination
   issue, not a worker instruction to execute the whole plan.
 - Native stages and `metadata.depends_on` describe the sequence; the installed
@@ -100,6 +112,10 @@ task database. Every child has a unique native stage and a recorded predecessor.
   animation notifies commit gameplay changes. Traces and physics use gameplay
   world coordinates, not the scaled first-person presentation. Avoid duplicate
   events, unbounded actor spawning and permanent map damage during playtests.
+  Rifle bullets use finite-flight simulation with swept collision, world-time
+  motion/aging and collision-time damage. Preserve normal player movement during
+  future slowdown/stop, contact with suspended bullets and self-hit eligibility;
+  shooter attribution is not permanent immunity. See the fixed owner policy above.
 - Audit current bindings before adding abilities or interactions: Q/E/F/X/T/U/G
   already trigger vendor actions. Document intended remaps in a single controls
   table. Do not silently remove unrelated functioning controls or imply demo

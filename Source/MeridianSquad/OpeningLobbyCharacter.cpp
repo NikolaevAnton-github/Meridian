@@ -1,4 +1,5 @@
 #include "OpeningLobbyCharacter.h"
+#include "CombatRifleComponent.h"
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimMontage.h"
 #include "Camera/CameraComponent.h"
@@ -100,6 +101,7 @@ AOpeningLobbyCharacter::AOpeningLobbyCharacter()
     FirstPersonCamera->FieldOfView = 90.f;
     FirstPersonCamera->bEnableFirstPersonScale = true;
     FirstPersonCamera->FirstPersonScale = .3f;
+    CombatRifle = CreateDefaultSubobject<UCombatRifleComponent>(TEXT("CombatRifle"));
 }
 
 void AOpeningLobbyCharacter::CallSource(FName Name)
@@ -155,6 +157,7 @@ void AOpeningLobbyCharacter::BeginPlay()
         });
     }
     ConfigureAssembly();
+    CombatRifle->InitializeRifle();
 }
 
 void AOpeningLobbyCharacter::ConfigureAssembly()
@@ -414,7 +417,9 @@ void AOpeningLobbyCharacter::PawnClientRestart()
     Input->BindAction(Sprint, ETriggerEvent::Triggered, this, &AOpeningLobbyCharacter::SprintTriggered);
     Input->BindAction(Sprint, ETriggerEvent::Completed, this, &AOpeningLobbyCharacter::SprintReleased);
     Input->BindAction(Sprint, ETriggerEvent::Canceled, this, &AOpeningLobbyCharacter::SprintReleased);
-    // Observe fire intent without replacing any of the source shot/timer callbacks.
+    // Rifle owns ammunition, cadence and reload input. Retain the airborne
+    // presentation observer after replacing the source demonstration callbacks.
+    CombatRifle->BindInput(Input);
     Input->BindAction(Fire, ETriggerEvent::Started, this, &AOpeningLobbyCharacter::FireStarted);
     Input->BindAction(Fire, ETriggerEvent::Completed, this, &AOpeningLobbyCharacter::FireReleased);
     Input->BindAction(Fire, ETriggerEvent::Canceled, this, &AOpeningLobbyCharacter::FireReleased);

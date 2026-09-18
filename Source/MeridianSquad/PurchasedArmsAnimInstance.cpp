@@ -1,5 +1,7 @@
 #include "PurchasedArmsAnimInstance.h"
 #include "OpeningLobbyCharacter.h"
+#include "CombatRifleComponent.h"
+#include "Components/SceneComponent.h"
 #include "Animation/AnimMontage.h"
 #include "Animation/AnimNode_AssetPlayerBase.h"
 #include "Animation/AnimBlueprintGeneratedClass.h"
@@ -18,6 +20,20 @@ void UPurchasedArmsAnimInstance::NativePostEvaluateAnimation()
     Super::NativePostEvaluateAnimation();
     ++Evaluations;
     EvaluatedWorldTime = GetWorld() ? GetWorld()->GetTimeSeconds() : 0.f;
+}
+
+int32 UPurchasedArmsAnimInstance::GetCombatMagazineRounds() const
+{
+    const AActor* MagazineActor = GetOwningActor();
+    const AActor* OwnerActor = MagazineActor;
+    for (int32 Depth = 0; OwnerActor && Depth < 4; ++Depth, OwnerActor = OwnerActor->GetAttachParentActor())
+        if (const auto* Rifle = OwnerActor->FindComponentByClass<UCombatRifleComponent>())
+        {
+            const auto* Root = MagazineActor->GetRootComponent();
+            const bool Spare = Root && Root->GetAttachSocketName().ToString().Contains(TEXT("Reserve"));
+            return Spare ? FMath::Min(Rifle->MagazineCapacity, Rifle->Magazine + Rifle->Reserve) : Rifle->Magazine;
+        }
+    return 0;
 }
 
 FString UPurchasedArmsAnimInstance::GetEvaluationState() const

@@ -1,0 +1,20 @@
+{
+    "asset":  "CombatFoundation01",
+    "artifacts":  [
+                      {
+                          "path":  "Assets/Source/CombatFoundation01/source-manifest.json",
+                          "sha256":  "2c19ada4da76b12909409beee8e2753878269f0c9e382f955fbd8e8b901fa8fb",
+                          "size_bytes":  1736,
+                          "role":  "combat_authoritative_magazine_revision_manifest",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/CombatFoundation01Review.md",
+                                               "note":  "MSQ-68 reviewed authoritative ammunition adapter. Historical package fingerprints remain immutable; registration is not owner acceptance."
+                                           }
+                                       ]
+                      }
+                  ],
+    "dependencies":  [
+
+                     ]
+}

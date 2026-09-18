@@ -14,6 +14,8 @@ public:
     virtual void NativePostEvaluateAnimation() override;
     UPROPERTY(Transient, BlueprintReadOnly, Category="Lobby|Presentation")
     bool bUseOrdinaryJumpBase = false;
+    UFUNCTION(BlueprintPure, Category="Combat|Presentation")
+    int32 GetCombatMagazineRounds() const;
     UFUNCTION(BlueprintPure, Category="Lobby|Verification")
     FString GetEvaluationState() const;
 private:

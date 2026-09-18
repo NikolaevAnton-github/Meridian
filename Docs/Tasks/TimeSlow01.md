@@ -1,4 +1,4 @@
-# TimeSlow01: controllable time slowdown
+# TimeSlow01: controllable world slowdown and stop
 
 Multica issue: **MSQ-75**.
 Stage 8 of [CombatSlice01](CombatSlice01Plan.md).
@@ -6,10 +6,15 @@ Predecessor: [EnvironmentDestruction01](EnvironmentDestruction01.md).
 
 ## Scope
 
-Implement the player's requested time-slowing ability with a documented prototype
-contract: input, hold/toggle behavior, world/player time relationship, duration,
-recovery/cost, eligibility and clear active/recovering feedback. These are working
-rules because the product brief leaves them open. Audit occupied bindings before
+Implement the player's requested time-slowing/stopping ability under the
+[fixed owner policy](../Approvals/CombatFoundation01-OwnerScope01.json): player
+movement remains normal while everything else slows or stops, including all
+player/enemy bullets. Own bullets can injure the player. Use the MSQ-68 finite-flight
+and separate-time seam; do not replace it with immediate hitscan damage.
+
+Document the remaining prototype choices: input, hold/toggle behavior, duration,
+recovery/cost, eligibility, player action timing and clear active/recovering
+feedback. These choices remain tunable. Audit occupied bindings before
 choosing a key; retain the current rifle actions unless a remap is documented.
 
 Apply slowdown coherently to enemy perception/actions, firing/reloads, body physics,
@@ -21,6 +26,10 @@ antagonist time control. No skill tree or permanent upgrade system.
 
 - Enter and leave slowdown under clear control and cost limits; inactive state
   restores the recorded normal time values exactly.
+- Exact stop preserves world/projectile position and simulation age while player
+  movement remains normal; resumption preserves stored velocity. Moving into a
+  suspended own/enemy bullet produces the declared single damage event. Verify
+  newly fired bullets during stop, launch clearance and bounded accumulation.
 - Compare actual shot cadence, ammo consumption and reload commit timing before,
   during and after slowdown for player and enemy under the declared time policy.
 - Exercise activation/release during firing, reload and moving debris; there are

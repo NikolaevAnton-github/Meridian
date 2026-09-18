@@ -1,5 +1,12 @@
 # Game direction
 
+Combat execution update, 2026-09-18: the owner authorizes MSQ-68 and fixes the
+[time/projectile policy](../Approvals/CombatFoundation01-OwnerScope01.json): player
+movement remains normal while the rest of the world slows or stops. All bullets,
+including the player's, follow world time and may injure their shooter. The hit
+foundation must support this now; the actual time ability and player health are
+implemented in their later tasks. Ability input/cost/duration remain proposals.
+
 Gameplay planning update, 2026-09-18: the owner requested preparation of a
 sequential task family for combat, representative body/environment damage,
 time slowdown, force push, telekinesis and a bounded opening episode. See
@@ -25,7 +32,7 @@ project/repository name; a final public game title has not been established.
   (owner direction on 2026-09-16).
 - Shooting is the highest gameplay priority. The owner wants strong perceived
   impact, enemy body destruction, and extensive environmental destruction.
-- Player abilities: time slowdown, force push, and telekinesis. Their costs,
+- Player abilities: world time slowdown/stop, force push, and telekinesis. Their costs,
   limits, progression, controls, and interactions have not been specified.
 - Primary game references: F.E.A.R., Control, and TimeShift. References guide
   experience and combat; they do not import those games' settings or systems.

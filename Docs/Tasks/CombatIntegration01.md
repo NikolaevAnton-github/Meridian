@@ -18,6 +18,11 @@ thrown objects damaging enemies, body separation during an ability, slowdown
 during reload/impacts, and death/restart with active abilities/held objects. Reuse
 earlier evidence for unchanged components; do not repeat the full feature matrix.
 
+Include the [fixed time/self-hit policy](../Approvals/CombatFoundation01-OwnerScope01.json)
+in newly coupled checks: normal player movement during world slowdown/stop,
+all bullets following world time, self-injury on eligible contact, and reliable
+restoration/cleanup after stop, death and restart.
+
 ## Acceptance
 
 - One short fight supports rifle fire and each ability, has a clear completion,

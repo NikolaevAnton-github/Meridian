@@ -6,6 +6,7 @@
 
 class UCameraComponent;
 class UAnimMontage;
+class UCombatRifleComponent;
 
 /** Collision-aware lobby adapter for the supplied rifle gameplay Blueprints. */
 UCLASS()
@@ -14,6 +15,8 @@ class MERIDIANSQUAD_API AOpeningLobbyCharacter : public ACharacter
     GENERATED_BODY()
 public:
     AOpeningLobbyCharacter();
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat")
+    TObjectPtr<UCombatRifleComponent> CombatRifle;
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
     virtual void CalcCamera(float DeltaSeconds, FMinimalViewInfo& OutResult) override;

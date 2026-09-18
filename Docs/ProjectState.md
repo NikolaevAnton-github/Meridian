@@ -1,6 +1,6 @@
 # MeridianSquad current project state
 
-Updated 2026-09-18. This is a navigation snapshot of current scope and decisions,
+Updated 2026-09-19. This is a navigation snapshot of current scope and decisions,
 not a second task database or a new execution authorization. Read the relevant
 linked task before work and verify live Multica/editor state when needed. Later
 explicit owner instructions take precedence within their scope. When dated summaries
@@ -13,7 +13,22 @@ Verify native execution as well as saved profiles. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
-## Current scope: sequential combat and opening episode task preparation
+## Current scope: MSQ-68 combat foundation verified
+
+The owner authorized **MSQ-68 / CombatFoundation01** implementation, with
+[fixed projectile/time/self-hit rules](Approvals/CombatFoundation01-OwnerScope01.json).
+Player movement stays normal during world slowdown and complete stop; all bullets,
+including the player's, follow world time and can injure their shooter. Stage 1
+now implements finite-flight hits, ammunition and testable collision/time seams;
+player health and the player-facing ability remain later tasks. One Multica
+production worker at Astra/max/standard completed implementation and bounded
+corrections. Focused runtime, independent source/visual and controller reviews
+pass; see [implementation and controls](CombatFoundation01.md) and
+[controller acceptance](CombatFoundation01Review.md). The retained lobby is ready
+for Play with transient targets. F6 resets targets and feedback without refilling
+ammunition; Stop/Play restores 30/90. Owner play/visual acceptance remains separate.
+MSQ-69 and later stages remain undispatched; verify live Multica before choosing
+the next task. The parent stays open for the remaining sequential family.
 
 On 2026-09-18, the owner requested tasks for the proposed gameplay progression
 and sequential execution; see the [exact task-creation decision](Approvals/CombatSlice01-TaskCreation01.json).
@@ -23,9 +38,10 @@ a small lobby encounter; representative body/environment damage; time slowdown,
 force push and telekinesis; integrated combat; episode design/implementation;
 and independent final review.
 
-This is administrative preparation, not a production dispatch. Parent **MSQ-67**
-and children **MSQ-68 through MSQ-81** are verified unassigned backlog with one
-ordered stage per child and zero runs. See the [setup verification](CombatSlice01TaskSetup01.md). Multica owns
+The original preparation created parent **MSQ-67** and children **MSQ-68 through
+MSQ-81** as unassigned backlog with one ordered stage per child and zero runs.
+That setup snapshot precedes the MSQ-68 execution authorization above. See the
+[setup verification](CombatSlice01TaskSetup01.md). Multica owns
 live status; stage/depends_on metadata is descriptive and the controller must
 verify prerequisites before explicitly dispatching each authorized run. The
 parent is coordination only. Use one production worker, max reasoning and standard
@@ -36,8 +52,8 @@ named episode design are explicit later gates. New art/modeling, structural lobb
 changes and unresolved narrative staging are not approved by task preparation.
 Original protagonist work and deferred lobby architecture remain paused. Existing
 owner edits, accepted assets, source/evidence history and the retained lobby stay
-preserved. The first prepared implementation is **MSQ-68 / CombatFoundation01**; no gameplay
-or editor changes were made while preparing this task family.
+preserved. No gameplay or editor changes were made during the historical task
+preparation; follow live Multica and the MSQ-68 handoff for execution evidence.
 
 ## Latest rifle presentation baseline: muzzle flame brightness
 
