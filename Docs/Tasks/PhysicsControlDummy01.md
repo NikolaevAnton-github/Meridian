@@ -16,6 +16,12 @@ See [implementation and controls](../PhysicsControlDummy01.md) and
 historical F9 toggle to avoid Unreal's screenshot shortcut. Owner play acceptance
 and adoption by the original enemy remain separate.
 
+Owner follow-up, 2026-09-19: F8 conflicts with the editor's Possess/Eject shortcut.
+The current preview binding is Y. The owner explicitly requested a simple direct
+key change without executor/reviewer overhead; the controller cancelled the
+extra run and applied the binding/documentation change with native rebuild only.
+No new gameplay or visual acceptance is inferred.
+
 ## Outcome and experiment boundary
 
 Add one removable second Manny in the retained lobby to let the owner compare

@@ -2,7 +2,7 @@
 
 Candidate10 retains the removable second Manny in the lobby: a supported
 living pose, local physical rifle reactions, passive death, continued corpse
-contacts, natural sleep/wake and repeatable reset. F8 provides actual world/body
+contacts, natural sleep/wake and repeatable reset. Y provides actual world/body
 and bullet slowdown while the player remains at normal movement speed.
 This is a stationary fixture with distributed world-space springs. It has no
 autonomous balance, stepping, recovery from death, AI or final character art.
@@ -26,6 +26,10 @@ Exact correspondence of the grounded collapse remains a limitation for review.
 All worker evidence names below are relative to
 `Saved/CombatSlice01/PhysicsControlDummy01/Worker/`.
 
+Owner-reported F8 editor shortcut conflict corrected: the current preview key is
+Y. Candidate10 and the F8 evidence below remain historical; physics and time logic
+are unchanged.
+
 ## Play and controls
 
 Open `/Game/Maps/L_OpeningLobby_PainterStone01` and Play. The original enemy still
@@ -40,7 +44,7 @@ standing movement capsule. Both fixtures use 100 health and the existing
 | LMB / RMB / V / R | Existing fire, aim, mode and finite-ammunition reload controls. |
 | F6 | Clear projectiles/feedback and reset both fixtures. Ammunition is unchanged. Restore preview time. |
 | F7 | Retained original enemy movement preview. It does not animate the new dummy. |
-| F8 | Toggle this development preview between normal and 0.25 world/body/bullet time. Works before the first shot. |
+| Y | Toggle this development preview between normal and 0.25 world/body/bullet time. Works before the first shot. |
 | F10 | Destroy/recreate only the second dummy and restore preview time when disabling it. Works before firing. |
 | Stop / Play | Clean teardown and a fresh session with both fixtures and the ordinary 30/90 ammunition. |
 

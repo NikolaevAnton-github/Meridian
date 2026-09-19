@@ -1,0 +1,13 @@
+{
+  "record_id": "PhysicsControlDummy01-F8Conflict01",
+  "date_local": "2026-09-19",
+  "source": "Owner direct chat after playing MSQ-84",
+  "owner_message_original": "на f8 какая то другая функция при режимне play",
+  "owner_message_english_translation": "F8 seems to invoke some other function in Play mode.",
+  "scope": "Correct the experimental slow-preview input conflict with the editor's Play shortcut, with a bounded replacement binding and actual foreground keyboard verification.",
+  "controller_response": "Inspect the conflict, move the preview to an unoccupied key, and verify entry and restoration in Play.",
+  "later_owner_message_original": "Надо просто поменять клавишу...зачем запускать проверяющих и тд?это очень растратно",
+  "later_owner_message_english_translation": "Just change the key. Why launch reviewers and so on? This is very wasteful.",
+  "superseding_workflow": "Apply this trivial key correction directly, cancel the extra executor/reviewer workflow and omit additional runtime test runs. Retain only the native rebuild needed to make it effective. Use this proportionate direct route for similarly trivial local changes.",
+  "limits": "Preserve editor shortcuts and owner input configuration, physical/time behavior, historical candidates and applicable evidence. No successor or expanded gameplay work."
+}

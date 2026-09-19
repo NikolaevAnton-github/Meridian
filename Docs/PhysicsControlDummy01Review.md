@@ -1,5 +1,12 @@
 # PhysicsControlDummy01 / MSQ-84 controller acceptance
 
+Owner follow-up on 2026-09-19 supersedes the F8 control in the historical review
+below: the current preview key is Y, avoiding editor Possess/Eject. The owner
+requested this trivial correction directly without further executor/reviewer
+work. The extra run was cancelled; only the binding and current documentation
+changed, with native rebuild. Prior injected-input checks did not validate the
+editor shortcut path; no new runtime input verification is claimed.
+
 Accepted 2026-09-19 within the [authorized experiment](Tasks/PhysicsControlDummy01.md)
 and [owner start](Approvals/PhysicsControlDummy01-OwnerStart01.json).
 Candidate10 passes the eight scoped technical/prototype visual rows. The sole

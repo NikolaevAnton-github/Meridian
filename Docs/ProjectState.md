@@ -40,7 +40,7 @@ and [controller acceptance](PhysicsControlDummy01Review.md).
 
 The supported second Manny responds locally to hits, releases drives on death,
 receives falling/sleeping corpse impacts and resets without ammunition refill.
-F8 previews coherent quarter-speed bodies/bullets with normal player movement;
+Y previews coherent quarter-speed bodies/bullets with normal player movement;
 F10 toggles the fixture, avoiding Unreal's F9 screenshot shortcut. F6/F7 retain
 their existing roles. The grounded normal/quarter trajectory comparison remains
 failed (36.659 cm versus 15 cm); the separate physical-clock check passes.

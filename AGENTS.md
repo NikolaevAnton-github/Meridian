@@ -53,6 +53,9 @@ instructions supersede earlier guidance within their stated scope.
 - Multica is the default implementation route; use the existing project and
   keep production concurrency at one. Direct chat handles clarification,
   dispatch, review and small administrative updates.
+- For trivial local corrections such as changing one key binding, the controller
+  edits directly without dispatching an executor or reviewer. Use only the build
+  or narrow check needed to make the change effective; avoid a task-sized workflow.
 - For administrative access, use `Scripts/multica.ps1 -Action StartServices`
   (database/API/web); start the task runtime only for intended execution.
   Use `suppress_run=true` / CLI `--no-start` for administrative status, assignment

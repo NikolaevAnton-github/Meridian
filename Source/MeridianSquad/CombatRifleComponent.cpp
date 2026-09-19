@@ -122,7 +122,7 @@ void UCombatRifleComponent::BindInput(UEnhancedInputComponent* Input)
     Input->BindAction(Reload, ETriggerEvent::Completed, this, &UCombatRifleComponent::ReloadReleased);
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::F6, IE_Pressed, this, &UCombatRifleComponent::ResetTargets);
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::F7, IE_Pressed, this, &UCombatRifleComponent::ToggleEnemyPreview);
-    static_cast<UInputComponent*>(Input)->BindKey(EKeys::F8, IE_Pressed, this, &UCombatRifleComponent::TogglePhysicsPreview);
+    static_cast<UInputComponent*>(Input)->BindKey(EKeys::Y, IE_Pressed, this, &UCombatRifleComponent::TogglePhysicsPreview);
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::F10, IE_Pressed, this, &UCombatRifleComponent::TogglePhysicsDummy);
 }
 void UCombatRifleComponent::TogglePhysicsPreview()
