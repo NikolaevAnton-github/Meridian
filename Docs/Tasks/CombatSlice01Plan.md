@@ -84,8 +84,11 @@ task database. Every child has a unique native stage and a recorded predecessor.
   executors and reviewers use **max reasoning, standard speed**. Verify saved
   profiles, native arguments and actual execution. Restore task-local settings
   while retaining the standing max requirement.
-- A technical task advances after focused checks, controller review, bounded
-  corrections and a local task-scoped closure commit. Owner play feedback and
+- A technical task advances through executor self-checks, one primary independent
+  technical review for substantive changes, bounded corrections and controller
+  acceptance under [review responsibilities](../AgentDevelopment.md#review-responsibilities),
+  followed by a local task-scoped closure commit. The controller does not repeat
+  the full technical review or applicable passing checks. Owner play feedback and
   visual acceptance remain separate; technical success never invents acceptance.
   Do not introduce an owner approval step for each routine implementation choice.
 - Concrete owner decisions are needed where the existing rules require them:
@@ -148,7 +151,10 @@ views for visual claims and report independently without editing the candidate.
 Follow [FocusedVerification01](../Approvals/FocusedVerification01.json): test
 changed behavior and related transitions only. Use appropriate compile/load and
 saved-package checks, but no repeated full animation matrix or new benchmark
-harness. Explicit integration tasks exercise only newly coupled risks. On a
+harness. Assign each criterion one review owner and reuse applicable evidence
+across executor, reviewer and controller. Record a concrete change, gap,
+contradiction or uncovered risk before repeating a check, limited to affected
+criteria. Explicit integration tasks exercise only newly coupled risks. On a
 failed check, diagnose with new evidence; after two equivalent failures change
 the approach. After controller closure, commit only verified task files with the
 Multica ID before owner handoff. Leave the retained lobby ready for Play with no

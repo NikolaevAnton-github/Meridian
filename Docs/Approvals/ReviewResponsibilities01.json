@@ -1,0 +1,26 @@
+{
+  "record_id": "ReviewResponsibilities01",
+  "date_local": "2026-09-19",
+  "task_id": "MSQ-83",
+  "source": "Owner direct chat after discussion of duplicate executor, reviewer and controller checks",
+  "owner_message_original": "Давай сделаем четче, уменьшим дублирование в работе",
+  "owner_message_english_translation": "Let's make it clearer and reduce duplication in the work.",
+  "accepted_proposal_context": "The controller proposed keeping one primary independent technical reviewer for substantive changes and controller task acceptance, instead of a second complete technical review. Small obvious low-impact changes can use executor self-checks and controller acceptance unless independent review is explicitly required.",
+  "decision": "Clarify and apply standing review responsibilities to reduce duplicate work while retaining controller accountability and required acceptance gates.",
+  "workflow": "Docs/AgentDevelopment.md#review-responsibilities",
+  "responsibilities": {
+    "executor": "Implement, self-check directly affected behavior and provide candidate-specific evidence and limits.",
+    "independent_reviewer": "Own technical review of substantive changes and verification of findings; inspect the actual relevant candidate and reuse credible applicable executor evidence. Additional specialists cover distinct criteria only.",
+    "controller": "Own scope, dispatch, progress, correction coordination, evidence applicability, finding closure, task acceptance, administration, closure commit and owner handoff without a second full technical review."
+  },
+  "repeat_check_rule": "Record a concrete relevant candidate change, evidence gap, contradictory result or uncovered risk before repeating a check or deepening controller investigation. Limit work to affected criteria and related transitions; retain applicable passing evidence with its original identity.",
+  "preserved_requirements": [
+    "Explicit independent visual review and owner design/play acceptance gates",
+    "Owner-only review of the protagonist concept batch",
+    "Max reasoning and standard speed for executors and reviewers",
+    "One production writer, one heavy workload and existing dispatch boundaries",
+    "Focused verification and local task-scoped closure commits",
+    "Historical evidence and unrelated owner changes"
+  ],
+  "scope": "Standing future workflow and relevant existing administrative guidance/profile instructions. No gameplay changes, successor execution, new art production or retrospective acceptance are authorized by this record."
+}

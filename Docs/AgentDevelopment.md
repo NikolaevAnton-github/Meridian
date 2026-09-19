@@ -8,6 +8,11 @@ See [the closure decision](Approvals/LobbyDeferred01-OwnerClosure01.json) and
 
 ## Constraints and decisions
 
+- Current review responsibilities, 2026-09-19: one primary technical reviewer for
+  substantive changes; controller acceptance checks scope, evidence applicability
+  and finding closure without repeating the full technical review. See
+  [the standing workflow](#review-responsibilities) and
+  [owner decision](Approvals/ReviewResponsibilities01.json).
 - Current standing owner instruction, 2026-09-17: all project executors and
   reviewers use max reasoning at standard speed. Verify actual native settings;
   retain max when restoring other task-local profile values. See
@@ -43,6 +48,62 @@ See [the closure decision](Approvals/LobbyDeferred01-OwnerClosure01.json) and
   an independent visual review and explicit owner approval. Dedicated Multica
   Spatial Designer and Visual Reviewer profiles use Astra/high/default; existing
   profiles and user-level Codex settings are unchanged. Runtime concurrency stays one.
+
+## Review responsibilities
+
+Standing workflow approved on 2026-09-19 under
+[ReviewResponsibilities01](Approvals/ReviewResponsibilities01.json), implemented
+in [MSQ-83](Tasks/ReviewResponsibilities01.md). This clarifies future execution;
+historical reviews remain unchanged.
+
+| Role | Responsibility |
+| --- | --- |
+| Executor | Implement the bounded change, run focused self-checks, and supply the candidate, results and known limitations. |
+| Primary independent reviewer | Inspect the relevant candidate code/assets and evidence, evaluate technical criteria and test adequacy, identify defects and verify correction of findings. |
+| Controller | Own task scope, dispatch, progress, correction coordination, owner-request acceptance, evidence applicability, finding closure, administrative closure, commit and owner handoff. |
+| Owner | Retain the required design selections and final visual/play acceptance. |
+
+Before dispatch, identify the acceptance criteria, expected evidence and one review
+owner for each criterion in the existing task brief. Use one primary independent
+technical reviewer for substantive changes, such as gameplay logic, timing,
+architecture and significant visual work. Add a specialist only for distinct
+criteria the primary reviewer does not cover; do not assign overlapping full
+reviews. Technical and visual verdicts remain distinct where required.
+
+Small, obvious, low-impact changes can finish with executor self-checks and
+controller acceptance when no explicit independent review requirement applies.
+The controller may execute small administrative updates directly under AGENTS.md;
+this does not require adding a worker or reviewer. Record the chosen review route
+briefly in the existing task record rather than creating another review document.
+Required independent visual review, named owner approval and the protagonist
+concept owner-only exception remain in force.
+
+The executor provides evidence that identifies the checked candidate (commit,
+hashes or an existing suitable manifest), checks performed, results, and limits.
+The independent reviewer directly examines the relevant implementation and actual
+views for visual claims; an executor's PASS summary alone is insufficient. Reuse
+credible, applicable executor test output instead of rerunning every passing test.
+The reviewer requests or performs only the missing checks needed for a verdict.
+
+The controller checks that the delivered scope answers the owner, evidence applies
+to the delivered version, mandatory criteria have a supported verdict, findings
+are closed or explicitly retained within the authorized scope, and owner edits
+are preserved. This is task acceptance, not a second complete code/asset review,
+independent reimplementation of the verifier, or repetition of passing tests.
+
+Repeat a check or deepen controller investigation only for a concrete reason:
+a relevant candidate change after the evidence was collected; missing, stale or
+unreliable evidence; conflicting results; or a specific uncovered risk. Record the
+reason and affected criteria in the existing task/review report, then check only
+that subset and related transitions. Reuse unaffected evidence with its original
+candidate identity; do not silently rebaseline historical results. Corrections
+return to the same review scope; they do not restart the entire review by default.
+Additional integrated checks need a newly coupled risk or an explicit task criterion.
+
+The controller remains accountable through completion. Max reasoning, standard
+speed, one production writer, existing authorization boundaries and the local
+closure commit still apply. This workflow grants no successor dispatch or owner
+visual acceptance.
 
 ## Stage 1: Codex and Unreal
 

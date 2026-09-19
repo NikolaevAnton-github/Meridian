@@ -13,6 +13,14 @@ Verify native execution as well as saved profiles. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
+Current review workflow, 2026-09-19: the executor self-checks; one primary independent
+reviewer owns technical review for substantive changes; the controller accepts
+scope, applicable evidence and finding closure without a second full technical
+review. Reuse passing evidence and justify only affected rechecks. See
+[review responsibilities](AgentDevelopment.md#review-responsibilities) and
+[the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
+and owner gates remain; this administrative change does not expand gameplay scope.
+
 ## Current scope: MSQ-82 combat timing verified
 
 The owner placed **MSQ-82 / CombatTiming01** next after MSQ-68 and authorized

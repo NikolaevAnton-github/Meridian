@@ -85,6 +85,16 @@ instructions supersede earlier guidance within their stated scope.
 - Define acceptance criteria, make a bounded change and verify it. Repeat failed
   actions only with new evidence; after two equivalent failures change the
   diagnostic approach. Avoid redundant passing tests.
+- Follow [review responsibilities](Docs/AgentDevelopment.md#review-responsibilities):
+  the executor implements and self-checks; one primary independent reviewer owns
+  technical review for substantive changes; the controller accepts owner scope,
+  evidence applicability and finding closure without a second full technical review.
+  Assign additional reviewers distinct criteria only. Reuse applicable passing
+  evidence; repeat checks only for a recorded change, gap, contradiction or uncovered
+  risk, limited to affected criteria. Small obvious low-impact changes may use
+  executor self-checks and controller acceptance unless independent review is
+  explicitly required. Preserve visual and owner gates. See the
+  [owner decision](Docs/Approvals/ReviewResponsibilities01.json).
 - For animation and gameplay corrections, verify only behavior directly affected
   by the change and its related transitions. Do not run the full animation or
   feature matrix. This is a standing owner instruction for future tasks; see
