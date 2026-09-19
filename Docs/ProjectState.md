@@ -40,10 +40,13 @@ an isolated environment under `D:/devgames/Kimodo`, with local launchers, CUDA
 verification and 10.05 GB of source, dependencies and public models. See
 [the handoff and continuation](KimodoLocal01.md) and
 [the owner instruction](Approvals/KimodoLocal01-OwnerScope01.json).
-Full UI and first text generation remain pending approved Hugging Face access to
-Llama 3 and enough free RAM; no Kimodo server remains running. This is tooling
-setup only; gameplay balance/get-up and Unreal integration are not dispatched.
-The existing six-mannequin gameplay and owner edits remain preserved.
+The owner subsequently started the Chrome UI and explicitly requested a get-up
+animation. [GetUp01](KimodoGetUp01.md) records one successfully generated and saved
+six-second floor-to-standing candidate (NPZ and BVH). Full UI and one real text
+generation are now demonstrated for that session; server restart/lifecycle was
+not retested. The owner-started server and result tab remain available. Gameplay
+balance/get-up and Unreal integration are not dispatched; the candidate is not
+production-accepted. The six-mannequin gameplay and owner edits remain preserved.
 
 ## Owner-play handoff: MSQ-85 Physics Control variants
 

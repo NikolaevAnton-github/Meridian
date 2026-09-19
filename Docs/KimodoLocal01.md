@@ -1,5 +1,12 @@
 # KimodoLocal01 / MSQ-86: executor handoff
 
+**Later session update, 2026-09-20:** the owner started Kimodo in Chrome and
+requested a get-up animation. [GetUp01](KimodoGetUp01.md) successfully generated
+and saved one six-second NPZ/BVH candidate. Full UI and real text generation are
+therefore demonstrated for that session. The initial authentication/memory
+blockers described in the installation snapshot below are historical; server
+restart/lifecycle remains unverified. The owner-started server is left running.
+
 2026-09-20. Local tooling is installed at **`D:\devgames\Kimodo`**.
 **Text generation and the full Kimodo UI remain unverified**, pending approved
 Hugging Face authentication and enough free system RAM. The independent setup
