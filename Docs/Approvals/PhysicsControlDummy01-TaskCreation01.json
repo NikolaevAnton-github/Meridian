@@ -1,0 +1,29 @@
+{
+  "record_id": "PhysicsControlDummy01-TaskCreation01",
+  "date_local": "2026-09-19",
+  "source": "Owner direct chat after discussing post-death bullet interaction and current Epic Physics Control examples",
+  "owner_message_original": "Давай тогда попробуем как эксперемент создать вторую куклу Physics Control, создай план на это и задачи или задачу.",
+  "owner_message_english_translation": "Let's then try creating a second Physics Control dummy as an experiment; create a plan and tasks or a task for it.",
+  "decision": "Prepare one bounded experimental task and its implementation plan for a second Physics Control mannequin alongside the retained enemy prototype.",
+  "task_creation_authorized": true,
+  "requested_deliverable_this_turn": "Plan and Multica task creation",
+  "production_run_dispatched": false,
+  "initial_status": "backlog",
+  "initial_assignment": "unassigned",
+  "owner_intent": "Explore Physics Control on a second dummy before deciding whether to adopt it for the existing enemy.",
+  "context": "The owner wants a dying/dead body to retain ragdoll collision and respond physically to further bullets, particularly during slow motion. Epic's powered-ragdoll example was discussed as a potential reference.",
+  "controller_planning_choices": [
+    "Use one task with sequential implementation, focused verification and one primary independent review.",
+    "Use an existing Manny as a removable second stationary fixture and preserve the original enemy for comparison.",
+    "Cover powered living hits, a single transition to passive ragdoll, falling/resting corpse impacts, sleep/wake and reset.",
+    "Include a bounded coherent body-and-bullet slow-motion development preview; retain the full player-facing time ability in MSQ-75.",
+    "Keep this experimental child unstaged; do not reorder or dispatch the existing MSQ-70-and-later sequence."
+  ],
+  "adoption": "The experiment does not approve replacement of the baseline enemy, final enemy art or full Euphoria-style behavior.",
+  "preservation": "Keep owner edits, retained lobby, PurchasedArms06, MSQ-69/MSQ-82 evidence, original sources and paused art/environment work. No purchases or new model production.",
+  "task": "Docs/Tasks/PhysicsControlDummy01.md",
+  "parent": "MSQ-67",
+  "depends_on": "MSQ-69",
+  "multica_issue": "MSQ-84",
+  "creation_evidence": "Saved/CombatSlice01/PhysicsControlDummy01/Planning/verification.json"
+}

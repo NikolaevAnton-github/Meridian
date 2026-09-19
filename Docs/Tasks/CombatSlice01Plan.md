@@ -76,6 +76,21 @@ task database. Every child has a unique native stage and a recorded predecessor.
 | 14 | MSQ-80 | [OpeningEpisode01](OpeningEpisode01.md) | The selected exploration, combat, recording and progression sequence. |
 | 15 | MSQ-81 | [GameplaySliceReview01](GameplaySliceReview01.md) | Independent integrated review and owner-ready playable handoff. |
 
+## Prepared experimental task
+
+On 2026-09-19 the owner requested a plan and task for a second Physics Control
+dummy; see [the exact request](../Approvals/PhysicsControlDummy01-TaskCreation01.json).
+[PhysicsControlDummy01 / MSQ-84](PhysicsControlDummy01.md) is one unstaged
+experimental child depending on verified MSQ-69. Its plan covers powered living
+hit reactions, a continuous death transition, further impacts on the ragdoll,
+sleep/wake, reset and a bounded coherent slow-motion development preview.
+The existing enemy stays available as the comparison baseline. Adoption of the
+experiment is a separate owner choice; MSQ-75 retains the full time ability.
+
+Preparation creates an unassigned backlog task with zero production runs. The
+ordered stages above and MSQ-70's existing dependency remain unchanged. This
+experiment does not dispatch the sequential family or resume paused art/lobby work.
+
 ## Sequential execution and gates
 
 - The original setup prepared tasks only. It created the parent and all children as

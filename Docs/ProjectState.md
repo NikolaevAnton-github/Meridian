@@ -21,7 +21,25 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
-## Current scope: MSQ-69 enemy prototype verified
+## Prepared experiment: MSQ-84 second Physics Control dummy
+
+On 2026-09-19, after playing the enemy prototype and discussing continued bullet
+impacts on dead bodies, the owner requested a plan and task for a second Physics
+Control dummy. [PhysicsControlDummy01 / MSQ-84](Tasks/PhysicsControlDummy01.md)
+defines one removable Manny beside the retained enemy: powered living reactions,
+death to passive ragdoll, continued corpse impacts, sleep/wake, reset and a bounded
+body-and-bullet slow-motion development preview. See the
+[exact request and planning scope](Approvals/PhysicsControlDummy01-TaskCreation01.json).
+
+This is one unassigned backlog experiment under MSQ-67, depending on verified
+MSQ-69, with no production run. It has no native stage and does not reorder or
+dispatch MSQ-70 and successors. The original enemy remains the comparison baseline;
+adoption is separate from evaluating the second dummy. Full time ability, autonomous
+balance/get-up, AI, Mover migration, new art and deferred lobby work are outside
+the experiment. Multica readback and preservation evidence are under
+`Saved/CombatSlice01/PhysicsControlDummy01/Planning/`.
+
+## Verified gameplay baseline: MSQ-69 enemy prototype
 
 The owner requested the next gameplay task on 2026-09-19; see
 [the exact start record](Approvals/EnemyPrototype01-OwnerStart01.json) and
