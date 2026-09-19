@@ -4,6 +4,8 @@
 #include "Engine/Canvas.h"
 #include "Engine/Engine.h"
 #include "GameFramework/PlayerController.h"
+#include "PhysicsControlDummy.h"
+#include "EngineUtils.h"
 
 void ACombatPrototypeHUD::DrawHUD()
 {
@@ -21,10 +23,27 @@ void ACombatPrototypeHUD::DrawHUD()
         Rifle->Magazine > 0 ? FLinearColor::White : FLinearColor(1,.4f,.2f), X, Y + 21 * Scale, GEngine->GetMediumFont(), Scale);
     DrawText(Rifle->StatusText.IsEmpty() ? TEXT("LMB fire   RMB aim   V mode   R reload / hold check") : Rifle->StatusText,
         FLinearColor(.75f,.83f,.85f), X, Y + 54 * Scale, GEngine->GetSmallFont(), Scale);
-    DrawText(TEXT("F6 reset targets   F7 enemy motion preview"), FLinearColor(.65f,.73f,.76f),
+    DrawText(TEXT("F6 reset   Y slow preview   F10 mannequins"), FLinearColor(.65f,.73f,.76f),
         X, Y + 77 * Scale, GEngine->GetSmallFont(), Scale);
     const float CX = Canvas->SizeX * .5f, CY = Canvas->SizeY * .5f;
     DrawRect(FLinearColor(1,1,1,.65f), CX - 1, CY - 1, 2, 2);
+    for (TActorIterator<APhysicsControlDummy> It(GetWorld()); It; ++It)
+    {
+        const FVector Point = It->GetPhysicalBodyLocation(TEXT("head")) + FVector(0, 0, 28);
+        FVector2D Screen;
+        if (!PlayerOwner->ProjectWorldLocationToScreen(Point, Screen, true) || Screen.X < 0 || Screen.X > Canvas->SizeX ||
+            Screen.Y < 0 || Screen.Y > Canvas->SizeY) continue;
+        FCollisionQueryParams Query(SCENE_QUERY_STAT(FixtureLabel), true);
+        if (const auto* Manager = ACombatProjectileWorld::Find(GetWorld())) Manager->BuildQuery(Query, Pawn);
+        FVector Eye; FRotator View; PlayerOwner->GetPlayerViewPoint(Eye, View);
+        FHitResult Obstruction;
+        if (GetWorld()->LineTraceSingleByChannel(Obstruction, Eye, Point, ECC_Visibility, Query)) continue;
+        if (const auto* Manager = ACombatProjectileWorld::Find(GetWorld()))
+            if (Manager->TraceEnemyAim(Eye, Point, Manager->GetFiringClock(), Obstruction) && Obstruction.GetActor() != *It) continue;
+        DrawRect(FLinearColor(.01f,.02f,.025f,.85f), Screen.X - 65 * Scale, Screen.Y - 4 * Scale, 130 * Scale, 26 * Scale);
+        DrawText(FString::Printf(TEXT("%d  |  %.0f HP%s"), It->ReactionProfile, It->Health, It->IsDead() ? TEXT("  CORPSE") : TEXT("")),
+            FLinearColor(.4f,.9f,1.f), Screen.X - 56 * Scale, Screen.Y, GEngine->GetMediumFont(), Scale);
+    }
     if (const auto* World = ACombatProjectileWorld::Find(GetWorld()))
     {
         if (FPlatformTime::Seconds() - World->LastHitRealTime < 1.2f)

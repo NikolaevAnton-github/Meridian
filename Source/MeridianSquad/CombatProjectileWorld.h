@@ -56,6 +56,8 @@ public:
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     FString ProbePhysicsDummy();
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
+    FString ProbePhysicsPreviewOverrides();
+    UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     bool PreparePhysicsDummyFreefallProbe();
     UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
     void SetPhysicsDummyEnabled(bool Enabled);
@@ -68,12 +70,17 @@ public:
     float GetPhysicsPreviewScale() const { return RequestedPreviewScale; }
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Prototype")
     bool bEnablePhysicsDummy = true;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat|Prototype", meta=(ClampMin="0.1", ClampMax="0.9"))
+    float PreviewWorldRate = .25f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat|Prototype", meta=(ClampMin="0.1", ClampMax="1.0"))
+    float PreviewPlayerRate = .65f;
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     bool ProbeCover(FName Kind);
 
     int64 Launch(AActor* Shooter, const FVector& Position, const FVector& Velocity, float Damage);
     int64 LaunchTimed(AActor* Shooter, const FVector& Position, const FVector& Velocity, float Damage, double Time);
     double GetFiringClock() const { return FiringClock; }
+    double GetPlayerActionClock() const { return PlayerActionClock; }
     void ClearProjectiles();
     void BuildQuery(FCollisionQueryParams& Query, const AActor* Ignore = nullptr) const;
     bool TraceEnemyAim(const FVector& Start, const FVector& End, double Time, FHitResult& Hit) const;
@@ -130,7 +137,7 @@ private:
     UPROPERTY(Transient)
     TObjectPtr<AEnemyPrototypeCharacter> Enemy;
     UPROPERTY(Transient)
-    TObjectPtr<APhysicsControlDummy> PhysicsDummy;
+    TArray<TObjectPtr<APhysicsControlDummy>> PhysicsDummies;
     TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> PreviousDummies;
     TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> FrameStartDummies;
     TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> FrameEndDummies;
@@ -140,10 +147,14 @@ private:
     float SavedPlayerDilation = 1.f;
     float SavedManagerDilation = 1.f;
     float SavedProjectileScale = 1.f;
+    float PlayerActionRate = 1.f;
+    double PlayerActionClock = 0.0;
+    TMap<TWeakObjectPtr<AActor>, float> SavedPresentationDilation;
     TWeakObjectPtr<ACharacter> PreviewPlayer;
     bool bOwnsPreviewTime = false;
     void ApplyPreviewTime();
     void RestorePreviewTime();
+    void SyncPreviewPresentation();
     TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> SampleDummies() const;
     TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> DummiesAt(double Time) const;
     float ProjectileTimeScale = 1.f;

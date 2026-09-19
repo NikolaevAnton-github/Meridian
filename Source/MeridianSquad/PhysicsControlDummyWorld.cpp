@@ -10,18 +10,30 @@ void ACombatProjectileWorld::SetPhysicsDummyEnabled(bool Enabled)
     bEnablePhysicsDummy = Enabled;
     if (!Enabled)
     {
-        if (IsValid(PhysicsDummy)) PhysicsDummy->Destroy();
-        PhysicsDummy = nullptr;
+        for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy)) Dummy->Destroy();
+        PhysicsDummies.Reset();
         PreviousDummies.Reset(); FrameStartDummies.Reset(); FrameEndDummies.Reset();
         SetPhysicsPreviewScale(1);
         return;
     }
-    if (!IsValid(PhysicsDummy))
+    PhysicsDummies.RemoveAll([](const auto& Dummy) { return !IsValid(Dummy); });
+    if (PhysicsDummies.Num() != 6)
     {
+        for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy)) Dummy->Destroy();
+        PhysicsDummies.Reset();
         FActorSpawnParameters Params;
         Params.ObjectFlags |= RF_Transient;
         Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-        PhysicsDummy = GetWorld()->SpawnActor<APhysicsControlDummy>(FVector(-950, 110, 8), FRotator(0, 180, 0), Params);
+        Params.bDeferConstruction = true;
+        for (int32 I = 0; I < 6; ++I)
+        {
+            const FTransform Placement(FRotator(0, 180, 0), FVector(-950 + (I / 3) * 320, -320 + (I % 3) * 320, 8));
+            auto* Dummy = GetWorld()->SpawnActor<APhysicsControlDummy>(APhysicsControlDummy::StaticClass(), Placement, Params);
+            if (!Dummy) continue;
+            Dummy->ConfigureReactionProfile(I + 1);
+            Dummy->FinishSpawning(Placement);
+            PhysicsDummies.Add(Dummy);
+        }
         RecordCapsules();
     }
 }
@@ -60,7 +72,7 @@ TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> ACombatProjectileWorld::D
 void ACombatProjectileWorld::SetPhysicsPreviewScale(float Scale)
 {
     if (!FMath::IsFinite(Scale)) return;
-    RequestedPreviewScale = bEnablePhysicsDummy && Scale < .5f ? .25f : 1.f;
+    RequestedPreviewScale = bEnablePhysicsDummy && Scale < 1.f ? FMath::Clamp(PreviewWorldRate, .1f, .9f) : 1.f;
 }
 void ACombatProjectileWorld::ApplyPreviewTime()
 {
@@ -76,13 +88,34 @@ void ACombatProjectileWorld::ApplyPreviewTime()
         SavedProjectileScale = ProjectileTimeScale;
         bOwnsPreviewTime = true;
     }
-    // One scale for actual Chaos and projectile travel. The firing clock and player
-    // remain at their previous rates through inverse actor time compensation.
+    // The manager keeps a continuous compensated clock for finite flight/history.
+    // Player actions integrate their own clock; rate changes never rebase shot debt.
     UGameplayStatics::SetGlobalTimeDilation(GetWorld(), SavedWorldDilation * RequestedPreviewScale);
-    PreviewPlayer->CustomTimeDilation = SavedPlayerDilation / RequestedPreviewScale;
+    PlayerActionRate = FMath::Clamp(PreviewPlayerRate, .1f, 1.f);
+    PreviewPlayer->CustomTimeDilation = SavedPlayerDilation * PlayerActionRate / RequestedPreviewScale;
     CustomTimeDilation = SavedManagerDilation / RequestedPreviewScale;
-    ProjectileTimeScale = RequestedPreviewScale;
+    ProjectileTimeScale = SavedProjectileScale * RequestedPreviewScale;
     ActivePreviewScale = RequestedPreviewScale;
+    SyncPreviewPresentation();
+}
+void ACombatProjectileWorld::SyncPreviewPresentation()
+{
+    if (!bOwnsPreviewTime || !PreviewPlayer.IsValid()) return;
+    TArray<AActor*> Attached;
+    PreviewPlayer->GetAttachedActors(Attached, true, true);
+    for (AActor* Actor : Attached)
+    {
+        // Separate weapon/magazine actors own their mesh ticks. They must share
+        // the hands' clock; detached physical props deliberately keep world time.
+        if (!SavedPresentationDilation.Contains(Actor)) SavedPresentationDilation.Add(Actor, Actor->CustomTimeDilation);
+        Actor->CustomTimeDilation = SavedPresentationDilation.FindChecked(Actor) * PlayerActionRate / ActivePreviewScale;
+    }
+    for (auto It = SavedPresentationDilation.CreateIterator(); It; ++It)
+        if (!It.Key().IsValid() || !Attached.Contains(It.Key().Get()))
+        {
+            if (It.Key().IsValid()) It.Key()->CustomTimeDilation = It.Value();
+            It.RemoveCurrent();
+        }
 }
 void ACombatProjectileWorld::RestorePreviewTime()
 {
@@ -94,6 +127,10 @@ void ACombatProjectileWorld::RestorePreviewTime()
         ProjectileTimeScale = SavedProjectileScale;
     }
     bOwnsPreviewTime = false;
+    for (const auto& Entry : SavedPresentationDilation)
+        if (Entry.Key.IsValid()) Entry.Key->CustomTimeDilation = Entry.Value;
+    SavedPresentationDilation.Reset();
+    PlayerActionRate = 1.f;
     PreviewPlayer.Reset();
     RequestedPreviewScale = ActivePreviewScale = 1;
 }

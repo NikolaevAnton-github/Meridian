@@ -1,0 +1,11 @@
+{
+  "record_id": "OwnerVariantTesting01",
+  "date_local": "2026-09-19",
+  "source": "Owner direct chat interrupting excessive MSQ-85 verification",
+  "owner_message_original": "Зачем ты прогоняешь тесты на всех маникенах? я сам посмотрю на них, понятно что если один работает то остальные тоже же будут работать. Учись более умно назначать тесты, если я попросил себе 6 маникенов, значит я сам хочу их затестить, просто првоерь что 6 отрисовалось и пападания есть на одном.",
+  "owner_message_english_translation": "Why are you running tests on all mannequins? I will look at them myself. If one works, the others should work too. Assign tests more intelligently: when I ask for six mannequins, I want to test them myself. Just check that six render and one receives hits.",
+  "decision": "Immediately stop the expanded six-profile test campaign and independent visual comparison. MSQ-85 acceptance is six rendered mannequins and a real hit on one. The owner personally evaluates and selects the reactions.",
+  "standing_rule": "For sets of variants requested for owner experimentation, verify the requested set exists/renders and representative shared functionality on one instance. Do not run a full per-variant matrix, tuning campaign or independent subjective comparison unless explicitly requested or a concrete distinct defect requires a bounded check.",
+  "current_disposition": "Cancel the active MSQ-85 production run and stop its primary review; preserve implementation, previous results and unfinished review notes. Controller performs only the narrowed smoke/handoff, using applicable existing build and timing evidence. No further limb/death/joint/performance/full transition campaign.",
+  "acceptance_limits": "This scope reduction does not fabricate a full technical pass or owner selection of a particular profile. Earlier failed/superseded metrics remain historical evidence. Physics Control adoption and relative player slowdown remain authorized."
+}

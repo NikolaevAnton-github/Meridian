@@ -61,6 +61,14 @@ public:
     float BulletImpulse = 900.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning")
     float MaxImpulseVelocity = 180.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning")
+    float HitStrengthMultiplier = .2f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning")
+    float HitHoldSeconds = 0.f;
+    UPROPERTY(BlueprintReadOnly, Category="Physics Dummy")
+    int32 ReactionProfile = 0;
+    /** Configure before FinishSpawning; profile zero retains the historical probe default. */
+    void ConfigureReactionProfile(int32 Number);
     UPROPERTY(BlueprintReadOnly, Category="Physics Dummy")
     float Health = 100.f;
     UPROPERTY(BlueprintReadOnly, Category="Physics Dummy")

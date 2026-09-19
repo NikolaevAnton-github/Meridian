@@ -69,7 +69,7 @@ public:
     // The projectile coordinator owns the interval after movement/camera sampling.
     void PrepareTimingFrame(double Start, double End);
     double GetDueTime() const;
-    bool EmitScheduledShot(double Time, const FVector& View, const FQuat& Rotation);
+    bool EmitScheduledShot(double Time, const FVector& View, const FQuat& Rotation, double ProjectileBirth = -1.0);
     void FinishTimingFrame(bool bCanceled);
     void CancelFiringSession();
     void SampleView(FVector& Position, FQuat& Rotation) const;
@@ -127,6 +127,7 @@ private:
         FVector Position;
         FVector Velocity;
         uint64 Session;
+        double ActionTime;
     };
     TArray<FShotRecord> RecentShots;
 #if WITH_EDITOR

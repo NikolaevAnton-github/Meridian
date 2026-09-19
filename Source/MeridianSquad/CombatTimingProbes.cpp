@@ -38,6 +38,9 @@ FString ACombatProjectileWorld::ProbeTiming(const FString& Configuration)
     const int32 OriginalMagazine = Rifle->Magazine, OriginalReserve = Rifle->Reserve;
     const bool OriginalAuto = Rifle->bAutomatic;
     const double OriginalClock = FiringClock;
+    const double OriginalActionClock = PlayerActionClock;
+    TGuardValue<double> ActionClockGuard(PlayerActionClock, 0.0);
+    TGuardValue<float> ActionRateGuard(PlayerActionRate, Number(TEXT("player_rate"), 1.0));
     const FVector Origin(0, 8000, 12000);
     FActorSpawnParameters Params;
     Params.ObjectFlags |= RF_Transient;
@@ -134,6 +137,7 @@ FString ACombatProjectileWorld::ProbeTiming(const FString& Configuration)
                 else if (Type == TEXT("reset")) ResetTargets();
                 else if (Type == TEXT("capacity")) MaxProjectiles = int32(Amount);
                 else if (Type == TEXT("scale")) SetProjectileTimeScale(Amount);
+                else if (Type == TEXT("player_rate")) PlayerActionRate = FMath::Clamp(float(Amount), .1f, 1.f);
                 else if (Type == TEXT("lock")) Rifle->bReloading = true;
                 else if (Type == TEXT("unlock")) { Rifle->bReloading = false; Rifle->bTimingBarrier = true; }
                 auto Recorded = MakeShared<FJsonObject>();
@@ -173,7 +177,7 @@ FString ACombatProjectileWorld::ProbeTiming(const FString& Configuration)
         for (int32 Order = 0; Order < 2; ++Order)
         {
             ClearProjectiles();
-            FiringClock = 0;
+            FiringClock = PlayerActionClock = 0;
             int64 LaterId = 0;
             for (int32 I = 0; I < 2; ++I)
             {
@@ -213,7 +217,7 @@ FString ACombatProjectileWorld::ProbeTiming(const FString& Configuration)
         ClearProjectiles();
         Front->MaxHealth = 100;
         Front->ResetTarget();
-        FiringClock = 0;
+        FiringClock = PlayerActionClock = 0;
         Rifle->NextShotTime = Rifle->NextAllowedShotTime = 0;
         Rifle->FirePressed();
         const int32 BeforeResetShots = Rifle->ShotCount;
@@ -262,7 +266,7 @@ FString ACombatProjectileWorld::ProbeTiming(const FString& Configuration)
     Rifle->bAllowedAtFrameStart = false;
     Rifle->SyncPresentation();
     FiringClock = OriginalClock;
-    Rifle->NextAllowedShotTime = Rifle->NextShotTime = FiringClock;
+    Rifle->NextAllowedShotTime = Rifle->NextShotTime = OriginalActionClock;
     MaxProjectiles = OriginalCapacity;
     SetProjectileTimeScale(OriginalScale);
     Report->SetBoolField(TEXT("cleanup"), Bullets.IsEmpty() && !Rifle->bFireHeld && !Rifle->bReloading);

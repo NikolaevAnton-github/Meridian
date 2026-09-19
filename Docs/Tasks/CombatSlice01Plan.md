@@ -8,8 +8,11 @@ Multica issue: **MSQ-67**.
 
 The MSQ-68 execution instruction authorized that child and fixed the
 [projectile/time/self-hit policy](../Approvals/CombatFoundation01-OwnerScope01.json).
-All bullets have finite flight and follow world slowdown/stop; player movement
-remains normal and own bullets can injure the player. Build these seams in stage 1;
+All bullets have finite flight and follow world slowdown/stop; own bullets can
+injure the player. The original normal-player slowdown rule is superseded by
+[the MSQ-85 owner decision](../Approvals/PhysicsControlVariants01-OwnerScope01.json):
+player movement/firing slow less than the world. Full stop policy is unchanged.
+Build these seams in stage 1;
 player health and the ability remain in their later stages. The original task
 creation record and setup evidence remain historical, unchanged.
 
@@ -68,7 +71,7 @@ task database. Every child has a unique native stage and a recorded predecessor.
 | 6 | MSQ-72 | [LobbyEncounter01](LobbyEncounter01.md) | A small encounter with cover, completion and reset. |
 | 7 | MSQ-73 | [EnemyBodyDamage01](EnemyBodyDamage01.md) | A bounded regional damage and dismemberment sample. |
 | 8 | MSQ-74 | [EnvironmentDestruction01](EnvironmentDestruction01.md) | Selected destructible objects with correct cover and debris behavior. |
-| 9 | MSQ-75 | [TimeSlow01](TimeSlow01.md) | World slowdown/stop, normal player movement and reliable restoration. |
+| 9 | MSQ-75 | [TimeSlow01](TimeSlow01.md) | World slowdown/stop, relative player slowdown and reliable restoration. |
 | 10 | MSQ-76 | [ForcePush01](ForcePush01.md) | Directional push with explicit eligibility and recovery. |
 | 11 | MSQ-77 | [Telekinesis01](Telekinesis01.md) | Acquire, hold, release and throw suitable objects. |
 | 12 | MSQ-78 | [CombatIntegration01](CombatIntegration01.md) | The encounter works with damage, destruction and abilities together. |
@@ -92,6 +95,13 @@ ordered stages above and MSQ-70's existing dependency remain unchanged. This
 experiment does not dispatch the sequential family or resume paused art/lobby work.
 
 ## Sequential execution and gates
+
+On 2026-09-19 the owner adopted MSQ-84 Physics Control, requested removal of the
+old enemy from active gameplay, six stronger reaction variants, and partial
+player movement/firing slowdown. [PhysicsControlVariants01 / MSQ-85](PhysicsControlVariants01.md)
+is the authorized unstaged follow-up, with MSQ-84 as predecessor. It replaces the
+old active comparison arrangement and updates the slowdown policy inherited by
+MSQ-75; source/evidence history and the ordered MSQ-70 onward sequence are retained.
 
 - The original setup prepared tasks only. It created the parent and all children as
   **backlog, unassigned**, with no production run. The parent is a coordination
@@ -151,8 +161,8 @@ experiment does not dispatch the sequential family or resume paused art/lobby wo
   world coordinates, not the scaled first-person presentation. Avoid duplicate
   events, unbounded actor spawning and permanent map damage during playtests.
   Rifle bullets use finite-flight simulation with swept collision, world-time
-  motion/aging and collision-time damage. Preserve normal player movement during
-  future slowdown/stop, contact with suspended bullets and self-hit eligibility;
+  motion/aging and collision-time damage. Preserve the amended player-relative
+  slowdown policy, the unchanged stop policy, contact with suspended bullets and self-hit eligibility;
   shooter attribution is not permanent immunity. See the fixed owner policy above.
 - Audit current bindings before adding abilities or interactions: Q/E/F/X/T/U/G
   already trigger vendor actions. Document intended remaps in a single controls

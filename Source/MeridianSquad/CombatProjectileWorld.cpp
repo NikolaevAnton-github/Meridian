@@ -78,17 +78,10 @@ void ACombatProjectileWorld::BeginPlay()
     Bullets.Reserve(256);
     Impacts.Reserve(48);
     RecordCapsules();
-    // Removable gameplay setup only: none of these actors are saved into the map.
-    for (float Y : {-260.f, 0.f, 260.f})
-    {
-        FActorSpawnParameters Params;
-        Params.ObjectFlags |= RF_Transient;
-        Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-        Targets.Add(GetWorld()->SpawnActor<ACombatTarget>(FVector(-850, Y, 135), FRotator::ZeroRotator, Params));
-    }
-    FActorSpawnParameters EnemyParams;
-    EnemyParams.ObjectFlags |= RF_Transient;
-    Enemy = GetWorld()->SpawnActor<AEnemyPrototypeCharacter>(FVector(-1100, 0, 100), FRotator(0, 180, 0), EnemyParams);
+    // Replace the old transient comparison (including its obstructing test boxes).
+    // No fixtures are saved into the retained map; test-box source/probes survive.
+    // Legacy enemy implementation/assets remain available for historical probes.
+    // The active experiment is now the six Physics Control fixtures only.
     SetPhysicsDummyEnabled(bEnablePhysicsDummy);
 }
 ACombatProjectileWorld* ACombatProjectileWorld::Find(const UWorld* World)
@@ -281,6 +274,7 @@ void ACombatProjectileWorld::Tick(float DeltaSeconds)
         for (const FBullet& Bullet : Bullets)
             DrawDebugPoint(GetWorld(), Bullet.Position, 5.f, FColor(255, 210, 120), false, 0.f);
     ApplyPreviewTime();
+    SyncPreviewPresentation();
 }
 void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
 {
@@ -295,6 +289,7 @@ void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
     FrameEndDummies = SampleDummies();
     AdvanceSegment(FrameStart, FrameEnd, RealNow);
     FiringClock = FrameEnd;
+    PlayerActionClock += FMath::Max(0.f, WorldDelta) * PlayerActionRate;
     RecordCapsules();
 }
 void ACombatProjectileWorld::AdvanceFrame(double WorldDelta, double RealNow, UCombatRifleComponent* Rifle)
@@ -304,6 +299,8 @@ void ACombatProjectileWorld::AdvanceFrame(double WorldDelta, double RealNow, UCo
     ++FrameSerial;
     FrameStart = FiringClock;
     FrameEnd = FrameStart + WorldDelta;
+    const double ActionStart = PlayerActionClock;
+    const double ActionEnd = ActionStart + WorldDelta * PlayerActionRate;
     LastFrameDelta = WorldDelta;
     LastFrameSteps = LastFrameBirths = 0;
     FrameStartCapsules = PreviousCapsules;
@@ -317,7 +314,7 @@ void ACombatProjectileWorld::AdvanceFrame(double WorldDelta, double RealNow, UCo
         Rifle->SampleView(View, Rotation);
         StartView = Rifle->bHaveViewSample ? Rifle->PreviousView : View;
         StartRotation = Rifle->bHaveViewSample ? Rifle->PreviousViewRotation : Rotation;
-        Rifle->PrepareTimingFrame(FrameStart, FrameEnd);
+        Rifle->PrepareTimingFrame(ActionStart, ActionEnd);
     }
     const auto Blockers = SampleBlockers();
     bool bHistoryValid = BlockersMatch(Blockers);
@@ -338,20 +335,27 @@ void ACombatProjectileWorld::AdvanceFrame(double WorldDelta, double RealNow, UCo
     }
     const uint64 Generation = ResetGeneration;
     double Cursor = FrameStart;
+    auto DueOnManagerClock = [&]()
+    {
+        if (!Rifle || Rifle->GetDueTime() == TNumericLimits<double>::Max()) return TNumericLimits<double>::Max();
+        return FrameStart + (Rifle->GetDueTime() - ActionStart) / PlayerActionRate;
+    };
     while (!bCanceled && Cursor < FrameEnd - 1.e-8)
     {
         FiringClock = Cursor;
-        if (Rifle && Rifle->GetDueTime() <= Cursor + 1.e-8)
+        PlayerActionClock = ActionStart + (Cursor - FrameStart) * PlayerActionRate;
+        if (Rifle && DueOnManagerClock() <= Cursor + 1.e-8)
         {
             if (LastFrameBirths >= MaxFrameBirths) { bCanceled = true; break; }
-            const double Birth = FMath::Max(FrameStart, Rifle->GetDueTime());
+            const double Birth = FMath::Max(FrameStart, DueOnManagerClock());
             const double Alpha = FMath::Clamp((Birth - FrameStart) / WorldDelta, 0.0, 1.0);
-            Rifle->EmitScheduledShot(Birth, FMath::Lerp(StartView, View, Alpha), FQuat::Slerp(StartRotation, Rotation, Alpha));
+            Rifle->EmitScheduledShot(ActionStart + (Birth - FrameStart) * PlayerActionRate,
+                FMath::Lerp(StartView, View, Alpha), FQuat::Slerp(StartRotation, Rotation, Alpha), Birth);
             ++LastFrameBirths;
         }
         const double GridEnd = FrameStart + (FMath::FloorToDouble((Cursor - FrameStart) / MaxStepTime + 1.e-7) + 1.0) * MaxStepTime;
         double Next = FMath::Min(FrameEnd, GridEnd);
-        if (Rifle) Next = FMath::Min(Next, Rifle->GetDueTime());
+        if (Rifle) Next = FMath::Min(Next, DueOnManagerClock());
         if (LastFrameSteps >= MaxFrameSteps || Next <= Cursor) { bCanceled = true; break; }
         AdvanceSegment(Cursor, Next, RealNow);
         ++LastFrameSteps;
@@ -367,6 +371,7 @@ void ACombatProjectileWorld::AdvanceFrame(double WorldDelta, double RealNow, UCo
         if (Rifle) Rifle->CancelFiringSession();
     }
     FiringClock = FrameEnd;
+    PlayerActionClock = ActionEnd;
     PeakFrameSteps = FMath::Max(PeakFrameSteps, LastFrameSteps);
     if (Rifle)
     {
@@ -572,8 +577,7 @@ void ACombatProjectileWorld::ResetTargets()
 {
     ClearProjectiles();
     for (ACombatTarget* Target : Targets) if (IsValid(Target)) Target->ResetTarget();
-    if (IsValid(Enemy)) Enemy->ResetEnemy();
-    if (IsValid(PhysicsDummy)) PhysicsDummy->ResetDummy();
+    for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy)) Dummy->ResetDummy();
     SetPhysicsPreviewScale(1);
     PreviousDummies.Reset(); FrameStartDummies.Reset(); FrameEndDummies.Reset();
     RecordCapsules();
@@ -596,7 +600,10 @@ FString ACombatProjectileWorld::GetCombatState() const
     auto Root = MakeShared<FJsonObject>();
     Root->SetNumberField(TEXT("scale"), ProjectileTimeScale);
     Root->SetNumberField(TEXT("physics_preview_scale"), ActivePreviewScale);
-    Root->SetBoolField(TEXT("physics_dummy_enabled"), IsValid(PhysicsDummy));
+    Root->SetBoolField(TEXT("physics_dummy_enabled"), !PhysicsDummies.IsEmpty());
+    Root->SetNumberField(TEXT("physics_dummy_count"), PhysicsDummies.Num());
+    Root->SetNumberField(TEXT("player_action_clock"), PlayerActionClock);
+    Root->SetNumberField(TEXT("player_action_rate"), PlayerActionRate);
     Root->SetNumberField(TEXT("physical_history_actors"), PreviousDummies.Num());
     Root->SetNumberField(TEXT("firing_clock"), FiringClock);
     Root->SetNumberField(TEXT("frame_delta"), LastFrameDelta);

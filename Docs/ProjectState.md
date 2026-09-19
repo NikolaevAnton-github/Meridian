@@ -21,6 +21,28 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Owner-play handoff: MSQ-85 Physics Control variants
+
+On 2026-09-19 the owner played and liked MSQ-84, adopted Physics Control and
+requested removal of the old enemy from active gameplay, six mannequins with
+different stronger hit reactions, and partial player movement/firing slowdown
+while the world slows more. See [the exact decision](Approvals/PhysicsControlVariants01-OwnerScope01.json)
+and [PhysicsControlVariants01 / MSQ-85](Tasks/PhysicsControlVariants01.md).
+Initial adjustable preview values are 0.25 world/body/all-bullet time and 0.65
+player movement/firing time. Earlier normal-player SLOWDOWN statements below are
+historical and superseded; full stop is unchanged and remains later MSQ-75 scope.
+The former old-enemy comparison requirement is superseded for active gameplay;
+all source assets, implementations and historical evidence remain preserved.
+This authorizes the bounded implementation/review, not MSQ-70 or paused art/lobby work.
+The owner subsequently stopped excessive per-profile testing and independent
+visual comparison: [OwnerVariantTesting01](Approvals/OwnerVariantTesting01.json)
+limits handoff verification to six rendered mannequins and actual hits on one.
+The owner compares the variants. The executor run and primary review were stopped.
+Candidate04 is built and handed off under the narrowed scope: six profiles, no
+legacy enemy and applicable real-hit evidence on one. See
+[implementation and controls](PhysicsControlVariants01.md). The owner's subsequent
+PIE session is preserved. Broad technical/visual review is not claimed.
+
 ## Verified experiment: MSQ-84 second Physics Control dummy
 
 On 2026-09-19, after playing the enemy prototype and discussing continued bullet

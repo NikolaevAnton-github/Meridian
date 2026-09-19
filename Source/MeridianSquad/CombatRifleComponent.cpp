@@ -121,7 +121,7 @@ void UCombatRifleComponent::BindInput(UEnhancedInputComponent* Input)
     Input->BindAction(Reload, ETriggerEvent::Canceled, this, &UCombatRifleComponent::ReloadTap);
     Input->BindAction(Reload, ETriggerEvent::Completed, this, &UCombatRifleComponent::ReloadReleased);
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::F6, IE_Pressed, this, &UCombatRifleComponent::ResetTargets);
-    static_cast<UInputComponent*>(Input)->BindKey(EKeys::F7, IE_Pressed, this, &UCombatRifleComponent::ToggleEnemyPreview);
+    // F7's legacy enemy preview is retired from active input; its source is preserved.
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::Y, IE_Pressed, this, &UCombatRifleComponent::TogglePhysicsPreview);
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::F10, IE_Pressed, this, &UCombatRifleComponent::TogglePhysicsDummy);
 }
@@ -193,7 +193,7 @@ void UCombatRifleComponent::FireReleased()
 double UCombatRifleComponent::FiringNow()
 {
     if (!Simulation.IsValid()) Simulation = ACombatProjectileWorld::Find(GetWorld());
-    return Simulation.IsValid() ? Simulation->GetFiringClock() : 0.0;
+    return Simulation.IsValid() ? Simulation->GetPlayerActionClock() : 0.0;
 }
 void UCombatRifleComponent::SampleView(FVector& View, FQuat& Rotation) const
 {
@@ -235,8 +235,9 @@ double UCombatRifleComponent::GetDueTime() const
     const double Due = FMath::Min(Press, Automatic);
     return Due < TimingFrameEnd - 1.e-8 ? Due : TNumericLimits<double>::Max();
 }
-bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, const FQuat& Rotation)
+bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, const FQuat& Rotation, double ProjectileBirth)
 {
+    const double Birth = ProjectileBirth >= 0 ? ProjectileBirth : Now;
     const uint64 ShotSession = bSemiPending ? PendingPressSession : FiringSession;
     bSemiPending = false;
     // Every attempted event consumes its schedule slot, including a capacity
@@ -264,7 +265,7 @@ bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, c
     FHitResult AimHit, CoverHit;
     bool bAimHit = GetWorld()->LineTraceSingleByChannel(AimHit, View, View + Forward * 30000.f, ECC_Visibility, Query);
     FHitResult EnemyAimHit;
-    if (Simulation->TraceEnemyAim(View, View + Forward * 30000.f, Now, EnemyAimHit) && (!bAimHit || EnemyAimHit.Time < AimHit.Time))
+    if (Simulation->TraceEnemyAim(View, View + Forward * 30000.f, Birth, EnemyAimHit) && (!bAimHit || EnemyAimHit.Time < AimHit.Time))
     {
         AimHit = EnemyAimHit;
         bAimHit = true;
@@ -279,7 +280,7 @@ bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, c
     FVector Direction = bCover ? (Muzzle - View).GetSafeNormal() : (AimPoint - Start).GetSafeNormal();
     if (Direction.IsNearlyZero()) Direction = Forward;
     const FVector Velocity = Direction * FMath::Clamp(BulletSpeed, 1.f, 200000.f);
-    const int64 Id = Simulation->LaunchTimed(Character, Start, Velocity, Damage, Now);
+    const int64 Id = Simulation->LaunchTimed(Character, Start, Velocity, Damage, Birth);
     if (!Id) { StatusText = TEXT("PROJECTILE CAPACITY  |  WAIT"); return false; }
     // Reservation succeeded: this is the only ammunition-decrementing path.
     --Magazine;
@@ -290,7 +291,7 @@ bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, c
     ++FrameShotCount;
     MaxFrameShotCount = FMath::Max(MaxFrameShotCount, FrameShotCount);
     if (RecentShots.Num() == 128) RecentShots.RemoveAt(0);
-    RecentShots.Add({Id, Now, Start, Velocity, ShotSession});
+    RecentShots.Add({Id, Birth, Start, Velocity, ShotSession, Now});
     StatusText.Empty();
     return true;
 }
@@ -607,6 +608,7 @@ FString UCombatRifleComponent::GetRifleState() const
         auto Row = MakeShared<FJsonObject>();
         Row->SetNumberField(TEXT("id"), Shot.Id);
         Row->SetNumberField(TEXT("time"), Shot.Time);
+        Row->SetNumberField(TEXT("action_time"), Shot.ActionTime);
         Row->SetNumberField(TEXT("session"), Shot.Session);
         auto Vector = [](const FVector& V) { return TArray<TSharedPtr<FJsonValue>>{
             MakeShared<FJsonValueNumber>(V.X), MakeShared<FJsonValueNumber>(V.Y), MakeShared<FJsonValueNumber>(V.Z)}; };

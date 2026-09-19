@@ -3,6 +3,13 @@
 Multica issue: **MSQ-70**.
 Stage 4 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [EnemyPrototype01](EnemyPrototype01.md), with its asset contract.
+The later [PhysicsControlVariants01 / MSQ-85](PhysicsControlVariants01.md) adopts
+Physics Control and removes the legacy enemy from active gameplay under
+[the owner's decision](../Approvals/PhysicsControlVariants01-OwnerScope01.json).
+Read its verified handoff before dispatch and carry the adopted response/death
+behavior forward; do not silently restore the old active enemy. Its supported
+stationary fixtures do not establish locomotion or autonomous balance. Integrate
+the required movement within this task without claiming that those are already solved.
 
 ## Scope
 

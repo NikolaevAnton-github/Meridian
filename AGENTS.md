@@ -13,10 +13,13 @@ instructions supersede earlier guidance within their stated scope.
 - Codex may launch existing applications and local project services needed for
   authorized work without asking again. Starting a service does not authorize
   unrelated execution, purchases or a pending design selection.
-- Current scope: MSQ-69 enemy prototype is verified after
-  MSQ-68 combat foundation and MSQ-82 combat timing within the sequential
-  [CombatSlice01 task family](Docs/Tasks/CombatSlice01Plan.md), under the
-  [projectile/time/self-hit decision](Docs/Approvals/CombatFoundation01-OwnerScope01.json).
+- Current scope: MSQ-85 [Physics Control variants](Docs/Tasks/PhysicsControlVariants01.md)
+  adopts verified MSQ-84, removes the old enemy from active gameplay and adds six
+  stronger reactions. The [later owner decision](Docs/Approvals/PhysicsControlVariants01-OwnerScope01.json)
+  requires partial player movement/firing slowdown while the world slows more,
+  superseding the earlier normal-player slowdown rule. Full stop remains later scope.
+  MSQ-69, MSQ-68 and MSQ-82 are verified prerequisites in the sequential
+  [CombatSlice01 task family](Docs/Tasks/CombatSlice01Plan.md).
   [MSQ-82 review](Docs/CombatTiming01Review.md) records timing acceptance and the
   retained low-FPS recoil limitation. Manny remains a technical placeholder;
   MSQ-70 and successors remain undispatched. See ProjectState for current scope.
@@ -103,6 +106,11 @@ instructions supersede earlier guidance within their stated scope.
   by the change and its related transitions. Do not run the full animation or
   feature matrix. This is a standing owner instruction for future tasks; see
   [focused verification](Docs/Approvals/FocusedVerification01.json).
+- For variant sets requested for owner experimentation, verify the requested set
+  renders and shared functionality works on one representative instance. Leave
+  subjective comparison to the owner; do not run a per-variant matrix or independent
+  visual comparison unless requested or a concrete distinct defect needs a bounded
+  check. See [owner variant testing](Docs/Approvals/OwnerVariantTesting01.json).
 - Before environment layout or model production, create a separate concept-art
   task and obtain explicit owner approval of an identified art version. Environment
   preproduction requires dimensioned plans/sections with human scale, approved as

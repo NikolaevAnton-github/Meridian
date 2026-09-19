@@ -1,0 +1,21 @@
+{
+  "record_id": "PhysicsControlVariants01-OwnerScope01",
+  "date_local": "2026-09-19",
+  "source": "Owner direct chat after playing the Physics Control experiment",
+  "owner_message_original": "Так я побегал по лобби, новый Physics Control мне нравится, мы оставялет его и старый убираем, но есть пару моментов, во первых я все таки думаю, что при замедлении наш персонаж тоже должен чуть замедляться, его стрельба чуть замедляться, что бы эффект был нагляднее, просто все осатльно должно замедляться сильнее. Второе создай плиз 6 маникенов и задай им разную степень реакции на попадания, сейчас она крайне слабая.",
+  "owner_message_english_translation": "I ran around the lobby and like the new Physics Control. We keep it and remove the old one. During slowdown our character and their shooting should also slow a little so the effect is clearer, while everything else slows more. Please create six mannequins with different degrees of hit reaction; the current reaction is extremely weak.",
+  "decision": "Adopt the MSQ-84 Physics Control prototype for the active lobby, remove the legacy enemy from active spawning, implement six reaction variants, and slow player movement and firing less than world time during the development slowdown preview.",
+  "authorization": "Implement, self-check, independently review, correct and locally commit the bounded PhysicsControlVariants01 task through one Multica production executor.",
+  "supersedes": [
+    "MSQ-84's requirement to retain the old enemy as an active comparison fixture and defer Physics Control adoption.",
+    "CombatFoundation01-OwnerScope01's normal player movement rule DURING SLOWDOWN; player movement and firing now slow less than the world. This carries forward to TimeSlow01."
+  ],
+  "controller_tuning_proposal": {
+    "world_body_and_all_bullets_scale": 0.25,
+    "player_movement_and_firing_scale": 0.65,
+    "status": "Initial adjustable implementation values, not exact owner-selected numbers.",
+    "variants": "Exactly six numbered Physics Control mannequins with increasing, visibly distinguishable reactions, stronger than the former weak profile. Final preferred profile remains an owner play choice."
+  },
+  "preservation": "Remove the old enemy only from active gameplay; preserve its implementation, source assets and historical evidence. Preserve owner configuration, retained lobby geometry/materials/lighting, purchased arms and prior Physics Control candidates.",
+  "limits": "No AI/MSQ-70 dispatch, new art, autonomous balance/get-up, structural lobby work or full time ability. Full stop behavior is not changed by this bounded slowdown request; retain its prior policy pending the later time-ability task. All bullets retain world time, finite flight and self-hit eligibility."
+}

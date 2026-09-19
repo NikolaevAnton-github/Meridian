@@ -7,6 +7,7 @@
 #include "PhysicsEngine/SkeletalBodySetup.h"
 #include "PhysicsEngine/BodyInstance.h"
 #include "PhysicsEngine/PhysicsConstraintTemplate.h"
+#include "Physics/PhysicsInterfaceCore.h"
 #include "Serialization/JsonSerializer.h"
 #include "UObject/ConstructorHelpers.h"
 
@@ -93,7 +94,9 @@ APhysicsControlDummy::APhysicsControlDummy()
     Label = CreateDefaultSubobject<UTextRenderComponent>(TEXT("ExperimentalIdentity"));
     Label->SetupAttachment(FixtureRoot);
     Label->SetRelativeLocation(FVector(0, 0, 213));
-    Label->SetWorldSize(10);
+    Label->SetWorldSize(14);
+    // Screen-projected fixture labels in CombatPrototypeHUD stay legible in the dark lobby.
+    Label->SetVisibility(false);
     Label->SetHorizontalAlignment(EHTA_Center);
     Label->SetTextRenderColor(FColor(110, 220, 255));
     Label->SetCastShadow(false);
@@ -103,6 +106,18 @@ void APhysicsControlDummy::BeginPlay()
     Super::BeginPlay();
     Home = GetActorTransform();
     ResetDummy();
+}
+void APhysicsControlDummy::ConfigureReactionProfile(int32 Number)
+{
+    ReactionProfile = FMath::Clamp(Number, 1, 6);
+    struct FProfile { float Impulse, Velocity, Strength, Hold, Recovery; };
+    static constexpr FProfile Profiles[] = {
+        {1800, 260, .03f, .14f, .55f}, {2300, 300, .015f, .22f, .65f},
+        {2800, 340, .009f, .30f, .75f}, {3400, 370, .008f, .36f, .85f},
+        {4100, 410, .006f, .44f, 1.0f}, {4800, 450, .005f, .60f, 1.2f}};
+    const auto& P = Profiles[ReactionProfile - 1];
+    BulletImpulse = P.Impulse; MaxImpulseVelocity = P.Velocity;
+    HitStrengthMultiplier = P.Strength; HitHoldSeconds = P.Hold; HitRecoverySeconds = P.Recovery;
 }
 void APhysicsControlDummy::ResetDummy()
 {
@@ -205,10 +220,11 @@ void APhysicsControlDummy::Tick(float DeltaSeconds)
     for (auto It = RecoveringControls.CreateIterator(); It; ++It)
     {
         It.Value() = FMath::Max(0.f, It.Value() - DeltaSeconds);
-        const float Alpha = 1.f - It.Value() / FMath::Clamp(HitRecoverySeconds, .1f, .6f);
+        const float Alpha = FMath::Clamp(1.f - It.Value() / FMath::Clamp(HitRecoverySeconds, .1f, 1.5f), 0.f, 1.f);
         FPhysicsControlMultiplier Multiplier;
-        Multiplier.LinearStrengthMultiplier = FVector(FMath::Lerp(.2f, 1.f, Alpha));
-        Multiplier.AngularStrengthMultiplier = FMath::Lerp(.2f, 1.f, Alpha);
+        const float Strength = FMath::Lerp(FMath::Clamp(HitStrengthMultiplier, .005f, 1.f), 1.f, Alpha);
+        Multiplier.LinearStrengthMultiplier = FVector(Strength);
+        Multiplier.AngularStrengthMultiplier = Strength;
         PhysicsControl->SetControlMultiplier(It.Key(), Multiplier);
         if (It.Value() == 0) It.RemoveCurrent();
     }
@@ -217,8 +233,8 @@ void APhysicsControlDummy::Tick(float DeltaSeconds)
 }
 void APhysicsControlDummy::UpdateLabel()
 {
-    Label->SetText(FText::FromString(FString::Printf(TEXT("PHYSICS CONTROL  |  %.0f HP\n%s"), Health,
-        !bReady ? TEXT("SETUP FAILED") : IsDead() ? TEXT("PASSIVE CORPSE") : TEXT("WORLD-SUPPORTED FIXTURE"))));
+    Label->SetText(FText::FromString(FString::Printf(TEXT("%d  |  %.0f HP\n%s"), ReactionProfile, Health,
+        !bReady ? TEXT("SETUP FAILED") : IsDead() ? TEXT("CORPSE") : TEXT("PHYSICS CONTROL"))));
 }
 FVector APhysicsControlDummy::GetPhysicalBodyLocation(FName Bone) const
 {
@@ -294,6 +310,7 @@ TSharedPtr<FJsonObject> APhysicsControlDummy::BodyState() const
             auto Row = MakeShared<FJsonObject>();
             const FTransform T = BI->GetUnrealWorldTransform();
             Row->SetField(TEXT("position"), VJson(T.GetLocation()));
+            Row->SetField(TEXT("center_of_mass"), VJson(BI->GetCOMPosition()));
             Row->SetField(TEXT("rotation"), QJson(T.GetRotation()));
             if (!IsDead())
             {
@@ -350,15 +367,26 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
                 (Bone.EndsWith(TEXT("_r")) && Part.EndsWith(TEXT("_r")));
             const bool Arm = Bone.Contains(TEXT("arm")) || Bone.StartsWith(TEXT("hand"));
             const bool Leg = Bone.StartsWith(TEXT("thigh")) || Bone.StartsWith(TEXT("calf")) || Bone.StartsWith(TEXT("foot"));
-            const bool Region = Entry.Key == Hit.BoneName || (SameSide && Arm && (Part.Contains(TEXT("arm")) || Part.StartsWith(TEXT("hand")))) ||
+            const bool UpperBody = Part.StartsWith(TEXT("spine")) || Part.StartsWith(TEXT("neck")) || Part == TEXT("head") ||
+                Part.StartsWith(TEXT("clavicle")) || Part.Contains(TEXT("arm")) || Part.StartsWith(TEXT("hand"));
+            const bool Region = Entry.Key == Hit.BoneName || (SameSide && Arm && (Part.Contains(TEXT("arm")) || Part.StartsWith(TEXT("hand")) ||
+                (ReactionProfile > 0 && Part.StartsWith(TEXT("clavicle"))))) ||
                 (SameSide && Leg && (Part.StartsWith(TEXT("thigh")) || Part.StartsWith(TEXT("calf")) || Part.StartsWith(TEXT("foot")))) ||
-                ((!Arm && !Leg) && (Part.StartsWith(TEXT("spine")) || Part.StartsWith(TEXT("neck")) || Part == TEXT("head")));
-            if (Region) RecoveringControls.Add(Entry.Value, FMath::Clamp(HitRecoverySeconds, .1f, .6f));
+                ((!Arm && !Leg) && (ReactionProfile > 0 ? UpperBody :
+                    (Part.StartsWith(TEXT("spine")) || Part.StartsWith(TEXT("neck")) || Part == TEXT("head"))));
+            if (Region)
+            {
+                RecoveringControls.Add(Entry.Value, FMath::Clamp(HitRecoverySeconds, .1f, 1.5f) + FMath::Clamp(HitHoldSeconds, 0.f, .6f));
+                FPhysicsControlMultiplier Multiplier;
+                Multiplier.LinearStrengthMultiplier = FVector(FMath::Clamp(HitStrengthMultiplier, .005f, 1.f));
+                Multiplier.AngularStrengthMultiplier = Multiplier.LinearStrengthMultiplier.X;
+                PhysicsControl->SetControlMultiplier(Entry.Value, Multiplier);
+            }
         }
     }
     Row->SetObjectField(TEXT("after_release"), BodyState());
     const float Magnitude = FMath::Min(FMath::Clamp(BulletImpulse, 0.f, 5000.f),
-        BI->GetBodyMass() * FMath::Clamp(MaxImpulseVelocity, 0.f, 300.f));
+        BI->GetBodyMass() * FMath::Clamp(MaxImpulseVelocity, 0.f, 450.f));
     const FVector Impulse = Direction.GetSafeNormal() * Magnitude;
     Body->WakeAllRigidBodies();
     Body->AddImpulseAtLocation(Impulse, Hit.ImpactPoint, Hit.BoneName);
@@ -378,6 +406,24 @@ FString APhysicsControlDummy::GetDummyState(bool IncludeContacts) const
 {
     auto Root = MakeShared<FJsonObject>();
     Root->SetStringField(TEXT("name"), GetName());
+    Root->SetNumberField(TEXT("profile"), ReactionProfile);
+    Root->SetNumberField(TEXT("impulse_cap"), FMath::Clamp(BulletImpulse, 0.f, 5000.f));
+    Root->SetNumberField(TEXT("velocity_cap"), FMath::Clamp(MaxImpulseVelocity, 0.f, 450.f));
+    Root->SetNumberField(TEXT("hit_strength"), FMath::Clamp(HitStrengthMultiplier, .005f, 1.f));
+    Root->SetNumberField(TEXT("hit_hold"), FMath::Clamp(HitHoldSeconds, 0.f, .6f));
+    Root->SetNumberField(TEXT("hit_recovery"), FMath::Clamp(HitRecoverySeconds, .1f, 1.5f));
+    double JointGap = 0;
+    if (const auto* Asset = Body->GetPhysicsAsset())
+        for (int32 I = 0; I < Asset->ConstraintSetup.Num(); ++I)
+            if (const auto* Joint = Body->GetConstraintInstanceByIndex(I))
+            {
+                const auto& Constraint = Joint->GetPhysicsConstraintRef();
+                if (Constraint.IsValid())
+                    JointGap = FMath::Max(JointGap, FVector::Distance(
+                        FPhysicsInterface::GetGlobalPose(Constraint, EConstraintFrame::Frame1).GetLocation(),
+                        FPhysicsInterface::GetGlobalPose(Constraint, EConstraintFrame::Frame2).GetLocation()));
+            }
+    Root->SetNumberField(TEXT("max_joint_anchor_gap_cm"), JointGap);
     Root->SetBoolField(TEXT("ready"), bReady);
     Root->SetNumberField(TEXT("health"), Health);
     Root->SetNumberField(TEXT("deaths"), Deaths);
