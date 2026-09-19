@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "EnemyPrototypeCharacter.h"
+#include "PhysicsControlDummy.h"
 #include "CombatProjectileWorld.generated.h"
 
 class ACharacter;
@@ -53,6 +54,21 @@ public:
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     FString ProbeEnemy(bool bCoverOnly = false, bool bAimOnly = false);
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
+    FString ProbePhysicsDummy();
+    UFUNCTION(BlueprintCallable, Category="Combat|Verification")
+    bool PreparePhysicsDummyFreefallProbe();
+    UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
+    void SetPhysicsDummyEnabled(bool Enabled);
+    UFUNCTION(BlueprintPure, Category="Combat|Prototype")
+    bool IsPhysicsDummyEnabled() const { return bEnablePhysicsDummy; }
+    /** Development preview only. Applied after this combat frame to avoid mixed clock deltas. */
+    UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
+    void SetPhysicsPreviewScale(float Scale);
+    UFUNCTION(BlueprintPure, Category="Combat|Prototype")
+    float GetPhysicsPreviewScale() const { return RequestedPreviewScale; }
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Prototype")
+    bool bEnablePhysicsDummy = true;
+    UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     bool ProbeCover(FName Kind);
 
     int64 Launch(AActor* Shooter, const FVector& Position, const FVector& Velocity, float Damage);
@@ -97,6 +113,7 @@ private:
         bool bLaunchClear = false;
         bool bFirstAdvance = true;
         TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> BirthCapsules;
+        TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> BirthDummies;
     };
     struct FImpact
     {
@@ -112,6 +129,23 @@ private:
     TArray<TObjectPtr<ACombatTarget>> Targets;
     UPROPERTY(Transient)
     TObjectPtr<AEnemyPrototypeCharacter> Enemy;
+    UPROPERTY(Transient)
+    TObjectPtr<APhysicsControlDummy> PhysicsDummy;
+    TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> PreviousDummies;
+    TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> FrameStartDummies;
+    TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> FrameEndDummies;
+    float RequestedPreviewScale = 1.f;
+    float ActivePreviewScale = 1.f;
+    float SavedWorldDilation = 1.f;
+    float SavedPlayerDilation = 1.f;
+    float SavedManagerDilation = 1.f;
+    float SavedProjectileScale = 1.f;
+    TWeakObjectPtr<ACharacter> PreviewPlayer;
+    bool bOwnsPreviewTime = false;
+    void ApplyPreviewTime();
+    void RestorePreviewTime();
+    TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> SampleDummies() const;
+    TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> DummiesAt(double Time) const;
     float ProjectileTimeScale = 1.f;
     int64 NextShotId = 1;
     int32 LaunchedCount = 0;

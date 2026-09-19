@@ -122,6 +122,18 @@ void UCombatRifleComponent::BindInput(UEnhancedInputComponent* Input)
     Input->BindAction(Reload, ETriggerEvent::Completed, this, &UCombatRifleComponent::ReloadReleased);
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::F6, IE_Pressed, this, &UCombatRifleComponent::ResetTargets);
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::F7, IE_Pressed, this, &UCombatRifleComponent::ToggleEnemyPreview);
+    static_cast<UInputComponent*>(Input)->BindKey(EKeys::F8, IE_Pressed, this, &UCombatRifleComponent::TogglePhysicsPreview);
+    static_cast<UInputComponent*>(Input)->BindKey(EKeys::F10, IE_Pressed, this, &UCombatRifleComponent::TogglePhysicsDummy);
+}
+void UCombatRifleComponent::TogglePhysicsPreview()
+{
+    if (auto* World = ACombatProjectileWorld::Find(GetWorld()))
+        World->SetPhysicsPreviewScale(World->GetPhysicsPreviewScale() == 1.f ? .25f : 1.f);
+}
+void UCombatRifleComponent::TogglePhysicsDummy()
+{
+    if (auto* World = ACombatProjectileWorld::Find(GetWorld()))
+        World->SetPhysicsDummyEnabled(!World->IsPhysicsDummyEnabled());
 }
 bool UCombatRifleComponent::CanAct() const
 {

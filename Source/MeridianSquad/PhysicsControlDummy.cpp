@@ -1,0 +1,423 @@
+#include "PhysicsControlDummy.h"
+#include "PhysicsControlComponent.h"
+#include "Animation/AnimSequence.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/TextRenderComponent.h"
+#include "PhysicsEngine/PhysicsAsset.h"
+#include "PhysicsEngine/SkeletalBodySetup.h"
+#include "PhysicsEngine/BodyInstance.h"
+#include "PhysicsEngine/PhysicsConstraintTemplate.h"
+#include "Serialization/JsonSerializer.h"
+#include "UObject/ConstructorHelpers.h"
+
+namespace
+{
+TSharedPtr<FJsonValue> VJson(const FVector& V)
+{
+    return MakeShared<FJsonValueArray>(TArray<TSharedPtr<FJsonValue>>{
+        MakeShared<FJsonValueNumber>(V.X), MakeShared<FJsonValueNumber>(V.Y), MakeShared<FJsonValueNumber>(V.Z)});
+}
+TSharedPtr<FJsonValue> QJson(const FQuat& Q)
+{
+    return MakeShared<FJsonValueArray>(TArray<TSharedPtr<FJsonValue>>{MakeShared<FJsonValueNumber>(Q.X),
+        MakeShared<FJsonValueNumber>(Q.Y), MakeShared<FJsonValueNumber>(Q.Z), MakeShared<FJsonValueNumber>(Q.W)});
+}
+bool CapsuleHit(const FVector& Start, const FVector& End, double Radius, double HalfHeight, double& Time)
+{
+    const double H = FMath::Max(0.0, HalfHeight - Radius);
+    if (FVector::DistSquared(Start, FVector(0, 0, FMath::Clamp(Start.Z, -H, H))) <= Radius * Radius)
+    { Time = 0; return true; }
+    const FVector D = End - Start;
+    double First = 2;
+    auto Roots = [&](double A, double B, double C, auto Accept)
+    {
+        const double Disc = B * B - 4 * A * C;
+        if (A < 1.e-12 || Disc < 0) return;
+        const double Root = FMath::Sqrt(Disc);
+        for (double T : {(-B - Root) / (2 * A), (-B + Root) / (2 * A)})
+            if (T >= 0 && T <= 1 && T < First && Accept(T)) First = T;
+    };
+    Roots(D.X * D.X + D.Y * D.Y, 2 * (Start.X * D.X + Start.Y * D.Y),
+        Start.X * Start.X + Start.Y * Start.Y - Radius * Radius,
+        [&](double T) { return FMath::Abs(Start.Z + D.Z * T) <= H; });
+    for (double Z : {-H, H})
+    {
+        const FVector S = Start - FVector(0, 0, Z);
+        Roots(D.SizeSquared(), 2 * FVector::DotProduct(S, D), S.SizeSquared() - Radius * Radius, [](double) { return true; });
+    }
+    Time = First;
+    return First <= 1;
+}
+bool BoxHit(const FVector& Start, const FVector& End, const FVector& Extent, double& Time)
+{
+    double Lo = 0, Hi = 1;
+    for (int32 Axis = 0; Axis < 3; ++Axis)
+    {
+        const double D = End[Axis] - Start[Axis];
+        if (FMath::Abs(D) < 1.e-12) { if (FMath::Abs(Start[Axis]) > Extent[Axis]) return false; }
+        else
+        {
+            double A = (-Extent[Axis] - Start[Axis]) / D, B = (Extent[Axis] - Start[Axis]) / D;
+            if (A > B) Swap(A, B);
+            Lo = FMath::Max(Lo, A); Hi = FMath::Min(Hi, B);
+            if (Lo > Hi) return false;
+        }
+    }
+    Time = Lo;
+    return true;
+}
+}
+
+APhysicsControlDummy::APhysicsControlDummy()
+{
+    PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.TickGroup = TG_PrePhysics;
+    FixtureRoot = CreateDefaultSubobject<USceneComponent>(TEXT("FixtureOrigin"));
+    SetRootComponent(FixtureRoot);
+    Body = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("PoweredManny"));
+    Body->SetupAttachment(FixtureRoot);
+    Body->SetRelativeRotation(FRotator(0, -90, 0));
+    static ConstructorHelpers::FObjectFinder<USkeletalMesh> Mesh(TEXT("/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple.SKM_Manny_Simple"));
+    Body->SetSkeletalMesh(Mesh.Object);
+    Body->SetAnimationMode(EAnimationMode::AnimationSingleNode);
+    Body->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+    Body->SetCollisionObjectType(ECC_PhysicsBody);
+    Body->SetCollisionResponseToAllChannels(ECR_Ignore);
+    Body->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+    Body->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+    static ConstructorHelpers::FObjectFinder<UAnimSequence> Pose(TEXT("/Game/Development/EnemyPrototype01/A_EnemyTemplate_Idle.A_EnemyTemplate_Idle"));
+    Idle = Pose.Object;
+    PhysicsControl = CreateDefaultSubobject<UPhysicsControlComponent>(TEXT("LivingDrives"));
+    PhysicsControl->SetupAttachment(FixtureRoot);
+    PhysicsControl->AddTickPrerequisiteActor(this);
+    Label = CreateDefaultSubobject<UTextRenderComponent>(TEXT("ExperimentalIdentity"));
+    Label->SetupAttachment(FixtureRoot);
+    Label->SetRelativeLocation(FVector(0, 0, 213));
+    Label->SetWorldSize(10);
+    Label->SetHorizontalAlignment(EHTA_Center);
+    Label->SetTextRenderColor(FColor(110, 220, 255));
+    Label->SetCastShadow(false);
+}
+void APhysicsControlDummy::BeginPlay()
+{
+    Super::BeginPlay();
+    Home = GetActorTransform();
+    ResetDummy();
+}
+void APhysicsControlDummy::ResetDummy()
+{
+    bReady = false;
+    if (!Controls.IsEmpty()) PhysicsControl->DestroyControls(Controls);
+    Controls.Reset();
+    BodyControls.Reset(); RecoveringControls.Reset();
+    WidenedJoints = 0;
+    if (const auto* Asset = Body->GetPhysicsAsset())
+        for (int32 I = 0; I < Asset->ConstraintSetup.Num(); ++I)
+            if (auto* Joint = Body->GetConstraintInstanceByIndex(I))
+                Joint->RestoreAngularLimitsToDefault(Asset->ConstraintSetup[I]->DefaultInstance);
+    Body->SetAllPhysicsLinearVelocity(FVector::ZeroVector);
+    Body->SetAllPhysicsAngularVelocityInRadians(FVector::ZeroVector);
+    Body->SetSimulatePhysics(false);
+    Body->SetAllBodiesSimulatePhysics(false);
+    Body->AttachToComponent(FixtureRoot, FAttachmentTransformRules::KeepRelativeTransform);
+    SetActorTransform(Home, false, nullptr, ETeleportType::TeleportPhysics);
+    Body->SetRelativeLocationAndRotation(FVector::ZeroVector, FRotator(0, -90, 0));
+    Body->bPauseAnims = false;
+    Body->PlayAnimation(Idle, true);
+    Body->TickAnimation(0, false);
+    Body->RefreshBoneTransforms();
+    ReferencePose.Reset();
+    if (const auto* Asset = Body->GetPhysicsAsset())
+        for (const USkeletalBodySetup* Setup : Asset->SkeletalBodySetups)
+            ReferencePose.Add(Setup->BoneName, Body->GetSocketTransform(Setup->BoneName));
+    SupportTarget = Body->GetSocketTransform(TEXT("pelvis"));
+    Body->bPauseAnims = true;
+    Body->SetAllBodiesSimulatePhysics(true);
+    Body->SetAllBodiesPhysicsBlendWeight(1);
+    Body->bBlendPhysics = true;
+    Body->SetAllPhysicsLinearVelocity(FVector::ZeroVector);
+    Body->SetAllPhysicsAngularVelocityInRadians(FVector::ZeroVector);
+    Health = FMath::IsFinite(MaxHealth) ? FMath::Clamp(MaxHealth, 1.f, 100000.f) : 100.f;
+    Deaths = PhysicalHits = 0;
+    DeathFrame = 0; DeathTime = -1;
+    Contacts.Reset();
+    ++PoseEpoch;
+    UnsupportedShapes = 0;
+    if (const auto* Asset = Body->GetPhysicsAsset())
+        for (const USkeletalBodySetup* Setup : Asset->SkeletalBodySetups)
+            UnsupportedShapes += Setup->AggGeom.ConvexElems.Num() + Setup->AggGeom.TaperedCapsuleElems.Num();
+
+    FPhysicsControlData Limbs;
+    Limbs.LinearStrength = FMath::Clamp(PoseLinearStrength, .1f, 15.f);
+    Limbs.LinearDampingRatio = FMath::Clamp(DriveDampingRatio, .5f, 3.f);
+    Limbs.AngularStrength = FMath::Clamp(LimbAngularStrength, .1f, 30.f);
+    Limbs.AngularDampingRatio = FMath::Clamp(DriveDampingRatio, .5f, 3.f);
+    Limbs.bUseSkeletalAnimation = false;
+    Limbs.bDisableCollision = true;
+    // World-space pose springs provide explicit distributed support for this fixture.
+    // They are elastic drives, not kinematic pins or a self-balancing character.
+    const auto* Asset = Body->GetPhysicsAsset();
+    for (const auto& Entry : ReferencePose)
+    {
+        FName Parent = Body->GetParentBone(Entry.Key);
+        while (!Parent.IsNone() && Asset->FindBodyIndex(Parent) == INDEX_NONE) Parent = Body->GetParentBone(Parent);
+        const FTransform* ParentPose = ReferencePose.Find(Parent);
+        if (!ParentPose) continue;
+        const FTransform Relative = Entry.Value.GetRelativeTransform(*ParentPose);
+        // The template's ragdoll limits can exclude the selected rifle idle pose.
+        // Widen only this instance, using Epic's drive-target-aware operation.
+        // Keep these limits through death so release introduces no joint-limit snap.
+        const int32 JointIndex = Asset->FindConstraintIndex(Entry.Key, Parent);
+        if (auto* Joint = Body->GetConstraintInstanceByIndex(JointIndex))
+            if (Joint->WidenLimitsForDriveTarget(Relative.GetRotation(), Asset->ConstraintSetup[JointIndex]->DefaultInstance)) ++WidenedJoints;
+        FPhysicsControlTarget LimbTarget;
+        LimbTarget.TargetPosition = Entry.Value.GetLocation();
+        LimbTarget.TargetOrientation = Entry.Value.Rotator();
+        LimbTarget.bApplyControlPointToTarget = true;
+        FPhysicsControlData Data = Limbs;
+        const FString BoneName = Entry.Key.ToString();
+        if (BoneName.StartsWith(TEXT("spine")) || BoneName.StartsWith(TEXT("neck")) || BoneName == TEXT("head") || BoneName.StartsWith(TEXT("clavicle")))
+            Data.AngularStrength = FMath::Clamp(TrunkAngularStrength, .1f, 30.f);
+        const FName Name = PhysicsControl->CreateControl(nullptr, NAME_None, Body, Entry.Key, Data, LimbTarget, TEXT("Living"), TEXT("Pose_"));
+        if (!Name.IsNone()) { Controls.Add(Name); BodyControls.Add(Entry.Key, Name); }
+    }
+    FPhysicsControlData Support;
+    Support.LinearStrength = Support.AngularStrength = FMath::Clamp(SupportStrength, 1.f, 30.f);
+    Support.LinearDampingRatio = Support.AngularDampingRatio = Limbs.AngularDampingRatio;
+    Support.bUseSkeletalAnimation = false;
+    FPhysicsControlTarget Target;
+    Target.TargetPosition = SupportTarget.GetLocation();
+    Target.TargetOrientation = SupportTarget.Rotator();
+    Target.bApplyControlPointToTarget = true;
+    const FName SupportName = PhysicsControl->CreateControl(nullptr, NAME_None, Body, TEXT("pelvis"), Support, Target,
+        TEXT("Support"), TEXT("Fixture_"));
+    if (!SupportName.IsNone()) Controls.Add(SupportName);
+    PhysicsControl->SetComponentTickEnabled(true);
+    PhysicsControl->UpdateTargetCaches(0);
+    PhysicsControl->UpdateControls(0);
+    Body->WakeAllRigidBodies();
+    bReady = Controls.Num() > 1 && !SupportName.IsNone() && UnsupportedShapes == 0;
+    UpdateLabel();
+}
+void APhysicsControlDummy::Tick(float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+    for (auto It = RecoveringControls.CreateIterator(); It; ++It)
+    {
+        It.Value() = FMath::Max(0.f, It.Value() - DeltaSeconds);
+        const float Alpha = 1.f - It.Value() / FMath::Clamp(HitRecoverySeconds, .1f, .6f);
+        FPhysicsControlMultiplier Multiplier;
+        Multiplier.LinearStrengthMultiplier = FVector(FMath::Lerp(.2f, 1.f, Alpha));
+        Multiplier.AngularStrengthMultiplier = FMath::Lerp(.2f, 1.f, Alpha);
+        PhysicsControl->SetControlMultiplier(It.Key(), Multiplier);
+        if (It.Value() == 0) It.RemoveCurrent();
+    }
+    // No elapsed-time sleep call: Chaos inactivity decides rest, and new impacts wake it.
+    UpdateLabel();
+}
+void APhysicsControlDummy::UpdateLabel()
+{
+    Label->SetText(FText::FromString(FString::Printf(TEXT("PHYSICS CONTROL  |  %.0f HP\n%s"), Health,
+        !bReady ? TEXT("SETUP FAILED") : IsDead() ? TEXT("PASSIVE CORPSE") : TEXT("WORLD-SUPPORTED FIXTURE"))));
+}
+FVector APhysicsControlDummy::GetPhysicalBodyLocation(FName Bone) const
+{
+    if (const auto* BI = Body->GetBodyInstance(Bone)) return BI->GetCOMPosition();
+    return Body->GetComponentLocation();
+}
+FDummyPose APhysicsControlDummy::SamplePhysicalPose() const
+{
+    FDummyPose Pose;
+    Pose.Epoch = PoseEpoch;
+    if (!bReady || IsActorBeingDestroyed()) return Pose;
+    const auto* Asset = Body->GetPhysicsAsset();
+    if (!Asset) return Pose;
+    for (const USkeletalBodySetup* Setup : Asset->SkeletalBodySetups)
+    {
+        const auto* BI = Body->GetBodyInstance(Setup->BoneName);
+        if (!BI || !BI->IsValidBodyInstance()) continue;
+        const FTransform World = BI->GetUnrealWorldTransform();
+        for (const auto& Shape : Setup->AggGeom.SphylElems)
+            Pose.Shapes.Add({Setup->BoneName, Shape.GetTransform() * World, FVector::ZeroVector,
+                Shape.Radius, Shape.Length * .5f + Shape.Radius, false});
+        for (const auto& Shape : Setup->AggGeom.SphereElems)
+            Pose.Shapes.Add({Setup->BoneName, Shape.GetTransform() * World, FVector::ZeroVector, Shape.Radius, Shape.Radius, false});
+        for (const auto& Shape : Setup->AggGeom.BoxElems)
+            Pose.Shapes.Add({Setup->BoneName, Shape.GetTransform() * World, FVector(Shape.X, Shape.Y, Shape.Z) * .5, 0, 0, true});
+    }
+    return Pose;
+}
+bool APhysicsControlDummy::TracePhysicalPose(const FDummyPose& Before, const FDummyPose& After,
+    const FVector& Start, const FVector& End, float Radius, FHitResult& Hit) const
+{
+    double First = 2;
+    for (int32 Index = 0; Index < After.Shapes.Num(); ++Index)
+    {
+        const auto& Shape = After.Shapes[Index];
+        const FTransform& Old = Before.Epoch == After.Epoch && Before.Shapes.IsValidIndex(Index) ? Before.Shapes[Index].Transform : Shape.Transform;
+        const FVector A = Old.InverseTransformPosition(Start), B = Shape.Transform.InverseTransformPosition(End);
+        double T;
+        // Translation is continuous. Rotation uses each interval endpoint's local frame;
+        // this chord approximation is bounded by the coordinator's 10 ms segments.
+        const bool Found = Shape.bBox ? BoxHit(A, B, Shape.Extent + FVector(Radius), T) :
+            CapsuleHit(A, B, Shape.Radius + Radius, Shape.HalfHeight + Radius, T);
+        if (!Found || T >= First) continue;
+        First = T;
+        const FVector Center = FMath::Lerp(Start, End, T);
+        const FQuat Rotation = FQuat::Slerp(Old.GetRotation(), Shape.Transform.GetRotation(), T);
+        const FVector Local = FMath::Lerp(A, B, T);
+        FVector Normal;
+        if (Shape.bBox)
+        {
+            const FVector D = Local.GetAbs() - Shape.Extent;
+            const int32 Axis = D.X > D.Y ? (D.X > D.Z ? 0 : 2) : (D.Y > D.Z ? 1 : 2);
+            Normal = FVector::ZeroVector; Normal[Axis] = FMath::Sign(Local[Axis]);
+        }
+        else Normal = (Local - FVector(0, 0, FMath::Clamp(Local.Z, -double(Shape.HalfHeight - Shape.Radius), double(Shape.HalfHeight - Shape.Radius)))).GetSafeNormal();
+        Normal = Rotation.RotateVector(Normal).GetSafeNormal(UE_DOUBLE_SMALL_NUMBER, (Start - End).GetSafeNormal());
+        const FVector Contact = Center - Normal * Radius;
+        Hit = FHitResult(const_cast<APhysicsControlDummy*>(this), Body, Contact, Normal);
+        Hit.Location = Center; Hit.ImpactPoint = Contact; Hit.Time = T;
+        Hit.Distance = FVector::Distance(Start, Center);
+        Hit.BoneName = Shape.Bone; Hit.bBlockingHit = true;
+    }
+    return First <= 1;
+}
+TSharedPtr<FJsonObject> APhysicsControlDummy::BodyState() const
+{
+    auto Result = MakeShared<FJsonObject>();
+    const auto* Asset = Body->GetPhysicsAsset();
+    if (!Asset) return Result;
+    for (const USkeletalBodySetup* Setup : Asset->SkeletalBodySetups)
+        if (const auto* BI = Body->GetBodyInstance(Setup->BoneName))
+        {
+            auto Row = MakeShared<FJsonObject>();
+            const FTransform T = BI->GetUnrealWorldTransform();
+            Row->SetField(TEXT("position"), VJson(T.GetLocation()));
+            Row->SetField(TEXT("rotation"), QJson(T.GetRotation()));
+            if (!IsDead())
+            {
+                const FTransform Target = ReferencePose.FindRef(Setup->BoneName);
+                Row->SetField(TEXT("target_position"), VJson(Target.GetLocation()));
+                Row->SetField(TEXT("target_rotation"), QJson(Target.GetRotation()));
+            }
+            Row->SetField(TEXT("linear_velocity"), VJson(BI->GetUnrealWorldVelocity()));
+            Row->SetField(TEXT("angular_velocity"), VJson(BI->GetUnrealWorldAngularVelocityInRadians()));
+            Row->SetNumberField(TEXT("mass"), BI->GetBodyMass());
+            Row->SetBoolField(TEXT("awake"), BI->IsInstanceAwake());
+            Row->SetBoolField(TEXT("simulating"), BI->IsInstanceSimulatingPhysics());
+            Result->SetObjectField(Setup->BoneName.ToString(), Row);
+        }
+    return Result;
+}
+float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVector& Direction, const FHitResult& Hit,
+    double ContactTime, double BirthTime, uint64 CombatFrame)
+{
+    auto* BI = Body->GetBodyInstance(Hit.BoneName);
+    if (!bReady || !BI || !FMath::IsFinite(Damage) || Damage <= 0 || Direction.ContainsNaN()) return 0;
+    auto Row = MakeShared<FJsonObject>();
+    Row->SetNumberField(TEXT("shot"), ShotId);
+    Row->SetNumberField(TEXT("birth_time"), BirthTime);
+    Row->SetNumberField(TEXT("contact_time"), ContactTime);
+    Row->SetNumberField(TEXT("combat_frame"), CombatFrame);
+    Row->SetStringField(TEXT("bone"), Hit.BoneName.ToString());
+    Row->SetField(TEXT("contact"), VJson(Hit.ImpactPoint));
+    Row->SetField(TEXT("direction"), VJson(Direction));
+    Row->SetBoolField(TEXT("was_dead"), IsDead());
+    Row->SetObjectField(TEXT("before"), BodyState());
+    const float Applied = IsDead() ? 0.f : FMath::Min(Health, Damage);
+    Health = FMath::Max(0.f, Health - Applied);
+    if (!IsDead() && Health == 0)
+    {
+        ++Deaths;
+        DeathFrame = CombatFrame; DeathTime = ContactTime;
+        // Remove the motors only. Existing bodies, pose and momentum survive untouched.
+        if (!Controls.IsEmpty()) PhysicsControl->DestroyControls(Controls);
+        Controls.Reset();
+        BodyControls.Reset(); RecoveringControls.Reset();
+        PhysicsControl->SetComponentTickEnabled(false);
+        Body->bPauseAnims = true;
+    }
+    else if (!IsDead())
+    {
+        // Briefly soften the struck region's pose springs. Physical joints and the
+        // pelvis support stay active; recovery uses world time, including the preview.
+        const FString Bone = Hit.BoneName.ToString();
+        for (const auto& Entry : BodyControls)
+        {
+            const FString Part = Entry.Key.ToString();
+            const bool SameSide = (Bone.EndsWith(TEXT("_l")) && Part.EndsWith(TEXT("_l"))) ||
+                (Bone.EndsWith(TEXT("_r")) && Part.EndsWith(TEXT("_r")));
+            const bool Arm = Bone.Contains(TEXT("arm")) || Bone.StartsWith(TEXT("hand"));
+            const bool Leg = Bone.StartsWith(TEXT("thigh")) || Bone.StartsWith(TEXT("calf")) || Bone.StartsWith(TEXT("foot"));
+            const bool Region = Entry.Key == Hit.BoneName || (SameSide && Arm && (Part.Contains(TEXT("arm")) || Part.StartsWith(TEXT("hand")))) ||
+                (SameSide && Leg && (Part.StartsWith(TEXT("thigh")) || Part.StartsWith(TEXT("calf")) || Part.StartsWith(TEXT("foot")))) ||
+                ((!Arm && !Leg) && (Part.StartsWith(TEXT("spine")) || Part.StartsWith(TEXT("neck")) || Part == TEXT("head")));
+            if (Region) RecoveringControls.Add(Entry.Value, FMath::Clamp(HitRecoverySeconds, .1f, .6f));
+        }
+    }
+    Row->SetObjectField(TEXT("after_release"), BodyState());
+    const float Magnitude = FMath::Min(FMath::Clamp(BulletImpulse, 0.f, 5000.f),
+        BI->GetBodyMass() * FMath::Clamp(MaxImpulseVelocity, 0.f, 300.f));
+    const FVector Impulse = Direction.GetSafeNormal() * Magnitude;
+    Body->WakeAllRigidBodies();
+    Body->AddImpulseAtLocation(Impulse, Hit.ImpactPoint, Hit.BoneName);
+    ++PhysicalHits;
+    Row->SetField(TEXT("impulse"), VJson(Impulse));
+    Row->SetNumberField(TEXT("impulse_count"), 1);
+    Row->SetNumberField(TEXT("health"), Health);
+    Row->SetNumberField(TEXT("deaths"), Deaths);
+    Row->SetNumberField(TEXT("controls"), Controls.Num());
+    Row->SetObjectField(TEXT("after_impulse"), BodyState());
+    if (Contacts.Num() == 32) Contacts.RemoveAt(0);
+    Contacts.Add(MakeShared<FJsonValueObject>(Row));
+    UpdateLabel();
+    return Applied;
+}
+FString APhysicsControlDummy::GetDummyState(bool IncludeContacts) const
+{
+    auto Root = MakeShared<FJsonObject>();
+    Root->SetStringField(TEXT("name"), GetName());
+    Root->SetBoolField(TEXT("ready"), bReady);
+    Root->SetNumberField(TEXT("health"), Health);
+    Root->SetNumberField(TEXT("deaths"), Deaths);
+    Root->SetNumberField(TEXT("physical_hits"), PhysicalHits);
+    Root->SetNumberField(TEXT("epoch"), PoseEpoch);
+    Root->SetNumberField(TEXT("unsupported_shapes"), UnsupportedShapes);
+    Root->SetNumberField(TEXT("widened_instance_joints"), WidenedJoints);
+    Root->SetNumberField(TEXT("recovering_controls"), RecoveringControls.Num());
+    Root->SetNumberField(TEXT("shape_count"), SamplePhysicalPose().Shapes.Num());
+    Root->SetNumberField(TEXT("death_time"), DeathTime);
+    Root->SetNumberField(TEXT("death_frame"), DeathFrame);
+    Root->SetField(TEXT("home"), VJson(Home.GetLocation()));
+    Root->SetField(TEXT("support_target"), VJson(SupportTarget.GetLocation()));
+    Root->SetObjectField(TEXT("bodies"), BodyState());
+    TArray<TSharedPtr<FJsonValue>> DriveRows;
+    for (FName Name : Controls)
+    {
+        auto Row = MakeShared<FJsonObject>();
+        FPhysicsControlData Data;
+        PhysicsControl->GetControlData(Name, Data);
+        Row->SetStringField(TEXT("name"), Name.ToString());
+        Row->SetBoolField(TEXT("enabled"), PhysicsControl->GetControlEnabled(Name));
+        Row->SetBoolField(TEXT("animation_target"), Data.bUseSkeletalAnimation);
+        Row->SetNumberField(TEXT("linear_strength"), Data.LinearStrength);
+        Row->SetNumberField(TEXT("angular_strength"), Data.AngularStrength);
+        Row->SetNumberField(TEXT("damping_ratio"), Data.AngularDampingRatio);
+        FPhysicsControlMultiplier Multiplier;
+        PhysicsControl->GetControlMultiplier(Name, Multiplier);
+        Row->SetNumberField(TEXT("strength_multiplier"), Multiplier.AngularStrengthMultiplier);
+        DriveRows.Add(MakeShared<FJsonValueObject>(Row));
+    }
+    Root->SetArrayField(TEXT("controls"), DriveRows);
+    if (IncludeContacts) Root->SetArrayField(TEXT("contacts"), Contacts);
+    FString Result;
+    FJsonSerializer::Serialize(Root, TJsonWriterFactory<>::Create(&Result));
+    return Result;
+}
+void APhysicsControlDummy::EndPlay(const EEndPlayReason::Type Reason)
+{
+    if (!Controls.IsEmpty()) PhysicsControl->DestroyControls(Controls);
+    Controls.Reset(); Contacts.Reset(); bReady = false;
+    Super::EndPlay(Reason);
+}

@@ -89,6 +89,7 @@ void ACombatProjectileWorld::BeginPlay()
     FActorSpawnParameters EnemyParams;
     EnemyParams.ObjectFlags |= RF_Transient;
     Enemy = GetWorld()->SpawnActor<AEnemyPrototypeCharacter>(FVector(-1100, 0, 100), FRotator(0, 180, 0), EnemyParams);
+    SetPhysicsDummyEnabled(bEnablePhysicsDummy);
 }
 ACombatProjectileWorld* ACombatProjectileWorld::Find(const UWorld* World)
 {
@@ -107,7 +108,7 @@ void ACombatProjectileWorld::BuildQuery(FCollisionQueryParams& Query, const AAct
     // Characters are handled by continuous relative sweeps. FP physics props
     // are presentation only, and never become invisible gameplay cover.
     for (TActorIterator<AActor> It(GetWorld()); It; ++It)
-        if (It->IsA<ACharacter>() || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics")))
+        if (It->IsA<ACharacter>() || It->IsA<APhysicsControlDummy>() || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics")))
             Query.AddIgnoredActor(*It);
 }
 bool ACombatProjectileWorld::TraceEnemyAim(const FVector& Start, const FVector& End, double BirthTime, FHitResult& Hit) const
@@ -137,6 +138,15 @@ bool ACombatProjectileWorld::TraceEnemyAim(const FVector& Start, const FVector& 
             }
         }
     }
+    // Physical contact eligibility is independent of health and movement capsules.
+    const auto Physical = bProcessingFrame ? DummiesAt(BirthTime) : SampleDummies();
+    for (const auto& Entry : Physical)
+        if (const auto* Dummy = Entry.Key.Get())
+        {
+            FHitResult BodyHit;
+            if (Dummy->TracePhysicalPose(Entry.Value, Entry.Value, Start, End, 0, BodyHit) && BodyHit.Time < Nearest)
+            { Hit = BodyHit; Nearest = BodyHit.Time; Found = true; }
+        }
     return Found;
 }
 int64 ACombatProjectileWorld::Launch(AActor* Shooter, const FVector& Position, const FVector& Velocity, float Damage)
@@ -167,6 +177,7 @@ int64 ACombatProjectileWorld::LaunchTimed(AActor* Shooter, const FVector& Positi
     // New rounds cannot contact capsule motion that happened before their birth.
     // Keep per-round samples so firing never truncates older suspended rounds' history.
     Bullet.BirthCapsules = bProcessingFrame ? CapsulesAt(Time) : SampleCapsules();
+    Bullet.BirthDummies = bProcessingFrame ? DummiesAt(Time) : SampleDummies();
     Bullet.bLaunchClear = true;
     if (const ACharacter* Character = Cast<ACharacter>(Shooter))
     {
@@ -181,6 +192,7 @@ int64 ACombatProjectileWorld::LaunchTimed(AActor* Shooter, const FVector& Positi
 void ACombatProjectileWorld::RecordCapsules()
 {
     PreviousCapsules = SampleCapsules();
+    PreviousDummies = SampleDummies();
 }
 TMap<TWeakObjectPtr<ACharacter>, ACombatProjectileWorld::FCapsuleSample> ACombatProjectileWorld::SampleCapsules() const
 {
@@ -219,7 +231,7 @@ TMap<TWeakObjectPtr<UPrimitiveComponent>, ACombatProjectileWorld::FBlockerSample
     TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample> Samples;
     for (TActorIterator<AActor> It(GetWorld()); It; ++It)
     {
-        if (It->IsA<ACharacter>() || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics"))) continue;
+        if (It->IsA<ACharacter>() || It->IsA<APhysicsControlDummy>() || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics"))) continue;
         TInlineComponentArray<UPrimitiveComponent*> Parts(*It);
         for (UPrimitiveComponent* Part : Parts)
             if (Part->IsQueryCollisionEnabled() && Part->GetCollisionResponseToChannel(ECC_Visibility) == ECR_Block)
@@ -268,6 +280,7 @@ void ACombatProjectileWorld::Tick(float DeltaSeconds)
     if (ProjectileTimeScale < 1.f)
         for (const FBullet& Bullet : Bullets)
             DrawDebugPoint(GetWorld(), Bullet.Position, 5.f, FColor(255, 210, 120), false, 0.f);
+    ApplyPreviewTime();
 }
 void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
 {
@@ -278,6 +291,8 @@ void ACombatProjectileWorld::Advance(float WorldDelta, double RealNow)
     FrameEnd = FrameStart + FMath::Max(0.f, WorldDelta);
     FrameStartCapsules = PreviousCapsules;
     FrameEndCapsules = SampleCapsules();
+    FrameStartDummies = PreviousDummies;
+    FrameEndDummies = SampleDummies();
     AdvanceSegment(FrameStart, FrameEnd, RealNow);
     FiringClock = FrameEnd;
     RecordCapsules();
@@ -293,6 +308,8 @@ void ACombatProjectileWorld::AdvanceFrame(double WorldDelta, double RealNow, UCo
     LastFrameSteps = LastFrameBirths = 0;
     FrameStartCapsules = PreviousCapsules;
     FrameEndCapsules = SampleCapsules();
+    FrameStartDummies = PreviousDummies;
+    FrameEndDummies = SampleDummies();
     FVector View = FVector::ZeroVector, StartView = FVector::ZeroVector;
     FQuat Rotation = FQuat::Identity, StartRotation = FQuat::Identity;
     if (Rifle)
@@ -396,6 +413,8 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
         const double FlightDuration = ProjectileTimeScale > 0.f ? FMath::Min(Duration, double(Step) / ProjectileTimeScale) : Duration;
         const auto StartCapsules = CapsulesAt(FlightStart);
         const auto EndCapsules = CapsulesAt(FlightStart + FlightDuration);
+        const auto StartDummies = DummiesAt(FlightStart);
+        const auto EndDummies = DummiesAt(FlightStart + FlightDuration);
         const FVector Start = Bullet.Position;
         const FVector End = Start + Bullet.Velocity * Step;
         FHitResult Hit;
@@ -458,6 +477,14 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
                 bHit = true;
             }
         }
+        for (const auto& Entry : EndDummies)
+            if (const auto* Dummy = Entry.Key.Get())
+            {
+                const auto* Old = Bullet.bFirstAdvance ? Bullet.BirthDummies.Find(Entry.Key) : StartDummies.Find(Entry.Key);
+                FHitResult BodyHit;
+                if (Dummy->TracePhysicalPose(Old ? *Old : Entry.Value, Entry.Value, Start, End, BulletRadius, BodyHit) && BodyHit.Time < Earliest)
+                { Hit = BodyHit; Earliest = BodyHit.Time; bHit = true; }
+            }
         if (bHit)
         {
             PendingHits.Add({Bullet, Hit, FlightStart + FlightDuration * Hit.Time});
@@ -466,6 +493,7 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
         }
         Bullet.bFirstAdvance = false;
         Bullet.BirthCapsules.Reset();
+        Bullet.BirthDummies.Reset();
         Bullet.Position = End;
         Bullet.Age += Step;
         Bullet.Travel += Speed * Step;
@@ -502,8 +530,11 @@ void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult&
     LastHitShooterIdentity = Bullet.ShooterIdentity;
     LastHitRealTime = Now;
     const uint64 Generation = ResetGeneration;
-    const float Applied = IsValid(Victim) ? UGameplayStatics::ApplyPointDamage(Victim, Bullet.Damage, Bullet.Velocity.GetSafeNormal(),
-        Hit, Bullet.Instigator.Get(), Bullet.Shooter.Get(), nullptr) : 0.f;
+    auto* PhysicalTarget = Cast<APhysicsControlDummy>(Victim);
+    const float Applied = IsValid(PhysicalTarget) ? PhysicalTarget->ReceiveBullet(Bullet.Id, Bullet.Damage,
+        Bullet.Velocity.GetSafeNormal(), Hit, LastContactTime, Bullet.BirthTime, FrameSerial) :
+        IsValid(Victim) ? UGameplayStatics::ApplyPointDamage(Victim, Bullet.Damage, Bullet.Velocity.GetSafeNormal(),
+            Hit, Bullet.Instigator.Get(), Bullet.Shooter.Get(), nullptr) : 0.f;
     if (Generation != ResetGeneration || IsActorBeingDestroyed()) return;
     Victim = Hit.GetActor();
     const auto* Target = Cast<ACombatTarget>(Victim);
@@ -511,6 +542,8 @@ void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult&
     LastHitText = bSelf ? TEXT("SELF HIT") : Target ?
         FString::Printf(TEXT("HIT %.0f  |  TARGET %.0f / %.0f"), Applied, Target->Health, Target->MaxHealth) : EnemyTarget ?
         FString::Printf(TEXT("HIT %.0f  |  %s  |  ENEMY %.0f"), Applied, *EnemyTarget->LastRegion.ToString(), EnemyTarget->Health) : TEXT("SURFACE IMPACT");
+    if (IsValid(PhysicalTarget)) LastHitText = FString::Printf(TEXT("PHYSICS %s  |  %s  |  %.0f HP"),
+        PhysicalTarget->IsDead() ? TEXT("CORPSE") : TEXT("HIT"), *Hit.BoneName.ToString(), PhysicalTarget->Health);
     bool bMetal = Victim && Victim->ActorHasTag(TEXT("CombatMetal"));
     LastHitMaterial.Empty();
     if (const auto* Part = Hit.GetComponent())
@@ -540,6 +573,10 @@ void ACombatProjectileWorld::ResetTargets()
     ClearProjectiles();
     for (ACombatTarget* Target : Targets) if (IsValid(Target)) Target->ResetTarget();
     if (IsValid(Enemy)) Enemy->ResetEnemy();
+    if (IsValid(PhysicsDummy)) PhysicsDummy->ResetDummy();
+    SetPhysicsPreviewScale(1);
+    PreviousDummies.Reset(); FrameStartDummies.Reset(); FrameEndDummies.Reset();
+    RecordCapsules();
     for (TActorIterator<ACharacter> It(GetWorld()); It; ++It)
         if (auto* Rifle = It->FindComponentByClass<UCombatRifleComponent>()) Rifle->ClearTransientFeedback();
     LastHitText = TEXT("TARGETS RESET  |  AMMO UNCHANGED");
@@ -547,8 +584,10 @@ void ACombatProjectileWorld::ResetTargets()
 }
 void ACombatProjectileWorld::EndPlay(const EEndPlayReason::Type Reason)
 {
+    RestorePreviewTime();
     ClearProjectiles();
     PreviousCapsules.Reset();
+    PreviousDummies.Reset(); FrameStartDummies.Reset(); FrameEndDummies.Reset();
     OnBulletHit.Clear();
     Super::EndPlay(Reason);
 }
@@ -556,6 +595,9 @@ FString ACombatProjectileWorld::GetCombatState() const
 {
     auto Root = MakeShared<FJsonObject>();
     Root->SetNumberField(TEXT("scale"), ProjectileTimeScale);
+    Root->SetNumberField(TEXT("physics_preview_scale"), ActivePreviewScale);
+    Root->SetBoolField(TEXT("physics_dummy_enabled"), IsValid(PhysicsDummy));
+    Root->SetNumberField(TEXT("physical_history_actors"), PreviousDummies.Num());
     Root->SetNumberField(TEXT("firing_clock"), FiringClock);
     Root->SetNumberField(TEXT("frame_delta"), LastFrameDelta);
     Root->SetNumberField(TEXT("frame_steps"), LastFrameSteps);

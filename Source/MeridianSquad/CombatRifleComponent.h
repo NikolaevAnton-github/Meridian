@@ -156,4 +156,6 @@ private:
     void ReloadReleased();
     void ResetTargets();
     void ToggleEnemyPreview();
+    void TogglePhysicsPreview();
+    void TogglePhysicsDummy();
 };

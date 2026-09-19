@@ -1,0 +1,12 @@
+{
+  "record_id": "PhysicsControlDummy01-OwnerStart01",
+  "date_local": "2026-09-19",
+  "source": "Owner direct chat after MSQ-84 preparation",
+  "owner_message_original": "Давай попробуем MSQ-84",
+  "owner_message_english_translation": "Let's try MSQ-84.",
+  "decision": "Execute the bounded second Physics Control dummy experiment defined in Docs/Tasks/PhysicsControlDummy01.md.",
+  "scope": "One removable second Manny, powered living reactions, passive death/ragdoll, continued corpse impacts, sleep/wake, reset, and coherent body-and-bullet 0.25 development preview beside the retained enemy.",
+  "execution": "One existing Multica Unreal executor at Astra/max/standard; one primary independent reviewer /root/msq84_primary_review at Astra/max/standard owns all eight focused acceptance rows. Controller owns scope, evidence applicability, correction coordination, administrative closure and local commit.",
+  "preservation": "Preserve the original enemy comparison baseline, owner configuration and pre-existing project plugin edits, retained lobby, purchased arms, sources and historical evidence.",
+  "limits": "No adoption by the baseline enemy, autonomous balance/get-up, AI, full time ability, new art or successor task dispatch is authorized. Owner play acceptance remains separate."
+}

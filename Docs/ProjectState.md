@@ -21,7 +21,7 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
-## Prepared experiment: MSQ-84 second Physics Control dummy
+## Verified experiment: MSQ-84 second Physics Control dummy
 
 On 2026-09-19, after playing the enemy prototype and discussing continued bullet
 impacts on dead bodies, the owner requested a plan and task for a second Physics
@@ -31,13 +31,26 @@ death to passive ragdoll, continued corpse impacts, sleep/wake, reset and a boun
 body-and-bullet slow-motion development preview. See the
 [exact request and planning scope](Approvals/PhysicsControlDummy01-TaskCreation01.json).
 
-This is one unassigned backlog experiment under MSQ-67, depending on verified
-MSQ-69, with no production run. It has no native stage and does not reorder or
-dispatch MSQ-70 and successors. The original enemy remains the comparison baseline;
-adoption is separate from evaluating the second dummy. Full time ability, autonomous
-balance/get-up, AI, Mover migration, new art and deferred lobby work are outside
-the experiment. Multica readback and preservation evidence are under
-`Saved/CombatSlice01/PhysicsControlDummy01/Planning/`.
+The owner authorized execution on 2026-09-19: see
+[the start record](Approvals/PhysicsControlDummy01-OwnerStart01.json). Candidate10
+passes the eight scoped technical/prototype visual rows after one Multica Unreal
+executor and the sole primary review role completed implementation and bounded
+correction at Astra/max/standard. See [implementation](PhysicsControlDummy01.md)
+and [controller acceptance](PhysicsControlDummy01Review.md).
+
+The supported second Manny responds locally to hits, releases drives on death,
+receives falling/sleeping corpse impacts and resets without ammunition refill.
+F8 previews coherent quarter-speed bodies/bullets with normal player movement;
+F10 toggles the fixture, avoiding Unreal's F9 screenshot shortcut. F6/F7 retain
+their existing roles. The grounded normal/quarter trajectory comparison remains
+failed (36.659 cm versus 15 cm); the separate physical-clock check passes.
+Distributed world supports do not demonstrate autonomous balance.
+
+The original enemy remains the comparison baseline. Owner play acceptance and
+adoption are separate. Full time ability, balance/get-up, AI, Mover migration,
+new art and deferred lobby work remain outside the experiment. MSQ-67 stays open;
+MSQ-70 and successors remain undispatched. Owner edits, source assets and historical
+evidence are preserved under `Saved/CombatSlice01/PhysicsControlDummy01/`.
 
 ## Verified gameplay baseline: MSQ-69 enemy prototype
 

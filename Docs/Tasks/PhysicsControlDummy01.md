@@ -4,8 +4,17 @@ Prepared 2026-09-19. Multica issue: **MSQ-84**.
 An unstaged experimental child of [CombatSlice01 / MSQ-67](CombatSlice01Plan.md),
 depending on verified [EnemyPrototype01 / MSQ-69](EnemyPrototype01.md), closure
 commit `02fb313`. See the [owner request](../Approvals/PhysicsControlDummy01-TaskCreation01.json).
-This preparation creates a plan and one unassigned backlog task; it starts no
-production run and does not reorder or dispatch MSQ-70 and successors.
+The original preparation created one unassigned backlog task without a run.
+The owner authorized execution on 2026-09-19; see
+[the start record](../Approvals/PhysicsControlDummy01-OwnerStart01.json).
+This experiment does not reorder or dispatch MSQ-70 and successors.
+
+Completed 2026-09-19 as Candidate10: the sole primary review passes all eight
+scoped rows, with the failed grounded trajectory comparison explicitly retained.
+See [implementation and controls](../PhysicsControlDummy01.md) and
+[controller acceptance](../PhysicsControlDummy01Review.md). F10 replaces the
+historical F9 toggle to avoid Unreal's screenshot shortcut. Owner play acceptance
+and adoption by the original enemy remain separate.
 
 ## Outcome and experiment boundary
 
@@ -97,6 +106,12 @@ this task into MSQ-75. Numerical tolerances and any approximation must be chosen
 from the implementation and recorded before claiming a pass.
 
 ## Execution, evidence and review ownership
+
+Execution is authorized by PhysicsControlDummy01-OwnerStart01. The named sole
+primary independent reviewer is `/root/msq84_primary_review`, configured at
+Astra/max/standard and responsible for all eight acceptance rows above. The
+controller accepts scope, candidate/evidence applicability, preservation and
+finding closure without a second full technical review.
 
 Use one existing Multica Unreal executor at **Astra/max/standard**, production
 concurrency one and one editor writer. Verify configured profiles, native
