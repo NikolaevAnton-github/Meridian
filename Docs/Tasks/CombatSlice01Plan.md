@@ -15,7 +15,7 @@ creation record and setup evidence remain historical, unchanged.
 
 Stage 1 implementation and bounded corrections are verified on 2026-09-19; see
 [CombatFoundation01 controller review](../CombatFoundation01Review.md).
-MSQ-69 and successors remain undispatched. This parent remains coordination for
+At that closure, MSQ-69 and successors remained undispatched. This parent coordinates
 the unfinished stages; it is not a request to start the whole family.
 
 On 2026-09-19 the owner requested **MSQ-82 / CombatTiming01 next**, immediately
@@ -27,8 +27,15 @@ MSQ-69 depends on MSQ-82. Task preparation creates no new production run.
 Stage 2 implementation and bounded corrections are technically verified on
 2026-09-19; see [CombatTiming01 controller review](../CombatTiming01Review.md).
 The retained low-FPS procedural recoil limitation is documented separately from
-cadence/projectile acceptance. Owner play/visual acceptance remains separate;
-MSQ-69 and successors remain undispatched.
+cadence/projectile acceptance. Owner play/visual acceptance remains separate.
+
+Stage 3, MSQ-69 / EnemyPrototype01, was subsequently authorized by the
+[owner start record](../Approvals/EnemyPrototype01-OwnerStart01.json) and technically
+verified on 2026-09-19; see [the controller review](../EnemyPrototype01Review.md).
+The temporary Manny prototype, source/region contract and bounded forearm
+adaptation feasibility pass, with detached-piece production remaining later scope.
+The same primary reviewer closes the post-lethal aim-query correction and retains
+the passing prototype visual verdict. MSQ-70 and successors remain undispatched.
 
 ## Outcome and starting point
 

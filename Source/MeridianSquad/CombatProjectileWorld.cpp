@@ -3,6 +3,7 @@
 #include "CombatRifleComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/World.h"
 #include "Engine/StaticMeshActor.h"
@@ -85,6 +86,9 @@ void ACombatProjectileWorld::BeginPlay()
         Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
         Targets.Add(GetWorld()->SpawnActor<ACombatTarget>(FVector(-850, Y, 135), FRotator::ZeroRotator, Params));
     }
+    FActorSpawnParameters EnemyParams;
+    EnemyParams.ObjectFlags |= RF_Transient;
+    Enemy = GetWorld()->SpawnActor<AEnemyPrototypeCharacter>(FVector(-1100, 0, 100), FRotator(0, 180, 0), EnemyParams);
 }
 ACombatProjectileWorld* ACombatProjectileWorld::Find(const UWorld* World)
 {
@@ -105,6 +109,35 @@ void ACombatProjectileWorld::BuildQuery(FCollisionQueryParams& Query, const AAct
     for (TActorIterator<AActor> It(GetWorld()); It; ++It)
         if (It->IsA<ACharacter>() || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics")))
             Query.AddIgnoredActor(*It);
+}
+bool ACombatProjectileWorld::TraceEnemyAim(const FVector& Start, const FVector& End, double BirthTime, FHitResult& Hit) const
+{
+    bool Found = false;
+    double Nearest = 1.0;
+    const auto Samples = bProcessingFrame ? CapsulesAt(BirthTime) : SampleCapsules();
+    for (const auto& Entry : Samples)
+    {
+        ACharacter* Character = Entry.Key.Get();
+        // A prior birth can kill an enemy after this frame's spheres were cached.
+        // Match the damage query's live collision gate before considering them.
+        if (!IsValid(Character) || !Character->GetCapsuleComponent()->IsQueryCollisionEnabled()) continue;
+        for (const auto& Sphere : Entry.Value.Regions)
+        {
+            double Time;
+            if (CapsuleContact(Start - Sphere.Center, End - Sphere.Center, Sphere.Radius, Sphere.Radius, Time) && Time < Nearest)
+            {
+                Nearest = Time;
+                const FVector Point = FMath::Lerp(Start, End, Time);
+                Hit = FHitResult(Character, Character->GetMesh(), Point, (Point - Sphere.Center).GetSafeNormal());
+                Hit.BoneName = Sphere.Bone;
+                Hit.bBlockingHit = true;
+                Hit.Time = Time;
+                Hit.Distance = FVector::Distance(Start, Point);
+                Found = true;
+            }
+        }
+    }
+    return Found;
 }
 int64 ACombatProjectileWorld::Launch(AActor* Shooter, const FVector& Position, const FVector& Velocity, float Damage)
 {
@@ -156,7 +189,11 @@ TMap<TWeakObjectPtr<ACharacter>, ACombatProjectileWorld::FCapsuleSample> ACombat
     {
         const auto* Capsule = It->GetCapsuleComponent();
         if (Capsule->IsQueryCollisionEnabled())
-            Samples.Add(*It, {Capsule->GetComponentLocation(), Capsule->GetScaledCapsuleRadius(), Capsule->GetScaledCapsuleHalfHeight()});
+        {
+            FCapsuleSample Sample{Capsule->GetComponentLocation(), Capsule->GetScaledCapsuleRadius(), Capsule->GetScaledCapsuleHalfHeight(), {}};
+            if (const auto* Target = Cast<AEnemyPrototypeCharacter>(*It)) Sample.Regions = Target->SampleHitSpheres();
+            Samples.Add(*It, MoveTemp(Sample));
+        }
     }
     return Samples;
 }
@@ -171,6 +208,9 @@ TMap<TWeakObjectPtr<ACharacter>, ACombatProjectileWorld::FCapsuleSample> ACombat
             // Crouch-size transitions use a conservative envelope throughout.
             Entry.Value.Radius = FMath::Max(Old->Radius, Entry.Value.Radius);
             Entry.Value.HalfHeight = FMath::Max(Old->HalfHeight, Entry.Value.HalfHeight);
+            if (Old->Regions.Num() == Entry.Value.Regions.Num())
+                for (int32 Index = 0; Index < Entry.Value.Regions.Num(); ++Index)
+                    Entry.Value.Regions[Index].Center = FMath::Lerp(Old->Regions[Index].Center, Entry.Value.Regions[Index].Center, Alpha);
         }
     return Samples;
 }
@@ -381,6 +421,30 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
                 continue;
             }
             double ContactTime = 0.0;
+            if (Character->IsA<AEnemyPrototypeCharacter>())
+            {
+                // Linear per-bone sphere history keeps moving limbs and stopped
+                // bullets on the same birth/substep timeline as player capsules.
+                for (int32 Region = 0; Region < Current.Regions.Num(); ++Region)
+                {
+                    const auto& New = Current.Regions[Region];
+                    const FVector Before = Old->Regions.IsValidIndex(Region) ? Old->Regions[Region].Center : New.Center;
+                    if (CapsuleContact(Start - Before, End - New.Center, New.Radius + BulletRadius,
+                        New.Radius + BulletRadius, ContactTime) && ContactTime < Earliest)
+                    {
+                        Earliest = ContactTime;
+                        const FVector Point = FMath::Lerp(Start, End, ContactTime);
+                        Hit = FHitResult(Character, Character->GetMesh(), Point,
+                            (Point - FMath::Lerp(Before, New.Center, ContactTime)).GetSafeNormal());
+                        Hit.BoneName = New.Bone;
+                        Hit.bBlockingHit = true;
+                        Hit.Time = ContactTime;
+                        Hit.ImpactPoint = Point;
+                        bHit = true;
+                    }
+                }
+                continue;
+            }
             if (CapsuleContact(Start - Old->Center, End - Center,
                 FMath::Max(Old->Radius, Current.Radius) + BulletRadius,
                 FMath::Max(Old->HalfHeight, Current.HalfHeight) + BulletRadius, ContactTime) && ContactTime < Earliest)
@@ -443,8 +507,10 @@ void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult&
     if (Generation != ResetGeneration || IsActorBeingDestroyed()) return;
     Victim = Hit.GetActor();
     const auto* Target = Cast<ACombatTarget>(Victim);
+    const auto* EnemyTarget = Cast<AEnemyPrototypeCharacter>(Victim);
     LastHitText = bSelf ? TEXT("SELF HIT") : Target ?
-        FString::Printf(TEXT("HIT %.0f  |  TARGET %.0f / %.0f"), Applied, Target->Health, Target->MaxHealth) : TEXT("SURFACE IMPACT");
+        FString::Printf(TEXT("HIT %.0f  |  TARGET %.0f / %.0f"), Applied, Target->Health, Target->MaxHealth) : EnemyTarget ?
+        FString::Printf(TEXT("HIT %.0f  |  %s  |  ENEMY %.0f"), Applied, *EnemyTarget->LastRegion.ToString(), EnemyTarget->Health) : TEXT("SURFACE IMPACT");
     bool bMetal = Victim && Victim->ActorHasTag(TEXT("CombatMetal"));
     LastHitMaterial.Empty();
     if (const auto* Part = Hit.GetComponent())
@@ -473,6 +539,7 @@ void ACombatProjectileWorld::ResetTargets()
 {
     ClearProjectiles();
     for (ACombatTarget* Target : Targets) if (IsValid(Target)) Target->ResetTarget();
+    if (IsValid(Enemy)) Enemy->ResetEnemy();
     for (TActorIterator<ACharacter> It(GetWorld()); It; ++It)
         if (auto* Rifle = It->FindComponentByClass<UCombatRifleComponent>()) Rifle->ClearTransientFeedback();
     LastHitText = TEXT("TARGETS RESET  |  AMMO UNCHANGED");

@@ -1,0 +1,13 @@
+{
+  "record_id": "EnemyPrototype01-OwnerStart01",
+  "date_local": "2026-09-19",
+  "source": "Owner direct chat after MSQ-82 closure and the review workflow update",
+  "owner_message_original": "Давай следуюущую задачу делать по геймплею нашему, что там по плану в ней?",
+  "owner_message_english_translation": "Let's work on the next gameplay task; what is planned in it?",
+  "decision": "Proceed with the next prepared gameplay task, MSQ-69 / EnemyPrototype01, and explain its planned scope to the owner.",
+  "interpretation": "ProjectState, the ordered CombatSlice01 plan and live Multica identify MSQ-69 as the next stage after completed MSQ-82. This authorizes its bounded asset audit and prototype implementation, not the entire task family.",
+  "scope": "Audit existing reusable sources; prepare one temporary damageable enemy and EnemyPrototype01-Contract01 under Docs/Tasks/EnemyPrototype01.md, with focused verification, independent review, bounded corrections and a controller closure commit.",
+  "asset_gate": "Retain the task's explicit source suitability and owner selection gate. No purchases, unrestricted downloads, paused protagonist production, new model production or final enemy art approval is authorized.",
+  "execution": "One existing Multica Unreal executor at Astra/max/standard; verify configured and actual native execution. One primary independent reviewer owns technical criteria and actual visual evidence. No successor dispatch.",
+  "preservation": "Preserve owner Config/DefaultEngine.ini edits, the retained lobby and PurchasedArms06 presentation, the verified MSQ-68/MSQ-82 gameplay contracts, source assets and historical evidence."
+}

@@ -21,7 +21,36 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
-## Current scope: MSQ-82 combat timing verified
+## Current scope: MSQ-69 enemy prototype verified
+
+The owner requested the next gameplay task on 2026-09-19; see
+[the exact start record](Approvals/EnemyPrototype01-OwnerStart01.json) and
+[EnemyPrototype01 / MSQ-69](Tasks/EnemyPrototype01.md). Live Multica confirms
+MSQ-82 is done, with verified closure commit `be8d2ae`. One Multica Unreal executor
+delivered the prototype and one bounded correction at Astra/max/standard. The
+same primary independent reviewer closes the correction and passes the technical
+and prototype visual criteria; see [controller review](EnemyPrototype01Review.md).
+
+The retained lobby spawns one transient Manny enemy with seven damage regions,
+100 health, rifle hit response, death/ragdoll and reset. F7 toggles demonstration
+movement; F6 resets targets/feedback without refilling ammunition. See the
+[implementation](EnemyPrototype01.md), [Contract01](EnemyPrototype01-Contract01.json)
+and [correction](EnemyPrototype01Correction01.md). The source audit verifies an
+editable template body and bounded forearm capping feasibility; production caps,
+matching stump/skin transitions and detached-piece physics remain later criteria.
+No additional source-selection gate is needed for that demonstrated technical route.
+
+The 71 original focused checks and 12 correction checks pass with applicable
+evidence reused. The correction excludes a newly killed enemy's cached spheres
+from later same-frame aim queries, preserving the 85 ms schedule and residual
+bullet flight. Candidate06/08 provide independently reviewed actual visuals.
+Owner play/final-art acceptance remains separate. No new model production,
+purchases, paused protagonist work or final enemy styling is authorized.
+MSQ-70 (enemy AI/combat) and successors remain undispatched; player health follows
+later. The retained lobby, owner configuration, purchased arms and earlier
+verified evidence remain preserved. The parent remains open for the family.
+
+## Verified prerequisite: MSQ-82 combat timing
 
 The owner placed **MSQ-82 / CombatTiming01** next after MSQ-68 and authorized
 execution; see the [task](Tasks/CombatTiming01.md),
@@ -40,9 +69,9 @@ causal limits. This timing closure does not claim that visual limitation is fixe
 or confer owner play/visual acceptance. Owner configuration, assets and historical
 evidence are preserved. A newly opened owner PIE session is left untouched.
 
-MSQ-69 depends on this completed stage 2 and remains undispatched, as do later
-stages. The parent remains open for the sequential family. No successor is
-authorized by this snapshot or the technical closure.
+MSQ-69 depends on this completed stage 2 and is now authorized by the later owner
+start record above. Later stages remain undispatched. The parent remains open for
+the sequential family; technical closure alone grants no successor authorization.
 
 ## Verified baseline: MSQ-68 combat foundation
 
@@ -58,8 +87,8 @@ pass; see [implementation and controls](CombatFoundation01.md) and
 [controller acceptance](CombatFoundation01Review.md). The retained lobby is ready
 for Play with transient targets. F6 resets targets and feedback without refilling
 ammunition; Stop/Play restores 30/90. Owner play/visual acceptance remains separate.
-MSQ-69 and later stages remain undispatched; verify live Multica before choosing
-the next task. The parent stays open for the remaining sequential family.
+MSQ-69 now follows completed MSQ-82 under the owner start record above; verify live
+Multica for execution state. The parent stays open for the remaining family.
 
 On 2026-09-18, the owner requested tasks for the proposed gameplay progression
 and sequential execution; see the [exact task-creation decision](Approvals/CombatSlice01-TaskCreation01.json).

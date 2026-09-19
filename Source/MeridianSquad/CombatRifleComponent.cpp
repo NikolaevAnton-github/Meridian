@@ -9,6 +9,7 @@
 #include "EngineUtils.h"
 #include "GameFramework/PlayerController.h"
 #include "InputAction.h"
+#include "Kismet/GameplayStatics.h"
 #include "Serialization/JsonSerializer.h"
 #include "UObject/StructOnScope.h"
 #include "UObject/UnrealType.h"
@@ -120,6 +121,7 @@ void UCombatRifleComponent::BindInput(UEnhancedInputComponent* Input)
     Input->BindAction(Reload, ETriggerEvent::Canceled, this, &UCombatRifleComponent::ReloadTap);
     Input->BindAction(Reload, ETriggerEvent::Completed, this, &UCombatRifleComponent::ReloadReleased);
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::F6, IE_Pressed, this, &UCombatRifleComponent::ResetTargets);
+    static_cast<UInputComponent*>(Input)->BindKey(EKeys::F7, IE_Pressed, this, &UCombatRifleComponent::ToggleEnemyPreview);
 }
 bool UCombatRifleComponent::CanAct() const
 {
@@ -248,7 +250,13 @@ bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, c
     FCollisionQueryParams Query(SCENE_QUERY_STAT(CombatAim), true);
     Simulation->BuildQuery(Query, Character);
     FHitResult AimHit, CoverHit;
-    const bool bAimHit = GetWorld()->LineTraceSingleByChannel(AimHit, View, View + Forward * 30000.f, ECC_Visibility, Query);
+    bool bAimHit = GetWorld()->LineTraceSingleByChannel(AimHit, View, View + Forward * 30000.f, ECC_Visibility, Query);
+    FHitResult EnemyAimHit;
+    if (Simulation->TraceEnemyAim(View, View + Forward * 30000.f, Now, EnemyAimHit) && (!bAimHit || EnemyAimHit.Time < AimHit.Time))
+    {
+        AimHit = EnemyAimHit;
+        bAimHit = true;
+    }
     const FVector AimPoint = bAimHit ? AimHit.ImpactPoint : View + Forward * 30000.f;
     const bool bCover = GetWorld()->SweepSingleByChannel(CoverHit, View, Muzzle, FQuat::Identity, ECC_Visibility,
         FCollisionShape::MakeSphere(.5f), Query);
@@ -498,6 +506,11 @@ void UCombatRifleComponent::TickComponent(float Delta, ELevelTick TickType, FAct
 void UCombatRifleComponent::ResetTargets()
 {
     if (auto* World = ACombatProjectileWorld::Find(GetWorld())) World->ResetTargets();
+}
+void UCombatRifleComponent::ToggleEnemyPreview()
+{
+    if (auto* Target = Cast<AEnemyPrototypeCharacter>(UGameplayStatics::GetActorOfClass(GetWorld(), AEnemyPrototypeCharacter::StaticClass())))
+        Target->SetPreviewMoving(!Target->IsPreviewMoving());
 }
 void UCombatRifleComponent::ClearTransientFeedback()
 {

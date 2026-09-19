@@ -21,7 +21,7 @@ void ACombatPrototypeHUD::DrawHUD()
         Rifle->Magazine > 0 ? FLinearColor::White : FLinearColor(1,.4f,.2f), X, Y + 21 * Scale, GEngine->GetMediumFont(), Scale);
     DrawText(Rifle->StatusText.IsEmpty() ? TEXT("LMB fire   RMB aim   V mode   R reload / hold check") : Rifle->StatusText,
         FLinearColor(.75f,.83f,.85f), X, Y + 54 * Scale, GEngine->GetSmallFont(), Scale);
-    DrawText(TEXT("Q quick reload   E reload   F6 reset targets"), FLinearColor(.65f,.73f,.76f),
+    DrawText(TEXT("F6 reset targets   F7 enemy motion preview"), FLinearColor(.65f,.73f,.76f),
         X, Y + 77 * Scale, GEngine->GetSmallFont(), Scale);
     const float CX = Canvas->SizeX * .5f, CY = Canvas->SizeY * .5f;
     DrawRect(FLinearColor(1,1,1,.65f), CX - 1, CY - 1, 2, 2);

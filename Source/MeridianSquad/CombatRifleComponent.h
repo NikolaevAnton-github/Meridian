@@ -155,4 +155,5 @@ private:
     void ReloadTap();
     void ReloadReleased();
     void ResetTargets();
+    void ToggleEnemyPreview();
 };

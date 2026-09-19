@@ -1,0 +1,141 @@
+{
+    "asset":  "EnemyPrototype01",
+    "artifacts":  [
+                      {
+                          "path":  "Assets/Source/EnemyPrototype01/SKM_Manny_Simple_Export01.fbx",
+                          "sha256":  "52824cf572b31b3d6cebc11e7da43c64dd531b716a2d62517983f746eafb48f7",
+                          "size_bytes":  2879760,
+                          "role":  "unselected_comparison_mesh_export",
+                          "evidence":  [
+                                           {
+                                               "note":  "Immutable MSQ-69 source, region and adaptation contract. This is a technical placeholder inventory, not final enemy art or detached-body acceptance. Export01 is the unselected comparison; Export02 is the selected editable template export. Cross-asset derivation is declared in this contract, not inferred as a verified registry edge.",
+                                               "source":  "Docs/EnemyPrototype01-Contract01.json"
+                                           },
+                                           {
+                                               "note":  "Independent source, animation and prototype visual criteria pass. Its MSQ69-R1 finding concerns gameplay aim-query code only; these asset bytes are unaffected and preserve the recorded source and detached-body limitations.",
+                                               "source":  "Saved/CombatSlice01/EnemyPrototype01/Controller/Review/primary-review01.md"
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Assets/Source/EnemyPrototype01/SKM_Manny_Simple_Export02.fbx",
+                          "sha256":  "1b973d2b92a7f5de1dd34ffe46d3e1dbf1f7784d96add352a2640f58515fcb23",
+                          "size_bytes":  2887888,
+                          "role":  "selected_editable_enemy_mesh_export",
+                          "evidence":  [
+                                           {
+                                               "note":  "Immutable MSQ-69 source, region and adaptation contract. This is a technical placeholder inventory, not final enemy art or detached-body acceptance. Export01 is the unselected comparison; Export02 is the selected editable template export. Cross-asset derivation is declared in this contract, not inferred as a verified registry edge.",
+                                               "source":  "Docs/EnemyPrototype01-Contract01.json"
+                                           },
+                                           {
+                                               "note":  "Independent source, animation and prototype visual criteria pass. Its MSQ69-R1 finding concerns gameplay aim-query code only; these asset bytes are unaffected and preserve the recorded source and detached-body limitations.",
+                                               "source":  "Saved/CombatSlice01/EnemyPrototype01/Controller/Review/primary-review01.md"
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/EnemyPrototype01/A_Enemy_Left.uasset",
+                          "sha256":  "129f7026704b99e865034fe13895fd812754b85424ba9a53de4a940a3e64b4b5",
+                          "size_bytes":  452679,
+                          "role":  "temporary_enemy_animation_copy",
+                          "evidence":  [
+                                           {
+                                               "note":  "Immutable MSQ-69 source, region and adaptation contract. This is a technical placeholder inventory, not final enemy art or detached-body acceptance. Export01 is the unselected comparison; Export02 is the selected editable template export. Cross-asset derivation is declared in this contract, not inferred as a verified registry edge.",
+                                               "source":  "Docs/EnemyPrototype01-Contract01.json"
+                                           },
+                                           {
+                                               "note":  "Independent source, animation and prototype visual criteria pass. Its MSQ69-R1 finding concerns gameplay aim-query code only; these asset bytes are unaffected and preserve the recorded source and detached-body limitations.",
+                                               "source":  "Saved/CombatSlice01/EnemyPrototype01/Controller/Review/primary-review01.md"
+                                           }
+                                       ],
+                          "unreal_package":  "/Game/Development/EnemyPrototype01/A_Enemy_Left"
+                      },
+                      {
+                          "path":  "Content/Development/EnemyPrototype01/A_Enemy_Right.uasset",
+                          "sha256":  "e02c60259aa31dee3423b515c394f8e6662b13dd5b31379c948ed662f54d734d",
+                          "size_bytes":  510246,
+                          "role":  "temporary_enemy_animation_copy",
+                          "evidence":  [
+                                           {
+                                               "note":  "Immutable MSQ-69 source, region and adaptation contract. This is a technical placeholder inventory, not final enemy art or detached-body acceptance. Export01 is the unselected comparison; Export02 is the selected editable template export. Cross-asset derivation is declared in this contract, not inferred as a verified registry edge.",
+                                               "source":  "Docs/EnemyPrototype01-Contract01.json"
+                                           },
+                                           {
+                                               "note":  "Independent source, animation and prototype visual criteria pass. Its MSQ69-R1 finding concerns gameplay aim-query code only; these asset bytes are unaffected and preserve the recorded source and detached-body limitations.",
+                                               "source":  "Saved/CombatSlice01/EnemyPrototype01/Controller/Review/primary-review01.md"
+                                           }
+                                       ],
+                          "unreal_package":  "/Game/Development/EnemyPrototype01/A_Enemy_Right"
+                      },
+                      {
+                          "path":  "Content/Development/EnemyPrototype01/A_EnemyTemplate_Fire.uasset",
+                          "sha256":  "a716d16ccd8442102c077ecaa44243af595aa6c006cb71abe7257c4c29021646",
+                          "size_bytes":  184249,
+                          "role":  "temporary_enemy_animation_copy",
+                          "evidence":  [
+                                           {
+                                               "note":  "Immutable MSQ-69 source, region and adaptation contract. This is a technical placeholder inventory, not final enemy art or detached-body acceptance. Export01 is the unselected comparison; Export02 is the selected editable template export. Cross-asset derivation is declared in this contract, not inferred as a verified registry edge.",
+                                               "source":  "Docs/EnemyPrototype01-Contract01.json"
+                                           },
+                                           {
+                                               "note":  "Independent source, animation and prototype visual criteria pass. Its MSQ69-R1 finding concerns gameplay aim-query code only; these asset bytes are unaffected and preserve the recorded source and detached-body limitations.",
+                                               "source":  "Saved/CombatSlice01/EnemyPrototype01/Controller/Review/primary-review01.md"
+                                           }
+                                       ],
+                          "unreal_package":  "/Game/Development/EnemyPrototype01/A_EnemyTemplate_Fire"
+                      },
+                      {
+                          "path":  "Content/Development/EnemyPrototype01/A_EnemyTemplate_Hit.uasset",
+                          "sha256":  "15ad845c0454536d2b04e24564e587ee4b4bec02020c6fe6b903ad73d1486bf0",
+                          "size_bytes":  224647,
+                          "role":  "temporary_enemy_animation_copy",
+                          "evidence":  [
+                                           {
+                                               "note":  "Immutable MSQ-69 source, region and adaptation contract. This is a technical placeholder inventory, not final enemy art or detached-body acceptance. Export01 is the unselected comparison; Export02 is the selected editable template export. Cross-asset derivation is declared in this contract, not inferred as a verified registry edge.",
+                                               "source":  "Docs/EnemyPrototype01-Contract01.json"
+                                           },
+                                           {
+                                               "note":  "Independent source, animation and prototype visual criteria pass. Its MSQ69-R1 finding concerns gameplay aim-query code only; these asset bytes are unaffected and preserve the recorded source and detached-body limitations.",
+                                               "source":  "Saved/CombatSlice01/EnemyPrototype01/Controller/Review/primary-review01.md"
+                                           }
+                                       ],
+                          "unreal_package":  "/Game/Development/EnemyPrototype01/A_EnemyTemplate_Hit"
+                      },
+                      {
+                          "path":  "Content/Development/EnemyPrototype01/A_EnemyTemplate_Idle.uasset",
+                          "sha256":  "6da490854de3bd2958c8e287a4f069df31b7ad67af1ce1f3ea404fd7fa9c64b6",
+                          "size_bytes":  1673699,
+                          "role":  "temporary_enemy_animation_copy",
+                          "evidence":  [
+                                           {
+                                               "note":  "Immutable MSQ-69 source, region and adaptation contract. This is a technical placeholder inventory, not final enemy art or detached-body acceptance. Export01 is the unselected comparison; Export02 is the selected editable template export. Cross-asset derivation is declared in this contract, not inferred as a verified registry edge.",
+                                               "source":  "Docs/EnemyPrototype01-Contract01.json"
+                                           },
+                                           {
+                                               "note":  "Independent source, animation and prototype visual criteria pass. Its MSQ69-R1 finding concerns gameplay aim-query code only; these asset bytes are unaffected and preserve the recorded source and detached-body limitations.",
+                                               "source":  "Saved/CombatSlice01/EnemyPrototype01/Controller/Review/primary-review01.md"
+                                           }
+                                       ],
+                          "unreal_package":  "/Game/Development/EnemyPrototype01/A_EnemyTemplate_Idle"
+                      },
+                      {
+                          "path":  "Docs/EnemyPrototype01-Contract01.json",
+                          "sha256":  "e4baebdf7de03d6d540fff2f8194fe56ace77d022454515b04d7bbdcec0bdabc",
+                          "size_bytes":  25677,
+                          "role":  "enemy_source_region_and_collision_contract",
+                          "evidence":  [
+                                           {
+                                               "note":  "Immutable MSQ-69 source, region and adaptation contract. This is a technical placeholder inventory, not final enemy art or detached-body acceptance. Export01 is the unselected comparison; Export02 is the selected editable template export. Cross-asset derivation is declared in this contract, not inferred as a verified registry edge.",
+                                               "source":  "Docs/EnemyPrototype01-Contract01.json"
+                                           },
+                                           {
+                                               "note":  "Independent source, animation and prototype visual criteria pass. Its MSQ69-R1 finding concerns gameplay aim-query code only; these asset bytes are unaffected and preserve the recorded source and detached-body limitations.",
+                                               "source":  "Saved/CombatSlice01/EnemyPrototype01/Controller/Review/primary-review01.md"
+                                           }
+                                       ]
+                      }
+                  ],
+    "dependencies":  [
+
+                     ]
+}

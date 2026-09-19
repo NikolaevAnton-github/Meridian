@@ -1,0 +1,760 @@
+{
+  "record_id": "EnemyPrototype01-Contract01",
+  "task": "MSQ-69",
+  "revision": 1,
+  "date_local": "2026-09-19",
+  "status": "Worker verified; independent review and controller acceptance pending",
+  "representation": "Installed UE template Manny Simple technical placeholder; no final enemy art acceptance",
+  "engine": "5.8.1-56057345+++UE5+Release-5.8",
+  "source_rights": {
+    "template": "Installed Templates/TemplateResources/High/Characters; UE Examples reuse in this Unreal project",
+    "terms": "https://www.unrealengine.com/eula/unreal",
+    "rifle": "Existing owner-purchased Infima SK_TFA_AR visual core; owner purchase statement is preserved, receipt/tier unavailable locally",
+    "exclusions": [
+      "No purchases or downloads",
+      "No reuse of the paused original protagonist as enemy source",
+      "No external source-asset redistribution authorization"
+    ]
+  },
+  "assets": [
+    {
+      "path": "Content/Characters/Mannequins/Materials/M_Mannequin.uasset",
+      "bytes": 59292,
+      "sha256": "d7ffe412d906380bd5bd4462f464b2a1fe48fdb79b9077f29bd0f958a782035c",
+      "package": "/Game/Characters/Mannequins/Materials/M_Mannequin",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Materials\\M_Mannequin.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Materials/Manny/MI_Manny_01_New.uasset",
+      "bytes": 17963,
+      "sha256": "9f1e4ed382304d020b750c81505140fc1de4d339b0909430adb5380a6bb89b65",
+      "package": "/Game/Characters/Mannequins/Materials/Manny/MI_Manny_01_New",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Materials\\Manny\\MI_Manny_01_New.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Materials/Manny/MI_Manny_02_New.uasset",
+      "bytes": 18706,
+      "sha256": "26389db06f0b7928b487494bef3320d6b0e6bccd58193bccedd67c2c89132a46",
+      "package": "/Game/Characters/Mannequins/Materials/Manny/MI_Manny_02_New",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Materials\\Manny\\MI_Manny_02_New.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset",
+      "bytes": 15825101,
+      "sha256": "be9f011191ee1887b97cd13bce09886a6066c2fd62c619991070ec142184e1bf",
+      "package": "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Meshes\\SKM_Manny_Simple.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset",
+      "bytes": 191198,
+      "sha256": "22029d47455f24471195b26a0e04a1e1389f27d6a924e88c9f46a0f600c9a530",
+      "package": "/Game/Characters/Mannequins/Meshes/SK_Mannequin",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Meshes\\SK_Mannequin.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Rigs/PA_Mannequin.uasset",
+      "bytes": 301538,
+      "sha256": "c0ceaf003947088ff076555b81a46e5ccb11149c94025eb2a9e74263fbaa0d67",
+      "package": "/Game/Characters/Mannequins/Rigs/PA_Mannequin",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Rigs\\PA_Mannequin.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_BN.uasset",
+      "bytes": 1422785,
+      "sha256": "2f623209571ecbd8185b5b463786be033c3284190b4fc7b249e8d1d2ed995fd8",
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_BN",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Textures\\Manny\\T_Manny_01_BN.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset",
+      "bytes": 699555,
+      "sha256": "6ae0f4f9908c30ecc9aedf1ebb442e4983e526a7832ec791542064c7853f9999",
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_D",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Textures\\Manny\\T_Manny_01_D.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA.uasset",
+      "bytes": 712594,
+      "sha256": "3e42e888aed8aefff68da7d7dda4f177c5647b19473e4e913f61375c1319abd8",
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Textures\\Manny\\T_Manny_01_MRA.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_BN.uasset",
+      "bytes": 20999487,
+      "sha256": "c9575d21c9e2872b3358c0efb9e202535ce2efce94c338b9d3bd04cb9831e353",
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_BN",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Textures\\Manny\\T_Manny_02_BN.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset",
+      "bytes": 1036712,
+      "sha256": "474728713232c6833f55c041548f555bc62c5c49e74082a5d16e68a5ce488cfe",
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_D",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Textures\\Manny\\T_Manny_02_D.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA.uasset",
+      "bytes": 1059559,
+      "sha256": "6697972eaf2dfe201923dba6a302f024b0ef4c4e46b4ecf578178717098e8277",
+      "package": "/Game/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Textures\\Manny\\T_Manny_02_MRA.uasset"
+    },
+    {
+      "path": "Content/Characters/Mannequins/Textures/Shared/T_UE_Logo_M.uasset",
+      "bytes": 59927,
+      "sha256": "34e6fa3414c04a86b7a5287e5569ea9d6e53c319d6e7dbfc8b09dab5b70611a6",
+      "package": "/Game/Characters/Mannequins/Textures/Shared/T_UE_Logo_M",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Textures\\Shared\\T_UE_Logo_M.uasset"
+    },
+    {
+      "path": "Content/Development/EnemyPrototype01/A_EnemyTemplate_Fire.uasset",
+      "bytes": 184249,
+      "sha256": "a716d16ccd8442102c077ecaa44243af595aa6c006cb71abe7257c4c29021646",
+      "package": "/Game/Development/EnemyPrototype01/A_EnemyTemplate_Fire"
+    },
+    {
+      "path": "Content/Development/EnemyPrototype01/A_EnemyTemplate_Hit.uasset",
+      "bytes": 224647,
+      "sha256": "15ad845c0454536d2b04e24564e587ee4b4bec02020c6fe6b903ad73d1486bf0",
+      "package": "/Game/Development/EnemyPrototype01/A_EnemyTemplate_Hit"
+    },
+    {
+      "path": "Content/Development/EnemyPrototype01/A_EnemyTemplate_Idle.uasset",
+      "bytes": 1673699,
+      "sha256": "6da490854de3bd2958c8e287a4f069df31b7ad67af1ce1f3ea404fd7fa9c64b6",
+      "package": "/Game/Development/EnemyPrototype01/A_EnemyTemplate_Idle"
+    },
+    {
+      "path": "Content/Development/EnemyPrototype01/A_Enemy_Left.uasset",
+      "bytes": 452679,
+      "sha256": "129f7026704b99e865034fe13895fd812754b85424ba9a53de4a940a3e64b4b5",
+      "package": "/Game/Development/EnemyPrototype01/A_Enemy_Left"
+    },
+    {
+      "path": "Content/Development/EnemyPrototype01/A_Enemy_Right.uasset",
+      "bytes": 510246,
+      "sha256": "e02c60259aa31dee3423b515c394f8e6662b13dd5b31379c948ed662f54d734d",
+      "package": "/Game/Development/EnemyPrototype01/A_Enemy_Right"
+    }
+  ],
+  "retained_rifle": {
+    "path": "Content/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Meshes/SK_TFA_AR.uasset",
+    "bytes": 2956145,
+    "sha256": "efced765233a453b905db941a0659b8695d94b0144e36a8d355ca36fb43bd872"
+  },
+  "editable_source": {
+    "path": "Assets/Source/EnemyPrototype01/SKM_Manny_Simple_Export02.fbx",
+    "bytes": 2887888,
+    "sha256": "1b973d2b92a7f5de1dd34ffe46d3e1dbf1f7784d96add352a2640f58515fcb23"
+  },
+  "unselected_export": {
+    "path": "Assets/Source/EnemyPrototype01/SKM_Manny_Simple_Export01.fbx",
+    "bytes": 2879760,
+    "sha256": "52824cf572b31b3d6cebc11e7da43c64dd531b716a2d62517983f746eafb48f7"
+  },
+  "skeleton": {
+    "package": "/Game/Characters/Mannequins/Meshes/SK_Mannequin",
+    "mesh_bone_entries": 89,
+    "exported_bones": 88,
+    "mesh_bones": [
+      {
+        "name": "root",
+        "parent": "None"
+      },
+      {
+        "name": "pelvis",
+        "parent": "root"
+      },
+      {
+        "name": "spine_01",
+        "parent": "pelvis"
+      },
+      {
+        "name": "spine_02",
+        "parent": "spine_01"
+      },
+      {
+        "name": "spine_03",
+        "parent": "spine_02"
+      },
+      {
+        "name": "spine_04",
+        "parent": "spine_03"
+      },
+      {
+        "name": "spine_05",
+        "parent": "spine_04"
+      },
+      {
+        "name": "neck_01",
+        "parent": "spine_05"
+      },
+      {
+        "name": "neck_02",
+        "parent": "neck_01"
+      },
+      {
+        "name": "head",
+        "parent": "neck_02"
+      },
+      {
+        "name": "clavicle_l",
+        "parent": "spine_05"
+      },
+      {
+        "name": "upperarm_l",
+        "parent": "clavicle_l"
+      },
+      {
+        "name": "lowerarm_l",
+        "parent": "upperarm_l"
+      },
+      {
+        "name": "lowerarm_twist_02_l",
+        "parent": "lowerarm_l"
+      },
+      {
+        "name": "lowerarm_twist_01_l",
+        "parent": "lowerarm_l"
+      },
+      {
+        "name": "hand_l",
+        "parent": "lowerarm_l"
+      },
+      {
+        "name": "index_metacarpal_l",
+        "parent": "hand_l"
+      },
+      {
+        "name": "index_01_l",
+        "parent": "index_metacarpal_l"
+      },
+      {
+        "name": "index_02_l",
+        "parent": "index_01_l"
+      },
+      {
+        "name": "index_03_l",
+        "parent": "index_02_l"
+      },
+      {
+        "name": "middle_metacarpal_l",
+        "parent": "hand_l"
+      },
+      {
+        "name": "middle_01_l",
+        "parent": "middle_metacarpal_l"
+      },
+      {
+        "name": "middle_02_l",
+        "parent": "middle_01_l"
+      },
+      {
+        "name": "middle_03_l",
+        "parent": "middle_02_l"
+      },
+      {
+        "name": "thumb_01_l",
+        "parent": "hand_l"
+      },
+      {
+        "name": "thumb_02_l",
+        "parent": "thumb_01_l"
+      },
+      {
+        "name": "thumb_03_l",
+        "parent": "thumb_02_l"
+      },
+      {
+        "name": "pinky_metacarpal_l",
+        "parent": "hand_l"
+      },
+      {
+        "name": "pinky_01_l",
+        "parent": "pinky_metacarpal_l"
+      },
+      {
+        "name": "pinky_02_l",
+        "parent": "pinky_01_l"
+      },
+      {
+        "name": "pinky_03_l",
+        "parent": "pinky_02_l"
+      },
+      {
+        "name": "ring_metacarpal_l",
+        "parent": "hand_l"
+      },
+      {
+        "name": "ring_01_l",
+        "parent": "ring_metacarpal_l"
+      },
+      {
+        "name": "ring_02_l",
+        "parent": "ring_01_l"
+      },
+      {
+        "name": "ring_03_l",
+        "parent": "ring_02_l"
+      },
+      {
+        "name": "upperarm_twist_01_l",
+        "parent": "upperarm_l"
+      },
+      {
+        "name": "upperarm_twist_02_l",
+        "parent": "upperarm_l"
+      },
+      {
+        "name": "clavicle_r",
+        "parent": "spine_05"
+      },
+      {
+        "name": "upperarm_r",
+        "parent": "clavicle_r"
+      },
+      {
+        "name": "lowerarm_r",
+        "parent": "upperarm_r"
+      },
+      {
+        "name": "lowerarm_twist_02_r",
+        "parent": "lowerarm_r"
+      },
+      {
+        "name": "lowerarm_twist_01_r",
+        "parent": "lowerarm_r"
+      },
+      {
+        "name": "hand_r",
+        "parent": "lowerarm_r"
+      },
+      {
+        "name": "pinky_metacarpal_r",
+        "parent": "hand_r"
+      },
+      {
+        "name": "pinky_01_r",
+        "parent": "pinky_metacarpal_r"
+      },
+      {
+        "name": "pinky_02_r",
+        "parent": "pinky_01_r"
+      },
+      {
+        "name": "pinky_03_r",
+        "parent": "pinky_02_r"
+      },
+      {
+        "name": "ring_metacarpal_r",
+        "parent": "hand_r"
+      },
+      {
+        "name": "ring_01_r",
+        "parent": "ring_metacarpal_r"
+      },
+      {
+        "name": "ring_02_r",
+        "parent": "ring_01_r"
+      },
+      {
+        "name": "ring_03_r",
+        "parent": "ring_02_r"
+      },
+      {
+        "name": "middle_metacarpal_r",
+        "parent": "hand_r"
+      },
+      {
+        "name": "middle_01_r",
+        "parent": "middle_metacarpal_r"
+      },
+      {
+        "name": "middle_02_r",
+        "parent": "middle_01_r"
+      },
+      {
+        "name": "middle_03_r",
+        "parent": "middle_02_r"
+      },
+      {
+        "name": "index_metacarpal_r",
+        "parent": "hand_r"
+      },
+      {
+        "name": "index_01_r",
+        "parent": "index_metacarpal_r"
+      },
+      {
+        "name": "index_02_r",
+        "parent": "index_01_r"
+      },
+      {
+        "name": "index_03_r",
+        "parent": "index_02_r"
+      },
+      {
+        "name": "thumb_01_r",
+        "parent": "hand_r"
+      },
+      {
+        "name": "thumb_02_r",
+        "parent": "thumb_01_r"
+      },
+      {
+        "name": "thumb_03_r",
+        "parent": "thumb_02_r"
+      },
+      {
+        "name": "upperarm_twist_01_r",
+        "parent": "upperarm_r"
+      },
+      {
+        "name": "upperarm_twist_02_r",
+        "parent": "upperarm_r"
+      },
+      {
+        "name": "thigh_r",
+        "parent": "pelvis"
+      },
+      {
+        "name": "calf_r",
+        "parent": "thigh_r"
+      },
+      {
+        "name": "foot_r",
+        "parent": "calf_r"
+      },
+      {
+        "name": "ball_r",
+        "parent": "foot_r"
+      },
+      {
+        "name": "calf_twist_02_r",
+        "parent": "calf_r"
+      },
+      {
+        "name": "calf_twist_01_r",
+        "parent": "calf_r"
+      },
+      {
+        "name": "thigh_twist_01_r",
+        "parent": "thigh_r"
+      },
+      {
+        "name": "thigh_twist_02_r",
+        "parent": "thigh_r"
+      },
+      {
+        "name": "thigh_l",
+        "parent": "pelvis"
+      },
+      {
+        "name": "calf_l",
+        "parent": "thigh_l"
+      },
+      {
+        "name": "foot_l",
+        "parent": "calf_l"
+      },
+      {
+        "name": "ball_l",
+        "parent": "foot_l"
+      },
+      {
+        "name": "calf_twist_02_l",
+        "parent": "calf_l"
+      },
+      {
+        "name": "calf_twist_01_l",
+        "parent": "calf_l"
+      },
+      {
+        "name": "thigh_twist_01_l",
+        "parent": "thigh_l"
+      },
+      {
+        "name": "thigh_twist_02_l",
+        "parent": "thigh_l"
+      },
+      {
+        "name": "ik_foot_root",
+        "parent": "root"
+      },
+      {
+        "name": "ik_foot_l",
+        "parent": "ik_foot_root"
+      },
+      {
+        "name": "ik_foot_r",
+        "parent": "ik_foot_root"
+      },
+      {
+        "name": "ik_hand_root",
+        "parent": "root"
+      },
+      {
+        "name": "ik_hand_gun",
+        "parent": "ik_hand_root"
+      },
+      {
+        "name": "ik_hand_l",
+        "parent": "ik_hand_gun"
+      },
+      {
+        "name": "ik_hand_r",
+        "parent": "ik_hand_gun"
+      },
+      {
+        "name": "interaction",
+        "parent": "root"
+      },
+      {
+        "name": "center_of_mass",
+        "parent": "root"
+      }
+    ]
+  },
+  "animation_copies": [
+    {
+      "source": "/Game/Characters/Mannequins/Anims/Rifle/MF_Rifle_Idle_ADS",
+      "destination": "/Game/Development/EnemyPrototype01/A_EnemyTemplate_Idle",
+      "immutable_source": "D:\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Anims\\Rifle\\MF_Rifle_Idle_ADS.uasset",
+      "source_sha256": "cfa32b19207a25546bb5bc2dde8454dc633cc27c3de45747e941756e23da5d4d",
+      "adaptation": {
+        "additive": "None (raw full pose)",
+        "root_motion": false,
+        "force_root_lock": true,
+        "skeleton_unchanged": true
+      }
+    },
+    {
+      "source": "/Game/Characters/Mannequins/Anims/Rifle/MM_Rifle_Fire",
+      "destination": "/Game/Development/EnemyPrototype01/A_EnemyTemplate_Fire",
+      "immutable_source": "D:\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Anims\\Rifle\\MM_Rifle_Fire.uasset",
+      "source_sha256": "1c5b983bd6c09431c83866f772ccf13871ad9626426c86cc08a0c87c150555f7",
+      "adaptation": {
+        "additive": "None (raw full pose)",
+        "root_motion": false,
+        "force_root_lock": true,
+        "skeleton_unchanged": true
+      }
+    },
+    {
+      "source": "/Game/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_01",
+      "destination": "/Game/Development/EnemyPrototype01/A_EnemyTemplate_Hit",
+      "immutable_source": "D:\\UE_5.8\\Templates\\TemplateResources\\High\\Characters\\Content\\Mannequins\\Anims\\Rifle\\HitReact\\MM_HitReact_Front_Lgt_01.uasset",
+      "source_sha256": "ae8728f698434dd1e63978d5d92c5984d086d7ee39ce618598122b6fa87dc820",
+      "adaptation": {
+        "additive": "None (raw full pose)",
+        "root_motion": false,
+        "force_root_lock": true,
+        "skeleton_unchanged": true
+      }
+    },
+    {
+      "source": "/Game/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Left",
+      "destination": "/Game/Development/EnemyPrototype01/A_Enemy_Left",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Anims\\Rifle\\Walk\\MF_Rifle_Walk_Left.uasset",
+      "source_sha256": "a99d18722e504801616e1c0c495711c43c2d82c4465f7f388cdae8a45502bd1e",
+      "adaptation": {
+        "additive": "None (raw full pose)",
+        "root_motion": false,
+        "force_root_lock": true,
+        "skeleton_unchanged": true
+      }
+    },
+    {
+      "source": "/Game/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Right",
+      "destination": "/Game/Development/EnemyPrototype01/A_Enemy_Right",
+      "immutable_source": "D:\\devgames\\MeridianSquad\\Assets\\Archive\\PurchasedArms01\\Content\\Characters\\Mannequins\\Anims\\Rifle\\Walk\\MF_Rifle_Walk_Right.uasset",
+      "source_sha256": "2c2c12d6a959d69c96962ca340bdfe984942df621ee2ff7e7e955662ddaee52a",
+      "adaptation": {
+        "additive": "None (raw full pose)",
+        "root_motion": false,
+        "force_root_lock": true,
+        "skeleton_unchanged": true
+      }
+    }
+  ],
+  "verified_coverage": [
+    "Rifle idle/hold with the visual rifle core",
+    "Left/right in-place walk",
+    "Explicit fire-pose playback (no enemy shot)",
+    "Front light hit and idle/walk recovery",
+    "Whole-body ragdoll death and active/settled reset"
+  ],
+  "missing_or_unverified": [
+    "Full modular rifle attachment/magazine assembly",
+    "Directional or limb-specific hit animation variants",
+    "Integrated forward/back locomotion, crouch, turns, jumps, blend transitions",
+    "AI, enemy projectile firing, player health",
+    "Corpse damage, detached limb rendering/physics, cap UVs/interior materials"
+  ],
+  "collision": {
+    "alive_capsule": "34 cm radius / 92 cm half-height: world and pawn movement only; ignored by projectile world query",
+    "alive_mesh": "No rigid/query collision; 28 sampled bone spheres own projectile and convergence queries",
+    "sphere_centers": "Lerp(start bone, end bone, (index+0.5)/count), plus optional component-space offset",
+    "spheres": [
+      {
+        "region": "head",
+        "bone": "head",
+        "end": "head",
+        "radius_cm": 12,
+        "count": 1,
+        "component_offset_cm": [
+          0,
+          0,
+          7
+        ]
+      },
+      {
+        "region": "torso",
+        "bone": "spine_04",
+        "end": "spine_05",
+        "radius_cm": 19,
+        "count": 1
+      },
+      {
+        "region": "torso",
+        "bone": "spine_02",
+        "end": "spine_03",
+        "radius_cm": 17,
+        "count": 1
+      },
+      {
+        "region": "pelvis",
+        "bone": "pelvis",
+        "end": "spine_01",
+        "radius_cm": 18,
+        "count": 1
+      },
+      {
+        "region": "arm_l",
+        "bone": "upperarm_l",
+        "end": "lowerarm_l",
+        "radius_cm": 9,
+        "count": 2
+      },
+      {
+        "region": "arm_l",
+        "bone": "lowerarm_l",
+        "end": "hand_l",
+        "radius_cm": 8,
+        "count": 2
+      },
+      {
+        "region": "arm_l",
+        "bone": "hand_l",
+        "end": "hand_l",
+        "radius_cm": 8,
+        "count": 1
+      },
+      {
+        "region": "leg_l",
+        "bone": "thigh_l",
+        "end": "calf_l",
+        "radius_cm": 12,
+        "count": 3
+      },
+      {
+        "region": "leg_l",
+        "bone": "calf_l",
+        "end": "foot_l",
+        "radius_cm": 10,
+        "count": 3
+      },
+      {
+        "region": "leg_l",
+        "bone": "foot_l",
+        "end": "ball_l",
+        "radius_cm": 10,
+        "count": 1
+      },
+      {
+        "region": "arm_r",
+        "bone": "upperarm_r",
+        "end": "lowerarm_r",
+        "radius_cm": 9,
+        "count": 2
+      },
+      {
+        "region": "arm_r",
+        "bone": "lowerarm_r",
+        "end": "hand_r",
+        "radius_cm": 8,
+        "count": 2
+      },
+      {
+        "region": "arm_r",
+        "bone": "hand_r",
+        "end": "hand_r",
+        "radius_cm": 8,
+        "count": 1
+      },
+      {
+        "region": "leg_r",
+        "bone": "thigh_r",
+        "end": "calf_r",
+        "radius_cm": 12,
+        "count": 3
+      },
+      {
+        "region": "leg_r",
+        "bone": "calf_r",
+        "end": "foot_r",
+        "radius_cm": 10,
+        "count": 3
+      },
+      {
+        "region": "leg_r",
+        "bone": "foot_r",
+        "end": "ball_r",
+        "radius_cm": 10,
+        "count": 1
+      }
+    ],
+    "total_spheres": 28,
+    "temporal_policy": "Linear interpolation between rendered-frame bone samples on the retained birth/substep clock; per-bullet birth snapshots",
+    "damage_path": "Authoritative rifle -> finite-flight manager -> earliest world/player/enemy hit -> ApplyPointDamage -> TakeDamage",
+    "event_mapping": "FPointDamageEvent.HitInfo.BoneName maps to head, torso, pelvis, arm_l, arm_r, leg_l, leg_r; unmapped generic damage is explicitly labelled",
+    "damage_multiplier": 1,
+    "health": 100,
+    "default_rifle_damage": 25,
+    "unsupported_detail": "Not per-poly. No independent fingers, toes, eyes, armor layers, neck segment, or internal damage. Sphere gaps and overlap follow the documented approximation.",
+    "dead": "Movement capsule/query volumes off; unchanged PA_Mannequin ragdoll blocks WorldStatic only; ignores pawn/projectiles; forced sleep after six world seconds",
+    "reset": "Manager clears bullets/feedback; enemy clears rigid velocities, disables physics, reattaches and refreshes idle pose; health restored, ammunition unchanged"
+  },
+  "separation": {
+    "status": "Editable source and bounded forearm capping feasibility established; no severed gameplay asset accepted",
+    "evidence": "Saved/CombatSlice01/EnemyPrototype01/Worker/mesh-topology-audit02.json",
+    "measurement": {
+      "vertices": 7582,
+      "faces": 13914,
+      "open_edges_before": 1184,
+      "cap_faces": 14,
+      "boundary_edges_after": 0,
+      "nonmanifold_edges_after": 0,
+      "volume_m3": 0.001357756802348376
+    },
+    "required_next": [
+      "Preserve UV/normal/weight seams while reconciling coincident vertices",
+      "Prepare matching retained stump and detached mesh",
+      "Triangulate/inspect caps and assign interior material",
+      "Check deformed cut continuity, self-intersections and mass/collision",
+      "Verify detached rigid-body behavior and reset in Unreal"
+    ],
+    "owner_source_selection_gate": false,
+    "scope_limit": "Only a bounded technical source adaptation is feasible under this contract. Final enemy appearance and new model production keep separate concept/owner gates."
+  },
+  "replacement_boundary": {
+    "actor": "/Script/MeridianSquad.EnemyPrototypeCharacter",
+    "body": "Replace body, skeleton-compatible animations and physics asset on a subclass; preserve 1 cm world units and foot origin",
+    "region_mapping": "Update SampleHitSpheres / RegionForBone for the replacement skeleton; retain FPointDamageEvent and health semantics",
+    "behavior": "Future EnemyCombat01 replaces the explicit preview movement/fire hooks with its scoped AI/weapon behavior",
+    "projectiles": "Reuse CombatProjectileWorld / CombatRifleComponent; no animation notify applies gameplay damage"
+  },
+  "verification": "Saved/CombatSlice01/EnemyPrototype01/Worker/verification-summary01.json"
+}

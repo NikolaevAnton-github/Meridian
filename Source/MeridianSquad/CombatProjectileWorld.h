@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "EnemyPrototypeCharacter.h"
 #include "CombatProjectileWorld.generated.h"
 
 class ACharacter;
@@ -50,6 +51,8 @@ public:
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     FString ProbeTiming(const FString& Configuration);
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
+    FString ProbeEnemy(bool bCoverOnly = false, bool bAimOnly = false);
+    UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     bool ProbeCover(FName Kind);
 
     int64 Launch(AActor* Shooter, const FVector& Position, const FVector& Velocity, float Damage);
@@ -57,6 +60,7 @@ public:
     double GetFiringClock() const { return FiringClock; }
     void ClearProjectiles();
     void BuildQuery(FCollisionQueryParams& Query, const AActor* Ignore = nullptr) const;
+    bool TraceEnemyAim(const FVector& Start, const FVector& End, double Time, FHitResult& Hit) const;
     int32 GetActiveCount() const { return Bullets.Num(); }
     FString LastHitText;
     double LastHitRealTime = -100.0;
@@ -74,6 +78,7 @@ private:
         FVector Center;
         float Radius;
         float HalfHeight;
+        TArray<FEnemyHitSphere> Regions;
     };
     struct FBullet
     {
@@ -105,6 +110,8 @@ private:
     TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> PreviousCapsules;
     UPROPERTY(Transient)
     TArray<TObjectPtr<ACombatTarget>> Targets;
+    UPROPERTY(Transient)
+    TObjectPtr<AEnemyPrototypeCharacter> Enemy;
     float ProjectileTimeScale = 1.f;
     int64 NextShotId = 1;
     int32 LaunchedCount = 0;

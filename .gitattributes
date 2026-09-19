@@ -73,3 +73,12 @@ Docs/PurchasedArms03Review.md -text
 # Preserve the registered combat-foundation revision and review fingerprints.
 Assets/Source/CombatFoundation01/** -text
 Docs/CombatFoundation01Review.md -text
+
+# Preserve the exact MSQ-69 candidate and source-contract fingerprints.
+Assets/Source/EnemyPrototype01/** -text
+Docs/EnemyPrototype01* -text
+Scripts/EnemyPrototype01/** -text
+Source/MeridianSquad/EnemyPrototype* -text
+Source/MeridianSquad/CombatProjectileWorld.* -text
+Source/MeridianSquad/CombatRifleComponent.* -text
+Source/MeridianSquad/CombatPrototypeHUD.cpp -text
