@@ -1,0 +1,13 @@
+{
+  "record_id": "PhysicsControlBalance01-TaskCreation01",
+  "date_local": "2026-09-20",
+  "source": "Owner direct chat after discussing mannequin instability and local animation tools",
+  "owner_message_original": "Постепенная потеря устойчивости\nНоги подгибаются, корпус отклоняется, манекен пытается восстановить позу. Если воздействия слишком много или опора потеряна — падает.\nБольше настройки, зато лучше ощущается вес и сопротивление тела.\n\nты оформил наш вариант в задачу в задачу?",
+  "owner_message_english_translation": "Gradual loss of stability. The legs buckle, the torso leans, and the mannequin tries to recover its pose. If the disturbance is excessive or support is lost, it falls. More tuning, but a better sense of body weight and resistance. Did you record our chosen option in a task?",
+  "earlier_owner_goal_original": "Так я бы хотел дальше продолжить эксперементы с нашими новыми маникенами. Сейчас если выбить две ноги, маникен не теряет устойчивость, можно ли сделать так что бы маникены могли терять устойчивость от чрезмерного воздействия, типо толчка будушего, или выбивании ног, или взрыве и потом вставал. Какие есть варианты?",
+  "decision": "Record the selected gradual instability, physical fall and subsequent living get-up behavior as a separate planning-only backlog task for the retained Physics Control mannequins.",
+  "authorization": "Task creation and project planning documentation. This status/planning request does not dispatch implementation or change the running game.",
+  "scope_relationship": "The new planned follow-up covers balance/get-up previously excluded from MSQ-84 and MSQ-85. Their historical acceptance and limits remain unchanged. Kimodo installation is a separate task, not implementation of balance or a prerequisite to balance development.",
+  "controller_proposals": "State flow, measurable support/deviation inputs, temporary support failure, reusable disturbance entry point and focused representative checks are planning proposals. Exact thresholds, animation assets and final motion quality remain unselected.",
+  "limits": "No production dispatch, new paid services/purchases, full push/explosion ability, AI, dismemberment, new art, lobby changes or interruption of owner application sessions. Preserve owner edits and prior sources/evidence."
+}

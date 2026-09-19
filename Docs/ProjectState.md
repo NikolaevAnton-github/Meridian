@@ -21,6 +21,17 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Planned follow-up: MSQ-87 gradual mannequin instability and get-up
+
+The owner selected gradual loss of stability: buckling legs, torso lean and pose
+recovery, followed by a physical fall when disturbance or support loss is excessive,
+then living get-up when support permits. [PhysicsControlBalance01](Tasks/PhysicsControlBalance01.md)
+records the planned behavior and focused acceptance under
+[the task-creation request](Approvals/PhysicsControlBalance01-TaskCreation01.json).
+This is an unassigned backlog task; implementation is not dispatched. It builds
+on MSQ-85 and is separate from animation-tool installation. Kimodo is optional
+for animation experiments, not a prerequisite to initial balance/falling work.
+
 ## Authorized tooling setup: MSQ-86 local Kimodo
 
 The owner requested a local NVIDIA Kimodo installation under `D:/devgames` for
