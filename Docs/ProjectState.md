@@ -1,6 +1,6 @@
 # MeridianSquad current project state
 
-Updated 2026-09-19. This is a navigation snapshot of current scope and decisions,
+Updated 2026-09-20. This is a navigation snapshot of current scope and decisions,
 not a second task database or a new execution authorization. Read the relevant
 linked task before work and verify live Multica/editor state when needed. Later
 explicit owner instructions take precedence within their scope. When dated summaries
@@ -20,6 +20,19 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [review responsibilities](AgentDevelopment.md#review-responsibilities) and
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
+
+## Authorized tooling setup: MSQ-86 local Kimodo
+
+The owner requested a local NVIDIA Kimodo installation under `D:/devgames` for
+animation experiments. [KimodoLocal01 / MSQ-86](Tasks/KimodoLocal01.md) has installed
+an isolated environment under `D:/devgames/Kimodo`, with local launchers, CUDA
+verification and 10.05 GB of source, dependencies and public models. See
+[the handoff and continuation](KimodoLocal01.md) and
+[the owner instruction](Approvals/KimodoLocal01-OwnerScope01.json).
+Full UI and first text generation remain pending approved Hugging Face access to
+Llama 3 and enough free RAM; no Kimodo server remains running. This is tooling
+setup only; gameplay balance/get-up and Unreal integration are not dispatched.
+The existing six-mannequin gameplay and owner edits remain preserved.
 
 ## Owner-play handoff: MSQ-85 Physics Control variants
 

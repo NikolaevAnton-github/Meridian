@@ -1,0 +1,10 @@
+{
+  "record_id": "KimodoLocal01-OwnerScope01",
+  "date_local": "2026-09-20",
+  "source": "Owner direct chat after discussing NVIDIA Kimodo and the optional Animotive Unreal integration",
+  "owner_message_original": "Установи его куда-то к нам в папочку D:\\devgames, будем пробовать",
+  "owner_message_english_translation": "Install it somewhere under our D:\\devgames folder; we will try it.",
+  "authorized_scope": "Install a local NVIDIA Kimodo environment under D:/devgames, with required dependencies and in-budget model downloads, launch access and a bounded functional smoke test.",
+  "controller_selected_install_root": "D:/devgames/Kimodo",
+  "limits": "No paid services or purchases, no Unreal plugin/gameplay/editor changes, no production animation selection, no interruption of owner application sessions. Respect gated model access and keep credentials out of chat, logs and Git."
+}
