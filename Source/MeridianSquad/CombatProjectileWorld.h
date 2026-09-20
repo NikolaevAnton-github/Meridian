@@ -73,9 +73,9 @@ public:
     /** Session toggle; reset and fixture recreation retain it, a new world defaults to off. */
     UPROPERTY(Transient, BlueprintReadOnly, Category="Combat|Prototype")
     bool bImmortalDummies = false;
-    /** Keep living standing mannequins powered when recovery would otherwise fail. */
+    /** Bounded test preset; missing support and failed recovery still release drives. */
     UPROPERTY(Transient, BlueprintReadOnly, Category="Combat|Prototype")
-    bool bPreventDummyFalls = false;
+    bool bRecoveryAssistance = false;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat|Prototype", meta=(ClampMin="0.1", ClampMax="0.9"))
     float PreviewWorldRate = .25f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat|Prototype", meta=(ClampMin="0.1", ClampMax="1.0"))

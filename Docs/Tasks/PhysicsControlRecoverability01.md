@@ -10,9 +10,12 @@ Next: [PhysicsControlAdaptiveSteps01 / MSQ-92](PhysicsControlAdaptiveSteps01.md)
 The owner selected this as the next task after discussing displaced-leg
 replanting, successive steps under torso fire, different enemy capabilities and
 physically unrecoverable loss of support. See the [exact request and scope](../Approvals/PhysicsControlRecoverability01-NextTask01.json).
-This preparation creates the next task and updates its dependencies; it does not
-dispatch implementation. Keep the issue in backlog, unassigned, with zero runs.
-Earlier review waivers remain attached to their original tasks.
+The initial preparation created the next task without dispatch. The owner now
+[authorizes MSQ-97 execution without an independent reviewer](../Approvals/PhysicsControlRecoverability01-OwnerStart01.json).
+Use one existing Multica Unreal executor at verified Astra/max/standard. The
+executor self-checks the focused criteria below; the controller accepts scope,
+candidate identity, evidence applicability and preservation. Final motion/play
+judgement remains with the owner. This waiver applies only to MSQ-97.
 
 Use MSQ-91 Candidate07 plus the three-mannequin/control adjustment in
 [CombatTestToggles02](../CombatTestToggles01.md#combattesttoggles02-three-mannequins-and-optional-fall-prevention),
@@ -102,11 +105,13 @@ it on a new session. Ordinary mode also uses the new recoverability rules.
    rifle, ammunition, other animation and earlier get-up evidence.
 
 Reuse existing input, disturbance, recorder and measurement tools. Failed
-simulated fire that emits no bullets is not real-hit evidence. One primary
-independent reviewer owns technical review on execution, reusing applicable
-self-checks under [review responsibilities](../AgentDevelopment.md#review-responsibilities).
-The controller accepts scope/evidence/finding closure; the owner judges motion
-and play. Do not expand to a per-profile or full animation matrix.
+simulated fire that emits no bullets is not real-hit evidence. Independent review
+is waived by the [MSQ-97 owner start decision](../Approvals/PhysicsControlRecoverability01-OwnerStart01.json).
+The executor supplies focused self-checks and evidence; the controller accepts
+scope/evidence/preservation under the applicable role boundaries in
+[review responsibilities](../AgentDevelopment.md#review-responsibilities).
+The owner judges motion and play. Do not expand to a per-profile or full animation
+matrix or dispatch an independent reviewer.
 
 ## Boundaries and handoff
 
@@ -130,3 +135,11 @@ focused evidence under `Saved/CombatSlice01/PhysicsControlRecoverability01/`.
 Record actual recovery limits, approximation limits, enemy settings and final
 Ctrl+F9 behavior. The controller owns the verified local closure commit and
 Multica status; completion does not start MSQ-92.
+
+## Delivered candidate
+
+Candidate07 passes the Development Editor build and 183 focused self-checks under
+the task-specific independent-review waiver. See [implementation and limits](../PhysicsControlRecoverability01.md)
+and [controller acceptance/handoff](../PhysicsControlRecoverability01Handoff.md).
+The controller verifies candidate identity, applicable evidence and preservation;
+owner motion/play judgement remains separate. No successor is dispatched.

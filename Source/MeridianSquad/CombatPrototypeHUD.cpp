@@ -31,8 +31,8 @@ void ACombatPrototypeHUD::DrawHUD()
         CombatWorld && CombatWorld->bImmortalDummies ? TEXT("ON") : TEXT("OFF"),
         Rifle->bInfiniteReserve ? TEXT("ON") : TEXT("OFF")), FLinearColor(.65f,.83f,.76f),
         X, Y + 100 * Scale, GEngine->GetSmallFont(), Scale);
-    DrawText(FString::Printf(TEXT("Ctrl+F9 prevent falls: %s"),
-        CombatWorld && CombatWorld->bPreventDummyFalls ? TEXT("ON") : TEXT("OFF")), FLinearColor(.65f,.83f,.76f),
+    DrawText(FString::Printf(TEXT("Ctrl+F9 bounded recovery assist: %s"),
+        CombatWorld && CombatWorld->bRecoveryAssistance ? TEXT("ON") : TEXT("OFF")), FLinearColor(.65f,.83f,.76f),
         X, Y + 123 * Scale, GEngine->GetSmallFont(), Scale);
     const float CX = Canvas->SizeX * .5f, CY = Canvas->SizeY * .5f;
     DrawRect(FLinearColor(1,1,1,.65f), CX - 1, CY - 1, 2, 2);

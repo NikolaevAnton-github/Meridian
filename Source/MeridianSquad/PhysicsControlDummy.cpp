@@ -91,6 +91,8 @@ APhysicsControlDummy::APhysicsControlDummy()
     Body->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
     Body->SetCollisionResponseToChannel(ECC_PhysicsBody, ECR_Block);
     Body->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+    Body->SetNotifyRigidBodyCollision(true);
+    Body->OnComponentHit.AddDynamic(this, &APhysicsControlDummy::OnBodyContact);
     static ConstructorHelpers::FObjectFinder<UAnimSequence> Pose(TEXT("/Game/Development/EnemyPrototype01/A_EnemyTemplate_Idle.A_EnemyTemplate_Idle"));
     Idle = Pose.Object;
     static ConstructorHelpers::FObjectFinder<UAnimSequence> Back(TEXT("/Game/Development/PhysicsControlBalance01/A_GetUp_Back.A_GetUp_Back"));
@@ -188,6 +190,7 @@ void APhysicsControlDummy::ResetDummy()
     Body->RefreshBoneTransforms();
     Body->bPauseAnims = true;
     Body->SetAllBodiesSimulatePhysics(true);
+    Body->SetAllBodiesNotifyRigidBodyCollision(true);
     Body->SetAllBodiesPhysicsBlendWeight(1);
     IsolateSelfCollision();
     Body->bBlendPhysics = true;
@@ -210,6 +213,12 @@ void APhysicsControlDummy::ResetDummy()
     Limbs.AngularDampingRatio = FMath::Clamp(DriveDampingRatio, .5f, 3.f);
     Limbs.bUseSkeletalAnimation = false;
     Limbs.bDisableCollision = false;
+    // Never create an unlimited or unsupported drive during spawn/F6. The first
+    // measured contact enables assistance through BoundRecoveryDrives.
+    Limbs.bEnabled = false;
+    const auto* CombatWorld = ACombatProjectileWorld::Find(GetWorld());
+    const float InitialStrength = FMath::Clamp(RecoveryStrength *
+        (CombatWorld && CombatWorld->bRecoveryAssistance ? 1.5f : 1.f), .25f, 2.f);
     // Distributed assistance remains explicit. UpdateBalance gates EVERY drive by
     // actual support/state; falling/down/dead bodies have no enabled world springs.
     const auto* Asset = Body->GetPhysicsAsset();
@@ -231,6 +240,9 @@ void APhysicsControlDummy::ResetDummy()
         LimbTarget.TargetOrientation = Entry.Value.Rotator();
         LimbTarget.bApplyControlPointToTarget = true;
         FPhysicsControlData Data = Limbs;
+        const float Mass = Body->GetBodyInstance(Entry.Key)->GetBodyMass();
+        Data.MaxForce = Mass * 3500.f * InitialStrength;
+        Data.MaxTorque = Mass * 180000.f * InitialStrength;
         const FString BoneName = Entry.Key.ToString();
         if (BoneName.StartsWith(TEXT("spine")) || BoneName.StartsWith(TEXT("neck")) || BoneName == TEXT("head") || BoneName.StartsWith(TEXT("clavicle")))
             Data.AngularStrength = FMath::Clamp(TrunkAngularStrength, .1f, 30.f);
@@ -241,6 +253,10 @@ void APhysicsControlDummy::ResetDummy()
     Support.LinearStrength = Support.AngularStrength = FMath::Clamp(SupportStrength, 1.f, 30.f);
     Support.LinearDampingRatio = Support.AngularDampingRatio = Limbs.AngularDampingRatio;
     Support.bUseSkeletalAnimation = false;
+    Support.bEnabled = false;
+    const float PelvisMass = Body->GetBodyInstance(TEXT("pelvis"))->GetBodyMass();
+    Support.MaxForce = PelvisMass * 9000.f * InitialStrength;
+    Support.MaxTorque = PelvisMass * 180000.f * InitialStrength;
     FPhysicsControlTarget Target;
     Target.TargetPosition = SupportTarget.GetLocation();
     Target.TargetOrientation = SupportTarget.Rotator();
@@ -272,6 +288,11 @@ void APhysicsControlDummy::Tick(float DeltaSeconds)
         if (It.Value() == 0) It.RemoveCurrent();
     }
     UpdateBalance(DeltaSeconds);
+    BoundRecoveryDrives(DeltaSeconds);
+    // Evaluate the last completed Chaos step before aging its contacts. The
+    // upcoming frame's delta (including a loading hitch) has not simulated yet.
+    for (auto& Foot : RecoveryFeet) Foot.ContactAge += DeltaSeconds;
+    GroundContactAge += DeltaSeconds;
     // Chaos inactivity decides sleep; recovery only starts after measured settling.
     UpdateLabel();
 }
@@ -540,6 +561,8 @@ FString APhysicsControlDummy::GetDummyState(bool IncludeContacts) const
         Row->SetBoolField(TEXT("animation_target"), Data.bUseSkeletalAnimation);
         Row->SetNumberField(TEXT("linear_strength"), Data.LinearStrength);
         Row->SetNumberField(TEXT("angular_strength"), Data.AngularStrength);
+        Row->SetNumberField(TEXT("max_force"), Data.MaxForce);
+        Row->SetNumberField(TEXT("max_torque"), Data.MaxTorque);
         Row->SetNumberField(TEXT("damping_ratio"), Data.AngularDampingRatio);
         FPhysicsControlMultiplier Multiplier;
         PhysicsControl->GetControlMultiplier(Name, Multiplier);

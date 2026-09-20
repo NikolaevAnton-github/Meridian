@@ -9,6 +9,7 @@ class UPhysicsControlComponent;
 class USkeletalMeshComponent;
 class UTextRenderComponent;
 class UAnimSequence;
+class UPrimitiveComponent;
 class FJsonValue;
 class FJsonObject;
 
@@ -125,6 +126,20 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Stepping")
     float StepFootStrength = 24.f;
 
+    /** Capacity settings shared by enemy types; all values are bounded at use. */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Recoverability")
+    float RecoveryStrength = 1.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Recoverability")
+    float RecoverySpeed = 1.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Recoverability")
+    float RecoveryReactionSeconds = .10f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Recoverability")
+    float RecoveryPersistenceSeconds = 2.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Recoverability")
+    float RecoveryFriction = .6f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Recoverability")
+    float RecoveryLegStrength = .35f;
+
     /** Shared non-damaging force seam for future push/explosion work; one physical impulse. */
     UFUNCTION(BlueprintCallable, Category="Physics Dummy|Balance")
     void ApplyExternalDisturbance(FVector Impulse, FVector WorldPoint, FName Bone = "pelvis");
@@ -208,6 +223,57 @@ private:
     void SampleAnimation(UAnimSequence* Animation, float Time, const FTransform& Origin, TMap<FName,FTransform>& Pose);
     void DrivePose(const TMap<FName,FTransform>& Pose, float Strength = 1.f);
     void AddBalanceState(TSharedPtr<FJsonObject> Root) const;
+    struct FRecoveryFoot
+    {
+        bool bUsable = false;
+        bool bContact = false;
+        float Gap = 1000;
+        float Slip = 0;
+        float VerticalSpeed = 0;
+        float ContactAge = 1000;
+        float NormalImpulse = 0;
+        int32 FootprintPoints = 0;
+        TArray<FVector> Footprint;
+    };
+    FRecoveryFoot RecoveryFeet[2];
+    FVector RecoveryCOM = FVector::ZeroVector;
+    FVector RecoveryVelocity = FVector::ZeroVector;
+    FVector CapturePoint = FVector::ZeroVector;
+    FVector CaptureError = FVector::ZeroVector;
+    float RecoveryMass = 0;
+    float CaptureDistance = 0;
+    float LandingCaptureDistance = 0;
+    float RequiredReach = 0;
+    float EffectiveStrength = 1;
+    float EffectiveSpeed = 1;
+    float EffectiveReach = 40;
+    float EffectivePersistence = 2;
+    float RecoveryAcceleration = 0;
+    float BodyAngularSpeed = 0;
+    float RecoveryInvalidSeconds = 0;
+    float RecoveryNoProgressSeconds = 0;
+    float RecoveryBestError = 1000;
+    float RecoveryStableSeconds = 0;
+    float StepRequestSeconds = 0;
+    float GroundContactAge = 1000;
+    float RecoveryEffortRatio = 0;
+    float RecoveryForceLimit = 0;
+    float RecoveryTorqueLimit = 0;
+    float StepEntryCaptureDistance = 0;
+    FName DisturbedFoot;
+    bool bRecoveryFeasible = true;
+    bool bRecoveryAssistance = false;
+    bool bRecoverySampled = false;
+    FString RecoveryReason;
+    TArray<TSharedPtr<FJsonValue>> LegContacts;
+    UFUNCTION()
+    void OnBodyContact(UPrimitiveComponent* HitComponent, AActor* OtherActor,
+        UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+    FRecoveryFoot MeasureFoot(FName Bone, const FRecoveryFoot& Previous) const;
+    void ResetRecoverability();
+    void UpdateRecoverability(float DeltaSeconds);
+    void BoundRecoveryDrives(float DeltaSeconds);
+    void AddRecoverabilityState(TSharedPtr<FJsonObject> Root) const;
     void CalibrateSoles();
     float SoleBottom(const USkeletalMeshComponent* Mesh, bool bLeft) const;
     float ShapeBottom(FName Bone, const FTransform& Transform) const;

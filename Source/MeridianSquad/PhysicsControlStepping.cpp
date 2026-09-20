@@ -153,9 +153,8 @@ bool APhysicsControlDummy::BeginStep()
         ++StepsRejected; StepReason = Reason; EnterFall(Reason); return false;
     };
     if (IsDead()) { CancelStep(); return false; }
-    if (EpisodeSteps >= 2) return Reject(TEXT("two-step recovery budget exhausted"));
-    if (LeftLegDisabled > 0 || RightLegDisabled > 0 || UsableFeet < 1)
-        return Reject(TEXT("step requires usable legs and a grounded support foot"));
+    if (UsableFeet < 1 || !bRecoveryFeasible)
+        return Reject(TEXT("step requires feasible physical support"));
     if (StandingBones.Num() != Body->GetNumBones() || NeutralBones.Num() != Body->GetNumBones())
         return Reject(TEXT("step skeleton unavailable"));
 
@@ -170,8 +169,17 @@ bool APhysicsControlDummy::BeginStep()
     const FVector BodyOffset = Flat(Pelvis - StandingPose.FindChecked(TEXT("pelvis")).GetLocation()) +
         Flat(Chest - Pelvis) * .35f + Flat(Velocity) * .08f;
     StepBodyDirection = BodyOffset;
-    StepDirection = (BodyOffset.GetClampedToMaxSize(14) + LastStepImpulse.GetSafeNormal2D() * 9).GetSafeNormal2D();
-    if (StepDirection.IsNearlyZero()) return Reject(TEXT("no horizontal recovery direction"));
+    StepDirection = (BodyOffset.GetClampedToMaxSize(14) + CaptureError.GetClampedToMaxSize(20) + Flat(RecoveryVelocity)*.12f +
+        LastStepImpulse.GetSafeNormal2D()*8.f).GetSafeNormal2D();
+    if (!DisturbedFoot.IsNone())
+    {
+        const auto* FootBody=Body->GetBodyInstance(DisturbedFoot);
+        const FVector Motion=Flat(FootBody->GetUnrealWorldTransform().GetLocation()-StandingPose.FindChecked(DisturbedFoot).GetLocation())+
+            Flat(FootBody->GetUnrealWorldVelocity())*.12f;
+        if (Motion.Size() > .5f) StepDirection=Motion.GetSafeNormal();
+    }
+    if (StepDirection.IsNearlyZero())
+    { bStepRequested=false; StepRequestSeconds=0; StepReason=TEXT("disturbance already settled without placement"); return false; }
 
     const FVector Left = StandingPose.FindChecked(TEXT("foot_l")).GetLocation();
     const FVector Right = StandingPose.FindChecked(TEXT("foot_r")).GetLocation();
@@ -186,15 +194,19 @@ bool APhysicsControlDummy::BeginStep()
     // newly landed foot remains fixed for the whole corrective step.
     bool bLeft = bCorrectiveStep ? PlantedFoot == TEXT("foot_l") : (Separation >= 0) == Leading;
     const bool LeftSupported = FootSupported(TEXT("foot_l")), RightSupported = FootSupported(TEXT("foot_r"));
+    if (!bCorrectiveStep && DisturbedFoot == TEXT("foot_l") && RightSupported) bLeft=true;
+    if (!bCorrectiveStep && DisturbedFoot == TEXT("foot_r") && LeftSupported) bLeft=false;
     if (!LeftSupported && !RightSupported) return Reject(TEXT("step lost usable foot support"));
     if (!LeftSupported) bLeft = true;
     if (!RightSupported) bLeft = false;
     SwingFoot = bLeft ? TEXT("foot_l") : TEXT("foot_r");
     PlantedFoot = bLeft ? TEXT("foot_r") : TEXT("foot_l");
     SwingStart = StandingPose.FindChecked(SwingFoot);
+    const FVector ActualAnkle=AnklePosition(Body,SwingFoot);
+    SwingStart.SetLocation(FVector(ActualAnkle.X,ActualAnkle.Y,SwingStart.GetLocation().Z));
     PlantedTarget = StandingPose.FindChecked(PlantedFoot);
     SwingDestination = SwingStart;
-    const float Length = FMath::Min(FMath::Clamp(StepLength, 12.f, 40.f), FMath::Clamp(StepMaxReach, 12.f, 45.f));
+    const float Length = FMath::Min(FMath::Clamp(StepLength,12.f,40.f), EffectiveReach);
     SwingDestination.AddToTranslation(StepDirection * Length);
     const FVector NeutralLeft = NeutralBones[Body->GetBoneIndex(TEXT("foot_l"))].GetLocation();
     const FVector NeutralRight = NeutralBones[Body->GetBoneIndex(TEXT("foot_r"))].GetLocation();
@@ -206,7 +218,7 @@ bool APhysicsControlDummy::BeginStep()
         const FVector Correction = Flat(Destination - SwingStart.GetLocation());
         // World-space subtraction can put an exact 40 cm step a few ulps over
         // 40. The 0.01 cm numerical margin does not expand the placement budget.
-        if (Correction.Size() > FMath::Clamp(StepMaxReach, 12.f, 45.f) + .01f)
+        if (Correction.Size() > EffectiveReach + .01f)
             return Reject(TEXT("corrective stance exceeds step reach"));
         SwingDestination.SetLocation(Destination);
         StepDirection = Correction.GetSafeNormal();
@@ -225,6 +237,9 @@ bool APhysicsControlDummy::BeginStep()
     const FVector StanceCenter = (Left + Right) * .5f;
     StepTransfer = Flat(PlantedTarget.GetLocation() - StanceCenter).GetClampedToMaxSize(10) * .65f;
     StepSeconds = StepNoSupportSeconds = StepSupportDrift = StepPeakSupportDrift = 0;
+    StepEntryCaptureDistance = CaptureDistance;
+    DisturbedFoot = NAME_None;
+    StepRequestSeconds = 0;
     StepPhase = 1; ++EpisodeSteps; ++StepsStarted; bStepRequested = false; bStanceCorrectionPending = false;
     StepReason = TEXT("transferring weight onto planted leg");
     // Fixed envelope for this asset's offset constraint frames. Calibrated idle
@@ -423,15 +438,14 @@ void APhysicsControlDummy::UpdateStep(float DeltaSeconds)
     StepPeakSupportDrift = FMath::Max(StepPeakSupportDrift, StepSupportDrift);
     StepNoSupportSeconds = FootSupported(PlantedFoot) ? 0 : StepNoSupportSeconds + DeltaSeconds;
     FTransform Support = PlantedTarget, Destination = SwingDestination;
-    if (LeftLegDisabled > 0 || RightLegDisabled > 0 || StepNoSupportSeconds > .10f ||
+    if (StepNoSupportSeconds > .14f ||
         !StepPlacement(PlantedFoot, Support, GroundHeight) || !StepPlacement(SwingFoot, Destination, GroundHeight))
     { StepReason = TEXT("usable step support lost"); EnterFall(TEXT("usable step support lost")); return; }
-    if (Instability >= FMath::Max(.1f, FallThreshold) || PoseLeanDegrees > FMath::Clamp(MaxLeanDegrees, 20.f, 80.f) ||
-        PelvisDrop > 45 || StepSupportDrift > 5)
+    if (!bRecoveryFeasible || StepSupportDrift > 8)
     { StepReason = TEXT("recovery step exceeded balance limits"); EnterFall(TEXT("recovery step exceeded balance limits")); return; }
-    const float TransferTime = FMath::Clamp(StepTransferSeconds, .12f, .35f);
-    const float SwingTime = FMath::Clamp(StepSwingSeconds, .25f, .75f);
-    const float SettleTime = FMath::Clamp(StepSettleSeconds, .2f, .6f);
+    const float TransferTime = FMath::Clamp(StepTransferSeconds, .12f, .35f)/EffectiveSpeed;
+    const float SwingTime = FMath::Clamp(StepSwingSeconds, .25f, .75f)/EffectiveSpeed;
+    const float SettleTime = FMath::Clamp(StepSettleSeconds, .2f, .6f)/EffectiveSpeed;
     const float Transfer = FMath::Clamp(StepSeconds / TransferTime, 0.f, 1.f);
     const float Swing = FMath::Clamp((StepSeconds - TransferTime) / SwingTime, 0.f, 1.f);
     const float Settle = FMath::Clamp((StepSeconds - TransferTime - SwingTime) / SettleTime, 0.f, 1.f);
@@ -450,16 +464,17 @@ void APhysicsControlDummy::UpdateStep(float DeltaSeconds)
             StandingPose = Targets;
             RememberStandingSkeleton(PoseSource, false);
             ++StepsCompleted;
+            if (StepDisplacement.Size2D() > 5 && CaptureDistance <= FMath::Max(5.f,StepEntryCaptureDistance+3))
+            { RecoveryNoProgressSeconds=0; RecoveryBestError=CaptureDistance; }
             StepPhase = 0;
             Instability = FMath::Max(0.f, Instability - .30f);
-            BalanceState = Instability > .08f ? EDummyBalanceState::LosingBalance : EDummyBalanceState::Standing;
+            BalanceState = EDummyBalanceState::LosingBalance;
+            RecoveryStableSeconds=0;
             StepReason = TEXT("landed at displaced stance");
             BalanceReason = TEXT("step recovered without health restoration");
             StepCooldownRemaining = bStepRequested ? .08f : FMath::Clamp(StepCooldown, .2f, 3.f);
             if (NeedsStanceCorrection())
             {
-                if (EpisodeSteps >= 2)
-                { StepReason = TEXT("stance infeasible after two steps"); EnterFall(TEXT("stance infeasible after two steps")); return; }
                 bStanceCorrectionPending = bStepRequested = true;
                 StepCooldownRemaining = .08f;
                 BalanceState = EDummyBalanceState::LosingBalance;

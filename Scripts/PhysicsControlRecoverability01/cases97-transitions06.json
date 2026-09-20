@@ -1,0 +1,7 @@
+[
+  {"name":"Candidate06-OneLegRear","duration":7,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-700,-80,125],"events":[[0.05,"@track","calf_l"],[1,"LeftMouseButton",1],[1.12,"LeftMouseButton",0]]},
+  {"name":"Candidate06-TorsoOrdinary","duration":7,"fps":30,"profile":1,"flying":true,"location":[-1150,-20,120],"events":[[0.05,"@track","spine_03"],[0.1,"LeftControl",1],[0.2,"F7",1],[0.3,"F7",0],[0.4,"LeftControl",0],[0.6,"V",1],[0.7,"V",0],[1.2,"LeftMouseButton",1],[3.3,"LeftMouseButton",0],[3.45,"LeftMouseButton",1],[3.75,"LeftMouseButton",0]]},
+  {"name":"Candidate06-DeathDuring","duration":5,"fps":30,"profile":1,"flying":true,"tuning":{"max_health":50},"reset_tuning":true,"during_step":"kill","location":[-1150,-20,120],"events":[[0.05,"@track","spine_03"],[1,"LeftMouseButton",1],[1.12,"LeftMouseButton",0]]},
+  {"name":"Candidate06-Controls","duration":6,"fps":30,"profile":1,"flying":true,"during_step":"reset","location":[-1150,-20,120],"events":[[0.05,"@track","spine_03"],[0.1,"LeftControl",1],[0.2,"F9",1],[0.3,"F9",0],[0.4,"LeftControl",0],[1,"LeftMouseButton",1],[1.12,"LeftMouseButton",0],[2.2,"F10",1],[2.3,"F10",0],[2.6,"F10",1],[2.7,"F10",0],[3.2,"LeftControl",1],[3.3,"F9",1],[3.4,"F9",0],[3.5,"LeftControl",0]]},
+  {"name":"Candidate06-SlowEpisode","duration":7,"fps":30,"profile":1,"flying":true,"during_step":"slow","location":[-1150,-20,120],"events":[[0.05,"@track","spine_03"],[1,"LeftMouseButton",1],[1.12,"LeftMouseButton",0],[4,"@scale",1]]}
+]

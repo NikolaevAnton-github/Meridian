@@ -27,8 +27,12 @@ as the next task, between MSQ-91 and MSQ-92; see the [later decision](../Approva
 It adds displaced-leg replanting, contact/momentum-based recovery limits and
 successive steps under sustained hits. The active baseline is MSQ-91 Candidate07
 plus CombatTestToggles02 commit `37af4b8`; earlier evidence stays immutable.
-This preparation leaves MSQ-97 and MSQ-92 through MSQ-96 unassigned in backlog,
-with zero runs. It does not dispatch implementation or extend prior review waivers.
+The owner subsequently [authorized MSQ-97 execution without an independent reviewer](../Approvals/PhysicsControlRecoverability01-OwnerStart01.json).
+Its executor supplies focused self-checks; controller scope/evidence acceptance
+and owner motion/play judgement remain separate. MSQ-92 through MSQ-96 remain
+undispatched; neither task-specific waiver extends to them.
+MSQ-97 Candidate07 now supplies the physical recovery foundation with a passing
+build and 183 focused self-checks; see the [controller handoff](../PhysicsControlRecoverability01Handoff.md).
 
 ## Ordered implementation tasks
 

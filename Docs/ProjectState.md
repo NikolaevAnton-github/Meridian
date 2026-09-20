@@ -21,28 +21,39 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
-## Next task prepared: MSQ-97 physical recoverability
+## Owner-test handoff: MSQ-97 physical recoverability
 
 The owner selected [PhysicsControlRecoverability01 / MSQ-97](Tasks/PhysicsControlRecoverability01.md)
 as the next task after discussing leg replanting and physical balance limits;
 see the [exact next-task decision](Approvals/PhysicsControlRecoverability01-NextTask01.json).
 The MSQ-90 order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**.
-MSQ-97 is prepared in backlog, unassigned, with zero runs. MSQ-92 through MSQ-96
-remain undispatched. Planning creates no implementation run or review waiver.
+The owner [authorized MSQ-97 without an independent reviewer](Approvals/PhysicsControlRecoverability01-OwnerStart01.json).
+One existing Multica Unreal executor delivered Candidate07 at verified native
+Astra/max/standard. The build and 183 focused self-checks pass; all 47 candidate
+manifest entries match current and frozen bytes. See [implementation](PhysicsControlRecoverability01.md)
+and [controller handoff](PhysicsControlRecoverability01Handoff.md). The controller
+accepts scope, candidate identity, evidence applicability and preservation; owner
+motion/play judgement remains separate. The review waiver is limited to MSQ-97.
+MSQ-92 through MSQ-96 remain undispatched; live Multica owns execution status.
 
-The new task replaces automatic leg-hit support failure with displaced-leg
+The delivered task replaces automatic leg-hit support failure with displaced-leg
 replanting, coordinated body recovery and a practical contact/momentum-based
 recoverability estimate with bounded physical assistance. Successive recovery
 steps may continue under torso fire beyond the old two-step cap; genuinely
 infeasible support releases into physical falling even during a burst. Enemy
-settings alter recovery capacity. Ctrl+F9 is planned to become a bounded assistance
+settings alter recovery capacity. Ctrl+F9 now enables a bounded assistance
 preset rather than the rejected unlimited fall veto. Actual bullet penetration
 through both legs remains a separate future projectile integration scenario.
 MSQ-92 then refines adaptive step geometry/timing, reusing predecessor evidence.
 
-Current runtime remains MSQ-91 Candidate07 plus CombatTestToggles02 (`37af4b8`),
-including its existing Ctrl+F9 behavior, until the new task is implemented.
-Historical sources/evidence and owner edits remain preserved. See the updated
+Current runtime is MSQ-97 Candidate07, built on MSQ-91 Candidate07 plus
+CombatTestToggles02 (`37af4b8`). A recorded 30-bullet torso episode completes
+three steps during continuous fire and five overall with recovery speed 1.5;
+the mannequin settles after a three-bullet resumed burst. Missing support still
+releases drives with assistance on. Actual inter-leg contact, living recovery,
+death, reset/recreation and affected slowdown transitions are evidenced. No binary
+assets changed. Historical sources/evidence and owner edits remain preserved;
+the owner's later Play session is left untouched. See the updated
 [family plan](Tasks/PhysicsControlRefinement01Plan.md) for scope and verification.
 
 ## Owner-test handoff: MSQ-91 stance correction within MSQ-90

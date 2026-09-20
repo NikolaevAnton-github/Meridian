@@ -1,0 +1,7 @@
+[
+  {"name":"Candidate06-TorsoRearFast","duration":8,"fps":30,"profile":1,"flying":true,"inspection_view":true,"tuning":{"recovery_speed":1.5},"location":[-700,-20,40],"events":[[0.05,"@track","spine_03"],[0.1,"LeftControl",1],[0.2,"F7",1],[0.3,"F7",0],[0.4,"LeftControl",0],[0.6,"V",1],[0.7,"V",0],[1.2,"LeftMouseButton",1],[3.3,"LeftMouseButton",0],[3.45,"LeftMouseButton",1],[3.75,"LeftMouseButton",0]]},
+  {"name":"Candidate06-TorsoRearOrdinary","duration":8,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-700,-20,40],"events":[[0.05,"@track","spine_03"],[0.1,"LeftControl",1],[0.2,"F7",1],[0.3,"F7",0],[0.4,"LeftControl",0],[0.6,"V",1],[0.7,"V",0],[1.2,"LeftMouseButton",1],[3.3,"LeftMouseButton",0],[3.45,"LeftMouseButton",1],[3.75,"LeftMouseButton",0]]},
+  {"name":"Candidate06-BothWeak","duration":6,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-700,-80,125],"look_at":[-930,-310,78],"events":[[1,"@impulse",[600,0,0,"calf_l"]],[1,"@impulse",[600,0,0,"calf_r"]]]},
+  {"name":"Candidate06-OneLegComparable","duration":6,"fps":30,"profile":1,"flying":true,"location":[-1150,-20,120],"events":[[0.05,"@track","calf_l"],[1,"LeftMouseButton",1],[1.12,"LeftMouseButton",0]]},
+  {"name":"Candidate06-ThreeRendered","duration":4,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-1500,0,400],"look_at":[-950,0,90],"events":[]}
+]

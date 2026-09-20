@@ -145,7 +145,7 @@ void UCombatRifleComponent::ToggleInfiniteReserve()
 void UCombatRifleComponent::ToggleDummyFallPrevention()
 {
     if (auto* World = ACombatProjectileWorld::Find(GetWorld()))
-        World->bPreventDummyFalls = !World->bPreventDummyFalls;
+        World->bRecoveryAssistance = !World->bRecoveryAssistance;
 }
 void UCombatRifleComponent::TogglePhysicsPreview()
 {

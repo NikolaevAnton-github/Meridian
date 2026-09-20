@@ -1,0 +1,14 @@
+{
+  "record_id": "PhysicsControlRecoverability01-OwnerStart01",
+  "date_local": "2026-09-21",
+  "task_identifier": "MSQ-97",
+  "source": "Owner direct chat starting MSQ-97",
+  "owner_message_original": "MSQ-97 давай запустим без независимого проверяющего",
+  "owner_message_english_translation": "Let's start MSQ-97 without an independent reviewer.",
+  "decision": "Execute the bounded physical balance recovery task defined in Docs/Tasks/PhysicsControlRecoverability01.md, using MSQ-91 Candidate07 plus CombatTestToggles02 commit 37af4b8 as the retained baseline.",
+  "review_route": "Independent technical and visual review is waived for MSQ-97. Do not dispatch an independent reviewer. The executor performs the task's focused self-checks and supplies identified evidence; the controller accepts scope, candidate identity, evidence applicability and preservation. Final motion/play judgement remains with the owner.",
+  "execution": "One existing Multica Unreal executor at verified native Astra/max/standard, one editor writer and one heavy workload at a time. The controller remains active through handoff and bounded corrections, then creates a verified local task-scoped closure commit.",
+  "verification": "Retain all six focused acceptance rows in the task: baseline failure and real-hit leg replanting, more than two recovery steps under real torso fire, feasible and infeasible support outcomes, actual inter-leg contact transfer, bounded enemy settings and Ctrl+F9 assistance, and affected transitions/cleanup/slowdown. Reuse applicable prior evidence; no per-profile or full animation matrix.",
+  "preservation": "Preserve owner configuration and project descriptor edits, owner application state, retained lobby and purchased arms, three mannequin identities, original sources and immutable historical candidate evidence.",
+  "limits": "No successor dispatch, projectile penetration implementation, general locomotion, uneven/moving terrain, new art or paid services. The review waiver applies only to MSQ-97 and does not establish owner motion/play acceptance."
+}

@@ -48,6 +48,7 @@ void APhysicsControlDummy::ResetBalance()
     bRecoveryFloor = bRecoveryClear = false;
     BalanceReason = TEXT("reset");
     ResetStepping();
+    ResetRecoverability();
 }
 
 void APhysicsControlDummy::DisableBalanceDrives()
@@ -59,19 +60,6 @@ void APhysicsControlDummy::DisableBalanceDrives()
 void APhysicsControlDummy::EnterFall(const TCHAR* Reason)
 {
     if (IsDead()) return;
-    const auto* CombatWorld = ACombatProjectileWorld::Find(GetWorld());
-    if (CombatWorld && CombatWorld->bPreventDummyFalls &&
-        (BalanceState == EDummyBalanceState::Standing || BalanceState == EDummyBalanceState::LosingBalance ||
-         BalanceState == EDummyBalanceState::Stepping))
-    {
-        // Test assistance retains impacts and feasible steps, but a failed recovery
-        // returns to the standing target instead of releasing every drive.
-        CancelStep();
-        BalanceState = EDummyBalanceState::LosingBalance;
-        BalanceReason = TEXT("full fall disabled by test toggle");
-        DrivePose(StandingPose);
-        return;
-    }
     if (BalanceState == EDummyBalanceState::GettingUp) ++InterruptedGetUps;
     if (BalanceState != EDummyBalanceState::Falling && BalanceState != EDummyBalanceState::Down) ++Falls;
     BalanceState = EDummyBalanceState::Falling;
@@ -92,16 +80,15 @@ void APhysicsControlDummy::RegisterDisturbance(FName Bone, const FVector& Impuls
     Instability = FMath::Min(2.f, Instability + FMath::Max(0.f, Amount));
     LeanDirection = (LeanDirection * .3f + Impulse.GetSafeNormal2D()).GetSafeNormal2D();
     LastStepImpulse = Impulse;
-    if (Instability >= FMath::Clamp(StepTriggerInstability, .1f, .9f)) bStepRequested = true;
+    // The request clock belongs to the recovery, not to the latest bullet.
+    if (!bStepRequested) StepRequestSeconds = 0;
+    bStepRequested = true;
     const FString Name = Bone.ToString();
     if (IsLeg(Name))
     {
-        if (Name.EndsWith(TEXT("_l"))) LeftLegDisabled = FMath::Clamp(LegDisableSeconds, .1f, 20.f);
-        if (Name.EndsWith(TEXT("_r"))) RightLegDisabled = FMath::Clamp(LegDisableSeconds, .1f, 20.f);
+        DisturbedFoot = Name.EndsWith(TEXT("_l")) ? TEXT("foot_l") : TEXT("foot_r");
     }
     if (BalanceState == EDummyBalanceState::GettingUp) EnterFall(TEXT("recovery interrupted by disturbance"));
-    else if (LeftLegDisabled > 0 && RightLegDisabled > 0) EnterFall(TEXT("both legs unavailable"));
-    else if (Instability >= FMath::Max(.1f, FallThreshold)) EnterFall(TEXT("accumulated disturbance"));
     else if (BalanceState == EDummyBalanceState::Standing) BalanceState = EDummyBalanceState::LosingBalance;
 }
 
@@ -232,18 +219,25 @@ void APhysicsControlDummy::DrivePose(const TMap<FName,FTransform>& Pose, float S
         if (const float* Remaining = RecoveringControls.Find(Name))
             RegionStrength = FMath::Lerp(FMath::Clamp(HitStrengthMultiplier,.005f,1.f), 1.f,
                 FMath::Clamp(1.f - *Remaining / FMath::Clamp(HitRecoverySeconds,.1f,1.5f),0.f,1.f));
+        if (IsLeg(Entry.Key.ToString())) RegionStrength = FMath::Max(RegionStrength,FMath::Clamp(RecoveryLegStrength,.15f,1.f));
         FPhysicsControlMultiplier Multiplier;
         Multiplier.LinearStrengthMultiplier = FVector(Strength * RegionStrength);
         Multiplier.AngularStrengthMultiplier = Strength * RegionStrength;
+        if (BalanceState == EDummyBalanceState::Stepping && UsableFeet > 0 && bRecoveryFeasible &&
+            !IsLeg(Entry.Key.ToString()))
+        {
+            // A supported recovery reserves bounded posture effort under a burst.
+            // Translational hit compliance and each real impulse remain intact;
+            // a new hit cannot continually reset all available postural effort.
+            Multiplier.AngularStrengthMultiplier=Strength*FMath::Max(RegionStrength,FMath::Min(.65f,.28f*EffectiveStrength));
+        }
         if ((BalanceState == EDummyBalanceState::Stepping ||
             (bStepRequested && LeftLegDisabled <= 0 && RightLegDisabled <= 0 &&
              (BalanceState == EDummyBalanceState::Standing || BalanceState == EDummyBalanceState::LosingBalance))) &&
             (Entry.Key == TEXT("foot_l") || Entry.Key == TEXT("foot_r")))
         {
-            // A usable planted foot is not softened by an unrelated trunk impact.
-            // Leg hits abort the step before this path; all drives release on fall.
-            Multiplier.LinearStrengthMultiplier = FVector(FMath::Clamp(StepFootStrength, 8.f, 30.f) / FMath::Clamp(PoseLinearStrength, .1f, 15.f));
-            Multiplier.AngularStrengthMultiplier = 2.f;
+            Multiplier.LinearStrengthMultiplier = FVector(RegionStrength * FMath::Clamp(StepFootStrength, 8.f, 30.f) / FMath::Clamp(PoseLinearStrength, .1f, 15.f));
+            Multiplier.AngularStrengthMultiplier = RegionStrength * 2.f;
         }
         PhysicsControl->SetControlMultiplier(Name, Multiplier);
     }
@@ -277,8 +271,6 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
         Instability = FMath::Max(0.f, Instability - FMath::Max(0.f, InstabilityRecoveryRate) * Dt);
     UsableFeet = 0;
     FHitResult Floor;
-    if (LeftLegDisabled == 0 && FootSupported(TEXT("foot_l"))) ++UsableFeet;
-    if (RightLegDisabled == 0 && FootSupported(TEXT("foot_r"))) ++UsableFeet;
     const FVector Pelvis = GetPhysicalBodyLocation(TEXT("pelvis"));
     const FVector Trunk = GetPhysicalBodyLocation(TEXT("spine_05"));
     const FVector Upright = (Trunk - Pelvis).GetSafeNormal();
@@ -287,6 +279,7 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
     bRecoveryFloor = FindFloor(Pelvis, 120, Floor);
     if (bRecoveryFloor) GroundHeight = Floor.ImpactPoint.Z;
     bRecoveryClear = bRecoveryFloor && RecoverySpace(Pelvis, GroundHeight);
+    UpdateRecoverability(Dt);
 
     if (BalanceState == EDummyBalanceState::Stepping)
     {
@@ -296,23 +289,19 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
 
     if (BalanceState == EDummyBalanceState::Standing || BalanceState == EDummyBalanceState::LosingBalance)
     {
-        NoSupportSeconds = UsableFeet == 0 ? NoSupportSeconds + Dt : 0;
-        if ((LeftLegDisabled > 0 && RightLegDisabled > 0) || NoSupportSeconds > .18f)
-            EnterFall(TEXT("no usable foot support"));
-        else if (PoseLeanDegrees > FMath::Clamp(MaxLeanDegrees,20.f,80.f) || PelvisDrop > 52)
-            EnterFall(TEXT("body exceeded recoverable deviation"));
-        else
         {
-            if (!bStanceCorrectionPending && Instability < .08f && SinceDisturbance > FMath::Max(.2f, StepCooldown))
+            if (!bStanceCorrectionPending && RecoveryStableSeconds > .35f && SinceDisturbance > .5f && !bStepRequested)
             { EpisodeSteps = 0; bStepRequested = false; }
-            if (bStepRequested && SinceDisturbance >= .10f && StepCooldownRemaining <= 0)
+            if (bStepRequested && StepRequestSeconds >= FMath::Clamp(RecoveryReactionSeconds,.06f,.3f)/EffectiveSpeed && StepCooldownRemaining <= 0 && UsableFeet > 0)
             {
                 if (BeginStep()) UpdateStep(0);
                 return;
             }
-            BalanceState = bStanceCorrectionPending || Instability > .08f || LeftLegDisabled > 0 || RightLegDisabled > 0 ? EDummyBalanceState::LosingBalance : EDummyBalanceState::Standing;
+            BalanceState = bStanceCorrectionPending || bStepRequested || RecoveryStableSeconds < .25f ? EDummyBalanceState::LosingBalance : EDummyBalanceState::Standing;
             auto Targets = StandingPose;
-            const float Weight = FMath::Clamp(Instability / FMath::Max(.1f,FallThreshold), 0.f, 1.f);
+            // Physical hit softening supplies the disturbance. Do not manufacture
+            // crouch/leg collapse from a bullet counter while evaluating support.
+            const float Weight = 0;
             const FVector PelvisTarget = StandingPose.FindChecked(TEXT("pelvis")).GetLocation();
             const FVector Lean = LeanDirection.IsNearlyZero() ? StandingForward : LeanDirection;
             const FQuat Tilt(FVector::CrossProduct(FVector::UpVector,Lean).GetSafeNormal(), FMath::DegreesToRadians(Weight * 17.f));
@@ -374,6 +363,9 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
                 StandingPose=Targets; StandingForward=RecoveredIdleRoot.GetRotation().RotateVector(FVector::RightVector); Instability=0; NoSupportSeconds=0;
                 RememberStandingSkeleton(PoseSource);
                 EpisodeSteps=0; bStepRequested=false;
+                RecoveryInvalidSeconds=RecoveryNoProgressSeconds=StepRequestSeconds=0;
+                RecoveryStableSeconds=.3f; RecoveryBestError=CaptureDistance;
+                bRecoveryFeasible=true; DisturbedFoot=NAME_None;
                 BalanceState=EDummyBalanceState::Standing; StateSeconds=0;
                 ++GetUps; ActiveGetUp=nullptr; BalanceReason=TEXT("recovered without health restoration");
             }
@@ -421,4 +413,5 @@ void APhysicsControlDummy::AddBalanceState(TSharedPtr<FJsonObject> Root) const
     S->SetNumberField(TEXT("enabled_drives"),Enabled);
     Root->SetObjectField(TEXT("balance"),S);
     AddStepState(Root);
+    AddRecoverabilityState(Root);
 }

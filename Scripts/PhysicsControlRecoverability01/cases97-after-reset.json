@@ -1,0 +1,3 @@
+[
+  {"name":"Candidate02-LegAfterReset","duration":6,"fps":30,"profile":1,"flying":true,"location":[-1150,-20,120],"events":[[0.05,"@track","calf_l"],[0.2,"F6",1],[0.26,"F6",0],[1.5,"LeftMouseButton",1],[1.62,"LeftMouseButton",0]]}
+]

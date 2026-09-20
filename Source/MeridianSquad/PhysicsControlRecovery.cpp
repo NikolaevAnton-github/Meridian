@@ -78,16 +78,7 @@ float APhysicsControlDummy::PoseBottom(const TMap<FName,FTransform>& Pose) const
 
 bool APhysicsControlDummy::FootSupported(FName Bone) const
 {
-    const auto* BI = Body->GetBodyInstance(Bone);
-    if (!BI) return false;
-    const FTransform Actual = BI->GetUnrealWorldTransform();
-    const float Bottom = ShapeBottom(Bone, Actual);
-    FVector Point = Actual.GetLocation();
-    Point.Z = Bottom;
-    FHitResult Floor;
-    if (!FindFloor(Point, FMath::Clamp(SupportReach, .5f, 3.f), Floor)) return false;
-    const float Gap = Bottom - Floor.ImpactPoint.Z;
-    return Gap >= -2.f && Gap <= FMath::Clamp(SupportReach, .5f, 3.f);
+    return MeasureFoot(Bone,RecoveryFeet[Bone == TEXT("foot_l") ? 0 : 1]).bUsable;
 }
 
 void APhysicsControlDummy::IsolateSelfCollision()
