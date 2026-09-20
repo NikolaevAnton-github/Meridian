@@ -1,0 +1,5 @@
+[
+  {"name":"Candidate02-FrontSettledSlow","duration":22,"profile":1,"flying":true,"inspection_view":true,"capture_skin":true,"seed_front":true,"slow_getup":true,"location":[-1150,-20,158],"yaw":-56,"look_at":[-980,-320,65],"events":[]},
+  {"name":"Candidate02-Asymmetric","duration":20,"profile":1,"flying":true,"inspection_view":true,"capture_skin":true,"location":[-1150,-20,158],"yaw":-56,"look_at":[-980,-320,70],"events":[[0.05,"@track","calf_l"],[1,"LeftMouseButton",1],[1.07,"LeftMouseButton",0],[1.2,"@track","calf_r"],[1.4,"LeftMouseButton",1],[1.47,"LeftMouseButton",0],[1.5,"@view",[-10,-56,0]]]},
+  {"name":"Candidate02-InterruptedDeathReset","duration":28,"profile":1,"flying":true,"inspection_view":true,"interrupt_and_kill":true,"location":[-1150,-20,158],"yaw":-56,"events":[[0.05,"@track","calf_l"],[1,"LeftMouseButton",1],[1.07,"LeftMouseButton",0],[1.2,"@track","calf_r"],[1.4,"LeftMouseButton",1],[1.47,"LeftMouseButton",0],[1.5,"@track","spine_03"],[26,"F6",1],[26.05,"F6",0]]}
+]

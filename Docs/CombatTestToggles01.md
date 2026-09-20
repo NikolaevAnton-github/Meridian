@@ -1,7 +1,9 @@
 # Optional combat test controls
 
 Added 2026-09-20 at the owner's direct request, outside MSQ-88. This is a small
-extension to the MSQ-87 owner-test build; MSQ-88 remains an unassigned backlog task.
+extension to the MSQ-87 owner-test build. MSQ-88 was still undispatched at this
+addition; the later [separate start](Approvals/PhysicsControlRecovery01-OwnerStart01.json)
+authorizes that task while preserving these controls.
 
 | Shortcut | Toggle |
 | --- | --- |

@@ -1,6 +1,7 @@
 #include "PhysicsControlDummy.h"
 #include "CombatProjectileWorld.h"
 #include "PhysicsControlComponent.h"
+#include "DummyRecoveryAnimInstance.h"
 #include "Animation/AnimSequence.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/TextRenderComponent.h"
@@ -81,11 +82,14 @@ APhysicsControlDummy::APhysicsControlDummy()
     Body->SetRelativeRotation(FRotator(0, -90, 0));
     static ConstructorHelpers::FObjectFinder<USkeletalMesh> Mesh(TEXT("/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple.SKM_Manny_Simple"));
     Body->SetSkeletalMesh(Mesh.Object);
+    Body->SetForcedLOD(1);
+    Body->SetPhysicsAsset(LoadObject<UPhysicsAsset>(nullptr, TEXT("/Game/Development/PhysicsControlRecovery01/PA_Manny_Recovery01.PA_Manny_Recovery01")));
     Body->SetAnimationMode(EAnimationMode::AnimationSingleNode);
     Body->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
     Body->SetCollisionObjectType(ECC_PhysicsBody);
     Body->SetCollisionResponseToAllChannels(ECR_Ignore);
     Body->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+    Body->SetCollisionResponseToChannel(ECC_PhysicsBody, ECR_Block);
     Body->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
     static ConstructorHelpers::FObjectFinder<UAnimSequence> Pose(TEXT("/Game/Development/EnemyPrototype01/A_EnemyTemplate_Idle.A_EnemyTemplate_Idle"));
     Idle = Pose.Object;
@@ -95,7 +99,8 @@ APhysicsControlDummy::APhysicsControlDummy()
     PoseSource = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("RecoveryPoseSource"));
     PoseSource->SetupAttachment(FixtureRoot);
     PoseSource->SetSkeletalMesh(Mesh.Object);
-    PoseSource->SetAnimationMode(EAnimationMode::AnimationSingleNode);
+    PoseSource->SetForcedLOD(1);
+    PoseSource->SetAnimInstanceClass(UDummyRecoveryAnimInstance::StaticClass());
     PoseSource->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     PoseSource->SetVisibility(false);
     PoseSource->SetCastShadow(false);
@@ -136,6 +141,8 @@ void APhysicsControlDummy::ResetDummy()
 {
     ClearBalanceProbeFixtures();
     bReady = false;
+    if (auto* ScopedAsset = LoadObject<UPhysicsAsset>(nullptr, TEXT("/Game/Development/PhysicsControlRecovery01/PA_Manny_Recovery01.PA_Manny_Recovery01")))
+        if (Body->GetPhysicsAsset() != ScopedAsset) Body->SetPhysicsAsset(ScopedAsset);
     if (!Controls.IsEmpty()) PhysicsControl->DestroyControls(Controls);
     Controls.Reset();
     BodyControls.Reset(); RecoveringControls.Reset();
@@ -155,15 +162,33 @@ void APhysicsControlDummy::ResetDummy()
     Body->PlayAnimation(Idle, true);
     Body->TickAnimation(0, false);
     Body->RefreshBoneTransforms();
+    if (SolePoints.IsEmpty()) CalibrateSoles();
+    FHitResult Floor;
+    if (FindFloor(Home.GetLocation() + FVector(0,0,50), 150, Floor))
+    {
+        const float Bottom = FMath::Min(SoleBottom(Body, true), SoleBottom(Body, false));
+        Body->AddWorldOffset(FVector(0,0,Floor.ImpactPoint.Z + .15f - Bottom), false, nullptr, ETeleportType::TeleportPhysics);
+        Body->RefreshBoneTransforms();
+    }
     ReferencePose.Reset();
     if (const auto* Asset = Body->GetPhysicsAsset())
         for (const USkeletalBodySetup* Setup : Asset->SkeletalBodySetups)
             ReferencePose.Add(Setup->BoneName, Body->GetSocketTransform(Setup->BoneName));
     SupportTarget = Body->GetSocketTransform(TEXT("pelvis"));
     StandingPose = ReferencePose;
+    FPoseSnapshot StandingSnapshot;
+    Body->SnapshotPose(StandingSnapshot);
+    Body->SetAnimInstanceClass(UDummyRecoveryAnimInstance::StaticClass());
+    auto* VisibleAnim = CastChecked<UDummyRecoveryAnimInstance>(Body->GetAnimInstance());
+    VisibleAnim->bSnapshotOnly = true;
+    VisibleAnim->StartPose = StandingSnapshot;
+    VisibleAnim->Sequence = Idle;
+    Body->TickAnimation(0, false);
+    Body->RefreshBoneTransforms();
     Body->bPauseAnims = true;
     Body->SetAllBodiesSimulatePhysics(true);
     Body->SetAllBodiesPhysicsBlendWeight(1);
+    IsolateSelfCollision();
     Body->bBlendPhysics = true;
     Body->SetAllPhysicsLinearVelocity(FVector::ZeroVector);
     Body->SetAllPhysicsAngularVelocityInRadians(FVector::ZeroVector);
@@ -183,7 +208,7 @@ void APhysicsControlDummy::ResetDummy()
     Limbs.AngularStrength = FMath::Clamp(LimbAngularStrength, .1f, 30.f);
     Limbs.AngularDampingRatio = FMath::Clamp(DriveDampingRatio, .5f, 3.f);
     Limbs.bUseSkeletalAnimation = false;
-    Limbs.bDisableCollision = true;
+    Limbs.bDisableCollision = false;
     // Distributed assistance remains explicit. UpdateBalance gates EVERY drive by
     // actual support/state; falling/down/dead bodies have no enabled world springs.
     const auto* Asset = Body->GetPhysicsAsset();

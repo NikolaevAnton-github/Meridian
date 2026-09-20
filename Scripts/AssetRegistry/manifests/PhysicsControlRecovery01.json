@@ -1,0 +1,23 @@
+{
+  "asset": "PhysicsControlRecovery01",
+  "artifacts": [
+    {
+      "path": "Content/Development/PhysicsControlRecovery01/PA_Manny_Recovery01.uasset",
+      "role": "experimental_manny_recovery_physics_asset",
+      "sha256": "bea668f6539cb44fcf58e6489f9f294b09a717a24f0e5d75a96f73cb4463edec",
+      "size_bytes": 309252,
+      "unreal_package": "/Game/Development/PhysicsControlRecovery01/PA_Manny_Recovery01",
+      "evidence": [
+        {
+          "source": "Docs/PhysicsControlRecovery01.md",
+          "note": "MSQ-88 Candidate04 executor inventory. Derived from shared PA_Mannequin; source preserved. Same 92 exclusions, calibrated foot boxes, runtime self-collision filtering. Owner motion acceptance pending; registration is not acceptance."
+        },
+        {
+          "source": "Docs/Approvals/PhysicsControlRecovery01-OwnerStart01.json",
+          "note": "Scoped owner authorization; independent checks waived. Controller owns registration and closure."
+        }
+      ]
+    }
+  ],
+  "dependencies": []
+}

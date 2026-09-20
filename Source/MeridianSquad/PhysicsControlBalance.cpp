@@ -1,5 +1,6 @@
 #include "PhysicsControlDummy.h"
 #include "PhysicsControlComponent.h"
+#include "DummyRecoveryAnimInstance.h"
 #include "Animation/AnimSequence.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "PhysicsEngine/BodyInstance.h"
@@ -14,12 +15,6 @@ namespace
 bool IsLeg(const FString& Bone)
 {
     return Bone.StartsWith(TEXT("thigh")) || Bone.StartsWith(TEXT("calf")) || Bone.StartsWith(TEXT("foot"));
-}
-FTransform BlendPose(const FTransform& A, const FTransform& B, float Alpha)
-{
-    FTransform Result;
-    Result.Blend(A, B, FMath::Clamp(Alpha, 0.f, 1.f));
-    return Result;
 }
 }
 
@@ -46,7 +41,8 @@ void APhysicsControlDummy::ResetBalance()
     LeanDirection = FVector::ZeroVector;
     StandingForward = Home.GetRotation().GetForwardVector();
     ActiveGetUp = nullptr;
-    FallenPose.Reset(); GetUpEndPose.Reset();
+    FallenSnapshot = FPoseSnapshot(); IdleSnapshot = FPoseSnapshot(); GetUpEndPose.Reset();
+    SnapshotFirstError = 0;
     bRecoveryFloor = bRecoveryClear = false;
     BalanceReason = TEXT("reset");
 }
@@ -66,9 +62,10 @@ void APhysicsControlDummy::EnterFall(const TCHAR* Reason)
     StateSeconds = SettledSeconds = 0;
     BalanceReason = Reason;
     ActiveGetUp = nullptr;
+    Body->bPauseAnims = true;
     DisableBalanceDrives();
     Body->WakeAllRigidBodies();
-    // No teleport, animation switch, velocity replacement or collision replacement.
+    // The fully simulated current visible pose and velocities remain authoritative.
 }
 
 void APhysicsControlDummy::RegisterDisturbance(FName Bone, const FVector& Impulse, float Amount)
@@ -128,8 +125,12 @@ void APhysicsControlDummy::SampleAnimation(UAnimSequence* Animation, float Time,
     TMap<FName,FTransform>& Pose)
 {
     PoseSource->SetWorldTransform(Origin);
-    if (PoseSource->AnimationData.AnimToPlay != Animation) PoseSource->PlayAnimation(Animation, false);
-    PoseSource->SetPosition(FMath::Clamp(Time, 0.f, Animation->GetPlayLength()), false);
+    auto* Anim = CastChecked<UDummyRecoveryAnimInstance>(PoseSource->GetAnimInstance());
+    Anim->Sequence = Animation;
+    Anim->SequenceTime = FMath::Clamp(Time, 0.f, Animation->GetPlayLength());
+    Anim->StartAlpha = 1;
+    Anim->EndAlpha = 0;
+    Anim->MotionOffsetZ = 0;
     PoseSource->TickAnimation(0, false);
     PoseSource->RefreshBoneTransforms();
     Pose.Reset();
@@ -154,7 +155,9 @@ bool APhysicsControlDummy::BeginGetUp()
     const float Yaw = ActualAxis.Rotation().Yaw - SourceAxis.Rotation().Yaw;
     const FQuat Rotation = FRotator(0, Yaw, 0).Quaternion();
     FVector Origin = ActualPelvis.GetLocation() - Rotation.RotateVector(First.FindChecked(TEXT("pelvis")).GetLocation());
-    Origin.Z = GroundHeight + 10;
+    // Align the complete first pose's collision envelope to the measured floor.
+    // This is an animation-target placement, never a teleport of the fallen body.
+    Origin.Z = GroundHeight + .15f - PoseBottom(First);
     RecoveryRoot = FTransform(Rotation, Origin);
     SampleAnimation(ActiveGetUp, ActiveGetUp->GetPlayLength(), RecoveryRoot, GetUpEndPose);
     float EndFloor;
@@ -162,9 +165,30 @@ bool APhysicsControlDummy::BeginGetUp()
     {
         ActiveGetUp = nullptr; BalanceReason = TEXT("get-up destination blocked or unsupported"); return false;
     }
-    FallenPose.Reset();
-    for (const auto& Entry : StandingPose)
-        if (auto* BI = Body->GetBodyInstance(Entry.Key)) FallenPose.Add(Entry.Key, BI->GetUnrealWorldTransform());
+    const FVector EndPelvis = GetUpEndPose.FindChecked(TEXT("pelvis")).GetLocation();
+    const FVector Side = GetUpEndPose.FindChecked(TEXT("thigh_l")).GetLocation() - GetUpEndPose.FindChecked(TEXT("thigh_r")).GetLocation();
+    TMap<FName,FTransform> IdlePose;
+    SampleAnimation(Idle, 0, FTransform::Identity, IdlePose);
+    const FVector IdleSide = IdlePose.FindChecked(TEXT("thigh_l")).GetLocation() - IdlePose.FindChecked(TEXT("thigh_r")).GetLocation();
+    const FQuat IdleRotation = FRotator(0, Side.Rotation().Yaw - IdleSide.Rotation().Yaw, 0).Quaternion();
+    SampleAnimation(Idle, 0, FTransform(IdleRotation,FVector::ZeroVector), IdlePose);
+    FVector IdleOffset = EndPelvis - IdlePose.FindChecked(TEXT("pelvis")).GetLocation();
+    IdleOffset.Z = EndFloor + .15f - FMath::Min(SoleBottom(PoseSource,true), SoleBottom(PoseSource,false));
+    RecoveredIdleRoot = FTransform(IdleRotation, IdleOffset);
+    SampleAnimation(Idle, 0, RecoveredIdleRoot, IdlePose);
+    PoseSource->SnapshotPose(IdleSnapshot);
+    IdleSnapshot.LocalTransforms[0] = (IdleSnapshot.LocalTransforms[0] * RecoveredIdleRoot).GetRelativeTransform(RecoveryRoot);
+    // Capture the post-physics full skeleton, including fingers/toes/non-body bones.
+    // Both components stay forced to LOD0 from construction through capture/playback.
+    Body->SnapshotPose(FallenSnapshot);
+    if (!FallenSnapshot.bIsValid || FallenSnapshot.LocalTransforms.Num() != Body->GetNumBones())
+    { ActiveGetUp = nullptr; BalanceReason = TEXT("incomplete skeletal snapshot"); return false; }
+    FallenSnapshot.LocalTransforms[0] = (FallenSnapshot.LocalTransforms[0] * Body->GetComponentTransform()).GetRelativeTransform(RecoveryRoot);
+    TMap<FName,FTransform> SnapshotTargets;
+    EvaluateRecoveryPose(0, 0, 0, SnapshotTargets);
+    SnapshotFirstError = 0;
+    for (const auto& Entry : SnapshotTargets)
+        SnapshotFirstError = FMath::Max(SnapshotFirstError, static_cast<float>(FVector::Distance(Entry.Value.GetLocation(), Body->GetSocketLocation(Entry.Key))));
     BalanceState = EDummyBalanceState::GettingUp;
     BalanceReason = FaceUp ? TEXT("Mixamo back") : TEXT("Mixamo stomach");
     StateSeconds = 0;
@@ -221,8 +245,8 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
         Instability = FMath::Max(0.f, Instability - FMath::Max(0.f, InstabilityRecoveryRate) * Dt);
     UsableFeet = 0;
     FHitResult Floor;
-    if (LeftLegDisabled == 0 && FindFloor(GetPhysicalBodyLocation(TEXT("foot_l")), SupportReach, Floor)) ++UsableFeet;
-    if (RightLegDisabled == 0 && FindFloor(GetPhysicalBodyLocation(TEXT("foot_r")), SupportReach, Floor)) ++UsableFeet;
+    if (LeftLegDisabled == 0 && FootSupported(TEXT("foot_l"))) ++UsableFeet;
+    if (RightLegDisabled == 0 && FootSupported(TEXT("foot_r"))) ++UsableFeet;
     const FVector Pelvis = GetPhysicalBodyLocation(TEXT("pelvis"));
     const FVector Trunk = GetPhysicalBodyLocation(TEXT("spine_05"));
     const FVector Upright = (Trunk - Pelvis).GetSafeNormal();
@@ -289,31 +313,19 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
             !RecoverySpace(GetUpEndPose.FindChecked(TEXT("pelvis")).GetLocation(),DestinationFloor))
         { EnterFall(TEXT("recovery support/clearance lost")); return; }
         const float BlendSeconds = FMath::Max(.2f,GetUpBlendSeconds);
-        const float MotionTime = FMath::Max(0.f,StateSeconds - BlendSeconds);
+        // Playback starts immediately while the snapshot blends out; no first-frame hold.
+        const float MotionTime = GetRecoveryAnimationTime();
         TMap<FName,FTransform> Targets;
-        SampleAnimation(ActiveGetUp,MotionTime,RecoveryRoot,Targets);
         const float Blend = FMath::SmoothStep(0.f,BlendSeconds,StateSeconds);
-        for (auto& Entry : Targets) Entry.Value = BlendPose(FallenPose.FindChecked(Entry.Key),Entry.Value,Blend);
+        const float EndBlend = FMath::SmoothStep(0.f,1.f,MotionTime-ActiveGetUp->GetPlayLength());
+        EvaluateRecoveryPose(FMath::Min(MotionTime, ActiveGetUp->GetPlayLength()), Blend, EndBlend, Targets);
         // End in the retained idle at the recovered location/heading. The physical
         // mesh stays simulated and all targets interpolate through this handover.
         if (MotionTime >= ActiveGetUp->GetPlayLength())
         {
-            const FVector EndPelvis = GetUpEndPose.FindChecked(TEXT("pelvis")).GetLocation();
-            const FVector Side = GetUpEndPose.FindChecked(TEXT("thigh_l")).GetLocation() - GetUpEndPose.FindChecked(TEXT("thigh_r")).GetLocation();
-            TMap<FName,FTransform> IdlePose;
-            SampleAnimation(Idle,0,FTransform::Identity,IdlePose);
-            const FVector IdleSide = IdlePose.FindChecked(TEXT("thigh_l")).GetLocation() - IdlePose.FindChecked(TEXT("thigh_r")).GetLocation();
-            const FQuat Rotation = FRotator(0,Side.Rotation().Yaw - IdleSide.Rotation().Yaw,0).Quaternion();
-            const FVector Forward = Rotation.RotateVector(FVector::RightVector);
-            SampleAnimation(Idle,0,FTransform(Rotation,FVector::ZeroVector),IdlePose);
-            FVector Offset=EndPelvis-IdlePose.FindChecked(TEXT("pelvis")).GetLocation();
-            Offset.Z=GroundHeight+8;
-            SampleAnimation(Idle,0,FTransform(Rotation,Offset),IdlePose);
-            const float EndBlend=FMath::SmoothStep(0.f,1.f,MotionTime-ActiveGetUp->GetPlayLength());
-            for (auto& Entry : Targets) Entry.Value=BlendPose(Entry.Value,IdlePose.FindChecked(Entry.Key),EndBlend);
             if (EndBlend >= 1 && UsableFeet > 0 && PoseLeanDegrees < 25)
             {
-                StandingPose=IdlePose; StandingForward=Forward; Instability=0; NoSupportSeconds=0;
+                StandingPose=Targets; StandingForward=RecoveredIdleRoot.GetRotation().RotateVector(FVector::RightVector); Instability=0; NoSupportSeconds=0;
                 BalanceState=EDummyBalanceState::Standing; StateSeconds=0;
                 ++GetUps; ActiveGetUp=nullptr; BalanceReason=TEXT("recovered without health restoration");
             }
@@ -344,6 +356,18 @@ void APhysicsControlDummy::AddBalanceState(TSharedPtr<FJsonObject> Root) const
     S->SetNumberField(TEXT("get_ups"),GetUps);
     S->SetNumberField(TEXT("interruptions"),InterruptedGetUps);
     S->SetStringField(TEXT("animation"),ActiveGetUp ? ActiveGetUp->GetName() : TEXT(""));
+    S->SetNumberField(TEXT("animation_time"),ActiveGetUp ? FMath::Min(GetRecoveryAnimationTime(),ActiveGetUp->GetPlayLength()) : 0);
+    S->SetNumberField(TEXT("snapshot_bones"),FallenSnapshot.LocalTransforms.Num());
+    S->SetNumberField(TEXT("skeleton_bones"),Body->GetNumBones());
+    S->SetNumberField(TEXT("snapshot_first_error_cm"),SnapshotFirstError);
+    S->SetNumberField(TEXT("lod"),Body->GetPredictedLODLevel());
+    S->SetNumberField(TEXT("ground_z"),GroundHeight);
+    S->SetNumberField(TEXT("sole_tolerance_cm"),1.f);
+    S->SetNumberField(TEXT("sole_left_z"),SoleBottom(Body,true));
+    S->SetNumberField(TEXT("sole_right_z"),SoleBottom(Body,false));
+    for (const TCHAR* Bone : {TEXT("foot_l"),TEXT("foot_r")})
+        if (const auto* BI = Body->GetBodyInstance(Bone))
+            S->SetNumberField(FString(Bone)+TEXT("_shape_bottom_z"),ShapeBottom(Bone,BI->GetUnrealWorldTransform()));
     int32 Enabled=0;
     for (FName Name:Controls) if (PhysicsControl->GetControlEnabled(Name)) ++Enabled;
     S->SetNumberField(TEXT("enabled_drives"),Enabled);

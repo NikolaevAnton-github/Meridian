@@ -1,0 +1,4 @@
+[
+  {"name":"Candidate01-Back02","duration":22,"profile":1,"flying":true,"inspection_view":true,"location":[-1150,-20,158],"yaw":-56,"look_at":[-980,-320,70],"events":[[1,"@push",-6000]]},
+  {"name":"Candidate01-Front","duration":23,"profile":1,"flying":true,"inspection_view":true,"location":[-1150,-20,158],"yaw":-56,"look_at":[-980,-320,70],"events":[[1,"@push",6000]]}
+]

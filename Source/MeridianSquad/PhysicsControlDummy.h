@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+фц#include "Animation/PoseSnapshot.h"
 #include "PhysicsControlDummy.generated.h"
 
 class UPhysicsControlComponent;
@@ -95,7 +96,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
     float LegDisableSeconds = 2.5f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
-    float SupportReach = 26.f;
+    float SupportReach = 2.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
     float FallThreshold = 1.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
@@ -103,7 +104,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
     float SettleSeconds = .85f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
-    float GetUpBlendSeconds = .8f;
+    float GetUpBlendSeconds = .75f;
 
     /** Shared non-damaging force seam for future push/explosion work; one physical impulse. */
     UFUNCTION(BlueprintCallable, Category="Physics Dummy|Balance")
@@ -148,13 +149,19 @@ private:
     TArray<FName> Controls;
     TMap<FName, FName> BodyControls;
     TMap<FName, float> RecoveringControls;
-    TMap<FName, FTransform> FallenPose;
+    FPoseSnapshot FallenSnapshot;
+    FPoseSnapshot IdleSnapshot;
+    struct FSolePoint { FName Bone; FVector Local; };
+    TArray<FSolePoint> SolePoints;
     TMap<FName, FTransform> StandingPose;
     TMap<FName, FTransform> GetUpEndPose;
     FName PelvisControl;
     FVector LeanDirection = FVector::ZeroVector;
     FVector StandingForward = FVector::ForwardVector;
     FTransform RecoveryRoot;
+    FTransform RecoveredIdleRoot;
+    float SnapshotFirstError = 0;
+    float GetRecoveryAnimationTime() const;
     float StateSeconds = 0.f;
     float SinceDisturbance = 0.f;
     float LeftLegDisabled = 0.f;
@@ -182,6 +189,14 @@ private:
     void SampleAnimation(UAnimSequence* Animation, float Time, const FTransform& Origin, TMap<FName,FTransform>& Pose);
     void DrivePose(const TMap<FName,FTransform>& Pose, float Strength = 1.f);
     void AddBalanceState(TSharedPtr<FJsonObject> Root) const;
+    void CalibrateSoles();
+    float SoleBottom(const USkeletalMeshComponent* Mesh, bool bLeft) const;
+    float ShapeBottom(FName Bone, const FTransform& Transform) const;
+    float PoseBottom(const TMap<FName,FTransform>& Pose) const;
+    bool FootSupported(FName Bone) const;
+    void IsolateSelfCollision();
+    void SetVisibleAnimationPose();
+    void EvaluateRecoveryPose(float Time, float Blend, float EndBlend, TMap<FName,FTransform>& Pose);
     uint64 PoseEpoch = 0;
     bool bReady = false;
     int32 UnsupportedShapes = 0;

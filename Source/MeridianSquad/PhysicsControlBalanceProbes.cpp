@@ -43,11 +43,13 @@ bool APhysicsControlDummy::ProbeBalanceEnvironment(const FString& Operation)
     };
     if (Operation == TEXT("platform"))
     {
+        auto* Floor=SpawnBox(FVector(30000,33000,990),FVector(8,8,.2));
+        if (!Floor) return false;
         const FTransform OriginalHome=Home;
-        Home=FTransform(Home.GetRotation(),FVector(30000,33000,1008));
+        Home=FTransform(Home.GetRotation(),FVector(30000,33000,1000));
         ResetDummy();
         Home=OriginalHome;
-        ProbeFloor=SpawnBox(FVector(30000,33000,990),FVector(8,8,.2));
+        ProbeFloor=Floor;
         return IsValid(ProbeFloor);
     }
     if (Operation == TEXT("ceiling"))

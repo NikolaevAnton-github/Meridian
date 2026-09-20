@@ -1,10 +1,12 @@
 # PhysicsControlRecovery01: self-collision, grounded feet and pose-snapshot get-up
 
-Prepared 2026-09-20. Multica issue: **MSQ-88**, an unassigned backlog follow-up to
+Prepared 2026-09-20. Multica issue: **MSQ-88**, an authorized follow-up to
 MSQ-87 Candidate05 in the CombatSlice01 / MSQ-67 family. The owner reports that the system generally works
 but requests a task covering three visible defects. See the
 [exact feedback and task request](../Approvals/PhysicsControlRecovery01-TaskCreation01.json).
-This record does not dispatch implementation or review.
+The owner [authorized execution without independent checks](../Approvals/PhysicsControlRecovery01-OwnerStart01.json)
+on 2026-09-20. Use executor self-checks and controller scope/evidence acceptance;
+owner play and visual acceptance remain separate. Live Multica owns run state.
 
 Baseline: [MSQ-87 implementation](../PhysicsControlBalance01.md),
 [owner-test handoff](../PhysicsControlBalance01Handoff.md), and the immutable
@@ -65,7 +67,7 @@ with no healing. Preserve blocked/unsupported recovery. Keep the full original
 Mixamo sources and motions; no animation purchase or new source-selection task is
 needed. Document any derived alignment/blend changes and remaining limitations.
 
-## Focused acceptance for future authorized execution
+## Focused acceptance for authorized execution
 
 Use one representative mannequin and ordinary-speed continuous footage with a
 clear view of arms, trunk and soles. Reuse unaffected MSQ-87 evidence and keep all
@@ -96,8 +98,7 @@ MSQ-87 review. General project review rules outside this scoped experiment remai
 
 ## Execution boundaries
 
-Leave the issue unassigned in backlog with zero runs until an explicit start.
-On authorized execution, use the existing Multica project, one production writer
+The explicit owner start is recorded above. Use the existing Multica project, one production writer
 at verified Astra/max/standard and one heavy workload at a time. Check the actual
 editor/project/map/PIE and dirty state through official Epic MCP; preserve owner
 sessions. Register new/derived asset fingerprints without replacing accepted
@@ -108,3 +109,37 @@ single hit path, corpse impacts, F6/F10 and the 0.25 world / 0.65 player slowdow
 No autonomous locomotion overhaul, AI, Mover migration, dismemberment, full push or
 explosion ability, new art, lobby editing, paid service or successor dispatch.
 The controller owns future scope acceptance, closure and the task-scoped commit.
+
+## Execution handoff, 2026-09-20
+
+The assigned Multica Unreal executor owns implementation and the sole editor
+writer lease. Reconfirm live project/map/PIE and dirty state before mutation;
+the controller preflight found UE 5.8.1, the retained lobby, no PIE and no dirty
+map/content packages. Existing owner edits are `Config/DefaultEngine.ini` and
+`MeridianSquad.uproject`; preserve them exactly. Controller fingerprints are in
+`Saved/CombatSlice01/PhysicsControlRecovery01/Controller/preservation-before.json`.
+Preserve the later Ctrl+F7/Ctrl+F8 controls described in `Docs/CombatTestToggles01.md`.
+
+Deliver `Docs/PhysicsControlRecovery01.md` with behavior, changed collision
+pairs/shapes, declared sole tolerance and measurements, snapshot/animation/physics
+handover, focused results and honest limits. Keep an immutable identified candidate,
+changed-file list and ordinary-speed continuous evidence under
+`Saved/CombatSlice01/PhysicsControlRecovery01/Worker/`. Reuse the existing focused
+probe/recording tools where applicable; avoid rebuilding the harness. Keep original
+Mixamo sources and complete motions. Use a scoped derivative for shared assets.
+
+Do not dispatch independent checks, commit, alter profiles/status, register assets
+or start successors. Supply a new asset inventory manifest when needed; the
+controller owns registration and closure. After focused self-checks, return the
+editor ready for owner Play without saving unrelated changes, release the writer
+lease, and provide the exact evidence/candidate paths. The owner judges final motion.
+
+## Implementation handoff, 2026-09-20
+
+The Multica executor delivered Candidate04 with passing build and focused
+self-checks. See [implementation and evidence](../PhysicsControlRecovery01.md)
+and [controller handoff](../PhysicsControlRecovery01Handoff.md). Independent
+checks remain waived; owner play/motion acceptance is pending. The current manual
+owner Play session is preserved. Controller registration includes one documented
+inventory-schema correction, with no gameplay or candidate-manifest changes.
+Task closure and the local MSQ-88 commit are controller-owned; no successor starts.

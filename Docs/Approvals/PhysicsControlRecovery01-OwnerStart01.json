@@ -1,0 +1,14 @@
+{
+  "record_id": "PhysicsControlRecovery01-OwnerStart01",
+  "date_local": "2026-09-20",
+  "task_identifier": "MSQ-88",
+  "source": "Owner direct chat starting MSQ-88",
+  "owner_message_original": "MSQ-88\nприступим, независимых проверок пока не надо",
+  "owner_message_english_translation": "MSQ-88: let's start; no independent checks for now.",
+  "decision": "Execute the bounded mannequin self-collision, sole grounding and full-skeleton pose-snapshot recovery corrections defined in Docs/Tasks/PhysicsControlRecovery01.md.",
+  "review_route": "Independent technical and visual review is waived for this execution. The executor performs focused self-checks and supplies evidence; the controller accepts scope, candidate identity, evidence applicability and preservation. The owner retains direct play and visual acceptance. Do not resume the cancelled MSQ-87 review or dispatch another reviewer.",
+  "execution": "One existing Multica Unreal executor at verified native Astra/max/standard, with one editor writer and one heavy workload at a time. Preserve the current MSQ-87 baseline and later optional combat-test controls.",
+  "verification": "Use one representative mannequin for the changed collision, grounding, back/front/asymmetric recovery and coupled transitions. Confirm all six fixtures render. Reuse unaffected evidence; no per-profile comparison or broad feature matrix.",
+  "preservation": "Keep owner configuration and project descriptor edits, retained lobby and purchased arms, original Mixamo sources and complete motions, immutable historical candidate manifests and evidence, and active owner application sessions.",
+  "limits": "No new paid services, art, AI, lobby changes, full push/explosion ability or successor dispatch. Task closure and a local task-scoped commit remain the controller's responsibility. This is execution authorization, not final motion/play acceptance."
+}

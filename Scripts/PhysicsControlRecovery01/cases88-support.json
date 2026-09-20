@@ -1,0 +1,5 @@
+[
+  {"name":"Candidate02-BlockedAndAnchors","duration":20,"profile":1,"flying":true,"inspection_view":true,"capture_skin":true,"location":[-1150,-20,158],"yaw":-56,"events":[[0.05,"@track","spine_03"],[1,"@push",-6000],[2.7,"@environment","ceiling"],[7,"@environment","clear_ceiling"]]},
+  {"name":"Candidate02-UnsupportedView","duration":8,"profile":1,"platform":true,"flying":true,"inspection_view":true,"remove_support":true,"follow_fall":true,"location":[29550,33200,1180],"yaw":-25,"events":[[0.05,"@track","spine_03"],[1,"@push",-6000]]},
+  {"name":"Candidate02-SixRendered","duration":4,"profile":1,"flying":true,"inspection_view":true,"location":[-1150,0,568],"yaw":0,"look_at":[-790,0,100],"events":[]}
+]

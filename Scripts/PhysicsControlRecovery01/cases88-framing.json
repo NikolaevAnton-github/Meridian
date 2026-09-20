@@ -1,0 +1,3 @@
+[
+  {"name":"Candidate02-AsymmetricView02","duration":19,"profile":1,"flying":true,"inspection_view":true,"capture_skin":true,"capture_collision":true,"location":[-1150,-20,158],"yaw":-56,"events":[[0.05,"@track","calf_l"],[1,"LeftMouseButton",1],[1.07,"LeftMouseButton",0],[1.2,"@track","calf_r"],[1.4,"LeftMouseButton",1],[1.47,"LeftMouseButton",0],[1.5,"@track","spine_03"]]}
+]

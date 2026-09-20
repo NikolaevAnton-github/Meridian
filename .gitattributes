@@ -92,3 +92,12 @@ Source/MeridianSquad/PhysicsControlDummy.cpp -text
 Source/MeridianSquad/PhysicsControlDummy.h -text
 Scripts/PhysicsControlBalance01/** -text
 Docs/PhysicsControlBalance01.md -text
+
+# Preserve exact MSQ-88 recovery candidate and inventory fingerprints.
+Source/MeridianSquad/DummyRecoveryAnimInstance.* -text
+Source/MeridianSquad/PhysicsControlRecovery* -text
+Source/MeridianSquad/PhysicsControlDummyWorld.cpp -text
+Source/MeridianSquad/MeridianSquad.Build.cs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+Scripts/PhysicsControlRecovery01/** -text
+Scripts/AssetRegistry/manifests/PhysicsControlRecovery01.json -text
+Docs/PhysicsControlRecovery01.md -text

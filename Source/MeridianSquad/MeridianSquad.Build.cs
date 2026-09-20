@@ -7,10 +7,12 @@ public class MeridianSquad : ModuleRules
 	public MeridianSquad(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+		// Keep private file helpers isolated when new recovery sources change unity grouping.
+		bUseUnity = false;
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "Json", "PhysicsControl", "PhysicsCore" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "Json", "PhysicsControl", "PhysicsCore", "AnimGraphRuntime", "RenderCore", "RHI" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

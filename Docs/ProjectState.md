@@ -21,7 +21,7 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
-## Planned follow-up: MSQ-88 mannequin collision, grounding and recovery blend
+## Owner-test handoff: MSQ-88 mannequin collision, grounding and recovery blend
 
 The owner separately requested [optional combat test controls](CombatTestToggles01.md):
 Ctrl+F7 toggles mannequin immortality and Ctrl+F8 toggles infinite reserve ammunition
@@ -32,12 +32,20 @@ for one follow-up covering arms passing through the body, feet hovering above
 the floor and the visible transition from varied physical falls to the get-up
 animation. [PhysicsControlRecovery01 / MSQ-88](Tasks/PhysicsControlRecovery01.md)
 records selective self-collision, calibrated sole contact and a full skeletal
-pose-snapshot blend based on the owner's Epic reference. The current MSQ-87 path
-blends physical-body targets toward a fixed first frame; it is not that snapshot
+pose-snapshot blend based on the owner's Epic reference. The earlier MSQ-87
+Candidate05 path blends physical-body targets toward a fixed first frame; it is not that snapshot
 workflow. See [the exact feedback and task request](Approvals/PhysicsControlRecovery01-TaskCreation01.json).
-MSQ-88 is unassigned in backlog; implementation and review are not dispatched.
-Preserve MSQ-87 Candidate05 and its evidence. The owner retains direct visual
-testing for this experiment; the three reported defects remain unresolved.
+The owner [authorized MSQ-88 execution without independent checks](Approvals/PhysicsControlRecovery01-OwnerStart01.json).
+One Multica Unreal executor delivered Candidate04 at verified Astra/max/standard.
+The build and focused self-checks pass: effective arm/body collision, calibrated
+soles and an 89-bone snapshot blend into moving get-up are implemented. Measured
+post-recovery sole gaps are about 0.52-0.58 cm against a 1 cm tolerance. See the
+[implementation](PhysicsControlRecovery01.md) and
+[controller handoff](PhysicsControlRecovery01Handoff.md). The owner retains direct
+visual/play acceptance; assisted motion, foot sliding and retargeted shoulders
+remain judgement points. Continuous recordings are supplied. The new manual owner
+PIE session is preserved. MSQ-87 Candidate05, its evidence and the subsequent
+optional combat test controls remain intact. Live Multica owns task status.
 
 ## Owner-test handoff: MSQ-87 gradual mannequin instability and get-up
 

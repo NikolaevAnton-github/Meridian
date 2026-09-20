@@ -27,7 +27,8 @@ void ACombatProjectileWorld::SetPhysicsDummyEnabled(bool Enabled)
         Params.bDeferConstruction = true;
         for (int32 I = 0; I < 6; ++I)
         {
-            const FTransform Placement(FRotator(0, 180, 0), FVector(-950 + (I / 3) * 320, -320 + (I % 3) * 320, 8));
+            // Z is a search seed; ResetDummy places the measured soles on the floor.
+            const FTransform Placement(FRotator(0, 180, 0), FVector(-950 + (I / 3) * 320, -320 + (I % 3) * 320, 0));
             auto* Dummy = GetWorld()->SpawnActor<APhysicsControlDummy>(APhysicsControlDummy::StaticClass(), Placement, Params);
             if (!Dummy) continue;
             Dummy->ConfigureReactionProfile(I + 1);
