@@ -1,4 +1,5 @@
 #include "PhysicsControlDummy.h"
+#include "CombatProjectileWorld.h"
 #include "PhysicsControlComponent.h"
 #include "DummyRecoveryAnimInstance.h"
 #include "Animation/AnimSequence.h"
@@ -58,6 +59,19 @@ void APhysicsControlDummy::DisableBalanceDrives()
 void APhysicsControlDummy::EnterFall(const TCHAR* Reason)
 {
     if (IsDead()) return;
+    const auto* CombatWorld = ACombatProjectileWorld::Find(GetWorld());
+    if (CombatWorld && CombatWorld->bPreventDummyFalls &&
+        (BalanceState == EDummyBalanceState::Standing || BalanceState == EDummyBalanceState::LosingBalance ||
+         BalanceState == EDummyBalanceState::Stepping))
+    {
+        // Test assistance retains impacts and feasible steps, but a failed recovery
+        // returns to the standing target instead of releasing every drive.
+        CancelStep();
+        BalanceState = EDummyBalanceState::LosingBalance;
+        BalanceReason = TEXT("full fall disabled by test toggle");
+        DrivePose(StandingPose);
+        return;
+    }
     if (BalanceState == EDummyBalanceState::GettingUp) ++InterruptedGetUps;
     if (BalanceState != EDummyBalanceState::Falling && BalanceState != EDummyBalanceState::Down) ++Falls;
     BalanceState = EDummyBalanceState::Falling;

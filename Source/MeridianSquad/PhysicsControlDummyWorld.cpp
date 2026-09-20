@@ -17,7 +17,7 @@ void ACombatProjectileWorld::SetPhysicsDummyEnabled(bool Enabled)
         return;
     }
     PhysicsDummies.RemoveAll([](const auto& Dummy) { return !IsValid(Dummy); });
-    if (PhysicsDummies.Num() != 6)
+    if (PhysicsDummies.Num() != 3)
     {
         for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy)) Dummy->Destroy();
         PhysicsDummies.Reset();
@@ -25,10 +25,10 @@ void ACombatProjectileWorld::SetPhysicsDummyEnabled(bool Enabled)
         Params.ObjectFlags |= RF_Transient;
         Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
         Params.bDeferConstruction = true;
-        for (int32 I = 0; I < 6; ++I)
+        for (int32 I = 0; I < 3; ++I)
         {
             // Z is a search seed; ResetDummy places the measured soles on the floor.
-            const FTransform Placement(FRotator(0, 180, 0), FVector(-950 + (I / 3) * 320, -320 + (I % 3) * 320, 0));
+            const FTransform Placement(FRotator(0, 180, 0), FVector(-950, -320 + I * 320, 0));
             auto* Dummy = GetWorld()->SpawnActor<APhysicsControlDummy>(APhysicsControlDummy::StaticClass(), Placement, Params);
             if (!Dummy) continue;
             Dummy->ConfigureReactionProfile(I + 1);

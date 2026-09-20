@@ -128,6 +128,8 @@ void UCombatRifleComponent::BindInput(UEnhancedInputComponent* Input)
         IE_Pressed, this, &UCombatRifleComponent::ToggleDummyImmortality);
     static_cast<UInputComponent*>(Input)->BindKey(FInputChord(EKeys::F8, false, true, false, false),
         IE_Pressed, this, &UCombatRifleComponent::ToggleInfiniteReserve);
+    static_cast<UInputComponent*>(Input)->BindKey(FInputChord(EKeys::F9, false, true, false, false),
+        IE_Pressed, this, &UCombatRifleComponent::ToggleDummyFallPrevention);
 }
 void UCombatRifleComponent::ToggleDummyImmortality()
 {
@@ -139,6 +141,11 @@ void UCombatRifleComponent::ToggleInfiniteReserve()
     bInfiniteReserve = !bInfiniteReserve;
     if (!bReloading) StatusText.Empty();
     SyncPresentation();
+}
+void UCombatRifleComponent::ToggleDummyFallPrevention()
+{
+    if (auto* World = ACombatProjectileWorld::Find(GetWorld()))
+        World->bPreventDummyFalls = !World->bPreventDummyFalls;
 }
 void UCombatRifleComponent::TogglePhysicsPreview()
 {

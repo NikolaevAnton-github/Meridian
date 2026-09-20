@@ -23,6 +23,12 @@ and owner gates remain; this administrative change does not expand gameplay scop
 
 ## Owner-test handoff: MSQ-91 stance correction within MSQ-90
 
+The later direct owner test adjustment, [CombatTestToggles02](CombatTestToggles01.md#combattesttoggles02-three-mannequins-and-optional-fall-prevention),
+keeps only mannequins 1-3 in the original first row and adds Ctrl+F9 to prevent
+full living balance-loss falls while retaining hit reactions and recovery steps.
+This small outside-task correction does not start MSQ-92 or change the immutable
+MSQ-91 Candidate07 evidence. Ctrl+F7 immortality remains a separate control.
+
 The owner broadly likes MSQ-89 but reports unnatural leg-joint positions after
 steps in an [original screenshot](Approvals/PhysicsControlRefinement01-LegPose01.png).
 The owner agrees with the proposed refinements and explicitly requires uneven

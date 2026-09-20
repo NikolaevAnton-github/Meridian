@@ -71,6 +71,8 @@ public:
     void ToggleInfiniteReserve();
     UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
     void ToggleDummyImmortality();
+    UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
+    void ToggleDummyFallPrevention();
 
     // The projectile coordinator owns the interval after movement/camera sampling.
     void PrepareTimingFrame(double Start, double End);
