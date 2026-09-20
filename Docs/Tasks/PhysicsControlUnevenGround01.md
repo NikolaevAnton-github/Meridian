@@ -1,7 +1,7 @@
 # PhysicsControlUnevenGround01: recovery on static uneven support
 
 Multica issue: **MSQ-95**.
-Stage 5 of [PhysicsControlRefinement01](PhysicsControlRefinement01Plan.md).
+Stage 6 of [PhysicsControlRefinement01](PhysicsControlRefinement01Plan.md).
 Predecessor: [PhysicsControlObstacleRecovery01](PhysicsControlObstacleRecovery01.md).
 Planning only; follow the parent authorization, preservation and verification rules.
 

@@ -1,6 +1,6 @@
 # MeridianSquad current project state
 
-Updated 2026-09-20. This is a navigation snapshot of current scope and decisions,
+Updated 2026-09-21. This is a navigation snapshot of current scope and decisions,
 not a second task database or a new execution authorization. Read the relevant
 linked task before work and verify live Multica/editor state when needed. Later
 explicit owner instructions take precedence within their scope. When dated summaries
@@ -20,6 +20,30 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [review responsibilities](AgentDevelopment.md#review-responsibilities) and
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
+
+## Next task prepared: MSQ-97 physical recoverability
+
+The owner selected [PhysicsControlRecoverability01 / MSQ-97](Tasks/PhysicsControlRecoverability01.md)
+as the next task after discussing leg replanting and physical balance limits;
+see the [exact next-task decision](Approvals/PhysicsControlRecoverability01-NextTask01.json).
+The MSQ-90 order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**.
+MSQ-97 is prepared in backlog, unassigned, with zero runs. MSQ-92 through MSQ-96
+remain undispatched. Planning creates no implementation run or review waiver.
+
+The new task replaces automatic leg-hit support failure with displaced-leg
+replanting, coordinated body recovery and a practical contact/momentum-based
+recoverability estimate with bounded physical assistance. Successive recovery
+steps may continue under torso fire beyond the old two-step cap; genuinely
+infeasible support releases into physical falling even during a burst. Enemy
+settings alter recovery capacity. Ctrl+F9 is planned to become a bounded assistance
+preset rather than the rejected unlimited fall veto. Actual bullet penetration
+through both legs remains a separate future projectile integration scenario.
+MSQ-92 then refines adaptive step geometry/timing, reusing predecessor evidence.
+
+Current runtime remains MSQ-91 Candidate07 plus CombatTestToggles02 (`37af4b8`),
+including its existing Ctrl+F9 behavior, until the new task is implemented.
+Historical sources/evidence and owner edits remain preserved. See the updated
+[family plan](Tasks/PhysicsControlRefinement01Plan.md) for scope and verification.
 
 ## Owner-test handoff: MSQ-91 stance correction within MSQ-90
 

@@ -22,20 +22,29 @@ That authorization is scoped to stage 1; MSQ-92 through MSQ-96 remain undispatch
 Multica owns live status. Stage order and dependency metadata guide later dispatch;
 they are not execution permission.
 
+On 2026-09-21 the owner selected [physical recoverability / MSQ-97](PhysicsControlRecoverability01.md)
+as the next task, between MSQ-91 and MSQ-92; see the [later decision](../Approvals/PhysicsControlRecoverability01-NextTask01.json).
+It adds displaced-leg replanting, contact/momentum-based recovery limits and
+successive steps under sustained hits. The active baseline is MSQ-91 Candidate07
+plus CombatTestToggles02 commit `37af4b8`; earlier evidence stays immutable.
+This preparation leaves MSQ-97 and MSQ-92 through MSQ-96 unassigned in backlog,
+with zero runs. It does not dispatch implementation or extend prior review waivers.
+
 ## Ordered implementation tasks
 
 | Stage | Multica | Task | Required result |
 | --- | --- | --- | --- |
 | 1 | MSQ-91 | [PhysicsControlLegPose01](PhysicsControlLegPose01.md) | Anatomical knee/foot alignment and a credible settled stance after steps. |
-| 2 | MSQ-92 | [PhysicsControlAdaptiveSteps01](PhysicsControlAdaptiveSteps01.md) | Step length, lift and timing respond to actual disturbance and safe reachable placement. |
-| 3 | MSQ-93 | [PhysicsControlCounterbalance01](PhysicsControlCounterbalance01.md) | Torso and arms help balance, then settle without perpetual sway. |
-| 4 | MSQ-94 | [PhysicsControlObstacleRecovery01](PhysicsControlObstacleRecovery01.md) | Obstacle-aware living get-up, finite retries and safe blocked behavior. |
-| 5 | MSQ-95 | [PhysicsControlUnevenGround01](PhysicsControlUnevenGround01.md) | Ground contact and recovery steps on slopes, unequal heights and fixed rough support. |
-| 6 | MSQ-96 | [PhysicsControlDebrisSupport01](PhysicsControlDebrisSupport01.md) | Contact with translating, rotating or disappearing debris, including loss of support. |
+| 2 | MSQ-97 | [PhysicsControlRecoverability01](PhysicsControlRecoverability01.md) | Displaced-leg replanting and successive recovery steps within physical support and effort limits; fall when recovery is infeasible. |
+| 3 | MSQ-92 | [PhysicsControlAdaptiveSteps01](PhysicsControlAdaptiveSteps01.md) | Refine step length, lift and timing on the recoverability foundation. |
+| 4 | MSQ-93 | [PhysicsControlCounterbalance01](PhysicsControlCounterbalance01.md) | Torso and arms help balance, then settle without perpetual sway. |
+| 5 | MSQ-94 | [PhysicsControlObstacleRecovery01](PhysicsControlObstacleRecovery01.md) | Obstacle-aware living get-up, finite retries and safe blocked behavior. |
+| 6 | MSQ-95 | [PhysicsControlUnevenGround01](PhysicsControlUnevenGround01.md) | Ground contact and recovery steps on slopes, unequal heights and fixed rough support. |
+| 7 | MSQ-96 | [PhysicsControlDebrisSupport01](PhysicsControlDebrisSupport01.md) | Contact with translating, rotating or disappearing debris, including loss of support. |
 
 The first child depends on MSQ-89; each subsequent child consumes the verified
 preceding handoff. Use the latest applicable candidate, preserving older manifests.
-Stage 4 addresses the retained wall/get-up retry limitation; terrain work follows
+Stage 5 addresses the retained wall/get-up retry limitation; terrain work follows
 so that blocked recovery already has a safe outcome. These are bounded increments,
 not a mandatory solver, animation-system or movement-framework replacement.
 
@@ -61,7 +70,7 @@ Teleportation, collision disabling, cosmetic rubble and permanently frozen chunk
 do not satisfy this row. Reuse focused earlier evidence and check only the newly
 coupled behavior and cleanup. This is not unrestricted traversal over every fragment.
 
-Stage 6 may close its support capability against removable dynamic fixtures before
+Stage 7 may close its support capability against removable dynamic fixtures before
 MSQ-74 exists. That closure does not close real rubble traversal: MSQ-78 retains the
 explicit open integration gate until the movement and destruction prerequisites
 are available. Do not make MSQ-70 depend on MSQ-74/MSQ-78 or reorder the original
@@ -73,14 +82,18 @@ Each child defines its affected behaviors, records numeric operating limits and
 provides an identified candidate, concise changes, measurements and ordinary-speed
 continuous footage. Owner motion/play acceptance remains separate. Verify only
 changed behavior and related transitions; reuse applicable passing evidence. For
-the six-mannequin experiment, inspect the set rendering and check shared behavior
+the current three-mannequin experiment, inspect the set rendering and check shared behavior
 on one representative mannequin unless a distinct profile defect needs a check.
 Do not run a full animation, variant or combat matrix by default.
 
-Retain hit response, one/two-step recovery limit, true physical collapse when
+The former one/two-step episode cap is superseded for reactive hit recovery by
+MSQ-97. Successive steps are permitted while support, reach, actuator limits and
+progress remain valid. Navigation, pursuit and general walking remain excluded.
+Retain hit response, true physical collapse when
 recovery fails, living get-up, terminal death, damage state, self-collision and
 calibrated sole contact. Preserve F6 reset without ammunition refill, F10, optional
-Ctrl+F7/Ctrl+F8 controls and the 0.25 world / 0.65 player slowdown. Recheck slowdown
+Ctrl+F7/Ctrl+F8 controls and the 0.25 world / 0.65 player slowdown. MSQ-97 replaces
+Ctrl+F9's unlimited fall veto with bounded recovery assistance. Recheck slowdown
 only where changed timing/support behavior couples to it. Reset/recreation must
 clear any new episode or support references. No hidden suspension or forced
 placement through geometry may make a failed recovery appear successful.

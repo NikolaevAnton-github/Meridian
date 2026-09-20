@@ -16,6 +16,9 @@ instructions supersede earlier guidance within their stated scope.
 - Current family: MSQ-90 [stance, balance and terrain support](Docs/Tasks/PhysicsControlRefinement01Plan.md)
   contains MSQ-91 through MSQ-96 under the
   [owner's task-creation request](Docs/Approvals/PhysicsControlRefinement01-TaskCreation01.json).
+  The later [MSQ-97 next-task decision](Docs/Approvals/PhysicsControlRecoverability01-NextTask01.json)
+  inserts physical recoverability after MSQ-91 and before MSQ-92; it is prepared,
+  unassigned and undispatched. See [the task](Docs/Tasks/PhysicsControlRecoverability01.md).
   The later [MSQ-91 start and review waiver](Docs/Approvals/PhysicsControlLegPose01-OwnerStart01.json)
   authorized the delivered Candidate07 stance correction. See the
   [handoff](Docs/PhysicsControlLegPose01Handoff.md); MSQ-89 Candidate05 and its

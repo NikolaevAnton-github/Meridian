@@ -1,7 +1,7 @@
 # PhysicsControlObstacleRecovery01: obstacle-aware living get-up
 
 Multica issue: **MSQ-94**.
-Stage 4 of [PhysicsControlRefinement01](PhysicsControlRefinement01Plan.md).
+Stage 5 of [PhysicsControlRefinement01](PhysicsControlRefinement01Plan.md).
 Predecessor: [PhysicsControlCounterbalance01](PhysicsControlCounterbalance01.md).
 Planning only; follow the parent authorization, preservation and verification rules.
 

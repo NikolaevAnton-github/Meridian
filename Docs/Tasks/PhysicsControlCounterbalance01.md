@@ -1,7 +1,7 @@
 # PhysicsControlCounterbalance01: torso and arm balance during recovery
 
 Multica issue: **MSQ-93**.
-Stage 3 of [PhysicsControlRefinement01](PhysicsControlRefinement01Plan.md).
+Stage 4 of [PhysicsControlRefinement01](PhysicsControlRefinement01Plan.md).
 Predecessor: [PhysicsControlAdaptiveSteps01](PhysicsControlAdaptiveSteps01.md).
 Planning only; follow the parent authorization, preservation and verification rules.
 

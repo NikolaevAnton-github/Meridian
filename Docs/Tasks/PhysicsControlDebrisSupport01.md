@@ -1,7 +1,7 @@
 # PhysicsControlDebrisSupport01: moving and disappearing debris support
 
 Multica issue: **MSQ-96**.
-Stage 6 of [PhysicsControlRefinement01](PhysicsControlRefinement01Plan.md).
+Stage 7 of [PhysicsControlRefinement01](PhysicsControlRefinement01Plan.md).
 Predecessor: [PhysicsControlUnevenGround01](PhysicsControlUnevenGround01.md).
 Planning only; follow the parent authorization, preservation and verification rules.
 

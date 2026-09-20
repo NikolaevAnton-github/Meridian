@@ -1,0 +1,33 @@
+{
+  "record_id": "PhysicsControlRecoverability01-NextTask01",
+  "date_local": "2026-09-21",
+  "source": "Owner direct chat after the CombatTestToggles02 experiment and discussion of physical recoverability",
+  "owner_next_task_request_original": "Давай это сделаем следующей задачей",
+  "owner_next_task_request_english_translation": "Let's make this the next task.",
+  "owner_leg_recovery_context_original": "На счет попадания в ногу, в целом логично, что маникен теряет опору при выстреле в ногу, но для нашего геймплея не совсем годится. В заивисимости от настроек(типа врага) нога например отклоняется в противоположную сторону от выстрела, и она же встает на новую позицию из-за отклоений, и следом должно подстроится все тело. Но тут встает вопрос, а мы можем физически определить, когда уже совсем не выходит телу держать баланс? скажем выбивание двух ног пулями, или одной пробивной пулей сбоку, которая прошла через обе ноги, уже никак не получится держать баланс, или даже мощная пуля, которая бьет одну ногу и силой удра этой ноги сносит вторую?",
+  "owner_leg_recovery_context_english_translation": "Losing support from a leg shot is understandable, but does not quite suit our gameplay. Depending on enemy settings, the leg should be displaced away from the shot, replant at a new position, and the body should adjust. Can we physically determine when balance is no longer recoverable, such as both legs being swept by bullets, a penetrating side shot through both legs, or the struck leg knocking the other leg away?",
+  "earlier_owner_burst_context_original": "Нет, не совсем то, в целом когда Ctrl+F9 выключено, все работает окей, разве что не понятно, почему от одного попадание в ногу манекен теряет равновесие. Но вот выключение Ctrl+F9 показывает следующее, я бы хотел что бы это было так - знаешь как в кино, в персонжа стреляют непрерывно в туловище, это все откидывает его, но он держиться на ногах постоянно переступая и когда огонь прекращается он уже падает. У нас в игре будут разные враги и они при разных условиях будут терять равновесие. Такое можно сделать?",
+  "accepted_discussion_context": "The controller described a practical physical recoverability estimate using contact/support, body motion, reachable steps and bounded enemy capabilities. Recovery may replant the struck leg; impossible support loss can cause falling even during a burst. Forced survival until the last shot would be a separate cinematic rule. Current projectile penetration is absent.",
+  "decision": "Create physical balance recovery under hits as the next task after MSQ-91 and before MSQ-92; update the existing MSQ-90 family order and dependency descriptions.",
+  "task": "Docs/Tasks/PhysicsControlRecoverability01.md",
+  "multica_issue": "MSQ-97",
+  "parent": "MSQ-90",
+  "predecessor": "MSQ-91",
+  "successor": "MSQ-92",
+  "native_stage": 2,
+  "priority": "high",
+  "creation_evidence": "Saved/CombatSlice01/PhysicsControlRecoverability01/Planning/verification.json",
+  "task_creation_authorized": true,
+  "preparation_dispatches_production": false,
+  "administrative_scope": "Create one backlog issue unassigned with zero runs; update ordering and planning records using no-start administration. No implementation, editor mutation or task-runtime startup in this preparation.",
+  "controller_scope_choices": [
+    "Static flat support first; choose and document a practical recoverability approximation, not an exact general proof.",
+    "Supersede the one/two-step episode cap for physically feasible reactive hit recovery; general walking and navigation remain excluded.",
+    "Replace the rejected Ctrl+F9 unlimited fall veto with a bounded recovery-assistance preset; ordinary mode also receives the new recoverability logic.",
+    "Stopping fire resolves according to recoverability rather than guaranteeing collapse after every burst. Preserve immediate terminal death and separate Ctrl+F7 immortality.",
+    "Verify leg-to-leg contact transfer; actual bullet penetration remains a separate future projectile integration scenario, not a blocker or new issue created here.",
+    "MSQ-92 refines adaptive step geometry/timing after this prerequisite; MSQ-93 retains expanded torso/arm counterbalance. Reuse overlapping passing evidence."
+  ],
+  "review": "No implementation reviewer is dispatched during planning. On substantive implementation follow the standing one-primary-reviewer workflow; previous task-specific waivers are not extended. Owner motion/play judgement remains separate.",
+  "preservation": "Retain MSQ-91 Candidate07, CombatTestToggles02 commit 37af4b8, three active mannequin identities, earlier candidates, original sources, owner edits and editor sessions. Runtime code and assets are unchanged by task creation."
+}
