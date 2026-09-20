@@ -21,6 +21,20 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Planned follow-up: MSQ-88 mannequin collision, grounding and recovery blend
+
+After playing MSQ-87, the owner reports that the overall system works but asks
+for one follow-up covering arms passing through the body, feet hovering above
+the floor and the visible transition from varied physical falls to the get-up
+animation. [PhysicsControlRecovery01 / MSQ-88](Tasks/PhysicsControlRecovery01.md)
+records selective self-collision, calibrated sole contact and a full skeletal
+pose-snapshot blend based on the owner's Epic reference. The current MSQ-87 path
+blends physical-body targets toward a fixed first frame; it is not that snapshot
+workflow. See [the exact feedback and task request](Approvals/PhysicsControlRecovery01-TaskCreation01.json).
+MSQ-88 is unassigned in backlog; implementation and review are not dispatched.
+Preserve MSQ-87 Candidate05 and its evidence. The owner retains direct visual
+testing for this experiment; the three reported defects remain unresolved.
+
 ## Owner-test handoff: MSQ-87 gradual mannequin instability and get-up
 
 The owner selected gradual loss of stability: buckling legs, torso lean and pose

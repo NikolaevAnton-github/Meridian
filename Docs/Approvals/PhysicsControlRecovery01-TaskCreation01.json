@@ -1,0 +1,15 @@
+{
+  "record_id": "PhysicsControlRecovery01-TaskCreation01",
+  "date_local": "2026-09-20",
+  "task_identifier": "MSQ-88",
+  "source": "Owner direct chat after testing MSQ-87 Candidate05 and discussing its visible defects",
+  "owner_feedback_original": "В целом система работает. Но есть пара вопросов. 1) А можно сделать так, что при падении руки себя вели более адекватно?не провалисваясь сковзь маникен? 2) персонаж будто бы не стоит на земле а в нескольких сантиметрах выше, почему? имено ноги, когд аон падает туловище вроде лежит на земле. 3) когда персонаж падает, он как бы падает в разные позы, и переход к нашей анимации очень заметен, во первых анимация начинается с определенных поз, особенно на спине. в примере epic все заметно лучше https://dev.epicgames.com/documentation/unreal-engine/animation-pose-snapshot-in-unreal-engine, ты так же делал?",
+  "owner_message_original": "Заведи на это все задачу",
+  "owner_message_english_translation": "Create a task for all of this.",
+  "decision": "Create one planning-only follow-up covering arm/body self-collision, grounded feet and a smooth full-skeleton pose-snapshot transition from physical falls into the retained get-up animations.",
+  "reference": "https://dev.epicgames.com/documentation/unreal-engine/animation-pose-snapshot-in-unreal-engine",
+  "discussion_context": "Source inspection identified fixed recovery/standing origin offsets of +10/+8 cm, a floor-proximity check that does not require sole contact, and a 0.8-second physical-body blend toward the first animation frame before playback advances. The current system does not use Unreal Save Pose Snapshot/Pose Snapshot. Effective self-collision pairs and body shapes require a focused audit; exact runtime causes and correction values must not be inferred from one collision flag alone.",
+  "authorization": "Task creation and project planning records only. No executor assignment, implementation run, editor mutation, independent review or automatic successor dispatch.",
+  "acceptance_context": "The owner says the overall system works, while reporting three unresolved presentation defects. This is not final acceptance of those defects. Preserve the owner's direct-testing direction for this experiment and do not automatically resume the cancelled MSQ-87 review.",
+  "preservation": "Keep MSQ-87 Candidate05 and its exact evidence, original Mixamo sources and full motion ranges, the retained six fixtures, relative slowdown, damage/death/reset semantics, owner configuration/descriptor/map edits and application sessions. No new paid services, purchased animations, new art, AI or full push/explosion ability."
+}
