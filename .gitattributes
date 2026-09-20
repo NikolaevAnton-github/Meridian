@@ -82,3 +82,6 @@ Source/MeridianSquad/EnemyPrototype* -text
 Source/MeridianSquad/CombatProjectileWorld.* -text
 Source/MeridianSquad/CombatRifleComponent.* -text
 Source/MeridianSquad/CombatPrototypeHUD.cpp -text
+
+# Preserve exact downloaded get-up sources and their registry provenance.
+Assets/Source/PhysicsControlBalance01/MixamoGetUp01/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

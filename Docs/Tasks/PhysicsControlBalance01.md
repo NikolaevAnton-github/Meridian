@@ -6,6 +6,13 @@ stability for the existing Physics Control mannequins and asked that it be recor
 See [the exact request](../Approvals/PhysicsControlBalance01-TaskCreation01.json).
 No production executor is assigned or started by this planning record.
 
+Source preparation, 2026-09-20: the owner subsequently selected Mixamo's
+Getting Up From Back and Getting Up From Stomach and requested their download
+with project-appropriate settings. Both original FBXs are now preserved in
+[MixamoGetUp01](../../Assets/Source/PhysicsControlBalance01/MixamoGetUp01/README.md),
+with exact settings and fingerprints in its provenance record. This is source
+intake only; Manny retargeting and gameplay execution remain undispatched.
+
 ## Selected behavior
 
 The mannequin resists disturbances with visible weight: knees buckle, the torso
@@ -43,12 +50,14 @@ or an immediate fall on every hit.
   Do not implement the full push ability, explosives, dismemberment or AI here.
   Temporary loss of usable support is sufficient for this experiment; permanent
   injury/regrowth rules are not selected by the owner.
-- Animation sourcing is a preparation step: inspect suitable existing licensed
-  assets, then identify front/back get-up coverage and any necessary retargeting.
-  Kimodo is an optional experiment, not a required dependency or an accepted motion
-  source. Its current authentication/memory gate must not block initial balance and
-  falling work. Any provisional get-up must be labelled; a missing transition is
-  not a completed get-up feature. No new paid service, asset purchase or art task.
+- Animation sourcing has two owner-selected Mixamo source candidates for back
+  and stomach get-up. Inspect their full motion ranges and retarget them to Manny
+  during implementation. Kimodo remains an optional experiment; its first real
+  generation is recorded in [KimodoGetUp01](../KimodoGetUp01.md), superseding the
+  earlier installation-only generation blocker for that session. Neither source
+  route is yet integrated or accepted in gameplay. Any provisional get-up must
+  be labelled; a missing transition is not a completed get-up feature. No new
+  paid service, asset purchase or art task.
 - Preserve the single hit/damage path, living/dead distinction, corpse impacts,
   F6 reset without ammunition refill, F10 fixture toggle and retained relative
   slowdown. Use the appropriate simulation clock so recovery does not silently run

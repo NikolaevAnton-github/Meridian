@@ -1,0 +1,30 @@
+{
+  "asset": "MixamoGetUp01",
+  "artifacts": [
+    {
+      "path": "Assets/Source/PhysicsControlBalance01/MixamoGetUp01/GetUp_FromBack_XBot.fbx",
+      "role": "downloaded_animation_source_candidate",
+      "sha256": "9a3ce556dee7314c4f6d64fc93cb70174a153366c096b2a57764abf12c415c02",
+      "size_bytes": 2472256,
+      "evidence": [
+        {
+          "source": "Assets/Source/PhysicsControlBalance01/MixamoGetUp01/provenance.json",
+          "note": "Owner-selected source intake for MSQ-87; original Mixamo FBX bytes. Not Manny-retargeted, gameplay-tested or accepted for final motion quality."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/PhysicsControlBalance01/MixamoGetUp01/GetUp_FromStomach_XBot.fbx",
+      "role": "downloaded_animation_source_candidate",
+      "sha256": "1e80da563f558c6c0cf11bf59156d6404a4740a242bb3810fe8a1c1b9e0bd14b",
+      "size_bytes": 2431520,
+      "evidence": [
+        {
+          "source": "Assets/Source/PhysicsControlBalance01/MixamoGetUp01/provenance.json",
+          "note": "Owner-selected source intake for MSQ-87; original Mixamo FBX bytes. Not Manny-retargeted, gameplay-tested or accepted for final motion quality."
+        }
+      ]
+    }
+  ],
+  "dependencies": []
+}

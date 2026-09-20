@@ -1,0 +1,108 @@
+{
+  "record_id": "MixamoGetUp01-SourceIntake01",
+  "task": "MSQ-87",
+  "date_local": "2026-09-20",
+  "provider": "Adobe Mixamo",
+  "source_url": "https://www.mixamo.com/#/?page=1&query=get%20up&type=Motion%2CMotionPack",
+  "license_reference": "https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html",
+  "owner_request_original": "Давай возьмем их, скачаешь с нужными насйтроками для нас?",
+  "owner_request_english": "Let us take them; will you download them with the settings we need?",
+  "owner_request_context": "The two proposed Mixamo candidates: Getting Up From Back and Getting Up From Stomach.",
+  "authorization": "Download and preserve these source candidates with suitable export settings; no gameplay implementation dispatch.",
+  "export_settings_observed": {
+    "character": "X Bot",
+    "format": "FBX Binary(.fbx)",
+    "skin": "With Skin",
+    "frames_per_second": 30,
+    "keyframe_reduction": "none"
+  },
+  "source_byte_changes": "None; original browser downloads copied with descriptive project filenames.",
+  "clips": [
+    {
+      "display_title": "Getting Up",
+      "catalog_description": "Getting Up From Back",
+      "original_download_filename": "Getting Up.fbx",
+      "path": "Assets/Source/PhysicsControlBalance01/MixamoGetUp01/GetUp_FromBack_XBot.fbx",
+      "sha256": "9a3ce556dee7314c4f6d64fc93cb70174a153366c096b2a57764abf12c415c02",
+      "size_bytes": 2472256,
+      "ui_frame_count": 251,
+      "duration_seconds": 8.333333333333334,
+      "customization_observed": {
+        "injury_level": 0,
+        "get_up": 50,
+        "overdrive": 50,
+        "character_arm_space": 50,
+        "trim_percent": [
+          0,
+          100
+        ],
+        "mirror": false
+      },
+      "fbx_inspection": {
+        "fbx_version": 7700,
+        "skeleton_bones": 65,
+        "mesh_geometries": 2,
+        "animation_curves": 315,
+        "distinct_key_times": 251,
+        "key_time_step_seconds": [
+          0.03333333333333333
+        ],
+        "finite_animation_values": true,
+        "strictly_increasing_curve_times": true
+      },
+      "animation_stacks": [
+        "Take 001",
+        "mixamo.com"
+      ]
+    },
+    {
+      "display_title": "Getting Up",
+      "catalog_description": "Getting Up From Stomach",
+      "original_download_filename": "Getting Up (1).fbx",
+      "path": "Assets/Source/PhysicsControlBalance01/MixamoGetUp01/GetUp_FromStomach_XBot.fbx",
+      "sha256": "1e80da563f558c6c0cf11bf59156d6404a4740a242bb3810fe8a1c1b9e0bd14b",
+      "size_bytes": 2431520,
+      "ui_frame_count": 259,
+      "duration_seconds": 8.6,
+      "customization_observed": {
+        "injury_level": 50,
+        "get_up": 50,
+        "overdrive": 50,
+        "character_arm_space": 50,
+        "trim_percent": [
+          0,
+          100
+        ],
+        "mirror": false
+      },
+      "fbx_inspection": {
+        "fbx_version": 7700,
+        "skeleton_bones": 65,
+        "mesh_geometries": 2,
+        "animation_curves": 315,
+        "distinct_key_times": 259,
+        "key_time_step_seconds": [
+          0.03333333333333333
+        ],
+        "finite_animation_values": true,
+        "strictly_increasing_curve_times": true
+      },
+      "animation_stacks": [
+        "Take 001",
+        "mixamo.com"
+      ]
+    }
+  ],
+  "verification": {
+    "method": "Read-only parse using existing Blender io_scene_fbx.parse_fbx",
+    "blender_version": "5.2.1 LTS",
+    "evidence": "Saved/CombatSlice01/PhysicsControlBalance01/MixamoGetUp01/fbx-inspection.json",
+    "scope": "FBX readability, skeleton/mesh/animation presence, finite values and time samples; no motion quality assessment."
+  },
+  "import_note": "Use the complete mixamo.com stack; generic global and Take 001 ranges end at 3.333 s and are shorter than the actual motion.",
+  "owner_selected_for_source_intake": true,
+  "retargeted_to_manny": false,
+  "gameplay_integrated": false,
+  "production_accepted": false,
+  "owner_visual_accepted": false
+}

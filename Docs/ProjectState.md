@@ -31,6 +31,11 @@ records the planned behavior and focused acceptance under
 This is an unassigned backlog task; implementation is not dispatched. It builds
 on MSQ-85 and is separate from animation-tool installation. Kimodo is optional
 for animation experiments, not a prerequisite to initial balance/falling work.
+The owner subsequently selected and requested download of Mixamo back/stomach
+get-up sources. [MixamoGetUp01](../Assets/Source/PhysicsControlBalance01/MixamoGetUp01/README.md)
+preserves both original FBXs at 30 FPS without key reduction, with source mesh,
+skeleton and exact provenance. This completes source intake only; Manny
+retargeting, gameplay integration and motion acceptance remain pending.
 
 ## Authorized tooling setup: MSQ-86 local Kimodo
 
