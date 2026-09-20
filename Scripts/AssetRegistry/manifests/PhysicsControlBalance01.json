@@ -1,0 +1,266 @@
+{
+    "asset":  "PhysicsControlBalance01",
+    "artifacts":  [
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/A_GetUp_Back.uasset",
+                          "role":  "experimental_manny_get_up_animation",
+                          "sha256":  "5f805e923dd108bcb988d6549cf913fa7355ca0b69a15b5c83d078e19b4fdc32",
+                          "size_bytes":  1697114,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/A_GetUp_Back",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/A_GetUp_Stomach.uasset",
+                          "role":  "experimental_manny_get_up_animation",
+                          "sha256":  "e475f9f109725f8f03c1ffb4b5450a88bf7ff5c8d6b510fd48467814c161565c",
+                          "size_bytes":  1747284,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/A_GetUp_Stomach",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/IK_Manny.uasset",
+                          "role":  "experimental_ik_rig",
+                          "sha256":  "af851ff413d95fe312d328cdbfbe705e3f4e32d2deced58a9efde06c5d352712",
+                          "size_bytes":  92145,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/IK_Manny",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/IK_XBot.uasset",
+                          "role":  "experimental_ik_rig",
+                          "sha256":  "bc844a3191f7fd6f5498a6b7c43f1917a67f0c93d2874ea7c8618f8720d5d183",
+                          "size_bytes":  71526,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/IK_XBot",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/RT_XBot_Manny.uasset",
+                          "role":  "experimental_ik_retargeter",
+                          "sha256":  "0444b2e41963368737f228f5bb43bf3d3babc89371772f89419f29c0ecacd1d7",
+                          "size_bytes":  29979,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/RT_XBot_Manny",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/Source/Back/XBot_Back.uasset",
+                          "role":  "imported_mixamo_source_mesh",
+                          "sha256":  "b7670bfeaa8cff8d93b92ec4661a34b1fae6ea8fd0ef88c6205d4f31a10c0636",
+                          "size_bytes":  6392147,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/Source/Back/XBot_Back",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/Source/Back/XBot_Back_Anim.uasset",
+                          "role":  "imported_mixamo_source_animation",
+                          "sha256":  "32a3c6f4281ad88a9c300235c7045d8fcc19de6f6c41685133e2b2f1effb23c9",
+                          "size_bytes":  1309020,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/Source/Back/XBot_Back_Anim",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/Source/Back/XBot_Back_Skeleton.uasset",
+                          "role":  "imported_mixamo_source_skeleton",
+                          "sha256":  "b515a723b25732f7214ee6e965198fcdec651780f83587fcc47ef3398be037a9",
+                          "size_bytes":  29503,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/Source/Back/XBot_Back_Skeleton",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/Source/Stomach/XBot_Stomach.uasset",
+                          "role":  "imported_mixamo_source_mesh",
+                          "sha256":  "047c4cbf7e3e7f4562bac8bafe845dfff85055ccfc44ac0f7eafcbebcd3a4921",
+                          "size_bytes":  6391096,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/Source/Stomach/XBot_Stomach",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/Source/Stomach/XBot_Stomach_Anim.uasset",
+                          "role":  "imported_mixamo_source_animation",
+                          "sha256":  "f27f55264225f779780c73472d8e7f721c90aa1c8b5bfc50f314151aba6ca23c",
+                          "size_bytes":  1364874,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/Source/Stomach/XBot_Stomach_Anim",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      },
+                      {
+                          "path":  "Content/Development/PhysicsControlBalance01/Source/Stomach/XBot_Stomach_Skeleton.uasset",
+                          "role":  "imported_mixamo_source_skeleton",
+                          "sha256":  "ed8b8c5d43bd33333a1aa2068ec802f71246befd44a06691c92c5d00ff7fc7a7",
+                          "size_bytes":  29542,
+                          "unreal_package":  "/Game/Development/PhysicsControlBalance01/Source/Stomach/XBot_Stomach_Skeleton",
+                          "evidence":  [
+                                           {
+                                               "source":  "Docs/PhysicsControlBalance01.md",
+                                               "note":  "Executor Candidate05 and focused self-check handoff. Experimental owner-test inventory; independent review waived for MSQ-87, no final owner motion acceptance."
+                                           },
+                                           {
+                                               "source":  "Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json",
+                                               "note":  "Scoped owner instruction replaces independent review with direct owner testing; original Mixamo sources remain inventoried separately in MixamoGetUp01."
+                                           }
+                                       ]
+                      }
+                  ],
+    "dependencies":  [
+                         {
+                             "upstream":  "Content/Development/PhysicsControlBalance01/Source/Back/XBot_Back_Anim.uasset",
+                             "downstream":  "Content/Development/PhysicsControlBalance01/A_GetUp_Back.uasset",
+                             "kind":  "retarget",
+                             "status":  "declared",
+                             "evidence":  [
+                                              {
+                                                  "source":  "Saved/CombatSlice01/PhysicsControlBalance01/Worker/retarget01.json",
+                                                  "note":  "Executor records source animation, target animation and full duration. Native asset derivation has not received independent review."
+                                              }
+                                          ]
+                         },
+                         {
+                             "upstream":  "Content/Development/PhysicsControlBalance01/RT_XBot_Manny.uasset",
+                             "downstream":  "Content/Development/PhysicsControlBalance01/A_GetUp_Back.uasset",
+                             "kind":  "retarget_configuration",
+                             "status":  "declared",
+                             "evidence":  [
+                                              {
+                                                  "source":  "Docs/PhysicsControlBalance01.md",
+                                                  "note":  "Documented retarget operation; not independently certified."
+                                              }
+                                          ]
+                         },
+                         {
+                             "upstream":  "Content/Development/PhysicsControlBalance01/Source/Stomach/XBot_Stomach_Anim.uasset",
+                             "downstream":  "Content/Development/PhysicsControlBalance01/A_GetUp_Stomach.uasset",
+                             "kind":  "retarget",
+                             "status":  "declared",
+                             "evidence":  [
+                                              {
+                                                  "source":  "Saved/CombatSlice01/PhysicsControlBalance01/Worker/retarget01.json",
+                                                  "note":  "Executor records source animation, target animation and full duration. Native asset derivation has not received independent review."
+                                              }
+                                          ]
+                         },
+                         {
+                             "upstream":  "Content/Development/PhysicsControlBalance01/RT_XBot_Manny.uasset",
+                             "downstream":  "Content/Development/PhysicsControlBalance01/A_GetUp_Stomach.uasset",
+                             "kind":  "retarget_configuration",
+                             "status":  "declared",
+                             "evidence":  [
+                                              {
+                                                  "source":  "Docs/PhysicsControlBalance01.md",
+                                                  "note":  "Documented retarget operation; not independently certified."
+                                              }
+                                          ]
+                         },
+                         {
+                             "upstream":  "Content/Development/PhysicsControlBalance01/IK_XBot.uasset",
+                             "downstream":  "Content/Development/PhysicsControlBalance01/RT_XBot_Manny.uasset",
+                             "kind":  "retarget_rig",
+                             "status":  "declared",
+                             "evidence":  [
+                                              {
+                                                  "source":  "Docs/PhysicsControlBalance01.md",
+                                                  "note":  "Documented source/target rig configuration; not independently certified."
+                                              }
+                                          ]
+                         },
+                         {
+                             "upstream":  "Content/Development/PhysicsControlBalance01/IK_Manny.uasset",
+                             "downstream":  "Content/Development/PhysicsControlBalance01/RT_XBot_Manny.uasset",
+                             "kind":  "retarget_rig",
+                             "status":  "declared",
+                             "evidence":  [
+                                              {
+                                                  "source":  "Docs/PhysicsControlBalance01.md",
+                                                  "note":  "Documented source/target rig configuration; not independently certified."
+                                              }
+                                          ]
+                         }
+                     ]
+}

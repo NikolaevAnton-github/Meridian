@@ -1,0 +1,13 @@
+{
+  "record_id": "PhysicsControlBalance01-OwnerStart01",
+  "date_local": "2026-09-20",
+  "source": "Owner direct chat after MSQ-87 planning and Mixamo source intake",
+  "owner_message_original": "Давай тестово начнем MSQ-87",
+  "owner_message_english_translation": "Let's start MSQ-87 as a test.",
+  "decision": "Execute the bounded gradual instability, physical falling and living get-up experiment defined in Docs/Tasks/PhysicsControlBalance01.md.",
+  "scope": "Extend the retained MSQ-85 six-mannequin baseline with shared instance-local balance and recovery, support loss, physical falls, and back/stomach get-up using the preserved owner-selected Mixamo sources. Preserve relative player/world slowdown and existing damage/reset behavior.",
+  "execution": "One existing Multica Unreal executor at Astra/max/standard. The existing Multica MeridianSquad Code profile in its task-local primary review role owns the four focused technical/transition acceptance rows, with native Astra/max/standard verified. The direct-chat sub-agent /root/msq87_primary_review performed only read-only acceptance/source-intake preparation. The controller handles scope, evidence applicability, finding closure, administrative closure and the local task commit.",
+  "verification": "Focused changed behavior and related transitions on one representative mannequin, plus rendering of all six. Use ordinary-speed continuous motion evidence and concise state/support evidence. No per-profile matrix or independent subjective variant comparison; the owner judges feel.",
+  "preservation": "Preserve owner configuration and project descriptor edits, retained lobby and purchased arms, original Mixamo FBXs and provenance, Kimodo experiment, all historical sources and evidence, and active owner application sessions.",
+  "limits": "No full push/explosion ability, AI, dismemberment, new paid services, new art, lobby changes or successor dispatch. This authorizes the experiment, not final visual/play acceptance."
+}

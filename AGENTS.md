@@ -13,9 +13,12 @@ instructions supersede earlier guidance within their stated scope.
 - Codex may launch existing applications and local project services needed for
   authorized work without asking again. Starting a service does not authorize
   unrelated execution, purchases or a pending design selection.
-- Current scope: MSQ-85 [Physics Control variants](Docs/Tasks/PhysicsControlVariants01.md)
-  adopts verified MSQ-84, removes the old enemy from active gameplay and adds six
-  stronger reactions. The [later owner decision](Docs/Approvals/PhysicsControlVariants01-OwnerScope01.json)
+- Current scope: MSQ-87 [balance and get-up](Docs/Tasks/PhysicsControlBalance01.md)
+  extends the retained MSQ-85 six-mannequin baseline. The owner waived independent
+  review for this experiment and will test it directly; see the
+  [scoped decision](Docs/Approvals/PhysicsControlBalance01-OwnerTesting01.json).
+  Owner play/motion acceptance remains pending. The MSQ-85
+  [relative slowdown decision](Docs/Approvals/PhysicsControlVariants01-OwnerScope01.json)
   requires partial player movement/firing slowdown while the world slows more,
   superseding the earlier normal-player slowdown rule. Full stop remains later scope.
   MSQ-69, MSQ-68 and MSQ-82 are verified prerequisites in the sequential

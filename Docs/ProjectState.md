@@ -21,21 +21,29 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
-## Planned follow-up: MSQ-87 gradual mannequin instability and get-up
+## Owner-test handoff: MSQ-87 gradual mannequin instability and get-up
 
 The owner selected gradual loss of stability: buckling legs, torso lean and pose
 recovery, followed by a physical fall when disturbance or support loss is excessive,
 then living get-up when support permits. [PhysicsControlBalance01](Tasks/PhysicsControlBalance01.md)
 records the planned behavior and focused acceptance under
 [the task-creation request](Approvals/PhysicsControlBalance01-TaskCreation01.json).
-This is an unassigned backlog task; implementation is not dispatched. It builds
-on MSQ-85 and is separate from animation-tool installation. Kimodo is optional
-for animation experiments, not a prerequisite to initial balance/falling work.
+The owner [authorized trial execution](Approvals/PhysicsControlBalance01-OwnerStart01.json).
+One existing Multica Unreal executor delivered Candidate05 at verified native
+Astra/max/standard. The build and 38 focused self-checks pass. The owner then
+[waived independent review for this task](Approvals/PhysicsControlBalance01-OwnerTesting01.json)
+and will test it directly; the dispatched review was cancelled without a verdict.
+See [implementation](PhysicsControlBalance01.md) and
+[controller handoff](PhysicsControlBalance01Handoff.md). The six mannequins now
+lose stability, fall alive and recover with assisted back/stomach get-up, including
+interruption and blocked/unsupported paths. Standing/recovery retain pose springs
+and possible foot sliding; this is not autonomous locomotion. Owner play/motion
+acceptance remains pending. Live Multica owns task status. Kimodo remains optional.
 The owner subsequently selected and requested download of Mixamo back/stomach
 get-up sources. [MixamoGetUp01](../Assets/Source/PhysicsControlBalance01/MixamoGetUp01/README.md)
 preserves both original FBXs at 30 FPS without key reduction, with source mesh,
-skeleton and exact provenance. This completes source intake only; Manny
-retargeting, gameplay integration and motion acceptance remain pending.
+skeleton and exact provenance. Manny retargeting and bounded integration preserve
+their full 251/259-frame ranges. Original sources and earlier evidence remain intact.
 
 ## Authorized tooling setup: MSQ-86 local Kimodo
 

@@ -1,0 +1,12 @@
+{
+  "record_id": "PhysicsControlBalance01-OwnerTesting01",
+  "date_local": "2026-09-20",
+  "source": "Owner direct chat after Candidate05 implementation and primary review dispatch",
+  "owner_message_original": "В данном случе не нужно ревью независимое, я сам протестирую",
+  "owner_message_english_translation": "In this case an independent review is not needed; I will test it myself.",
+  "decision": "Cancel the independent review for MSQ-87 and hand the implemented experiment to the owner for direct testing, using the completed executor self-checks and controller scope/preservation acceptance.",
+  "scope": "This MSQ-87-specific instruction supersedes the independent review route in its task/start record. The general standing review workflow remains unchanged for other tasks.",
+  "execution": "The controller cancelled Multica review run 01a0bf6b-903f-758b-8786-f5f69769d742. No independent verdict is claimed. Preserve all partial review and execution evidence.",
+  "handoff": "Candidate05, successful build07 and 38 passing focused executor checks. Owner play, subjective weight/resistance and final motion acceptance remain pending. No additional review, broad test matrix or successor dispatch.",
+  "preservation": "Keep original sources, historical candidates, owner configuration/descriptor/map bytes and any owner application session. Complete task-scoped administrative closure and local commit under the standing closure instruction."
+}

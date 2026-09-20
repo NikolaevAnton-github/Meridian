@@ -1,17 +1,25 @@
 # PhysicsControlBalance01: gradual instability, falling and getting up
 
-Prepared 2026-09-20. Multica issue: **MSQ-87**. Planning-only backlog task,
-an unstaged child of CombatSlice01 / MSQ-67. The owner selected gradual loss of
-stability for the existing Physics Control mannequins and asked that it be recorded.
-See [the exact request](../Approvals/PhysicsControlBalance01-TaskCreation01.json).
-No production executor is assigned or started by this planning record.
+Prepared 2026-09-20. Multica issue: **MSQ-87**, an unstaged child of
+CombatSlice01 / MSQ-67. The owner authorized a trial implementation under
+[the start decision](../Approvals/PhysicsControlBalance01-OwnerStart01.json).
+The original [planning request](../Approvals/PhysicsControlBalance01-TaskCreation01.json)
+remains preserved. Verify live Multica for execution status.
+
+Candidate05 is now handed to the owner for testing. The
+[later owner decision](../Approvals/PhysicsControlBalance01-OwnerTesting01.json)
+waives independent review for this task and supersedes the original review route
+below. See [controller handoff](../PhysicsControlBalance01Handoff.md) and the
+[preserved executor report](../PhysicsControlBalance01.md). No independent verdict
+or owner play acceptance is claimed.
 
 Source preparation, 2026-09-20: the owner subsequently selected Mixamo's
 Getting Up From Back and Getting Up From Stomach and requested their download
 with project-appropriate settings. Both original FBXs are now preserved in
 [MixamoGetUp01](../../Assets/Source/PhysicsControlBalance01/MixamoGetUp01/README.md),
 with exact settings and fingerprints in its provenance record. This is source
-intake only; Manny retargeting and gameplay execution remain undispatched.
+intake only; the later start decision now authorizes Manny retargeting and
+bounded gameplay integration in this task.
 
 ## Selected behavior
 
@@ -63,7 +71,7 @@ or an immediate fall on every hit.
   slowdown. Use the appropriate simulation clock so recovery does not silently run
   at normal speed during world slowdown. Preserve owner sessions and asset sources.
 
-## Focused acceptance for the future execution
+## Focused acceptance and review ownership
 
 Verify only the changed behavior and its transitions on one representative
 mannequin, plus continued rendering of the six-fixture set. Use ordinary-speed
@@ -81,9 +89,37 @@ independent subjective comparison of the six variants.
 4. F6 restores a usable standing state. Check the affected recovery transition once
    under the retained slowdown and reuse applicable passing hit/death/timing evidence.
 
-On explicit execution dispatch, use one existing Multica production executor and
-one primary independent technical reviewer at Astra/max/standard, with actual
-native settings verified. The owner judges subjective weight and resistance.
+The original dispatch selected one existing Multica Unreal production executor and one primary independent
+technical reviewer, the existing Multica `MeridianSquad Code` profile in its
+task-local review role, at Astra/max/standard, with actual
+native settings verified. The primary reviewer owns all four rows and directly
+inspects the applicable implementation and actual continuous visuals, reusing
+credible passing self-checks. The owner judges subjective weight and resistance.
 The controller accepts scoped evidence and closes findings without a second full
 technical review. MSQ-70, the full force-push ability and other successors remain
 undispatched by this record.
+
+## Execution handoff
+
+The executor owns native code/assets, focused self-checks and the sole editor
+writer lease. Confirm the live project, retained map, PIE and dirty packages via
+official Epic MCP before mutations. Preserve any owner PIE session; continue
+independent source work if the editor is occupied. Existing owner edits at dispatch
+are `Config/DefaultEngine.ini` and `MeridianSquad.uproject`; do not revert or include
+unrelated bytes in task changes. Keep one heavy build/import/render at a time.
+
+Deliver `Docs/PhysicsControlBalance01.md` with behavior, controls, tuning, assistance
+and limits. Store candidate hashes, concise acceptance results and continuous
+ordinary-speed footage under `Saved/CombatSlice01/PhysicsControlBalance01/Worker/`.
+Preserve full Mixamo motion ranges: the `mixamo.com` stacks contain 8.333/8.600 s,
+whereas generic `Take 001` metadata ends at 3.333 s. Any animation derivation must
+retain the original FBXs/provenance and record the reproducible import/retarget path.
+Use Git LFS for new binary assets and keep generated logs outside Git. Workers do
+not commit, change profiles/status/registry, dispatch successors or duplicate the
+primary review. The controller owns verified task closure and commit.
+
+The direct-chat sub-agent `/root/msq87_primary_review` performed only bounded
+read-only acceptance/source-intake preparation. Formal candidate review was
+subsequently dispatched through Multica and cancelled under OwnerTesting01.
+Completed executor self-checks and controller scope/preservation acceptance are
+the handoff basis; the owner performs play testing.

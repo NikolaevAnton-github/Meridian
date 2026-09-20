@@ -88,6 +88,18 @@ APhysicsControlDummy::APhysicsControlDummy()
     Body->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
     static ConstructorHelpers::FObjectFinder<UAnimSequence> Pose(TEXT("/Game/Development/EnemyPrototype01/A_EnemyTemplate_Idle.A_EnemyTemplate_Idle"));
     Idle = Pose.Object;
+    static ConstructorHelpers::FObjectFinder<UAnimSequence> Back(TEXT("/Game/Development/PhysicsControlBalance01/A_GetUp_Back.A_GetUp_Back"));
+    static ConstructorHelpers::FObjectFinder<UAnimSequence> Stomach(TEXT("/Game/Development/PhysicsControlBalance01/A_GetUp_Stomach.A_GetUp_Stomach"));
+    GetUpBack = Back.Object; GetUpStomach = Stomach.Object;
+    PoseSource = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("RecoveryPoseSource"));
+    PoseSource->SetupAttachment(FixtureRoot);
+    PoseSource->SetSkeletalMesh(Mesh.Object);
+    PoseSource->SetAnimationMode(EAnimationMode::AnimationSingleNode);
+    PoseSource->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    PoseSource->SetVisibility(false);
+    PoseSource->SetCastShadow(false);
+    PoseSource->SetComponentTickEnabled(false);
+    PoseSource->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
     PhysicsControl = CreateDefaultSubobject<UPhysicsControlComponent>(TEXT("LivingDrives"));
     PhysicsControl->SetupAttachment(FixtureRoot);
     PhysicsControl->AddTickPrerequisiteActor(this);
@@ -121,6 +133,7 @@ void APhysicsControlDummy::ConfigureReactionProfile(int32 Number)
 }
 void APhysicsControlDummy::ResetDummy()
 {
+    ClearBalanceProbeFixtures();
     bReady = false;
     if (!Controls.IsEmpty()) PhysicsControl->DestroyControls(Controls);
     Controls.Reset();
@@ -146,6 +159,7 @@ void APhysicsControlDummy::ResetDummy()
         for (const USkeletalBodySetup* Setup : Asset->SkeletalBodySetups)
             ReferencePose.Add(Setup->BoneName, Body->GetSocketTransform(Setup->BoneName));
     SupportTarget = Body->GetSocketTransform(TEXT("pelvis"));
+    StandingPose = ReferencePose;
     Body->bPauseAnims = true;
     Body->SetAllBodiesSimulatePhysics(true);
     Body->SetAllBodiesPhysicsBlendWeight(1);
@@ -169,8 +183,8 @@ void APhysicsControlDummy::ResetDummy()
     Limbs.AngularDampingRatio = FMath::Clamp(DriveDampingRatio, .5f, 3.f);
     Limbs.bUseSkeletalAnimation = false;
     Limbs.bDisableCollision = true;
-    // World-space pose springs provide explicit distributed support for this fixture.
-    // They are elastic drives, not kinematic pins or a self-balancing character.
+    // Distributed assistance remains explicit. UpdateBalance gates EVERY drive by
+    // actual support/state; falling/down/dead bodies have no enabled world springs.
     const auto* Asset = Body->GetPhysicsAsset();
     for (const auto& Entry : ReferencePose)
     {
@@ -207,11 +221,13 @@ void APhysicsControlDummy::ResetDummy()
     const FName SupportName = PhysicsControl->CreateControl(nullptr, NAME_None, Body, TEXT("pelvis"), Support, Target,
         TEXT("Support"), TEXT("Fixture_"));
     if (!SupportName.IsNone()) Controls.Add(SupportName);
+    PelvisControl = SupportName;
     PhysicsControl->SetComponentTickEnabled(true);
     PhysicsControl->UpdateTargetCaches(0);
     PhysicsControl->UpdateControls(0);
     Body->WakeAllRigidBodies();
     bReady = Controls.Num() > 1 && !SupportName.IsNone() && UnsupportedShapes == 0;
+    ResetBalance();
     UpdateLabel();
 }
 void APhysicsControlDummy::Tick(float DeltaSeconds)
@@ -228,7 +244,8 @@ void APhysicsControlDummy::Tick(float DeltaSeconds)
         PhysicsControl->SetControlMultiplier(It.Key(), Multiplier);
         if (It.Value() == 0) It.RemoveCurrent();
     }
-    // No elapsed-time sleep call: Chaos inactivity decides rest, and new impacts wake it.
+    UpdateBalance(DeltaSeconds);
+    // Chaos inactivity decides sleep; recovery only starts after measured settling.
     UpdateLabel();
 }
 void APhysicsControlDummy::UpdateLabel()
@@ -347,6 +364,9 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
     if (!IsDead() && Health == 0)
     {
         ++Deaths;
+        BalanceState = EDummyBalanceState::Dead;
+        BalanceReason = TEXT("health depleted");
+        ActiveGetUp = nullptr;
         DeathFrame = CombatFrame; DeathTime = ContactTime;
         // Remove the motors only. Existing bodies, pose and momentum survive untouched.
         if (!Controls.IsEmpty()) PhysicsControl->DestroyControls(Controls);
@@ -355,7 +375,7 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
         PhysicsControl->SetComponentTickEnabled(false);
         Body->bPauseAnims = true;
     }
-    else if (!IsDead())
+    else if (!IsDead() && (BalanceState == EDummyBalanceState::Standing || BalanceState == EDummyBalanceState::LosingBalance))
     {
         // Briefly soften the struck region's pose springs. Physical joints and the
         // pelvis support stay active; recovery uses world time, including the preview.
@@ -388,6 +408,7 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
     const float Magnitude = FMath::Min(FMath::Clamp(BulletImpulse, 0.f, 5000.f),
         BI->GetBodyMass() * FMath::Clamp(MaxImpulseVelocity, 0.f, 450.f));
     const FVector Impulse = Direction.GetSafeNormal() * Magnitude;
+    if (!IsDead()) RegisterDisturbance(Hit.BoneName, Impulse, InstabilityPerHit);
     Body->WakeAllRigidBodies();
     Body->AddImpulseAtLocation(Impulse, Hit.ImpactPoint, Hit.BoneName);
     ++PhysicalHits;
@@ -406,24 +427,63 @@ FString APhysicsControlDummy::GetDummyState(bool IncludeContacts) const
 {
     auto Root = MakeShared<FJsonObject>();
     Root->SetStringField(TEXT("name"), GetName());
+    AddBalanceState(Root);
     Root->SetNumberField(TEXT("profile"), ReactionProfile);
     Root->SetNumberField(TEXT("impulse_cap"), FMath::Clamp(BulletImpulse, 0.f, 5000.f));
     Root->SetNumberField(TEXT("velocity_cap"), FMath::Clamp(MaxImpulseVelocity, 0.f, 450.f));
     Root->SetNumberField(TEXT("hit_strength"), FMath::Clamp(HitStrengthMultiplier, .005f, 1.f));
     Root->SetNumberField(TEXT("hit_hold"), FMath::Clamp(HitHoldSeconds, 0.f, .6f));
     Root->SetNumberField(TEXT("hit_recovery"), FMath::Clamp(HitRecoverySeconds, .1f, 1.5f));
-    double JointGap = 0;
+    double JointGap = 0, RawChaosGap = 0, LockedJointGap = 0;
+    int32 LockedJointCount = 0;
+    TArray<TSharedPtr<FJsonValue>> JointRows;
     if (const auto* Asset = Body->GetPhysicsAsset())
         for (int32 I = 0; I < Asset->ConstraintSetup.Num(); ++I)
             if (const auto* Joint = Body->GetConstraintInstanceByIndex(I))
             {
                 const auto& Constraint = Joint->GetPhysicsConstraintRef();
                 if (Constraint.IsValid())
-                    JointGap = FMath::Max(JointGap, FVector::Distance(
+                    RawChaosGap = FMath::Max(RawChaosGap, FVector::Distance(
                         FPhysicsInterface::GetGlobalPose(Constraint, EConstraintFrame::Frame1).GetLocation(),
                         FPhysicsInterface::GetGlobalPose(Constraint, EConstraintFrame::Frame2).GetLocation()));
+                // Retain both anchor calculations for diagnosis; neither changes physics.
+                const auto* Child = Body->GetBodyInstance(Joint->ConstraintBone1);
+                const auto* Parent = Body->GetBodyInstance(Joint->ConstraintBone2);
+                if (Child && Parent)
+                {
+                    const double Gap = FVector::Distance(
+                        (Joint->GetRefFrame(EConstraintFrame::Frame1) * Child->GetUnrealWorldTransform()).GetLocation(),
+                        (Joint->GetRefFrame(EConstraintFrame::Frame2) * Parent->GetUnrealWorldTransform()).GetLocation());
+                    JointGap = FMath::Max(JointGap, Gap);
+                    // The source asset also has two free calf-to-pelvis constraints.
+                    // Their separated anchors are not a violation of a positional lock.
+                    if (Joint->GetLinearXMotion() == LCM_Locked && Joint->GetLinearYMotion() == LCM_Locked &&
+                        Joint->GetLinearZMotion() == LCM_Locked)
+                    {
+                        LockedJointGap = FMath::Max(LockedJointGap, Gap);
+                        ++LockedJointCount;
+                    }
+                    if (IncludeContacts)
+                    {
+                        auto Row = MakeShared<FJsonObject>();
+                        Row->SetStringField(TEXT("child"),Joint->ConstraintBone1.ToString());
+                        Row->SetStringField(TEXT("parent"),Joint->ConstraintBone2.ToString());
+                        Row->SetNumberField(TEXT("gap"),Gap);
+                        Row->SetBoolField(TEXT("valid"),Constraint.IsValid());
+                        Row->SetNumberField(TEXT("linear_x"),static_cast<int32>(Joint->GetLinearXMotion()));
+                        Row->SetNumberField(TEXT("linear_y"),static_cast<int32>(Joint->GetLinearYMotion()));
+                        Row->SetNumberField(TEXT("linear_z"),static_cast<int32>(Joint->GetLinearZMotion()));
+                        Row->SetField(TEXT("local_anchor1"),VJson(Joint->GetRefFrame(EConstraintFrame::Frame1).GetLocation()));
+                        Row->SetField(TEXT("local_anchor2"),VJson(Joint->GetRefFrame(EConstraintFrame::Frame2).GetLocation()));
+                        JointRows.Add(MakeShared<FJsonValueObject>(Row));
+                    }
+                }
             }
     Root->SetNumberField(TEXT("max_joint_anchor_gap_cm"), JointGap);
+    Root->SetNumberField(TEXT("raw_chaos_joint_pose_gap_cm"), RawChaosGap);
+    Root->SetNumberField(TEXT("max_locked_joint_anchor_gap_cm"), LockedJointGap);
+    Root->SetNumberField(TEXT("locked_joint_count"), LockedJointCount);
+    if (IncludeContacts) Root->SetArrayField(TEXT("joints"),JointRows);
     Root->SetBoolField(TEXT("ready"), bReady);
     Root->SetNumberField(TEXT("health"), Health);
     Root->SetNumberField(TEXT("deaths"), Deaths);
@@ -463,6 +523,7 @@ FString APhysicsControlDummy::GetDummyState(bool IncludeContacts) const
 }
 void APhysicsControlDummy::EndPlay(const EEndPlayReason::Type Reason)
 {
+    ClearBalanceProbeFixtures();
     if (!Controls.IsEmpty()) PhysicsControl->DestroyControls(Controls);
     Controls.Reset(); Contacts.Reset(); bReady = false;
     Super::EndPlay(Reason);

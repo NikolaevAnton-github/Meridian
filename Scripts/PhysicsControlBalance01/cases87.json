@@ -1,0 +1,7 @@
+[
+  {"name":"Candidate03-Core","duration":24,"profile":1,"flying":true,"location":[-1150,-20,158],"yaw":-56,"events":[[0.05,"@track","spine_03"],[1,"LeftMouseButton",1],[1.07,"LeftMouseButton",0],[4,"F6",1],[4.05,"F6",0],[5,"LeftMouseButton",1],[5.07,"LeftMouseButton",0],[5.18,"LeftMouseButton",1],[5.25,"LeftMouseButton",0],[5.36,"LeftMouseButton",1],[5.43,"LeftMouseButton",0],[23,"F6",1],[23.05,"F6",0]]},
+  {"name":"Candidate03-LegInterruptedDeath","duration":26,"profile":1,"flying":true,"interrupt_and_kill":true,"location":[-1150,-20,158],"yaw":-56,"events":[[0.05,"@track","calf_l"],[1,"LeftMouseButton",1],[1.07,"LeftMouseButton",0],[1.2,"@track","calf_r"],[1.4,"LeftMouseButton",1],[1.47,"LeftMouseButton",0],[1.5,"@track","spine_03"]]},
+  {"name":"Candidate03-FrontSlow","duration":24,"profile":1,"flying":true,"slow_getup":true,"location":[-1150,-20,158],"yaw":-56,"events":[[0.05,"@track","spine_03"],[1,"@push",6000]]},
+  {"name":"Candidate03-Blocked","duration":24,"profile":1,"flying":true,"location":[-1150,-20,158],"yaw":-56,"events":[[0.05,"@track","spine_03"],[1,"@push",-6000],[2.7,"@environment","ceiling"],[7,"@environment","clear_ceiling"]]},
+  {"name":"Candidate03-Unsupported","duration":11,"profile":1,"platform":true,"flying":true,"remove_support":true,"location":[29550,33200,1300],"yaw":-25,"events":[[0.05,"@track","spine_03"],[1,"@push",-6000],[9,"F6",1],[9.05,"F6",0]]}
+]

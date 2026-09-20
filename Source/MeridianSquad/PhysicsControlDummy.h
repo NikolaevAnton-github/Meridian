@@ -28,7 +28,13 @@ struct FDummyPose
     uint64 Epoch = 0;
 };
 
-/** A removable fixture with explicit world-space pose springs. No balance or AI. */
+UENUM(BlueprintType)
+enum class EDummyBalanceState : uint8
+{
+    Standing, LosingBalance, Falling, Down, GettingUp, Dead
+};
+
+/** Physical mannequin with support-gated pose assistance and interruptible recovery. */
 UCLASS()
 class MERIDIANSQUAD_API APhysicsControlDummy : public AActor
 {
@@ -76,6 +82,38 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="Physics Dummy")
     int32 PhysicalHits = 0;
 
+    UPROPERTY(BlueprintReadOnly, Category="Physics Dummy|Balance")
+    EDummyBalanceState BalanceState = EDummyBalanceState::Standing;
+    UPROPERTY(BlueprintReadOnly, Category="Physics Dummy|Balance")
+    float Instability = 0.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
+    float InstabilityPerHit = .42f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
+    float InstabilityRecoveryRate = .30f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
+    float RecoveryDelay = .75f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
+    float LegDisableSeconds = 2.5f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
+    float SupportReach = 26.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
+    float FallThreshold = 1.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
+    float MaxLeanDegrees = 48.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
+    float SettleSeconds = .85f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
+    float GetUpBlendSeconds = .8f;
+
+    /** Shared non-damaging force seam for future push/explosion work; one physical impulse. */
+    UFUNCTION(BlueprintCallable, Category="Physics Dummy|Balance")
+    void ApplyExternalDisturbance(FVector Impulse, FVector WorldPoint, FName Bone = "pelvis");
+    UFUNCTION(BlueprintPure, Category="Physics Dummy|Balance")
+    FString GetBalanceLabel() const;
+    /** Editor-only physical floor/ceiling fixtures for the bounded transition checks. */
+    UFUNCTION(BlueprintCallable, Category="Physics Dummy|Verification")
+    bool ProbeBalanceEnvironment(const FString& Operation);
+
     UFUNCTION(BlueprintCallable, Category="Physics Dummy")
     void ResetDummy();
     UFUNCTION(BlueprintPure, Category="Physics Dummy|Verification")
@@ -97,12 +135,53 @@ private:
     UPROPERTY() TObjectPtr<USceneComponent> FixtureRoot;
     UPROPERTY() TObjectPtr<UTextRenderComponent> Label;
     UPROPERTY() TObjectPtr<UAnimSequence> Idle;
+    UPROPERTY() TObjectPtr<UAnimSequence> GetUpBack;
+    UPROPERTY() TObjectPtr<UAnimSequence> GetUpStomach;
+    UPROPERTY() TObjectPtr<UAnimSequence> ActiveGetUp;
+    UPROPERTY() TObjectPtr<USkeletalMeshComponent> PoseSource;
+    UPROPERTY() TObjectPtr<AActor> ProbeFloor;
+    UPROPERTY() TObjectPtr<AActor> ProbeCeiling;
+    void ClearBalanceProbeFixtures();
     FTransform Home;
     FTransform SupportTarget;
     TMap<FName, FTransform> ReferencePose;
     TArray<FName> Controls;
     TMap<FName, FName> BodyControls;
     TMap<FName, float> RecoveringControls;
+    TMap<FName, FTransform> FallenPose;
+    TMap<FName, FTransform> StandingPose;
+    TMap<FName, FTransform> GetUpEndPose;
+    FName PelvisControl;
+    FVector LeanDirection = FVector::ZeroVector;
+    FVector StandingForward = FVector::ForwardVector;
+    FTransform RecoveryRoot;
+    float StateSeconds = 0.f;
+    float SinceDisturbance = 0.f;
+    float LeftLegDisabled = 0.f;
+    float RightLegDisabled = 0.f;
+    float NoSupportSeconds = 0.f;
+    float SettledSeconds = 0.f;
+    float PoseLeanDegrees = 0.f;
+    float PelvisDrop = 0.f;
+    float GroundHeight = 0.f;
+    int32 UsableFeet = 0;
+    bool bRecoveryFloor = false;
+    bool bRecoveryClear = false;
+    int32 Falls = 0;
+    int32 GetUps = 0;
+    int32 InterruptedGetUps = 0;
+    FString BalanceReason;
+    void ResetBalance();
+    void UpdateBalance(float DeltaSeconds);
+    void RegisterDisturbance(FName Bone, const FVector& Impulse, float Amount);
+    void EnterFall(const TCHAR* Reason);
+    void DisableBalanceDrives();
+    bool FindFloor(const FVector& Point, float Depth, FHitResult& Hit) const;
+    bool RecoverySpace(const FVector& Center, float& FloorZ) const;
+    bool BeginGetUp();
+    void SampleAnimation(UAnimSequence* Animation, float Time, const FTransform& Origin, TMap<FName,FTransform>& Pose);
+    void DrivePose(const TMap<FName,FTransform>& Pose, float Strength = 1.f);
+    void AddBalanceState(TSharedPtr<FJsonObject> Root) const;
     uint64 PoseEpoch = 0;
     bool bReady = false;
     int32 UnsupportedShapes = 0;
