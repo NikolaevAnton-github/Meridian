@@ -36,6 +36,17 @@ build and 183 focused self-checks; see the [controller handoff](../PhysicsContro
 
 ## Ordered implementation tasks
 
+The later [MSQ-92 start and tempo request](../Approvals/PhysicsControlAdaptiveSteps01-OwnerStart01.json)
+authorizes stage 3 on MSQ-97 Candidate07, with approximately 25 percent faster
+recovery response/stepping as initial tuning. One primary independent technical
+reviewer applies to MSQ-92; earlier scoped waivers remain historical. MSQ-93
+through MSQ-96 remain undispatched. This supersedes the earlier MSQ-92 planning-only
+status above without changing predecessor evidence or owner motion acceptance.
+MSQ-92 Candidate06 is now delivered with a passing build, 208 focused assertions
+and six passing independent review rows; see the
+[controller handoff](../PhysicsControlAdaptiveSteps01Handoff.md). Owner motion/play
+judgement remains separate, and no later stage is started.
+
 | Stage | Multica | Task | Required result |
 | --- | --- | --- | --- |
 | 1 | MSQ-91 | [PhysicsControlLegPose01](PhysicsControlLegPose01.md) | Anatomical knee/foot alignment and a credible settled stance after steps. |

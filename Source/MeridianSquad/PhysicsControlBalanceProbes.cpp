@@ -77,6 +77,14 @@ bool APhysicsControlDummy::ProbeBalanceEnvironment(const FString& Operation)
         if (ProbeCeiling) ProbeCeiling->SetActorRotation(StandingForward.Rotation());
         return IsValid(ProbeCeiling);
     }
+    if (Operation == TEXT("step_target_block"))
+    {
+        if (IsValid(ProbeCeiling) || BalanceState != EDummyBalanceState::Stepping) return false;
+        FVector P = SwingDestination.GetLocation();
+        P.Z = GroundHeight + 12;
+        ProbeCeiling = SpawnBox(P, FVector(.16, .30, .24));
+        return IsValid(ProbeCeiling);
+    }
     if (Operation == TEXT("ceiling"))
     {
         if (IsValid(ProbeCeiling)) return false;

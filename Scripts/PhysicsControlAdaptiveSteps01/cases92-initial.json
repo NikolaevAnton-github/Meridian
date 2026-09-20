@@ -1,0 +1,5 @@
+[
+  {"name":"Candidate01-Small","duration":5,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-700,-80,125],"look_at":[-930,-310,78],"events":[[1,"@impulse",[600,0,0,"spine_05"]]]},
+  {"name":"Candidate01-Large","duration":5,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-700,-80,125],"look_at":[-930,-310,78],"events":[[1,"@impulse",[3000,0,0,"spine_05"]]]},
+  {"name":"Candidate01-Replan","duration":5,"fps":30,"profile":1,"flying":true,"inspection_view":true,"during_step":"hit","location":[-700,-80,125],"look_at":[-930,-310,78],"events":[[1,"@impulse",[1800,0,0,"spine_05"]]]}
+]

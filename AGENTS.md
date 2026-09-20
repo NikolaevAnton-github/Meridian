@@ -26,7 +26,12 @@ instructions supersede earlier guidance within their stated scope.
   The later [MSQ-91 start and review waiver](Docs/Approvals/PhysicsControlLegPose01-OwnerStart01.json)
   authorized the delivered Candidate07 stance correction. See the
   [handoff](Docs/PhysicsControlLegPose01Handoff.md); MSQ-89 Candidate05 and its
-  evidence remain preserved. MSQ-92 through MSQ-96 remain undispatched.
+  evidence remain preserved.
+  The later [MSQ-92 start and tempo request](Docs/Approvals/PhysicsControlAdaptiveSteps01-OwnerStart01.json)
+  authorized delivered Candidate06 adaptive steps with approximately 25 percent
+  faster recovery. Build, focused self-checks and the sole independent technical
+  review pass; see the [handoff](Docs/PhysicsControlAdaptiveSteps01Handoff.md).
+  MSQ-93 through MSQ-96 remain undispatched.
   Review waivers stay task-scoped. Owner play/motion acceptance stays separate. The MSQ-85
   [relative slowdown decision](Docs/Approvals/PhysicsControlVariants01-OwnerScope01.json)
   requires partial player movement/firing slowdown while the world slows more,

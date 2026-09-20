@@ -1,0 +1,4 @@
+[
+  {"name":"Candidate01-Stronger","duration":5,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-700,-80,125],"look_at":[-930,-310,78],"events":[[1,"@impulse",[9000,0,0,"spine_05"]]]},
+  {"name":"Candidate01-Rifle","duration":6,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-700,-80,125],"events":[[0.05,"@track","calf_l"],[1,"LeftMouseButton",1],[1.12,"LeftMouseButton",0]]}
+]

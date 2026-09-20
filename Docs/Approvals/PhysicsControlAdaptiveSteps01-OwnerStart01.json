@@ -1,0 +1,15 @@
+{
+  "record_id": "PhysicsControlAdaptiveSteps01-OwnerStart01",
+  "date_local": "2026-09-21",
+  "source": "Owner direct chat",
+  "task_identifier": "MSQ-92",
+  "owner_start_original": "MSQ-92 давай",
+  "owner_start_english_translation": "Let's do MSQ-92.",
+  "owner_tempo_followup_original": "на счет MSQ-97...попробую объяснить, я веду стрельбу по пративнику, попадаю он отступает, все окей. Но я бы хотел что бы он  более резко и быстро реагировал реагировал, соотвественно более быстро пыталсяся восстановить равновесия перебирая ногами. Нам это еще предстоит настраивать, но сейчас будто бы надо процентов на 25 сделать быстрее.",
+  "owner_tempo_followup_english_translation": "Regarding MSQ-97: I shoot the enemy, hits make him retreat, and that is fine. I want a sharper, faster response and faster attempts to regain balance by stepping. We will tune this further, but for now it seems it should be about 25 percent faster.",
+  "decision": "Execute MSQ-92 on MSQ-97 Candidate07 and include an approximately 25 percent faster recovery response and stepping tempo as the initial owner-test tuning.",
+  "controller_interpretation": "Use a 1.25 recovery-speed baseline, giving comparable phase/reaction durations divided by 1.25 (20 percent shorter), then bounded disturbance-dependent adaptation. Do not accelerate the world, rifle, damage or get-up animation, increase hit impulse, or promise a fixed observed completion time under different physical disturbances.",
+  "execution": "One existing Multica Unreal executor, verified native Astra/max/standard, focused self-checks, one primary independent technical reviewer. Previous MSQ-91/MSQ-97 review waivers do not extend to MSQ-92.",
+  "acceptance": "Controller scope, evidence applicability, preservation and finding closure; final motion/play judgement stays with the owner. Preserve predecessor immutable candidates and reuse unaffected evidence.",
+  "boundaries": "Static flat support, no automatic successor start, new art, general locomotion, expanded counterbalance or new paid services. Controller owns the local task-scoped closure commit."
+}

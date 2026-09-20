@@ -1,0 +1,4 @@
+[
+  {"name":"Candidate05-Small","duration":5,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-760,-140,125],"look_at":[-930,-310,78],"events":[[1,"@impulse",[600,0,0,"spine_05"]]]},
+  {"name":"Candidate05-Large","duration":5,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-760,-140,125],"look_at":[-930,-310,78],"events":[[1,"@impulse",[6600,0,0,"spine_05"]]]}
+]

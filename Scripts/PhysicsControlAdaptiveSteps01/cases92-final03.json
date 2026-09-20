@@ -1,0 +1,343 @@
+﻿[
+    {
+        "name":  "Candidate03-Small",
+        "duration":  5,
+        "fps":  30,
+        "profile":  1,
+        "flying":  true,
+        "inspection_view":  true,
+        "location":  [
+                         -700,
+                         -80,
+                         125
+                     ],
+        "look_at":  [
+                        -930,
+                        -310,
+                        78
+                    ],
+        "events":  [
+                       [
+                           1,
+                           "@impulse",
+                           [
+                               600,
+                               0,
+                               0,
+                               "spine_05"
+                           ]
+                       ]
+                   ]
+    },
+    {
+        "name":  "Candidate03-Large",
+        "duration":  5,
+        "fps":  30,
+        "profile":  1,
+        "flying":  true,
+        "inspection_view":  true,
+        "location":  [
+                         -700,
+                         -80,
+                         125
+                     ],
+        "look_at":  [
+                        -930,
+                        -310,
+                        78
+                    ],
+        "events":  [
+                       [
+                           1,
+                           "@impulse",
+                           [
+                               6600,
+                               0,
+                               0,
+                               "spine_05"
+                           ]
+                       ]
+                   ]
+    },
+    {
+        "name":  "Candidate03-Replan",
+        "duration":  5,
+        "fps":  30,
+        "profile":  1,
+        "flying":  true,
+        "inspection_view":  true,
+        "during_step":  "hit",
+        "location":  [
+                         -700,
+                         -80,
+                         125
+                     ],
+        "look_at":  [
+                        -930,
+                        -310,
+                        78
+                    ],
+        "events":  [
+                       [
+                           1,
+                           "@impulse",
+                           [
+                               1800,
+                               0,
+                               0,
+                               "spine_05"
+                           ]
+                       ]
+                   ]
+    },
+    {
+        "name":  "Candidate03-Blocked",
+        "duration":  5,
+        "fps":  30,
+        "profile":  1,
+        "flying":  true,
+        "inspection_view":  true,
+        "location":  [
+                         -700,
+                         -80,
+                         125
+                     ],
+        "look_at":  [
+                        -930,
+                        -310,
+                        78
+                    ],
+        "events": [[1, "@impulse", [6600, 0, 0, "spine_05"]]],
+        "block_landing":  true
+    },
+    {
+        "name":  "Candidate03-Slow",
+        "duration":  7,
+        "fps":  30,
+        "profile":  1,
+        "flying":  true,
+        "inspection_view":  true,
+        "during_step":  "slow",
+        "location":  [
+                         -700,
+                         -80,
+                         125
+                     ],
+        "events":  [
+                       [
+                           0.05,
+                           "@track",
+                           "calf_l"
+                       ],
+                       [
+                           1,
+                           "LeftMouseButton",
+                           1
+                       ],
+                       [
+                           1.12,
+                           "LeftMouseButton",
+                           0
+                       ],
+                       [
+                           4,
+                           "@scale",
+                           1
+                       ]
+                   ]
+    },
+    {
+        "name":  "Candidate03-Controls",
+        "duration":  6,
+        "fps":  30,
+        "profile":  1,
+        "flying":  true,
+        "during_step":  "reset",
+        "location":  [
+                         -700,
+                         -80,
+                         125
+                     ],
+        "events":  [
+                       [
+                           0.05,
+                           "@track",
+                           "calf_l"
+                       ],
+                       [
+                           1,
+                           "LeftMouseButton",
+                           1
+                       ],
+                       [
+                           1.12,
+                           "LeftMouseButton",
+                           0
+                       ],
+                       [
+                           2.2,
+                           "F10",
+                           1
+                       ],
+                       [
+                           2.3,
+                           "F10",
+                           0
+                       ],
+                       [
+                           2.6,
+                           "F10",
+                           1
+                       ],
+                       [
+                           2.7,
+                           "F10",
+                           0
+                       ]
+                   ]
+    },
+    {
+        "name":  "Candidate03-Rifle",
+        "duration":  6,
+        "fps":  30,
+        "profile":  1,
+        "flying":  true,
+        "inspection_view":  true,
+        "location":  [
+                         -700,
+                         -80,
+                         125
+                     ],
+        "events":  [
+                       [
+                           0.05,
+                           "@track",
+                           "calf_l"
+                       ],
+                       [
+                           1,
+                           "LeftMouseButton",
+                           1
+                       ],
+                       [
+                           1.12,
+                           "LeftMouseButton",
+                           0
+                       ]
+                   ]
+    },
+    {
+        "name":  "Candidate03-ReferenceSpeed",
+        "duration":  6,
+        "fps":  30,
+        "profile":  1,
+        "flying":  true,
+        "inspection_view":  true,
+        "tuning":  {
+                       "recovery_speed":  1.0
+                   },
+        "location":  [
+                         -700,
+                         -80,
+                         125
+                     ],
+        "events":  [
+                       [
+                           0.05,
+                           "@track",
+                           "calf_l"
+                       ],
+                       [
+                           1,
+                           "LeftMouseButton",
+                           1
+                       ],
+                       [
+                           1.12,
+                           "LeftMouseButton",
+                           0
+                       ]
+                   ]
+    },
+    {
+        "name":  "Candidate03-TorsoTempo",
+        "duration":  7,
+        "fps":  30,
+        "profile":  1,
+        "flying":  true,
+        "inspection_view":  true,
+        "location":  [
+                         -700,
+                         -20,
+                         40
+                     ],
+        "events":  [
+                       [
+                           0.05,
+                           "@track",
+                           "spine_03"
+                       ],
+                       [
+                           0.1,
+                           "LeftControl",
+                           1
+                       ],
+                       [
+                           0.2,
+                           "F7",
+                           1
+                       ],
+                       [
+                           0.3,
+                           "F7",
+                           0
+                       ],
+                       [
+                           0.4,
+                           "LeftControl",
+                           0
+                       ],
+                       [
+                           0.6,
+                           "V",
+                           1
+                       ],
+                       [
+                           0.7,
+                           "V",
+                           0
+                       ],
+                       [
+                           1.2,
+                           "LeftMouseButton",
+                           1
+                       ],
+                       [
+                           2.2,
+                           "LeftMouseButton",
+                           0
+                       ]
+                   ]
+    },
+    {
+        "name":  "Candidate03-ThreeRendered",
+        "duration":  3,
+        "fps":  30,
+        "profile":  1,
+        "flying":  true,
+        "inspection_view":  true,
+        "location":  [
+                         -420,
+                         0,
+                         240
+                     ],
+        "look_at":  [
+                        -950,
+                        0,
+                        90
+                    ],
+        "events":  [
+
+                   ]
+    }
+]

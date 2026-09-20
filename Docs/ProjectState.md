@@ -21,6 +21,29 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Owner-test handoff: MSQ-92 adaptive recovery steps
+
+The owner [starts MSQ-92 and requests approximately 25 percent faster recovery](Approvals/PhysicsControlAdaptiveSteps01-OwnerStart01.json).
+[PhysicsControlAdaptiveSteps01](Tasks/PhysicsControlAdaptiveSteps01.md) consumes
+MSQ-97 Candidate07, closure commit `5cd5b67`, and refines step length, lift,
+phase timing and bounded replanning on static flat support. The initial tempo
+interpretation is recovery speed 1.25, preserving physical support/effort limits.
+One Multica Unreal executor delivered Candidate06 (Candidate05 native code,
+build06) with a passing build and 208 focused assertions. One independent primary
+reviewer passes all six scoped criteria and verifies all 438 candidate entries.
+Both runs used verified native Astra/max/standard. The controller accepts scope,
+evidence applicability, preservation and finding closure. See the
+[implementation](PhysicsControlAdaptiveSteps01.md) and
+[controller handoff](PhysicsControlAdaptiveSteps01Handoff.md).
+The comparable rifle-hit step takes 0.667 s instead of 0.833 s; twelve torso hits
+produce three completed steps and settling. Adaptive placement, filtered bounded
+replanning, physical blocked fallback and affected slowdown/reset transitions pass.
+The final build is loaded and ready for owner Play. Owner motion judgement remains
+separate; assisted motion, roughly 16 FPS capture and sampled sole-clearance limits
+are retained. Owner edits, sources and historical evidence remain preserved.
+MSQ-93 through MSQ-96 remain undispatched; Multica owns live execution status.
+The historical handoffs below retain their original candidate evidence.
+
 ## Owner-test handoff: MSQ-97 physical recoverability
 
 The owner selected [PhysicsControlRecoverability01 / MSQ-97](Tasks/PhysicsControlRecoverability01.md)
@@ -34,7 +57,7 @@ manifest entries match current and frozen bytes. See [implementation](PhysicsCon
 and [controller handoff](PhysicsControlRecoverability01Handoff.md). The controller
 accepts scope, candidate identity, evidence applicability and preservation; owner
 motion/play judgement remains separate. The review waiver is limited to MSQ-97.
-MSQ-92 through MSQ-96 remain undispatched; live Multica owns execution status.
+MSQ-92 is now delivered above; MSQ-93 through MSQ-96 remain undispatched.
 
 The delivered task replaces automatic leg-hit support failure with displaced-leg
 replanting, coordinated body recovery and a practical contact/momentum-based
@@ -46,7 +69,7 @@ preset rather than the rejected unlimited fall veto. Actual bullet penetration
 through both legs remains a separate future projectile integration scenario.
 MSQ-92 then refines adaptive step geometry/timing, reusing predecessor evidence.
 
-Current runtime is MSQ-97 Candidate07, built on MSQ-91 Candidate07 plus
+The MSQ-97 handoff runtime was Candidate07, built on MSQ-91 Candidate07 plus
 CombatTestToggles02 (`37af4b8`). A recorded 30-bullet torso episode completes
 three steps during continuous fire and five overall with recovery speed 1.5;
 the mannequin settles after a three-bullet resumed burst. Missing support still

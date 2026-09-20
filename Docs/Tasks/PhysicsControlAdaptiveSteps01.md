@@ -3,7 +3,32 @@
 Multica issue: **MSQ-92**.
 Stage 3 of [PhysicsControlRefinement01](PhysicsControlRefinement01Plan.md).
 Predecessor: [PhysicsControlRecoverability01 / MSQ-97](PhysicsControlRecoverability01.md).
-Planning only; follow the parent authorization, preservation and verification rules.
+The owner [authorizes execution and approximately 25 percent faster recovery](../Approvals/PhysicsControlAdaptiveSteps01-OwnerStart01.json).
+Use MSQ-97 Candidate07 (closure commit `5cd5b67`) as the implementation baseline.
+Follow the parent preservation and focused verification rules.
+
+Candidate06 is delivered with a passing Development Editor build and 208 focused
+self-check assertions. One primary independent reviewer passes all six scoped
+criteria with no blocking findings. See the [implementation](../PhysicsControlAdaptiveSteps01.md)
+and [controller handoff](../PhysicsControlAdaptiveSteps01Handoff.md). Final owner
+motion/play judgement remains separate; this delivery does not start MSQ-93.
+
+## Execution and review
+
+One existing Multica Unreal executor implements and self-checks at verified native
+Astra/max/standard. One primary independent technical reviewer owns the scoped
+acceptance rows below, including actual motion evidence; previous task waivers do
+not extend here. The controller accepts scope, evidence applicability, finding
+closure and preservation. Final motion/play judgement remains with the owner.
+MSQ-93 and successors remain undispatched.
+
+Start with ordinary recovery response and stepping about 25 percent faster than
+MSQ-97's default. The controller's initial interpretation is `RecoverySpeed=1.25`,
+with comparable reaction/phase durations divided by 1.25 (20 percent shorter).
+Keep that setting adjustable and distinguish it from disturbance-driven geometry
+and timing. Preserve impulse strength, world/player slowdown and physical fallback.
+Record actual configured/effective timings and show the faster baseline in the
+focused motion evidence; final tuning remains open to owner play feedback.
 
 ## Scope
 

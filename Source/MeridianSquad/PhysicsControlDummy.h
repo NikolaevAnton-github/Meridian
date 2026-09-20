@@ -130,7 +130,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Recoverability")
     float RecoveryStrength = 1.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Recoverability")
-    float RecoverySpeed = 1.f;
+    float RecoverySpeed = 1.25f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Recoverability")
     float RecoveryReactionSeconds = .10f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Recoverability")
@@ -310,6 +310,28 @@ private:
     float StepCooldownRemaining = 0;
     float StepSupportDrift = 0;
     float StepPeakSupportDrift = 0;
+    // Frozen at step entry; owner tempo and measured disturbance scaling are separate.
+    float AdaptiveLength = 0;
+    float AdaptiveLift = 0;
+    float AdaptiveUrgency = 0;
+    float AdaptiveTransferTime = 0;
+    float AdaptiveSwingTime = 0;
+    float AdaptiveSettleTime = 0;
+    float AdaptiveEntrySpeed = 0;
+    float AdaptiveEntryLean = 0;
+    float AdaptiveLeanExcursion = 0;
+    float AdaptiveEntryDemand = 0;
+    FVector AdaptiveEntryVelocity = FVector::ZeroVector;
+    FVector AdaptiveReplanVelocity = FVector::ZeroVector;
+    FVector AdaptiveReplanOrigin = FVector::ZeroVector;
+    FVector AdaptiveReplanGoal = FVector::ZeroVector;
+    float AdaptiveReplanStart = -1;
+    float AdaptiveReplanAge = 0;
+    float AdaptiveReplanTravel = 0;
+    int32 AdaptiveReplans = 0;
+    int32 AdaptiveGeometryTrials = 0;
+    bool bAdaptiveReplanPending = false;
+    FString AdaptiveReplanReason;
     int32 StepPhase = 0; // 0 idle, 1 transfer, 2 swing, 3 settling.
     int32 EpisodeSteps = 0;
     int32 StepsStarted = 0;
@@ -319,13 +341,19 @@ private:
     FString StepReason;
     void ResetStepping();
     void CancelStep();
+    void ResetAdaptiveStep();
+    void SelectAdaptiveStep(const FVector& BodyOffset, float FootMotion);
+    void ConfigureAdaptiveGeometry(float Length);
+    bool ValidateStepGeometry();
+    bool UpdateAdaptiveReplan(float DeltaSeconds);
+    void UpdateStepRestPelvis();
     void RememberStandingSkeleton(const USkeletalMeshComponent* Mesh, bool bNeutral = true);
     bool NeedsStanceCorrection() const;
     bool BeginStep();
     void UpdateStep(float DeltaSeconds);
     bool StepPlacement(FName Bone, FTransform& Foot, float FloorReference) const;
     bool StepPathClear(const FTransform& Start, const FTransform& End) const;
-    bool BuildStepPose(float Transfer, float Swing, float Settle, TMap<FName,FTransform>& Pose);
+    bool BuildStepPose(float Transfer, float Swing, float Settle, TMap<FName,FTransform>& Pose, bool bApply = true);
     void AddStepState(TSharedPtr<FJsonObject> Root) const;
     uint64 PoseEpoch = 0;
     bool bReady = false;

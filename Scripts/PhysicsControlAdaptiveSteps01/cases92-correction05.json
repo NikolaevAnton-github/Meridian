@@ -1,0 +1,4 @@
+[
+  {"name":"Candidate05-TorsoTempo","duration":7,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-700,-20,40],"events":[[0.05,"@track","spine_03"],[0.1,"LeftControl",1],[0.2,"F7",1],[0.3,"F7",0],[0.4,"LeftControl",0],[0.6,"V",1],[0.7,"V",0],[1.2,"LeftMouseButton",1],[2.2,"LeftMouseButton",0]]},
+  {"name":"Candidate05-Replan","duration":5,"fps":30,"profile":1,"flying":true,"inspection_view":true,"during_step":"hit","location":[-700,-80,125],"look_at":[-930,-310,78],"events":[[1,"@impulse",[1800,0,0,"spine_05"]]]}
+]

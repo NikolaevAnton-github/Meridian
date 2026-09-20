@@ -80,6 +80,11 @@ void APhysicsControlDummy::RegisterDisturbance(FName Bone, const FVector& Impuls
     Instability = FMath::Min(2.f, Instability + FMath::Max(0.f, Amount));
     LeanDirection = (LeanDirection * .3f + Impulse.GetSafeNormal2D()).GetSafeNormal2D();
     LastStepImpulse = Impulse;
+    if (StepPhase && !bAdaptiveReplanPending)
+    {
+        bAdaptiveReplanPending = true;
+        AdaptiveReplanAge = 0;
+    }
     // The request clock belongs to the recovery, not to the latest bullet.
     if (!bStepRequested) StepRequestSeconds = 0;
     bStepRequested = true;

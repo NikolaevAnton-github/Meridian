@@ -47,6 +47,160 @@ void APhysicsControlDummy::CancelStep()
     bStepRequested = false;
     bStanceCorrectionPending = false;
     StepNoSupportSeconds = 0;
+    ResetAdaptiveStep();
+}
+
+void APhysicsControlDummy::ResetAdaptiveStep()
+{
+    AdaptiveLength = AdaptiveLift = AdaptiveUrgency = 0;
+    AdaptiveTransferTime = AdaptiveSwingTime = AdaptiveSettleTime = 0;
+    AdaptiveEntrySpeed = AdaptiveEntryLean = AdaptiveLeanExcursion = AdaptiveEntryDemand = 0;
+    AdaptiveEntryVelocity = AdaptiveReplanVelocity = AdaptiveReplanOrigin = AdaptiveReplanGoal = FVector::ZeroVector;
+    AdaptiveReplanStart = -1;
+    AdaptiveReplanAge = AdaptiveReplanTravel = 0;
+    AdaptiveReplans = 0;
+    AdaptiveGeometryTrials = 0;
+    bAdaptiveReplanPending = false;
+    AdaptiveReplanReason = TEXT("reset");
+}
+
+void APhysicsControlDummy::SelectAdaptiveStep(const FVector& BodyOffset, float FootMotion)
+{
+    ResetAdaptiveStep();
+    AdaptiveEntrySpeed = EffectiveSpeed;
+    AdaptiveEntryLean = PoseLeanDegrees;
+    const FVector NeutralTrunk = (NeutralBones[Body->GetBoneIndex(TEXT("spine_05"))].GetLocation() -
+        NeutralBones[Body->GetBoneIndex(TEXT("pelvis"))].GetLocation()).GetSafeNormal();
+    const FVector ActualTrunk = (AnklePosition(Body,TEXT("spine_05")) - AnklePosition(Body,TEXT("pelvis"))).GetSafeNormal();
+    AdaptiveLeanExcursion = FMath::RadiansToDegrees(FMath::Acos(FMath::Clamp(FVector::DotProduct(NeutralTrunk,ActualTrunk),-1.0,1.0)));
+    AdaptiveEntryVelocity = Flat(RecoveryVelocity);
+    AdaptiveReplanVelocity = AdaptiveEntryVelocity;
+    // Body state dominates; impulse is a bounded feed-forward displacement,
+    // not a replacement for actual support/momentum or a bullet-count proxy.
+    const float ImpulseTravel = FMath::Min(4.f, static_cast<float>(LastStepImpulse.Size2D()) /
+        FMath::Max(1.f, RecoveryMass) * .12f);
+    AdaptiveEntryDemand = BodyOffset.Size2D() * 1.1f + CaptureDistance * .65f +
+        RecoveryVelocity.Size2D() * .10f + FootMotion * .35f + AdaptiveLeanExcursion * 1.5f + ImpulseTravel;
+    AdaptiveLength = FMath::Clamp(8.f + AdaptiveEntryDemand, 8.f, EffectiveReach);
+    AdaptiveUrgency = FMath::Clamp(FMath::Max3(static_cast<float>(BodyOffset.Size2D()) / 20.f,
+        static_cast<float>(RecoveryVelocity.Size2D()) / 100.f, PoseLeanDegrees / 35.f), 0.f, 1.f);
+    ConfigureAdaptiveGeometry(AdaptiveLength);
+    AdaptiveReplanReason = TEXT("entry plan frozen");
+}
+
+void APhysicsControlDummy::ConfigureAdaptiveGeometry(float Length)
+{
+    AdaptiveLength = Length;
+    const float LengthRatio = Length / FMath::Clamp(StepLength, 12.f, 40.f);
+    // Short corrections need a lower arc; retain the reference lift at StepLength.
+    AdaptiveLift = FMath::Clamp(StepLift * (.25f + .75f * LengthRatio) +
+        PoseLeanDegrees * .03f, 6.f, 18.f);
+    AdaptiveTransferTime = FMath::Clamp(StepTransferSeconds, .12f, .35f) /
+        EffectiveSpeed * (1.f - .15f * AdaptiveUrgency);
+    AdaptiveSwingTime = FMath::Clamp(StepSwingSeconds, .25f, .75f) /
+        EffectiveSpeed * FMath::Clamp(.80f + .25f * LengthRatio, .85f, 1.15f) /
+        (1.f + .20f * AdaptiveUrgency);
+    AdaptiveSettleTime = FMath::Clamp(StepSettleSeconds, .2f, .6f) / EffectiveSpeed;
+}
+
+bool APhysicsControlDummy::ValidateStepGeometry()
+{
+    const FVector NeutralSpan = NeutralBones[Body->GetBoneIndex(SwingFoot)].GetLocation() -
+        NeutralBones[Body->GetBoneIndex(PlantedFoot)].GetLocation();
+    const float StanceError = Flat(SwingDestination.GetLocation() - PlantedTarget.GetLocation() - NeutralSpan).Size();
+    // Reserve a reachable catch-up placement for the other leg. Do not create
+    // a stance whose next neutral correction is already outside the step budget.
+    if (!bCorrectiveStep && StanceError > EffectiveReach - .5f) return false;
+    // Pure target solves: do not move bodies, animate the visible mesh or widen
+    // constraints. Reject an arc that is reachable at its endpoints only.
+    TMap<FName,FTransform> Unused;
+    for (int32 I = 0; I <= 4; ++I)
+        if (!BuildStepPose(I / 4.f, 0, 0, Unused, false)) return false;
+    for (int32 I = 1; I <= 12; ++I)
+        if (!BuildStepPose(1, I / 12.f, 0, Unused, false)) return false;
+    for (int32 I = 1; I <= 4; ++I)
+        if (!BuildStepPose(1, 1, I / 4.f, Unused, false)) return false;
+    return true;
+}
+
+void APhysicsControlDummy::UpdateStepRestPelvis()
+{
+    const FVector NeutralPelvis = NeutralBones[Body->GetBoneIndex(TEXT("pelvis"))].GetLocation();
+    const FVector NeutralLeft = NeutralBones[Body->GetBoneIndex(TEXT("foot_l"))].GetLocation();
+    const FVector NeutralRight = NeutralBones[Body->GetBoneIndex(TEXT("foot_r"))].GetLocation();
+    StepDisplacement = SwingDestination.GetLocation() - SwingStart.GetLocation();
+    StepRestPelvis = (SwingDestination.GetLocation() + PlantedTarget.GetLocation()) * .5 +
+        NeutralPelvis - (NeutralLeft + NeutralRight) * .5;
+}
+
+bool APhysicsControlDummy::UpdateAdaptiveReplan(float DeltaSeconds)
+{
+    // No deadline extension or late foot snap. A late/new disturbance remains a
+    // request for the next feasible step, under the existing progress timer.
+    const float Swing = FMath::Clamp((StepSeconds - AdaptiveTransferTime) / AdaptiveSwingTime, 0.f, 1.f);
+    if (bAdaptiveReplanPending)
+    {
+        AdaptiveReplanAge += DeltaSeconds;
+        const bool Blending = AdaptiveReplanStart >= 0 && StepSeconds < AdaptiveReplanStart + .12f;
+        if (AdaptiveReplanAge >= .04f && !Blending)
+        {
+            bAdaptiveReplanPending = false;
+            if (bCorrectiveStep || Swing >= .50f ||
+                StepSeconds + .12f > AdaptiveTransferTime + AdaptiveSwingTime * .85f ||
+                AdaptiveReplans >= 2 || AdaptiveReplanTravel >= 6.f)
+                AdaptiveReplanReason = TEXT("committed swing; queued next recovery step");
+            else
+            {
+                const FVector Change = (Flat(RecoveryVelocity) - AdaptiveReplanVelocity) * .12f +
+                    LastStepImpulse.GetClampedToMaxSize(3000.f) / FMath::Max(1.f, RecoveryMass) * .08f;
+                const FVector Correction = Flat(Change).GetClampedToMaxSize(FMath::Min(4.f, 6.f - AdaptiveReplanTravel));
+                if (Correction.Size2D() >= .5f)
+                {
+                    FTransform Goal = SwingDestination;
+                    Goal.AddToTranslation(Correction);
+                    const FVector Reach = Flat(Goal.GetLocation() - SwingStart.GetLocation()).GetClampedToMaxSize(EffectiveReach);
+                    Goal.SetLocation(SwingStart.GetLocation() + Reach);
+                    if (!StepPlacement(SwingFoot, Goal, GroundHeight) || !StepPathClear(SwingStart, Goal))
+                    {
+                        AdaptiveReplanReason = TEXT("replanned placement or swing blocked");
+                        EnterFall(TEXT("adaptive step replan unsafe"));
+                        return false;
+                    }
+                    const FTransform Committed = SwingDestination;
+                    SwingDestination = Goal;
+                    UpdateStepRestPelvis();
+                    const bool GeometrySafe = ValidateStepGeometry();
+                    SwingDestination = Committed;
+                    UpdateStepRestPelvis();
+                    if (!GeometrySafe)
+                    {
+                        // Keep the validated committed arc. A subsequent step
+                        // can absorb the hit; current support/capacity still gate it.
+                        AdaptiveReplanReason = TEXT("replan outside joint envelope; keep committed arc");
+                        return true;
+                    }
+                    AdaptiveReplanOrigin = SwingDestination.GetLocation();
+                    AdaptiveReplanGoal = Goal.GetLocation();
+                    AdaptiveReplanStart = StepSeconds;
+                    AdaptiveReplanTravel += FVector::Dist2D(AdaptiveReplanOrigin, AdaptiveReplanGoal);
+                    AdaptiveReplanVelocity = Flat(RecoveryVelocity);
+                    ++AdaptiveReplans;
+                    AdaptiveReplanReason = TEXT("early replan blended over 0.12 world seconds");
+                }
+                else AdaptiveReplanReason = TEXT("body change below replan deadband");
+            }
+        }
+    }
+    if (AdaptiveReplanStart >= 0)
+    {
+        FTransform Target = SwingDestination;
+        Target.SetLocation(FMath::Lerp(AdaptiveReplanOrigin, AdaptiveReplanGoal, Smooth((StepSeconds - AdaptiveReplanStart) / .12f)));
+        if (!StepPlacement(SwingFoot, Target, GroundHeight) || !StepPathClear(SwingStart, Target))
+        { EnterFall(TEXT("adaptive blended swing blocked")); return false; }
+        SwingDestination = Target;
+        UpdateStepRestPelvis();
+    }
+    return true;
 }
 
 void APhysicsControlDummy::ResetStepping()
@@ -126,7 +280,7 @@ bool APhysicsControlDummy::StepPathClear(const FTransform& Start, const FTransfo
     {
         const float Alpha = I / 12.f;
         FVector P = Box.GetLocation() + ClearanceOffset + (End.GetLocation() - Start.GetLocation()) * Smooth(Alpha);
-        P.Z += FMath::Sin(PI * Alpha) * FMath::Clamp(StepLift, 5.f, 18.f);
+        P.Z += FMath::Sin(PI * Alpha) * AdaptiveLift;
         FHitResult Hit;
         if (GetWorld()->SweepSingleByObjectType(Hit, Previous, P, Rotation, Objects,
             FCollisionShape::MakeBox(Extent), Query)) return false;
@@ -164,7 +318,7 @@ bool APhysicsControlDummy::BeginStep()
     const FVector Facing = FVector::CrossProduct(Chest - Pelvis, TrunkLeft).GetSafeNormal2D();
     if (!Facing.IsNearlyZero()) StandingForward = Facing;
     const FVector Velocity = Body->GetBodyInstance(TEXT("pelvis"))->GetUnrealWorldVelocity();
-    // Measure the live body after the impulse has had 0.10 world seconds to act.
+    // Measure the live body after the speed-scaled reaction window.
     // Both lean/displacement and velocity contribute, in world coordinates.
     const FVector BodyOffset = Flat(Pelvis - StandingPose.FindChecked(TEXT("pelvis")).GetLocation()) +
         Flat(Chest - Pelvis) * .35f + Flat(Velocity) * .08f;
@@ -189,10 +343,18 @@ bool APhysicsControlDummy::BeginStep()
     const float Separation = FVector::DotProduct(StepDirection, Left - Right);
     const bool Lateral = FMath::Abs(FVector::DotProduct(StepDirection, StandingForward)) < .65f;
     const bool Leading = Lateral && FMath::Abs(Separation) < 40;
+    const FVector NeutralLeft = NeutralBones[Body->GetBoneIndex(TEXT("foot_l"))].GetLocation();
+    const FVector NeutralRight = NeutralBones[Body->GetBoneIndex(TEXT("foot_r"))].GetLocation();
     bCorrectiveStep = bStanceCorrectionPending;
     // Finish an over-wide/low stance by moving the previous support foot. The
     // newly landed foot remains fixed for the whole corrective step.
     bool bLeft = bCorrectiveStep ? PlantedFoot == TEXT("foot_l") : (Separation >= 0) == Leading;
+    // A changed hit direction can straddle the lateral/sagittal classification.
+    // After a displacement, prefer the leg that REDUCES measured stance error
+    // along the new recovery direction, instead of opening the same leg again.
+    const FVector StanceError = Flat((Left - Right) - (NeutralLeft - NeutralRight));
+    if (!bCorrectiveStep && StanceError.Size2D() > 8.f)
+        bLeft = FVector::DotProduct(StanceError, StepDirection) < 0;
     const bool LeftSupported = FootSupported(TEXT("foot_l")), RightSupported = FootSupported(TEXT("foot_r"));
     if (!bCorrectiveStep && DisturbedFoot == TEXT("foot_l") && RightSupported) bLeft=true;
     if (!bCorrectiveStep && DisturbedFoot == TEXT("foot_r") && LeftSupported) bLeft=false;
@@ -206,29 +368,26 @@ bool APhysicsControlDummy::BeginStep()
     SwingStart.SetLocation(FVector(ActualAnkle.X,ActualAnkle.Y,SwingStart.GetLocation().Z));
     PlantedTarget = StandingPose.FindChecked(PlantedFoot);
     SwingDestination = SwingStart;
-    const float Length = FMath::Min(FMath::Clamp(StepLength,12.f,40.f), EffectiveReach);
-    SwingDestination.AddToTranslation(StepDirection * Length);
-    const FVector NeutralLeft = NeutralBones[Body->GetBoneIndex(TEXT("foot_l"))].GetLocation();
-    const FVector NeutralRight = NeutralBones[Body->GetBoneIndex(TEXT("foot_r"))].GetLocation();
+    const float FootMotion = FVector::Dist2D(ActualAnkle, StandingPose.FindChecked(SwingFoot).GetLocation());
+    SelectAdaptiveStep(BodyOffset, FootMotion);
+    SwingDestination.AddToTranslation(StepDirection * AdaptiveLength);
     if (bCorrectiveStep)
     {
         const FVector NeutralSeparation = bLeft ? NeutralLeft - NeutralRight : NeutralRight - NeutralLeft;
         FVector Destination = PlantedTarget.GetLocation() + NeutralSeparation;
         Destination.Z = SwingStart.GetLocation().Z;
         const FVector Correction = Flat(Destination - SwingStart.GetLocation());
-        // World-space subtraction can put an exact 40 cm step a few ulps over
-        // 40. The 0.01 cm numerical margin does not expand the placement budget.
-        if (Correction.Size() > EffectiveReach + .01f)
-            return Reject(TEXT("corrective stance exceeds step reach"));
-        SwingDestination.SetLocation(Destination);
+        // A large stance correction can take further feasible steps. Each one
+        // keeps the same support, effort and no-progress bounds as other recovery.
+        const FVector BoundedCorrection = Correction.GetClampedToMaxSize(EffectiveReach);
+        SwingDestination.SetLocation(SwingStart.GetLocation() + BoundedCorrection);
         StepDirection = Correction.GetSafeNormal();
+        // Corrective placement follows neutral stance geometry, with matching lift.
+        ConfigureAdaptiveGeometry(BoundedCorrection.Size2D());
     }
     if (!StepPlacement(SwingFoot, SwingDestination, GroundHeight) || !StepPathClear(SwingStart, SwingDestination))
         return Reject(TEXT("step destination blocked or unsupported"));
-    StepDisplacement = SwingDestination.GetLocation() - SwingStart.GetLocation();
-    const FVector NeutralPelvis = NeutralBones[Body->GetBoneIndex(TEXT("pelvis"))].GetLocation();
-    StepRestPelvis = (SwingDestination.GetLocation() + PlantedTarget.GetLocation()) * .5 +
-        NeutralPelvis - (NeutralLeft + NeutralRight) * .5;
+    UpdateStepRestPelvis();
     StepStartBones = StandingBones;
     StepEntryBones.Reset();
     for (int32 I = 0; I < Body->GetNumBones(); ++I)
@@ -240,7 +399,6 @@ bool APhysicsControlDummy::BeginStep()
     StepEntryCaptureDistance = CaptureDistance;
     DisturbedFoot = NAME_None;
     StepRequestSeconds = 0;
-    StepPhase = 1; ++EpisodeSteps; ++StepsStarted; bStepRequested = false; bStanceCorrectionPending = false;
     StepReason = TEXT("transferring weight onto planted leg");
     // Fixed envelope for this asset's offset constraint frames. Calibrated idle
     // already needs hip swing ~58 and ankle twist ~38 degrees; the original
@@ -269,12 +427,27 @@ bool APhysicsControlDummy::BeginStep()
                 }
             }
     }
+    bool GeometrySafe = false;
+    // A bounded geometric search can shorten a reactive placement before it
+    // starts. No retries extend an active phase or change a planted target.
+    for (int32 Trial = 0; Trial < 4; ++Trial)
+    {
+        ++AdaptiveGeometryTrials;
+        if (ValidateStepGeometry()) { GeometrySafe = true; break; }
+        if (Trial == 3 || AdaptiveLength <= 8.01f) break;
+        ConfigureAdaptiveGeometry(FMath::Max(8.f, AdaptiveLength * .8f));
+        SwingDestination.SetLocation(SwingStart.GetLocation() + StepDirection * AdaptiveLength);
+        if (!StepPlacement(SwingFoot, SwingDestination, GroundHeight) || !StepPathClear(SwingStart, SwingDestination)) break;
+        UpdateStepRestPelvis();
+    }
+    if (!GeometrySafe) return Reject(TEXT("adaptive swing has no reachable joint-safe arc"));
+    StepPhase = 1; ++EpisodeSteps; ++StepsStarted; bStepRequested = false; bStanceCorrectionPending = false;
     BalanceState = EDummyBalanceState::Stepping;
     BalanceReason = TEXT("bounded reactive recovery step");
     return true;
 }
 
-bool APhysicsControlDummy::BuildStepPose(float Transfer, float Swing, float Settle, TMap<FName,FTransform>& Pose)
+bool APhysicsControlDummy::BuildStepPose(float Transfer, float Swing, float Settle, TMap<FName,FTransform>& Pose, bool bApply)
 {
     const auto& Skeleton = Body->GetSkeletalMeshAsset()->GetRefSkeleton();
     StepOutputBones = NeutralBones;
@@ -311,7 +484,7 @@ bool APhysicsControlDummy::BuildStepPose(float Transfer, float Swing, float Sett
         const int32 F = Body->GetBoneIndex(bLeft ? TEXT("foot_l") : TEXT("foot_r"));
         const bool Moving = Body->GetBoneName(F) == SwingFoot;
         FVector Ankle = Moving ? FMath::Lerp(SwingStart.GetLocation(), SwingDestination.GetLocation(), Move) : PlantedTarget.GetLocation();
-        if (Moving) Ankle.Z += FMath::Sin(PI * FMath::Clamp(Swing, 0.f, 1.f)) * FMath::Clamp(StepLift, 5.f, 18.f);
+        if (Moving) Ankle.Z += FMath::Sin(PI * FMath::Clamp(Swing, 0.f, 1.f)) * AdaptiveLift;
         const FVector Hip = StepOutputBones[H].GetLocation();
         const double Reach = FVector::Distance(NeutralBones[H].GetLocation(), NeutralBones[K].GetLocation()) +
             FVector::Distance(NeutralBones[K].GetLocation(), NeutralBones[F].GetLocation()) - 1;
@@ -333,7 +506,7 @@ bool APhysicsControlDummy::BuildStepPose(float Transfer, float Swing, float Sett
         if (Foot == SwingFoot)
         {
             Target.SetLocation(FMath::Lerp(SwingStart.GetLocation(), SwingDestination.GetLocation(), Move) +
-                FVector(0, 0, FMath::Sin(PI * FMath::Clamp(Swing, 0.f, 1.f)) * FMath::Clamp(StepLift, 5.f, 18.f)));
+                FVector(0, 0, FMath::Sin(PI * FMath::Clamp(Swing, 0.f, 1.f)) * AdaptiveLift));
         }
         const FVector Hip = StepOutputBones[H].GetLocation();
         const FVector Ankle = Target.GetLocation();
@@ -408,6 +581,7 @@ bool APhysicsControlDummy::BuildStepPose(float Transfer, float Swing, float Sett
             }
     }
     if (StepJointLimitError > 3.f) return false;
+    if (!bApply) return true;
 
     FPoseSnapshot Snapshot;
     Snapshot.bIsValid = true;
@@ -434,6 +608,7 @@ void APhysicsControlDummy::UpdateStep(float DeltaSeconds)
 {
     if (IsDead()) { CancelStep(); return; }
     StepSeconds += DeltaSeconds;
+    if (!UpdateAdaptiveReplan(DeltaSeconds)) return;
     StepSupportDrift = FVector::Dist2D(AnklePosition(Body, PlantedFoot), PlantedActualStart);
     StepPeakSupportDrift = FMath::Max(StepPeakSupportDrift, StepSupportDrift);
     StepNoSupportSeconds = FootSupported(PlantedFoot) ? 0 : StepNoSupportSeconds + DeltaSeconds;
@@ -443,9 +618,9 @@ void APhysicsControlDummy::UpdateStep(float DeltaSeconds)
     { StepReason = TEXT("usable step support lost"); EnterFall(TEXT("usable step support lost")); return; }
     if (!bRecoveryFeasible || StepSupportDrift > 8)
     { StepReason = TEXT("recovery step exceeded balance limits"); EnterFall(TEXT("recovery step exceeded balance limits")); return; }
-    const float TransferTime = FMath::Clamp(StepTransferSeconds, .12f, .35f)/EffectiveSpeed;
-    const float SwingTime = FMath::Clamp(StepSwingSeconds, .25f, .75f)/EffectiveSpeed;
-    const float SettleTime = FMath::Clamp(StepSettleSeconds, .2f, .6f)/EffectiveSpeed;
+    const float TransferTime = AdaptiveTransferTime;
+    const float SwingTime = AdaptiveSwingTime;
+    const float SettleTime = AdaptiveSettleTime;
     const float Transfer = FMath::Clamp(StepSeconds / TransferTime, 0.f, 1.f);
     const float Swing = FMath::Clamp((StepSeconds - TransferTime) / SwingTime, 0.f, 1.f);
     const float Settle = FMath::Clamp((StepSeconds - TransferTime - SwingTime) / SettleTime, 0.f, 1.f);
@@ -503,6 +678,23 @@ void APhysicsControlDummy::AddStepState(TSharedPtr<FJsonObject> Root) const
     S->SetNumberField(TEXT("rejected"), StepsRejected);
     S->SetBoolField(TEXT("requested"), bStepRequested);
     S->SetNumberField(TEXT("cooldown"), StepCooldownRemaining);
+    S->SetNumberField(TEXT("selected_length_cm"), AdaptiveLength);
+    S->SetNumberField(TEXT("selected_lift_cm"), AdaptiveLift);
+    S->SetNumberField(TEXT("urgency"), AdaptiveUrgency);
+    S->SetNumberField(TEXT("entry_speed"), AdaptiveEntrySpeed);
+    S->SetNumberField(TEXT("entry_lean_degrees"), AdaptiveEntryLean);
+    S->SetNumberField(TEXT("entry_lean_excursion_degrees"), AdaptiveLeanExcursion);
+    S->SetNumberField(TEXT("entry_demand_cm"), AdaptiveEntryDemand);
+    S->SetField(TEXT("entry_velocity_cm_s"), StepVector(AdaptiveEntryVelocity));
+    S->SetField(TEXT("phase_durations_seconds"), StepVector(FVector(AdaptiveTransferTime, AdaptiveSwingTime, AdaptiveSettleTime)));
+    S->SetNumberField(TEXT("reaction_seconds"), FMath::Clamp(RecoveryReactionSeconds,.06f,.3f)/EffectiveSpeed);
+    S->SetNumberField(TEXT("replans"), AdaptiveReplans);
+    S->SetNumberField(TEXT("geometry_trials"), AdaptiveGeometryTrials);
+    S->SetBoolField(TEXT("replan_pending"), bAdaptiveReplanPending);
+    S->SetNumberField(TEXT("replan_travel_cm"), AdaptiveReplanTravel);
+    S->SetNumberField(TEXT("replan_start_seconds"), AdaptiveReplanStart);
+    S->SetStringField(TEXT("replan_reason"), AdaptiveReplanReason);
+    S->SetField(TEXT("replan_goal"), StepVector(AdaptiveReplanGoal));
     S->SetNumberField(TEXT("support_drift_cm"), StepSupportDrift);
     S->SetNumberField(TEXT("peak_support_drift_cm"), StepPeakSupportDrift);
     S->SetNumberField(TEXT("support_drift_tolerance_cm"), 2.f);
