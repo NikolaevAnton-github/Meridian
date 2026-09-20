@@ -124,6 +124,21 @@ void UCombatRifleComponent::BindInput(UEnhancedInputComponent* Input)
     // F7's legacy enemy preview is retired from active input; its source is preserved.
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::Y, IE_Pressed, this, &UCombatRifleComponent::TogglePhysicsPreview);
     static_cast<UInputComponent*>(Input)->BindKey(EKeys::F10, IE_Pressed, this, &UCombatRifleComponent::TogglePhysicsDummy);
+    static_cast<UInputComponent*>(Input)->BindKey(FInputChord(EKeys::F7, false, true, false, false),
+        IE_Pressed, this, &UCombatRifleComponent::ToggleDummyImmortality);
+    static_cast<UInputComponent*>(Input)->BindKey(FInputChord(EKeys::F8, false, true, false, false),
+        IE_Pressed, this, &UCombatRifleComponent::ToggleInfiniteReserve);
+}
+void UCombatRifleComponent::ToggleDummyImmortality()
+{
+    if (auto* World = ACombatProjectileWorld::Find(GetWorld()))
+        World->bImmortalDummies = !World->bImmortalDummies;
+}
+void UCombatRifleComponent::ToggleInfiniteReserve()
+{
+    bInfiniteReserve = !bInfiniteReserve;
+    if (!bReloading) StatusText.Empty();
+    SyncPresentation();
 }
 void UCombatRifleComponent::TogglePhysicsPreview()
 {
@@ -246,7 +261,7 @@ bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, c
     NextShotTime = Now + Interval;
     if (Magazine <= 0)
     {
-        StatusText = Reserve > 0 ? TEXT("EMPTY  |  R: RELOAD") : TEXT("EMPTY  |  NO RESERVE");
+        StatusText = bInfiniteReserve || Reserve > 0 ? TEXT("EMPTY  |  R: RELOAD") : TEXT("EMPTY  |  NO RESERVE");
         if (!bDryForPress && Now >= NextDryTime)
         {
             NextDryTime = Now + .3;
@@ -353,9 +368,9 @@ void UCombatRifleComponent::ChangeFireMode()
 bool UCombatRifleComponent::RequestReload(bool Quick)
 {
     if (!CanAct()) return false;
-    if (Magazine >= MagazineCapacity || Reserve <= 0)
+    if (Magazine >= MagazineCapacity || (!bInfiniteReserve && Reserve <= 0))
     {
-        StatusText = Reserve <= 0 ? TEXT("NO RESERVE") : TEXT("MAGAZINE FULL");
+        StatusText = !bInfiniteReserve && Reserve <= 0 ? TEXT("NO RESERVE") : TEXT("MAGAZINE FULL");
         return false;
     }
     // Empty state always selects bolt-handling animation, including Q and E.
@@ -379,9 +394,10 @@ void UCombatRifleComponent::CommitReload(USkeletalMeshComponent* Mesh, UAnimSequ
     if (!bReloading || bTransferDone || !Character || Mesh != Character->GetMesh() ||
         Animation != ActiveReload || InstanceId != ReloadInstanceId) return;
     bTransferDone = true;
-    const int32 Transfer = FMath::Min(FMath::Max(0, MagazineCapacity - Magazine), FMath::Max(0, Reserve));
+    const int32 Missing = FMath::Max(0, MagazineCapacity - Magazine);
+    const int32 Transfer = bInfiniteReserve ? Missing : FMath::Min(Missing, FMath::Max(0, Reserve));
     Magazine += Transfer;
-    Reserve -= Transfer;
+    if (!bInfiniteReserve) Reserve -= Transfer;
     TransferredRounds += Transfer;
     ++TransferCount;
     bReloading = false;
@@ -579,6 +595,7 @@ FString UCombatRifleComponent::GetRifleState() const
     auto Root = MakeShared<FJsonObject>();
     Root->SetNumberField(TEXT("magazine"), Magazine);
     Root->SetNumberField(TEXT("reserve"), Reserve);
+    Root->SetBoolField(TEXT("infinite_reserve"), bInfiniteReserve);
     Root->SetBoolField(TEXT("automatic"), bAutomatic);
     Root->SetBoolField(TEXT("reloading"), bReloading);
     Root->SetBoolField(TEXT("transfer_done"), bTransferDone);

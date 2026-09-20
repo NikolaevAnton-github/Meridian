@@ -1,4 +1,5 @@
 #include "PhysicsControlDummy.h"
+#include "CombatProjectileWorld.h"
 #include "PhysicsControlComponent.h"
 #include "Animation/AnimSequence.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -359,7 +360,10 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
     Row->SetField(TEXT("direction"), VJson(Direction));
     Row->SetBoolField(TEXT("was_dead"), IsDead());
     Row->SetObjectField(TEXT("before"), BodyState());
-    const float Applied = IsDead() ? 0.f : FMath::Min(Health, Damage);
+    const auto* CombatWorld = ACombatProjectileWorld::Find(GetWorld());
+    // Suppress health loss only; physical impacts and balance disturbances still run.
+    const bool bImmortal = CombatWorld && CombatWorld->bImmortalDummies;
+    const float Applied = IsDead() || bImmortal ? 0.f : FMath::Min(Health, Damage);
     Health = FMath::Max(0.f, Health - Applied);
     if (!IsDead() && Health == 0)
     {

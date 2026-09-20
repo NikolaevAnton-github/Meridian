@@ -23,6 +23,10 @@ and owner gates remain; this administrative change does not expand gameplay scop
 
 ## Planned follow-up: MSQ-88 mannequin collision, grounding and recovery blend
 
+The owner separately requested [optional combat test controls](CombatTestToggles01.md):
+Ctrl+F7 toggles mannequin immortality and Ctrl+F8 toggles infinite reserve ammunition
+with ordinary magazine consumption/reload. This direct correction does not start MSQ-88.
+
 After playing MSQ-87, the owner reports that the overall system works but asks
 for one follow-up covering arms passing through the body, feet hovering above
 the floor and the visible transition from varied physical falls to the get-up

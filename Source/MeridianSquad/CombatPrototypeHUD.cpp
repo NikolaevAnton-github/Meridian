@@ -15,16 +15,22 @@ void ACombatPrototypeHUD::DrawHUD()
     if (!Canvas || !Rifle) return;
     const float Scale = FMath::Clamp(Canvas->SizeY / 900.f, .8f, 1.4f);
     const float X = 24.f * Scale;
-    const float Y = Canvas->SizeY - 130.f * Scale;
-    DrawRect(FLinearColor(0.012f, .018f, .025f, .8f), X - 10 * Scale, Y - 8 * Scale, 410 * Scale, 114 * Scale);
+    const float Y = Canvas->SizeY - 150.f * Scale;
+    DrawRect(FLinearColor(0.012f, .018f, .025f, .8f), X - 10 * Scale, Y - 8 * Scale, 440 * Scale, 134 * Scale);
     DrawText(TEXT("COMBAT PROTOTYPE"), FLinearColor(.55f,.65f,.7f), X, Y, GEngine->GetSmallFont(), Scale);
-    DrawText(FString::Printf(TEXT("%02d / %02d   |   RESERVE %03d   |   %s"), Rifle->Magazine,
-        Rifle->MagazineCapacity, Rifle->Reserve, Rifle->bAutomatic ? TEXT("AUTO") : TEXT("SEMI")),
+    const FString ReserveText = Rifle->bInfiniteReserve ? TEXT("INF") : FString::Printf(TEXT("%03d"), Rifle->Reserve);
+    DrawText(FString::Printf(TEXT("%02d / %02d   |   RESERVE %s   |   %s"), Rifle->Magazine,
+        Rifle->MagazineCapacity, *ReserveText, Rifle->bAutomatic ? TEXT("AUTO") : TEXT("SEMI")),
         Rifle->Magazine > 0 ? FLinearColor::White : FLinearColor(1,.4f,.2f), X, Y + 21 * Scale, GEngine->GetMediumFont(), Scale);
     DrawText(Rifle->StatusText.IsEmpty() ? TEXT("LMB fire   RMB aim   V mode   R reload / hold check") : Rifle->StatusText,
         FLinearColor(.75f,.83f,.85f), X, Y + 54 * Scale, GEngine->GetSmallFont(), Scale);
     DrawText(TEXT("F6 reset   Y slow preview   F10 mannequins"), FLinearColor(.65f,.73f,.76f),
         X, Y + 77 * Scale, GEngine->GetSmallFont(), Scale);
+    const auto* CombatWorld = ACombatProjectileWorld::Find(GetWorld());
+    DrawText(FString::Printf(TEXT("Ctrl+F7 immortal: %s   Ctrl+F8 reserve: %s"),
+        CombatWorld && CombatWorld->bImmortalDummies ? TEXT("ON") : TEXT("OFF"),
+        Rifle->bInfiniteReserve ? TEXT("ON") : TEXT("OFF")), FLinearColor(.65f,.83f,.76f),
+        X, Y + 100 * Scale, GEngine->GetSmallFont(), Scale);
     const float CX = Canvas->SizeX * .5f, CY = Canvas->SizeY * .5f;
     DrawRect(FLinearColor(1,1,1,.65f), CX - 1, CY - 1, 2, 2);
     for (TActorIterator<APhysicsControlDummy> It(GetWorld()); It; ++It)

@@ -31,7 +31,9 @@ int32 UPurchasedArmsAnimInstance::GetCombatMagazineRounds() const
         {
             const auto* Root = MagazineActor->GetRootComponent();
             const bool Spare = Root && Root->GetAttachSocketName().ToString().Contains(TEXT("Reserve"));
-            return Spare ? FMath::Min(Rifle->MagazineCapacity, Rifle->Magazine + Rifle->Reserve) : Rifle->Magazine;
+            if (!Spare) return Rifle->Magazine;
+            return Rifle->bInfiniteReserve ? Rifle->MagazineCapacity :
+                FMath::Min(Rifle->MagazineCapacity, Rifle->Magazine + Rifle->Reserve);
         }
     return 0;
 }

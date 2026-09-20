@@ -602,6 +602,7 @@ FString ACombatProjectileWorld::GetCombatState() const
     Root->SetNumberField(TEXT("physics_preview_scale"), ActivePreviewScale);
     Root->SetBoolField(TEXT("physics_dummy_enabled"), !PhysicsDummies.IsEmpty());
     Root->SetNumberField(TEXT("physics_dummy_count"), PhysicsDummies.Num());
+    Root->SetBoolField(TEXT("immortal_dummies"), bImmortalDummies);
     Root->SetNumberField(TEXT("player_action_clock"), PlayerActionClock);
     Root->SetNumberField(TEXT("player_action_rate"), PlayerActionRate);
     Root->SetNumberField(TEXT("physical_history_actors"), PreviousDummies.Num());

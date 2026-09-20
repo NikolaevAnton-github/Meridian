@@ -46,6 +46,8 @@ public:
     int32 Magazine = 30;
     UPROPERTY(BlueprintReadOnly, Category="Combat")
     int32 Reserve = 90;
+    UPROPERTY(Transient, BlueprintReadOnly, Category="Combat|Prototype")
+    bool bInfiniteReserve = false;
     UPROPERTY(BlueprintReadOnly, Category="Combat")
     bool bAutomatic = false;
     UPROPERTY(BlueprintReadOnly, Category="Combat")
@@ -65,6 +67,10 @@ public:
     void ProbeDuplicateNotify();
     void CommitReload(USkeletalMeshComponent* Mesh, UAnimSequenceBase* Animation, int32 InstanceId);
     void ClearTransientFeedback();
+    UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
+    void ToggleInfiniteReserve();
+    UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
+    void ToggleDummyImmortality();
 
     // The projectile coordinator owns the interval after movement/camera sampling.
     void PrepareTimingFrame(double Start, double End);
