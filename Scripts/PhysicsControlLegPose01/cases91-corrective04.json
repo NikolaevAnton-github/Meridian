@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Candidate04-Corrective",
+    "duration": 8,
+    "fps": 30,
+    "profile": 1,
+    "tuning": {
+      "step_length": 40
+    },
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -700,
+      -80,
+      125
+    ],
+    "look_at": [
+      -910,
+      -290,
+      78
+    ],
+    "events": [
+      [
+        1,
+        "@push",
+        -2000
+      ]
+    ]
+  }
+]

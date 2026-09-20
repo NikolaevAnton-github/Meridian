@@ -218,6 +218,8 @@ private:
     void EvaluateRecoveryPose(float Time, float Blend, float EndBlend, TMap<FName,FTransform>& Pose);
     // World-space full target skeleton. Home is reserved for explicit F6 only.
     TArray<FTransform> StandingBones;
+    // Captured only from calibrated idle/reset or completed get-up, never solved steps.
+    TArray<FTransform> NeutralBones;
     TArray<FTransform> StepStartBones;
     TArray<FTransform> StepEntryBones;
     TArray<FTransform> StepOutputBones;
@@ -232,6 +234,11 @@ private:
     FVector StepBodyDirection = FVector::ZeroVector;
     FVector StepDisplacement = FVector::ZeroVector;
     FVector StepTransfer = FVector::ZeroVector;
+    FVector StepRestPelvis = FVector::ZeroVector;
+    bool bCorrectiveStep = false;
+    bool bStanceCorrectionPending = false;
+    float StepHeightCorrection = 0;
+    float StepJointLimitError = 0;
     float StepSeconds = 0;
     float StepNoSupportSeconds = 0;
     float StepCooldownRemaining = 0;
@@ -246,7 +253,8 @@ private:
     FString StepReason;
     void ResetStepping();
     void CancelStep();
-    void RememberStandingSkeleton(const USkeletalMeshComponent* Mesh);
+    void RememberStandingSkeleton(const USkeletalMeshComponent* Mesh, bool bNeutral = true);
+    bool NeedsStanceCorrection() const;
     bool BeginStep();
     void UpdateStep(float DeltaSeconds);
     bool StepPlacement(FName Bone, FTransform& Foot, float FloorReference) const;

@@ -240,6 +240,7 @@ void APhysicsControlDummy::DrivePose(const TMap<FName,FTransform>& Pose, float S
         for (int32 I=0; I<Asset->ConstraintSetup.Num(); ++I)
         {
             const auto& Default = Asset->ConstraintSetup[I]->DefaultInstance;
+            if (BalanceState == EDummyBalanceState::Stepping && IsLeg(Default.ConstraintBone1.ToString())) continue;
             const FTransform* Child = Pose.Find(Default.ConstraintBone1);
             const FTransform* Parent = Pose.Find(Default.ConstraintBone2);
             if (Child && Parent)
@@ -288,14 +289,14 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
             EnterFall(TEXT("body exceeded recoverable deviation"));
         else
         {
-            if (Instability < .08f && SinceDisturbance > FMath::Max(.2f, StepCooldown))
+            if (!bStanceCorrectionPending && Instability < .08f && SinceDisturbance > FMath::Max(.2f, StepCooldown))
             { EpisodeSteps = 0; bStepRequested = false; }
             if (bStepRequested && SinceDisturbance >= .10f && StepCooldownRemaining <= 0)
             {
                 if (BeginStep()) UpdateStep(0);
                 return;
             }
-            BalanceState = Instability > .08f || LeftLegDisabled > 0 || RightLegDisabled > 0 ? EDummyBalanceState::LosingBalance : EDummyBalanceState::Standing;
+            BalanceState = bStanceCorrectionPending || Instability > .08f || LeftLegDisabled > 0 || RightLegDisabled > 0 ? EDummyBalanceState::LosingBalance : EDummyBalanceState::Standing;
             auto Targets = StandingPose;
             const float Weight = FMath::Clamp(Instability / FMath::Max(.1f,FallThreshold), 0.f, 1.f);
             const FVector PelvisTarget = StandingPose.FindChecked(TEXT("pelvis")).GetLocation();

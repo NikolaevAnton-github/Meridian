@@ -14,6 +14,14 @@ bool APhysicsControlDummy::ProbeBalanceEnvironment(const FString& Operation)
 {
 #if WITH_EDITOR
     if (GetWorld()->WorldType != EWorldType::PIE) return false;
+    if (Operation == TEXT("step_infeasible_stance"))
+    {
+        // Adversarial target only: do not teleport bodies or change support.
+        // The next solve must reject the impossible pelvis/ankle reach and fall.
+        if (BalanceState != EDummyBalanceState::Stepping || StepPhase != 2) return false;
+        StepRestPelvis.Z += 40;
+        return true;
+    }
     if (Operation == TEXT("remove_floor"))
     {
         if (!IsValid(ProbeFloor)) return false;

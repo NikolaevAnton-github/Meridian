@@ -13,13 +13,14 @@ instructions supersede earlier guidance within their stated scope.
 - Codex may launch existing applications and local project services needed for
   authorized work without asking again. Starting a service does not authorize
   unrelated execution, purchases or a pending design selection.
-- Current planning: MSQ-90 [stance, balance and terrain support](Docs/Tasks/PhysicsControlRefinement01Plan.md)
-  contains prepared MSQ-91 through MSQ-96 under the
+- Current family: MSQ-90 [stance, balance and terrain support](Docs/Tasks/PhysicsControlRefinement01Plan.md)
+  contains MSQ-91 through MSQ-96 under the
   [owner's task-creation request](Docs/Approvals/PhysicsControlRefinement01-TaskCreation01.json).
-  No implementation is started by that request. MSQ-89 Candidate05 remains the
-  baseline with the owner's post-step stance defect open. Its
-  [independent-review waiver](Docs/Approvals/PhysicsControlStepping01-ReviewWaiver01.json)
-  remains scoped to MSQ-89. Owner play/motion acceptance stays separate. The MSQ-85
+  The later [MSQ-91 start and review waiver](Docs/Approvals/PhysicsControlLegPose01-OwnerStart01.json)
+  authorized the delivered Candidate07 stance correction. See the
+  [handoff](Docs/PhysicsControlLegPose01Handoff.md); MSQ-89 Candidate05 and its
+  evidence remain preserved. MSQ-92 through MSQ-96 remain undispatched.
+  Review waivers stay task-scoped. Owner play/motion acceptance stays separate. The MSQ-85
   [relative slowdown decision](Docs/Approvals/PhysicsControlVariants01-OwnerScope01.json)
   requires partial player movement/firing slowdown while the world slows more,
   superseding the earlier normal-player slowdown rule. Full stop remains later scope.

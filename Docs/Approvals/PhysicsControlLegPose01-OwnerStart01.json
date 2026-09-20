@@ -1,0 +1,14 @@
+{
+  "record_id": "PhysicsControlLegPose01-OwnerStart01",
+  "date_local": "2026-09-20",
+  "task_identifier": "MSQ-91",
+  "source": "Owner direct chat starting MSQ-91",
+  "owner_message_original": "MSQ-91 начнем, без независимой проверки",
+  "owner_message_english_translation": "Let's start MSQ-91, without independent review.",
+  "decision": "Execute the bounded anatomical leg alignment and settled-stance correction defined in Docs/Tasks/PhysicsControlLegPose01.md, using MSQ-89 Candidate05 as the retained baseline.",
+  "review_route": "Independent technical and visual review is waived for MSQ-91. The executor performs focused self-checks and supplies evidence; the controller accepts scope, candidate identity, evidence applicability and preservation. Final visual and motion/play judgement remains with the owner. Do not dispatch an independent reviewer.",
+  "execution": "One existing Multica Unreal executor at verified native Astra/max/standard, one editor writer and one heavy workload at a time. The controller remains active through handoff and bounded corrections, then creates a local task-scoped closure commit.",
+  "verification": "Reproduce the reported defect before tuning. Provide comparable before/after rear and side views, continuous landing/settling footage, representative left/right and repeated episodes, measured stance/joint/reach/planting/contact limits, one infeasible fallback and reset. Reuse unaffected MSQ-89 evidence; no per-profile or full feature matrix.",
+  "preservation": "Preserve owner configuration and project descriptor edits, active owner application sessions, retained lobby and purchased arms, original animation sources, accepted assets and immutable historical candidates/evidence.",
+  "limits": "No successor dispatch, adaptive gait, terrain support, new get-up clips, autonomous locomotion, new paid services or paused art/environment production. This authorization does not establish owner motion/play acceptance."
+}

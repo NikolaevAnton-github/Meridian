@@ -1,0 +1,7 @@
+[
+  {"name":"Candidate03-RepeatedReset","duration":17,"fps":30,"profile":1,"flying":true,"inspection_view":true,"location":[-700,-80,125],"look_at":[-910,-290,78],"events":[[1,"@push",-2000],[4,"@push",-2000],[7,"@push",-2000],[10,"@push",-2000],[14,"F6",1],[14.05,"F6",0]]},
+  {"name":"Candidate03-TurnedLateral","duration":7,"fps":30,"profile":1,"turned":true,"flying":true,"inspection_view":true,"location":[-1150,-20,125],"look_at":[-930,-310,78],"events":[[1,"@lateral",-2000]]},
+  {"name":"Candidate03-Corrective","duration":8,"fps":30,"profile":1,"tuning":{"step_length":40},"flying":true,"inspection_view":true,"location":[-700,-80,125],"look_at":[-910,-290,78],"events":[[1,"@push",-2000]]},
+  {"name":"Candidate03-Infeasible","duration":20,"fps":30,"profile":1,"infeasible_stance":true,"flying":true,"inspection_view":true,"location":[-1150,-20,125],"look_at":[-930,-310,65],"events":[[1,"@push",-2000]]},
+  {"name":"Candidate03-ResetDuring","duration":5,"fps":30,"profile":1,"during_step":"reset","flying":true,"inspection_view":true,"location":[-700,-80,125],"look_at":[-930,-310,78],"events":[[1,"@push",-2000]]}
+]

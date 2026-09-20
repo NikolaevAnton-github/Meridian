@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Candidate01-Rear",
+    "duration": 9,
+    "fps": 30,
+    "profile": 1,
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -700,
+      -80,
+      125
+    ],
+    "look_at": [
+      -930,
+      -310,
+      78
+    ],
+    "events": [
+      [
+        1,
+        "@push",
+        -2000
+      ],
+      [
+        4,
+        "@push",
+        -2000
+      ]
+    ]
+  },
+  {
+    "name": "Candidate01-Side",
+    "duration": 9,
+    "fps": 30,
+    "profile": 1,
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -1150,
+      -20,
+      125
+    ],
+    "look_at": [
+      -930,
+      -310,
+      78
+    ],
+    "events": [
+      [
+        1,
+        "@push",
+        -2000
+      ],
+      [
+        4,
+        "@push",
+        -2000
+      ]
+    ]
+  }
+]

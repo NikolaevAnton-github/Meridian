@@ -15,10 +15,12 @@ asks to split the discussed improvements into tasks. See the
 [original stance screenshot](../Approvals/PhysicsControlRefinement01-LegPose01.png).
 This feedback is not acceptance of the defective pose or unrestricted locomotion.
 
-This is task creation and dependency planning only. Create the parent and six
-children in backlog, unassigned, with zero runs. Do not start an executor, reviewer,
-task runtime, editor operation or successor. Multica owns live status. Stage order
-and dependency metadata guide later dispatch; they are not execution permission.
+The original request authorized task creation and dependency planning only: the
+parent and six children were created in backlog, unassigned, with zero runs.
+The owner subsequently [authorized MSQ-91 execution without independent review](../Approvals/PhysicsControlLegPose01-OwnerStart01.json).
+That authorization is scoped to stage 1; MSQ-92 through MSQ-96 remain undispatched.
+Multica owns live status. Stage order and dependency metadata guide later dispatch;
+they are not execution permission.
 
 ## Ordered implementation tasks
 

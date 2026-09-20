@@ -1,0 +1,81 @@
+[
+  {
+    "name": "Candidate06-Corrective",
+    "duration": 8,
+    "fps": 30,
+    "profile": 1,
+    "tuning": {
+      "step_length": 40
+    },
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -700,
+      -80,
+      125
+    ],
+    "look_at": [
+      -910,
+      -290,
+      78
+    ],
+    "events": [
+      [
+        1,
+        "@push",
+        -2000
+      ]
+    ]
+  },
+  {
+    "name": "Candidate06-Lateral",
+    "duration": 7,
+    "fps": 30,
+    "profile": 1,
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -700,
+      -80,
+      125
+    ],
+    "look_at": [
+      -930,
+      -310,
+      78
+    ],
+    "events": [
+      [
+        1,
+        "@lateral",
+        2000
+      ]
+    ]
+  },
+  {
+    "name": "Candidate06-TurnedLateral",
+    "duration": 7,
+    "fps": 30,
+    "profile": 1,
+    "turned": true,
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -1150,
+      -20,
+      125
+    ],
+    "look_at": [
+      -930,
+      -310,
+      78
+    ],
+    "events": [
+      [
+        1,
+        "@lateral",
+        -2000
+      ]
+    ]
+  }
+]
