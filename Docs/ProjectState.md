@@ -21,6 +21,21 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Planned follow-up: MSQ-89 reactive recovery steps
+
+The owner says the MSQ-88 result looks good and likes the existing hit reaction,
+then requests a task for short steps that help the mannequin retain balance after
+hits. [PhysicsControlStepping01 / MSQ-89](Tasks/PhysicsControlStepping01.md) covers
+one or two reactive recovery steps, support-leg selection, valid foot placement,
+settling at the new position and retained physical collapse when recovery fails.
+Direction follows actual body displacement/lean and hit impulse. See the
+[exact feedback and task-creation request](Approvals/PhysicsControlStepping01-TaskCreation01.json).
+Numeric tuning and the animation/procedural route remain implementation choices.
+MSQ-89 is unassigned in backlog with zero runs at creation. No implementation,
+independent check, runtime startup or editor mutation is dispatched. Preserve
+MSQ-88 Candidate04 and the owner's application sessions. Convenient get-up clip
+replacement was a separate question and is not added to this stepping scope.
+
 ## Owner-test handoff: MSQ-88 mannequin collision, grounding and recovery blend
 
 The owner separately requested [optional combat test controls](CombatTestToggles01.md):
@@ -41,10 +56,13 @@ The build and focused self-checks pass: effective arm/body collision, calibrated
 soles and an 89-bone snapshot blend into moving get-up are implemented. Measured
 post-recovery sole gaps are about 0.52-0.58 cm against a 1 cm tolerance. See the
 [implementation](PhysicsControlRecovery01.md) and
-[controller handoff](PhysicsControlRecovery01Handoff.md). The owner retains direct
-visual/play acceptance; assisted motion, foot sliding and retargeted shoulders
-remain judgement points. Continuous recordings are supplied. The new manual owner
-PIE session is preserved. MSQ-87 Candidate05, its evidence and the subsequent
+[controller handoff](PhysicsControlRecovery01Handoff.md). The owner subsequently
+[reported that the current result looks good and likes the hit reaction](Approvals/PhysicsControlStepping01-TaskCreation01.json).
+This is the retained experimental baseline for the planned stepping follow-up.
+Assisted motion, foot sliding and retargeted shoulders remain documented limits;
+the feedback does not establish unrestricted-pose or final-character acceptance.
+Continuous recordings are supplied. The manual owner PIE session is preserved.
+MSQ-87 Candidate05, its evidence and the subsequent
 optional combat test controls remain intact. Live Multica owns task status.
 
 ## Owner-test handoff: MSQ-87 gradual mannequin instability and get-up

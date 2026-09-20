@@ -1,0 +1,17 @@
+{
+  "record_id": "PhysicsControlStepping01-TaskCreation01",
+  "date_local": "2026-09-20",
+  "task_identifier": "MSQ-89",
+  "source": "Owner direct chat after MSQ-88 handoff and discussion of reactive balance-recovery steps",
+  "owner_baseline_feedback_excerpt": "Да выглядит хорошо.",
+  "owner_feature_question_original": "А еще вопрос, сейчас у нас есть реакция на попадание, мне нравится. А нельзя ли сделать что бы маникен как бы оступал чуть назад относительно направления урона по нему, пытаясь при этом сохранить баланс на ногах?",
+  "owner_task_request_original": "Заведи задачку",
+  "owner_task_request_english_translation": "Create a task for it.",
+  "decision": "Create one planning-only follow-up for short reactive steps that attempt to preserve standing balance after hits, extending the current hit response.",
+  "discussed_proposal": "One or two short recovery steps selected from actual body displacement/lean and hit impulse, with support-leg choice, foot placement and retained physical collapse when disturbance or support loss exceeds recovery. Tunable lengths, durations and thresholds are implementation proposals rather than approved numeric values.",
+  "baseline": "MSQ-88 Candidate04, closure commit c618623. The owner positively evaluates the current appearance and likes the hit reaction. Preserve that experimental baseline and all original evidence; this feedback does not claim unrestricted tangled-pose or final-character-art acceptance.",
+  "authorization": "Task creation and project planning records only. No executor assignment, implementation run, editor mutation, independent checks, task-runtime startup or automatic successor dispatch.",
+  "review_context": "The owner's earlier MSQ-88 execution waived independent checks. No checker is requested or dispatched by this planning request. Final motion judgement stays with the owner; follow applicable owner direction at a future explicit execution start without turning a scoped waiver into a universal rule.",
+  "preservation": "Retain current reactions, six independent mannequins, self-collision, sole grounding, snapshot get-up, source animations, damage/death/reset semantics, relative slowdown, optional combat toggles, purchased arms, lobby, owner files and application sessions.",
+  "exclusions": "No general locomotion/AI/navigation overhaul, Mover migration, full push or explosion ability, new art, animation purchase, paid service, lobby editing or successor start. The separate question about convenient get-up clip replacement is not execution scope for this task."
+}
