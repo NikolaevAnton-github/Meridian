@@ -27,6 +27,16 @@ Use existing lobby geometry and bounded navigation support. Do not move columns,
 alter passages or add rooms to rescue pathfinding. Keep spawn and reset repeatable.
 Dead actors stop AI, shots, timers and movement before death physics/presentation.
 
+The later [PhysicsControlRefinement01 / MSQ-90](PhysicsControlRefinement01Plan.md)
+plans corrected stance and uneven/moving support. Consume its applicable completed
+handoffs and define how ordinary movement transfers to hit-recovery steps and back
+without conflicting foot targets or stale support. Do not replace adopted physical
+response with the old enemy implementation. MSQ-70 establishes usable locomotion;
+real destruction-rubble traversal is an explicit integration row in MSQ-78 after
+MSQ-74 produces representative debris. Preserve this task's existing predecessor
+and stage: these links do not authorize those later tasks or create a dependency
+on MSQ-74/MSQ-78 before enemy movement can be implemented.
+
 ## Acceptance
 
 - Demonstrate acquisition, reachable movement, obstruction/lost sight, attack,
@@ -38,6 +48,10 @@ Dead actors stop AI, shots, timers and movement before death physics/presentatio
   tasks. A bounded restart restores one opponent with no duplicate controllers.
 - Inspect actual gameplay views for aim, movement and hit/death readability;
   technical AI checks do not accept final enemy art.
+- Demonstrate the affected movement-to-hit-recovery-to-movement handover at the
+  displaced position using the applicable Physics Control candidate. Document
+  support/placement interfaces needed for the later rubble crossing; stationary
+  recovery steps alone do not satisfy this task's reachable movement requirement.
 
 No squad tactics, enemy variants, progression or a full behavior framework.
 Follow the parent plan; deliver `Docs/EnemyCombat01.md` and focused evidence.

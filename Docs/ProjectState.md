@@ -21,6 +21,28 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Prepared follow-ups: MSQ-90 stance, balance and terrain support
+
+The owner broadly likes MSQ-89 but reports unnatural leg-joint positions after
+steps in an [original screenshot](Approvals/PhysicsControlRefinement01-LegPose01.png).
+The owner agrees with the proposed refinements and explicitly requires uneven
+surfaces because future destruction debris must be traversable; see the
+[exact planning request](Approvals/PhysicsControlRefinement01-TaskCreation01.json).
+[PhysicsControlRefinement01 / MSQ-90](Tasks/PhysicsControlRefinement01Plan.md)
+contains six ordered tasks: MSQ-91 anatomical stance, MSQ-92 adaptive steps,
+MSQ-93 torso/arm balance, MSQ-94 obstacle-aware get-up, MSQ-95 static uneven
+support, and MSQ-96 moving/disappearing debris support. The parent and children
+are prepared in backlog, unassigned, with zero runs; no implementation is started.
+
+MSQ-70 supplies actual movement and MSQ-74 representative debris. MSQ-78 retains
+an explicit future acceptance row for both player and enemy crossing a rubble
+patch through ordinary movement, including changing support. Reactive steps and
+contact fixtures do not prove that traversal. Original CombatSlice stage order
+is unchanged; this planning request does not dispatch MSQ-70 or successors.
+MSQ-89 Candidate05 remains the implementation baseline with the reported stance
+defect open. Owner motion/play judgement remains separate. No reviewer is launched
+by this task preparation; the MSQ-89 waiver remains recorded within its scope.
+
 ## Owner-test handoff: MSQ-89 reactive recovery steps
 
 The owner says the MSQ-88 result looks good and likes the existing hit reaction,

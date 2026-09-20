@@ -19,9 +19,19 @@ during reload/impacts, and death/restart with active abilities/held objects. Reu
 earlier evidence for unchanged components; do not repeat the full feature matrix.
 
 Include the [fixed time/self-hit policy](../Approvals/CombatFoundation01-OwnerScope01.json)
-in newly coupled checks: normal player movement during world slowdown/stop,
-all bullets following world time, self-injury on eligible contact, and reliable
-restoration/cleanup after stop, death and restart.
+with its later [relative slowdown override](../Approvals/PhysicsControlVariants01-OwnerScope01.json):
+player movement/firing slow less than the world during slowdown, all bullets
+follow world time, and eligible own-projectile contact can injure the player.
+Full stop remains in its later ability scope. Check restoration/cleanup after
+the implemented time states, death and restart.
+
+The owner's later debris-traversal requirement is assigned here by
+[PhysicsControlRefinement01 / MSQ-90](PhysicsControlRefinement01Plan.md).
+Consume MSQ-91 through MSQ-96 stance/support handoffs, MSQ-70 movement and MSQ-74
+representative destruction output. The six new tasks can prove reactive support
+capabilities on fixtures; this task retains the open real-traversal gate. Preserve
+the existing stage/predecessor, check these additional handoffs before the coupled
+acceptance, and do not dispatch any prerequisite from this planning amendment.
 
 ## Acceptance
 
@@ -29,6 +39,14 @@ restoration/cleanup after stop, death and restart.
   and can be lost/restarted without stale enemies, damage, time state or constraints.
 - Cover and damage semantics agree across rifle, enemy, body and physics paths;
   controls do not conflict and feedback is readable at normal gameplay distance.
+- Both the player and the adopted enemy enter, cross and leave one declared
+  traversable patch of actual MSQ-74 debris through ordinary movement. For the
+  enemy, show credible foot contact/clearance and one affected hit-recovery return
+  to locomotion. Include a piece that actually shifts or loses support and safe
+  behavior when that contact fails. State the supported envelope and the handling
+  of impassable rubble. Check newly coupled cleanup/reset; reuse earlier evidence.
+  Recovery steps in place, teleportation, cosmetic/frozen chunks, disabling
+  collision or routing around the whole patch do not satisfy this crossing row.
 - Bounded captures demonstrate the selected cross-system checks. Measure introduced
   frame/physics costs at stated resolution/settings and actor counts; report limits
   honestly rather than hiding them through changed scene quality.

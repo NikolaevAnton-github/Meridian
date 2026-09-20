@@ -96,6 +96,15 @@ experiment does not dispatch the sequential family or resume paused art/lobby wo
 
 ## Sequential execution and gates
 
+On 2026-09-20 the owner requests decomposition of the post-MSQ-89 stance and
+balance refinements, explicitly including uneven surfaces and movement over
+destruction debris. [PhysicsControlRefinement01 / MSQ-90](PhysicsControlRefinement01Plan.md)
+is an unstaged coordination child containing ordered MSQ-91 through MSQ-96.
+All seven new issues are prepared in backlog, unassigned, without execution.
+MSQ-70 and MSQ-74 carry movement/debris interface handoffs; MSQ-78 owns actual
+player/enemy crossing of representative rubble. The original stages above remain
+unchanged. Support-fixture tests alone do not close the traversal requirement.
+
 On 2026-09-19 the owner adopted MSQ-84 Physics Control, requested removal of the
 old enemy from active gameplay, six stronger reaction variants, and partial
 player movement/firing slowdown. [PhysicsControlVariants01 / MSQ-85](PhysicsControlVariants01.md)

@@ -1,0 +1,30 @@
+{
+  "record_id": "PhysicsControlRefinement01-TaskCreation01",
+  "date_local": "2026-09-20",
+  "task_identifier": "MSQ-90",
+  "child_task_identifiers_in_order": ["MSQ-91", "MSQ-92", "MSQ-93", "MSQ-94", "MSQ-95", "MSQ-96"],
+  "source": "Owner direct chat following the MSQ-89 handoff, stance screenshot and proposed refinements",
+  "owner_feedback_original": "В целом не плохо. 1)Если посмотришь на скриншот увидишь что ноги после перступов занимают странные позиции в суставах, можно как-то поправить? 2)какие дальнейщие улучшения ты предлагаешь?",
+  "owner_task_request_original": "Да, я согласен, для неровных поверхностей тоже надо, ведь у нас будет разрушаемость и будут какие то обломки, по которым тоже бы надо двигаться. Разбей на задачки тогда, что ты описал, как считаешь нужным.",
+  "owner_task_request_english_translation": "Yes, I agree, we need it for uneven surfaces too, because we will have destruction and some debris that actors should also be able to move over. Split what you described into tasks as you think appropriate.",
+  "decision": "Create an ordered planning family for the discussed stance, adaptive stepping, upper-body balance, obstacle recovery and terrain improvements, including future movement over destruction debris.",
+  "controller_decomposition": [
+    "Anatomical knee/foot alignment and settled stance after recovery steps",
+    "Disturbance-driven step length, lift and timing",
+    "Torso and arm counterbalance with damped settling",
+    "Obstacle-aware living get-up and finite blocked retry behavior",
+    "Static uneven ground, slopes and unequal foot heights",
+    "Moving, unstable and disappearing debris support"
+  ],
+  "traversal_integration": "The six support/recovery tasks do not alone prove ordinary movement across rubble. Add an explicit player/enemy traversal acceptance row to existing MSQ-78, linked to MSQ-70 movement and MSQ-74 destruction. Preserve existing CombatSlice order and avoid circular dependencies. This is the controller's task-boundary choice implementing the owner's request, not an owner-specified architecture.",
+  "authorization": "Task creation, descriptions, dependencies and project planning records only. Keep all new issues in backlog, unassigned, with zero runs. No implementation, editor mutation, task-runtime start or automatic successor dispatch.",
+  "review_context": "No reviewer is requested or dispatched by this planning request. The earlier explicit no-independent-review instruction remains recorded for MSQ-89; this planning record neither expands that waiver nor creates a new review mandate. Follow applicable later owner direction at execution. Motion/play judgement stays with the owner.",
+  "baseline": "MSQ-89 Candidate05, closure commit 71d7d36. Broadly positive feedback includes an unresolved anatomical-pose defect; do not treat it as unrestricted visual or locomotion acceptance.",
+  "screenshot": {
+    "path": "Docs/Approvals/PhysicsControlRefinement01-LegPose01.png",
+    "original_filename": "ai-chat-custom-attachment-temp-file-db9d3eec-9b55-4e58-9f70-21d5c5410692-6265894090383206384.png",
+    "sha256": "C0E640B45255386CC6AD50B17ADA9E41F78980C48A4D2C5CEB6A96C34006AA80",
+    "handling": "Original owner attachment copied without image changes; retained through Git LFS."
+  },
+  "preservation": "Keep historical sources, candidates, evidence, owner edits and application sessions intact. Existing hit response, six mannequins, physical fall/get-up, damage/death/reset, controls and relative slowdown remain the baseline. Numeric limits and solver selection are implementation proposals."
+}
