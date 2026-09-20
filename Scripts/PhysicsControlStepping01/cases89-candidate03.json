@@ -1,0 +1,4 @@
+[
+  {"name":"Candidate03-Frontal","duration":7,"profile":1,"flying":true,"inspection_view":true,"capture_skin":true,"location":[-1150,-20,158],"look_at":[-940,-320,90],"events":[[1,"@push",-2000]]},
+  {"name":"Candidate03-LateralTurned","duration":7,"profile":1,"turned":true,"flying":true,"inspection_view":true,"capture_skin":true,"location":[-1150,-20,158],"look_at":[-950,-320,90],"events":[[1,"@impulse",[2000,0,0,"spine_05"]]]}
+]

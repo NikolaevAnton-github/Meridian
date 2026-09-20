@@ -1,0 +1,3 @@
+[
+  {"name":"Trial01-Frontal","duration":8,"profile":1,"flying":true,"inspection_view":true,"capture_skin":true,"location":[-1240,-45,160],"look_at":[-965,-320,92],"events":[[1,"@impulse",[-2000,0,0,"spine_05"]]]}
+]

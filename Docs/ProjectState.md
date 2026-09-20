@@ -21,7 +21,7 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
-## Planned follow-up: MSQ-89 reactive recovery steps
+## Owner-test handoff: MSQ-89 reactive recovery steps
 
 The owner says the MSQ-88 result looks good and likes the existing hit reaction,
 then requests a task for short steps that help the mannequin retain balance after
@@ -31,10 +31,23 @@ settling at the new position and retained physical collapse when recovery fails.
 Direction follows actual body displacement/lean and hit impulse. See the
 [exact feedback and task-creation request](Approvals/PhysicsControlStepping01-TaskCreation01.json).
 Numeric tuning and the animation/procedural route remain implementation choices.
-MSQ-89 is unassigned in backlog with zero runs at creation. No implementation,
-independent check, runtime startup or editor mutation is dispatched. Preserve
-MSQ-88 Candidate04 and the owner's application sessions. Convenient get-up clip
-replacement was a separate question and is not added to this stepping scope.
+MSQ-89 was unassigned in backlog with zero runs at creation. The owner subsequently
+[authorized execution](Approvals/PhysicsControlStepping01-OwnerStart01.json).
+Use one Multica Unreal executor at verified Astra/max/standard and focused self-checks.
+The owner subsequently [waived independent review for MSQ-89](Approvals/PhysicsControlStepping01-ReviewWaiver01.json).
+The controller accepts scope, applicable evidence and preservation; owner motion/play
+acceptance remains separate. One Multica executor delivered Candidate05 with a
+passing build and 149 focused self-check assertions. The procedural step transfers
+weight, lifts a foot, settles at a displaced stance and permits at most two steps;
+unsafe support still releases into the retained physical fall and living get-up.
+See [implementation](PhysicsControlStepping01.md) and
+[controller handoff](PhysicsControlStepping01Handoff.md) for evidence and limits.
+Support-foot drift is below 0.62 cm in completed measured episodes; post-step sole
+gaps are about 0.20-0.58 cm. Flat static floors are the verified scope; assisted
+motion and the retained weak-response sole compression remain documented limits.
+The owner's subsequently opened Play session is preserved. Preserve MSQ-88 Candidate04
+and all historical sources/evidence. Convenient get-up clip replacement was a
+separate question and is not added to this stepping scope. Live Multica owns status.
 
 ## Owner-test handoff: MSQ-88 mannequin collision, grounding and recovery blend
 

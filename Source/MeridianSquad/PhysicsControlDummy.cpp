@@ -176,6 +176,7 @@ void APhysicsControlDummy::ResetDummy()
             ReferencePose.Add(Setup->BoneName, Body->GetSocketTransform(Setup->BoneName));
     SupportTarget = Body->GetSocketTransform(TEXT("pelvis"));
     StandingPose = ReferencePose;
+    RememberStandingSkeleton(Body);
     FPoseSnapshot StandingSnapshot;
     Body->SnapshotPose(StandingSnapshot);
     Body->SetAnimInstanceClass(UDummyRecoveryAnimInstance::StaticClass());
@@ -394,6 +395,7 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
     {
         ++Deaths;
         BalanceState = EDummyBalanceState::Dead;
+        CancelStep();
         BalanceReason = TEXT("health depleted");
         ActiveGetUp = nullptr;
         DeathFrame = CombatFrame; DeathTime = ContactTime;
@@ -404,7 +406,7 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
         PhysicsControl->SetComponentTickEnabled(false);
         Body->bPauseAnims = true;
     }
-    else if (!IsDead() && (BalanceState == EDummyBalanceState::Standing || BalanceState == EDummyBalanceState::LosingBalance))
+    else if (!IsDead() && (BalanceState == EDummyBalanceState::Standing || BalanceState == EDummyBalanceState::LosingBalance || BalanceState == EDummyBalanceState::Stepping))
     {
         // Briefly soften the struck region's pose springs. Physical joints and the
         // pelvis support stay active; recovery uses world time, including the preview.

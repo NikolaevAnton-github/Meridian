@@ -52,6 +52,23 @@ bool APhysicsControlDummy::ProbeBalanceEnvironment(const FString& Operation)
         ProbeFloor=Floor;
         return IsValid(ProbeFloor);
     }
+    if (Operation == TEXT("turn90"))
+    {
+        const FTransform OriginalHome = Home;
+        Home.SetRotation(FRotator(0, Home.Rotator().Yaw + 90, 0).Quaternion());
+        ResetDummy();
+        Home = OriginalHome;
+        return true;
+    }
+    if (Operation == TEXT("step_wall"))
+    {
+        if (IsValid(ProbeCeiling)) return false;
+        FVector P = GetPhysicalBodyLocation(TEXT("pelvis")) - StandingForward * 40;
+        P.Z = GroundHeight + 45;
+        ProbeCeiling = SpawnBox(P, FVector(.1, 1.1, .9));
+        if (ProbeCeiling) ProbeCeiling->SetActorRotation(StandingForward.Rotation());
+        return IsValid(ProbeCeiling);
+    }
     if (Operation == TEXT("ceiling"))
     {
         if (IsValid(ProbeCeiling)) return false;

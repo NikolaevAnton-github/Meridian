@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-фц#include "Animation/PoseSnapshot.h"
+#include "Animation/PoseSnapshot.h"
 #include "PhysicsControlDummy.generated.h"
 
 class UPhysicsControlComponent;
@@ -32,7 +32,7 @@ struct FDummyPose
 UENUM(BlueprintType)
 enum class EDummyBalanceState : uint8
 {
-    Standing, LosingBalance, Falling, Down, GettingUp, Dead
+    Standing, LosingBalance, Falling, Down, GettingUp, Dead, Stepping
 };
 
 /** Physical mannequin with support-gated pose assistance and interruptible recovery. */
@@ -105,6 +105,25 @@ public:
     float SettleSeconds = .85f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Balance")
     float GetUpBlendSeconds = .75f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Stepping")
+    float StepTriggerInstability = .32f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Stepping")
+    float StepLength = 30.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Stepping")
+    float StepMaxReach = 40.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Stepping")
+    float StepLift = 11.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Stepping")
+    float StepTransferSeconds = .18f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Stepping")
+    float StepSwingSeconds = .42f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Stepping")
+    float StepSettleSeconds = .28f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Stepping")
+    float StepCooldown = 1.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Stepping")
+    float StepFootStrength = 24.f;
 
     /** Shared non-damaging force seam for future push/explosion work; one physical impulse. */
     UFUNCTION(BlueprintCallable, Category="Physics Dummy|Balance")
@@ -197,6 +216,43 @@ private:
     void IsolateSelfCollision();
     void SetVisibleAnimationPose();
     void EvaluateRecoveryPose(float Time, float Blend, float EndBlend, TMap<FName,FTransform>& Pose);
+    // World-space full target skeleton. Home is reserved for explicit F6 only.
+    TArray<FTransform> StandingBones;
+    TArray<FTransform> StepStartBones;
+    TArray<FTransform> StepEntryBones;
+    TArray<FTransform> StepOutputBones;
+    FName SwingFoot;
+    FName PlantedFoot;
+    FTransform SwingStart;
+    FTransform SwingDestination;
+    FTransform PlantedTarget;
+    FVector PlantedActualStart = FVector::ZeroVector;
+    FVector StepDirection = FVector::ZeroVector;
+    FVector LastStepImpulse = FVector::ZeroVector;
+    FVector StepBodyDirection = FVector::ZeroVector;
+    FVector StepDisplacement = FVector::ZeroVector;
+    FVector StepTransfer = FVector::ZeroVector;
+    float StepSeconds = 0;
+    float StepNoSupportSeconds = 0;
+    float StepCooldownRemaining = 0;
+    float StepSupportDrift = 0;
+    float StepPeakSupportDrift = 0;
+    int32 StepPhase = 0; // 0 idle, 1 transfer, 2 swing, 3 settling.
+    int32 EpisodeSteps = 0;
+    int32 StepsStarted = 0;
+    int32 StepsCompleted = 0;
+    int32 StepsRejected = 0;
+    bool bStepRequested = false;
+    FString StepReason;
+    void ResetStepping();
+    void CancelStep();
+    void RememberStandingSkeleton(const USkeletalMeshComponent* Mesh);
+    bool BeginStep();
+    void UpdateStep(float DeltaSeconds);
+    bool StepPlacement(FName Bone, FTransform& Foot, float FloorReference) const;
+    bool StepPathClear(const FTransform& Start, const FTransform& End) const;
+    bool BuildStepPose(float Transfer, float Swing, float Settle, TMap<FName,FTransform>& Pose);
+    void AddStepState(TSharedPtr<FJsonObject> Root) const;
     uint64 PoseEpoch = 0;
     bool bReady = false;
     int32 UnsupportedShapes = 0;

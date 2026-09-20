@@ -1,0 +1,14 @@
+{
+  "record_id": "PhysicsControlStepping01-OwnerStart01",
+  "date_local": "2026-09-20",
+  "task_identifier": "MSQ-89",
+  "source": "Owner direct chat selecting the prepared stepping task after checking MSQ-88 closure",
+  "owner_message_original": "MSQ-89 эту делаем",
+  "owner_message_english_translation": "MSQ-89, let's do this one.",
+  "decision": "Execute the bounded reactive balance-recovery stepping experiment defined in Docs/Tasks/PhysicsControlStepping01.md, extending retained MSQ-88 Candidate04.",
+  "execution": "One existing Multica Unreal executor at verified native Astra/max/standard, one editor writer and one heavy workload at a time. At most two reactive steps per recovery episode; tuning and procedural or existing-animation implementation remain engineering choices.",
+  "review_route": "Apply the standing ReviewResponsibilities01 workflow: executor focused self-checks, one primary independent technical reviewer, and controller scope/evidence/finding acceptance without duplicate full review. This instruction does not extend the earlier MSQ-88-only independent-check waiver. Final motion and play acceptance remain with the owner.",
+  "verification": "One representative mannequin for frontal/lateral/turned stepping, planted and swing feet, blocked or unsupported destination, usable-leg loss, coupled hit/collapse/get-up/death transitions, slowdown and reset. Confirm all six render; reuse unaffected MSQ-88 evidence without a per-profile matrix.",
+  "preservation": "Preserve owner edits and sessions, current hit reactions, six fixtures, collision and sole grounding, complete snapshot get-up and sources, authoritative damage, relative slowdown, optional combat controls, purchased arms, lobby and immutable historical candidates/evidence.",
+  "limits": "No general locomotion/AI/navigation overhaul, Mover migration, new art, animation purchase, paid service, lobby editing, configurable get-up replacement or successor dispatch. Controller owns registry administration, task closure and the local task-scoped commit."
+}

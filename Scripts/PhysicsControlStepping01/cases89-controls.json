@@ -1,0 +1,4 @@
+[
+  {"name":"Candidate03-SlowReset","duration":10,"profile":1,"during_step":"slow","flying":true,"inspection_view":true,"capture_skin":true,"location":[-1150,-20,158],"events":[[0.05,"@track","spine_03"],[0.1,"LeftControl",1],[0.15,"F7",1],[0.18,"F7",0],[0.21,"F8",1],[0.24,"F8",0],[0.27,"LeftControl",0],[1,"LeftMouseButton",1],[1.07,"LeftMouseButton",0],[6,"F6",1],[6.05,"F6",0],[7,"@scale",1],[8,"F10",1],[8.05,"F10",0],[8.5,"F10",1],[8.55,"F10",0]]},
+  {"name":"Candidate03-ResetDuring","duration":5,"profile":1,"during_step":"reset","flying":true,"inspection_view":true,"location":[-1150,-20,158],"events":[[0.05,"@track","spine_03"],[1,"LeftMouseButton",1],[1.07,"LeftMouseButton",0]]}
+]

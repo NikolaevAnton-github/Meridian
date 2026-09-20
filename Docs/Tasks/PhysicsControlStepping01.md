@@ -1,11 +1,13 @@
 # PhysicsControlStepping01: reactive steps to retain balance after hits
 
-Prepared 2026-09-20. Multica issue: **MSQ-89**, a planning-only follow-up
+Prepared 2026-09-20. Multica issue: **MSQ-89**, an authorized follow-up
 to MSQ-88 Candidate04 in the CombatSlice01 / MSQ-67 family. The owner likes the
 current hit reaction and asks for a short retreat or stumble in response to the
 hit direction while the mannequin attempts to remain standing. See the
 [exact request and planning decision](../Approvals/PhysicsControlStepping01-TaskCreation01.json).
-This record authorizes task creation only, not implementation or review.
+The owner subsequently [authorized execution](../Approvals/PhysicsControlStepping01-OwnerStart01.json)
+on 2026-09-20, then [waived independent review for this task](../Approvals/PhysicsControlStepping01-ReviewWaiver01.json).
+Live Multica owns execution state.
 
 Baseline: [MSQ-88 implementation](../PhysicsControlRecovery01.md),
 [controller handoff](../PhysicsControlRecovery01Handoff.md), and commit `c618623`.
@@ -50,7 +52,7 @@ may choose a suitable procedural/IK or existing-animation route after inspecting
 the installed capabilities; this plan does not select a new animation purchase,
 paid service or replacement character asset.
 
-## Focused acceptance for future authorized execution
+## Focused acceptance for authorized execution
 
 Use one representative mannequin and ordinary-speed continuous recordings that
 show both feet, the trunk and the floor. Reuse applicable MSQ-88 evidence. Confirm
@@ -80,16 +82,19 @@ all six fixtures render, without running a per-profile gameplay or visual matrix
 The executor supplies an identified candidate, a concise changed-file list,
 focused results, continuous recordings, actual measurements and honest limits.
 Numerical checks alone do not establish convincing weight transfer. Final motion
-and play acceptance belong to the owner. This planning request dispatches no
-independent checker and does not resume the cancelled MSQ-87 review. Follow the
-applicable owner review direction when a later explicit execution start arrives;
-the earlier MSQ-88 waiver is not rewritten as a universal project rule.
+and play acceptance belong to the owner. The executor owns implementation and
+focused self-checks for all four acceptance rows, with applicable passing evidence
+reused. The owner explicitly waived independent review for MSQ-89 after execution
+started. The controller owns scope, candidate identity, evidence applicability,
+preservation and finding closure without a duplicate full technical review.
+Do not dispatch an independent technical or visual reviewer. The cancelled MSQ-87
+review stays cancelled. No separate subjective six-profile comparison is needed.
 
 ## Execution boundaries
 
-Create the issue unassigned in backlog with zero runs. Do not start the task
-runtime, assign an executor/reviewer or mutate gameplay/editor state for this
-planning request. A later explicit start is required for implementation.
+The original planning-only issue was created unassigned in backlog with zero runs.
+The later owner start above authorizes implementation and focused verification;
+the subsequent task-specific waiver removes independent review from this execution.
 
 On authorized execution, use the existing Multica project, one production writer
 at verified native Astra/max/standard and one heavy workload at a time. Confirm
@@ -109,3 +114,36 @@ full push/explosion ability, dismemberment, new art, lobby changes, paid service
 successor dispatch. Configurable replacement get-up clips were a separate question
 and are not added to this stepping task. The controller owns future scope/evidence
 acceptance, registry/status administration and the task-scoped closure commit.
+
+## Execution handoff, 2026-09-20
+
+The existing Multica Unreal executor owns implementation and the sole editor
+writer lease. Reconfirm the live project/map/PIE and dirty packages through official
+Epic MCP before mutations. Preserve unrelated owner edits in
+`Config/DefaultEngine.ini` and `MeridianSquad.uproject`; controller fingerprints
+are under `Saved/CombatSlice01/PhysicsControlStepping01/Controller/`.
+
+Deliver `Docs/PhysicsControlStepping01.md`, an immutable candidate manifest,
+changed-file list, focused results, ordinary-speed continuous recordings and
+honest limitations under `Saved/CombatSlice01/PhysicsControlStepping01/Worker/`.
+Use existing probe/recording facilities; extend only the stepping measurements
+needed for the four acceptance rows. Show actual visible foot lift and weight
+transfer, support-foot drift, landing and stable soles at the displaced stance.
+Use a task-scoped derivative and inventory if a shared binary asset must change.
+
+Do not commit, alter profiles or task status, register assets, dispatch reviewers
+or start successors. The controller owns those steps. Keep all internal Multica
+progress and reports in English. Release the editor writer lease at handoff and
+leave the retained lobby ready for owner Play unless an owner-controlled session
+has since appeared; preserve any such session and report it explicitly.
+
+## Implementation handoff, 2026-09-20
+
+Candidate05 delivers the bounded stepping experiment with a passing build and
+149 focused self-check assertions. Its gameplay bytes match Candidate04's final
+recordings; the unchanged six-fixture view is reused from Candidate03. See
+[implementation and limits](../PhysicsControlStepping01.md) and
+[controller handoff](../PhysicsControlStepping01Handoff.md). Independent review
+remains waived by the later owner decision. The owner's subsequent Play session
+is preserved; final motion/play acceptance remains pending. Controller closure and
+the local task-scoped commit do not authorize a successor.

@@ -1,0 +1,4 @@
+[
+  {"name":"Candidate03-BodyLateralTurned","duration":7,"profile":1,"turned":true,"flying":true,"inspection_view":true,"capture_skin":true,"location":[-1150,-20,158],"look_at":[-945,-320,90],"events":[[1,"@lateral",2000]]},
+  {"name":"Candidate03-SixRendered","duration":4,"profile":1,"flying":true,"inspection_view":true,"location":[-1150,0,568],"yaw":0,"look_at":[-790,0,100],"events":[]}
+]

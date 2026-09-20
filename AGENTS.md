@@ -13,11 +13,12 @@ instructions supersede earlier guidance within their stated scope.
 - Codex may launch existing applications and local project services needed for
   authorized work without asking again. Starting a service does not authorize
   unrelated execution, purchases or a pending design selection.
-- Current scope: MSQ-88 [collision, grounding and recovery](Docs/Tasks/PhysicsControlRecovery01.md)
-  corrects the retained MSQ-87 six-mannequin experiment. The owner authorized
-  execution without independent checks; see the
-  [scoped decision](Docs/Approvals/PhysicsControlRecovery01-OwnerStart01.json).
-  Owner play/motion acceptance remains pending. The MSQ-85
+- Current scope: MSQ-89 [reactive recovery steps](Docs/Tasks/PhysicsControlStepping01.md)
+  extends retained MSQ-88 Candidate04. The owner authorized execution; see the
+  [scoped decision](Docs/Approvals/PhysicsControlStepping01-OwnerStart01.json).
+  The owner [waived independent review for MSQ-89](Docs/Approvals/PhysicsControlStepping01-ReviewWaiver01.json);
+  use executor self-checks and controller scope/evidence acceptance.
+  Owner play/motion acceptance stays separate. The MSQ-85
   [relative slowdown decision](Docs/Approvals/PhysicsControlVariants01-OwnerScope01.json)
   requires partial player movement/firing slowdown while the world slows more,
   superseding the earlier normal-player slowdown rule. Full stop remains later scope.

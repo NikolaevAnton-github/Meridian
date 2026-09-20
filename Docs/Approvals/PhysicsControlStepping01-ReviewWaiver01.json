@@ -1,0 +1,11 @@
+{
+  "record_id": "PhysicsControlStepping01-ReviewWaiver01",
+  "date_local": "2026-09-20",
+  "task_identifier": "MSQ-89",
+  "source": "Owner direct chat during the authorized MSQ-89 implementation run",
+  "owner_message_original": "Забыл сказать, что проверяющий независимый не нужен в этой задаче",
+  "owner_message_english_translation": "I forgot to say that an independent reviewer is not needed for this task.",
+  "decision": "Waive independent review for MSQ-89. Continue the existing executor run with focused self-checks and controller scope, candidate identity, evidence applicability and preservation acceptance.",
+  "supersedes": "The independent-review route selected at the initial MSQ-89 start in PhysicsControlStepping01-OwnerStart01; other execution, acceptance and preservation requirements remain applicable.",
+  "limits": "Do not dispatch a technical or visual independent reviewer for this task. The controller does not replace the waived review with a duplicate full technical review. Final motion/play judgement remains with the owner. The standing workflow outside MSQ-89 is unchanged."
+}

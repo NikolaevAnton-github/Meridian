@@ -27,6 +27,7 @@ FString APhysicsControlDummy::GetBalanceLabel() const
     case EDummyBalanceState::Falling: return TEXT("FALLING");
     case EDummyBalanceState::Down: return TEXT("DOWN");
     case EDummyBalanceState::GettingUp: return TEXT("GETTING UP");
+    case EDummyBalanceState::Stepping: return TEXT("STEPPING");
     default: return TEXT("CORPSE");
     }
 }
@@ -45,6 +46,7 @@ void APhysicsControlDummy::ResetBalance()
     SnapshotFirstError = 0;
     bRecoveryFloor = bRecoveryClear = false;
     BalanceReason = TEXT("reset");
+    ResetStepping();
 }
 
 void APhysicsControlDummy::DisableBalanceDrives()
@@ -62,6 +64,7 @@ void APhysicsControlDummy::EnterFall(const TCHAR* Reason)
     StateSeconds = SettledSeconds = 0;
     BalanceReason = Reason;
     ActiveGetUp = nullptr;
+    CancelStep();
     Body->bPauseAnims = true;
     DisableBalanceDrives();
     Body->WakeAllRigidBodies();
@@ -74,6 +77,8 @@ void APhysicsControlDummy::RegisterDisturbance(FName Bone, const FVector& Impuls
     SinceDisturbance = SettledSeconds = 0;
     Instability = FMath::Min(2.f, Instability + FMath::Max(0.f, Amount));
     LeanDirection = (LeanDirection * .3f + Impulse.GetSafeNormal2D()).GetSafeNormal2D();
+    LastStepImpulse = Impulse;
+    if (Instability >= FMath::Clamp(StepTriggerInstability, .1f, .9f)) bStepRequested = true;
     const FString Name = Bone.ToString();
     if (IsLeg(Name))
     {
@@ -126,6 +131,7 @@ void APhysicsControlDummy::SampleAnimation(UAnimSequence* Animation, float Time,
 {
     PoseSource->SetWorldTransform(Origin);
     auto* Anim = CastChecked<UDummyRecoveryAnimInstance>(PoseSource->GetAnimInstance());
+    Anim->bSnapshotOnly = false;
     Anim->Sequence = Animation;
     Anim->SequenceTime = FMath::Clamp(Time, 0.f, Animation->GetPlayLength());
     Anim->StartAlpha = 1;
@@ -215,10 +221,20 @@ void APhysicsControlDummy::DrivePose(const TMap<FName,FTransform>& Pose, float S
         FPhysicsControlMultiplier Multiplier;
         Multiplier.LinearStrengthMultiplier = FVector(Strength * RegionStrength);
         Multiplier.AngularStrengthMultiplier = Strength * RegionStrength;
+        if ((BalanceState == EDummyBalanceState::Stepping ||
+            (bStepRequested && LeftLegDisabled <= 0 && RightLegDisabled <= 0 &&
+             (BalanceState == EDummyBalanceState::Standing || BalanceState == EDummyBalanceState::LosingBalance))) &&
+            (Entry.Key == TEXT("foot_l") || Entry.Key == TEXT("foot_r")))
+        {
+            // A usable planted foot is not softened by an unrelated trunk impact.
+            // Leg hits abort the step before this path; all drives release on fall.
+            Multiplier.LinearStrengthMultiplier = FVector(FMath::Clamp(StepFootStrength, 8.f, 30.f) / FMath::Clamp(PoseLinearStrength, .1f, 15.f));
+            Multiplier.AngularStrengthMultiplier = 2.f;
+        }
         PhysicsControl->SetControlMultiplier(Name, Multiplier);
     }
     SupportTarget = Pose.FindChecked(TEXT("pelvis"));
-    if (BalanceState == EDummyBalanceState::GettingUp)
+    if (BalanceState == EDummyBalanceState::GettingUp || BalanceState == EDummyBalanceState::Stepping)
     {
         const auto* Asset = Body->GetPhysicsAsset();
         for (int32 I=0; I<Asset->ConstraintSetup.Num(); ++I)
@@ -239,6 +255,7 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
     // Actor ticks receive world-scaled delta. No real-time timer drives support or recovery.
     const float Dt = FMath::Max(0.f, DeltaSeconds);
     StateSeconds += Dt; SinceDisturbance += Dt;
+    StepCooldownRemaining = FMath::Max(0.f, StepCooldownRemaining - Dt);
     LeftLegDisabled = FMath::Max(0.f, LeftLegDisabled - Dt);
     RightLegDisabled = FMath::Max(0.f, RightLegDisabled - Dt);
     if (SinceDisturbance > FMath::Max(0.f, RecoveryDelay))
@@ -256,6 +273,12 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
     if (bRecoveryFloor) GroundHeight = Floor.ImpactPoint.Z;
     bRecoveryClear = bRecoveryFloor && RecoverySpace(Pelvis, GroundHeight);
 
+    if (BalanceState == EDummyBalanceState::Stepping)
+    {
+        UpdateStep(Dt);
+        return;
+    }
+
     if (BalanceState == EDummyBalanceState::Standing || BalanceState == EDummyBalanceState::LosingBalance)
     {
         NoSupportSeconds = UsableFeet == 0 ? NoSupportSeconds + Dt : 0;
@@ -265,22 +288,30 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
             EnterFall(TEXT("body exceeded recoverable deviation"));
         else
         {
+            if (Instability < .08f && SinceDisturbance > FMath::Max(.2f, StepCooldown))
+            { EpisodeSteps = 0; bStepRequested = false; }
+            if (bStepRequested && SinceDisturbance >= .10f && StepCooldownRemaining <= 0)
+            {
+                if (BeginStep()) UpdateStep(0);
+                return;
+            }
             BalanceState = Instability > .08f || LeftLegDisabled > 0 || RightLegDisabled > 0 ? EDummyBalanceState::LosingBalance : EDummyBalanceState::Standing;
             auto Targets = StandingPose;
             const float Weight = FMath::Clamp(Instability / FMath::Max(.1f,FallThreshold), 0.f, 1.f);
             const FVector PelvisTarget = StandingPose.FindChecked(TEXT("pelvis")).GetLocation();
-            const FVector Lean = LeanDirection.IsNearlyZero() ? Home.GetRotation().GetForwardVector() : LeanDirection;
+            const FVector Lean = LeanDirection.IsNearlyZero() ? StandingForward : LeanDirection;
             const FQuat Tilt(FVector::CrossProduct(FVector::UpVector,Lean).GetSafeNormal(), FMath::DegreesToRadians(Weight * 17.f));
             for (auto& Entry : Targets)
             {
                 const FString Name = Entry.Key.ToString();
                 FVector P = Entry.Value.GetLocation();
                 if (Name.StartsWith(TEXT("foot"))) continue;
+                if (IsLeg(Name) && bStepRequested) continue;
                 if (IsLeg(Name))
                     P += Lean * (Name.StartsWith(TEXT("calf")) ? 15.f : 6.f) * Weight - FVector(0,0,Weight * (Name.StartsWith(TEXT("calf")) ? 6.f : 15.f));
                 else
                 {
-                    P = PelvisTarget + Tilt.RotateVector(P-PelvisTarget) + Lean * Weight * 6 - FVector(0,0,Weight * 15);
+                    P = PelvisTarget + Tilt.RotateVector(P-PelvisTarget) + Lean * Weight * 6 - FVector(0,0,Weight * (bStepRequested ? 4.f : 15.f));
                     Entry.Value.SetRotation(Tilt * Entry.Value.GetRotation());
                 }
                 Entry.Value.SetLocation(P);
@@ -326,6 +357,8 @@ void APhysicsControlDummy::UpdateBalance(float DeltaSeconds)
             if (EndBlend >= 1 && UsableFeet > 0 && PoseLeanDegrees < 25)
             {
                 StandingPose=Targets; StandingForward=RecoveredIdleRoot.GetRotation().RotateVector(FVector::RightVector); Instability=0; NoSupportSeconds=0;
+                RememberStandingSkeleton(PoseSource);
+                EpisodeSteps=0; bStepRequested=false;
                 BalanceState=EDummyBalanceState::Standing; StateSeconds=0;
                 ++GetUps; ActiveGetUp=nullptr; BalanceReason=TEXT("recovered without health restoration");
             }
@@ -372,4 +405,5 @@ void APhysicsControlDummy::AddBalanceState(TSharedPtr<FJsonObject> Root) const
     for (FName Name:Controls) if (PhysicsControl->GetControlEnabled(Name)) ++Enabled;
     S->SetNumberField(TEXT("enabled_drives"),Enabled);
     Root->SetObjectField(TEXT("balance"),S);
+    AddStepState(Root);
 }
