@@ -32,6 +32,10 @@ instructions supersede earlier guidance within their stated scope.
   faster recovery. Build, focused self-checks and the sole independent technical
   review pass; see the [handoff](Docs/PhysicsControlAdaptiveSteps01Handoff.md).
   MSQ-93 through MSQ-96 remain undispatched.
+  The later [GASP priority decision](Docs/Approvals/GASPEnemyFoundation01-TaskCreation01.json)
+  places [MSQ-98 enemy migration](Docs/Tasks/GASPEnemyFoundation01.md) after MSQ-92
+  and before MSQ-93/MSQ-70. MSQ-99 disarming and MSQ-100 wound gestures are secondary.
+  These three tasks are prepared only; see ProjectState for dependencies and scope.
   Review waivers stay task-scoped. Owner play/motion acceptance stays separate. The MSQ-85
   [relative slowdown decision](Docs/Approvals/PhysicsControlVariants01-OwnerScope01.json)
   requires partial player movement slowdown while the world slows more,

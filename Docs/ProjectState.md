@@ -21,6 +21,33 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Next priority prepared: MSQ-98 GASP enemy foundation
+
+The owner [requests task creation with GASP migration first](Approvals/GASPEnemyFoundation01-TaskCreation01.json).
+[GASPEnemyFoundation01 / MSQ-98](Tasks/GASPEnemyFoundation01.md) is the next pending
+implementation candidate: adopt the configured local UE 5.8 GASP physical character
+and integrate our damage, recoverability, adaptive steps and existing controls.
+Start with one pilot, then migrate the three current fixtures after focused checks.
+Preserve the current MSQ-92 baseline and later cadence correction, all sources,
+historical evidence and owner edits. This preparation makes no gameplay changes.
+
+MSQ-98 is high priority and consumes MSQ-92/current follow-ups. It precedes MSQ-93
+and MSQ-70. The refinement order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 ->
+MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**; MSQ-98 is an unstaged MSQ-67 child, outside
+MSQ-90's unchanged native stages. MSQ-70 retains MSQ-69 and adds MSQ-98, keeping AI
+combat and actual enemy weapon setup separate from migration's movement handover.
+Earlier summaries' direct MSQ-92 -> MSQ-93 order is superseded by this decision.
+
+[EnemyDisarm01 / MSQ-99](Tasks/EnemyDisarm01.md) and
+[EnemyWoundReaction01 / MSQ-100](Tasks/EnemyWoundReaction01.md) are secondary,
+low-priority MSQ-67 children depending on MSQ-98 and MSQ-70. They do not block base
+combat or depend on each other. All three new tasks are backlog, unassigned, with
+zero runs. Task creation does not authorize implementation/runtime startup; future
+execution follows standing max/standard and one-primary-reviewer rules. Owner motion
+judgement remains separate. See [setup verification](GASPEnemyFoundation01TaskSetup01.md).
+AnimGen, parkour gameplay, player replacement and paused art/lobby work remain outside
+this task preparation. Multica owns live status.
+
 ## Owner-test handoff: MSQ-92 adaptive recovery steps
 
 The owner likes assisted retreat with Ctrl+F9 and requests matching weapon/world

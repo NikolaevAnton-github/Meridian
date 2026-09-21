@@ -3,6 +3,12 @@
 Multica issue: **MSQ-70**.
 Stage 4 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [EnemyPrototype01](EnemyPrototype01.md), with its asset contract.
+The later [owner priority decision](../Approvals/GASPEnemyFoundation01-TaskCreation01.json)
+adds [GASPEnemyFoundation01 / MSQ-98](GASPEnemyFoundation01.md) as a prerequisite.
+Consume its adopted character, damage interfaces and demonstrated flat-floor
+movement/recovery handover. This task still owns perception, pursuit/navigation,
+aiming, actual enemy weapon setup and autonomous firing; the migration does not
+complete those features. Retain MSQ-69 and native CombatSlice stage 4.
 The later [PhysicsControlVariants01 / MSQ-85](PhysicsControlVariants01.md) adopts
 Physics Control and removes the legacy enemy from active gameplay under
 [the owner's decision](../Approvals/PhysicsControlVariants01-OwnerScope01.json).
@@ -22,6 +28,9 @@ Enemy fire uses the established hit/damage path and real obstruction checks.
 Supply a damage event suitable for the next player-health task; during this stage
 verify it on an instrumented receiver. Player death is not claimed yet. Establish
 enemy cadence and ammunition/reload policy without inventing an inventory system.
+Expose held-weapon and hand-occupancy state for later
+[MSQ-99 disarming](EnemyDisarm01.md) and [MSQ-100 wound gestures](EnemyWoundReaction01.md).
+Those low-priority follow-ups do not block this task or MSQ-71.
 
 Use existing lobby geometry and bounded navigation support. Do not move columns,
 alter passages or add rooms to rescue pathfinding. Keep spawn and reset repeatable.
@@ -31,10 +40,10 @@ The later [PhysicsControlRefinement01 / MSQ-90](PhysicsControlRefinement01Plan.m
 plans corrected stance and uneven/moving support. Consume its applicable completed
 handoffs and define how ordinary movement transfers to hit-recovery steps and back
 without conflicting foot targets or stale support. Do not replace adopted physical
-response with the old enemy implementation. MSQ-70 establishes usable locomotion;
+response with the old enemy implementation. MSQ-70 establishes autonomous combat locomotion;
 real destruction-rubble traversal is an explicit integration row in MSQ-78 after
 MSQ-74 produces representative debris. Preserve this task's existing predecessor
-and stage: these links do not authorize those later tasks or create a dependency
+and stage, with MSQ-98 added above: these links do not authorize those later tasks or create a dependency
 on MSQ-74/MSQ-78 before enemy movement can be implemented.
 
 ## Acceptance

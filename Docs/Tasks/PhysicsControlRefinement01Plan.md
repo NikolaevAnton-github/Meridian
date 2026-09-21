@@ -34,6 +34,23 @@ undispatched; neither task-specific waiver extends to them.
 MSQ-97 Candidate07 now supplies the physical recovery foundation with a passing
 build and 183 focused self-checks; see the [controller handoff](../PhysicsControlRecoverability01Handoff.md).
 
+## GASP foundation inserted before remaining refinements
+
+The later [2026-09-21 owner request](../Approvals/GASPEnemyFoundation01-TaskCreation01.json)
+places [GASPEnemyFoundation01 / MSQ-98](GASPEnemyFoundation01.md) first in the pending
+work. It is an unstaged child of MSQ-67, consuming delivered MSQ-92 plus applicable
+follow-ups, and becomes MSQ-93's immediate prerequisite. Current order is
+**MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 -> MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**.
+Keep this family's existing native stages 1-7; MSQ-98 is an external prerequisite,
+not another child stage. MSQ-70 also consumes MSQ-98, while retaining MSQ-69.
+Migration is planning-only and does not dispatch any remaining task.
+
+MSQ-98 adapts existing recovery to the configured GASP character and proves the
+flat-floor movement/physics handover. The remaining tasks retain their distinct
+counterbalance, obstacle and terrain criteria on that adopted foundation. Earlier
+Mover/locomotion exclusions do not forbid the newly scoped enemy migration; player
+movement remains unchanged. The original baseline/evidence above stays historical.
+
 ## Ordered implementation tasks
 
 The later [MSQ-92 start and tempo request](../Approvals/PhysicsControlAdaptiveSteps01-OwnerStart01.json)
@@ -52,13 +69,15 @@ judgement remains separate, and no later stage is started.
 | 1 | MSQ-91 | [PhysicsControlLegPose01](PhysicsControlLegPose01.md) | Anatomical knee/foot alignment and a credible settled stance after steps. |
 | 2 | MSQ-97 | [PhysicsControlRecoverability01](PhysicsControlRecoverability01.md) | Displaced-leg replanting and successive recovery steps within physical support and effort limits; fall when recovery is infeasible. |
 | 3 | MSQ-92 | [PhysicsControlAdaptiveSteps01](PhysicsControlAdaptiveSteps01.md) | Refine step length, lift and timing on the recoverability foundation. |
+| External | MSQ-98 | [GASPEnemyFoundation01](GASPEnemyFoundation01.md) | Migrate the configured GASP enemy foundation and retain our balance/combat behavior before stage 4. |
 | 4 | MSQ-93 | [PhysicsControlCounterbalance01](PhysicsControlCounterbalance01.md) | Torso and arms help balance, then settle without perpetual sway. |
 | 5 | MSQ-94 | [PhysicsControlObstacleRecovery01](PhysicsControlObstacleRecovery01.md) | Obstacle-aware living get-up, finite retries and safe blocked behavior. |
 | 6 | MSQ-95 | [PhysicsControlUnevenGround01](PhysicsControlUnevenGround01.md) | Ground contact and recovery steps on slopes, unequal heights and fixed rough support. |
 | 7 | MSQ-96 | [PhysicsControlDebrisSupport01](PhysicsControlDebrisSupport01.md) | Contact with translating, rotating or disappearing debris, including loss of support. |
 
 The first child depends on MSQ-89; each subsequent child consumes the verified
-preceding handoff. Use the latest applicable candidate, preserving older manifests.
+preceding handoff, including the inserted MSQ-98 prerequisite before MSQ-93.
+Use the latest applicable candidate, preserving older manifests.
 Stage 5 addresses the retained wall/get-up retry limitation; terrain work follows
 so that blocked recovery already has a safe outcome. These are bounded increments,
 not a mandatory solver, animation-system or movement-framework replacement.
@@ -89,7 +108,8 @@ Stage 7 may close its support capability against removable dynamic fixtures befo
 MSQ-74 exists. That closure does not close real rubble traversal: MSQ-78 retains the
 explicit open integration gate until the movement and destruction prerequisites
 are available. Do not make MSQ-70 depend on MSQ-74/MSQ-78 or reorder the original
-CombatSlice stages. Creating these links does not dispatch any of those tasks.
+CombatSlice stages; the later owner request adds only MSQ-98 as a new prerequisite
+to MSQ-70. Creating these links does not dispatch any of those tasks.
 
 ## Shared acceptance and preservation
 

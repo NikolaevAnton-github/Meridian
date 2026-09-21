@@ -40,6 +40,27 @@ adaptation feasibility pass, with detached-piece production remaining later scop
 The same primary reviewer closes the post-lethal aim-query correction and retains
 the passing prototype visual verdict. MSQ-70 and successors remain undispatched.
 
+## GASP enemy migration priority and secondary reactions
+
+On 2026-09-21 the owner requests [three tasks](../Approvals/GASPEnemyFoundation01-TaskCreation01.json),
+placing GASP migration first. All are unstaged children of MSQ-67, prepared in
+backlog, unassigned and without runs:
+
+| Priority | Multica | Task | Prerequisites |
+| --- | --- | --- | --- |
+| High; next pending work | MSQ-98 | [GASPEnemyFoundation01](GASPEnemyFoundation01.md): configured GASP enemies with our balance and combat integration | Delivered MSQ-92 plus current corrections |
+| Low; secondary | MSQ-99 | [EnemyDisarm01](EnemyDisarm01.md): weapon loss and a safe disarmed state | MSQ-98 and MSQ-70 |
+| Low; secondary | MSQ-100 | [EnemyWoundReaction01](EnemyWoundReaction01.md): enemy hand reaches its own injured region | MSQ-98 and MSQ-70 |
+
+MSQ-98 precedes the remaining physical refinements (MSQ-93 through MSQ-96) and
+MSQ-70. MSQ-70 keeps MSQ-69 and adds MSQ-98 as prerequisites; original CombatSlice
+stage numbering and MSQ-70 onward relative order stay intact. Migration includes
+commanded flat-floor movement to prove recovery handover, while MSQ-70 still owns
+perception, pursuit and autonomous weapon use. The secondary tasks neither depend
+on each other nor block MSQ-71/base combat. No implementation, reviewer or successor
+is dispatched by this planning request. This later enemy migration scope supersedes
+the older experiment's exclusion of enemy-side Mover integration.
+
 ## Outcome and starting point
 
 Build a reviewable first combat slice in the retained lobby, followed by a

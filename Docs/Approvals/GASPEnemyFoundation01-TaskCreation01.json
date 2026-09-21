@@ -1,0 +1,29 @@
+{
+  "record_id": "GASPEnemyFoundation01-TaskCreation01",
+  "date_local": "2026-09-21",
+  "source": "Owner direct chat after discussion of GASP 5.8, retained balance, disarming and wound gestures",
+  "owner_message_original": "Создай задачи, вперед всего перенос гасп на противников, на счет выбивания оружия и хватания за рану это уже второстепенно",
+  "owner_message_english_translation": "Create the tasks; migrating GASP to enemies comes first. Weapon disarming and clutching a wound are secondary.",
+  "preceding_architecture_question_original": "Тогда нам стоит взять настроеные маникены из гасп и к ним прекрутить логику что мы написали для баланса?",
+  "preceding_feature_question_original": "А мы сможем потом добавить такую вещь как выбивание оружия из рук и хватание противника за то место, куда его ранили?",
+  "accepted_discussion_context": "Use the configured GASP 5.8 physical character as the proposed enemy foundation and adapt existing balance/recovery and combat logic, with a single authority for body drives and movement. Start with one pilot, then migrate current fixtures after affected checks. The wound reaction means the enemy reaches for its own injured region.",
+  "decision": "Create three tasks. Make GASP enemy migration the next highest-priority implementation candidate; keep disarming and hand-to-wound reactions as separate low-priority follow-ups.",
+  "multica_issues": {
+    "GASPEnemyFoundation01": "MSQ-98",
+    "EnemyDisarm01": "MSQ-99",
+    "EnemyWoundReaction01": "MSQ-100"
+  },
+  "parent": "MSQ-67",
+  "next_implementation_candidate": "MSQ-98",
+  "creation_evidence": "Saved/CombatSlice01/GASPEnemyFoundation01/Planning/verification.json",
+  "task_documents": [
+    "Docs/Tasks/GASPEnemyFoundation01.md",
+    "Docs/Tasks/EnemyDisarm01.md",
+    "Docs/Tasks/EnemyWoundReaction01.md"
+  ],
+  "controller_ordering": "Three unstaged children of MSQ-67. Migration consumes delivered MSQ-92/current follow-ups and precedes MSQ-93 and MSQ-70. MSQ-70 retains MSQ-69 as an additional prerequisite. Keep MSQ-93 through MSQ-96 and the existing MSQ-70 onward relative order. Both secondary tasks consume migration and MSQ-70; neither blocks base combat or depends on the other.",
+  "authorization": "Task creation, descriptions, priorities, dependencies and planning records only. New tasks stay backlog and unassigned with zero runs. Do not dispatch implementation/review or start the task runtime as part of preparation.",
+  "scope_interpretation": "Migration includes a bounded flat-floor locomotion/physical recovery handover and rollout to the current three fixtures. AI pursuit/firing remains MSQ-70, expanded counterbalance and terrain remain MSQ-93 through MSQ-96, parkour gameplay and AnimGen remain outside these tasks. Enemy-side movement framework adaptation is part of future migration scope; player movement/presentation is retained.",
+  "review": "Future substantive execution uses executor self-checks, one primary independent technical reviewer and controller acceptance at verified max reasoning and standard speed. Existing review waivers are not expanded. Owner motion/play judgement remains separate.",
+  "preservation": "Preserve the current baseline including post-MSQ-92 cadence correction, owner edits, three fixture/profile identities, original GASP/Mixamo/Manny sources, historical candidates/evidence, purchased arms, lobby and app sessions. No gameplay or asset migration occurs during task preparation."
+}

@@ -2,7 +2,10 @@
 
 Multica issue: **MSQ-93**.
 Stage 4 of [PhysicsControlRefinement01](PhysicsControlRefinement01Plan.md).
-Predecessor: [PhysicsControlAdaptiveSteps01](PhysicsControlAdaptiveSteps01.md).
+Predecessor: [GASPEnemyFoundation01 / MSQ-98](GASPEnemyFoundation01.md), consuming
+the delivered MSQ-92 balance and stepping baseline. The later
+[owner priority decision](../Approvals/GASPEnemyFoundation01-TaskCreation01.json)
+inserts GASP migration before this task; its native stage within MSQ-90 remains 4.
 Planning only; follow the parent authorization, preservation and verification rules.
 
 ## Scope

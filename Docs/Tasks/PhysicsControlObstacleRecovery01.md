@@ -9,9 +9,10 @@ Planning only; follow the parent authorization, preservation and verification ru
 
 Address repeated aborted get-up attempts near walls and other obstacles. Validate
 support, the occupied body volume and the relevant get-up path before committing.
-Use a feasible existing back/stomach recovery route or a bounded safe orientation
-choice when available; do not rotate or teleport the body through geometry.
-Preserve the full pose-snapshot transition and original get-up sources.
+Consume the GASP foundation introduced by [MSQ-98](GASPEnemyFoundation01.md).
+Use a feasible supported get-up route or a bounded safe orientation choice when
+available; do not rotate or teleport the body through geometry. Preserve the
+continuous fallen-pose-to-animation handover and all original get-up sources.
 
 Give blocked recovery an explicit finite retry/backoff policy. If space stays
 blocked, remain physically down and retry only under a stated condition or bounded
