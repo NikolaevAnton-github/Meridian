@@ -100,6 +100,16 @@ reaction distributed across the pelvis and spine. Current defaults are ratio
 loaded in the restarted lobby editor. Post-correction firing and motion evaluation
 remain with the owner; the prior diagnostic is not acceptance of the new motion.
 
+The owner then requested less leg lift and a more natural ragdoll fall.
+The [fall restriction follow-up](GASPEnemyAnatomicalFall01.md) reduces the leg
+accent to ratio 0.75 / 220 cm/s, with a much smaller upward component, and
+gradually narrows the fall-only hip cone to 50/25/20 in the existing constraint
+frames. Knees and ankles retain the authored ragdoll ranges; leaving ragdoll
+restores the previous per-instance recovery limits. The native build passes.
+The updated defaults are loaded in the restarted lobby editor.
+This [direct outside-task correction](Approvals/GASPEnemyAnatomicalFall01-OwnerScope01.json)
+uses build-only verification; owner firing/motion acceptance remains pending.
+
 MSQ-98 is high priority and consumes MSQ-92/current follow-ups. It precedes MSQ-93
 and MSQ-70. The refinement order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 ->
 MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**; MSQ-98 is an unstaged MSQ-67 child, outside

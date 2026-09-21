@@ -12,6 +12,7 @@
 #include "GameFramework/Pawn.h"
 #include "PhysicsEngine/BodyInstance.h"
 #include "PhysicsEngine/PhysicsAsset.h"
+#include "PhysicsEngine/PhysicsConstraintTemplate.h"
 #include "PhysicsEngine/SkeletalBodySetup.h"
 #include "Serialization/JsonSerializer.h"
 #include "UObject/StructOnScope.h"
@@ -69,6 +70,7 @@ void AGASPEnemyFixture::SetAuthority(EGASPEnemyAuthority NewAuthority)
     if (Authority == NewAuthority) return;
     Authority = NewAuthority;
     ++AuthorityChanges;
+    UpdateRagdollLegLimits(0.f);
 }
 
 bool AGASPEnemyFixture::AllowsSamplePhysics() const
@@ -169,6 +171,7 @@ void AGASPEnemyFixture::ResetDummy()
 {
     ClearBalanceProbeFixtures();
     bReady = bAdopted = false;
+    PreFallLegLimits.Reset();
     HandoffPose.Reset();
     HandoffSeconds = 0;
     if (IsValid(Foundation)) FoundationPhysicsTick->RemoveTickPrerequisiteActor(Foundation);
@@ -437,6 +440,63 @@ void AGASPEnemyFixture::UpdateFoundationPhysics(float DeltaSeconds)
         if (T >= 1.f) HandoffPose.Reset();
     }
     PhysicsControl->UpdateControls(DeltaSeconds);
+    UpdateRagdollLegLimits(DeltaSeconds);
+}
+
+void AGASPEnemyFixture::UpdateRagdollLegLimits(float DeltaSeconds)
+{
+    if (!bAdopted || !IsValid(Body) || !Body->GetPhysicsAsset()) return;
+    const bool bRagdoll = Authority == EGASPEnemyAuthority::Falling ||
+        Authority == EGASPEnemyAuthority::Down || Authority == EGASPEnemyAuthority::Dead;
+    const auto SetLimits = [](FConstraintInstance& Joint, const FVector& Limits)
+    {
+        if (!FMath::IsNearlyEqual(Joint.GetAngularSwing1Limit(), static_cast<float>(Limits.X), .001f))
+            Joint.SetAngularSwing1Limit(ACM_Limited, Limits.X);
+        if (!FMath::IsNearlyEqual(Joint.GetAngularSwing2Limit(), static_cast<float>(Limits.Y), .001f))
+            Joint.SetAngularSwing2Limit(ACM_Limited, Limits.Y);
+        if (!FMath::IsNearlyEqual(Joint.GetAngularTwistLimit(), static_cast<float>(Limits.Z), .001f))
+            Joint.SetAngularTwistLimit(ACM_Limited, Limits.Z);
+    };
+    if (!bRagdoll)
+    {
+        // Restore the exact recovery envelope before the sample starts its get-up.
+        // This only reopens limits; no pose or body velocity is overwritten.
+        for (const auto& Entry : PreFallLegLimits)
+            if (auto* Joint = Body->GetConstraintInstanceByIndex(Entry.Key)) SetLimits(*Joint, Entry.Value);
+        PreFallLegLimits.Reset();
+        return;
+    }
+    const auto* Asset = Body->GetPhysicsAsset();
+    const float Dt = FMath::Clamp(DeltaSeconds, 0.f, .1f);
+    for (int32 Index = 0; Index < Asset->ConstraintSetup.Num(); ++Index)
+    {
+        const auto& Authored = Asset->ConstraintSetup[Index]->DefaultInstance;
+        const FString Bone = Authored.ConstraintBone1.ToString();
+        if (!Bone.StartsWith(TEXT("thigh")) && !Bone.StartsWith(TEXT("calf")) && !Bone.StartsWith(TEXT("foot"))) continue;
+        auto* Joint = Body->GetConstraintInstanceByIndex(Index);
+        if (!Joint || Joint->GetAngularSwing1Motion() != ACM_Limited ||
+            Joint->GetAngularSwing2Motion() != ACM_Limited || Joint->GetAngularTwistMotion() != ACM_Limited ||
+            Authored.GetAngularSwing1Motion() != ACM_Limited || Authored.GetAngularSwing2Motion() != ACM_Limited ||
+            Authored.GetAngularTwistMotion() != ACM_Limited) continue;
+        const FVector Current(Joint->GetAngularSwing1Limit(), Joint->GetAngularSwing2Limit(), Joint->GetAngularTwistLimit());
+        if (!PreFallLegLimits.Contains(Index)) PreFallLegLimits.Add(Index, Current);
+        const FVector Original = PreFallLegLimits.FindRef(Index);
+        FVector FallLimits(Authored.GetAngularSwing1Limit(), Authored.GetAngularSwing2Limit(), Authored.GetAngularTwistLimit());
+        // Narrow the hip cone only during collapse, in the existing joint frames.
+        // Knee flexion uses mirrored frame bias, so retain its authored envelope.
+        if (Bone.StartsWith(TEXT("thigh")))
+        {
+            FallLimits.X = FMath::Min(FallLimits.X, 50.0);
+            FallLimits.Y = FMath::Min(FallLimits.Y, 25.0);
+        }
+        FVector Next;
+        for (int32 Axis = 0; Axis < 3; ++Axis)
+            Next[Axis] = FMath::FInterpConstantTo(Current[Axis],
+                FMath::Min(Current[Axis], FMath::Min(Original[Axis], FallLimits[Axis])), Dt, 120.0);
+        // Keep the asset's asymmetric frame offsets. Recovery steps widen these
+        // ranges; close them gradually during collapse instead of snapping them shut.
+        SetLimits(*Joint, Next);
+    }
 }
 
 void AGASPEnemyFixture::RegisterDisturbance(FName Bone, const FVector& Impulse, float Amount)
@@ -631,6 +691,7 @@ FString AGASPEnemyFixture::GetDummyState(bool IncludeContacts) const
     GASP->SetNumberField(TEXT("source_control_count"), SampleControls.Num());
     GASP->SetBoolField(TEXT("pose_handoff_active"), !HandoffPose.IsEmpty());
     GASP->SetNumberField(TEXT("pose_handoff_seconds"), HandoffSeconds);
+    GASP->SetNumberField(TEXT("ragdoll_leg_limit_count"), PreFallLegLimits.Num());
     GASP->SetBoolField(TEXT("source_component_tick_enabled"), PhysicsControl->IsComponentTickEnabled());
     GASP->SetNumberField(TEXT("unbounded_source_controls"), SourceUnbounded);
     GASP->SetField(TEXT("capsule_velocity"), Vector98(Mover ? Mover->GetVelocity() : FVector::ZeroVector));

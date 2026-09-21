@@ -1,0 +1,10 @@
+{
+  "record_id": "GASPEnemyAnatomicalFall01-OwnerScope01",
+  "date_local": "2026-09-22",
+  "source": "Owner direct chat after whole-leg impact rotation tuning",
+  "owner_message_original": "а мы можем как то более анатомично ограничеть рэкдол, при падении, что бы ноги не задирались так сильно, что бы это было походе на паданеее реального человека",
+  "owner_message_english_translation": "Can we constrain the ragdoll more anatomically during a fall, so the legs do not lift so high and it looks more like a real person falling?",
+  "decision": "Reduce the excessive artificial upward leg accent and apply bounded fall-only leg joint limits using the adopted asset's existing joint frames. Preserve supported recovery and get-up behavior.",
+  "execution": "Continue direct outside-task tuning and build verification. The earlier one-shot diagnostic permission was consumed; no new firing or gameplay test is authorized here. Owner motion evaluation remains separate. No new task or independent review.",
+  "preservation": "Preserve authored assets, historical evidence, owner config/project/map edits and current damage/local x4/x6 hit behavior. Apply constraint tuning to runtime instances, not source assets."
+}

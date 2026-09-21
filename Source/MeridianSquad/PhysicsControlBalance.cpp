@@ -140,7 +140,8 @@ void APhysicsControlDummy::ApplyPendingFallRotation()
     const float Magnitude = FMath::Min(static_cast<float>(Accent.BonusImpulse.Size()) *
         FMath::Clamp(UpperBodyFallRotationRatio, 0.f, 2.f), FMath::Min(LegMass, TrunkMass) * SpeedCap);
     if (Magnitude <= 0.f) return;
-    const FVector LegImpulse = (-ShotDirection * .75f + FVector::UpVector).GetSafeNormal() * Magnitude;
+    // Retain a small counter-motion without launching the legs above the torso.
+    const FVector LegImpulse = (-ShotDirection + FVector::UpVector * .25f).GetSafeNormal() * Magnitude;
     Body->WakeAllRigidBodies();
     for (const auto& Part : Legs)
         Body->AddImpulseAtLocation(LegImpulse * (Part.Mass / LegMass), Part.Instance->GetCOMPosition(), Part.Bone);

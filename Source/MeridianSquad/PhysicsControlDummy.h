@@ -70,9 +70,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning")
     float MaxImpulseVelocity = 180.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning", meta=(ClampMin="0", ClampMax="2"))
-    float UpperBodyFallRotationRatio = 1.5f;
+    float UpperBodyFallRotationRatio = .75f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning", meta=(ClampMin="0", ClampMax="600"))
-    float UpperBodyFallLegSpeed = 500.f;
+    float UpperBodyFallLegSpeed = 220.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning")
     float HitStrengthMultiplier = .2f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning")

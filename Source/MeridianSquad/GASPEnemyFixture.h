@@ -108,9 +108,11 @@ private:
     TMap<FString,int32> ArmTrunkContacts;
     float PeakArmTrunkImpulse = 0;
     TMap<FName, FTransform> HandoffPose;
+    TMap<int32, FVector> PreFallLegLimits;
     float HandoffSeconds = 0;
     static constexpr float HandoffDuration = .55f;
     void UpdateFoundationPhysics(float DeltaSeconds);
+    void UpdateRagdollLegLimits(float DeltaSeconds);
     void BeginPoseHandoff();
     UFUNCTION()
     void OnFoundationContact(UPrimitiveComponent* HitComponent, AActor* OtherActor,
