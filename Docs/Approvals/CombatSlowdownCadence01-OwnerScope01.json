@@ -1,0 +1,12 @@
+{
+  "record_id": "CombatSlowdownCadence01-OwnerScope01",
+  "date_local": "2026-09-21",
+  "source": "Owner direct chat after playing MSQ-92",
+  "owner_feedback_original": "Вот сейчас мне нравится поведение с включеным ctr+f9, он корректно отступает назад выдерживая попадания. Единственное что, если врубить замедление, то оно не так работает, делается шаг назад, а потом чисто туловище назад отклоняется, а шагов нет. Думаю это связано с тем что патроны гг летят быстрее, надо их сделать тойже скорости что и все во время замедления, быстрее должен быть только герой, все остально должно быть на 25, на сколько я помню. Внеси побыстрому такую правку.",
+  "owner_clarification_original": "только движение героя по миру должно быть быстрее, то есть то что делает он, тем стрельбы зависит не от него, а от автомата, так что он тоже должен быть 0,25",
+  "owner_clarification_english_translation": "Only the hero's movement through the world should be faster, meaning what the hero does. Firing rate depends on the rifle rather than the hero, so it must also be 0.25.",
+  "decision": "Make the rifle firing cadence follow the 0.25 world clock during slowdown. Keep the hero's existing 0.65 movement clock. Bullet flight already follows the world at 0.25.",
+  "supersedes": "PhysicsControlVariants01-OwnerScope01's faster player firing clock. Its faster player movement rule remains.",
+  "scope": "Small direct controller correction with a native build and focused slowdown/cadence check; no production dispatch, new reviewer or full gameplay matrix. Preserve hand/attached presentation synchronization for the hero's existing actions, physical recovery behavior, owner edits and immutable MSQ-92/MSQ-97 candidates.",
+  "feedback_scope": "Owner likes the assisted retreat behavior with Ctrl+F9 enabled. This is scoped motion feedback, not unrestricted character/terrain acceptance. No successor is started."
+}

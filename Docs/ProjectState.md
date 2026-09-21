@@ -23,6 +23,14 @@ and owner gates remain; this administrative change does not expand gameplay scop
 
 ## Owner-test handoff: MSQ-92 adaptive recovery steps
 
+The owner likes assisted retreat with Ctrl+F9 and requests matching weapon/world
+slowdown. The later [cadence correction](CombatSlowdownCadence01.md) sets rifle
+firing to the 0.25 world/bullet clock while hero movement remains at 0.65;
+see the [exact clarification](Approvals/CombatSlowdownCadence01-OwnerScope01.json).
+The native build and focused live cadence/normal-time restoration checks pass.
+This small follow-up is loaded for Play; Candidate06 below remains immutable
+historical evidence, not the identity of the newly built binary.
+
 The owner [starts MSQ-92 and requests approximately 25 percent faster recovery](Approvals/PhysicsControlAdaptiveSteps01-OwnerStart01.json).
 [PhysicsControlAdaptiveSteps01](Tasks/PhysicsControlAdaptiveSteps01.md) consumes
 MSQ-97 Candidate07, closure commit `5cd5b67`, and refines step length, lift,

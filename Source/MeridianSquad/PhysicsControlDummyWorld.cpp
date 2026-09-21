@@ -90,10 +90,11 @@ void ACombatProjectileWorld::ApplyPreviewTime()
         bOwnsPreviewTime = true;
     }
     // The manager keeps a continuous compensated clock for finite flight/history.
-    // Player actions integrate their own clock; rate changes never rebase shot debt.
+    // Rifle cadence follows world time; player movement retains its faster clock.
+    // Rate changes never rebase shot debt.
     UGameplayStatics::SetGlobalTimeDilation(GetWorld(), SavedWorldDilation * RequestedPreviewScale);
-    PlayerActionRate = FMath::Clamp(PreviewPlayerRate, .1f, 1.f);
-    PreviewPlayer->CustomTimeDilation = SavedPlayerDilation * PlayerActionRate / RequestedPreviewScale;
+    PlayerActionRate = RequestedPreviewScale;
+    PreviewPlayer->CustomTimeDilation = SavedPlayerDilation * FMath::Clamp(PreviewPlayerRate, .1f, 1.f) / RequestedPreviewScale;
     CustomTimeDilation = SavedManagerDilation / RequestedPreviewScale;
     ProjectileTimeScale = SavedProjectileScale * RequestedPreviewScale;
     ActivePreviewScale = RequestedPreviewScale;
@@ -109,7 +110,7 @@ void ACombatProjectileWorld::SyncPreviewPresentation()
         // Separate weapon/magazine actors own their mesh ticks. They must share
         // the hands' clock; detached physical props deliberately keep world time.
         if (!SavedPresentationDilation.Contains(Actor)) SavedPresentationDilation.Add(Actor, Actor->CustomTimeDilation);
-        Actor->CustomTimeDilation = SavedPresentationDilation.FindChecked(Actor) * PlayerActionRate / ActivePreviewScale;
+        Actor->CustomTimeDilation = SavedPresentationDilation.FindChecked(Actor) * FMath::Clamp(PreviewPlayerRate, .1f, 1.f) / ActivePreviewScale;
     }
     for (auto It = SavedPresentationDilation.CreateIterator(); It; ++It)
         if (!It.Key().IsValid() || !Attached.Contains(It.Key().Get()))

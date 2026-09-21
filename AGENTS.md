@@ -34,8 +34,11 @@ instructions supersede earlier guidance within their stated scope.
   MSQ-93 through MSQ-96 remain undispatched.
   Review waivers stay task-scoped. Owner play/motion acceptance stays separate. The MSQ-85
   [relative slowdown decision](Docs/Approvals/PhysicsControlVariants01-OwnerScope01.json)
-  requires partial player movement/firing slowdown while the world slows more,
-  superseding the earlier normal-player slowdown rule. Full stop remains later scope.
+  requires partial player movement slowdown while the world slows more,
+  superseding the earlier normal-player slowdown rule. The later
+  [slowdown cadence correction](Docs/Approvals/CombatSlowdownCadence01-OwnerScope01.json)
+  sets rifle cadence, bullets and world to 0.25 while hero movement stays at 0.65.
+  Full stop remains later scope.
   MSQ-69, MSQ-68 and MSQ-82 are verified prerequisites in the sequential
   [CombatSlice01 task family](Docs/Tasks/CombatSlice01Plan.md).
   [MSQ-82 review](Docs/CombatTiming01Review.md) records timing acceptance and the
