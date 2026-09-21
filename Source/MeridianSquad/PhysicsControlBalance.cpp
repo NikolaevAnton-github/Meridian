@@ -35,6 +35,7 @@ FString APhysicsControlDummy::GetBalanceLabel() const
 
 void APhysicsControlDummy::ResetBalance()
 {
+    PendingFallImpact = {};
     BalanceState = EDummyBalanceState::Standing;
     Instability = StateSeconds = LeftLegDisabled = RightLegDisabled = 0;
     NoSupportSeconds = SettledSeconds = PoseLeanDegrees = PelvisDrop = 0;
@@ -60,6 +61,7 @@ void APhysicsControlDummy::DisableBalanceDrives()
 void APhysicsControlDummy::EnterFall(const TCHAR* Reason)
 {
     if (IsDead()) return;
+    const bool bNewFall = BalanceState != EDummyBalanceState::Falling && BalanceState != EDummyBalanceState::Down;
     if (BalanceState == EDummyBalanceState::GettingUp) ++InterruptedGetUps;
     if (BalanceState != EDummyBalanceState::Falling && BalanceState != EDummyBalanceState::Down) ++Falls;
     BalanceState = EDummyBalanceState::Falling;
@@ -70,6 +72,23 @@ void APhysicsControlDummy::EnterFall(const TCHAR* Reason)
     Body->bPauseAnims = true;
     DisableBalanceDrives();
     Body->WakeAllRigidBodies();
+    if (bNewFall && PendingFallImpact.Deadline >= GetWorld()->GetTimeSeconds())
+    {
+        if (auto* BI = Body->GetBodyInstance(PendingFallImpact.Bone))
+        {
+            const FVector Point = BI->GetUnrealWorldTransform().TransformPosition(PendingFallImpact.LocalPoint);
+            Body->AddImpulseAtLocation(PendingFallImpact.BonusImpulse, Point, PendingFallImpact.Bone);
+            if (PendingFallImpact.Contact)
+            {
+                const FVector& Bonus = PendingFallImpact.BonusImpulse;
+                PendingFallImpact.Contact->SetField(TEXT("fall_bonus_impulse"), MakeShared<FJsonValueArray>(
+                    TArray<TSharedPtr<FJsonValue>>{MakeShared<FJsonValueNumber>(Bonus.X),
+                        MakeShared<FJsonValueNumber>(Bonus.Y), MakeShared<FJsonValueNumber>(Bonus.Z)}));
+                PendingFallImpact.Contact->SetNumberField(TEXT("impulse_count"), 2);
+            }
+        }
+    }
+    PendingFallImpact = {};
     // The fully simulated current visible pose and velocities remain authoritative.
 }
 
@@ -103,6 +122,7 @@ void APhysicsControlDummy::ApplyExternalDisturbance(FVector Impulse, FVector Wor
     if (!bReady || !BI || Impulse.ContainsNaN() || WorldPoint.ContainsNaN()) return;
     Impulse = Impulse.GetClampedToMaxSize(FMath::Min(18000.f, BI->GetBodyMass() * 700.f));
     if (Impulse.IsNearlyZero()) return;
+    PendingFallImpact = {};
     RegisterDisturbance(Bone, Impulse, Impulse.Size() / 5000.f);
     Body->WakeAllRigidBodies();
     Body->AddImpulseAtLocation(Impulse, WorldPoint, Bone);

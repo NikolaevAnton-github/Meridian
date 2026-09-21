@@ -71,6 +71,13 @@ movement-during-blend, reset, slowdown, get-up and death checks pass. The correc
 binary is loaded for owner Play. This remains a direct personal fix without a
 new task; owner motion acceptance is separate and prior evidence is preserved.
 
+The owner then requested a direct outside-task [rifle impact accent](GASPEnemyImpactBoost01.md):
+1.5 times the ordinary impulse for a recent hit followed by committed living
+fall, and 2 times for the lethal hit, without stacking both on one shot. Weapon
+settings travel with the projectile; ordinary hits and damage are retained.
+The native Development Editor build passes. Per the [owner's instruction](Approvals/GASPEnemyImpactBoost01-OwnerScope01.json),
+no firing or gameplay checks were run; the owner will test the new tuning.
+
 MSQ-98 is high priority and consumes MSQ-92/current follow-ups. It precedes MSQ-93
 and MSQ-70. The refinement order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 ->
 MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**; MSQ-98 is an unstaged MSQ-67 child, outside

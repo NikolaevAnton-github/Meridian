@@ -160,7 +160,8 @@ public:
     bool TracePhysicalPose(const FDummyPose& Before, const FDummyPose& After,
         const FVector& Start, const FVector& End, float Radius, FHitResult& Hit) const;
     virtual float ReceiveBullet(int64 ShotId, float Damage, const FVector& Direction, const FHitResult& Hit,
-        double ContactTime, double BirthTime, uint64 CombatFrame);
+        double ContactTime, double BirthTime, uint64 CombatFrame,
+        float FallImpulseMultiplier = 1.f, float DeathImpulseMultiplier = 1.f);
     bool IsDead() const { return Deaths != 0; }
     bool IsReady() const { return bReady; }
     uint64 DeathFrame = 0;
@@ -212,6 +213,16 @@ protected:
     int32 GetUps = 0;
     int32 InterruptedGetUps = 0;
     FString BalanceReason;
+    // One recent bullet may accent the next committed fall; the contact follows its body.
+    struct FPendingFallImpact
+    {
+        FName Bone;
+        FVector LocalPoint = FVector::ZeroVector;
+        FVector BonusImpulse = FVector::ZeroVector;
+        double Deadline = -1;
+        TSharedPtr<FJsonObject> Contact;
+    };
+    FPendingFallImpact PendingFallImpact;
     void ResetBalance();
     void InitializeBalanceDrives();
     virtual void UpdateBalance(float DeltaSeconds);

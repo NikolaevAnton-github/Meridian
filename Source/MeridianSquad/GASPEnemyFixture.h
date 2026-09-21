@@ -42,7 +42,8 @@ public:
     virtual void ResetDummy() override;
     virtual FString GetDummyState(bool IncludeContacts = true) const override;
     virtual float ReceiveBullet(int64 ShotId, float Damage, const FVector& Direction, const FHitResult& Hit,
-        double ContactTime, double BirthTime, uint64 CombatFrame) override;
+        double ContactTime, double BirthTime, uint64 CombatFrame,
+        float FallImpulseMultiplier = 1.f, float DeathImpulseMultiplier = 1.f) override;
     virtual void ApplyExternalDisturbance(FVector Impulse, FVector WorldPoint, FName Bone = "pelvis") override;
     virtual void ProduceInput_Implementation(int32 SimTimeMs, FMoverInputCmdContext& InputCmdResult) override;
 

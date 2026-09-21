@@ -1,5 +1,6 @@
 #include "PhysicsControlDummy.h"
 #include "CombatProjectileWorld.h"
+#include "Engine/World.h"
 #include "PhysicsControlComponent.h"
 #include "DummyRecoveryAnimInstance.h"
 #include "Animation/AnimSequence.h"
@@ -398,10 +399,12 @@ TSharedPtr<FJsonObject> APhysicsControlDummy::BodyState() const
     return Result;
 }
 float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVector& Direction, const FHitResult& Hit,
-    double ContactTime, double BirthTime, uint64 CombatFrame)
+    double ContactTime, double BirthTime, uint64 CombatFrame, float FallImpulseMultiplier, float DeathImpulseMultiplier)
 {
     auto* BI = Body->GetBodyInstance(Hit.BoneName);
     if (!bReady || !BI || !FMath::IsFinite(Damage) || Damage <= 0 || Direction.ContainsNaN()) return 0;
+    const bool bWasDead = IsDead();
+    PendingFallImpact = {};
     auto Row = MakeShared<FJsonObject>();
     Row->SetNumberField(TEXT("shot"), ShotId);
     Row->SetNumberField(TEXT("birth_time"), BirthTime);
@@ -464,13 +467,26 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
     Row->SetObjectField(TEXT("after_release"), BodyState());
     const float Magnitude = FMath::Min(FMath::Clamp(BulletImpulse, 0.f, 5000.f),
         BI->GetBodyMass() * FMath::Clamp(MaxImpulseVelocity, 0.f, 450.f));
-    const FVector Impulse = Direction.GetSafeNormal() * Magnitude;
+    const bool bLethalHit = !bWasDead && IsDead();
+    const float Multiplier = bLethalHit && FMath::IsFinite(DeathImpulseMultiplier) ?
+        FMath::Clamp(DeathImpulseMultiplier, 1.f, 2.f) : 1.f;
+    const FVector Impulse = Direction.GetSafeNormal() * Magnitude * Multiplier;
+    Row->SetField(TEXT("impulse"), VJson(Impulse));
+    Row->SetNumberField(TEXT("impulse_count"), 1);
+    Row->SetNumberField(TEXT("death_impulse_multiplier"), Multiplier);
+    if (!IsDead() && BalanceState != EDummyBalanceState::Falling && BalanceState != EDummyBalanceState::Down &&
+        FMath::IsFinite(FallImpulseMultiplier) && FallImpulseMultiplier > 1.f)
+    {
+        PendingFallImpact.Bone = Hit.BoneName;
+        PendingFallImpact.LocalPoint = BI->GetUnrealWorldTransform().InverseTransformPosition(Hit.ImpactPoint);
+        PendingFallImpact.BonusImpulse = Impulse * (FMath::Clamp(FallImpulseMultiplier, 1.f, 2.f) - 1.f);
+        PendingFallImpact.Deadline = GetWorld()->GetTimeSeconds() + .5;
+        PendingFallImpact.Contact = Row;
+    }
     if (!IsDead()) RegisterDisturbance(Hit.BoneName, Impulse, InstabilityPerHit);
     Body->WakeAllRigidBodies();
     Body->AddImpulseAtLocation(Impulse, Hit.ImpactPoint, Hit.BoneName);
     ++PhysicalHits;
-    Row->SetField(TEXT("impulse"), VJson(Impulse));
-    Row->SetNumberField(TEXT("impulse_count"), 1);
     Row->SetNumberField(TEXT("health"), Health);
     Row->SetNumberField(TEXT("deaths"), Deaths);
     Row->SetNumberField(TEXT("controls"), Controls.Num());

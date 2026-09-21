@@ -38,6 +38,10 @@ public:
     int32 InitialReserve = 90;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Tuning", meta=(ClampMin="0.01"))
     float Damage = 25.f;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Tuning", meta=(ClampMin="1", ClampMax="2"))
+    float FallImpulseMultiplier = 1.5f;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Tuning", meta=(ClampMin="1", ClampMax="2"))
+    float DeathImpulseMultiplier = 2.f;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Tuning", meta=(ClampMin="1", ClampMax="200000"))
     float BulletSpeed = 30000.f;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Tuning", meta=(ClampMin="0.05"))

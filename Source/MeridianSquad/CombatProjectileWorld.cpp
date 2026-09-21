@@ -165,6 +165,11 @@ int64 ACombatProjectileWorld::LaunchTimed(AActor* Shooter, const FVector& Positi
     Bullet.Position = Position;
     Bullet.Velocity = Velocity;
     Bullet.Damage = Damage;
+    if (const auto* Rifle = Shooter ? Shooter->FindComponentByClass<UCombatRifleComponent>() : nullptr)
+    {
+        Bullet.FallImpulseMultiplier = Rifle->FallImpulseMultiplier;
+        Bullet.DeathImpulseMultiplier = Rifle->DeathImpulseMultiplier;
+    }
     Bullet.Born = FPlatformTime::Seconds();
     Bullet.BirthTime = Time;
     Bullet.EligibleFrame = FrameSerial + (bAdvancing || !bProcessingFrame ? 1 : 0);
@@ -538,7 +543,8 @@ void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult&
     const uint64 Generation = ResetGeneration;
     auto* PhysicalTarget = Cast<APhysicsControlDummy>(Victim);
     const float Applied = IsValid(PhysicalTarget) ? PhysicalTarget->ReceiveBullet(Bullet.Id, Bullet.Damage,
-        Bullet.Velocity.GetSafeNormal(), Hit, LastContactTime, Bullet.BirthTime, FrameSerial) :
+        Bullet.Velocity.GetSafeNormal(), Hit, LastContactTime, Bullet.BirthTime, FrameSerial,
+        Bullet.FallImpulseMultiplier, Bullet.DeathImpulseMultiplier) :
         IsValid(Victim) ? UGameplayStatics::ApplyPointDamage(Victim, Bullet.Damage, Bullet.Velocity.GetSafeNormal(),
             Hit, Bullet.Instigator.Get(), Bullet.Shooter.Get(), nullptr) : 0.f;
     if (Generation != ResetGeneration || IsActorBeingDestroyed()) return;

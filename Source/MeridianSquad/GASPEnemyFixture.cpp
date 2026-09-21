@@ -543,11 +543,12 @@ void AGASPEnemyFixture::BoundRecoveryDrives(float DeltaSeconds)
 }
 
 float AGASPEnemyFixture::ReceiveBullet(int64 ShotId, float Damage, const FVector& Direction, const FHitResult& Hit,
-    double ContactTime, double BirthTime, uint64 CombatFrame)
+    double ContactTime, double BirthTime, uint64 CombatFrame, float FallImpulseMultiplier, float DeathImpulseMultiplier)
 {
     if (!bReady || !Body->GetBodyInstance(Hit.BoneName) || !FMath::IsFinite(Damage) || Damage <= 0 || Direction.ContainsNaN()) return 0;
     if (Authority == EGASPEnemyAuthority::Locomotion) TakeRecoveryAuthority();
-    const float Result = APhysicsControlDummy::ReceiveBullet(ShotId, Damage, Direction, Hit, ContactTime, BirthTime, CombatFrame);
+    const float Result = APhysicsControlDummy::ReceiveBullet(ShotId, Damage, Direction, Hit, ContactTime, BirthTime, CombatFrame,
+        FallImpulseMultiplier, DeathImpulseMultiplier);
     if (IsDead())
     {
         SetAuthority(EGASPEnemyAuthority::Dead);

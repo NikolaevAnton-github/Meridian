@@ -1,0 +1,10 @@
+{
+  "record_id": "GASPEnemyImpactBoost01-OwnerScope01",
+  "date_local": "2026-09-22",
+  "source": "Owner direct chat after the proposed rifle impact multipliers",
+  "owner_message_original": "Поставь эти значения, вне задачи, проверь сборку, а выстрелы я сам протестирую",
+  "owner_message_english_translation": "Set these values, outside a task, check the build, and I will test the shots myself.",
+  "decision": "Directly implement rifle impulse multipliers of 1.5 for a hit-associated committed living fall and 2.0 for a lethal hit. Do not stack both bonuses on the same shot; retain ordinary hit/corpse impulses and damage.",
+  "execution": "No new task, Multica execution or independent review. Verify the native build only; firing and motion evaluation belong to the owner.",
+  "preservation": "Preserve owner config/project/map edits, existing gameplay scope, sources and historical evidence. This direct follow-up does not dispatch any backlog task."
+}

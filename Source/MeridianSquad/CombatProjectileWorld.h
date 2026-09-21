@@ -118,6 +118,8 @@ private:
         FVector Position = FVector::ZeroVector;
         FVector Velocity = FVector::ZeroVector;
         float Damage = 0.f;
+        float FallImpulseMultiplier = 1.f;
+        float DeathImpulseMultiplier = 1.f;
         float Age = 0.f;
         float Travel = 0.f;
         double Born = 0.0;
