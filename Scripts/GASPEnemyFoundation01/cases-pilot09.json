@@ -1,0 +1,4 @@
+[
+  {"name":"Pilot09-MovingTorso","duration":8,"fps":30,"profile":1,"pilot":true,"flying":true,"inspection_view":true,"location":[-600,100,100],"events":[[0.05,"@track","spine_03"],[0.3,"@move",{"direction":[-1,0,0],"walk":true}],[1.3,"LeftMouseButton",1],[1.42,"LeftMouseButton",0],[1.6,"@track","pelvis"],[6.0,"@move",{"direction":[0,0,0]}]]},
+  {"name":"Pilot09-FallResume","duration":11,"fps":30,"profile":1,"pilot":true,"flying":true,"inspection_view":true,"location":[-600,100,175],"events":[[0.05,"@track","pelvis"],[1.0,"@push",18000],[1.1,"@push",18000],[1.2,"@push",18000],[2.0,"@move",{"direction":[0,-1,0],"walk":true}],[8.0,"@move",{"direction":[0,0,0]}]]}
+]

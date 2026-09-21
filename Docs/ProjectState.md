@@ -21,15 +21,27 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
-## Next priority prepared: MSQ-98 GASP enemy foundation
+## Owner-test handoff: MSQ-98 GASP enemy foundation
 
 The owner [requests task creation with GASP migration first](Approvals/GASPEnemyFoundation01-TaskCreation01.json).
-[GASPEnemyFoundation01 / MSQ-98](Tasks/GASPEnemyFoundation01.md) is the next pending
-implementation candidate: adopt the configured local UE 5.8 GASP physical character
-and integrate our damage, recoverability, adaptive steps and existing controls.
-Start with one pilot, then migrate the three current fixtures after focused checks.
-Preserve the current MSQ-92 baseline and later cadence correction, all sources,
-historical evidence and owner edits. This preparation makes no gameplay changes.
+[GASPEnemyFoundation01 / MSQ-98](Tasks/GASPEnemyFoundation01.md) delivered Candidate01 under
+the [owner start and review waiver](Approvals/GASPEnemyFoundation01-OwnerStart01.json):
+all three current fixtures use the local UE 5.8 GASP physical character with our
+damage, recoverability, adaptive steps and existing controls. The Development
+Editor build and six focused executor criteria pass; controller scope/evidence
+acceptance and all 3,236 candidate identity checks pass. See the
+[immutable handoff](GASPEnemyFoundation01Handoff.md) and
+[controller acceptance](GASPEnemyFoundation01Acceptance.md). The registry contains
+3,018 final plugin packages with passing validation. Source assets, historical
+evidence, owner edits and the later cadence correction remain preserved.
+One Multica Unreal executor ran at verified native Astra/max/standard. No independent
+reviewer was dispatched; owner motion/play judgement remains separate. Small sole
+compliance penetration (about 0.5-1.3 cm) remains documented. The active owner Play
+session was preserved during closure. Movement commands are ready for MSQ-70;
+autonomous AI combat is not part of this delivery.
+The [owner editor-lifecycle approval](Approvals/GASPEnemyFoundation01-OwnerEditor01.json)
+permits stopping the existing Play session and necessary controlled Unreal restarts
+for MSQ-98; preserve owner changes and unsaved assets before doing so.
 
 MSQ-98 is high priority and consumes MSQ-92/current follow-ups. It precedes MSQ-93
 and MSQ-70. The refinement order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 ->
@@ -41,12 +53,12 @@ Earlier summaries' direct MSQ-92 -> MSQ-93 order is superseded by this decision.
 [EnemyDisarm01 / MSQ-99](Tasks/EnemyDisarm01.md) and
 [EnemyWoundReaction01 / MSQ-100](Tasks/EnemyWoundReaction01.md) are secondary,
 low-priority MSQ-67 children depending on MSQ-98 and MSQ-70. They do not block base
-combat or depend on each other. All three new tasks are backlog, unassigned, with
-zero runs. Task creation does not authorize implementation/runtime startup; future
-execution follows standing max/standard and one-primary-reviewer rules. Owner motion
-judgement remains separate. See [setup verification](GASPEnemyFoundation01TaskSetup01.md).
+combat or depend on each other. MSQ-99/100 remain prepared and undispatched. The
+earlier zero-run planning snapshot is preserved in
+[setup verification](GASPEnemyFoundation01TaskSetup01.md). The later authorization
+covered MSQ-98 only and waived its independent review; other task review rules remain.
 AnimGen, parkour gameplay, player replacement and paused art/lobby work remain outside
-this task preparation. Multica owns live status.
+this delivery. MSQ-93 through MSQ-96 and MSQ-70 remain undispatched. Multica owns live status.
 
 ## Owner-test handoff: MSQ-92 adaptive recovery steps
 

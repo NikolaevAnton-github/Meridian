@@ -1,0 +1,73 @@
+[
+  {
+    "fps": 30,
+    "profile": 1,
+    "pilot": false,
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -600,
+      -260,
+      50
+    ],
+    "name": "Final03-Blocked",
+    "duration": 13,
+    "events": [
+      [
+        0.05,
+        "@track",
+        "spine_03"
+      ],
+      [
+        0.1,
+        "LeftControl",
+        1
+      ],
+      [
+        0.2,
+        "F7",
+        1
+      ],
+      [
+        0.3,
+        "F7",
+        0
+      ],
+      [
+        0.4,
+        "LeftControl",
+        0
+      ],
+      [
+        0.6,
+        "V",
+        1
+      ],
+      [
+        0.7,
+        "V",
+        0
+      ],
+      [
+        1.2,
+        "LeftMouseButton",
+        1
+      ],
+      [
+        2.2,
+        "LeftMouseButton",
+        0
+      ],
+      [
+        3,
+        "@environment",
+        "ceiling"
+      ],
+      [
+        7.5,
+        "@environment",
+        "clear_ceiling"
+      ]
+    ]
+  }
+]

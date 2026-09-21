@@ -260,6 +260,7 @@ bool APhysicsControlDummy::StepPlacement(FName Bone, FTransform& Foot, float Flo
     FootBox(Body, Bone, Foot, Box, Extent);
     Box.AddToTranslation(FVector(0, 0, Floor + .5f - ShapeBottom(Bone, Foot)));
     FCollisionQueryParams Query(SCENE_QUERY_STAT(DummyStepPlacement), false, this);
+    Query.AddIgnoredActor(Body->GetOwner());
     return !GetWorld()->OverlapAnyTestByObjectType(Box.GetLocation(), Box.GetRotation(),
         FCollisionObjectQueryParams(ECC_WorldStatic), FCollisionShape::MakeBox(Extent), Query);
 }
@@ -267,11 +268,11 @@ bool APhysicsControlDummy::StepPlacement(FName Bone, FTransform& Foot, float Flo
 bool APhysicsControlDummy::StepPathClear(const FTransform& Start, const FTransform& End) const
 {
     FCollisionQueryParams Query(SCENE_QUERY_STAT(DummyStepPath), false, this);
+    Query.AddIgnoredActor(Body->GetOwner());
     const FCollisionObjectQueryParams Objects(ECC_WorldStatic);
     FTransform Box;
     FVector Extent;
     if (!FootBox(Body, SwingFoot, Start, Box, Extent)) return false;
-    const FQuat Rotation = Box.GetRotation();
     // Sweep the actual calibrated foot box, including its offset from the ankle.
     // A 0.5 cm contact margin keeps the supporting floor out of the clearance query.
     const FVector ClearanceOffset(0, 0, GroundHeight + .5f - ShapeBottom(SwingFoot, Start));
@@ -279,10 +280,17 @@ bool APhysicsControlDummy::StepPathClear(const FTransform& Start, const FTransfo
     for (int32 I = 1; I <= 12; ++I)
     {
         const float Alpha = I / 12.f;
-        FVector P = Box.GetLocation() + ClearanceOffset + (End.GetLocation() - Start.GetLocation()) * Smooth(Alpha);
-        P.Z += FMath::Sin(PI * Alpha) * AdaptiveLift;
+        FTransform Foot;
+        Foot.Blend(Start, End, Smooth(Alpha));
+        Foot.AddToTranslation(FVector(0,0,FMath::Sin(PI * Alpha) * AdaptiveLift));
+        FTransform CurrentBox;
+        FootBox(Body, SwingFoot, Foot, CurrentBox, Extent);
+        // A walking ankle can rotate from toe-off to a flat landing. Sweep its
+        // actual interpolated box instead of retaining the airborne orientation.
+        const FVector P = CurrentBox.GetLocation() + FVector(0,0,
+            FMath::Max(0.f, GroundHeight + .5f - ShapeBottom(SwingFoot, Foot)));
         FHitResult Hit;
-        if (GetWorld()->SweepSingleByObjectType(Hit, Previous, P, Rotation, Objects,
+        if (GetWorld()->SweepSingleByObjectType(Hit, Previous, P, CurrentBox.GetRotation(), Objects,
             FCollisionShape::MakeBox(Extent), Query)) return false;
         Previous = P;
     }
@@ -385,6 +393,7 @@ bool APhysicsControlDummy::BeginStep()
         // Corrective placement follows neutral stance geometry, with matching lift.
         ConfigureAdaptiveGeometry(BoundedCorrection.Size2D());
     }
+    PrepareStepLanding(SwingFoot, SwingDestination);
     if (!StepPlacement(SwingFoot, SwingDestination, GroundHeight) || !StepPathClear(SwingStart, SwingDestination))
         return Reject(TEXT("step destination blocked or unsupported"));
     UpdateStepRestPelvis();
@@ -421,9 +430,10 @@ bool APhysicsControlDummy::BeginStep()
                 const bool Knee = Name.StartsWith(TEXT("calf")) && Default.ConstraintBone2.ToString().StartsWith(TEXT("thigh"));
                 if (Hip || Ankle || Knee)
                 {
-                    Joint->SetAngularSwing1Limit(ACM_Limited, Hip ? 75.f : Ankle ? 20.f : 8.f);
-                    Joint->SetAngularSwing2Limit(ACM_Limited, Hip ? 35.f : Ankle ? 30.f : 15.f);
-                    Joint->SetAngularTwistLimit(ACM_Limited, Hip ? 20.f : Ankle ? 65.f : 60.f);
+                    const FVector Limits = StepJointLimits(Default.ConstraintBone1);
+                    Joint->SetAngularSwing1Limit(ACM_Limited, Limits.X);
+                    Joint->SetAngularSwing2Limit(ACM_Limited, Limits.Y);
+                    Joint->SetAngularTwistLimit(ACM_Limited, Limits.Z);
                 }
             }
     }
@@ -437,6 +447,7 @@ bool APhysicsControlDummy::BeginStep()
         if (Trial == 3 || AdaptiveLength <= 8.01f) break;
         ConfigureAdaptiveGeometry(FMath::Max(8.f, AdaptiveLength * .8f));
         SwingDestination.SetLocation(SwingStart.GetLocation() + StepDirection * AdaptiveLength);
+        PrepareStepLanding(SwingFoot, SwingDestination);
         if (!StepPlacement(SwingFoot, SwingDestination, GroundHeight) || !StepPathClear(SwingStart, SwingDestination)) break;
         UpdateStepRestPelvis();
     }
@@ -445,6 +456,13 @@ bool APhysicsControlDummy::BeginStep()
     BalanceState = EDummyBalanceState::Stepping;
     BalanceReason = TEXT("bounded reactive recovery step");
     return true;
+}
+
+FVector APhysicsControlDummy::StepJointLimits(FName Bone) const
+{
+    const FString Name = Bone.ToString();
+    return Name.StartsWith(TEXT("thigh")) ? FVector(75,35,20) :
+        Name.StartsWith(TEXT("foot")) ? FVector(20,30,65) : FVector(8,15,60);
 }
 
 bool APhysicsControlDummy::BuildStepPose(float Transfer, float Swing, float Settle, TMap<FName,FTransform>& Pose, bool bApply)
@@ -505,6 +523,7 @@ bool APhysicsControlDummy::BuildStepPose(float Transfer, float Swing, float Sett
         FTransform Target = Foot == PlantedFoot ? PlantedTarget : SwingStart;
         if (Foot == SwingFoot)
         {
+            Target.SetRotation(FQuat::Slerp(SwingStart.GetRotation(), SwingDestination.GetRotation(), Move));
             Target.SetLocation(FMath::Lerp(SwingStart.GetLocation(), SwingDestination.GetLocation(), Move) +
                 FVector(0, 0, FMath::Sin(PI * FMath::Clamp(Swing, 0.f, 1.f)) * AdaptiveLift));
         }

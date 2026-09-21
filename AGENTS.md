@@ -35,7 +35,11 @@ instructions supersede earlier guidance within their stated scope.
   The later [GASP priority decision](Docs/Approvals/GASPEnemyFoundation01-TaskCreation01.json)
   places [MSQ-98 enemy migration](Docs/Tasks/GASPEnemyFoundation01.md) after MSQ-92
   and before MSQ-93/MSQ-70. MSQ-99 disarming and MSQ-100 wound gestures are secondary.
-  These three tasks are prepared only; see ProjectState for dependencies and scope.
+  The later [MSQ-98 start and review waiver](Docs/Approvals/GASPEnemyFoundation01-OwnerStart01.json)
+  authorized delivered Candidate01 without an independent reviewer. Focused executor
+  self-checks and [controller acceptance](Docs/GASPEnemyFoundation01Acceptance.md)
+  pass; owner motion/play judgement remains separate. MSQ-99/100 are prepared only.
+  See ProjectState for dependencies and scope.
   Review waivers stay task-scoped. Owner play/motion acceptance stays separate. The MSQ-85
   [relative slowdown decision](Docs/Approvals/PhysicsControlVariants01-OwnerScope01.json)
   requires partial player movement slowdown while the world slows more,

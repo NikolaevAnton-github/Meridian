@@ -27,5 +27,8 @@ public:
     static FString AuditSkin(USkeletalMeshComponent* Mesh);
     UFUNCTION(BlueprintCallable, Category="Physics Dummy|Verification")
     static bool ConfigureAsset(UPhysicsAsset* Asset);
+    /** Task-scoped sole boxes measured from the adopted mesh in a neutral pose. */
+    UFUNCTION(BlueprintCallable, Category="Physics Dummy|Verification")
+    static bool ConfigureGASPAsset(UPhysicsAsset* Asset, USkeletalMeshComponent* Mesh);
     static TArray<FDummySoleVertex> FootVertices(USkeletalMeshComponent* Mesh);
 };

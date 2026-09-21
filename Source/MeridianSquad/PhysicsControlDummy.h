@@ -142,7 +142,7 @@ public:
 
     /** Shared non-damaging force seam for future push/explosion work; one physical impulse. */
     UFUNCTION(BlueprintCallable, Category="Physics Dummy|Balance")
-    void ApplyExternalDisturbance(FVector Impulse, FVector WorldPoint, FName Bone = "pelvis");
+    virtual void ApplyExternalDisturbance(FVector Impulse, FVector WorldPoint, FName Bone = "pelvis");
     UFUNCTION(BlueprintPure, Category="Physics Dummy|Balance")
     FString GetBalanceLabel() const;
     /** Editor-only physical floor/ceiling fixtures for the bounded transition checks. */
@@ -150,23 +150,23 @@ public:
     bool ProbeBalanceEnvironment(const FString& Operation);
 
     UFUNCTION(BlueprintCallable, Category="Physics Dummy")
-    void ResetDummy();
+    virtual void ResetDummy();
     UFUNCTION(BlueprintPure, Category="Physics Dummy|Verification")
-    FString GetDummyState(bool IncludeContacts = true) const;
+    virtual FString GetDummyState(bool IncludeContacts = true) const;
     UFUNCTION(BlueprintPure, Category="Physics Dummy|Verification")
     FVector GetPhysicalBodyLocation(FName Bone) const;
 
     FDummyPose SamplePhysicalPose() const;
     bool TracePhysicalPose(const FDummyPose& Before, const FDummyPose& After,
         const FVector& Start, const FVector& End, float Radius, FHitResult& Hit) const;
-    float ReceiveBullet(int64 ShotId, float Damage, const FVector& Direction, const FHitResult& Hit,
+    virtual float ReceiveBullet(int64 ShotId, float Damage, const FVector& Direction, const FHitResult& Hit,
         double ContactTime, double BirthTime, uint64 CombatFrame);
     bool IsDead() const { return Deaths != 0; }
     bool IsReady() const { return bReady; }
     uint64 DeathFrame = 0;
     double DeathTime = -1;
 
-private:
+protected:
     UPROPERTY() TObjectPtr<USceneComponent> FixtureRoot;
     UPROPERTY() TObjectPtr<UTextRenderComponent> Label;
     UPROPERTY() TObjectPtr<UAnimSequence> Idle;
@@ -213,13 +213,14 @@ private:
     int32 InterruptedGetUps = 0;
     FString BalanceReason;
     void ResetBalance();
-    void UpdateBalance(float DeltaSeconds);
-    void RegisterDisturbance(FName Bone, const FVector& Impulse, float Amount);
-    void EnterFall(const TCHAR* Reason);
+    void InitializeBalanceDrives();
+    virtual void UpdateBalance(float DeltaSeconds);
+    virtual void RegisterDisturbance(FName Bone, const FVector& Impulse, float Amount);
+    virtual void EnterFall(const TCHAR* Reason);
     void DisableBalanceDrives();
     bool FindFloor(const FVector& Point, float Depth, FHitResult& Hit) const;
     bool RecoverySpace(const FVector& Center, float& FloorZ) const;
-    bool BeginGetUp();
+    virtual bool BeginGetUp();
     void SampleAnimation(UAnimSequence* Animation, float Time, const FTransform& Origin, TMap<FName,FTransform>& Pose);
     void DrivePose(const TMap<FName,FTransform>& Pose, float Strength = 1.f);
     void AddBalanceState(TSharedPtr<FJsonObject> Root) const;
@@ -272,7 +273,7 @@ private:
     FRecoveryFoot MeasureFoot(FName Bone, const FRecoveryFoot& Previous) const;
     void ResetRecoverability();
     void UpdateRecoverability(float DeltaSeconds);
-    void BoundRecoveryDrives(float DeltaSeconds);
+    virtual void BoundRecoveryDrives(float DeltaSeconds);
     void AddRecoverabilityState(TSharedPtr<FJsonObject> Root) const;
     void CalibrateSoles();
     float SoleBottom(const USkeletalMeshComponent* Mesh, bool bLeft) const;
@@ -280,7 +281,7 @@ private:
     float PoseBottom(const TMap<FName,FTransform>& Pose) const;
     bool FootSupported(FName Bone) const;
     void IsolateSelfCollision();
-    void SetVisibleAnimationPose();
+    virtual void SetVisibleAnimationPose();
     void EvaluateRecoveryPose(float Time, float Blend, float EndBlend, TMap<FName,FTransform>& Pose);
     // World-space full target skeleton. Home is reserved for explicit F6 only.
     TArray<FTransform> StandingBones;
@@ -350,6 +351,8 @@ private:
     void RememberStandingSkeleton(const USkeletalMeshComponent* Mesh, bool bNeutral = true);
     bool NeedsStanceCorrection() const;
     bool BeginStep();
+    virtual FVector StepJointLimits(FName Bone) const;
+    virtual void PrepareStepLanding(FName Bone, FTransform& Target) const {}
     void UpdateStep(float DeltaSeconds);
     bool StepPlacement(FName Bone, FTransform& Foot, float FloorReference) const;
     bool StepPathClear(const FTransform& Start, const FTransform& End) const;

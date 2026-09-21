@@ -31,6 +31,10 @@
 		{
 			"Name": "PhysicsControl",
 			"Enabled": true
+		},
+		{
+			"Name": "Mover",
+			"Enabled": true
 		}
 	]
 }

@@ -6,8 +6,19 @@ Predecessor: delivered [MSQ-92](PhysicsControlAdaptiveSteps01.md), consuming the
 current baseline including the later [cadence correction](../CombatSlowdownCadence01.md).
 The owner places this work first, ahead of the remaining physical refinements
 and MSQ-70; see [the exact planning decision](../Approvals/GASPEnemyFoundation01-TaskCreation01.json).
-This request authorizes task creation and ordering only. Prepare in backlog,
-unassigned, with zero runs. Implementation requires a later execution instruction.
+The later [owner start and review waiver](../Approvals/GASPEnemyFoundation01-OwnerStart01.json)
+authorizes this implementation without an independent reviewer for now. Executor
+focused self-checks and controller acceptance remain required; owner motion/play
+judgement stays separate.
+The [later editor-lifecycle approval](../Approvals/GASPEnemyFoundation01-OwnerEditor01.json)
+permits stopping the existing Play session and necessary controlled Unreal restarts
+for this task, preserving owner changes and unsaved assets first.
+
+Delivered Candidate01 on 2026-09-21: all three fixtures migrated; build and six
+focused executor criteria pass. Controller scope/evidence acceptance and registry
+validation pass. See the [immutable handoff](../GASPEnemyFoundation01Handoff.md)
+and [controller acceptance](../GASPEnemyFoundation01Acceptance.md). Independent
+review was waived; owner motion/play judgment and successor dispatch remain separate.
 
 ## Outcome
 
@@ -80,9 +91,10 @@ and migration of the whole sample are excluded. These planning boundaries supers
 earlier enemy-side Mover/locomotion exclusions only within this task's future scope.
 
 On execution, use one Multica Unreal writer at verified native Astra/max/standard.
-Follow the standing executor self-check, one primary independent technical reviewer
-and controller acceptance workflow. Prior task-scoped waivers do not extend here;
-owner motion/play judgement remains separate. Confirm live editor/project/map/PIE
+Follow executor focused self-checks and controller acceptance under the task-specific
+[owner review waiver](../Approvals/GASPEnemyFoundation01-OwnerStart01.json). Do not
+dispatch an independent reviewer for this execution; owner motion/play judgement
+remains separate. Confirm live editor/project/map/PIE
 and dirty state through Epic MCP before mutations. Preserve owner sessions, source
 assets, old candidates and exact historical manifests. Track binary derivatives in
 LFS and register new fingerprints without overwriting accepted registry records.

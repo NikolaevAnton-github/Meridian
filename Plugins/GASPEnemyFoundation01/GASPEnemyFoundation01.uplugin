@@ -1,0 +1,33 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "MSQ-98",
+  "FriendlyName": "GASP Enemy Foundation 01",
+  "Description": "Task-scoped derivatives of the local UE 5.8 Game Animation Sample enemy foundation.",
+  "Category": "MeridianSquad",
+  "CanContainContent": true,
+  "EnabledByDefault": true,
+  "IsBetaVersion": false,
+  "Plugins": [
+    { "Name": "AnimationWarping", "Enabled": true },
+    { "Name": "RigLogic", "Enabled": true },
+    { "Name": "LiveLink", "Enabled": true },
+    { "Name": "LiveLinkControlRig", "Enabled": true },
+    { "Name": "PoseSearch", "Enabled": true },
+    { "Name": "AnimationLocomotionLibrary", "Enabled": true },
+    { "Name": "MotionWarping", "Enabled": true },
+    { "Name": "HairStrands", "Enabled": true },
+    { "Name": "Chooser", "Enabled": true },
+    { "Name": "Mover", "Enabled": true },
+    { "Name": "NetworkPrediction", "Enabled": true },
+    { "Name": "ChaosMover", "Enabled": true },
+    { "Name": "AnimationLayering", "Enabled": true },
+    { "Name": "MoverExamples", "Enabled": true },
+    { "Name": "DrawDebugLibrary", "Enabled": true },
+    { "Name": "SmartObjects", "Enabled": true },
+    { "Name": "Locomotor", "Enabled": true },
+    { "Name": "CurveExpression", "Enabled": true },
+    { "Name": "GameplayInteractions", "Enabled": true },
+    { "Name": "PhysicsControl", "Enabled": true }
+  ]
+}

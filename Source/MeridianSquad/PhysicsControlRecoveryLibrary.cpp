@@ -149,3 +149,51 @@ bool UPhysicsControlRecoveryLibrary::ConfigureAsset(UPhysicsAsset* Asset)
     return false;
 #endif
 }
+
+bool UPhysicsControlRecoveryLibrary::ConfigureGASPAsset(UPhysicsAsset* Asset, USkeletalMeshComponent* Mesh)
+{
+#if WITH_EDITOR
+    if (!Asset || !Mesh || !Asset->GetPathName().StartsWith(TEXT("/GASPEnemyFoundation01/"))) return false;
+    const auto Vertices = FootVertices(Mesh);
+    if (Vertices.IsEmpty()) return false;
+    Asset->Modify();
+    for (FName Foot : {FName("foot_l"), FName("foot_r")})
+    {
+        const int32 Index = Asset->FindBodyIndex(Foot);
+        if (Index == INDEX_NONE) return false;
+        const FString Side = Foot == TEXT("foot_l") ? TEXT("_l") : TEXT("_r");
+        FBox Bounds(ForceInit);
+        for (const auto& Vertex : Vertices)
+            if (Vertex.Bone.ToString().EndsWith(Side))
+                Bounds += Mesh->GetComponentTransform().InverseTransformPosition(Vertex.World);
+        if (!Bounds.IsValid) return false;
+        auto* Setup = Asset->SkeletalBodySetups[Index].Get();
+        Setup->Modify();
+        Setup->AggGeom.EmptyElements();
+        // In mesh space the measured lower skin surface sets the contact plane.
+        // A 6 cm sole remains inside the visible foot; shrink its footprint 10%.
+        FVector Size = Bounds.GetSize();
+        Size.X *= .9; Size.Y *= .9; Size.Z = FMath::Min(6.0, Size.Z);
+        FVector Center = Bounds.GetCenter();
+        Center.Z = Bounds.Min.Z + Size.Z * .5;
+        FTransform BoxWorld(Mesh->GetComponentQuat(), Mesh->GetComponentTransform().TransformPosition(Center));
+        const FTransform BoxLocal = BoxWorld.GetRelativeTransform(Mesh->GetSocketTransform(Foot));
+        FKBoxElem Box;
+        Box.X = Size.X; Box.Y = Size.Y; Box.Z = Size.Z;
+        Box.SetTransform(BoxLocal);
+        Setup->AggGeom.BoxElems.Add(Box);
+        Setup->InvalidatePhysicsData();
+        Setup->CreatePhysicsMeshes();
+    }
+    for (const TCHAR* Arm : {TEXT("lowerarm_l"), TEXT("lowerarm_r"), TEXT("hand_l"), TEXT("hand_r")})
+        for (const TCHAR* Trunk : {TEXT("pelvis"), TEXT("spine_02"), TEXT("spine_03"), TEXT("spine_04"), TEXT("spine_05")})
+        {
+            const int32 A = Asset->FindBodyIndex(Arm), B = Asset->FindBodyIndex(Trunk);
+            if (A != INDEX_NONE && B != INDEX_NONE) Asset->EnableCollision(A, B);
+        }
+    Asset->MarkPackageDirty();
+    return true;
+#else
+    return false;
+#endif
+}

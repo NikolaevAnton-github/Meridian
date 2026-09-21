@@ -1,0 +1,4 @@
+[
+  {"name":"Pilot04-Leg","duration":12,"fps":30,"profile":0,"pilot":true,"flying":true,"inspection_view":true,"location":[-600,120,145],"look_at":[-950,0,75],"events":[[1.0,"@impulse",[0,900,0,"calf_l"]]]},
+  {"name":"Pilot04-Movement","duration":8,"fps":30,"profile":0,"pilot":true,"flying":true,"inspection_view":true,"location":[-530,0,240],"look_at":[-950,0,80],"events":[[0.7,"@move",{"direction":[0,1,0],"walk":true}],[2.5,"@move",{"direction":[0,0,0]}],[3.8,"@move",{"direction":[0,-1,0],"walk":false}],[5.6,"@move",{"direction":[0,0,0]}]]}
+]

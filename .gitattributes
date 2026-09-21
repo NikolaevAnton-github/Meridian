@@ -1,5 +1,12 @@
 * text=auto
 
+# Preserve exact MSQ-98 source, evidence-script and handoff fingerprints.
+Source/MeridianSquad/GASPEnemyFixture.* -text
+Scripts/GASPEnemyFoundation01/** -text
+Docs/GASPEnemyFoundation01*.md -text
+Plugins/GASPEnemyFoundation01/GASPEnemyFoundation01.uplugin -text
+Config/DefaultGameplayTags.ini -text
+
 # Unified diffs must preserve whitespace in their context lines.
 Tools/Patches/*.patch text eol=lf -whitespace
 *.ps1 text eol=crlf
@@ -101,3 +108,10 @@ Source/MeridianSquad/MeridianSquad.Build.cs -text whitespace=blank-at-eol,blank-
 Scripts/PhysicsControlRecovery01/** -text
 Scripts/AssetRegistry/manifests/PhysicsControlRecovery01.json -text
 Docs/PhysicsControlRecovery01.md -text
+
+# Preserve exact MSQ-98 candidate and registry evidence bytes.
+Source/MeridianSquad/GASPEnemyFixture.* -text
+Scripts/GASPEnemyFoundation01/** -text
+Plugins/GASPEnemyFoundation01/GASPEnemyFoundation01.uplugin -text
+Docs/GASPEnemyFoundation01*.md -text
+Scripts/AssetRegistry/manifests/GASPEnemyFoundation01*.json -text

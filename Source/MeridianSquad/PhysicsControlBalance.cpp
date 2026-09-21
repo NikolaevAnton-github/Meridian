@@ -111,6 +111,7 @@ void APhysicsControlDummy::ApplyExternalDisturbance(FVector Impulse, FVector Wor
 bool APhysicsControlDummy::FindFloor(const FVector& Point, float Depth, FHitResult& Hit) const
 {
     FCollisionQueryParams Query(SCENE_QUERY_STAT(DummySupport), false, this);
+    Query.AddIgnoredActor(Body->GetOwner());
     return GetWorld()->LineTraceSingleByObjectType(Hit, Point + FVector(0,0,8), Point - FVector(0,0,Depth),
         FCollisionObjectQueryParams(ECC_WorldStatic), Query) && Hit.ImpactNormal.Z >= .65;
 }
@@ -128,6 +129,7 @@ bool APhysicsControlDummy::RecoverySpace(const FVector& Center, float& FloorZ) c
             FMath::Abs(Foot.ImpactPoint.Z - FloorZ) > 12) return false;
     }
     FCollisionQueryParams Query(SCENE_QUERY_STAT(DummyRecoverySpace), false, this);
+    Query.AddIgnoredActor(Body->GetOwner());
     return !GetWorld()->OverlapBlockingTestByChannel(FVector(Center.X,Center.Y,FloorZ + 101), FQuat::Identity,
         ECC_WorldStatic, FCollisionShape::MakeCapsule(29, 90), Query);
 }

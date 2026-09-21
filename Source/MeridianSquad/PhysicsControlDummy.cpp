@@ -206,6 +206,13 @@ void APhysicsControlDummy::ResetDummy()
         for (const USkeletalBodySetup* Setup : Asset->SkeletalBodySetups)
             UnsupportedShapes += Setup->AggGeom.ConvexElems.Num() + Setup->AggGeom.TaperedCapsuleElems.Num();
 
+    InitializeBalanceDrives();
+    ResetBalance();
+    UpdateLabel();
+}
+
+void APhysicsControlDummy::InitializeBalanceDrives()
+{
     FPhysicsControlData Limbs;
     Limbs.LinearStrength = FMath::Clamp(PoseLinearStrength, .1f, 15.f);
     Limbs.LinearDampingRatio = FMath::Clamp(DriveDampingRatio, .5f, 3.f);
@@ -270,8 +277,6 @@ void APhysicsControlDummy::ResetDummy()
     PhysicsControl->UpdateControls(0);
     Body->WakeAllRigidBodies();
     bReady = Controls.Num() > 1 && !SupportName.IsNone() && UnsupportedShapes == 0;
-    ResetBalance();
-    UpdateLabel();
 }
 void APhysicsControlDummy::Tick(float DeltaSeconds)
 {

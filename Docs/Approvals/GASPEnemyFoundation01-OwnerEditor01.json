@@ -1,0 +1,12 @@
+{
+  "record_id": "GASPEnemyFoundation01-OwnerEditor01",
+  "date_local": "2026-09-21",
+  "task_identifier": "MSQ-98",
+  "source": "Owner direct chat responding to the request to stop the existing Play session and restart Unreal as necessary for MSQ-98",
+  "owner_message_original": "давай",
+  "owner_message_english_translation": "Go ahead.",
+  "decision": "The executor may stop the current Play session and perform necessary controlled Unreal shutdowns/restarts for GASP migration, builds and focused verification under MSQ-98.",
+  "preservation": "Recheck live project/map/PIE/dirty state before editor mutations. Preserve owner changes and any unsaved assets before restart. The previous observation found no unsaved packages, but that is not a substitute for a current check.",
+  "execution": "Continue the existing single Multica executor run where possible, with sole editor ownership, Astra/max/standard, focused self-checks and controller acceptance. No independent reviewer is authorized. Do not ask again for these necessary MSQ-98 editor lifecycle operations.",
+  "limits": "This approval lifts the current Play-session gate only within MSQ-98. All task scope, source preservation, single-heavy-workload and successor restrictions remain. Finish ready for owner Play."
+}

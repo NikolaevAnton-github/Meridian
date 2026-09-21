@@ -1,0 +1,222 @@
+[
+    {
+        "fps":  30,
+        "profile":  1,
+        "pilot":  true,
+        "flying":  true,
+        "inspection_view":  true,
+        "location":  [
+                         -600,
+                         60,
+                         50
+                     ],
+        "name":  "Pilot11-FallResume",
+        "duration":  12,
+        "events":  [
+                       [
+                           0.05,
+                           "@track",
+                           "spine_03"
+                       ],
+                       [
+                           0.1,
+                           "LeftControl",
+                           1
+                       ],
+                       [
+                           0.2,
+                           "F7",
+                           1
+                       ],
+                       [
+                           0.3,
+                           "F7",
+                           0
+                       ],
+                       [
+                           0.4,
+                           "LeftControl",
+                           0
+                       ],
+                       [
+                           0.6,
+                           "V",
+                           1
+                       ],
+                       [
+                           0.7,
+                           "V",
+                           0
+                       ],
+                       [
+                           1.2,
+                           "LeftMouseButton",
+                           1
+                       ],
+                       [
+                           2.2,
+                           "LeftMouseButton",
+                           0
+                       ],
+                       [
+                           2.5,
+                           "@move",
+                           {
+                               "direction":  [
+                                                 0,
+                                                 -1,
+                                                 0
+                                             ],
+                               "walk":  true
+                           }
+                       ],
+                       [
+                           2.6,
+                           "@track",
+                           "pelvis"
+                       ],
+                       [
+                           10,
+                           "@move",
+                           {
+                               "direction":  [
+                                                 0,
+                                                 0,
+                                                 0
+                                             ]
+                           }
+                       ]
+                   ]
+    },
+    {
+        "fps":  30,
+        "profile":  1,
+        "pilot":  true,
+        "flying":  true,
+        "inspection_view":  true,
+        "location":  [
+                         -600,
+                         60,
+                         50
+                     ],
+        "name":  "Pilot11-Interrupt",
+        "duration":  18,
+        "interrupt_and_kill":  true,
+        "events":  [
+                       [
+                           0.05,
+                           "@track",
+                           "spine_03"
+                       ],
+                       [
+                           0.1,
+                           "LeftControl",
+                           1
+                       ],
+                       [
+                           0.2,
+                           "F7",
+                           1
+                       ],
+                       [
+                           0.3,
+                           "F7",
+                           0
+                       ],
+                       [
+                           0.4,
+                           "LeftControl",
+                           0
+                       ],
+                       [
+                           0.6,
+                           "V",
+                           1
+                       ],
+                       [
+                           0.7,
+                           "V",
+                           0
+                       ],
+                       [
+                           1.2,
+                           "LeftMouseButton",
+                           1
+                       ],
+                       [
+                           2.2,
+                           "LeftMouseButton",
+                           0
+                       ],
+                       [
+                           2.6,
+                           "@track",
+                           "spine_03"
+                       ]
+                   ]
+    },
+    {
+        "fps":  30,
+        "profile":  1,
+        "pilot":  true,
+        "flying":  true,
+        "inspection_view":  true,
+        "location":  [
+                         30350,
+                         33060,
+                         1050
+                     ],
+        "name":  "Pilot11-Unsupported",
+        "duration":  11,
+        "platform":  true,
+        "remove_support":  true,
+        "follow_fall":  true,
+        "events":  [
+                       [
+                           0.05,
+                           "@track",
+                           "spine_03"
+                       ],
+                       [
+                           0.1,
+                           "LeftControl",
+                           1
+                       ],
+                       [
+                           0.2,
+                           "F7",
+                           1
+                       ],
+                       [
+                           0.3,
+                           "F7",
+                           0
+                       ],
+                       [
+                           0.4,
+                           "LeftControl",
+                           0
+                       ],
+                       [
+                           0.6,
+                           "V",
+                           1
+                       ],
+                       [
+                           0.7,
+                           "V",
+                           0
+                       ],
+                       [
+                           1.2,
+                           "LeftMouseButton",
+                           1
+                       ],
+                       [
+                           2.2,
+                           "LeftMouseButton",
+                           0
+                       ]
+                   ]
+    }
+]

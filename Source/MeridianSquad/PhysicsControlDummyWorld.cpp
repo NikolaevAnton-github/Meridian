@@ -1,4 +1,5 @@
 #include "CombatProjectileWorld.h"
+#include "GASPEnemyFixture.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "GameFramework/Character.h"
@@ -27,9 +28,9 @@ void ACombatProjectileWorld::SetPhysicsDummyEnabled(bool Enabled)
         Params.bDeferConstruction = true;
         for (int32 I = 0; I < 3; ++I)
         {
-            // Z is a search seed; ResetDummy places the measured soles on the floor.
+            // Retain the three fixture slots and reaction profiles on the GASP foundation.
             const FTransform Placement(FRotator(0, 180, 0), FVector(-950, -320 + I * 320, 0));
-            auto* Dummy = GetWorld()->SpawnActor<APhysicsControlDummy>(APhysicsControlDummy::StaticClass(), Placement, Params);
+            auto* Dummy = GetWorld()->SpawnActor<AGASPEnemyFixture>(AGASPEnemyFixture::StaticClass(), Placement, Params);
             if (!Dummy) continue;
             Dummy->ConfigureReactionProfile(I + 1);
             Dummy->FinishSpawning(Placement);

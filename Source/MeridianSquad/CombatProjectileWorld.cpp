@@ -1,4 +1,5 @@
 #include "CombatProjectileWorld.h"
+#include "GASPEnemyFixture.h"
 #include "CombatTarget.h"
 #include "CombatRifleComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -101,7 +102,7 @@ void ACombatProjectileWorld::BuildQuery(FCollisionQueryParams& Query, const AAct
     // Characters are handled by continuous relative sweeps. FP physics props
     // are presentation only, and never become invisible gameplay cover.
     for (TActorIterator<AActor> It(GetWorld()); It; ++It)
-        if (It->IsA<ACharacter>() || It->IsA<APhysicsControlDummy>() || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics")))
+        if (It->IsA<ACharacter>() || It->IsA<APhysicsControlDummy>() || AGASPEnemyFixture::FromFoundation(*It) || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics")))
             Query.AddIgnoredActor(*It);
 }
 bool ACombatProjectileWorld::TraceEnemyAim(const FVector& Start, const FVector& End, double BirthTime, FHitResult& Hit) const
@@ -224,7 +225,7 @@ TMap<TWeakObjectPtr<UPrimitiveComponent>, ACombatProjectileWorld::FBlockerSample
     TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample> Samples;
     for (TActorIterator<AActor> It(GetWorld()); It; ++It)
     {
-        if (It->IsA<ACharacter>() || It->IsA<APhysicsControlDummy>() || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics"))) continue;
+        if (It->IsA<ACharacter>() || It->IsA<APhysicsControlDummy>() || AGASPEnemyFixture::FromFoundation(*It) || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics"))) continue;
         TInlineComponentArray<UPrimitiveComponent*> Parts(*It);
         for (UPrimitiveComponent* Part : Parts)
             if (Part->IsQueryCollisionEnabled() && Part->GetCollisionResponseToChannel(ECC_Visibility) == ECR_Block)
