@@ -1,0 +1,10 @@
+{
+  "record_id": "GASPEnemyImpactRotation01-OwnerScope01",
+  "date_local": "2026-09-22",
+  "source": "Owner direct chat after the stronger local rifle impact tuning",
+  "owner_message_original": "Да уже лучше, знешь чего не хватает, что бы если стреляешь в верхнюю часть туловища, и при смертельном уроне или при сбивании, ноги как бы подкидывались в противоход выстрелу, что бы он так красиво падал",
+  "owner_message_english_translation": "Yes, it is better now. What is missing is that when shooting the upper torso, on lethal damage or knockdown the legs should be thrown up opposite the shot direction, so the fall looks good.",
+  "decision": "Add a bounded one-shot physical rotation accent to upper-torso lethal hits and hit-associated committed living falls, retaining the existing local fall x4 and lethal x6 impulses.",
+  "execution": "Continue the direct outside-task change and build-only verification established in this chat. Do not run firing/gameplay checks; the owner judges the motion. No new task or independent review.",
+  "preservation": "Preserve ordinary hit/damage behavior, source assets, historical evidence and owner config/project/map edits. No successor task is dispatched."
+}

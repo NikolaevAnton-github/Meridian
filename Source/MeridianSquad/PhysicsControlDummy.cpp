@@ -295,6 +295,8 @@ void APhysicsControlDummy::Tick(float DeltaSeconds)
     }
     UpdateBalance(DeltaSeconds);
     BoundRecoveryDrives(DeltaSeconds);
+    // Derived GASP transitions have finished releasing drives before this pre-physics accent.
+    ApplyPendingFallRotation();
     // Evaluate the last completed Chaos step before aging its contacts. The
     // upcoming frame's delta (including a loading hitch) has not simulated yet.
     for (auto& Foot : RecoveryFeet) Foot.ContactAge += DeltaSeconds;
@@ -404,6 +406,14 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
     auto* BI = Body->GetBodyInstance(Hit.BoneName);
     if (!bReady || !BI || !FMath::IsFinite(Damage) || Damage <= 0 || Direction.ContainsNaN()) return 0;
     const bool bWasDead = IsDead();
+    const bool bCanStartFallRotation = BalanceState == EDummyBalanceState::Standing ||
+        BalanceState == EDummyBalanceState::LosingBalance || BalanceState == EDummyBalanceState::Stepping;
+    const bool bCanRotateOnDeath = bCanStartFallRotation || PendingFallRotation.bAllowRotation;
+    if (bCanStartFallRotation)
+    {
+        bFallRotationApplied = false;
+        PendingFallRotation = {};
+    }
     PendingFallImpact = {};
     auto Row = MakeShared<FJsonObject>();
     Row->SetNumberField(TEXT("shot"), ShotId);
@@ -480,12 +490,25 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
         PendingFallImpact.Bone = Hit.BoneName;
         PendingFallImpact.LocalPoint = BI->GetUnrealWorldTransform().InverseTransformPosition(Hit.ImpactPoint);
         PendingFallImpact.BonusImpulse = Impulse * (FMath::Clamp(FallImpulseMultiplier, 1.f, 6.f) - 1.f);
+        PendingFallImpact.bAllowRotation = bCanStartFallRotation;
         PendingFallImpact.Deadline = GetWorld()->GetTimeSeconds() + .5;
         PendingFallImpact.Contact = Row;
     }
     if (!IsDead()) RegisterDisturbance(Hit.BoneName, Impulse, InstabilityPerHit);
     Body->WakeAllRigidBodies();
     Body->AddImpulseAtLocation(Impulse, Hit.ImpactPoint, Hit.BoneName);
+    if (bLethalHit && Multiplier > 1.f && !bFallRotationApplied)
+    {
+        // A lethal shot before the next physics step supersedes a queued living-fall accent.
+        PendingFallRotation = {};
+        if (bCanRotateOnDeath)
+        {
+            PendingFallRotation.Bone = Hit.BoneName;
+            PendingFallRotation.BonusImpulse = Impulse;
+            PendingFallRotation.bAllowRotation = true;
+            PendingFallRotation.Contact = Row;
+        }
+    }
     ++PhysicalHits;
     Row->SetNumberField(TEXT("health"), Health);
     Row->SetNumberField(TEXT("deaths"), Deaths);

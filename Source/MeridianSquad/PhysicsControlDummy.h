@@ -69,6 +69,10 @@ public:
     float BulletImpulse = 900.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning")
     float MaxImpulseVelocity = 180.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning", meta=(ClampMin="0", ClampMax="1"))
+    float UpperBodyFallRotationRatio = .75f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning", meta=(ClampMin="0", ClampMax="400"))
+    float UpperBodyFallLegSpeed = 300.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning")
     float HitStrengthMultiplier = .2f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Physics Dummy|Tuning")
@@ -219,10 +223,14 @@ protected:
         FName Bone;
         FVector LocalPoint = FVector::ZeroVector;
         FVector BonusImpulse = FVector::ZeroVector;
+        bool bAllowRotation = false;
         double Deadline = -1;
         TSharedPtr<FJsonObject> Contact;
     };
     FPendingFallImpact PendingFallImpact;
+    FPendingFallImpact PendingFallRotation;
+    bool bFallRotationApplied = false;
+    void ApplyPendingFallRotation();
     void ResetBalance();
     void InitializeBalanceDrives();
     virtual void UpdateBalance(float DeltaSeconds);

@@ -36,6 +36,8 @@ FString APhysicsControlDummy::GetBalanceLabel() const
 void APhysicsControlDummy::ResetBalance()
 {
     PendingFallImpact = {};
+    PendingFallRotation = {};
+    bFallRotationApplied = false;
     BalanceState = EDummyBalanceState::Standing;
     Instability = StateSeconds = LeftLegDisabled = RightLegDisabled = 0;
     NoSupportSeconds = SettledSeconds = PoseLeanDegrees = PelvisDrop = 0;
@@ -78,6 +80,8 @@ void APhysicsControlDummy::EnterFall(const TCHAR* Reason)
         {
             const FVector Point = BI->GetUnrealWorldTransform().TransformPosition(PendingFallImpact.LocalPoint);
             Body->AddImpulseAtLocation(PendingFallImpact.BonusImpulse, Point, PendingFallImpact.Bone);
+            if (PendingFallImpact.bAllowRotation && !bFallRotationApplied)
+                PendingFallRotation = PendingFallImpact;
             if (PendingFallImpact.Contact)
             {
                 const FVector& Bonus = PendingFallImpact.BonusImpulse;
@@ -90,6 +94,54 @@ void APhysicsControlDummy::EnterFall(const TCHAR* Reason)
     }
     PendingFallImpact = {};
     // The fully simulated current visible pose and velocities remain authoritative.
+}
+
+void APhysicsControlDummy::ApplyPendingFallRotation()
+{
+    const FPendingFallImpact Accent = PendingFallRotation;
+    PendingFallRotation = {};
+    if (!bReady || bFallRotationApplied || !Accent.bAllowRotation ||
+        (BalanceState != EDummyBalanceState::Falling && BalanceState != EDummyBalanceState::Dead)) return;
+    const FName Bone = Accent.Bone;
+    if (Bone != TEXT("spine_03") && Bone != TEXT("spine_04") && Bone != TEXT("spine_05") &&
+        Bone != TEXT("clavicle_l") && Bone != TEXT("clavicle_r")) return;
+    if (Accent.BonusImpulse.ContainsNaN() || !FMath::IsFinite(UpperBodyFallRotationRatio) ||
+        !FMath::IsFinite(UpperBodyFallLegSpeed)) return;
+    const FVector ShotDirection = Accent.BonusImpulse.GetSafeNormal2D();
+    if (ShotDirection.IsNearlyZero() || Accent.BonusImpulse.GetSafeNormal().SizeSquared2D() < .25) return;
+
+    auto* Chest = Body->GetBodyInstance(TEXT("spine_05"));
+    auto* Pelvis = Body->GetBodyInstance(TEXT("pelvis"));
+    auto* Left = Body->GetBodyInstance(TEXT("calf_l"));
+    auto* Right = Body->GetBodyInstance(TEXT("calf_r"));
+    if (!Chest || !Pelvis || !Left || !Right || !Chest->IsInstanceSimulatingPhysics() ||
+        !Left->IsInstanceSimulatingPhysics() || !Right->IsInstanceSimulatingPhysics()) return;
+    const FVector Torso = Chest->GetCOMPosition() - Pelvis->GetCOMPosition();
+    if (Torso.Z < 20.f || Torso.GetSafeNormal().Z < .5f) return;
+    const float LeftMass = Left->GetBodyMass(), RightMass = Right->GetBodyMass(), ChestMass = Chest->GetBodyMass();
+    if (!FMath::IsFinite(LeftMass) || !FMath::IsFinite(RightMass) || !FMath::IsFinite(ChestMass) ||
+        LeftMass <= 0.f || RightMass <= 0.f || ChestMass <= 0.f) return;
+
+    // The legs move together; the equal chest reaction adds a couple with zero net impulse.
+    // Cap the whole pair before splitting it so neither reaction is independently clipped.
+    const float LegMass = LeftMass + RightMass;
+    const float SpeedCap = FMath::Clamp(UpperBodyFallLegSpeed, 0.f, 400.f);
+    const float Magnitude = FMath::Min(static_cast<float>(Accent.BonusImpulse.Size()) *
+        FMath::Clamp(UpperBodyFallRotationRatio, 0.f, 1.f), FMath::Min(LegMass, ChestMass) * SpeedCap);
+    if (Magnitude <= 0.f) return;
+    const FVector LegImpulse = (-ShotDirection + FVector::UpVector * .65f).GetSafeNormal() * Magnitude;
+    Body->WakeAllRigidBodies();
+    Body->AddImpulseAtLocation(LegImpulse * (LeftMass / LegMass), Left->GetCOMPosition(), TEXT("calf_l"));
+    Body->AddImpulseAtLocation(LegImpulse * (RightMass / LegMass), Right->GetCOMPosition(), TEXT("calf_r"));
+    Body->AddImpulseAtLocation(-LegImpulse, Chest->GetCOMPosition(), TEXT("spine_05"));
+    bFallRotationApplied = true;
+    if (Accent.Contact)
+    {
+        Accent.Contact->SetField(TEXT("fall_rotation_leg_impulse"), MakeShared<FJsonValueArray>(
+            TArray<TSharedPtr<FJsonValue>>{MakeShared<FJsonValueNumber>(LegImpulse.X),
+                MakeShared<FJsonValueNumber>(LegImpulse.Y), MakeShared<FJsonValueNumber>(LegImpulse.Z)}));
+        Accent.Contact->SetNumberField(TEXT("fall_rotation_impulse_count"), 3);
+    }
 }
 
 void APhysicsControlDummy::RegisterDisturbance(FName Bone, const FVector& Impulse, float Amount)
@@ -123,6 +175,7 @@ void APhysicsControlDummy::ApplyExternalDisturbance(FVector Impulse, FVector Wor
     Impulse = Impulse.GetClampedToMaxSize(FMath::Min(18000.f, BI->GetBodyMass() * 700.f));
     if (Impulse.IsNearlyZero()) return;
     PendingFallImpact = {};
+    PendingFallRotation = {};
     RegisterDisturbance(Bone, Impulse, Impulse.Size() / 5000.f);
     Body->WakeAllRigidBodies();
     Body->AddImpulseAtLocation(Impulse, WorldPoint, Bone);

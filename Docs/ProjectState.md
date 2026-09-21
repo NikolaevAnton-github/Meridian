@@ -81,6 +81,14 @@ with the projectile; ordinary hits and damage are retained. Per the continuing
 the native Development Editor build passes, with no firing or gameplay tests;
 the owner tests the motion.
 
+The owner then liked the stronger impact and requested leg countermotion on
+upper-torso lethal/knockdown hits. The direct
+[rotation accent](GASPEnemyImpactRotation01.md) adds a bounded one-shot impulse
+couple: calves backward/upward and the equal opposite chest reaction, after
+GASP releases its drives. Existing x4/x6 local impacts remain. The native build
+passes; the owner retains firing and motion evaluation under the continuing
+build-only scope.
+
 MSQ-98 is high priority and consumes MSQ-92/current follow-ups. It precedes MSQ-93
 and MSQ-70. The refinement order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 ->
 MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**; MSQ-98 is an unstaged MSQ-67 child, outside
