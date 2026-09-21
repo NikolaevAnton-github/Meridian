@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "PhysicsControlDummy.h"
+#include "Components/ActorComponent.h"
 #include "MoverSimulationTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GASPEnemyFixture.generated.h"
@@ -10,6 +11,17 @@ class APawn;
 class UMoverComponent;
 class UCapsuleComponent;
 class UAnimInstance;
+
+/** Runs the adopted controls after animation, with an optional recovery target blend. */
+UCLASS()
+class UGASPEnemyPhysicsTick : public UActorComponent
+{
+    GENERATED_BODY()
+public:
+    UGASPEnemyPhysicsTick();
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType,
+        FActorComponentTickFunction* ThisTickFunction) override;
+};
 
 UENUM(BlueprintType)
 enum class EGASPEnemyAuthority : uint8
@@ -73,6 +85,8 @@ protected:
     virtual void PrepareStepLanding(FName Bone, FTransform& Target) const override;
 
 private:
+    friend class UGASPEnemyPhysicsTick;
+    UPROPERTY() TObjectPtr<UGASPEnemyPhysicsTick> FoundationPhysicsTick;
     UPROPERTY() TObjectPtr<USkeletalMeshComponent> UnusedLegacyBody;
     UPROPERTY() TObjectPtr<UPhysicsControlComponent> UnusedLegacyControls;
     UPROPERTY() TObjectPtr<UMoverComponent> Mover;
@@ -92,6 +106,11 @@ private:
     FString LastSelectedMontage;
     TMap<FString,int32> ArmTrunkContacts;
     float PeakArmTrunkImpulse = 0;
+    TMap<FName, FTransform> HandoffPose;
+    float HandoffSeconds = 0;
+    static constexpr float HandoffDuration = .55f;
+    void UpdateFoundationPhysics(float DeltaSeconds);
+    void BeginPoseHandoff();
     UFUNCTION()
     void OnFoundationContact(UPrimitiveComponent* HitComponent, AActor* OtherActor,
         UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);

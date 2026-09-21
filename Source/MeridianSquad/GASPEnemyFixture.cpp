@@ -30,6 +30,20 @@ TSharedPtr<FJsonValue> Vector98(FVector V)
 }
 }
 
+UGASPEnemyPhysicsTick::UGASPEnemyPhysicsTick()
+{
+    PrimaryComponentTick.bCanEverTick = true;
+    PrimaryComponentTick.TickGroup = TG_PrePhysics;
+}
+
+void UGASPEnemyPhysicsTick::TickComponent(float DeltaTime, ELevelTick TickType,
+    FActorComponentTickFunction* ThisTickFunction)
+{
+    Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+    if (TickType == LEVELTICK_All)
+        if (auto* Enemy = Cast<AGASPEnemyFixture>(GetOwner())) Enemy->UpdateFoundationPhysics(DeltaTime);
+}
+
 AGASPEnemyFixture::AGASPEnemyFixture()
 {
     // The inherited mesh/control subobjects retain the old class's construction contract.
@@ -40,6 +54,8 @@ AGASPEnemyFixture::AGASPEnemyFixture()
     UnusedLegacyBody->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     UnusedLegacyBody->SetComponentTickEnabled(false);
     UnusedLegacyControls->SetComponentTickEnabled(false);
+    FoundationPhysicsTick = CreateDefaultSubobject<UGASPEnemyPhysicsTick>(TEXT("FoundationPhysicsTick"));
+    FoundationPhysicsTick->AddTickPrerequisiteActor(this);
     ConfigureReactionProfile(1);
 }
 
@@ -153,6 +169,14 @@ void AGASPEnemyFixture::ResetDummy()
 {
     ClearBalanceProbeFixtures();
     bReady = bAdopted = false;
+    HandoffPose.Reset();
+    HandoffSeconds = 0;
+    if (IsValid(Foundation)) FoundationPhysicsTick->RemoveTickPrerequisiteActor(Foundation);
+    if (IsValid(Body)) FoundationPhysicsTick->RemoveTickPrerequisiteComponent(Body);
+    if (IsValid(PhysicsControl))
+        for (auto& Prerequisite : PhysicsControl->PrimaryComponentTick.GetPrerequisites())
+            if (auto* Tick = Prerequisite.Get())
+                FoundationPhysicsTick->PrimaryComponentTick.RemovePrerequisite(Prerequisite.PrerequisiteObject.Get(), *Tick);
     if (IsValid(PhysicsControl) && !Controls.IsEmpty()) PhysicsControl->DestroyControls(Controls);
     Controls.Reset(); BodyControls.Reset(); RecoveringControls.Reset(); SampleControls.Reset();
     if (IsValid(Foundation)) Foundation->Destroy();
@@ -208,6 +232,11 @@ bool AGASPEnemyFixture::AdoptFoundation()
     Body->OnComponentHit.AddUniqueDynamic(this, &AGASPEnemyFixture::OnBodyContact);
     Body->OnComponentHit.AddUniqueDynamic(this, &AGASPEnemyFixture::OnFoundationContact);
     PhysicsControl->AddTickPrerequisiteActor(this);
+    // Use Physics Control's supported manual update seam. The extra tick keeps
+    // the same animation -> targets -> drives order, with no double update.
+    FoundationPhysicsTick->AddTickPrerequisiteActor(Foundation);
+    FoundationPhysicsTick->AddTickPrerequisiteComponent(Body);
+    PhysicsControl->SetComponentTickEnabled(false);
     SampleControls = PhysicsControl->GetAllControlNames();
     BoundSampleControls();
     Idle = LoadObject<UAnimSequence>(nullptr, IdlePath);
@@ -324,6 +353,7 @@ void AGASPEnemyFixture::SetVisibleAnimationPose()
 void AGASPEnemyFixture::TakeRecoveryAuthority()
 {
     if (!bReady || IsDead() || Authority == EGASPEnemyAuthority::Recovery) return;
+    HandoffPose.Reset();
     SetAuthority(EGASPEnemyAuthority::Recovery);
     CaptureStandingBasis(true);
     StandingPelvisOffset = GetPhysicalBodyLocation(TEXT("pelvis")) - Foundation->GetActorLocation();
@@ -344,6 +374,9 @@ void AGASPEnemyFixture::TakeRecoveryAuthority()
     ResetRecoverability();
     CancelStep();
     if (Controls.IsEmpty()) InitializeBalanceDrives();
+    // The inherited initializer enables its normal component tick. This pawn
+    // uses the manual update seam, so do not leave a second drive update active.
+    PhysicsControl->SetComponentTickEnabled(false);
     IsolateSelfCollision();
     BalanceReason = TEXT("bounded native recovery owns the adopted GASP bodies");
 }
@@ -352,6 +385,7 @@ void AGASPEnemyFixture::ReleaseRecoveryAuthority()
 {
     if (Authority == EGASPEnemyAuthority::Recovery && FoundationAnimation)
     {
+        BeginPoseHandoff();
         // GASP's Blend Out Pose state reads this snapshot on every Ragdoll exit.
         // The get-up gate skips the sample's SavePoseSnapshot for upright exits;
         // without this capture it reuses a previous fallen pose (or the ref pose)
@@ -368,6 +402,41 @@ void AGASPEnemyFixture::ReleaseRecoveryAuthority()
     Body->bPauseAnims = false;
     BalanceState = EDummyBalanceState::Standing;
     BalanceReason = TEXT("GASP locomotion resumed at recovered location");
+}
+
+void AGASPEnemyFixture::BeginPoseHandoff()
+{
+    HandoffPose.Reset();
+    HandoffSeconds = 0;
+    // Start at the actual physical pose, not the old solver's ideal standing
+    // target. World space preserves the pose while Mover reanchors its capsule.
+    for (const auto& Setup : Body->GetPhysicsAsset()->SkeletalBodySetups)
+        if (const auto* BI = Body->GetBodyInstance(Setup->BoneName))
+            HandoffPose.Add(Setup->BoneName, BI->GetUnrealWorldTransform());
+}
+
+void AGASPEnemyFixture::UpdateFoundationPhysics(float DeltaSeconds)
+{
+    if (!bAdopted || !IsValid(PhysicsControl) || !IsValid(Body)) return;
+    PhysicsControl->UpdateTargetCaches(DeltaSeconds);
+    if (Authority != EGASPEnemyAuthority::Locomotion) HandoffPose.Reset();
+    if (!HandoffPose.IsEmpty())
+    {
+        const float T = FMath::Clamp(HandoffSeconds / HandoffDuration, 0.f, 1.f);
+        // Zero first and second derivatives at both ends; the destination keeps
+        // following live GASP animation rather than freezing an idle pose.
+        const float Alpha = T * T * T * (T * (T * 6.f - 15.f) + 10.f);
+        for (const auto& Entry : HandoffPose)
+        {
+            const FTransform Target = PhysicsControl->GetCachedBoneTransform(Body, Entry.Key);
+            FTransform Blended;
+            Blended.Blend(Entry.Value, Target, Alpha);
+            PhysicsControl->SetCachedBoneData(Body, Entry.Key, Blended);
+        }
+        HandoffSeconds += DeltaSeconds;
+        if (T >= 1.f) HandoffPose.Reset();
+    }
+    PhysicsControl->UpdateControls(DeltaSeconds);
 }
 
 void AGASPEnemyFixture::RegisterDisturbance(FName Bone, const FVector& Impulse, float Amount)
@@ -509,6 +578,11 @@ void AGASPEnemyFixture::Tick(float DeltaSeconds)
         return;
     }
     if (IsValid(Foundation)) SetActorTransform(Foundation->GetActorTransform());
+    // GASP installs its PostABPTick dependency later in BeginPlay than adoption.
+    // Preserve all of those dependencies for the replacement update tick.
+    for (auto& Prerequisite : PhysicsControl->PrimaryComponentTick.GetPrerequisites())
+        if (auto* Tick = Prerequisite.Get())
+            FoundationPhysicsTick->PrimaryComponentTick.AddPrerequisite(Prerequisite.PrerequisiteObject.Get(), *Tick);
     if (AllowsSamplePhysics()) BoundSampleControls();
     APhysicsControlDummy::Tick(DeltaSeconds);
 }
@@ -554,6 +628,9 @@ FString AGASPEnemyFixture::GetDummyState(bool IncludeContacts) const
     }
     GASP->SetNumberField(TEXT("enabled_source_controls"), SourceEnabled);
     GASP->SetNumberField(TEXT("source_control_count"), SampleControls.Num());
+    GASP->SetBoolField(TEXT("pose_handoff_active"), !HandoffPose.IsEmpty());
+    GASP->SetNumberField(TEXT("pose_handoff_seconds"), HandoffSeconds);
+    GASP->SetBoolField(TEXT("source_component_tick_enabled"), PhysicsControl->IsComponentTickEnabled());
     GASP->SetNumberField(TEXT("unbounded_source_controls"), SourceUnbounded);
     GASP->SetField(TEXT("capsule_velocity"), Vector98(Mover ? Mover->GetVelocity() : FVector::ZeroVector));
     GASP->SetField(TEXT("skeletal_pelvis"), Vector98(Body->GetSocketLocation(TEXT("pelvis"))));

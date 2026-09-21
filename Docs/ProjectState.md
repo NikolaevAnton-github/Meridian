@@ -62,6 +62,15 @@ This is another direct correction without a new task; assets and prior evidence
 remain unchanged. Temporary render settings are restored and the editor is ready
 for owner Play.
 
+The owner then reported a remaining jerk after holds and retreat steps.
+[Correction 03](GASPEnemyFoundation01HandoffCorrection03.md) blends physical
+targets from the recovered body pose into live GASP animation over 0.55 game
+seconds. The comparable return reduces peak rendered wrist acceleration by
+about 90 percent and speed by about half. Build and focused interruption,
+movement-during-blend, reset, slowdown, get-up and death checks pass. The corrected
+binary is loaded for owner Play. This remains a direct personal fix without a
+new task; owner motion acceptance is separate and prior evidence is preserved.
+
 MSQ-98 is high priority and consumes MSQ-92/current follow-ups. It precedes MSQ-93
 and MSQ-70. The refinement order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 ->
 MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**; MSQ-98 is an unstaged MSQ-67 child, outside

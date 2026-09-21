@@ -48,6 +48,14 @@ def start(config):
             elif key == 'rifle_release':
                 player.probe_key('LeftMouseButton', 0, False)
                 base.verify02.RUN['held'].discard('LeftMouseButton')
+            elif key == 'on_recovery_exit':
+                if not (last_key and 'RECOVERY' in last_key[0] and 'LOCOMOTION' in str(fixture.authority)):
+                    continue
+                for delay, action, argument in value:
+                    pending.append([now + delay, action, argument])
+            elif key == 'rifle_press':
+                player.probe_key('LeftMouseButton', 1, True)
+                base.verify02.RUN['held'].add('LeftMouseButton')
             else:
                 raise ValueError(key)
             base.verify02.RUN['events'].append(dict(t=now, key=key, value=value))
