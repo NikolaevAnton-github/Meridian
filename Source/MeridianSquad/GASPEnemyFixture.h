@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "PhysicsControlDummy.h"
+#include "MoverSimulationTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GASPEnemyFixture.generated.h"
 
@@ -19,7 +20,7 @@ enum class EGASPEnemyAuthority : uint8
 /** Logical combat fixture. Its adopted GASP pawn owns the visible mesh, capsule and Mover.
  * Reuses the retained recovery solver without a second visible mannequin or hit path. */
 UCLASS()
-class MERIDIANSQUAD_API AGASPEnemyFixture : public APhysicsControlDummy
+class MERIDIANSQUAD_API AGASPEnemyFixture : public APhysicsControlDummy, public IMoverInputProducerInterface
 {
     GENERATED_BODY()
 public:
@@ -31,6 +32,7 @@ public:
     virtual float ReceiveBullet(int64 ShotId, float Damage, const FVector& Direction, const FHitResult& Hit,
         double ContactTime, double BirthTime, uint64 CombatFrame) override;
     virtual void ApplyExternalDisturbance(FVector Impulse, FVector WorldPoint, FName Bone = "pelvis") override;
+    virtual void ProduceInput_Implementation(int32 SimTimeMs, FMoverInputCmdContext& InputCmdResult) override;
 
     /** Persistent command, gated by physical authority. No perception or autonomous decision. */
     UFUNCTION(BlueprintCallable, Category="Enemy|Movement")
@@ -76,6 +78,7 @@ private:
     UPROPERTY() TObjectPtr<UMoverComponent> Mover;
     UPROPERTY() TObjectPtr<UCapsuleComponent> Capsule;
     UPROPERTY() TObjectPtr<UAnimInstance> FoundationAnimation;
+    UPROPERTY() TArray<TObjectPtr<UObject>> FoundationInputProducers;
     FVector MovementCommand = FVector::ZeroVector;
     FVector StandingPelvisOffset = FVector::ZeroVector;
     TArray<FName> SampleControls;

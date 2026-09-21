@@ -1,6 +1,6 @@
 # MeridianSquad current project state
 
-Updated 2026-09-21. This is a navigation snapshot of current scope and decisions,
+Updated 2026-09-22. This is a navigation snapshot of current scope and decisions,
 not a second task database or a new execution authorization. Read the relevant
 linked task before work and verify live Multica/editor state when needed. Later
 explicit owner instructions take precedence within their scope. When dated summaries
@@ -51,6 +51,16 @@ The reproduced backward pose snap is corrected; the native build and focused
 fall/get-up, repeated-hit, slowdown and movement checks pass. The editor is ready
 for owner Play on the lobby. Candidate01 evidence remains unchanged and does not
 represent the new binary; owner config/project edits and map are preserved.
+
+The owner's follow-up recording then identified the remaining uncommanded
+half-turn from the player-spawn side. [Correction 02](GASPEnemyFoundation01HandoffCorrection02.md)
+preserves facing in both Mover's outgoing input and GASP's cached input at the
+Ragdoll/Walking boundary. The native build and focused checks pass: seven idle
+handoffs preserve facing, with continuous arm poses, including repeated hits,
+commanded movement, F6 recreation, slowdown and a completed fall/get-up sequence.
+This is another direct correction without a new task; assets and prior evidence
+remain unchanged. Temporary render settings are restored and the editor is ready
+for owner Play.
 
 MSQ-98 is high priority and consumes MSQ-92/current follow-ups. It precedes MSQ-93
 and MSQ-70. The refinement order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 ->

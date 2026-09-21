@@ -79,6 +79,29 @@ FVector AGASPEnemyFixture::GetMovementIntent() const
     return bReady && !IsDead() && Authority == EGASPEnemyAuthority::Locomotion ? MovementCommand : FVector::ZeroVector;
 }
 
+void AGASPEnemyFixture::ProduceInput_Implementation(int32 SimTimeMs, FMoverInputCmdContext& InputCmdResult)
+{
+    // Keep GASP's input production and custom payloads, then repair the handoff
+    // before Mover caches the command and the sample reuses its orientation.
+    for (UObject* Producer : FoundationInputProducers)
+        if (IsValid(Producer))
+            IMoverInputProducerInterface::Execute_ProduceInput(Producer, SimTimeMs, InputCmdResult);
+
+    if (!Foundation || !Mover || Mover->GetMovementModeName() != TEXT("Ragdoll")) return;
+    auto* Inputs = InputCmdResult.InputCollection.FindMutableDataByType<FCharacterDefaultInputs>();
+    if (Inputs && Inputs->OrientationIntent.IsNearlyZero())
+    {
+        // GASP's parent orientation switch has no Ragdoll branch. Once Walking
+        // is queued, the child's Ragdoll override stops, leaving a zero vector.
+        // The next idle Walking input converts that zero to +X and turns around.
+        Inputs->OrientationIntent = Foundation->GetActorForwardVector();
+        // Idle orientation reads this Blueprint cache, not Mover's last command.
+        if (auto* Cached = FindFProperty<FStructProperty>(Foundation->GetClass(), TEXT("MoverDefaultInputs_PreSim")))
+            if (Cached->Struct == FCharacterDefaultInputs::StaticStruct())
+                Cached->ContainerPtrToValuePtr<FCharacterDefaultInputs>(Foundation)->OrientationIntent = Inputs->OrientationIntent;
+    }
+}
+
 FTransform AGASPEnemyFixture::GetRagdollAnchor(const FTransform& SampleAnchor) const
 {
     if (!bAdopted || !Body) return SampleAnchor;
@@ -134,6 +157,7 @@ void AGASPEnemyFixture::ResetDummy()
     Controls.Reset(); BodyControls.Reset(); RecoveringControls.Reset(); SampleControls.Reset();
     if (IsValid(Foundation)) Foundation->Destroy();
     Foundation = nullptr; Mover = nullptr; Capsule = nullptr; FoundationAnimation = nullptr;
+    FoundationInputProducers.Reset();
     Body = UnusedLegacyBody; PhysicsControl = UnusedLegacyControls;
     SetActorTransform(Home, false, nullptr, ETeleportType::TeleportPhysics);
     Health = FMath::Clamp(MaxHealth, 1.f, 100000.f);
@@ -200,6 +224,14 @@ bool AGASPEnemyFixture::AdoptFoundation()
     CaptureStandingBasis(true);
     IsolateSelfCollision();
     bAdopted = bReady = Idle && !SolePoints.IsEmpty() && UnsupportedShapes == 0;
+    if (bAdopted)
+    {
+        // A dedicated producer owns the order rather than relying on the order
+        // of independent component producers in UMoverComponent.
+        FoundationInputProducers = Mover->InputProducers;
+        Mover->InputProducer = this;
+        Mover->InputProducers = {this};
+    }
     BalanceReason = bReady ? TEXT("GASP locomotion owns animation and Mover") : TEXT("GASP body calibration incomplete");
     return bAdopted;
 }

@@ -58,6 +58,8 @@ def start(config):
             full = json.loads(fixture.get_dummy_state(True))
             last_key = key
         bones = ['pelvis', 'spine_05', 'head', 'hand_l', 'foot_l', 'foot_r']
+        if config.get('heading_probe'):
+            bones += ['hand_r', 'upperarm_l', 'upperarm_r', 'clavicle_l', 'clavicle_r']
         physical = {bone: vec(fixture.get_physical_body_location(bone)) for bone in bones}
         visual = {bone: vec(mesh.get_socket_location(bone)) for bone in bones}
         targets = {bone: vec(controls.get_cached_bone_position(mesh, bone)) for bone in bones}
@@ -74,6 +76,12 @@ def start(config):
             dummy=dict(name=fixture.get_name(), epoch=full['epoch'], physical_hits=fixture.physical_hits,
                 deaths=fixture.deaths, health=fixture.health),
             full_state=full if changed else None)
+        if config.get('heading_probe'):
+            result['orientation_pre'] = vec(pawn.get_editor_property('MoverDefaultInputs_PreSim').orientation_intent)
+            result['orientation_post'] = vec(pawn.get_editor_property('MoverDefaultInputs_PostSim').orientation_intent)
+            result['move_input'] = vec(pawn.get_editor_property('MoverDefaultInputs_PreSim').move_input)
+            result['mesh_rotation'] = str(mesh.get_world_rotation())
+            result['bone_rotations'] = {bone: str(mesh.get_socket_rotation(bone)) for bone in ['pelvis', 'spine_05', 'upperarm_l', 'upperarm_r']}
         return result
 
     result = base.action('verify', json.dumps(config))
