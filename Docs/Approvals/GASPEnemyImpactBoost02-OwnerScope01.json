@@ -1,0 +1,10 @@
+{
+  "record_id": "GASPEnemyImpactBoost02-OwnerScope01",
+  "date_local": "2026-09-22",
+  "source": "Owner direct chat after testing the initial rifle impact accent",
+  "owner_message_original": "Нет, хочется что бы прям отбрасывало часть тела побольше",
+  "owner_message_english_translation": "No, I want the body part to be thrown back much more.",
+  "decision": "Strengthen the local struck-body impulse on committed falling and lethal hits. Continue the direct outside-task, build-only workflow; the owner tests firing.",
+  "implementation_choice": "Use fall multiplier 4 and lethal multiplier 6 as the next owner-test tuning, with metadata and runtime upper limits raised to 6. These numbers are the controller's tuning choice, not exact values dictated by the owner.",
+  "preservation": "Retain the prior implementation and evidence, ordinary hits/damage and one-shot transition rules. Preserve owner config/project/map edits. No new task or successor dispatch."
+}

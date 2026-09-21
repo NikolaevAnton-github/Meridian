@@ -469,7 +469,7 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
         BI->GetBodyMass() * FMath::Clamp(MaxImpulseVelocity, 0.f, 450.f));
     const bool bLethalHit = !bWasDead && IsDead();
     const float Multiplier = bLethalHit && FMath::IsFinite(DeathImpulseMultiplier) ?
-        FMath::Clamp(DeathImpulseMultiplier, 1.f, 2.f) : 1.f;
+        FMath::Clamp(DeathImpulseMultiplier, 1.f, 6.f) : 1.f;
     const FVector Impulse = Direction.GetSafeNormal() * Magnitude * Multiplier;
     Row->SetField(TEXT("impulse"), VJson(Impulse));
     Row->SetNumberField(TEXT("impulse_count"), 1);
@@ -479,7 +479,7 @@ float APhysicsControlDummy::ReceiveBullet(int64 ShotId, float Damage, const FVec
     {
         PendingFallImpact.Bone = Hit.BoneName;
         PendingFallImpact.LocalPoint = BI->GetUnrealWorldTransform().InverseTransformPosition(Hit.ImpactPoint);
-        PendingFallImpact.BonusImpulse = Impulse * (FMath::Clamp(FallImpulseMultiplier, 1.f, 2.f) - 1.f);
+        PendingFallImpact.BonusImpulse = Impulse * (FMath::Clamp(FallImpulseMultiplier, 1.f, 6.f) - 1.f);
         PendingFallImpact.Deadline = GetWorld()->GetTimeSeconds() + .5;
         PendingFallImpact.Contact = Row;
     }
