@@ -1,0 +1,13 @@
+{
+  "record_id": "GASPEnemyImpactRotation02-OwnerScope01",
+  "date_local": "2026-09-22",
+  "source": "Owner direct chat following upper-torso fall rotation tuning",
+  "owner_feedback_original": "Ну что-то совсем не чувствуется",
+  "owner_feedback_english_translation": "It barely feels noticeable at all.",
+  "clarification_context": "The controller requested a scoped exception to the earlier build-only instruction: one diagnostic shot under the debugger, followed by a correction based on the result.",
+  "owner_reply_original": "Давай",
+  "owner_reply_english_translation": "Go ahead.",
+  "decision": "Diagnose the weak leg counter-motion with one actual diagnostic shot, then make a direct outside-task correction and check the build. The owner retains post-correction firing and motion testing.",
+  "execution_record": "Rider attached but could not bind the source breakpoints or resolve a paused frame. Existing contact and motion recording supplied the runtime evidence instead. A preliminary input attempt launched zero shots; the successful recording launched exactly one rifle shot and recorded one lethal upper-torso contact. No post-correction firing test or test matrix was run.",
+  "preservation": "No new task, production dispatch or independent review. Preserve existing local x4/x6 impacts, ordinary damage behavior, owner config/project/map edits and all historical evidence. Remove agent breakpoints and restore temporary editor settings."
+}

@@ -110,37 +110,52 @@ void APhysicsControlDummy::ApplyPendingFallRotation()
     const FVector ShotDirection = Accent.BonusImpulse.GetSafeNormal2D();
     if (ShotDirection.IsNearlyZero() || Accent.BonusImpulse.GetSafeNormal().SizeSquared2D() < .25) return;
 
-    auto* Chest = Body->GetBodyInstance(TEXT("spine_05"));
-    auto* Pelvis = Body->GetBodyInstance(TEXT("pelvis"));
-    auto* Left = Body->GetBodyInstance(TEXT("calf_l"));
-    auto* Right = Body->GetBodyInstance(TEXT("calf_r"));
-    if (!Chest || !Pelvis || !Left || !Right || !Chest->IsInstanceSimulatingPhysics() ||
-        !Left->IsInstanceSimulatingPhysics() || !Right->IsInstanceSimulatingPhysics()) return;
-    const FVector Torso = Chest->GetCOMPosition() - Pelvis->GetCOMPosition();
+    struct FWeightedBody { FName Bone; FBodyInstance* Instance; float Mass; };
+    TArray<FWeightedBody> Legs, Trunk;
+    float LegMass = 0.f, TrunkMass = 0.f;
+    const auto Gather = [this](const TArray<FName>& Bones, TArray<FWeightedBody>& Group, float& Mass)
+    {
+        for (FName Part : Bones)
+        {
+            auto* Instance = Body->GetBodyInstance(Part);
+            if (!Instance || !Instance->IsInstanceSimulatingPhysics()) return false;
+            const float PartMass = Instance->GetBodyMass();
+            if (!FMath::IsFinite(PartMass) || PartMass <= 0.f) return false;
+            Group.Add({Part, Instance, PartMass});
+            Mass += PartMass;
+        }
+        return true;
+    };
+    if (!Gather({TEXT("thigh_l"), TEXT("calf_l"), TEXT("foot_l"),
+                 TEXT("thigh_r"), TEXT("calf_r"), TEXT("foot_r")}, Legs, LegMass) ||
+        !Gather({TEXT("pelvis"), TEXT("spine_01"), TEXT("spine_02"),
+                 TEXT("spine_03"), TEXT("spine_04"), TEXT("spine_05")}, Trunk, TrunkMass)) return;
+    const FVector Torso = Trunk.Last().Instance->GetCOMPosition() - Trunk[0].Instance->GetCOMPosition();
     if (Torso.Z < 20.f || Torso.GetSafeNormal().Z < .5f) return;
-    const float LeftMass = Left->GetBodyMass(), RightMass = Right->GetBodyMass(), ChestMass = Chest->GetBodyMass();
-    if (!FMath::IsFinite(LeftMass) || !FMath::IsFinite(RightMass) || !FMath::IsFinite(ChestMass) ||
-        LeftMass <= 0.f || RightMass <= 0.f || ChestMass <= 0.f) return;
 
-    // The legs move together; the equal chest reaction adds a couple with zero net impulse.
-    // Cap the whole pair before splitting it so neither reaction is independently clipped.
-    const float LegMass = LeftMass + RightMass;
-    const float SpeedCap = FMath::Clamp(UpperBodyFallLegSpeed, 0.f, 400.f);
+    // Accelerate each whole leg together, instead of spending a small calf-only impulse
+    // pulling its heavier thigh/foot through joints. Spread the opposite reaction over
+    // the trunk, and cap the complete pair before splitting to retain zero net impulse.
+    const float SpeedCap = FMath::Clamp(UpperBodyFallLegSpeed, 0.f, 600.f);
     const float Magnitude = FMath::Min(static_cast<float>(Accent.BonusImpulse.Size()) *
-        FMath::Clamp(UpperBodyFallRotationRatio, 0.f, 1.f), FMath::Min(LegMass, ChestMass) * SpeedCap);
+        FMath::Clamp(UpperBodyFallRotationRatio, 0.f, 2.f), FMath::Min(LegMass, TrunkMass) * SpeedCap);
     if (Magnitude <= 0.f) return;
-    const FVector LegImpulse = (-ShotDirection + FVector::UpVector * .65f).GetSafeNormal() * Magnitude;
+    const FVector LegImpulse = (-ShotDirection * .75f + FVector::UpVector).GetSafeNormal() * Magnitude;
     Body->WakeAllRigidBodies();
-    Body->AddImpulseAtLocation(LegImpulse * (LeftMass / LegMass), Left->GetCOMPosition(), TEXT("calf_l"));
-    Body->AddImpulseAtLocation(LegImpulse * (RightMass / LegMass), Right->GetCOMPosition(), TEXT("calf_r"));
-    Body->AddImpulseAtLocation(-LegImpulse, Chest->GetCOMPosition(), TEXT("spine_05"));
+    for (const auto& Part : Legs)
+        Body->AddImpulseAtLocation(LegImpulse * (Part.Mass / LegMass), Part.Instance->GetCOMPosition(), Part.Bone);
+    for (const auto& Part : Trunk)
+        Body->AddImpulseAtLocation(-LegImpulse * (Part.Mass / TrunkMass), Part.Instance->GetCOMPosition(), Part.Bone);
     bFallRotationApplied = true;
     if (Accent.Contact)
     {
         Accent.Contact->SetField(TEXT("fall_rotation_leg_impulse"), MakeShared<FJsonValueArray>(
             TArray<TSharedPtr<FJsonValue>>{MakeShared<FJsonValueNumber>(LegImpulse.X),
                 MakeShared<FJsonValueNumber>(LegImpulse.Y), MakeShared<FJsonValueNumber>(LegImpulse.Z)}));
-        Accent.Contact->SetNumberField(TEXT("fall_rotation_impulse_count"), 3);
+        Accent.Contact->SetNumberField(TEXT("fall_rotation_impulse_count"), Legs.Num() + Trunk.Num());
+        Accent.Contact->SetNumberField(TEXT("fall_rotation_leg_mass"), LegMass);
+        Accent.Contact->SetNumberField(TEXT("fall_rotation_trunk_mass"), TrunkMass);
+        Accent.Contact->SetNumberField(TEXT("fall_rotation_leg_delta_speed"), Magnitude / LegMass);
     }
 }
 

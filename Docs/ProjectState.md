@@ -89,6 +89,17 @@ GASP releases its drives. Existing x4/x6 local impacts remain. The native build
 passes; the owner retains firing and motion evaluation under the continuing
 build-only scope.
 
+The owner then reported that the leg accent was barely noticeable and
+[authorized one diagnostic shot](Approvals/GASPEnemyImpactRotation02-OwnerScope01.json).
+The recorder confirmed activation but exposed the single-chest mass cap:
+only 1,500 total leg impulse, versus a 10,200 lethal local impact.
+The [whole-leg correction](GASPEnemyImpactRotation02.md) distributes a stronger,
+more upward accent across thighs, calves and feet, with the equal opposite
+reaction distributed across the pelvis and spine. Current defaults are ratio
+1.5 and added-speed cap 500 cm/s. The native build passes and those defaults are
+loaded in the restarted lobby editor. Post-correction firing and motion evaluation
+remain with the owner; the prior diagnostic is not acceptance of the new motion.
+
 MSQ-98 is high priority and consumes MSQ-92/current follow-ups. It precedes MSQ-93
 and MSQ-70. The refinement order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 ->
 MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**; MSQ-98 is an unstaged MSQ-67 child, outside
