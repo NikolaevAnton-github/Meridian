@@ -55,6 +55,9 @@ def action(operation, argument=''):
         config = json.loads(argument)
         return pilot98.run('spawn') if config.get('pilot', True) else {'rollout': True}
     if operation == 'verify':
+        if json.loads(argument).get('handoff_probe'):
+            from Scripts.GASPEnemyFoundation01 import handoff_probe01
+            return handoff_probe01.start(json.loads(argument))
         if not hasattr(unreal87.unreal85, '_gasp98_original_sample'):
             unreal87.unreal85._gasp98_original_sample = unreal87.unreal85.sample
         unreal87.unreal85.sample = sample

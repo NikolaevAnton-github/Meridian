@@ -82,7 +82,11 @@ FVector AGASPEnemyFixture::GetMovementIntent() const
 FTransform AGASPEnemyFixture::GetRagdollAnchor(const FTransform& SampleAnchor) const
 {
     if (!bAdopted || !Body) return SampleAnchor;
-    if (Authority != EGASPEnemyAuthority::Recovery)
+    // Walking is queued, not applied immediately. Keep the upright anchor while
+    // Mover consumes the last Ragdoll input during a supported recovery exit.
+    const bool bUprightExit = Authority == EGASPEnemyAuthority::Locomotion && Mover &&
+        Mover->GetMovementModeName() == TEXT("Ragdoll");
+    if (Authority != EGASPEnemyAuthority::Recovery && !bUprightExit)
     {
         const auto* Pelvis = Body->GetBodyInstance(TEXT("pelvis"));
         const auto* Chest = Body->GetBodyInstance(TEXT("spine_05"));
@@ -314,6 +318,14 @@ void AGASPEnemyFixture::TakeRecoveryAuthority()
 
 void AGASPEnemyFixture::ReleaseRecoveryAuthority()
 {
+    if (Authority == EGASPEnemyAuthority::Recovery && FoundationAnimation)
+    {
+        // GASP's Blend Out Pose state reads this snapshot on every Ragdoll exit.
+        // The get-up gate skips the sample's SavePoseSnapshot for upright exits;
+        // without this capture it reuses a previous fallen pose (or the ref pose)
+        // as the newly enabled physical controls' animation target.
+        FoundationAnimation->SavePoseSnapshot(TEXT("Ragdoll"));
+    }
     DisableBalanceDrives();
     if (!Controls.IsEmpty()) PhysicsControl->DestroyControls(Controls);
     Controls.Reset(); BodyControls.Reset(); RecoveringControls.Reset();

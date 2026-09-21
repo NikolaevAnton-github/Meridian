@@ -43,6 +43,15 @@ The [owner editor-lifecycle approval](Approvals/GASPEnemyFoundation01-OwnerEdito
 permits stopping the existing Play session and necessary controlled Unreal restarts
 for MSQ-98; preserve owner changes and unsaved assets before doing so.
 
+The owner's later screen recording led to a direct, personally requested correction
+without a new task: [upright recovery handoff](GASPEnemyFoundation01HandoffCorrection01.md).
+The current build captures a fresh GASP Ragdoll snapshot before releasing upright
+recovery and retains the upright anchor through Mover's queued mode change.
+The reproduced backward pose snap is corrected; the native build and focused
+fall/get-up, repeated-hit, slowdown and movement checks pass. The editor is ready
+for owner Play on the lobby. Candidate01 evidence remains unchanged and does not
+represent the new binary; owner config/project edits and map are preserved.
+
 MSQ-98 is high priority and consumes MSQ-92/current follow-ups. It precedes MSQ-93
 and MSQ-70. The refinement order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 ->
 MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**; MSQ-98 is an unstaged MSQ-67 child, outside
