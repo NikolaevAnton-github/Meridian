@@ -2,21 +2,27 @@
 
 Multica issue: **MSQ-78**.
 Stage 12 of [CombatSlice01](CombatSlice01Plan.md).
-Predecessor: [Telekinesis01](Telekinesis01.md), using the completed combat/damage
-handoffs from stages 1-10.
+Predecessor: [Telekinesis01](Telekinesis01.md), using the applicable completed
+combat, destruction and ability handoffs. MSQ-73 is deferred and not required.
 
 ## Scope
 
 Reuse the bounded lobby encounter to make rifle impact, enemy response, player
-survival, body damage, selected destruction and three abilities work coherently.
+survival, ordinary regional damage, selected destruction and three abilities work coherently.
 Consolidate prototype controls/HUD and tune feedback, damage, pacing and resource
 limits. Record all tuning deltas. This task does not add weapons, enemy classes,
 more abilities or new architecture.
 
 Select tests by newly coupled risk: destruction invalidating cover, pushed or
-thrown objects damaging enemies, body separation during an ability, slowdown
+thrown objects damaging enemies, physical interruption during an ability, slowdown
 during reload/impacts, and death/restart with active abilities/held objects. Reuse
 earlier evidence for unchanged components; do not repeat the full feature matrix.
+
+Under the [owner priority decision](../Approvals/CombatPriorities01-OwnerScope01.json),
+advanced wound presentation and limb separation are deferred to MSQ-73. Declare
+them as excluded from this initial candidate, without claiming they passed. Keep
+existing hit regions, damage, recovery and death functional. MSQ-73 later owns
+its affected integration checks with the delivered combat and ability systems.
 
 Include the [fixed time/self-hit policy](../Approvals/CombatFoundation01-OwnerScope01.json)
 with its later [relative slowdown override](../Approvals/PhysicsControlVariants01-OwnerScope01.json):

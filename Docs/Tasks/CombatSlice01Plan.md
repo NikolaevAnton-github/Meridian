@@ -6,6 +6,17 @@ gameplay progression and proceed sequentially. See the
 
 Multica issue: **MSQ-67**.
 
+Current priority amendment, 2026-09-23: the owner prioritizes good AI, shooting
+and environmental destruction, with dismemberment last. See the
+[exact decision](../Approvals/CombatPriorities01-OwnerScope01.json).
+MSQ-73 moves from stage 7 to deferred low-priority stage 16. MSQ-74 depends on
+MSQ-72 directly; other native stage numbers remain unchanged and stage 7 is vacant.
+MSQ-78/MSQ-81 exclude advanced wounds/separation from their initial acceptance
+while retaining ordinary regional damage, reactions and death. MSQ-73 remains
+an open expansion and later owns its newly coupled integration checks. Historical
+statements preserving the original order below are superseded within this scope.
+This is an administrative priority update, not implementation dispatch.
+
 The MSQ-68 execution instruction authorized that child and fixed the
 [projectile/time/self-hit policy](../Approvals/CombatFoundation01-OwnerScope01.json).
 All bullets have finite flight and follow world slowdown/stop; own bullets can
@@ -65,9 +76,11 @@ the older experiment's exclusion of enemy-side Mover integration.
 
 Build a reviewable first combat slice in the retained lobby, followed by a
 bounded opening episode: meaningful rifle fire, enemies and player survival,
-a short encounter, body/environment damage, three abilities, and local narrative
+a short encounter, environmental destruction, three abilities, and local narrative
 interaction. This is the first representative implementation of the product
 goals, not completion of full-game AI, extensive destruction or a whole mission.
+Advanced body damage and dismemberment follow as a deferred expansion; existing
+regional damage, reactions and death remain part of the initial slice.
 
 Read [ProjectState](../ProjectState.md), [GameBrief](../Design/GameBrief.md),
 the relevant child task and its prerequisite handoff. Read
@@ -90,7 +103,6 @@ task database. Every child has a unique native stage and a recorded predecessor.
 | 4 | MSQ-70 | [EnemyCombat01](EnemyCombat01.md) | One enemy senses, moves, shoots, reacts and dies. |
 | 5 | MSQ-71 | [PlayerSurvival01](PlayerSurvival01.md) | Player health, death and reliable fight restart. |
 | 6 | MSQ-72 | [LobbyEncounter01](LobbyEncounter01.md) | A small encounter with cover, completion and reset. |
-| 7 | MSQ-73 | [EnemyBodyDamage01](EnemyBodyDamage01.md) | A bounded regional damage and dismemberment sample. |
 | 8 | MSQ-74 | [EnvironmentDestruction01](EnvironmentDestruction01.md) | Selected destructible objects with correct cover and debris behavior. |
 | 9 | MSQ-75 | [TimeSlow01](TimeSlow01.md) | World slowdown/stop, relative player slowdown and reliable restoration. |
 | 10 | MSQ-76 | [ForcePush01](ForcePush01.md) | Directional push with explicit eligibility and recovery. |
@@ -99,6 +111,11 @@ task database. Every child has a unique native stage and a recorded predecessor.
 | 13 | MSQ-79 | [OpeningEpisodeDesign01](OpeningEpisodeDesign01.md) | Named beat sheet, route and surveillance storyboard for owner selection. |
 | 14 | MSQ-80 | [OpeningEpisode01](OpeningEpisode01.md) | The selected exploration, combat, recording and progression sequence. |
 | 15 | MSQ-81 | [GameplaySliceReview01](GameplaySliceReview01.md) | Independent integrated review and owner-ready playable handoff. |
+| 16, deferred | MSQ-73 | [EnemyBodyDamage01](EnemyBodyDamage01.md) | Later regional wound and dismemberment expansion; does not block the priority combat slice. |
+
+Stage 7 is intentionally vacant to preserve the other task stage identities.
+MSQ-73 retains MSQ-72 as its technical prerequisite but is scheduled after the
+priority work; it is not a prerequisite for MSQ-74 or initial slice acceptance.
 
 ## Prepared experimental task
 

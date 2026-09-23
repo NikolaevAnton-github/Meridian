@@ -1,5 +1,11 @@
 # Game direction
 
+Combat priority update, 2026-09-23: prioritize good enemy AI, shooting quality and
+environmental destruction. Advanced body damage and dismemberment are deferred
+until after that priority work; they do not block the initial combat slice.
+Ordinary damage, hit reactions, death and ragdoll remain. See the
+[owner decision](../Approvals/CombatPriorities01-OwnerScope01.json).
+
 Combat AI direction update, 2026-09-23: the owner explicitly describes an **arcade
 shooter** and asks for surprising, excellent enemy AI without excessive pressure.
 Enemies should run, keep searching after contact, hear footsteps and respond to the

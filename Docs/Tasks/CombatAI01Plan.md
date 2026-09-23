@@ -45,6 +45,13 @@ abilities. Metadata describes prerequisites; it is not an automatic dispatcher.
 
 Recommended order for the next implementation work:
 
+The later [owner priority decision](../Approvals/CombatPriorities01-OwnerScope01.json)
+prioritizes AI, shooting and environmental destruction, deferring MSQ-73
+dismemberment. A bounded MSQ-74 sample after delivery A and MSQ-71/72, before
+extensive cover/squad tuning, is the recommended early destruction slot. It can
+inform CAI-04 tuning; its exact placement is not a new hard AI dependency or
+execution instruction. MSQ-111 still requires MSQ-109 and MSQ-74.
+
 1. CAI-00 -> CAI-01 -> CAI-02 -> CAI-03: deliver A on the current single opponent.
 2. MSQ-71 player survival, then CAI-04: complete meaningful survival/balance judgement
    for B. CAI-04 position mechanics can be developed earlier using hit counters.
@@ -52,14 +59,17 @@ Recommended order for the next implementation work:
    CAI-07: deliver the coordinated three-enemy C. The new squad policy must have its
    own scope; MSQ-72's original brief expressly excluded a squad framework.
 4. CAI-08: refine variety after C is already enjoyable and understandable.
-5. Existing MSQ-73 through MSQ-77 and applicable support tasks supply real mechanics.
+5. Existing MSQ-74 through MSQ-77 and applicable support tasks supply real mechanics.
    Integrate each available seam in the corresponding CAI-09 package; do not block
-   deliveries A-D on unavailable abilities or art.
+   deliveries A-D on unavailable abilities or art. Environmental destruction has
+   the recommended earlier slot above; MSQ-73 is a deferred expansion after the
+   priority combat work and cannot block this program or initial integrated acceptance.
 6. CAI-10 measures the completed target population; CAI-11 consolidates the accepted
    slice with MSQ-78 integration rather than duplicating its full acceptance suite.
 
-This is a proposed sequencing amendment, not an execution instruction or a rewrite
-of historical task order. MSQ-93 through MSQ-96, MSQ-99/100 and episode/art work retain
+Detailed interleaving remains a proposal; the owner's dismemberment deferral and
+removal of the MSQ-73 -> MSQ-74 dependency are current scheduling authority.
+MSQ-93 through MSQ-96, MSQ-99/100 and episode/art work retain
 their own scope and owner decisions.
 
 ```mermaid

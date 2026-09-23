@@ -1,0 +1,15 @@
+{
+  "record_id": "CombatPriorities01-OwnerScope01",
+  "date_local": "2026-09-23",
+  "source": "Owner direct chat after discussing when to implement environmental destruction",
+  "owner_message_original": "Расчленение наверное можно будет делать уже в последюнюю очередь, важен хороший ИИ, стрельбя и разрушаемость",
+  "owner_message_english_translation": "Dismemberment can probably be done last; good AI, shooting and destruction are important.",
+  "decision": "Prioritize combat AI, shooting quality and environmental destruction. Defer MSQ-73 advanced body damage and dismemberment until after the priority combat work; it must not block destruction or acceptance of that combat slice.",
+  "administrative_scope": "Update the current plans and existing Multica issues without dispatch. Move MSQ-73 from native stage 7 to the final existing-family expansion stage 16 and low priority, retaining MSQ-72 as its technical prerequisite. Change MSQ-74's prerequisite from MSQ-73 to MSQ-72 and raise its priority to high. Preserve other native stage numbers, leaving stage 7 vacant.",
+  "acceptance_scope": "Existing regional damage, hit reactions, death and ragdoll remain part of combat. Advanced wounds and limb separation are deferred, explicit exclusions from the initial MSQ-78/MSQ-81 slice, not completed criteria. MSQ-73 later owns its affected integration checks with the delivered combat and abilities.",
+  "sequencing_limits": "The detailed placement of destruction among AI packages remains a controller recommendation. This preference does not approve every proposed AI design, select assets, start production, or change the owner's gameplay-testing reservation. MSQ-111 retains MSQ-109 and MSQ-74 as prerequisites; MSQ-95/96 and MSQ-78 retain actual rubble-support/traversal scope.",
+  "supersedes": "The original MSQ-73-before-MSQ-74 ordering and mandatory advanced body-damage/separation acceptance in the initial integrated combat slice only. Preserve historical approvals and setup evidence unchanged.",
+  "preservation": "Preserve owner edits, current gameplay/editor state, existing assets, task status/assignment/run history, unrelated metadata and source/evidence history.",
+  "review_route": "Small administrative correction: controller self-checks and acceptance with bounded read-only dependency advice; no implementation or independent technical review run.",
+  "verification_report": "Docs/CombatPriorities01.md"
+}

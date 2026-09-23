@@ -16,7 +16,12 @@ The owner retains play/visual judgement. No gameplay/editor work starts from tas
 Deliver a persistent hunter first, then individual tactics, a coordinated small squad,
 replay variety and prerequisite-driven physical/ability integrations. Profiling and
 core-slice acceptance do not wait for all optional future mechanics. Existing MSQ-71/72
-and MSQ-74 through MSQ-78 remain separate tasks with preserved status and scope.
+and MSQ-74 through MSQ-78 remain separate tasks, subject to the later
+[owner priority decision](../Approvals/CombatPriorities01-OwnerScope01.json).
+AI, shooting and environmental destruction take priority; MSQ-73 dismemberment
+is deferred and cannot block this program or the initial integrated combat slice.
+MSQ-74 now depends on MSQ-72 rather than MSQ-73. The implementation plan records
+its recommended earlier placement; no task starts from this priority update.
 
 Each child has its work, acceptance, prerequisite references and handoff contract in
 its tracked document. Use max reasoning/standard speed, one production writer, one

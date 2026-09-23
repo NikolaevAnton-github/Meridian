@@ -21,6 +21,23 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Owner priority: AI, shooting and environmental destruction
+
+The owner places good AI, shooting and environmental destruction ahead of
+dismemberment; see the [exact priority decision](Approvals/CombatPriorities01-OwnerScope01.json).
+MSQ-73 advanced body damage/separation is deferred to low-priority stage 16,
+after the priority combat work. Its technical prerequisite remains MSQ-72.
+MSQ-74 now depends directly on MSQ-72, so dismemberment does not block destruction.
+MSQ-78/MSQ-81 retain ordinary damage, reactions and death while advanced wounds
+and separation remain explicit deferred scope. Other stage numbers are preserved;
+the historical stage-7 ordering below is superseded. See the
+[administrative verification](CombatPriorities01.md).
+
+The next recommended implementation task remains MSQ-102. A bounded destruction
+sample after the persistent hunter and a repeatable encounter, before extensive
+tactical tuning, remains a scheduling recommendation. No implementation starts
+from this priority update; existing owner gameplay-testing boundaries remain.
+
 ## Prepared direction: surprising arcade combat AI
 
 The owner reports that the delivered MSQ-70 opponent is too weak, does not run and

@@ -13,10 +13,17 @@ self-report as evidence of visual quality. This is integrated gameplay review,
 not review of the paused protagonist concepts.
 
 Assess the requested experience: responsive rifle hits/reloads, readable enemy
-reactions and player risk, a playable encounter, representative body/environment
-damage, usable abilities, coherent recording/progression and reliable restart.
+reactions and player risk, a playable encounter, ordinary regional damage,
+representative environmental destruction, usable abilities, coherent
+recording/progression and reliable restart.
 Check high-risk integration edges and the selected route; reuse passing component
 evidence rather than repeating every animation/action.
+
+The [owner priority decision](../Approvals/CombatPriorities01-OwnerScope01.json)
+defers MSQ-73 advanced wounds and dismemberment. Record that exclusion explicitly;
+their absence does not block this initial slice and must not be reported as passed.
+Review existing damage, physical reactions and death within the delivered scope.
+MSQ-73 remains open for its later expansion, independently of this review outcome.
 
 ## Acceptance and closure
 

@@ -1,9 +1,16 @@
 # EnemyBodyDamage01: regional damage and a dismemberment sample
 
 Multica issue: **MSQ-73**.
-Stage 7 of [CombatSlice01](CombatSlice01Plan.md).
+Deferred, low-priority stage 16 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [LobbyEncounter01](LobbyEncounter01.md).
 Additional gate: EnemyPrototype01's verified damage-ready editable asset contract.
+
+The [owner priority decision](../Approvals/CombatPriorities01-OwnerScope01.json)
+places this expansion after good AI, shooting and environmental destruction.
+The former stage 7 is superseded. MSQ-72 remains a technical prerequisite, not
+an instruction to dispatch immediately after it. This task does not block MSQ-74,
+the initial MSQ-78 integration or MSQ-81 review. It remains prepared backlog;
+no implementation or asset production is authorized by the priority change.
 
 ## Scope
 
@@ -29,6 +36,9 @@ not authorize original protagonist work or an unapproved new enemy model.
   rewards. A fatal result disables enemy combat immediately.
 - Detached collision cannot trap the player; debris/effects are bounded and reset
   removes them. Living/dead states remain correct after subsequent hits.
+- When implemented after the priority slice, check separation against the actual
+  delivered AI, weapon and ability interfaces, including one affected interruption
+  and reset. This task owns those new coupled checks; reuse prior passing evidence.
 - Independent visual review inspects actual close and gameplay-distance views;
   record prototype limitations separately from technical results and owner taste.
 

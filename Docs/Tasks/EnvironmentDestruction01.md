@@ -2,7 +2,13 @@
 
 Multica issue: **MSQ-74**.
 Stage 8 of [CombatSlice01](CombatSlice01Plan.md).
-Predecessor: [EnemyBodyDamage01](EnemyBodyDamage01.md).
+Predecessor: [LobbyEncounter01 / MSQ-72](LobbyEncounter01.md).
+
+The [owner priority decision](../Approvals/CombatPriorities01-OwnerScope01.json)
+places environmental destruction among the priority combat features. MSQ-73
+advanced body damage/dismemberment is deferred and is no longer a prerequisite.
+Stage 8 is retained; the former stage 7 is vacant. This administrative change
+does not start production or select any destruction asset.
 
 ## Scope
 
