@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Pilot04-CrouchHitRecovery", "duration": 10, "fps": 30, "profile": 1, "pilot": true,
+    "flying": true, "inspection_view": true, "location": [-600,-220,60],
+    "events": [[0.05,"@track","spine_03"],[0.1,"@rifle","aim"],[0.4,"@rifle","crouch"],
+               [2,"LeftMouseButton",1],[2.09,"LeftMouseButton",0],[3,"@track","pelvis"],
+               [7.5,"@rifle","stand"]]
+  },
+  {
+    "name": "Rollout01-FallGetup", "duration": 17, "fps": 30, "profile": 1, "pilot": false,
+    "flying": true, "inspection_view": true, "location": [-600,-260,50],
+    "events": [[0.05,"@track","spine_03"],[0.1,"@rifle","aim"],
+               [0.2,"LeftControl",1],[0.3,"F7",1],[0.4,"F7",0],[0.5,"LeftControl",0],
+               [0.6,"V",1],[0.7,"V",0],[1.2,"LeftMouseButton",1],[2.2,"LeftMouseButton",0],
+               [3,"@rifle","move 0 1 walk"],[13,"@rifle","stop"]]
+  },
+  {
+    "name": "Rollout02-DeathResetSlow", "duration": 11, "fps": 30, "profile": 1, "pilot": false,
+    "flying": true, "inspection_view": true, "location": [-600,-260,60],
+    "events": [[0.05,"@track","spine_03"],[0.1,"@rifle","aim"],
+               [0.6,"V",1],[0.7,"V",0],[1.1,"LeftMouseButton",1],[3.1,"LeftMouseButton",0],
+               [5,"F6",1],[5.1,"F6",0],[5.5,"@rifle","aim"],[6,"Y",1],[6.1,"Y",0],
+               [6.5,"@rifle","crouch"],[6.8,"@rifle","move 0 1 walk"],[8,"@rifle","stop"],
+               [8.5,"Y",1],[8.6,"Y",0],[9,"@rifle","stand"]]
+  }
+]

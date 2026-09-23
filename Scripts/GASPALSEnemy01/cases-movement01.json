@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Pilot03-AimMovement", "duration": 13, "fps": 30, "profile": 1, "pilot": true,
+    "flying": true, "inspection_view": true, "location": [-700,-300,90], "look_at": [-950,0,100],
+    "events": [[0.1,"@rifle","aim"],[0.2,"@rifle","target -500 0 145"],
+               [1.8,"@rifle","move 0 1 walk"],[2.8,"@rifle","stop"],
+               [3.5,"@rifle","move -1 0 walk"],[4.5,"@rifle","stop"],
+               [5.2,"@rifle","target -500 0 500"],[7,"@rifle","target -500 0 -170"],
+               [8.5,"@rifle","crouch"],[9,"@rifle","target -500 0 100"],
+               [9.6,"@rifle","move 0 -1 walk"],[10.6,"@rifle","stop"],
+               [11.2,"@rifle","stand"]]
+  }
+]

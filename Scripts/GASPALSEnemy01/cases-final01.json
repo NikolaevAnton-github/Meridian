@@ -1,0 +1,165 @@
+[
+  {
+    "name": "Fix03-CrouchHitAim",
+    "duration": 10,
+    "fps": 30,
+    "profile": 1,
+    "pilot": true,
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -600,
+      -220,
+      60
+    ],
+    "events": [
+      [
+        0.05,
+        "@track",
+        "spine_03"
+      ],
+      [
+        0.1,
+        "@rifle",
+        "aim"
+      ],
+      [
+        0.4,
+        "@rifle",
+        "crouch"
+      ],
+      [
+        2,
+        "LeftMouseButton",
+        1
+      ],
+      [
+        2.09,
+        "LeftMouseButton",
+        0
+      ],
+      [
+        3,
+        "@track",
+        "pelvis"
+      ],
+      [
+        7.5,
+        "@rifle",
+        "stand"
+      ]
+    ]
+  },
+  {
+    "name": "Fix03-AimedStop",
+    "duration": 13,
+    "fps": 30,
+    "profile": 1,
+    "pilot": true,
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -700,
+      -300,
+      90
+    ],
+    "look_at": [
+      -950,
+      0,
+      100
+    ],
+    "events": [
+      [
+        0.1,
+        "@rifle",
+        "aim"
+      ],
+      [
+        0.2,
+        "@rifle",
+        "target -500 0 145"
+      ],
+      [
+        1.8,
+        "@rifle",
+        "move 0 1 walk"
+      ],
+      [
+        2.8,
+        "@rifle",
+        "stop"
+      ],
+      [
+        3.5,
+        "@rifle",
+        "move -1 0 walk"
+      ],
+      [
+        4.5,
+        "@rifle",
+        "stop"
+      ],
+      [
+        5.2,
+        "@rifle",
+        "target -500 0 500"
+      ],
+      [
+        7,
+        "@rifle",
+        "target -500 0 -170"
+      ],
+      [
+        8.5,
+        "@rifle",
+        "crouch"
+      ],
+      [
+        9,
+        "@rifle",
+        "target -500 0 100"
+      ],
+      [
+        9.6,
+        "@rifle",
+        "move 0 -1 walk"
+      ],
+      [
+        10.6,
+        "@rifle",
+        "stop"
+      ],
+      [
+        11.2,
+        "@rifle",
+        "stand"
+      ]
+    ]
+  },
+  {
+    "name": "Final01-ThreeRendered",
+    "duration": 5,
+    "fps": 30,
+    "profile": 1,
+    "pilot": false,
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -420,
+      0,
+      200
+    ],
+    "look_at": [
+      -950,
+      0,
+      95
+    ],
+    "events": [
+      [
+        0.2,
+        "@rifle",
+        "aim"
+      ]
+    ]
+  }
+]

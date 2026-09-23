@@ -1,0 +1,10 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "GASPALS Enemy 01",
+  "Description": "Rifle animation and prop derivatives for the existing GASP Mover enemy.",
+  "Category": "MeridianSquad",
+  "CanContainContent": true,
+  "EnabledByDefault": true
+}

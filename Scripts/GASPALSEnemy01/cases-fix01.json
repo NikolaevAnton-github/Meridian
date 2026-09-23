@@ -1,0 +1,53 @@
+[
+  {
+    "name": "Fix01-CrouchHitAim",
+    "duration": 10,
+    "fps": 30,
+    "profile": 1,
+    "pilot": true,
+    "flying": true,
+    "inspection_view": true,
+    "location": [
+      -600,
+      -220,
+      60
+    ],
+    "events": [
+      [
+        0.05,
+        "@track",
+        "spine_03"
+      ],
+      [
+        0.1,
+        "@rifle",
+        "aim"
+      ],
+      [
+        0.4,
+        "@rifle",
+        "crouch"
+      ],
+      [
+        2,
+        "LeftMouseButton",
+        1
+      ],
+      [
+        2.09,
+        "LeftMouseButton",
+        0
+      ],
+      [
+        3,
+        "@track",
+        "pelvis"
+      ],
+      [
+        7.5,
+        "@rifle",
+        "stand"
+      ]
+    ]
+  }
+]

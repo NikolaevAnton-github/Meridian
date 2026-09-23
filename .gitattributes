@@ -115,3 +115,12 @@ Scripts/GASPEnemyFoundation01/** -text
 Plugins/GASPEnemyFoundation01/GASPEnemyFoundation01.uplugin -text
 Docs/GASPEnemyFoundation01*.md -text
 Scripts/AssetRegistry/manifests/GASPEnemyFoundation01*.json -text
+
+# Preserve GASPALS enemy source, derivative and review identities.
+Assets/Source/GASPALSEnemy01/** -text
+Docs/GASPALSEnemy01*.md -text
+Scripts/GASPALSEnemy01/** -text
+Scripts/AssetRegistry/manifests/GASPALSEnemy01.json -text
+Plugins/GASPALSEnemy01/GASPALSEnemy01.uplugin -text
+Source/MeridianSquad/GASPALSRifleAnimInstance.* -text
+Source/MeridianSquad/GASPEnemyRifle.cpp -text

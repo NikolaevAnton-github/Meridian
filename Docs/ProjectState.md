@@ -21,6 +21,25 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Owner-test handoff: GASPALS armed enemies
+
+The owner [authorized direct integration outside Multica tasks](Approvals/GASPALSEnemy01-OwnerStart01.json).
+[GASPALSEnemy01](GASPALSEnemy01.md) now delivers all three current GASP/Mover
+fixtures with the prototype M4, Relax/Ready/Aim poses, independent aim/movement,
+pitch and actual crouch. Existing damage, physical recovery, fall/get-up, death
+and current impact/fall tuning are retained. Candidate01/build11 passes focused
+checks and the [sole independent technical review](GASPALSEnemy01Review.md);
+[controller acceptance](GASPALSEnemy01Acceptance.md) covers scope, identity and
+19 registered artifacts. The modified existing AnimBP has a separate revision
+manifest and exact pre-edit archive; historical fingerprints remain unchanged.
+No source GASPALS mount is needed. Sources and owner settings are preserved.
+
+The lobby editor is ready with Play stopped. Use `msq.EnemyRifle aim`, `crouch`,
+`stand`, `ready`, `relax`, `move X Y walk` and `stop`; F6 recreates Ready fixtures.
+Owner motion/play judgement remains separate. No Multica issue or task runtime
+was dispatched. MSQ-70 retains enemy firing and autonomous combat; MSQ-99/100
+and MSQ-93 through 96 retain their separate scope.
+
 ## Separate owner trial: GASPALS on UE 5.8
 
 The owner requested a separate GASPALS project directly outside Multica.
@@ -133,7 +152,8 @@ MSQ-98 is high priority and consumes MSQ-92/current follow-ups. It precedes MSQ-
 and MSQ-70. The refinement order is now **MSQ-91 -> MSQ-97 -> MSQ-92 -> MSQ-98 ->
 MSQ-93 -> MSQ-94 -> MSQ-95 -> MSQ-96**; MSQ-98 is an unstaged MSQ-67 child, outside
 MSQ-90's unchanged native stages. MSQ-70 retains MSQ-69 and adds MSQ-98, keeping AI
-combat and actual enemy weapon setup separate from migration's movement handover.
+combat and enemy firing separate from migration's movement handover. The later
+direct GASPALS integration above supplies rifle presentation and aiming seams.
 Earlier summaries' direct MSQ-92 -> MSQ-93 order is superseded by this decision.
 
 [EnemyDisarm01 / MSQ-99](Tasks/EnemyDisarm01.md) and

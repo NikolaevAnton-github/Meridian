@@ -1,0 +1,175 @@
+{
+  "work": "GASPALSEnemy01",
+  "related_task": "MSQ-98",
+  "revision": "GASPALSEnemy01-Rifle01",
+  "source_repository": "https://github.com/PolygonHive/GASPALS",
+  "upstream_commit": "a6d3812545063f0954b4b80d632848f2eb8032e2",
+  "source_local_head": "835e0bcf97e9ed7f2dc51efdd6aaa3b44b04121f",
+  "license_statement": "UE-Only Content; see preserved upstream README.",
+  "scope": "15 selective GASPALS derivatives plus one revised existing enemy AnimBP. Existing registered fingerprints and historical candidate evidence are not rebaselined.",
+  "skeleton": "88 shared source bones match adopted names, indices, hierarchy and reference transforms within floating-point tolerance; three target-only helpers remain. No body retargeting or accepted skeleton/physics-asset mutation.",
+  "archive": {
+    "path": "Assets/Source/GASPALSEnemy01/Before/SandboxCharacter_Mover_ABP.uasset",
+    "sha256": "4be002ac82435201716c18fbe6e1ec83624515dbe823548c2bcfcc2131b8b963",
+    "size_bytes": 6006555
+  },
+  "files": [
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/AO_Rifle_Crouch_Sweep.uasset",
+      "package": "/GASPALSEnemy01/Animations/AO_Rifle_Crouch_Sweep",
+      "sha256": "73068b3ebd1edad333a2060c7b3bf85fae231731f0ee012264ef8d373688ce87",
+      "size_bytes": 201921,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/AO_Rifle_Crouch_Sweep.uasset",
+      "source_sha256": "03ad4bba3a1910ca9a1b9334e8ab0bf92edc0a1f130f7520bfb49c152e22948c",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/AO_Rifle_Stand_Sweep.uasset",
+      "package": "/GASPALSEnemy01/Animations/AO_Rifle_Stand_Sweep",
+      "sha256": "1552124e799f2af6b7804a8ca931f71b0a5711e3af51a4b4d8c64398f8d2691b",
+      "size_bytes": 200165,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/AO_Rifle_Stand_Sweep.uasset",
+      "source_sha256": "f09068747a1934227d1967f646818bf801ae256daeac2e692c96146747fb0edc",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Crouch_Aim.uasset",
+      "package": "/GASPALSEnemy01/Animations/Pose_Rifle_Crouch_Aim",
+      "sha256": "e629bdb764d7e038780fb15451e8791d40106c9ec30dc2db2c3e032120cc6e0f",
+      "size_bytes": 119182,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/Pose_Rifle_Crouch_Aim.uasset",
+      "source_sha256": "ca43de903f301dd2d19f58234b4e7c4597515ab427c671e1a2567604a5668f77",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Crouch_Ready.uasset",
+      "package": "/GASPALSEnemy01/Animations/Pose_Rifle_Crouch_Ready",
+      "sha256": "d3a32e2bba1b938f5de1919f1a84541ee23a5378addc672c65d799411c5713a4",
+      "size_bytes": 117668,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/Pose_Rifle_Crouch_Ready.uasset",
+      "source_sha256": "f679d8ca874e2983ea7f5715e6dcad2121d9cc43c3698b9197163aa5a79e4561",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Crouch_Relax.uasset",
+      "package": "/GASPALSEnemy01/Animations/Pose_Rifle_Crouch_Relax",
+      "sha256": "140940b890c812e907623ffb49e670d77e4c205987547cb0c7545e760d9eeaa3",
+      "size_bytes": 117616,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/Pose_Rifle_Crouch_Relax.uasset",
+      "source_sha256": "5aedd1041d77de978ac645f4043338de7df9da4bd92b9b02ef9d059d1d5e9510",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Aim_Idle.uasset",
+      "package": "/GASPALSEnemy01/Animations/Pose_Rifle_Stand_Aim_Idle",
+      "sha256": "8cabc8709fc3419eb6c61212397be6909e4c6c4b36286921c877575a6dc7b6a8",
+      "size_bytes": 125622,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/Pose_Rifle_Stand_Aim_Idle.uasset",
+      "source_sha256": "18809c3743270fcf0a865f0c2d964bdda5bb97088c7a50d71b9b3d0a89a082a0",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Aim_Move.uasset",
+      "package": "/GASPALSEnemy01/Animations/Pose_Rifle_Stand_Aim_Move",
+      "sha256": "52b0b24df42cb4c5c78b88cd5d5f80b1ea5494490a50f735f9406e07c2e431c2",
+      "size_bytes": 124184,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/Pose_Rifle_Stand_Aim_Move.uasset",
+      "source_sha256": "1beaccc03ec40b33572ebe895268641776a75e7b810a42616be7468a81c4fa97",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Ready_Idle.uasset",
+      "package": "/GASPALSEnemy01/Animations/Pose_Rifle_Stand_Ready_Idle",
+      "sha256": "67aa04bb10a69fe84365e870977e8f078d8e9f2015fe1be2e49f99d53b55fd75",
+      "size_bytes": 124103,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/Pose_Rifle_Stand_Ready_Idle.uasset",
+      "source_sha256": "790b443296a4fecf078b2ef018aece0215e17270af8fc8dd0064fb38813bd11c",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Ready_Move.uasset",
+      "package": "/GASPALSEnemy01/Animations/Pose_Rifle_Stand_Ready_Move",
+      "sha256": "847a518c225378a05fd99dd28ca93ceff12593a5d37d251fe031710767d504c3",
+      "size_bytes": 122556,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/Pose_Rifle_Stand_Ready_Move.uasset",
+      "source_sha256": "50e8d9339c6c3cfdfa4c892981a9c0466c885fc8d18a954997aec5e24ba1f1b7",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Relax_Idle.uasset",
+      "package": "/GASPALSEnemy01/Animations/Pose_Rifle_Stand_Relax_Idle",
+      "sha256": "e86cbd78d908164a0e056ced3bb9627f7e128b3f4b51acf5d5c5e804f8735f98",
+      "size_bytes": 124064,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/Pose_Rifle_Stand_Relax_Idle.uasset",
+      "source_sha256": "41d5365b1ff1502a9be2c6f76daa20cb8eb40e277192afca33a7e306fd753c3a",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Relax_Move.uasset",
+      "package": "/GASPALSEnemy01/Animations/Pose_Rifle_Stand_Relax_Move",
+      "sha256": "3e6367f2e80a1ed251ba52055a2034c2439b76a6345ef449e3b10c7b3018f60d",
+      "size_bytes": 122530,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Overlays/Poses/Rifle/Pose_Rifle_Stand_Relax_Move.uasset",
+      "source_sha256": "183c7fb16ccf6b1c57c3bf78ab4058690bd7a4c675957abfb330977cfcef3b39",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/OverlaySystem/Props/Materials/M_Prop.uasset",
+      "package": "/GASPALSEnemy01/OverlaySystem/Props/Materials/M_Prop",
+      "sha256": "15ca920519d1908ed5b47ec037f3ec424b6e2436fc81cddf350211b3c37b281b",
+      "size_bytes": 11305,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Props/Materials/M_Prop.uasset",
+      "source_sha256": "e3096c8906c45cabb4cd978d616c6dbc52e07ba3bbd21acea507c860cb41c787",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/OverlaySystem/Props/Materials/M_Prop_M4A1.uasset",
+      "package": "/GASPALSEnemy01/OverlaySystem/Props/Materials/M_Prop_M4A1",
+      "sha256": "0c6d6bdb7ef37957c37e233df65f225b25136df574cd6c83ca280f733362d7ad",
+      "size_bytes": 8529,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Props/Materials/M_Prop_M4A1.uasset",
+      "source_sha256": "f29f10a16a29778e2c622deee59f6ab75c9d1d1d03f40dee6aa840d08816fad3",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/OverlaySystem/Props/Meshes/M4A1.uasset",
+      "package": "/GASPALSEnemy01/OverlaySystem/Props/Meshes/M4A1",
+      "sha256": "2a8714befa4dfd35a08a8c8d7a5041c9ee83773b034970dd4dca2ef8b3ba8460",
+      "size_bytes": 2429851,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Props/Meshes/M4A1.uasset",
+      "source_sha256": "e60e2c9eb46d2d295359cfd2a0b2920c874446395a8a4d27c966fa0f397ce05a",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/OverlaySystem/Props/Meshes/M4A1_Skeleton.uasset",
+      "package": "/GASPALSEnemy01/OverlaySystem/Props/Meshes/M4A1_Skeleton",
+      "sha256": "b5ce5ca42c1a17bb371b12db5116b98f37bbb29f029a36200ba7a99b6cabb68b",
+      "size_bytes": 9466,
+      "source_file": "D:/devgames/GASPALS_UE58/Plugins/GASPALS/Content/OverlaySystem/Props/Meshes/M4A1_Skeleton.uasset",
+      "source_sha256": "b272266cc7319897eddb28a9f349404677acee7c4ed69ef37baf0a9a07f264c2",
+      "change": "Derived GASPALS package with internal references remapped. Rifle sequences use the adopted UEFN skeleton, retain authored poses/curves, and remove external editor-only authoring references."
+    },
+    {
+      "path": "Plugins/GASPEnemyFoundation01/Content/Blueprints/SandboxCharacter_Mover_ABP.uasset",
+      "package": "/GASPEnemyFoundation01/Blueprints/SandboxCharacter_Mover_ABP",
+      "sha256": "37b5f7490a38ce26536958b882696bcf0076bbd9f1704a3e2ead815c69f460ed",
+      "size_bytes": 6367803,
+      "previous_sha256": "4be002ac82435201716c18fbe6e1ec83624515dbe823548c2bcfcc2131b8b963",
+      "previous_archive": "Assets/Source/GASPALSEnemy01/Before/SandboxCharacter_Mover_ABP.uasset",
+      "change": "Preserve original AnimBP class identity for GASP chooser contexts; adopt native rifle parameters and insert pose, pitch, bounded root-relative yaw and hand IK ahead of existing ragdoll/get-up/recovery gates."
+    }
+  ],
+  "evidence": [
+    "Docs/Approvals/GASPALSEnemy01-OwnerStart01.json",
+    "Docs/GASPALSEnemy01.md",
+    "Docs/GASPALSEnemy01Review.md",
+    "Saved/CombatSlice01/GASPALSEnemy01/skeleton-compare.json",
+    "Saved/CombatSlice01/GASPALSEnemy01/dependency-closure.json"
+  ],
+  "acceptance": "Executor focused verification and one primary independent review; owner motion/play judgement remains separate. Registry registration is inventory, not acceptance.",
+  "candidate": "GASPALSEnemy01-Candidate01",
+  "candidate_identity": {
+    "path": "Saved/CombatSlice01/GASPALSEnemy01/Candidate01-identity.json",
+    "sha256": "6fe8152f99de22dc832c6c5b5259f670e8f326a51bfaa1060a87c07c7e7d5e32"
+  }
+}

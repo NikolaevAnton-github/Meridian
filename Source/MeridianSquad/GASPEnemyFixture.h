@@ -5,12 +5,20 @@
 #include "Components/ActorComponent.h"
 #include "MoverSimulationTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "GameFramework/Controller.h"
 #include "GASPEnemyFixture.generated.h"
 
 class APawn;
 class UMoverComponent;
 class UCapsuleComponent;
 class UAnimInstance;
+
+/** Supplies a control rotation to GASP without player input or autonomous AI. */
+UCLASS()
+class AGASPEnemyCommandController : public AController
+{
+    GENERATED_BODY()
+};
 
 /** Runs the adopted controls after animation, with an optional recovery target blend. */
 UCLASS()
@@ -27,6 +35,12 @@ UENUM(BlueprintType)
 enum class EGASPEnemyAuthority : uint8
 {
     Locomotion, Recovery, Falling, Down, GettingUp, Dead
+};
+
+UENUM(BlueprintType)
+enum class EGASPALSRifleStance : uint8
+{
+    Relax, Ready, Aim
 };
 
 /** Logical combat fixture. Its adopted GASP pawn owns the visible mesh, capsule and Mover.
@@ -52,9 +66,21 @@ public:
     void SetMovementCommand(FVector WorldDirection, bool bWalk = true);
     UFUNCTION(BlueprintCallable, Category="Enemy|Movement")
     void StopMovementCommand();
-    /** Extension point for MSQ-70/99/100; no weapon is created or fired here. */
+    /** Occupancy seam retained for later combat/disarming/gesture work. */
     UFUNCTION(BlueprintCallable, Category="Enemy|Combat")
     void SetHandOccupancy(bool bLeftOccupied, bool bRightOccupied);
+    UFUNCTION(BlueprintCallable, Category="Enemy|Rifle")
+    void SetRifleStance(EGASPALSRifleStance NewStance);
+    UFUNCTION(BlueprintCallable, Category="Enemy|Rifle")
+    void SetRifleAimTarget(FVector WorldTarget);
+    UFUNCTION(BlueprintCallable, Category="Enemy|Rifle")
+    void SetRifleFollowPlayer(bool bFollow);
+    UFUNCTION(BlueprintCallable, Category="Enemy|Movement")
+    void SetCrouchCommand(bool bCrouch);
+    UFUNCTION(BlueprintPure, Category="Enemy|Movement")
+    bool IsMovementCrouched() const;
+    FVector GetRifleAimDirection() const;
+    float GetRifleMovementAlpha() const;
     UFUNCTION(BlueprintPure, Category="Enemy|Movement")
     APawn* GetMovementPawn() const { return Foundation; }
 
@@ -68,6 +94,14 @@ public:
     bool bLeftHandOccupied = false;
     UPROPERTY(BlueprintReadOnly, Category="Enemy|Combat")
     bool bRightHandOccupied = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Enemy|Rifle")
+    EGASPALSRifleStance RifleStance = EGASPALSRifleStance::Ready;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Enemy|Rifle")
+    TObjectPtr<USkeletalMeshComponent> Rifle;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Enemy|Movement")
+    bool bCrouchCommand = false;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Enemy|Rifle")
+    bool bRifleFollowPlayer = false;
 
     FVector GetMovementIntent() const;
     FTransform GetRagdollAnchor(const FTransform& SampleAnchor) const;
@@ -93,6 +127,7 @@ private:
     UPROPERTY() TObjectPtr<UMoverComponent> Mover;
     UPROPERTY() TObjectPtr<UCapsuleComponent> Capsule;
     UPROPERTY() TObjectPtr<UAnimInstance> FoundationAnimation;
+    UPROPERTY() TObjectPtr<AGASPEnemyCommandController> CommandController;
     UPROPERTY() TArray<TObjectPtr<UObject>> FoundationInputProducers;
     FVector MovementCommand = FVector::ZeroVector;
     FVector StandingPelvisOffset = FVector::ZeroVector;
@@ -110,6 +145,10 @@ private:
     TMap<FName, FTransform> HandoffPose;
     TMap<int32, FVector> PreFallLegLimits;
     float HandoffSeconds = 0;
+    FVector RifleAimTarget = FVector::ZeroVector;
+    bool bHasRifleAimTarget = false;
+    void UpdateRifleInput();
+    void CreateRifle();
     static constexpr float HandoffDuration = .55f;
     void UpdateFoundationPhysics(float DeltaSeconds);
     void UpdateRagdollLegLimits(float DeltaSeconds);

@@ -1,0 +1,310 @@
+{
+  "asset": "GASPALSEnemy01",
+  "artifacts": [
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/AO_Rifle_Crouch_Sweep.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "73068b3ebd1edad333a2060c7b3bf85fae231731f0ee012264ef8d373688ce87",
+      "size_bytes": 201921,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/AO_Rifle_Crouch_Sweep. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/AO_Rifle_Stand_Sweep.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "1552124e799f2af6b7804a8ca931f71b0a5711e3af51a4b4d8c64398f8d2691b",
+      "size_bytes": 200165,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/AO_Rifle_Stand_Sweep. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Crouch_Aim.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "e629bdb764d7e038780fb15451e8791d40106c9ec30dc2db2c3e032120cc6e0f",
+      "size_bytes": 119182,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/Pose_Rifle_Crouch_Aim. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Crouch_Ready.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "d3a32e2bba1b938f5de1919f1a84541ee23a5378addc672c65d799411c5713a4",
+      "size_bytes": 117668,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/Pose_Rifle_Crouch_Ready. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Crouch_Relax.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "140940b890c812e907623ffb49e670d77e4c205987547cb0c7545e760d9eeaa3",
+      "size_bytes": 117616,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/Pose_Rifle_Crouch_Relax. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Aim_Idle.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "8cabc8709fc3419eb6c61212397be6909e4c6c4b36286921c877575a6dc7b6a8",
+      "size_bytes": 125622,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/Pose_Rifle_Stand_Aim_Idle. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Aim_Move.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "52b0b24df42cb4c5c78b88cd5d5f80b1ea5494490a50f735f9406e07c2e431c2",
+      "size_bytes": 124184,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/Pose_Rifle_Stand_Aim_Move. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Ready_Idle.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "67aa04bb10a69fe84365e870977e8f078d8e9f2015fe1be2e49f99d53b55fd75",
+      "size_bytes": 124103,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/Pose_Rifle_Stand_Ready_Idle. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Ready_Move.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "847a518c225378a05fd99dd28ca93ceff12593a5d37d251fe031710767d504c3",
+      "size_bytes": 122556,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/Pose_Rifle_Stand_Ready_Move. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Relax_Idle.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "e86cbd78d908164a0e056ced3bb9627f7e128b3f4b51acf5d5c5e804f8735f98",
+      "size_bytes": 124064,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/Pose_Rifle_Stand_Relax_Idle. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/Animations/Pose_Rifle_Stand_Relax_Move.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "3e6367f2e80a1ed251ba52055a2034c2439b76a6345ef449e3b10c7b3018f60d",
+      "size_bytes": 122530,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/Animations/Pose_Rifle_Stand_Relax_Move. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/OverlaySystem/Props/Materials/M_Prop.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "15ca920519d1908ed5b47ec037f3ec424b6e2436fc81cddf350211b3c37b281b",
+      "size_bytes": 11305,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/OverlaySystem/Props/Materials/M_Prop. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/OverlaySystem/Props/Materials/M_Prop_M4A1.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "0c6d6bdb7ef37957c37e233df65f225b25136df574cd6c83ca280f733362d7ad",
+      "size_bytes": 8529,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/OverlaySystem/Props/Materials/M_Prop_M4A1. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/OverlaySystem/Props/Meshes/M4A1.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "2a8714befa4dfd35a08a8c8d7a5041c9ee83773b034970dd4dca2ef8b3ba8460",
+      "size_bytes": 2429851,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/OverlaySystem/Props/Meshes/M4A1. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/Content/OverlaySystem/Props/Meshes/M4A1_Skeleton.uasset",
+      "role": "gaspals_enemy_rifle_derivative",
+      "sha256": "b5ce5ca42c1a17bb371b12db5116b98f37bbb29f029a36200ba7a99b6cabb68b",
+      "size_bytes": 9466,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Selective local derivative: /GASPALSEnemy01/OverlaySystem/Props/Meshes/M4A1_Skeleton. Exact source provenance is preserved in the revision manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/GASPALSEnemy01/Before/SandboxCharacter_Mover_ABP.uasset",
+      "role": "gaspals_enemy_pre_edit_animbp_archive",
+      "sha256": "4be002ac82435201716c18fbe6e1ec83624515dbe823548c2bcfcc2131b8b963",
+      "size_bytes": 6006555,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Exact pre-edit accepted AnimBP bytes, archived before the bounded class-preserving adaptation."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/GASPALSEnemy01/ProvisionalCopiedAnimBP/ABP_GASPALS_Enemy.uasset",
+      "role": "gaspals_enemy_rejected_animbp_archive",
+      "sha256": "b93157257f037f220ed7d4fc7f5f379b05e5c88b7c538eab588bcb594c7cac04",
+      "size_bytes": 6296606,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Rejected copied-class experiment preserved outside active Content; not an active accepted package."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Assets/Source/GASPALSEnemy01/source-manifest.json",
+      "role": "gaspals_enemy_rifle_revision_manifest",
+      "sha256": "d19cc3c447e80185811184d08d03069db9f8c880ac6ca80313340195b8585d15",
+      "size_bytes": 13434,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Candidate01 final revision identities and source provenance. The existing canonical AnimBP historical registry hash remains immutable; current bytes are verified separately against this manifest."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    },
+    {
+      "path": "Plugins/GASPALSEnemy01/GASPALSEnemy01.uplugin",
+      "role": "gaspals_enemy_plugin_descriptor",
+      "sha256": "c6bf291d076641f23097f67476e80cda418941e73804074de745a0e8a1ae3073",
+      "size_bytes": 281,
+      "evidence": [
+        {
+          "source": "Docs/GASPALSEnemy01.md",
+          "note": "Local enabled-by-default content plugin descriptor; owner project settings remain preserved."
+        },
+        {
+          "source": "Docs/GASPALSEnemy01Review.md",
+          "note": "Primary technical PASS for Candidate01/build11; owner motion judgment remains separate."
+        }
+      ]
+    }
+  ],
+  "dependencies": []
+}

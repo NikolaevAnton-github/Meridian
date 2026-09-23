@@ -1,4 +1,5 @@
 #include "GASPEnemyFixture.h"
+#include "GASPALSRifleAnimInstance.h"
 #include "CombatProjectileWorld.h"
 #include "DummyRecoveryAnimInstance.h"
 #include "PhysicsControlComponent.h"
@@ -99,14 +100,16 @@ FVector AGASPEnemyFixture::GetMovementIntent() const
 
 void AGASPEnemyFixture::ProduceInput_Implementation(int32 SimTimeMs, FMoverInputCmdContext& InputCmdResult)
 {
+    UpdateRifleInput();
     // Keep GASP's input production and custom payloads, then repair the handoff
     // before Mover caches the command and the sample reuses its orientation.
     for (UObject* Producer : FoundationInputProducers)
         if (IsValid(Producer))
             IMoverInputProducerInterface::Execute_ProduceInput(Producer, SimTimeMs, InputCmdResult);
 
-    if (!Foundation || !Mover || Mover->GetMovementModeName() != TEXT("Ragdoll")) return;
+    if (!Foundation || !Mover) return;
     auto* Inputs = InputCmdResult.InputCollection.FindMutableDataByType<FCharacterDefaultInputs>();
+    if (Mover->GetMovementModeName() != TEXT("Ragdoll")) return;
     if (Inputs && Inputs->OrientationIntent.IsNearlyZero())
     {
         // GASP's parent orientation switch has no Ragdoll branch. Once Walking
@@ -183,7 +186,9 @@ void AGASPEnemyFixture::ResetDummy()
     if (IsValid(PhysicsControl) && !Controls.IsEmpty()) PhysicsControl->DestroyControls(Controls);
     Controls.Reset(); BodyControls.Reset(); RecoveringControls.Reset(); SampleControls.Reset();
     if (IsValid(Foundation)) Foundation->Destroy();
-    Foundation = nullptr; Mover = nullptr; Capsule = nullptr; FoundationAnimation = nullptr;
+    if (IsValid(CommandController)) CommandController->Destroy();
+    CommandController = nullptr;
+    Foundation = nullptr; Mover = nullptr; Capsule = nullptr; FoundationAnimation = nullptr; Rifle = nullptr;
     FoundationInputProducers.Reset();
     Body = UnusedLegacyBody; PhysicsControl = UnusedLegacyControls;
     SetActorTransform(Home, false, nullptr, ETeleportType::TeleportPhysics);
@@ -199,6 +204,8 @@ void AGASPEnemyFixture::ResetDummy()
     LastSelectedMontage.Reset();
     ArmTrunkContacts.Reset(); PeakArmTrunkImpulse = 0;
     StopMovementCommand();
+    RifleStance = EGASPALSRifleStance::Ready;
+    bCrouchCommand = bRifleFollowPlayer = bHasRifleAimTarget = false;
     ResetBalance();
     UClass* Class = LoadClass<APawn>(nullptr, FoundationPath);
     if (!Class) { BalanceReason = TEXT("GASP foundation class unavailable"); return; }
@@ -226,6 +233,7 @@ bool AGASPEnemyFixture::AdoptFoundation()
     Body = Mesh; PhysicsControl = Drives; Mover = Movement;
     Capsule = Foundation->FindComponentByClass<UCapsuleComponent>();
     FoundationAnimation = Body->GetAnimInstance();
+    CreateRifle();
     if (auto* Asset = LoadObject<UPhysicsAsset>(nullptr, ScopedPhysicsPath))
         if (Body->GetPhysicsAsset() != Asset) Body->SetPhysicsAsset(Asset);
     Body->SetForcedLOD(1);
@@ -679,6 +687,20 @@ FString AGASPEnemyFixture::GetDummyState(bool IncludeContacts) const
     GASP->SetBoolField(TEXT("walk"), bWalkCommand);
     GASP->SetBoolField(TEXT("left_hand_occupied"), bLeftHandOccupied);
     GASP->SetBoolField(TEXT("right_hand_occupied"), bRightHandOccupied);
+    GASP->SetStringField(TEXT("rifle_stance"), StaticEnum<EGASPALSRifleStance>()->GetNameStringByValue(static_cast<int64>(RifleStance)));
+    GASP->SetStringField(TEXT("rifle_mesh"), Rifle && Rifle->GetSkeletalMeshAsset() ? Rifle->GetSkeletalMeshAsset()->GetPathName() : TEXT(""));
+    GASP->SetBoolField(TEXT("crouch_command"), bCrouchCommand);
+    GASP->SetBoolField(TEXT("crouched"), IsMovementCrouched());
+    GASP->SetNumberField(TEXT("capsule_half_height"), Capsule ? Capsule->GetUnscaledCapsuleHalfHeight() : 0);
+    GASP->SetField(TEXT("aim_direction"), Vector98(GetRifleAimDirection()));
+    GASP->SetField(TEXT("facing"), Vector98(Foundation->GetActorForwardVector()));
+    if (const auto* Anim = Cast<UGASPALSRifleAnimInstance>(FoundationAnimation))
+    {
+        GASP->SetNumberField(TEXT("rifle_alpha"), Anim->RifleAlpha);
+        GASP->SetNumberField(TEXT("rifle_aim_alpha"), Anim->RifleAimAlpha);
+        GASP->SetNumberField(TEXT("rifle_crouch_alpha"), Anim->RifleCrouchAlpha);
+        GASP->SetNumberField(TEXT("rifle_pitch_time"), Anim->RiflePitchTime);
+    }
     int32 SourceEnabled = 0, SourceUnbounded = 0;
     for (FName Name : SampleControls)
     {
@@ -713,6 +735,7 @@ void AGASPEnemyFixture::EndPlay(const EEndPlayReason::Type Reason)
     if (IsValid(Body)) Body->OnComponentHit.RemoveDynamic(this, &AGASPEnemyFixture::OnFoundationContact);
     APhysicsControlDummy::EndPlay(Reason);
     if (IsValid(Foundation)) Foundation->Destroy();
+    if (IsValid(CommandController)) CommandController->Destroy();
     Foundation = nullptr;
 }
 

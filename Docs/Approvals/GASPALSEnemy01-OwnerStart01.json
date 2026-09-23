@@ -1,0 +1,29 @@
+{
+  "record_id": "GASPALSEnemy01-OwnerStart01",
+  "date_local": "2026-09-23",
+  "source": "Owner direct chat after the GASPALS enemy integration plan and task split",
+  "owner_message_original": "Тогда сделай это сейчас вне задачи пожалуйста",
+  "owner_message_english_translation": "Then please do this now outside a task.",
+  "decision": "Implement the proposed GASPALS armed-mannequin integration directly, outside Multica task creation and dispatch.",
+  "scope": "Adapt the local GASPALS rifle animation layers, weapon attachment and grip, independent aiming and movement, and crouched rifle stance to the existing GASP/Mover enemy foundation. Begin with one pilot, integrate existing physical hit/balance/fall/get-up/death transitions, then deliver all three existing fixtures. Preserve the latest physical tuning and corrections.",
+  "scope_boundary": "This starts the proposed armed-mannequin integration. Autonomous perception, navigation and combat remain in MSQ-70; disarming, wound gestures and expanded terrain/balance work retain their separate scope. No new Multica issue or task runtime is needed.",
+  "execution": "One native implementation agent owns code and Unreal editing, at explicitly configured Astra/max and standard speed. The controller owns administration, evidence acceptance and the local closure commit. Existing services and applications may be launched as required for authorized work.",
+  "verification": "Focused build and affected runtime/visual transition checks, followed by one independent primary technical review. The request to work outside a task does not waive review. Owner subjective motion/play acceptance remains separate.",
+  "acceptance": [
+    "All three existing fixture profiles render with an attached rifle and adapted GASPALS presentation; demonstrate shared behavior on one representative.",
+    "Relax, Ready and Aim blend with commanded movement, stopping, directional aiming and crouch/stand; document movement/capsule and skeleton compatibility.",
+    "Record movement, real impact, physical recovery or fall/get-up, and return to armed movement without competing body targets or stale hand grips.",
+    "Verify directly affected death, reset/recreation and relative slowdown transitions; retain one authoritative damage path and existing tuning.",
+    "Provide the applicable native build result, ordinary-speed actual views, controls, changed-file identities and source/owner preservation evidence."
+  ],
+  "review_ownership": "One primary independent native reviewer covers implementation correctness, focused test adequacy and actual affected visual transitions. The controller accepts scope, candidate identity, evidence applicability and finding closure.",
+  "preservation": "Preserve D:/devgames/GASPALS_UE58 source assets, historical candidates and evidence, the retained lobby, first-person player/arms/camera, fixture profile identities and unrelated owner edits. Avoid wholesale GASPALS config or sample-pawn replacement.",
+  "initial_owner_modified_files": {
+    "Config/DefaultEngine.ini": "a47c56f4e860ce8085347f057503a3211b16a62a559cbedcdc95412d7c31e3af",
+    "MeridianSquad.uproject": "ec30c9a2f867354d21e2f0deaafd075bf3d6ef871a80f7d2914487a7d6048606"
+  },
+  "work_identifier": "GASPALSEnemy01",
+  "related_existing_task": "MSQ-98",
+  "implementation_record": "Docs/GASPALSEnemy01.md",
+  "evidence_root": "Saved/CombatSlice01/GASPALSEnemy01/"
+}
