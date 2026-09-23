@@ -38,6 +38,7 @@ const TCHAR* EventName(CombatAI::Event E)
     case CombatAI::Event::Shot: return TEXT("shot");
     case CombatAI::Event::Authority: return TEXT("authority");
     case CombatAI::Event::Action: return TEXT("action");
+    case CombatAI::Event::Tactical: return TEXT("tactical");
     default: return TEXT("stop");
     }
 }
@@ -76,6 +77,47 @@ TSharedRef<FJsonObject> SnapshotJson(const CombatAI::InputSnapshot& S)
     J->SetStringField(TEXT("action_failure"), Failures[static_cast<uint8>(S.Failure)]);
     J->SetNumberField(TEXT("action_started"), S.ActionStarted);
     J->SetNumberField(TEXT("action_updated"), S.ActionUpdated);
+    static const TCHAR* Objectives[] = {TEXT("none"), TEXT("engage_observed_threat"), TEXT("protected_observation")};
+    static const TCHAR* Phases[] = {TEXT("none"), TEXT("scanning"), TEXT("moving"), TEXT("holding"), TEXT("fallback")};
+    static const TCHAR* Contacts[] = {TEXT("none"), TEXT("initial"), TEXT("continuous"), TEXT("brief_reacquisition"), TEXT("known_reacquisition"), TEXT("new_direction")};
+    static const TCHAR* Gates[] = {TEXT("none"), TEXT("disabled"), TEXT("physical_authority"), TEXT("readiness"), TEXT("reload"), TEXT("contact_response"), TEXT("aim_settle"), TEXT("burst_pause"), TEXT("cadence"), TEXT("path_planning"), TEXT("travel"), TEXT("geometry_scan"), TEXT("active_observation"), TEXT("weapon_backoff"), TEXT("route_backoff"), TEXT("alignment_and_launch_safety")};
+    J->SetStringField(TEXT("objective"), Objectives[static_cast<uint8>(S.Objective)]);
+    J->SetStringField(TEXT("position_phase"), Phases[static_cast<uint8>(S.PositionPhase)]);
+    J->SetStringField(TEXT("contact_class"), Contacts[static_cast<uint8>(S.Contact)]);
+    J->SetStringField(TEXT("pending_gate"), Gates[static_cast<uint8>(S.Gate)]);
+    J->SetStringField(TEXT("tactical_reason"), UTF8_TO_TCHAR(S.TacticalReason.data()));
+    J->SetStringField(TEXT("assignment_generation"), LexToString(S.AssignmentId.Generation));
+    J->SetStringField(TEXT("assignment_id"), LexToString(S.AssignmentId.Id));
+    J->SetField(TEXT("selected_position"), JsonPosition(S.SelectedPosition));
+    J->SetField(TEXT("selected_facing_point"), JsonPosition(S.SelectedFacing));
+    J->SetNumberField(TEXT("contact_world_time"), S.ContactAt);
+    J->SetNumberField(TEXT("contact_decision_world_time"), S.ContactDecisionAt);
+    J->SetNumberField(TEXT("objective_decision_world_time"), S.ObjectiveDecidedAt);
+    J->SetNumberField(TEXT("scan_started_world_time"), S.ScanStartedAt);
+    J->SetNumberField(TEXT("contact_not_before"), S.ContactUntil);
+    J->SetNumberField(TEXT("aim_not_before"), S.AimUntil);
+    J->SetNumberField(TEXT("burst_pause_not_before"), S.PauseUntil);
+    J->SetNumberField(TEXT("reload_not_before"), S.ReloadUntil);
+    J->SetNumberField(TEXT("hold_started_world_time"), S.HoldStartedAt);
+    J->SetNumberField(TEXT("tactical_move_started_world_time"), S.MoveStartedAt);
+    J->SetNumberField(TEXT("next_reassessment"), S.NextReassess);
+    J->SetNumberField(TEXT("next_observation_sector"), S.NextSector);
+    J->SetNumberField(TEXT("evidence_age_world_seconds"), S.EvidenceAge);
+    J->SetNumberField(TEXT("position_score"), S.PositionScore);
+    J->SetNumberField(TEXT("rear_side_protection"), S.Protection);
+    J->SetNumberField(TEXT("threat_region_exposure"), S.Exposure);
+    J->SetNumberField(TEXT("candidate_count"), S.CandidateCount);
+    J->SetNumberField(TEXT("evaluated_count"), S.EvaluatedCount);
+    J->SetNumberField(TEXT("rejected_count"), S.RejectedCount);
+    J->SetNumberField(TEXT("tactical_transfer_attempts"), S.TransferAttempts);
+    J->SetNumberField(TEXT("look_sector"), S.LookSector);
+    J->SetNumberField(TEXT("geometry_queries_since_assignment"), S.GeometryQueries);
+    J->SetNumberField(TEXT("peak_assessment_queries"), S.PeakAssessmentQueries);
+    J->SetBoolField(TEXT("scanning"), S.Scanning); J->SetBoolField(TEXT("has_validated_position"), S.HasPosition);
+    static const TCHAR* Rejections[] = {TEXT("none"), TEXT("support"), TEXT("capsule"), TEXT("route"), TEXT("facing"), TEXT("recent_failure"), TEXT("arrival")};
+    auto Rejected = MakeShared<FJsonObject>();
+    for (size_t I = 0; I < S.Rejections.size(); ++I) Rejected->SetNumberField(Rejections[I], S.Rejections[I]);
+    J->SetObjectField(TEXT("position_rejections"), Rejected);
     J->SetNumberField(TEXT("search_candidate"), S.SearchIndex);
     J->SetStringField(TEXT("requested_gait"), S.RequestedWalk ? TEXT("walk") : TEXT("run"));
     J->SetNumberField(TEXT("movement_purpose"), static_cast<uint8>(S.Purpose));
@@ -114,11 +156,29 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
         S.ActionGoal = ValuePosition(State == EEnemyCombatState::Search ? SearchGoal : PathGoal);
         S.SearchAnchor = ValuePosition(SearchAnchor); S.SearchLook = ValuePosition(SearchLook);
     }
-    S.StateStarted = StateStarted; S.ReadyAt = ReadyAt; S.NextShot = NextShot;
-    S.MoveRetryAt = MoveBackoff.Until; S.WeaponRetryAt = WeaponBackoff.Until; S.SearchRetryAt = SearchCycle.RetryAt;
+    S.StateStarted = StateStarted; S.ReadyAt = Gates.ReadyAt(NextShot); S.NextShot = NextShot;
+    S.MoveRetryAt = MoveBackoff.Until; S.WeaponRetryAt = WeaponBackoff.Until; S.SearchRetryAt = NextTacticalScan;
     S.ActionId = Action.Token; S.Action = Action.Kind; S.ActionState = Action.Status; S.Failure = Action.Failure;
     S.ActionStarted = Action.Started; S.ActionUpdated = Action.Updated;
-    S.SearchIndex = SearchCycle.Index; S.RequestedWalk = bRequestedWalk; S.Purpose = MovementPurpose;
+    S.SearchIndex = CandidateIndex; S.RequestedWalk = bRequestedWalk; S.Purpose = MovementPurpose;
+    S.Objective = Assignment.Objective; S.AssignmentId = Assignment.Token; S.ObjectiveDecidedAt = Assignment.DecidedAt;
+    S.PositionPhase = TacticalPhase; S.Contact = Contact; S.ContactAt = ContactAt; S.ContactDecisionAt = ContactDecisionAt;
+    S.ScanStartedAt = ScanStartedAt; S.ContactUntil = Gates.ContactUntil; S.AimUntil = Gates.AimUntil;
+    S.PauseUntil = Gates.PauseUntil; S.ReloadUntil = Gates.ReloadUntil;
+    S.HoldStartedAt = HoldStartedAt; S.MoveStartedAt = TacticalMoveStartedAt;
+    S.NextReassess = NextTacticalScan; S.NextSector = NextLookAt;
+    S.EvidenceAge = Memory.HasObservation ? FMath::Max(0.0, S.WorldTime - Memory.LastSeen) : -1;
+    const auto& Position = bSelectedPosition ? SelectedPosition : HeldPosition;
+    S.HasPosition = bSelectedPosition || bHeldPosition;
+    S.SelectedPosition = ValuePosition(S.HasPosition ? Position.Ground : Feet());
+    S.SelectedFacing = ValuePosition(bSelectedPosition ? SelectedPosition.Ground +
+        TacticalDirection(SelectedPosition.Rating.Facing)*400 + FVector(0,0,140) :
+        Assignment.Objective == CombatAI::TacticalObjective::Engage ? LastKnownAim : SearchLook);
+    if (S.HasPosition) { S.PositionScore = Position.Rating.Score; S.Protection = Position.Rating.Protection; S.Exposure = Position.Rating.Exposure; }
+    S.CandidateCount = TacticalCandidates.Num(); S.EvaluatedCount = CandidateIndex; S.RejectedCount = TacticalRejected;
+    S.TransferAttempts = Transfers.Attempts; S.LookSector = LookSector; S.Scanning = bTacticalScan;
+    S.GeometryQueries = TacticalQueryCount; S.PeakAssessmentQueries = TacticalPeakQueries; S.Rejections = RejectionCounts;
+    FCStringAnsi::Strncpy(S.TacticalReason.data(), TCHAR_TO_UTF8(*TacticalReason), S.TacticalReason.size());
     S.Intent = static_cast<uint8>(State); S.Path = LastPathOutcome; S.Enabled = bEnabled;
     S.Magazine = Magazine; S.Shots = Shots; S.SpreadState = Spread.GetCurrentSeed();
     S.PathRemaining = FMath::Max(0, Path.Num() - PathIndex); S.PathFailures = PathFailures;
@@ -127,6 +187,21 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
         S.Authority = static_cast<uint8>(E->Authority); S.Ready = E->IsReady(); S.Dead = E->IsDead();
         S.RifleHeld = E->IsRifleHeld(); S.RightHandOccupied = E->bRightHandOccupied;
     }
+    using Gate = CombatAI::DecisionGate;
+    if (!bEnabled || State == EEnemyCombatState::Disabled) S.Gate = Gate::Disabled;
+    else if (S.Dead || S.Authority != static_cast<uint8>(EGASPEnemyAuthority::Locomotion)) S.Gate = Gate::Physics;
+    else if (!S.Ready) S.Gate = Gate::Readiness;
+    else if (State == EEnemyCombatState::Reload) S.Gate = Gate::Reload;
+    else if (bPlanning) S.Gate = Gate::Path;
+    else if (Action.Kind == CombatAI::ActionKind::Move && Action.Status == CombatAI::ActionStatus::Running) S.Gate = Gate::Travel;
+    else if (State == EEnemyCombatState::Search)
+        S.Gate = bTargetVisible ? (WeaponBackoff.Blocks(LastKnownGround.X, LastKnownGround.Y, S.WorldTime) ? Gate::WeaponBackoff : Gate::RouteBackoff) :
+            bTacticalScan ? Gate::Scan : Gate::Observation;
+    else if (S.WorldTime < Gates.ContactUntil) S.Gate = Gate::Contact;
+    else if (S.WorldTime < Gates.AimUntil) S.Gate = Gate::Aim;
+    else if (S.WorldTime < Gates.PauseUntil) S.Gate = Gate::BurstPause;
+    else if (S.WorldTime < NextShot) S.Gate = Gate::Cadence;
+    else if (State == EEnemyCombatState::Aim || State == EEnemyCombatState::Burst) S.Gate = Gate::LaunchSafety;
     return S;
 }
 void UEnemyCombatComponent::RecordTrace(CombatAI::Event Kind, const TCHAR* Why)

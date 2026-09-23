@@ -5,6 +5,11 @@ playtest of MSQ-103; this is not an implemented candidate or runtime acceptance.
 Source: [exact owner feedback](../Approvals/CombatAI01-TacticalDirection01.json).
 Read with the [main design](CombatAI01.md) and [package plan](../Tasks/CombatAI01Plan.md).
 
+Later [owner start](../Approvals/CombatAI01-Tactical01-OwnerStart01.json) authorizes
+[MSQ-118 / CAI-T01](../Tasks/CombatAI01/CAI-T01.md), the first single-enemy tactical
+slice using current sight evidence/local navigation. This explicit early slice
+precedes the full sensory/topology packages without claiming their completion.
+
 ## Required behavior
 
 The owner reports visible running and continued search, but finds decisions slow
@@ -104,7 +109,7 @@ Reaction numbers are tuning proposals until measured and judged in owner play.
 
 Default planning assumption: demonstrate situational decisions with one opponent,
 then extend the same coordinator to two/three. This is the controller's recommendation,
-not a recorded owner population selection.
+accepted for the first slice by the later owner start linked above.
 
 1. Retain CAI-02's real sound/fire evidence work. Use it to interrupt stale search
    and distinguish a located threat from an uncertain direction.
@@ -121,8 +126,9 @@ not a recorded owner population selection.
    do not relax direct-fire visibility to deliver it early.
 4. Add equipment only when its real mechanics and counterplay exist.
 
-This is a proposed refinement of package slicing, not a change to live task
-dependencies or a claim that existing hard prerequisites are satisfied. Player
+The later CAI-T01 task implements the bounded sight-based portion early; the
+remaining sequence is proposed, not a claim that existing hard prerequisites
+are satisfied. Player
 health and encounter lifecycle still gate their respective full acceptance.
 
 ## Future equipment contract

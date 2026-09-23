@@ -12,8 +12,9 @@ the MSQ-70 baseline table below remains the original planning snapshot.
 Later administrative update: the owner requested task formalization. The
 [MSQ-101 family](../Tasks/CombatAI01.md) now maps this design to 16 prepared backlog
 tasks under the [task-creation decision](../Approvals/CombatAI01-TaskCreation01.json).
-Gameplay implementation has not started; the original planning scope below describes
-the design package itself, not the later administrative setup.
+CAI-00/01 and the later [early tactical slice](../CombatAI01-Tactical01Acceptance.md)
+are now delivered for owner testing. The original planning scope below describes
+the design package itself and its MSQ-70 baseline.
 
 ## 1. Product intent and decision status
 

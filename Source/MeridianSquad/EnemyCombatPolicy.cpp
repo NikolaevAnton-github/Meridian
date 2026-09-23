@@ -5,15 +5,17 @@
 void UEnemyCombatComponent::BeginSearch(const TCHAR* Why, bool bRestart)
 {
     ClearIntent(); NextRepath = 0; FailedAttempts = 0; bReposition = false;
-    bSearchGoal = false; ObserveUntil = 0;
+    ResetTactics(false);
     if (bRestart)
     {
-        SearchCycle.Restart();
         SearchAnchor = LastKnownGround;
-        SearchLook = LastKnownAim;
         SearchForward = (LastKnownGround - Feet()).GetSafeNormal2D();
         if (SearchForward.IsNearlyZero()) SearchForward = HomeFacing.Vector().GetSafeNormal2D();
+        SearchLook = Feet() + SearchForward*400 + FVector(0,0,140);
     }
+    const double Now = GetWorld()->GetTimeSeconds();
+    Assignment.Assign(EncounterGeneration, CombatAI::SelectObjective({Memory.Alert, Memory.HasObservation, false, true}), SightEventId, Now);
+    HoldStartedAt = Now;
     ChangeState(Memory.Alert ? EEnemyCombatState::Search : EEnemyCombatState::Idle, Why);
 }
 
@@ -24,57 +26,6 @@ void UEnemyCombatComponent::FailTactic(const TCHAR* Why, CombatAI::ActionFailure
     Backoff.Set(LastKnownGround.X, LastKnownGround.Y,
         GetWorld()->GetTimeSeconds() + FMath::Clamp(Tuning.RetryCooldown, 1.f, 30.f));
     BeginSearch(Why);
-    // Avoid immediately retrying the same failed last-seen destination.
-    SearchCycle.Index = 1;
-}
-
-void UEnemyCombatComponent::AdvanceSearch(double Now)
-{
-    auto* E = Enemy();
-    if (!Memory.Alert || !Memory.HasObservation) return;
-    E->SetCrouchCommand(false);
-    E->SetRifleStance(EGASPALSRifleStance::Ready);
-    // Look at permitted evidence or an inspection sector. Never follow the hidden pawn.
-    E->SetRifleAimTarget(SearchLook);
-    if (Now < SearchCycle.RetryAt || Now < ObserveUntil)
-    {
-        E->StopMovementCommand(); EnsureAction(CombatAI::ActionKind::Observe, Now); return;
-    }
-    if (Action.Kind == CombatAI::ActionKind::Observe)
-        FinishAction(Action.Token, CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None);
-    if (!bSearchGoal)
-    {
-        const int32 Index = SearchCycle.Index;
-        // Fixed bounded proposals, validated by the same collision-based navigator.
-        // Nearby fallback points originate at actual feet, including after displacement.
-        const FVector Center = Index >= 5 ? Feet() : SearchAnchor;
-        const float Radius = Index >= 5 ? 240.f : FMath::Clamp(Tuning.SearchRadius, 200.f, 650.f);
-        const int32 Quarter = (Index - 1) % 4;
-        SearchGoal = Index == 0 ? SearchAnchor : Center + SearchForward.RotateAngleAxis(90.f * Quarter, FVector::UpVector) * Radius;
-        SearchLook = Index == 0 ? LastKnownAim : SearchGoal + FVector(0,0,140);
-        bSearchGoal = true; FailedAttempts = 0; NextRepath = 0;
-    }
-    const bool Arrived = FVector::Dist2D(Feet(), SearchGoal) <= 85.f && FMath::Abs(Feet().Z - SearchGoal.Z) <= 40.f;
-    const bool Suppressed = MoveBackoff.Blocks(SearchGoal.X, SearchGoal.Y, Now) || SearchBackoff.Blocks(SearchGoal.X, SearchGoal.Y, Now);
-    if (Arrived || Suppressed || !FollowPath(SearchGoal, 85.f, Now, CombatAI::MovePurpose::Search))
-    {
-        if (Arrived)
-        {
-            FinishAction(Action.Token, CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None);
-            RecordPath(CombatAI::PathOutcome::Arrived, TEXT("search inspection point reached"));
-            // Inspect outward from the reached point, rather than aim vertically at our feet.
-            const float SectorAngle = SearchCycle.Index == 0 ? 0.f : 90.f * ((SearchCycle.Index - 1) % 4);
-            SearchLook = Feet() + SearchForward.RotateAngleAxis(SectorAngle, FVector::UpVector) * 400.f + FVector(0,0,140);
-        }
-        else if (!Suppressed) SearchBackoff.Set(SearchGoal.X, SearchGoal.Y, Now + FMath::Clamp(Tuning.RetryCooldown, 1.f, 30.f));
-        ClearIntent();
-        // Retain this sector during the dwell, then select the next bounded proposal.
-        E->SetRifleAimTarget(SearchLook);
-        ObserveUntil = Now + (Arrived ? FMath::Clamp(Tuning.SearchSeconds, .5f, 5.f) : .8f);
-        SearchCycle.Advance(Now, .8, FMath::Clamp(Tuning.RetryCooldown, 1.f, 30.f));
-        bSearchGoal = false;
-        EnsureAction(CombatAI::ActionKind::Observe, Now);
-    }
 }
 
 void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
@@ -86,14 +37,15 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
     if (E->IsDead()) { if (State != EEnemyCombatState::Dead) SuspendForPhysics(true); return; }
     if (E->Authority != EGASPEnemyAuthority::Locomotion)
     { if (State != EEnemyCombatState::Recovery) SuspendForPhysics(false); return; }
-    if (!E->IsReady() || !IsValid(E->Foundation)) { ClearIntent(CombatAI::ActionFailure::Authority); return; }
+    if (!E->IsReady() || !IsValid(E->Foundation))
+    { if (State != EEnemyCombatState::Recovery) SuspendForPhysics(false); return; }
     const double Now = GetWorld()->GetTimeSeconds();
     if (State == EEnemyCombatState::Recovery)
     {
-        MoveBackoff = {}; WeaponBackoff = {}; SearchBackoff = {};
+        MoveBackoff = {}; WeaponBackoff = {};
         BeginSearch(TEXT("locomotion returned; replan from actual feet"));
         NextSight = 0;
-        NextShot = ReadyAt = Now + FMath::Clamp(Tuning.AimSeconds, .1f, 5.f);
+        Gates.AimUntil = Now + FMath::Clamp(Tuning.AimSeconds, .1f, 5.f);
     }
     // Perception is independent of tactical deadlines, including reload/backoff.
     if (Now >= NextSight)
@@ -109,12 +61,21 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
     const float Distance = FVector::Dist2D(Feet(), LastKnownGround);
     // A failed route cannot suppress an already viable in-range weapon action.
     const bool CanReacquire = !WeaponSuppressed && (!MoveSuppressed || Distance <= AttackRange);
-    if (bTargetVisible && CanReacquire && (State == EEnemyCombatState::Idle || State == EEnemyCombatState::Search || State == EEnemyCombatState::Blocked))
+    if (bTargetVisible && ContactAt > ContactDecisionAt) ContactDecisionAt = Now;
+    if (bTargetVisible && (State == EEnemyCombatState::Idle || State == EEnemyCombatState::Search || State == EEnemyCombatState::Blocked))
     {
-        ClearIntent(); FailedAttempts = 0; NextRepath = 0; bReposition = false;
-        ObstructionAttempts = 0; ObstructedSince = -1; ++Acquisitions;
-        ChangeState(EEnemyCombatState::Acquire, TEXT("player visibly acquired"));
-        ReadyAt = Now + FMath::Clamp(Tuning.AcquireSeconds, .1f, 5.f);
+        // Fresh known contact cancels scanning, ordinary holds and old routes on
+        // this decision tick, even when a weapon/route backoff still blocks attack.
+        if (CanReacquire || Assignment.Objective != CombatAI::TacticalObjective::Engage)
+        {
+            ClearIntent(); ResetTactics(false); FailedAttempts = 0; NextRepath = 0; bReposition = false;
+            Assignment.Assign(EncounterGeneration, CombatAI::SelectObjective({Memory.Alert, Memory.HasObservation, true, true}), SightEventId, Now);
+            ContactDecisionAt = Now;
+            ObstructionAttempts = 0; ObstructedSince = -1; ++Acquisitions;
+            if (CanReacquire)
+                ChangeState(EEnemyCombatState::Acquire, Contact == CombatAI::ContactKind::Initial ?
+                    TEXT("initial contact response") : TEXT("known contact interrupts observation"));
+        }
     }
     if (State == EEnemyCombatState::Idle)
     { E->StopMovementCommand(); E->SetRifleStance(EGASPALSRifleStance::Ready); return; }
@@ -124,22 +85,29 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
         E->SetRifleAimTarget(LastKnownAim);
         if (!E->IsRifleHeld() || !E->bRightHandOccupied)
         { FailTactic(TEXT("reload lost weapon capability"), CombatAI::ActionFailure::Weapon, true); return; }
-        if (Now < ReadyAt) return;
+        if (Now < Gates.ReloadUntil) return;
         // No ammo commit from an interrupted or replaced request, even in the same generation.
         if (!FinishAction(ReloadRequest, CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None))
         { BeginSearch(TEXT("stale reload discarded")); return; }
         Magazine = FMath::Clamp(Tuning.MagazineCapacity, 1, 60); ++Reloads;
+        Gates.ReloadUntil = 0; ReloadRequest = {};
         if (!bTargetVisible) { BeginSearch(TEXT("reload complete; continue search")); return; }
         ChangeState(EEnemyCombatState::Aim, TEXT("timed reload complete; unlimited reserve"));
-        ReadyAt = NextShot = Now + FMath::Clamp(Tuning.AimSeconds, .1f, 5.f);
+        Gates.AimUntil = Now + FMath::Clamp(Tuning.AimSeconds, .1f, 5.f);
     }
     if (!bTargetVisible)
     {
-        if (State != EEnemyCombatState::Search) BeginSearch(TEXT("lost sight; persistent local search"));
+        if (State != EEnemyCombatState::Search || Assignment.Objective != CombatAI::TacticalObjective::ProtectedObservation)
+            BeginSearch(TEXT("lost sight; protected observation from permitted evidence"));
         AdvanceSearch(Now); return;
     }
     if (State == EEnemyCombatState::Search && !CanReacquire)
-    { AdvanceSearch(Now); return; }
+    {
+        E->StopMovementCommand(); E->SetRifleStance(EGASPALSRifleStance::Aim);
+        E->SetRifleAimTarget(LastKnownAim); EnsureAction(CombatAI::ActionKind::Observe, Now);
+        TacticalReason = WeaponSuppressed ? TEXT("known visible contact; weapon backoff") : TEXT("known visible contact; route backoff");
+        return;
+    }
     E->SetRifleAimTarget(LastKnownAim); E->SetCrouchCommand(false);
     if (!E->IsRifleHeld() || !E->bRightHandOccupied)
     { FailTactic(TEXT("no held usable weapon"), CombatAI::ActionFailure::Weapon, true); return; }
@@ -147,7 +115,7 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
     {
         E->StopMovementCommand(); E->SetRifleStance(EGASPALSRifleStance::Ready);
         EnsureAction(CombatAI::ActionKind::Observe, Now);
-        if (Now < ReadyAt) return;
+        if (Now < Gates.ContactUntil) return;
         FinishAction(Action.Token, CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None);
         ChangeState(EEnemyCombatState::Pursue, TEXT("acquisition delay complete"));
     }
@@ -169,7 +137,7 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
         RecordPath(CombatAI::PathOutcome::Arrived, TEXT("pursuit attack region reached"));
         ClearIntent(); E->SetRifleAimTarget(LastKnownAim); bReposition = false;
         ChangeState(EEnemyCombatState::Aim, TEXT("attack distance reached; braking into aim"));
-        ReadyAt = FMath::Max(NextShot, Now + FMath::Clamp(Tuning.AimSeconds, .1f, 5.f));
+        Gates.AimUntil = Now + FMath::Clamp(Tuning.AimSeconds, .1f, 5.f);
     }
     if (Distance > AttackRange * 1.15f)
     {
@@ -182,10 +150,10 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
         ClearIntent();
         ReloadRequest = EnsureAction(CombatAI::ActionKind::Reload, Now);
         ChangeState(EEnemyCombatState::Reload, TEXT("empty magazine"));
-        ReadyAt = Now + FMath::Clamp(Tuning.ReloadSeconds, .3f, 15.f); return;
+        Gates.ReloadUntil = Now + FMath::Clamp(Tuning.ReloadSeconds, .3f, 15.f); return;
     }
     if (State != EEnemyCombatState::Burst) EnsureAction(CombatAI::ActionKind::Aim, Now);
-    if (Now < ReadyAt || Now < NextShot) return;
+    if (Now < Gates.ReadyAt(NextShot)) return;
     FVector Muzzle, Direction; bool bObstructed;
     if (!CanShoot(Muzzle, Direction, bObstructed))
     {
@@ -220,6 +188,6 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
     {
         FinishAction(Action.Token, CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None);
         ChangeState(EEnemyCombatState::Aim, TEXT("burst pause"));
-        ReadyAt = Now + FMath::Clamp(Tuning.BurstPause, .1f, 10.f);
+        Gates.PauseUntil = Now + FMath::Clamp(Tuning.BurstPause, .1f, 10.f);
     }
 }

@@ -47,6 +47,8 @@ bool UEnemyCombatComponent::FinishAction(CombatAI::ActionToken Request, CombatAI
 void UEnemyCombatComponent::ClearIntent(CombatAI::ActionFailure Why)
 {
     FinishAction(Action.Token, CombatAI::ActionStatus::Canceled, Why);
+    Gates.ReloadUntil = 0;
+    PathRequest = {}; ReloadRequest = {};
     if ((bPlanning || !Path.IsEmpty()) && LastPathOutcome != CombatAI::PathOutcome::Arrived && LastPathOutcome != CombatAI::PathOutcome::Failed)
         RecordPath(CombatAI::PathOutcome::Canceled, TEXT("intent cleared"));
     Path.Reset(); Nodes.Reset(); OpenNodes.Reset(); CellNodes.Reset();
@@ -76,9 +78,10 @@ void UEnemyCombatComponent::SetEnabled(bool bEnable)
     Target.Reset(); Memory.Reset(); bTargetVisible = false;
     SearchGoal = SearchAnchor = SearchLook = PathGoal = FVector::ZeroVector;
     bRequestedWalk = true;
-    SearchCycle.Restart(); bSearchGoal = bReposition = false; ObserveUntil = 0;
-    MoveBackoff = {}; WeaponBackoff = {}; SearchBackoff = {};
-    NextShot = ReadyAt = GetWorld()->GetTimeSeconds() + 1.f;
+    ResetTactics(); bReposition = false;
+    MoveBackoff = {}; WeaponBackoff = {};
+    Gates = {}; Contact = CombatAI::ContactKind::None; ContactAt = ContactDecisionAt = 0;
+    NextShot = GetWorld()->GetTimeSeconds() + 1.f;
     NextSight = NextRepath = 0; FailedAttempts = 0;
     ObstructionAttempts = 0; ObstructedSince = -1;
     ChangeState(bEnabled ? EEnemyCombatState::Idle : EEnemyCombatState::Disabled, bEnabled ? TEXT("combat enabled") : TEXT("manual fixture"));
@@ -108,8 +111,9 @@ void UEnemyCombatComponent::ResetCombat(FVector HomeGround, FRotator HomeRotatio
 void UEnemyCombatComponent::StopCombat()
 {
     ClearIntent(CombatAI::ActionFailure::Stopped);
+    ResetTactics(); Gates = {};
     Target.Reset(); bTargetVisible = false; Memory.Reset();
-    NextShot = ReadyAt = TNumericLimits<double>::Max();
+    NextShot = TNumericLimits<double>::Max();
     ChangeState(EEnemyCombatState::Disabled, TEXT("combat stopped"));
     RecordTrace(CombatAI::Event::Stop, TEXT("combat stopped"));
 }
@@ -117,8 +121,7 @@ void UEnemyCombatComponent::SuspendForPhysics(bool bDead)
 {
     if (!bEnabled) return;
     ClearIntent(bDead ? CombatAI::ActionFailure::Death : CombatAI::ActionFailure::Authority); bTargetVisible = false;
-    bSearchGoal = false; ObserveUntil = 0;
-    NextShot = ReadyAt = TNumericLimits<double>::Max();
+    ResetTactics();
     if (bDead) { Target.Reset(); Memory.Reset(); }
     ChangeState(bDead ? EEnemyCombatState::Dead : EEnemyCombatState::Recovery,
         bDead ? TEXT("death cancels combat") : TEXT("physical authority owns movement"));
@@ -127,8 +130,20 @@ void UEnemyCombatComponent::SuspendForPhysics(bool bDead)
 
 bool UEnemyCombatComponent::ObservePlayer()
 {
+    const CombatAI::EncounterMemory Prior = Memory;
+    const bool WasVisible = bTargetVisible;
+    const FVector PriorDirection = (LastKnownGround - Feet()).GetSafeNormal2D();
     bTargetVisible = TryObservePlayer();
-    if (bTargetVisible) ++SightEventId;
+    if (bTargetVisible)
+    {
+        ++SightEventId;
+        const double Now = GetWorld()->GetTimeSeconds();
+        const FVector Direction = (LastKnownGround - Feet()).GetSafeNormal2D();
+        const double Dot = PriorDirection.IsNearlyZero() || Direction.IsNearlyZero() ? 1 : FVector::DotProduct(PriorDirection, Direction);
+        const auto Kind = CombatAI::ClassifyContact(Prior.Alert, Prior.HasObservation, WasVisible, Now-Prior.LastSeen, Dot);
+        Gates.Sight(Kind, Now, FMath::Clamp(Tuning.AcquireSeconds, .1f, 5.f));
+        if (Kind != CombatAI::ContactKind::Continuous) { Contact = Kind; ContactAt = Now; }
+    }
     RecordTrace(bTargetVisible ? CombatAI::Event::Sight : CombatAI::Event::SightLost,
         bTargetVisible ? TEXT("direct sight sample") : TEXT("sight query failed; retained last observation only"));
     return bTargetVisible;
@@ -280,7 +295,7 @@ void EnemyCommand(const TArray<FString>& Args, UWorld* World)
         else if (Op == TEXT("status")) { UE_LOG(LogEnemyCombat, Display, TEXT("%s"), *Combat->GetCombatState()); }
         else if (Op == TEXT("trace"))
         {
-            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-01/Traces");
+            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-T01/Traces");
             IFileManager::Get().MakeDirectory(*Directory, true);
             const auto Snapshot = Combat->CaptureDecisionInput();
             const FString File = Directory / FString::Printf(TEXT("G%llu_S%u_%lld.json"),
@@ -301,12 +316,17 @@ void EnemyCommand(const TArray<FString>& Args, UWorld* World)
             else if (Name == TEXT("pause")) Combat->Tuning.BurstPause = FMath::Clamp(Value, .1f, 10.f);
             else if (Name == TEXT("reload")) Combat->Tuning.ReloadSeconds = FMath::Clamp(Value, .3f, 15.f);
             else if (Name == TEXT("search")) Combat->Tuning.SearchSeconds = FMath::Clamp(Value, .5f, 20.f);
+            else if (Name == TEXT("tacticalradius")) Combat->Tuning.TacticalRadius = FMath::Clamp(Value, 250.f, 750.f);
+            else if (Name == TEXT("reassess")) Combat->Tuning.TacticalReassessSeconds = FMath::Clamp(Value, 1.5f, 8.f);
+            else if (Name == TEXT("commit")) Combat->Tuning.TacticalCommitSeconds = FMath::Clamp(Value, 1.f, 10.f);
+            else if (Name == TEXT("probe")) Combat->Tuning.TacticalProbeSeconds = FMath::Clamp(Value, 3.f, 20.f);
+            else if (Name == TEXT("margin")) Combat->Tuning.TacticalSwitchMargin = FMath::Clamp(Value, 3.f, 30.f);
             else { UE_LOG(LogEnemyCombat, Warning, TEXT("Unknown tuning key: %s"), *Name); continue; }
             UE_LOG(LogEnemyCombat, Display, TEXT("%s = %.3f (world seconds / cm)"), *Name, Value);
         }
     }
 }
 FAutoConsoleCommandWithWorldAndArgs EnemyCombatConsole(TEXT("msq.EnemyCombat"),
-    TEXT("one | fixtures (three passive originals) | pause | resume | reset | seed 0..2147483647 (resets) | status | trace (explicit bounded export) | tune range/sight/aim/interval/pause/reload/search value"),
+    TEXT("one | fixtures (three passive originals) | pause | resume | reset | seed 0..2147483647 (resets) | status | trace (explicit bounded export) | tune range/sight/aim/interval/pause/reload/search/tacticalradius/reassess/commit/probe/margin value"),
     FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(&EnemyCommand));
 }

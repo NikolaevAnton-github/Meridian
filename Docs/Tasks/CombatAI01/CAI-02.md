@@ -7,7 +7,12 @@ Prepared 2026-09-23; no implementation started.
 Authority: [task preparation](../../Approvals/CombatAI01-TaskCreation01.json).
 Read the [implementation plan](../CombatAI01Plan.md) and [design](../../Design/CombatAI01.md).
 
-Hard prerequisites: MSQ-103.
+Hard prerequisites: MSQ-103, MSQ-118.
+
+The later [early tactical delivery](../../CombatAI01-Tactical01Acceptance.md)
+provides the current sight-based policy. Preserve its protected-position,
+reacquisition, weapon-gate and action contracts while adding sensory evidence.
+This prerequisite update does not dispatch MSQ-104.
 
 ## Package work and acceptance
 **Purpose:** give the hunter multiple honest sources of information.

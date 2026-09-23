@@ -1,0 +1,18 @@
+{
+  "record_id": "CombatAI01-Tactical01-OwnerStart01",
+  "date_local": "2026-09-23",
+  "source": "Owner direct chat following the situational tactics proposal",
+  "owner_message_original": "Давай делать тогда",
+  "owner_message_english_translation": "Let's do it then.",
+  "decision": "Implement the proposed first playable tactical result: one enemy with prompt known-threat reacquisition and useful protected observation after losing contact, with a minimal coordinator/intent seam for later group extension.",
+  "controller_slicing": "Create a bounded early MSQ-101 child on delivered MSQ-103 rather than claiming completion of the full CAI-03/04/05 packages. Use currently available sight evidence and collision/navigation capabilities. CAI-02 hearing/fire stimuli remains a separate next package; its absence must be explicit and cannot be hidden by fabricated sensory evidence.",
+  "scope": "Implement position selection from actual retained geometry, reachable protected movement, useful approach-facing observation, bounded reassessment and fallback, and reduced redundant acquisition delays. Integrate with existing interruptible actions, physical authority, reset generations and observability.",
+  "execution": "Use one Multica Unreal executor at Astra/max, standard/default speed, and one primary independent technical reviewer at max. Verify saved settings and native execution. Controller owns task administration, acceptance and local closure commit.",
+  "verification": "Continue owner-only gameplay testing. Agents perform native build, focused source/pure checks and independent source review. Geometry inspection in the editor is allowed; no agent Play, simulated combat, firing or gameplay probes. Runtime tactical quality and combat feel remain owner judgement.",
+  "editor_lifecycle": "Necessary controlled rebuild and editor reload are authorized. Confirm project, retained map, Play and dirty state before lifecycle changes; preserve unsaved assets and coordinate a newly active owner session.",
+  "later_scope": "Two/three-member cooperation, full hearing/stimulus integration, Recast topology, suppression, health/lifecycle completion, smoke, traps and other equipment remain separate. This first task does not declare the existing larger packages complete or dispatch successors.",
+  "preservation": "Preserve Config/DefaultEngine.ini and MeridianSquad.uproject owner edits, retained map/geometry, character sources, GASP/Mover authority, finite projectiles and world/bullet/rifle 0.25 versus hero 0.65 slowdown. Preserve all historical candidate manifests.",
+  "task": "MSQ-118",
+  "task_document": "Docs/Tasks/CombatAI01/CAI-T01.md",
+  "evidence_root": "Saved/CombatAI01/CAI-T01/"
+}

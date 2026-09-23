@@ -4,11 +4,12 @@
 #include <cstdint>
 #include <cstddef>
 #include "CombatAIAction.h"
+#include "CombatAITactics.h"
 
 // Value-only decision capture. No UObject, target getter or fairness input.
 namespace CombatAI
 {
-constexpr std::uint32_t SchemaVersion = 2;
+constexpr std::uint32_t SchemaVersion = 3;
 constexpr std::size_t TraceCapacity = 64;
 constexpr std::uint32_t DefaultEncounterSeed = 102;
 
@@ -28,7 +29,7 @@ struct Position
 };
 enum class Evidence : std::uint8_t { None, Sight, LastSight };
 enum class PathOutcome : std::uint8_t { None, Planning, Ready, Following, Arrived, Failed, Canceled };
-enum class Event : std::uint8_t { Reset, DecisionInput, Sight, SightLost, State, Path, Shot, Stop, Authority, Action };
+enum class Event : std::uint8_t { Reset, DecisionInput, Sight, SightLost, State, Path, Shot, Stop, Authority, Action, Tactical };
 
 struct InputSnapshot
 {
@@ -44,6 +45,21 @@ struct InputSnapshot
     ActionStatus ActionState = ActionStatus::None;
     ActionFailure Failure = ActionFailure::None;
     double ActionStarted = 0, ActionUpdated = 0;
+    TacticalObjective Objective = TacticalObjective::None;
+    TacticalPhase PositionPhase = TacticalPhase::None;
+    ContactKind Contact = ContactKind::None;
+    DecisionGate Gate = DecisionGate::None;
+    ActionToken AssignmentId;
+    Position SelectedPosition, SelectedFacing;
+    double ContactAt = 0, ContactDecisionAt = 0, ObjectiveDecidedAt = 0, ScanStartedAt = 0;
+    double ContactUntil = 0, AimUntil = 0, PauseUntil = 0, ReloadUntil = 0;
+    double HoldStartedAt = 0, MoveStartedAt = 0, NextReassess = 0, NextSector = 0, EvidenceAge = -1;
+    double PositionScore = InvalidPositionScore, Protection = 0, Exposure = 1;
+    int CandidateCount = 0, EvaluatedCount = 0, RejectedCount = 0, TransferAttempts = 0, LookSector = -1;
+    int GeometryQueries = 0, PeakAssessmentQueries = 0;
+    bool Scanning = false, HasPosition = false;
+    std::array<int, static_cast<std::size_t>(PositionRejection::Count)> Rejections{};
+    std::array<char, 96> TacticalReason{};
     int SearchIndex = 0;
     bool Alert = false, RequestedWalk = true;
     MovePurpose Purpose = MovePurpose::Pursuit;

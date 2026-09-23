@@ -4,6 +4,7 @@
 #include "Components/ActorComponent.h"
 #include "CombatAIObservation.h"
 #include "CombatAIAction.h"
+#include "CombatAITactics.h"
 #include "EnemyCombatComponent.generated.h"
 
 class AGASPEnemyFixture;
@@ -40,6 +41,11 @@ struct FEnemyCombatTuning
     // Local inspection dwell, never an encounter/memory expiry.
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SearchSeconds = 2.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SearchRadius = 360.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float TacticalRadius = 650.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float TacticalReassessSeconds = 2.5f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float TacticalCommitSeconds = 4.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float TacticalProbeSeconds = 6.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float TacticalSwitchMargin = 10.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float PursuitSeconds = 12.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float ReturnSeconds = 12.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float RetryCooldown = 5.f;
@@ -101,21 +107,20 @@ private:
     CombatAI::ActionRuntime Action;
     CombatAI::ActionToken PathRequest;
     CombatAI::ActionToken ReloadRequest;
-    CombatAI::LocalSearchCycle SearchCycle;
-    CombatAI::DestinationBackoff MoveBackoff, WeaponBackoff, SearchBackoff;
+    CombatAI::DestinationBackoff MoveBackoff, WeaponBackoff;
     FVector SearchGoal = FVector::ZeroVector;
     FVector SearchAnchor = FVector::ZeroVector;
     FVector SearchForward = FVector::ForwardVector;
     FVector SearchLook = FVector::ZeroVector;
-    bool bSearchGoal = false;
     bool bReposition = false;
-    double ObserveUntil = 0;
     CombatAI::MovePurpose MovementPurpose = CombatAI::MovePurpose::Pursuit;
     bool bRequestedWalk = true;
     double StateStarted = 0;
     double NextSight = 0;
     double NextShot = 0;
-    double ReadyAt = 0;
+    CombatAI::ResponseGates Gates;
+    CombatAI::ContactKind Contact = CombatAI::ContactKind::None;
+    double ContactAt = 0, ContactDecisionAt = 0;
     double NextRepath = 0;
     double LastProgress = 0;
     double FlashUntil = 0;
@@ -146,6 +151,41 @@ private:
     bool Fire(double Now, CombatAI::ActionToken Request);
     void BeginSearch(const TCHAR* Why, bool bRestart = true);
     void AdvanceSearch(double Now);
+    struct FTacticalPosition
+    {
+        FVector Ground = FVector::ZeroVector;
+        CombatAI::PositionFeatures Features;
+        CombatAI::PositionRating Rating;
+    };
+    CombatAI::TacticalAssignment Assignment;
+    CombatAI::ActionToken ScanRequest;
+    CombatAI::TacticalPhase TacticalPhase = CombatAI::TacticalPhase::None;
+    CombatAI::PositionHistory RejectedPositions, VisitedPositions;
+    TArray<FTacticalPosition> TacticalCandidates;
+    FTacticalPosition HeldPosition, SelectedPosition;
+    FVector ScanOrigin = FVector::ZeroVector;
+    bool bTacticalScan = false, bHeldPosition = false, bSelectedPosition = false;
+    int32 SurfaceIndex = 0, CandidateIndex = 0, LookSector = -1;
+    CombatAI::TransferBudget Transfers;
+    unsigned ViewedSectors = 0;
+    int32 TacticalQueryCount = 0, TacticalPeakQueries = 0, TacticalRejected = 0;
+    std::array<int32, static_cast<size_t>(CombatAI::PositionRejection::Count)> RejectionCounts{};
+    double ScanStartedAt = 0, NextTacticalWork = 0, NextTacticalScan = 0;
+    double HoldStartedAt = 0, NextHoldValidation = 0, NextLookAt = 0, TacticalMoveStartedAt = 0;
+    FString TacticalReason;
+    void ResetTactics(bool bClearHistory = true);
+    void BeginTacticalScan(double Now);
+    void AdvanceTacticalScan(double Now);
+    void ChooseTacticalPosition(double Now);
+    void RejectTacticalPosition(const FVector& Ground, CombatAI::PositionRejection Why, double Now);
+    void HoldTacticalPosition(double Now);
+    void SetObservationFacing(double Now);
+    void AddTacticalCandidate(FVector Ground);
+    FTacticalPosition AssessTacticalPosition(FVector Reference, FVector From, bool bCheckRoute);
+    bool TacticalGround(FVector Reference, FVector& Ground, CombatAI::PositionRejection& Failure);
+    bool TacticalWalk(FVector From, FVector To);
+    bool TacticalTrace(FVector From, FVector To, FHitResult& Hit, ECollisionChannel Response = ECC_Visibility);
+    FVector TacticalDirection(int32 Sector) const;
     void FailTactic(const TCHAR* Why, CombatAI::ActionFailure Failure, bool bWeapon);
     bool FollowPath(FVector Goal, float Acceptance, double Now, CombatAI::MovePurpose Purpose);
     bool PlanPath(FVector Goal, float Acceptance);

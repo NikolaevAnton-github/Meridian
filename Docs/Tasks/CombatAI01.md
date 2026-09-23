@@ -17,7 +17,7 @@ The later [MSQ-103 start](../Approvals/CombatAI01-CAI01-OwnerStart01.json) autho
 CAI-01 through Multica at Astra/high, retaining owner-only gameplay testing.
 It now delivers [Candidate01/build05](../CombatAI01-CAI01Acceptance.md) with passing
 build, 35 focused checks and independent source review; runtime remains pending owner testing.
-MSQ-104 and later children remain undispatched. Core native
+MSQ-104 through MSQ-117 remain undispatched. Core native
 stages describe the sequence only; conditional future integrations are unstaged.
 The controller verifies evidence and execution authorization before dispatch.
 The owner retains play/visual judgement. No gameplay/editor work starts from task creation.
@@ -39,11 +39,21 @@ owner testing boundaries and source/evidence identity.
 
 ## Task index
 
+The later [owner start](../Approvals/CombatAI01-Tactical01-OwnerStart01.json)
+authorizes **MSQ-118 / CAI-T01** as a bounded early single-enemy tactical slice
+after MSQ-103 and before the remaining core packages. It uses existing sight/local
+navigation and introduces protected lost-contact observation plus faster known
+contact response. MSQ-104 through MSQ-117 retain their unfinished scope.
+MSQ-118 now delivers [Candidate02/build01](../CombatAI01-Tactical01Acceptance.md)
+with passing build, focused evidence and the same primary review's finding closure.
+Gameplay acceptance remains pending owner. MSQ-104 consumes this current policy.
+
 | Package | Issue | Task | Prerequisites | Stage |
 | --- | --- | --- | --- | --- |
+| CAI-T01 | MSQ-118 | [Situational single-enemy tactics and coordinator foundation](CombatAI01/CAI-T01.md) | MSQ-103 | Unstaged early slice |
 | CAI-00 | MSQ-102 | [Baseline, contracts and observability](CombatAI01/CAI-00.md) | MSQ-70 | 1 |
 | CAI-01 | MSQ-103 | [Persistent intent and running](CombatAI01/CAI-01.md) | MSQ-102 | 2 |
-| CAI-02 | MSQ-104 | [Footsteps, incoming fire and evidence memory](CombatAI01/CAI-02.md) | MSQ-103 | 3 |
+| CAI-02 | MSQ-104 | [Footsteps, incoming fire and evidence memory](CombatAI01/CAI-02.md) | MSQ-103, MSQ-118 | 3 |
 | CAI-03 | MSQ-105 | [Encounter navigation and persistent spatial search](CombatAI01/CAI-03.md) | MSQ-104 | 4 |
 | CAI-04 | MSQ-106 | [Individual tactics, cover and firing rhythm](CombatAI01/CAI-04.md) | MSQ-105, MSQ-71 | 5 |
 | CAI-05 | MSQ-107 | [Safe multi-enemy foundation and shared information](CombatAI01/CAI-05.md) | MSQ-106, MSQ-72 | 6 |

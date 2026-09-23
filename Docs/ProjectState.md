@@ -44,7 +44,24 @@ sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
 
-## Owner feedback: situational tactics and squad coordination
+## Owner-test handoff: MSQ-118 situational tactics
+
+The [owner start](Approvals/CombatAI01-Tactical01-OwnerStart01.json) authorizes
+[MSQ-118 / CAI-T01](Tasks/CombatAI01/CAI-T01.md). **Candidate02/build01** delivers
+prompt known-contact response, static-geometry protected positioning, active
+observation/reassessment and a minimal one-member coordinator seam on MSQ-103.
+Native build, focused checks and the sole primary review pass after bounded
+CAIT-R1/R2 corrections. See [acceptance](CombatAI01-Tactical01Acceptance.md),
+[base behavior](CombatAI01-Tactical01.md), [correction](CombatAI01-Tactical01Correction01.md)
+and [finding closure](CombatAI01-Tactical01Correction01Review.md).
+All 96 final manifest entries match; owner config/project/map and history remain
+preserved. Native executor/reviewer Astra/max/default is verified. Gameplay,
+position usefulness, motion and performance remain pending owner; no agent Play
+or firing ran. The task runtime is stopped, profiles remain max/default, and the
+retained lobby is reopened with the accepted DLL for owner Play. Current
+sight/local-navigation limits remain. MSQ-104 hearing
+must consume this policy and remains undispatched, as do MSQ-105 through MSQ-117.
+Full CAI-03/04/05, group cooperation and equipment are not declared complete.
 
 After playing MSQ-103, the owner observes running/searching but finds decisions
 slow and the opponent mannequin-like. The [new tactical direction](Approvals/CombatAI01-TacticalDirection01.json)
@@ -53,8 +70,8 @@ lone enemy choosing protected observation after losing contact. Persistent searc
 can include controlling approaches; it need not mean exposed wandering.
 The [design refinement](Design/CombatAI01TacticalCoordinator01.md) records the
 current timer/search limitations, protected-position behavior, proposed early
-tactical delivery and future smoke/trap roles. Detailed slicing/population remain
-proposals; no new candidate or live dependency change is claimed. Overall owner
+tactical delivery and future smoke/trap roles. The later start above selects the
+bounded first slice; further group/equipment details remain proposals. Overall owner
 combat-feel acceptance remains unmet. Equipment is later scope.
 
 ## Owner-test handoff: MSQ-103 persistent intent and running

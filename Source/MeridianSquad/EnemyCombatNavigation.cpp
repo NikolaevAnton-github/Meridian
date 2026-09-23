@@ -105,9 +105,13 @@ void UEnemyCombatComponent::ContinuePath()
     const int32 ExpansionLimit = FMath::Clamp(Tuning.MaxPathExpansions, 64, 2000);
     const float Radius = FMath::Clamp(Tuning.NavigationRadius, 400.f, 4000.f);
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyPathExpand), false); NavigationQuery(Query);
+    const bool bTactical = MovementPurpose == CombatAI::MovePurpose::Search;
+    // Grid connectivity is separate from the pawn's final arrival tolerance.
+    // Cover a cell diagonal while keeping the connector below 180 cm / six samples.
+    const float ConnectionRadius = bTactical ? PathCell * 1.5f : PathAcceptance;
     // At most 16 nodes per frame, plus a 1.5 ms boundary between expansions.
-    // One expansion has at most eight fixed-length edges. Work is resumed next
-    // frame, not repeated from scratch. Pending searches time out in five seconds.
+    // One expansion has at most eight edges and one local goal connector. Work
+    // resumes next frame; pending searches time out in five seconds.
     for (int32 Work = 0; Work < 16 && bPlanning; ++Work)
     {
         if (OpenNodes.IsEmpty() || LastPathExpanded >= ExpansionLimit ||
@@ -125,15 +129,23 @@ void UEnemyCombatComponent::ContinuePath()
         Nodes[CurrentIndex].bClosed = true;
         const FPathNode Current = Nodes[CurrentIndex];
         ++LastPathExpanded;
-        if (FVector::Dist2D(Current.Ground, PathGoal) <= PathAcceptance && FMath::Abs(Current.Ground.Z - PathGoal.Z) <= 40.f)
+        if (FVector::Dist2D(Current.Ground, PathGoal) <= ConnectionRadius && FMath::Abs(Current.Ground.Z - PathGoal.Z) <= 40.f)
         {
-            for (int32 Index = CurrentIndex; Index != 0 && Index != INDEX_NONE; Index = Nodes[Index].Parent)
-                Path.Add(Nodes[Index].Ground);
-            Algo::Reverse(Path);
-            bPlanning = false; bPlanFailed = false;
-            ProgressPosition = Feet(); LastProgress = GetWorld()->GetTimeSeconds();
-            RecordPath(CombatAI::PathOutcome::Ready, TEXT("path found within acceptance"));
-            return;
+            // Tactical selection needs the final supported strip to the actual
+            // goal, rather than a grid point plus two overlapping tolerances.
+            FVector FinalGround = PathGoal;
+            if (!bTactical || (GroundPoint(PathGoal, FinalGround, Query) && WalkSegment(Current.Ground, FinalGround, Query)))
+            {
+                for (int32 Index = CurrentIndex; Index != 0 && Index != INDEX_NONE; Index = Nodes[Index].Parent)
+                    Path.Add(Nodes[Index].Ground);
+                Algo::Reverse(Path);
+                if (bTactical) Path.Add(FinalGround);
+                bPlanning = false; bPlanFailed = false;
+                ProgressPosition = Feet(); LastProgress = GetWorld()->GetTimeSeconds();
+                RecordPath(CombatAI::PathOutcome::Ready, TEXT("path found within acceptance"));
+                return;
+            }
+            // A blocked final strip must still permit expansion to another approach.
         }
         for (int32 X = -1; X <= 1; ++X)
             for (int32 Y = -1; Y <= 1; ++Y)
