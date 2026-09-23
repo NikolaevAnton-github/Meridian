@@ -1,0 +1,8 @@
+{
+  "date": "2026-09-23",
+  "scope": "Direct model trial in the separate GASPALS UE 5.8 project, outside Multica",
+  "owner_message": "Давай пока не будет продолжать, модель слишком деформирована. Так я хочу перейти в новый чат и там продолжать, сохрани все что нужно, модель не сохраняй",
+  "decision": "Stop the current trial. Owner rejects the model result due to excessive deformation. Preserve continuation context, but do not retain the trial model.",
+  "preservation": "Keep the owner's original Downloads export and earlier concept images unchanged. Keep investigation scripts, technical evidence and handoff notes. Remove this trial's copied/normalized models and imported Unreal assets.",
+  "continuation": "Wait for the owner's instructions in the new chat. No automatic model regeneration, reimport, corrective work or Multica dispatch."
+}

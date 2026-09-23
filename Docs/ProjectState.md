@@ -33,6 +33,13 @@ for the owner's trial; complete feature compatibility and motion acceptance
 are not claimed. Existing MeridianSquad and GameAnimationSample sources remain
 preserved. This experiment does not dispatch or integrate any gameplay task.
 
+The later [Tripo character experiment](TripoCharacter01ChatHandoff.md) is **stopped**.
+The owner rejected the result for excessive deformation and requested a new-chat
+handoff without retaining the trial model. Trial model assets and working copies
+were removed, the original Downloads export was preserved, and the separate
+editor returned to the default GASPALS map with Play stopped. Keep the notes and
+wait for new owner instructions; do not automatically resume model work.
+
 ## Owner-test handoff: MSQ-98 GASP enemy foundation
 
 The owner [requests task creation with GASP migration first](Approvals/GASPEnemyFoundation01-TaskCreation01.json).

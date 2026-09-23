@@ -3,6 +3,10 @@
 Date: 2026-09-23. Direct execution outside Multica under the
 [owner request](Approvals/GASPALSUE58Trial01-OwnerScope01.json).
 
+Later follow-up: the [Tripo model attempt](TripoCharacter01ChatHandoff.md) was
+stopped and rejected by the owner for excessive deformation. Its model assets
+were discarded at the owner's request; the original trial setup below remains.
+
 ## Delivery
 
 The separate project is `D:/devgames/GASPALS_UE58/GASPALS.uproject`.
