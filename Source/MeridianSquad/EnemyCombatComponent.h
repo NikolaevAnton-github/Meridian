@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "CombatAIObservation.h"
+#include "CombatAIAction.h"
 #include "EnemyCombatComponent.generated.h"
 
 class AGASPEnemyFixture;
@@ -36,7 +37,9 @@ struct FEnemyCombatTuning
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float BulletSpeed = 14000.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float BulletDamage = 10.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SpreadDegrees = .6f;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) float SearchSeconds = 4.f;
+    // Local inspection dwell, never an encounter/memory expiry.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float SearchSeconds = 2.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float SearchRadius = 360.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float PursuitSeconds = 12.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float ReturnSeconds = 12.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float RetryCooldown = 5.f;
@@ -94,13 +97,25 @@ private:
     int32 LastPathExpanded = 0;
     int32 ObstructionAttempts = 0;
     int64 LastShotId = 0;
-    bool bHasMemory = false;
-    double LastSeen = -1000;
+    CombatAI::EncounterMemory Memory;
+    CombatAI::ActionRuntime Action;
+    CombatAI::ActionToken PathRequest;
+    CombatAI::ActionToken ReloadRequest;
+    CombatAI::LocalSearchCycle SearchCycle;
+    CombatAI::DestinationBackoff MoveBackoff, WeaponBackoff, SearchBackoff;
+    FVector SearchGoal = FVector::ZeroVector;
+    FVector SearchAnchor = FVector::ZeroVector;
+    FVector SearchForward = FVector::ForwardVector;
+    FVector SearchLook = FVector::ZeroVector;
+    bool bSearchGoal = false;
+    bool bReposition = false;
+    double ObserveUntil = 0;
+    CombatAI::MovePurpose MovementPurpose = CombatAI::MovePurpose::Pursuit;
+    bool bRequestedWalk = true;
     double StateStarted = 0;
     double NextSight = 0;
     double NextShot = 0;
     double ReadyAt = 0;
-    double IgnoreSightUntil = 0;
     double NextRepath = 0;
     double LastProgress = 0;
     double FlashUntil = 0;
@@ -123,12 +138,16 @@ private:
     UPROPERTY() TObjectPtr<USoundBase> ShotSound;
     UPROPERTY() TObjectPtr<UNiagaraSystem> MuzzleEffect;
     void ChangeState(EEnemyCombatState NewState, const TCHAR* Why);
-    void ClearIntent();
+    void ClearIntent(CombatAI::ActionFailure Why = CombatAI::ActionFailure::Replaced);
+    CombatAI::ActionToken EnsureAction(CombatAI::ActionKind Kind, double Now);
+    bool FinishAction(CombatAI::ActionToken Request, CombatAI::ActionStatus Outcome, CombatAI::ActionFailure Why);
     bool ObservePlayer();
     bool CanShoot(FVector& Muzzle, FVector& Direction, bool& bObstructed) const;
-    bool Fire(double Now);
-    void StartReturn(const TCHAR* Why);
-    bool FollowPath(FVector Goal, float Acceptance, double Now);
+    bool Fire(double Now, CombatAI::ActionToken Request);
+    void BeginSearch(const TCHAR* Why, bool bRestart = true);
+    void AdvanceSearch(double Now);
+    void FailTactic(const TCHAR* Why, CombatAI::ActionFailure Failure, bool bWeapon);
+    bool FollowPath(FVector Goal, float Acceptance, double Now, CombatAI::MovePurpose Purpose);
     bool PlanPath(FVector Goal, float Acceptance);
     void ContinuePath();
     bool GroundPoint(FVector Reference, FVector& Ground, const FCollisionQueryParams& Query) const;

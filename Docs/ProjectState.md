@@ -12,7 +12,10 @@ reasoning at standard speed**. See [the standing owner instruction](Approvals/Wo
 Verify native execution as well as saved profiles. The later
 [MSQ-102 scoped decision](Approvals/CombatAI01-CAI00-OwnerStart01.json) permits
 controller-selected reasoning for that task; Astra/high is selected, with shared
-profiles restored to max afterward. Earlier high/medium settings
+profiles restored to max afterward. The later
+[MSQ-103 start](Approvals/CombatAI01-CAI01-OwnerStart01.json) also permits
+controller-selected Astra/high for that task, restoring shared profiles to max afterward.
+Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
@@ -41,6 +44,22 @@ sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
 
+## Owner-test handoff: MSQ-103 persistent intent and running
+
+The owner [starts the next task and delegates reasoning selection](Approvals/CombatAI01-CAI01-OwnerStart01.json).
+[CAI-01](Tasks/CombatAI01/CAI-01.md) delivers **Candidate01/build05** on MSQ-102:
+persistent encounter alert, bounded preliminary local search, explicit running and
+an interruptible action lifecycle. Native build, 35 focused source/pure checks and
+the sole independent source review pass. Controller acceptance matches all 79
+manifest entries and preserved owner/map bytes. See the [handoff](CombatAI01-CAI01.md),
+[review](CombatAI01-CAI01Review.md) and [acceptance](CombatAI01-CAI01Acceptance.md).
+Executor/reviewer native Astra/high is verified; the shared profile is restored to
+max/default and task runtime stopped. The retained lobby is reopened for owner Play.
+S01/S06/S07/S10, visible running/braking, motion, feel and performance remain pending
+owner testing. No agent Play/firing ran. Navigation retains its local one-layer,
+28 m home-radius limits. MSQ-104 hearing/incoming-fire awareness and later successors
+remain undispatched. Multica owns live execution status.
+
 ## Owner-test handoff: MSQ-102 baseline, contracts and observability
 
 The owner [starts MSQ-102 and delegates reasoning selection](Approvals/CombatAI01-CAI00-OwnerStart01.json).
@@ -55,7 +74,7 @@ standard-speed arguments were explicit. The shared profile is restored to max an
 task runtime stopped. The retained lobby is loaded for owner Play. Gameplay,
 in-engine reset/export, motion/audio and performance remain pending owner testing;
 no agent Play or firing probes ran. This capture contract does not establish full
-policy/physics replay. MSQ-103 running/persistent intent and all successors remain
+policy/physics replay. MSQ-103 is now authorized above; later successors remain
 undispatched. Multica owns live execution status.
 
 ## Prepared direction: surprising arcade combat AI

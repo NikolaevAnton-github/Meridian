@@ -18,7 +18,7 @@ const TCHAR* PathName(CombatAI::PathOutcome P)
     {
     case CombatAI::PathOutcome::Planning: return TEXT("planning");
     case CombatAI::PathOutcome::Ready: return TEXT("ready");
-    case CombatAI::PathOutcome::Following: return TEXT("following_walk");
+    case CombatAI::PathOutcome::Following: return TEXT("following");
     case CombatAI::PathOutcome::Arrived: return TEXT("arrived");
     case CombatAI::PathOutcome::Failed: return TEXT("failed");
     case CombatAI::PathOutcome::Canceled: return TEXT("canceled");
@@ -37,6 +37,7 @@ const TCHAR* EventName(CombatAI::Event E)
     case CombatAI::Event::Path: return TEXT("path");
     case CombatAI::Event::Shot: return TEXT("shot");
     case CombatAI::Event::Authority: return TEXT("authority");
+    case CombatAI::Event::Action: return TEXT("action");
     default: return TEXT("stop");
     }
 }
@@ -54,15 +55,33 @@ TSharedRef<FJsonObject> SnapshotJson(const CombatAI::InputSnapshot& S)
     J->SetField(TEXT("home"), JsonPosition(S.Home));
     J->SetField(TEXT("known_ground"), JsonPosition(S.KnownGround));
     J->SetField(TEXT("known_aim"), JsonPosition(S.KnownAim));
+    J->SetField(TEXT("action_goal"), JsonPosition(S.ActionGoal));
+    J->SetField(TEXT("search_anchor"), JsonPosition(S.SearchAnchor));
+    J->SetField(TEXT("search_look"), JsonPosition(S.SearchLook));
     J->SetNumberField(TEXT("last_seen_world_time"), S.LastSeenWorldTime);
     J->SetStringField(TEXT("sight_event_id"), LexToString(S.SightEventId));
     J->SetNumberField(TEXT("state_started"), S.StateStarted);
     J->SetNumberField(TEXT("ready_at"), S.ReadyAt);
     J->SetNumberField(TEXT("next_shot"), S.NextShot);
-    J->SetNumberField(TEXT("ignore_sight_until"), S.IgnoreSightUntil);
+    J->SetNumberField(TEXT("move_retry_at"), S.MoveRetryAt);
+    J->SetNumberField(TEXT("weapon_retry_at"), S.WeaponRetryAt);
+    J->SetNumberField(TEXT("search_retry_at"), S.SearchRetryAt);
+    J->SetStringField(TEXT("action_generation"), LexToString(S.ActionId.Generation));
+    J->SetStringField(TEXT("action_id"), LexToString(S.ActionId.Id));
+    static const TCHAR* Kinds[] = {TEXT("none"), TEXT("move"), TEXT("aim"), TEXT("burst"), TEXT("reload"), TEXT("observe")};
+    static const TCHAR* Outcomes[] = {TEXT("none"), TEXT("running"), TEXT("succeeded"), TEXT("canceled"), TEXT("failed")};
+    static const TCHAR* Failures[] = {TEXT("none"), TEXT("replaced"), TEXT("authority"), TEXT("death"), TEXT("reset"), TEXT("stopped"), TEXT("route"), TEXT("timeout"), TEXT("weapon"), TEXT("sight"), TEXT("obstruction")};
+    J->SetStringField(TEXT("action"), Kinds[static_cast<uint8>(S.Action)]);
+    J->SetStringField(TEXT("action_status"), Outcomes[static_cast<uint8>(S.ActionState)]);
+    J->SetStringField(TEXT("action_failure"), Failures[static_cast<uint8>(S.Failure)]);
+    J->SetNumberField(TEXT("action_started"), S.ActionStarted);
+    J->SetNumberField(TEXT("action_updated"), S.ActionUpdated);
+    J->SetNumberField(TEXT("search_candidate"), S.SearchIndex);
+    J->SetStringField(TEXT("requested_gait"), S.RequestedWalk ? TEXT("walk") : TEXT("run"));
+    J->SetNumberField(TEXT("movement_purpose"), static_cast<uint8>(S.Purpose));
     J->SetStringField(TEXT("intent"), StaticEnum<EEnemyCombatState>()->GetNameStringByValue(S.Intent));
     J->SetStringField(TEXT("physical_authority"), StaticEnum<EGASPEnemyAuthority>()->GetNameStringByValue(S.Authority));
-    J->SetStringField(TEXT("alert"), S.HasMemory ? TEXT("legacy_memory_present") : TEXT("legacy_no_memory"));
+    J->SetStringField(TEXT("alert"), S.Alert ? TEXT("confirmed_alert") : TEXT("unaware"));
     J->SetStringField(TEXT("evidence"), S.TargetEvidence == CombatAI::Evidence::Sight ? TEXT("direct_sight") :
         S.TargetEvidence == CombatAI::Evidence::LastSight ? TEXT("last_sight") : TEXT("none"));
     J->SetStringField(TEXT("path_outcome"), PathName(S.Path));
@@ -86,14 +105,20 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
     S.DeltaSeconds = CaptureDeltaSeconds;
     S.SelfFeet = ValuePosition(Feet()); S.Home = ValuePosition(Home);
     // Only the successful sight adapter writes these memories. Never dereference Target.
-    S.HasMemory = bHasMemory; S.Visible = bTargetVisible;
-    if (bHasMemory)
+    S.HasMemory = Memory.HasObservation; S.Alert = Memory.Alert; S.Visible = bTargetVisible;
+    if (Memory.HasObservation)
     {
         S.KnownGround = ValuePosition(LastKnownGround); S.KnownAim = ValuePosition(LastKnownAim);
-        S.LastSeenWorldTime = LastSeen; S.SightEventId = SightEventId;
+        S.LastSeenWorldTime = Memory.LastSeen; S.SightEventId = SightEventId;
         S.TargetEvidence = bTargetVisible ? CombatAI::Evidence::Sight : CombatAI::Evidence::LastSight;
+        S.ActionGoal = ValuePosition(State == EEnemyCombatState::Search ? SearchGoal : PathGoal);
+        S.SearchAnchor = ValuePosition(SearchAnchor); S.SearchLook = ValuePosition(SearchLook);
     }
-    S.StateStarted = StateStarted; S.ReadyAt = ReadyAt; S.NextShot = NextShot; S.IgnoreSightUntil = IgnoreSightUntil;
+    S.StateStarted = StateStarted; S.ReadyAt = ReadyAt; S.NextShot = NextShot;
+    S.MoveRetryAt = MoveBackoff.Until; S.WeaponRetryAt = WeaponBackoff.Until; S.SearchRetryAt = SearchCycle.RetryAt;
+    S.ActionId = Action.Token; S.Action = Action.Kind; S.ActionState = Action.Status; S.Failure = Action.Failure;
+    S.ActionStarted = Action.Started; S.ActionUpdated = Action.Updated;
+    S.SearchIndex = SearchCycle.Index; S.RequestedWalk = bRequestedWalk; S.Purpose = MovementPurpose;
     S.Intent = static_cast<uint8>(State); S.Path = LastPathOutcome; S.Enabled = bEnabled;
     S.Magazine = Magazine; S.Shots = Shots; S.SpreadState = Spread.GetCurrentSeed();
     S.PathRemaining = FMath::Max(0, Path.Num() - PathIndex); S.PathFailures = PathFailures;

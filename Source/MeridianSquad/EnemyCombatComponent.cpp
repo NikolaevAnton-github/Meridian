@@ -29,9 +29,26 @@ UEnemyCombatComponent::UEnemyCombatComponent()
 }
 AGASPEnemyFixture* UEnemyCombatComponent::Enemy() const { return Cast<AGASPEnemyFixture>(GetOwner()); }
 
-void UEnemyCombatComponent::ClearIntent()
+CombatAI::ActionToken UEnemyCombatComponent::EnsureAction(CombatAI::ActionKind Kind, double Now)
 {
-    if (bPlanning || !Path.IsEmpty()) RecordPath(CombatAI::PathOutcome::Canceled, TEXT("intent cleared"));
+    if (Action.Kind == Kind && Action.Accepts(Action.Token))
+    { Action.Update(Action.Token, Now); return Action.Token; }
+    FinishAction(Action.Token, CombatAI::ActionStatus::Canceled, CombatAI::ActionFailure::Replaced);
+    Action.Start(EncounterGeneration, Kind, Now);
+    RecordTrace(CombatAI::Event::Action, TEXT("action started"));
+    return Action.Token;
+}
+bool UEnemyCombatComponent::FinishAction(CombatAI::ActionToken Request, CombatAI::ActionStatus Outcome, CombatAI::ActionFailure Why)
+{
+    if (!Action.Finish(Request, Outcome, Why, GetWorld()->GetTimeSeconds())) return false;
+    RecordTrace(CombatAI::Event::Action, TEXT("action terminal outcome"));
+    return true;
+}
+void UEnemyCombatComponent::ClearIntent(CombatAI::ActionFailure Why)
+{
+    FinishAction(Action.Token, CombatAI::ActionStatus::Canceled, Why);
+    if ((bPlanning || !Path.IsEmpty()) && LastPathOutcome != CombatAI::PathOutcome::Arrived && LastPathOutcome != CombatAI::PathOutcome::Failed)
+        RecordPath(CombatAI::PathOutcome::Canceled, TEXT("intent cleared"));
     Path.Reset(); Nodes.Reset(); OpenNodes.Reset(); CellNodes.Reset();
     PathIndex = 0; bPlanning = bPlanFailed = false;
     BurstRemaining = 0;
@@ -53,9 +70,15 @@ void UEnemyCombatComponent::ChangeState(EEnemyCombatState NewState, const TCHAR*
 void UEnemyCombatComponent::SetEnabled(bool bEnable)
 {
     bEnabled = bEnable;
-    ClearIntent();
-    Target.Reset(); bHasMemory = bTargetVisible = false;
-    NextShot = ReadyAt = IgnoreSightUntil = GetWorld()->GetTimeSeconds() + 1.f;
+    ClearIntent(CombatAI::ActionFailure::Reset);
+    Action.Reset(EncounterGeneration);
+    PathRequest = {}; ReloadRequest = {};
+    Target.Reset(); Memory.Reset(); bTargetVisible = false;
+    SearchGoal = SearchAnchor = SearchLook = PathGoal = FVector::ZeroVector;
+    bRequestedWalk = true;
+    SearchCycle.Restart(); bSearchGoal = bReposition = false; ObserveUntil = 0;
+    MoveBackoff = {}; WeaponBackoff = {}; SearchBackoff = {};
+    NextShot = ReadyAt = GetWorld()->GetTimeSeconds() + 1.f;
     NextSight = NextRepath = 0; FailedAttempts = 0;
     ObstructionAttempts = 0; ObstructedSince = -1;
     ChangeState(bEnabled ? EEnemyCombatState::Idle : EEnemyCombatState::Disabled, bEnabled ? TEXT("combat enabled") : TEXT("manual fixture"));
@@ -65,7 +88,7 @@ void UEnemyCombatComponent::ResetCombat(FVector HomeGround, FRotator HomeRotatio
     Home = HomeGround; HomeFacing = HomeRotation;
     Magazine = FMath::Clamp(Tuning.MagazineCapacity, 1, 60);
     Shots = Reloads = Acquisitions = PathFailures = PathPlans = LastPathExpanded = 0;
-    LastShotId = 0; LastSeen = -1000; FlashUntil = 0;
+    LastShotId = 0; FlashUntil = 0;
     if (const auto* Manager = ACombatProjectileWorld::Find(GetWorld()))
     {
         EncounterGeneration = Manager->GetEncounterGeneration();
@@ -84,17 +107,19 @@ void UEnemyCombatComponent::ResetCombat(FVector HomeGround, FRotator HomeRotatio
 }
 void UEnemyCombatComponent::StopCombat()
 {
-    ClearIntent();
-    Target.Reset(); bTargetVisible = bHasMemory = false;
+    ClearIntent(CombatAI::ActionFailure::Stopped);
+    Target.Reset(); bTargetVisible = false; Memory.Reset();
     NextShot = ReadyAt = TNumericLimits<double>::Max();
+    ChangeState(EEnemyCombatState::Disabled, TEXT("combat stopped"));
     RecordTrace(CombatAI::Event::Stop, TEXT("combat stopped"));
 }
 void UEnemyCombatComponent::SuspendForPhysics(bool bDead)
 {
     if (!bEnabled) return;
-    ClearIntent(); bTargetVisible = false;
+    ClearIntent(bDead ? CombatAI::ActionFailure::Death : CombatAI::ActionFailure::Authority); bTargetVisible = false;
+    bSearchGoal = false; ObserveUntil = 0;
     NextShot = ReadyAt = TNumericLimits<double>::Max();
-    if (bDead) { Target.Reset(); bHasMemory = false; }
+    if (bDead) { Target.Reset(); Memory.Reset(); }
     ChangeState(bDead ? EEnemyCombatState::Dead : EEnemyCombatState::Recovery,
         bDead ? TEXT("death cancels combat") : TEXT("physical authority owns movement"));
     RecordTrace(CombatAI::Event::Authority, TEXT("physical authority handover"));
@@ -134,8 +159,7 @@ bool UEnemyCombatComponent::TryObservePlayer()
     LastKnownGround = Player->GetActorLocation();
     if (const auto* Capsule = Player->FindComponentByClass<UCapsuleComponent>())
         LastKnownGround.Z -= Capsule->GetScaledCapsuleHalfHeight();
-    LastSeen = GetWorld()->GetTimeSeconds();
-    bHasMemory = true;
+    Memory.Observe(GetWorld()->GetTimeSeconds());
     return true;
 }
 
@@ -165,8 +189,10 @@ bool UEnemyCombatComponent::CanShoot(FVector& Muzzle, FVector& Direction, bool& 
             ECC_Visibility, FCollisionShape::MakeSphere(1.f), Query);
     return !bObstructed;
 }
-bool UEnemyCombatComponent::Fire(double Now)
+bool UEnemyCombatComponent::Fire(double Now, CombatAI::ActionToken Request)
 {
+    if (!Action.Accepts(Request) || Action.Kind != CombatAI::ActionKind::Burst ||
+        Request.Generation != EncounterGeneration) return false;
     // Recheck visibility at the actual birth; cached perception cannot authorize
     // an extra round through newly entered cover or a replaced player pawn.
     bTargetVisible = ObservePlayer();
@@ -197,164 +223,6 @@ bool UEnemyCombatComponent::Fire(double Now)
     return true;
 }
 
-void UEnemyCombatComponent::StartReturn(const TCHAR* Why)
-{
-    ClearIntent(); bHasMemory = bTargetVisible = false; Target.Reset();
-    IgnoreSightUntil = GetWorld()->GetTimeSeconds() + FMath::Clamp(Tuning.RetryCooldown, 1.f, 30.f);
-    NextRepath = 0; FailedAttempts = 0;
-    ChangeState(EEnemyCombatState::Return, Why);
-}
-void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
-{
-    CaptureDeltaSeconds = DeltaSeconds;
-    auto* E = Enemy();
-    if (!bEnabled || !E || !E->IsReady() || !IsValid(E->Foundation)) return;
-    if (E->IsDead()) { if (State != EEnemyCombatState::Dead) SuspendForPhysics(true); return; }
-    if (E->Authority != EGASPEnemyAuthority::Locomotion)
-    { if (State != EEnemyCombatState::Recovery) SuspendForPhysics(false); return; }
-    const double Now = GetWorld()->GetTimeSeconds();
-    if (State == EEnemyCombatState::Recovery)
-    {
-        // Discard the old path and plan from the recovered capsule position.
-        ClearIntent(); FailedAttempts = 0; NextRepath = NextSight = 0;
-        NextShot = ReadyAt = Now + FMath::Clamp(Tuning.AimSeconds, .1f, 5.f);
-        ChangeState(bHasMemory ? EEnemyCombatState::Search : EEnemyCombatState::Idle, TEXT("locomotion returned after physical recovery"));
-    }
-    if (State == EEnemyCombatState::Blocked)
-    {
-        E->StopMovementCommand();
-        if (Now < ReadyAt) return;
-        bHasMemory = false; Target.Reset();
-        ChangeState(EEnemyCombatState::Idle, TEXT("bounded failure cooldown ended"));
-    }
-    if (Now >= NextSight)
-    {
-        bTargetVisible = Now >= IgnoreSightUntil && ObservePlayer();
-        NextSight = Now + FMath::Clamp(Tuning.SightInterval, .05f, 1.f);
-        RecordTrace(CombatAI::Event::DecisionInput, TEXT("post-perception legacy policy input"));
-    }
-    if (bTargetVisible && (State == EEnemyCombatState::Idle || State == EEnemyCombatState::Return || State == EEnemyCombatState::Search))
-    {
-        ClearIntent(); FailedAttempts = 0; NextRepath = 0;
-        ObstructionAttempts = 0; ObstructedSince = -1;
-        ++Acquisitions;
-        ChangeState(EEnemyCombatState::Acquire, TEXT("player visibly acquired"));
-        ReadyAt = Now + FMath::Clamp(Tuning.AcquireSeconds, .1f, 5.f);
-    }
-    if (State == EEnemyCombatState::Idle)
-    { E->StopMovementCommand(); E->SetRifleStance(EGASPALSRifleStance::Ready); return; }
-    if (State == EEnemyCombatState::Return)
-    {
-        E->SetRifleStance(EGASPALSRifleStance::Ready);
-        if (FVector::Dist2D(Feet(), Home) < 65.f)
-        {
-            ClearIntent(); E->SetRifleAimTarget(E->Foundation->GetActorLocation() + HomeFacing.Vector() * 300.f);
-            ChangeState(EEnemyCombatState::Idle, TEXT("returned home")); return;
-        }
-        if (Now - StateStarted > FMath::Clamp(Tuning.ReturnSeconds, 2.f, 30.f) || !FollowPath(Home, 55.f, Now))
-        {
-            ClearIntent(); ReadyAt = Now + FMath::Clamp(Tuning.RetryCooldown, 1.f, 30.f);
-            ChangeState(EEnemyCombatState::Blocked, TEXT("home unreachable; stopped without teleport"));
-        }
-        return;
-    }
-    if (State == EEnemyCombatState::Reload)
-    {
-        E->StopMovementCommand(); E->SetRifleStance(EGASPALSRifleStance::Ready);
-        if (bTargetVisible) E->SetRifleAimTarget(LastKnownAim); else E->SetRifleFollowPlayer(false);
-        if (Now < ReadyAt) return;
-        Magazine = FMath::Clamp(Tuning.MagazineCapacity, 1, 60); ++Reloads;
-        ChangeState(bTargetVisible ? EEnemyCombatState::Aim : EEnemyCombatState::Search, TEXT("timed reload complete; unlimited reserve"));
-        ReadyAt = NextShot = Now + FMath::Clamp(Tuning.AimSeconds, .1f, 5.f);
-    }
-    if (!bTargetVisible)
-    {
-        if (!bHasMemory || Now - LastSeen > FMath::Clamp(Tuning.SearchSeconds, .5f, 20.f))
-        { StartReturn(TEXT("finite sight memory expired")); return; }
-        if (State != EEnemyCombatState::Search)
-        { ClearIntent(); NextRepath = 0; FailedAttempts = 0; ChangeState(EEnemyCombatState::Search, TEXT("lost sight; investigate last visible position")); }
-        E->SetRifleStance(EGASPALSRifleStance::Ready);
-        E->SetRifleAimTarget(LastKnownAim);
-        if (!FollowPath(LastKnownGround, 85.f, Now)) StartReturn(TEXT("last visible position unreachable"));
-        return;
-    }
-    E->SetRifleAimTarget(LastKnownAim);
-    E->SetCrouchCommand(false);
-    if (!E->IsRifleHeld())
-    {
-        ClearIntent(); ReadyAt = Now + 1;
-        ChangeState(EEnemyCombatState::Blocked, TEXT("no held weapon")); return;
-    }
-    if (State == EEnemyCombatState::Acquire)
-    {
-        E->StopMovementCommand(); E->SetRifleStance(EGASPALSRifleStance::Ready);
-        if (Now < ReadyAt) return;
-        ChangeState(EEnemyCombatState::Pursue, TEXT("acquisition delay complete"));
-    }
-    const float AttackRange = FMath::Clamp(Tuning.AttackRange, 150.f, 5000.f);
-    const float Distance = FVector::Dist2D(Feet(), LastKnownGround);
-    if (State == EEnemyCombatState::Pursue)
-    {
-        if (Now - StateStarted > FMath::Clamp(Tuning.PursuitSeconds, 2.f, 60.f))
-        { StartReturn(TEXT("bounded pursuit time expired")); return; }
-        // A cover-reposition request needs the observed destination, not merely
-        // the old range threshold which could stop us behind the same pillar.
-        const float StopRange = Reason == TEXT("muzzle corridor obstructed") ? 85.f : AttackRange * .82f;
-        E->SetRifleStance(EGASPALSRifleStance::Ready);
-        if (Distance > StopRange)
-        {
-            if (!FollowPath(LastKnownGround, StopRange, Now)) StartReturn(TEXT("pursuit destination unreachable"));
-            return;
-        }
-        ClearIntent(); E->SetRifleAimTarget(LastKnownAim);
-        ChangeState(EEnemyCombatState::Aim, TEXT("attack distance reached"));
-        ReadyAt = FMath::Max(NextShot, Now + FMath::Clamp(Tuning.AimSeconds, .1f, 5.f));
-    }
-    if (Distance > AttackRange * 1.15f)
-    {
-        ClearIntent(); NextRepath = 0; FailedAttempts = 0;
-        ChangeState(EEnemyCombatState::Pursue, TEXT("visible player left firing range")); return;
-    }
-    E->StopMovementCommand(); E->SetRifleStance(EGASPALSRifleStance::Aim);
-    if (Magazine <= 0)
-    {
-        BurstRemaining = 0;
-        ChangeState(EEnemyCombatState::Reload, TEXT("empty magazine"));
-        ReadyAt = Now + FMath::Clamp(Tuning.ReloadSeconds, .3f, 15.f); return;
-    }
-    if (Now < ReadyAt || Now < NextShot) return;
-    FVector Muzzle, Direction; bool bObstructed;
-    if (!CanShoot(Muzzle, Direction, bObstructed))
-    {
-        BurstRemaining = 0;
-        if (bObstructed)
-        {
-            // Keep this budget across Aim/Pursue swaps, including a target
-            // already inside the close reposition radius. StateStarted alone
-            // would restart forever without ever attempting a path.
-            if (ObstructedSince < 0) ObstructedSince = Now;
-            ++ObstructionAttempts;
-            if (ObstructionAttempts >= 3 || Now - ObstructedSince > 6.f)
-            { StartReturn(TEXT("muzzle obstruction budget exhausted")); return; }
-            ClearIntent(); NextRepath = 0; FailedAttempts = 0;
-            ChangeState(EEnemyCombatState::Pursue, TEXT("muzzle corridor obstructed"));
-        }
-        else if (Now - StateStarted > 6.f)
-            StartReturn(TEXT("aim did not settle within bounded wait"));
-        return;
-    }
-    if (State != EEnemyCombatState::Burst)
-    {
-        BurstRemaining = FMath::Clamp(Tuning.BurstSize, 1, 8);
-        ChangeState(EEnemyCombatState::Burst, TEXT("settled rifle and clear observed target"));
-    }
-    if (Fire(Now) && BurstRemaining <= 0)
-    {
-        ChangeState(EEnemyCombatState::Aim, TEXT("burst pause"));
-        ReadyAt = Now + FMath::Clamp(Tuning.BurstPause, .1f, 10.f);
-    }
-}
-
 FString UEnemyCombatComponent::GetLabel() const
 {
     return FString::Printf(TEXT("%s  %d/%d"), *StaticEnum<EEnemyCombatState>()->GetNameStringByValue(int64(State)),
@@ -371,7 +239,7 @@ FString UEnemyCombatComponent::GetCombatState() const
     Root->SetNumberField(TEXT("state_started"), StateStarted);
     Root->SetNumberField(TEXT("next_shot_world_time"), NextShot);
     Root->SetBoolField(TEXT("visible"), bTargetVisible);
-    Root->SetNumberField(TEXT("last_seen_world_time"), LastSeen);
+    Root->SetNumberField(TEXT("last_seen_world_time"), Memory.LastSeen);
     Root->SetStringField(TEXT("last_known_ground"), LastKnownGround.ToString());
     Root->SetStringField(TEXT("target"), Target.IsValid() ? Target->GetPathName() : TEXT(""));
     Root->SetNumberField(TEXT("magazine"), Magazine);
@@ -412,7 +280,7 @@ void EnemyCommand(const TArray<FString>& Args, UWorld* World)
         else if (Op == TEXT("status")) { UE_LOG(LogEnemyCombat, Display, TEXT("%s"), *Combat->GetCombatState()); }
         else if (Op == TEXT("trace"))
         {
-            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-00/Traces");
+            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-01/Traces");
             IFileManager::Get().MakeDirectory(*Directory, true);
             const auto Snapshot = Combat->CaptureDecisionInput();
             const FString File = Directory / FString::Printf(TEXT("G%llu_S%u_%lld.json"),

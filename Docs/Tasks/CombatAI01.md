@@ -13,7 +13,11 @@ The later [MSQ-102 start](../Approvals/CombatAI01-CAI00-OwnerStart01.json) autho
 CAI-00 only, with controller-selected high reasoning and owner-only gameplay testing.
 It now delivers [Candidate01/build02](../CombatAI01-CAI00Acceptance.md) with passing
 build/source review; runtime criteria remain pending owner testing.
-Other children remain undispatched. Core native
+The later [MSQ-103 start](../Approvals/CombatAI01-CAI01-OwnerStart01.json) authorizes
+CAI-01 through Multica at Astra/high, retaining owner-only gameplay testing.
+It now delivers [Candidate01/build05](../CombatAI01-CAI01Acceptance.md) with passing
+build, 35 focused checks and independent source review; runtime remains pending owner testing.
+MSQ-104 and later children remain undispatched. Core native
 stages describe the sequence only; conditional future integrations are unstaged.
 The controller verifies evidence and execution authorization before dispatch.
 The owner retains play/visual judgement. No gameplay/editor work starts from task creation.

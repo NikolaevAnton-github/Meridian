@@ -3,12 +3,12 @@
 #include <array>
 #include <cstdint>
 #include <cstddef>
+#include "CombatAIAction.h"
 
-// Value-only CAI-00 capture contract. No UObject, target getter or fairness input.
-// This records the legacy policy; it does not implement persistent alert/search.
+// Value-only decision capture. No UObject, target getter or fairness input.
 namespace CombatAI
 {
-constexpr std::uint32_t SchemaVersion = 1;
+constexpr std::uint32_t SchemaVersion = 2;
 constexpr std::size_t TraceCapacity = 64;
 constexpr std::uint32_t DefaultEncounterSeed = 102;
 
@@ -28,7 +28,7 @@ struct Position
 };
 enum class Evidence : std::uint8_t { None, Sight, LastSight };
 enum class PathOutcome : std::uint8_t { None, Planning, Ready, Following, Arrived, Failed, Canceled };
-enum class Event : std::uint8_t { Reset, DecisionInput, Sight, SightLost, State, Path, Shot, Stop, Authority };
+enum class Event : std::uint8_t { Reset, DecisionInput, Sight, SightLost, State, Path, Shot, Stop, Authority, Action };
 
 struct InputSnapshot
 {
@@ -36,8 +36,17 @@ struct InputSnapshot
     std::uint32_t EncounterSeed = DefaultEncounterSeed, SpawnIndex = 0, Seed = 0;
     double WorldTime = 0, DeltaSeconds = 0;
     Position SelfFeet, Home, KnownGround, KnownAim;
+    Position ActionGoal, SearchAnchor, SearchLook;
     double LastSeenWorldTime = -1000, StateStarted = 0;
-    double ReadyAt = 0, NextShot = 0, IgnoreSightUntil = 0;
+    double ReadyAt = 0, NextShot = 0, MoveRetryAt = 0, WeaponRetryAt = 0, SearchRetryAt = 0;
+    ActionToken ActionId;
+    ActionKind Action = ActionKind::None;
+    ActionStatus ActionState = ActionStatus::None;
+    ActionFailure Failure = ActionFailure::None;
+    double ActionStarted = 0, ActionUpdated = 0;
+    int SearchIndex = 0;
+    bool Alert = false, RequestedWalk = true;
+    MovePurpose Purpose = MovePurpose::Pursuit;
     std::uint64_t SightEventId = 0;
     // Native EEnemyCombatState / EGASPEnemyAuthority numeric values in schema v1.
     std::uint8_t Intent = 0, Authority = 0;

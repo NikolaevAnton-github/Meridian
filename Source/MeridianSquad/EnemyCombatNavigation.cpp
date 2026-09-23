@@ -66,6 +66,8 @@ bool UEnemyCombatComponent::WalkSegment(FVector Start, FVector End, const FColli
 
 bool UEnemyCombatComponent::PlanPath(FVector Goal, float Acceptance)
 {
+    FinishAction(Action.Token, CombatAI::ActionStatus::Canceled, CombatAI::ActionFailure::Replaced);
+    PathRequest = EnsureAction(CombatAI::ActionKind::Move, GetWorld()->GetTimeSeconds());
     Path.Reset(); PathIndex = 0; Nodes.Reset(); OpenNodes.Reset(); CellNodes.Reset();
     bPlanning = bPlanFailed = false; LastPathExpanded = 0;
     PathGoal = Goal; PathAcceptance = FMath::Max(Acceptance, 45.f);
@@ -92,6 +94,13 @@ bool UEnemyCombatComponent::PlanPath(FVector Goal, float Acceptance)
 void UEnemyCombatComponent::ContinuePath()
 {
     if (!bPlanning) return;
+    if (!Action.Accepts(PathRequest) || PathRequest.Generation != EncounterGeneration)
+    {
+        Path.Reset(); Nodes.Reset(); OpenNodes.Reset(); CellNodes.Reset();
+        bPlanning = false; bPlanFailed = true;
+        RecordPath(CombatAI::PathOutcome::Canceled, TEXT("stale path request discarded"));
+        return;
+    }
     const double BudgetStart = FPlatformTime::Seconds();
     const int32 ExpansionLimit = FMath::Clamp(Tuning.MaxPathExpansions, 64, 2000);
     const float Radius = FMath::Clamp(Tuning.NavigationRadius, 400.f, 4000.f);
@@ -151,28 +160,39 @@ void UEnemyCombatComponent::ContinuePath()
     }
 }
 
-bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double Now)
+bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double Now, CombatAI::MovePurpose Purpose)
 {
     auto* E = Enemy(); if (!E) return false;
+    if (E->IsDead() || E->Authority != EGASPEnemyAuthority::Locomotion) return false;
+    MovementPurpose = Purpose;
     const FVector Position = Feet();
     if (FVector::Dist2D(Position, Goal) <= Acceptance && FMath::Abs(Position.Z - Goal.Z) <= 40.f)
-    { E->StopMovementCommand(); RecordPath(CombatAI::PathOutcome::Arrived, TEXT("destination acceptance reached")); return true; }
+    {
+        FinishAction(Action.Token, CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None);
+        E->StopMovementCommand(); RecordPath(CombatAI::PathOutcome::Arrived, TEXT("destination acceptance reached")); return true;
+    }
     auto Failed = [&](const TCHAR* Why)
     {
         ++PathFailures; ++FailedAttempts;
         Path.Reset(); bPlanning = bPlanFailed = false;
         NextRepath = Now + FMath::Clamp(Tuning.RepathSeconds, .3f, 5.f);
         E->StopMovementCommand();
+        FinishAction(Action.Token, CombatAI::ActionStatus::Failed, CombatAI::ActionFailure::Route);
         RecordPath(CombatAI::PathOutcome::Failed, Why);
         return FailedAttempts < 2;
     };
+    // An obsolete destination cannot keep submitting old movement while its replacement plans.
+    const bool bChangedGoal = FVector::Dist2D(Goal, PathGoal) > FMath::Clamp(Tuning.NavigationCell, 60.f,120.f) * 2.f;
+    if (bChangedGoal && (bPlanning || !Path.IsEmpty()))
+    {
+        ClearIntent(); NextRepath = 0;
+    }
     if (bPlanning)
     {
         E->StopMovementCommand(); ContinuePath();
         if (bPlanFailed) return Failed(TEXT("open set exhausted, expansion cap or world-time limit"));
         if (bPlanning) return true;
     }
-    const bool bChangedGoal = FVector::Dist2D(Goal, PathGoal) > FMath::Clamp(Tuning.NavigationCell, 60.f,120.f) * 2.f;
     if ((!Path.IsValidIndex(PathIndex) || bChangedGoal) && Now >= NextRepath)
     {
         if (!PlanPath(Goal, Acceptance)) return Failed(TEXT("outside local region/layer or no starting support"));
@@ -181,6 +201,9 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
         return true;
     }
     if (!Path.IsValidIndex(PathIndex)) { E->StopMovementCommand(); return true; }
+    if (!Action.Accepts(PathRequest) || PathRequest.Generation != EncounterGeneration)
+    { ClearIntent(); return false; }
+    Action.Update(PathRequest, Now);
     while (Path.IsValidIndex(PathIndex) && FVector::Dist2D(Position, Path[PathIndex]) < 32.f) ++PathIndex;
     if (!Path.IsValidIndex(PathIndex)) { E->StopMovementCommand(); return true; }
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyPathFollow), false); NavigationQuery(Query);
@@ -188,7 +211,11 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
     if (FVector::Dist2D(Position, ProgressPosition) > 20.f)
     { ProgressPosition = Position; LastProgress = Now; FailedAttempts = 0; }
     else if (Now - LastProgress > FMath::Clamp(Tuning.StuckSeconds, .5f, 5.f)) return Failed(TEXT("movement progress timeout"));
-    E->SetMovementCommand(Path[PathIndex] - Position, true);
-    RecordPath(CombatAI::PathOutcome::Following, TEXT("walk command submitted to foundation"));
+    const FVector Direction = (Path[PathIndex] - Position).GetSafeNormal2D();
+    const float TurnDot = Path.IsValidIndex(PathIndex + 1) ? FVector::DotProduct(Direction,
+        (Path[PathIndex + 1] - Path[PathIndex]).GetSafeNormal2D()) : 1.f;
+    bRequestedWalk = CombatAI::WantsWalk(Purpose, FVector::Dist2D(Position, Goal) - Acceptance, TurnDot);
+    E->SetMovementCommand(Direction, bRequestedWalk);
+    RecordPath(CombatAI::PathOutcome::Following, bRequestedWalk ? TEXT("walk: approach or corner") : TEXT("run: pursuit or search transit"));
     return true;
 }
