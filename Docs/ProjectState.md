@@ -1,6 +1,6 @@
 # MeridianSquad current project state
 
-Updated 2026-09-22. This is a navigation snapshot of current scope and decisions,
+Updated 2026-09-23. This is a navigation snapshot of current scope and decisions,
 not a second task database or a new execution authorization. Read the relevant
 linked task before work and verify live Multica/editor state when needed. Later
 explicit owner instructions take precedence within their scope. When dated summaries
@@ -20,6 +20,18 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [review responsibilities](AgentDevelopment.md#review-responsibilities) and
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
+
+## Separate owner trial: GASPALS on UE 5.8
+
+The owner requested a separate GASPALS project directly outside Multica.
+[GASPALSUE58Trial01](GASPALSUE58Trial01.md) prepares
+`D:/devgames/GASPALS_UE58/GASPALS.uproject` from pinned upstream UE 5.7 source on
+the installed UE 5.8.3. The default map, Play startup, keyboard crouch/stand,
+ragdoll/get-up and Play stop pass focused smoke checks. Camera deprecation and
+an empty character-mesh-array warning remain documented. The editor is ready
+for the owner's trial; complete feature compatibility and motion acceptance
+are not claimed. Existing MeridianSquad and GameAnimationSample sources remain
+preserved. This experiment does not dispatch or integrate any gameplay task.
 
 ## Owner-test handoff: MSQ-98 GASP enemy foundation
 

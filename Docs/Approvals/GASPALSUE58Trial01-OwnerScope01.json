@@ -1,0 +1,12 @@
+{
+  "record_id": "GASPALSUE58Trial01-OwnerScope01",
+  "date_local": "2026-09-23",
+  "source": "Owner direct chat",
+  "owner_message_original": "Рекомендую сначала подготовить отдельный GASPALS на 5.8 для твоей пробы сделай эту, вне мультики",
+  "owner_message_english_translation": "Prepare the recommended separate GASPALS on 5.8 for my trial; do this outside Multica.",
+  "decision": "Prepare a separate local GASPALS project for the owner's trial using the installed Unreal Engine 5.8, directly outside Multica.",
+  "execution": "The controller performs the preparation directly. Bounded read-only source research and an independent technical review may use native subagents. Do not create or dispatch a Multica task for this work.",
+  "acceptance": "Preserve upstream provenance; verify the prepared project opens in the installed UE 5.8, its demonstration level loads, and a focused Play smoke check works. Provide its local path and launch instructions. Owner movement and visual judgement remain separate.",
+  "preservation": "Keep the GASPALS trial separate from MeridianSquad and the existing GameAnimationSample. Preserve existing owner edits, source assets and evidence. Do not integrate this trial into the active game.",
+  "constraints": "Existing subscription and local tools only, no purchases or separately billed services; retain the standing storage, focused verification and closure commit rules."
+}
