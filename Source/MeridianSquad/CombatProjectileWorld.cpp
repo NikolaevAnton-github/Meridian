@@ -607,6 +607,7 @@ void ACombatProjectileWorld::ClearProjectiles()
 }
 void ACombatProjectileWorld::ResetTargets()
 {
+    ++EncounterGeneration;
     ClearProjectiles();
     for (ACombatTarget* Target : Targets) if (IsValid(Target)) Target->ResetTarget();
     for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy))
@@ -637,6 +638,8 @@ void ACombatProjectileWorld::EndPlay(const EEndPlayReason::Type Reason)
 FString ACombatProjectileWorld::GetCombatState() const
 {
     auto Root = MakeShared<FJsonObject>();
+    Root->SetStringField(TEXT("encounter_generation"), LexToString(EncounterGeneration));
+    Root->SetNumberField(TEXT("encounter_seed"), EncounterSeed);
     Root->SetNumberField(TEXT("scale"), ProjectileTimeScale);
     Root->SetNumberField(TEXT("physics_preview_scale"), ActivePreviewScale);
     Root->SetBoolField(TEXT("physics_dummy_enabled"), !PhysicsDummies.IsEmpty());

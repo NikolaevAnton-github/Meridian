@@ -36,6 +36,7 @@ void ACombatProjectileWorld::SetPhysicsDummyEnabled(bool Enabled)
             auto* Dummy = GetWorld()->SpawnActor<AGASPEnemyFixture>(AGASPEnemyFixture::StaticClass(), Placement, Params);
             if (!Dummy) continue;
             Dummy->ConfigureReactionProfile(I + 1);
+            Dummy->Combat->SetStableSpawnIndex(static_cast<uint32>(I));
             Dummy->Combat->bEnabled = bEnemyCombatMode;
             Dummy->FinishSpawning(Placement);
             PhysicsDummies.Add(Dummy);

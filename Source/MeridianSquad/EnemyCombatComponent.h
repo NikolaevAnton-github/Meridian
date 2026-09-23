@@ -2,11 +2,13 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "CombatAIObservation.h"
 #include "EnemyCombatComponent.generated.h"
 
 class AGASPEnemyFixture;
 class USoundBase;
 class UNiagaraSystem;
+class FJsonObject;
 
 UENUM(BlueprintType)
 enum class EEnemyCombatState : uint8
@@ -71,6 +73,9 @@ public:
     void AdvanceCombat(float DeltaSeconds);
     void SuspendForPhysics(bool bDead);
     void StopCombat();
+    // Set once from the explicit placement slot before deferred FinishSpawning.
+    void SetStableSpawnIndex(uint32 Index) { StableSpawnIndex = Index; }
+    CombatAI::InputSnapshot CaptureDecisionInput() const;
 
 private:
     AGASPEnemyFixture* Enemy() const;
@@ -102,7 +107,19 @@ private:
     double ObstructedSince = -1;
     FVector LastMuzzle = FVector::ZeroVector;
     FVector LastBarrel = FVector::ForwardVector;
-    FRandomStream Spread{70};
+    FRandomStream Spread;
+    uint32 StableSpawnIndex = 0;
+    uint32 EncounterSeed = CombatAI::DefaultEncounterSeed;
+    uint32 Seed = 0;
+    uint64 EncounterGeneration = 0;
+    uint64 SightEventId = 0;
+    double CaptureDeltaSeconds = 0;
+    CombatAI::PathOutcome LastPathOutcome = CombatAI::PathOutcome::None;
+    CombatAI::TraceRing DecisionTrace;
+    void RecordTrace(CombatAI::Event Kind, const TCHAR* Why);
+    void RecordPath(CombatAI::PathOutcome Outcome, const TCHAR* Why);
+    void AppendObservationStatus(const TSharedRef<FJsonObject>& Root) const;
+    bool TryObservePlayer();
     UPROPERTY() TObjectPtr<USoundBase> ShotSound;
     UPROPERTY() TObjectPtr<UNiagaraSystem> MuzzleEffect;
     void ChangeState(EEnemyCombatState NewState, const TCHAR* Why);

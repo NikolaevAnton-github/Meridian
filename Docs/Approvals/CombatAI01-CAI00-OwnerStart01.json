@@ -1,0 +1,16 @@
+{
+  "record_id": "CombatAI01-CAI00-OwnerStart01",
+  "date_local": "2026-09-23",
+  "source": "Owner direct chat",
+  "owner_messages_original": ["Давай приступим MSQ-102", "Выдай уровень рассуждений на свое усмотрение"],
+  "owner_messages_english_translation": ["Let's start MSQ-102.", "Set the reasoning level at your discretion."],
+  "decision": "Start MSQ-102 / CAI-00 through the existing Multica implementation route. The controller chooses reasoning levels for this task.",
+  "reasoning": "Controller selects Astra/high for the bounded implementation and independent source review at standard speed. This task-scoped later instruction supersedes the standing max requirement for MSQ-102. Restore the shared profiles to the standing max baseline after this task.",
+  "scope": "Record the current MSQ-70 baseline and interfaces; add bounded observability, decision input contracts and stable per-agent seeds as specified in Docs/Tasks/CombatAI01/CAI-00.md. No successor implementation is authorized.",
+  "verification": "Retain owner-only gameplay testing. Agents perform the native build, focused source checks and one independent source review. Pure non-gameplay checks of new invariants are permitted. Runtime gameplay, firing, motion and performance criteria remain pending owner testing; no agent PIE or firing probes.",
+  "editor_lifecycle": "Necessary controlled native rebuild and editor reload are within implementation scope. Confirm project, map, PIE and dirty state first; preserve unsaved owner assets and do not interrupt a newly active owner session without coordination.",
+  "preservation": "Preserve pre-existing Config/DefaultEngine.ini and MeridianSquad.uproject edits, retained lobby, asset sources, tuning and historical evidence. One production/editor writer. Controller owns task administration, acceptance and local task-scoped closure commit.",
+  "task": "MSQ-102",
+  "task_document": "Docs/Tasks/CombatAI01/CAI-00.md",
+  "evidence_root": "Saved/CombatAI01/CAI-00/"
+}

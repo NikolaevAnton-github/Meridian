@@ -8,7 +8,12 @@ Read [current state](../ProjectState.md), the [implementation plan](CombatAI01Pl
 and [design](../Design/CombatAI01.md). Aim for surprising, understandable arcade
 combat with persistent search, useful hearing and responses to incoming fire.
 
-All children are prepared backlog tasks, unassigned and without runs. Core native
+The original setup prepared all children as unassigned backlog tasks without runs.
+The later [MSQ-102 start](../Approvals/CombatAI01-CAI00-OwnerStart01.json) authorizes
+CAI-00 only, with controller-selected high reasoning and owner-only gameplay testing.
+It now delivers [Candidate01/build02](../CombatAI01-CAI00Acceptance.md) with passing
+build/source review; runtime criteria remain pending owner testing.
+Other children remain undispatched. Core native
 stages describe the sequence only; conditional future integrations are unstaged.
 The controller verifies evidence and execution authorization before dispatch.
 The owner retains play/visual judgement. No gameplay/editor work starts from task creation.

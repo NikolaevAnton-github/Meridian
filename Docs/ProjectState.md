@@ -9,7 +9,10 @@ report's "latest" label.
 
 Current execution requirement: **all project executors and reviewers use max
 reasoning at standard speed**. See [the standing owner instruction](Approvals/WorkerReviewerMax01.json).
-Verify native execution as well as saved profiles. Earlier high/medium settings
+Verify native execution as well as saved profiles. The later
+[MSQ-102 scoped decision](Approvals/CombatAI01-CAI00-OwnerStart01.json) permits
+controller-selected reasoning for that task; Astra/high is selected, with shared
+profiles restored to max afterward. Earlier high/medium settings
 below describe historical runs and are superseded for future work; profile
 restoration must retain the new max requirement.
 
@@ -33,10 +36,27 @@ and separation remain explicit deferred scope. Other stage numbers are preserved
 the historical stage-7 ordering below is superseded. See the
 [administrative verification](CombatPriorities01.md).
 
-The next recommended implementation task remains MSQ-102. A bounded destruction
+MSQ-102 is delivered for owner testing; see its handoff below. A bounded destruction
 sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
+
+## Owner-test handoff: MSQ-102 baseline, contracts and observability
+
+The owner [starts MSQ-102 and delegates reasoning selection](Approvals/CombatAI01-CAI00-OwnerStart01.json).
+[CAI-00](Tasks/CombatAI01/CAI-00.md) delivers Candidate01/build02 on the matched
+MSQ-70 baseline: bounded status/event traces, input contracts, reset generations
+and stable per-agent seeds. The native build, 24 focused checks and sole independent
+source review pass; controller acceptance matches all 30 manifest entries and
+preserved owner/map bytes. See the [handoff](CombatAI01-CAI00.md),
+[review](CombatAI01-CAI00Review.md) and [acceptance](CombatAI01-CAI00Acceptance.md).
+One Multica executor and the reviewer ran at verified native Astra/high; executor
+standard-speed arguments were explicit. The shared profile is restored to max and
+task runtime stopped. The retained lobby is loaded for owner Play. Gameplay,
+in-engine reset/export, motion/audio and performance remain pending owner testing;
+no agent Play or firing probes ran. This capture contract does not establish full
+policy/physics replay. MSQ-103 running/persistent intent and all successors remain
+undispatched. Multica owns live execution status.
 
 ## Prepared direction: surprising arcade combat AI
 

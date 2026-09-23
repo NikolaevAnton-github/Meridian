@@ -67,6 +67,10 @@ public:
     void SetEnemyCombatMode(bool bCombat);
     UFUNCTION(BlueprintPure, Category="Combat|Prototype")
     bool IsEnemyCombatMode() const { return bEnemyCombatMode; }
+    // Encounter lifetime is separate from projectile cancellation generations.
+    uint64 GetEncounterGeneration() const { return EncounterGeneration; }
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Prototype")
+    int32 EncounterSeed = 102;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Prototype")
     bool bEnemyCombatMode = true;
     /** Development preview only. Applied after this combat frame to avoid mixed clock deltas. */
@@ -176,6 +180,7 @@ private:
     int32 LaunchedCount = 0;
     int32 RejectedCount = 0;
     uint64 ResetGeneration = 0;
+    uint64 EncounterGeneration = 1;
     bool bAdvancing = false;
     static constexpr double MaxFrameTime = .250;
     static constexpr double MaxStepTime = .010;

@@ -15,6 +15,9 @@
 #include "NiagaraSystem.h"
 #include "Serialization/JsonSerializer.h"
 #include "Sound/SoundBase.h"
+#include "Misc/FileHelper.h"
+#include "Misc/Paths.h"
+#include "HAL/FileManager.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogEnemyCombat, Log, All);
 
@@ -28,6 +31,7 @@ AGASPEnemyFixture* UEnemyCombatComponent::Enemy() const { return Cast<AGASPEnemy
 
 void UEnemyCombatComponent::ClearIntent()
 {
+    if (bPlanning || !Path.IsEmpty()) RecordPath(CombatAI::PathOutcome::Canceled, TEXT("intent cleared"));
     Path.Reset(); Nodes.Reset(); OpenNodes.Reset(); CellNodes.Reset();
     PathIndex = 0; bPlanning = bPlanFailed = false;
     BurstRemaining = 0;
@@ -44,8 +48,7 @@ void UEnemyCombatComponent::ChangeState(EEnemyCombatState NewState, const TCHAR*
     if (State == NewState) return;
     State = NewState;
     StateStarted = GetWorld()->GetTimeSeconds();
-    UE_LOG(LogEnemyCombat, Log, TEXT("%s state=%s reason=%s ammo=%d shots=%d"),
-        *GetOwner()->GetName(), *StaticEnum<EEnemyCombatState>()->GetNameStringByValue(int64(State)), Why, Magazine, Shots);
+    RecordTrace(CombatAI::Event::State, Why);
 }
 void UEnemyCombatComponent::SetEnabled(bool bEnable)
 {
@@ -63,14 +66,28 @@ void UEnemyCombatComponent::ResetCombat(FVector HomeGround, FRotator HomeRotatio
     Magazine = FMath::Clamp(Tuning.MagazineCapacity, 1, 60);
     Shots = Reloads = Acquisitions = PathFailures = PathPlans = LastPathExpanded = 0;
     LastShotId = 0; LastSeen = -1000; FlashUntil = 0;
-    Spread.Initialize(70);
+    if (const auto* Manager = ACombatProjectileWorld::Find(GetWorld()))
+    {
+        EncounterGeneration = Manager->GetEncounterGeneration();
+        EncounterSeed = static_cast<uint32>(Manager->EncounterSeed);
+    }
+    Seed = CombatAI::AgentSeed(EncounterSeed, StableSpawnIndex);
+    Spread.Initialize(static_cast<int32>(Seed));
+    SightEventId = 0; CaptureDeltaSeconds = 0;
+    LastKnownGround = LastKnownAim = FVector::ZeroVector;
+    LastPathOutcome = CombatAI::PathOutcome::None;
+    // Clear old intent before opening the new ring; no old-generation cancellation survives.
     SetEnabled(bEnabled);
+    LastPathOutcome = CombatAI::PathOutcome::None;
+    DecisionTrace.Reset(EncounterGeneration);
+    RecordTrace(CombatAI::Event::Reset, TEXT("encounter reset; seed retained; player ammo unchanged"));
 }
 void UEnemyCombatComponent::StopCombat()
 {
     ClearIntent();
     Target.Reset(); bTargetVisible = bHasMemory = false;
     NextShot = ReadyAt = TNumericLimits<double>::Max();
+    RecordTrace(CombatAI::Event::Stop, TEXT("combat stopped"));
 }
 void UEnemyCombatComponent::SuspendForPhysics(bool bDead)
 {
@@ -80,9 +97,18 @@ void UEnemyCombatComponent::SuspendForPhysics(bool bDead)
     if (bDead) { Target.Reset(); bHasMemory = false; }
     ChangeState(bDead ? EEnemyCombatState::Dead : EEnemyCombatState::Recovery,
         bDead ? TEXT("death cancels combat") : TEXT("physical authority owns movement"));
+    RecordTrace(CombatAI::Event::Authority, TEXT("physical authority handover"));
 }
 
 bool UEnemyCombatComponent::ObservePlayer()
+{
+    bTargetVisible = TryObservePlayer();
+    if (bTargetVisible) ++SightEventId;
+    RecordTrace(bTargetVisible ? CombatAI::Event::Sight : CombatAI::Event::SightLost,
+        bTargetVisible ? TEXT("direct sight sample") : TEXT("sight query failed; retained last observation only"));
+    return bTargetVisible;
+}
+bool UEnemyCombatComponent::TryObservePlayer()
 {
     auto* E = Enemy();
     auto* PC = GetWorld()->GetFirstPlayerController();
@@ -167,7 +193,7 @@ bool UEnemyCombatComponent::Fire(double Now)
         FMath::Clamp(UGameplayStatics::GetGlobalTimeDilation(this), .25f, 1.f));
     if (MuzzleEffect) UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), MuzzleEffect, Muzzle,
         Direction.Rotation(), FVector(.4f), true, true, ENCPoolMethod::AutoRelease);
-    UE_LOG(LogEnemyCombat, Log, TEXT("%s shot=%lld world_time=%.3f ammo=%d"), *GetOwner()->GetName(), Shot, Now, Magazine);
+    RecordTrace(CombatAI::Event::Shot, TEXT("finite projectile launched"));
     return true;
 }
 
@@ -180,6 +206,7 @@ void UEnemyCombatComponent::StartReturn(const TCHAR* Why)
 }
 void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
 {
+    CaptureDeltaSeconds = DeltaSeconds;
     auto* E = Enemy();
     if (!bEnabled || !E || !E->IsReady() || !IsValid(E->Foundation)) return;
     if (E->IsDead()) { if (State != EEnemyCombatState::Dead) SuspendForPhysics(true); return; }
@@ -204,6 +231,7 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
     {
         bTargetVisible = Now >= IgnoreSightUntil && ObservePlayer();
         NextSight = Now + FMath::Clamp(Tuning.SightInterval, .05f, 1.f);
+        RecordTrace(CombatAI::Event::DecisionInput, TEXT("post-perception legacy policy input"));
     }
     if (bTargetVisible && (State == EEnemyCombatState::Idle || State == EEnemyCombatState::Return || State == EEnemyCombatState::Search))
     {
@@ -335,6 +363,7 @@ FString UEnemyCombatComponent::GetLabel() const
 FString UEnemyCombatComponent::GetCombatState() const
 {
     auto Root = MakeShared<FJsonObject>();
+    AppendObservationStatus(Root);
     Root->SetBoolField(TEXT("enabled"), bEnabled);
     Root->SetStringField(TEXT("state"), StaticEnum<EEnemyCombatState>()->GetNameStringByValue(int64(State)));
     Root->SetStringField(TEXT("reason"), Reason);
@@ -368,12 +397,30 @@ void EnemyCommand(const TArray<FString>& Args, UWorld* World)
     if (Op == TEXT("one") || Op == TEXT("fixtures"))
     { Manager->SetEnemyCombatMode(Op == TEXT("one")); return; }
     if (Op == TEXT("reset")) { Manager->ResetTargets(); return; }
+    if (Op == TEXT("seed") && Args.Num() == 2 && Args[1].IsNumeric())
+    {
+        const int64 Value = FCString::Atoi64(*Args[1]);
+        if (Value < 0 || Value > MAX_int32) return;
+        Manager->EncounterSeed = static_cast<int32>(Value);
+        Manager->ResetTargets(); return;
+    }
     for (TActorIterator<AGASPEnemyFixture> It(World); It; ++It)
     {
         auto* Combat = It->Combat.Get();
         if (Op == TEXT("pause")) Combat->SetEnabled(false);
         else if (Op == TEXT("resume") && Manager->IsEnemyCombatMode()) Combat->SetEnabled(true);
         else if (Op == TEXT("status")) { UE_LOG(LogEnemyCombat, Display, TEXT("%s"), *Combat->GetCombatState()); }
+        else if (Op == TEXT("trace"))
+        {
+            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-00/Traces");
+            IFileManager::Get().MakeDirectory(*Directory, true);
+            const auto Snapshot = Combat->CaptureDecisionInput();
+            const FString File = Directory / FString::Printf(TEXT("G%llu_S%u_%lld.json"),
+                static_cast<uint64>(Snapshot.Generation), Snapshot.SpawnIndex, FDateTime::UtcNow().GetTicks());
+            const bool Saved = FFileHelper::SaveStringToFile(Combat->GetCombatState(), *File,
+                FFileHelper::EEncodingOptions::ForceUTF8WithoutBOM);
+            UE_LOG(LogEnemyCombat, Display, TEXT("Bounded trace %s: %s"), Saved ? TEXT("saved") : TEXT("failed"), *File);
+        }
         else if (Op == TEXT("tune") && Args.Num() == 3 && Args[2].IsNumeric())
         {
             const float Value = FCString::Atof(*Args[2]);
@@ -392,6 +439,6 @@ void EnemyCommand(const TArray<FString>& Args, UWorld* World)
     }
 }
 FAutoConsoleCommandWithWorldAndArgs EnemyCombatConsole(TEXT("msq.EnemyCombat"),
-    TEXT("one | fixtures (three passive originals) | pause | resume | reset | status | tune range/sight/aim/interval/pause/reload/search value"),
+    TEXT("one | fixtures (three passive originals) | pause | resume | reset | seed 0..2147483647 (resets) | status | trace (explicit bounded export) | tune range/sight/aim/interval/pause/reload/search value"),
     FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(&EnemyCommand));
 }

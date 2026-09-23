@@ -85,6 +85,7 @@ bool UEnemyCombatComponent::PlanPath(FVector Goal, float Acceptance)
     Node.Ground = Ground; Node.Cost = 0; Node.bWalkable = true;
     Nodes.Add(Node); CellNodes.Add(Node.Cell, 0); OpenNodes.Add(0);
     bPlanning = true; PlanStarted = GetWorld()->GetTimeSeconds(); ++PathPlans;
+    RecordPath(CombatAI::PathOutcome::Planning, TEXT("bounded local path query started"));
     return true;
 }
 
@@ -122,6 +123,7 @@ void UEnemyCombatComponent::ContinuePath()
             Algo::Reverse(Path);
             bPlanning = false; bPlanFailed = false;
             ProgressPosition = Feet(); LastProgress = GetWorld()->GetTimeSeconds();
+            RecordPath(CombatAI::PathOutcome::Ready, TEXT("path found within acceptance"));
             return;
         }
         for (int32 X = -1; X <= 1; ++X)
@@ -154,25 +156,26 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
     auto* E = Enemy(); if (!E) return false;
     const FVector Position = Feet();
     if (FVector::Dist2D(Position, Goal) <= Acceptance && FMath::Abs(Position.Z - Goal.Z) <= 40.f)
-    { E->StopMovementCommand(); return true; }
-    auto Failed = [&]()
+    { E->StopMovementCommand(); RecordPath(CombatAI::PathOutcome::Arrived, TEXT("destination acceptance reached")); return true; }
+    auto Failed = [&](const TCHAR* Why)
     {
         ++PathFailures; ++FailedAttempts;
         Path.Reset(); bPlanning = bPlanFailed = false;
         NextRepath = Now + FMath::Clamp(Tuning.RepathSeconds, .3f, 5.f);
         E->StopMovementCommand();
+        RecordPath(CombatAI::PathOutcome::Failed, Why);
         return FailedAttempts < 2;
     };
     if (bPlanning)
     {
         E->StopMovementCommand(); ContinuePath();
-        if (bPlanFailed) return Failed();
+        if (bPlanFailed) return Failed(TEXT("open set exhausted, expansion cap or world-time limit"));
         if (bPlanning) return true;
     }
     const bool bChangedGoal = FVector::Dist2D(Goal, PathGoal) > FMath::Clamp(Tuning.NavigationCell, 60.f,120.f) * 2.f;
     if ((!Path.IsValidIndex(PathIndex) || bChangedGoal) && Now >= NextRepath)
     {
-        if (!PlanPath(Goal, Acceptance)) return Failed();
+        if (!PlanPath(Goal, Acceptance)) return Failed(TEXT("outside local region/layer or no starting support"));
         NextRepath = Now + FMath::Clamp(Tuning.RepathSeconds, .3f, 5.f);
         E->StopMovementCommand();
         return true;
@@ -181,10 +184,11 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
     while (Path.IsValidIndex(PathIndex) && FVector::Dist2D(Position, Path[PathIndex]) < 32.f) ++PathIndex;
     if (!Path.IsValidIndex(PathIndex)) { E->StopMovementCommand(); return true; }
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyPathFollow), false); NavigationQuery(Query);
-    if (!WalkSegment(Position, Path[PathIndex], Query)) return Failed();
+    if (!WalkSegment(Position, Path[PathIndex], Query)) return Failed(TEXT("next segment blocked or unsupported"));
     if (FVector::Dist2D(Position, ProgressPosition) > 20.f)
     { ProgressPosition = Position; LastProgress = Now; FailedAttempts = 0; }
-    else if (Now - LastProgress > FMath::Clamp(Tuning.StuckSeconds, .5f, 5.f)) return Failed();
+    else if (Now - LastProgress > FMath::Clamp(Tuning.StuckSeconds, .5f, 5.f)) return Failed(TEXT("movement progress timeout"));
     E->SetMovementCommand(Path[PathIndex] - Position, true);
+    RecordPath(CombatAI::PathOutcome::Following, TEXT("walk command submitted to foundation"));
     return true;
 }

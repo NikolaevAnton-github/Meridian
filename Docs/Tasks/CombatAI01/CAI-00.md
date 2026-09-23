@@ -2,7 +2,14 @@
 
 Multica issue: **MSQ-102**.
 Parent: [MSQ-101 / CombatAI01](../CombatAI01.md), under MSQ-67.
-Prepared 2026-09-23; no implementation started.
+Prepared 2026-09-23; execution authorized by the later
+[owner start and reasoning decision](../../Approvals/CombatAI01-CAI00-OwnerStart01.json).
+
+Delivered **Candidate01/build02** for owner testing. Native build, 24 focused checks,
+pure capture-contract checks and the sole independent source review pass. See the
+[handoff](../../CombatAI01-CAI00.md), [review](../../CombatAI01-CAI00Review.md) and
+[controller acceptance](../../CombatAI01-CAI00Acceptance.md). Runtime gameplay,
+reset/export, motion/audio and performance remain pending owner testing.
 
 Authority: [task preparation](../../Approvals/CombatAI01-TaskCreation01.json).
 Read the [implementation plan](../CombatAI01Plan.md) and [design](../../Design/CombatAI01.md).
@@ -49,11 +56,11 @@ prove every source assertion manually.
 
 ## Execution and verification contract
 
-Prepared only: backlog, unassigned, no run. Dispatch requires a later execution
-instruction under the standing project workflow. Read `Docs/ProjectState.md` first,
+The owner authorized this delivered package through Multica with build/source verification
+and owner-only gameplay testing. Read `Docs/ProjectState.md` first,
 then this task, the linked plan/design and only relevant prerequisite decisions.
 
-- One production writer and one Unreal writer; max reasoning at standard speed,
+- One production writer and one Unreal writer; controller-selected high reasoning at standard speed,
   verified in configured and native execution.
 - Executor implements and self-checks; one primary independent reviewer owns
   substantive technical review. Controller owns scoped acceptance and local commit.
