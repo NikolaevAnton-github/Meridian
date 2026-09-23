@@ -2,7 +2,10 @@
 
 Prepared 2026-09-23 for the owner's request for a very detailed plan for surprising,
 high-quality arcade shooter AI. Parent context: MSQ-67; starting delivery: MSQ-70.
-Status: **planning package only; no implementation or Multica task creation**.
+Status: **tasks prepared in Multica; implementation not started**.
+The later [task-creation request](../Approvals/CombatAI01-TaskCreation01.json)
+formalized this plan as parent **MSQ-101** and children **MSQ-102 through MSQ-117**.
+See the [task index](CombatAI01.md) and [setup verification](../CombatAI01TaskSetup01.md).
 
 Read [ProjectState](../ProjectState.md), the [owner request](../Approvals/CombatAI01-Planning01.json)
 and [CombatAI01 design and architecture](../Design/CombatAI01.md). The design document
@@ -32,10 +35,13 @@ remains an owner-facing aspiration until comparable gameplay evidence exists.
 
 ## 2. Scheduling and relationship to the existing backlog
 
-CAI identifiers below are **local planning references**, not allocated MSQ issue IDs
-or a second live task database. If the owner later requests issue creation, map each
-bounded package to the existing Multica project and record its real ID here. Do not
-create a competing dispatcher or bulk-start the program.
+CAI identifiers below are package references mapped to real issues in the
+[MSQ-101 task index](CombatAI01.md). Multica remains the source of live status.
+All 16 implementation tasks were prepared in backlog, unassigned and without runs.
+CAI-09D is split into MSQ-114 disarming and MSQ-115 wound-action integration so its
+independent mechanics do not block each other. Conditional future integrations are
+unstaged; core native stages preserve a sequence without waiting for all future
+abilities. Metadata describes prerequisites; it is not an automatic dispatcher.
 
 Recommended order for the next implementation work:
 
@@ -457,6 +463,10 @@ Acceptance: S17/S21 and the newly coupled physical/reset transitions.
 
 ### CAI-09D: disarming and wound-action ownership
 
+Task preparation splits this package into [CAI-09D1 / MSQ-114](CombatAI01/CAI-09D1.md)
+and [CAI-09D2 / MSQ-115](CombatAI01/CAI-09D2.md). They consume MSQ-99 and MSQ-100
+independently and do not depend on each other.
+
 Dependencies: C and the relevant MSQ-99 or MSQ-100 delivery; optional for earlier AI.
 Weapon loss changes capability eligibility and cancels gun actions/roles. Wound gestures
 declare arm/weapon ownership and interruption. Do not add weapon recovery/secondary
@@ -632,6 +642,6 @@ The [planning review and controller acceptance](../CombatAI01PlanningReview.md)
 records the independent verdict and closure of the two contract findings. It does
 not accept future code or gameplay.
 
-The first eligible future implementation package is **CAI-00**, immediately followed
+The first eligible future implementation package is **CAI-00 / MSQ-102**, immediately followed
 by the visible **CAI-01** improvement. The owner does not need to wait for squad systems
 or future abilities before receiving a substantially more capable single opponent.

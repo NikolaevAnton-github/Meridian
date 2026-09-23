@@ -31,12 +31,17 @@ arcade shooter: surprise and quality without oppressive pressure. See the
 [design and architecture](Design/CombatAI01.md), and
 [ordered implementation plan](Tasks/CombatAI01Plan.md).
 The plan proposes a persistent hunter, tactical individual, coordinated three-enemy
-encounter and later integration with actual destruction/abilities. Its CAI identifiers
-are planning references, not Multica issues. Limited sensory knowledge, pressure
+encounter and later integration with actual destruction/abilities. The owner's later
+[task-formalization request](Approvals/CombatAI01-TaskCreation01.json) creates
+[MSQ-101 and 16 children, MSQ-102 through MSQ-117](Tasks/CombatAI01.md), all prepared
+in backlog, unassigned and without runs. CAI package references map to those issues;
+future integrations are unstaged and do not block the core path. Disarming and wound
+integration are separate children preserving MSQ-99/100 independence. See
+[setup verification](CombatAI01TaskSetup01.md). Limited sensory knowledge, pressure
 permissions, architecture, tuning and future order are recommendations, not separately
 approved implementation. The intended persistent-search direction supersedes the
 old finite-search target; the existing build/evidence remain unchanged. No production,
-editor change, gameplay test or successor dispatch is authorized by planning alone.
+editor change, gameplay test or implementation dispatch is authorized by task preparation.
 The sole independent [planning review](CombatAI01PlanningReview.md) passes after two
 bounded contract clarifications; controller acceptance is documentation-only.
 
