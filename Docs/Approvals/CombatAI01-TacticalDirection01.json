@@ -1,0 +1,16 @@
+{
+  "record_id": "CombatAI01-TacticalDirection01",
+  "date_local": "2026-09-23",
+  "source": "Owner direct chat after playing the MSQ-103 delivery",
+  "related_task": "MSQ-101",
+  "tested_task": "MSQ-103",
+  "owner_message_original": "Поиграл. Пока слабо, противник очень медленно решение генерирует, да он бегает, да ищет потом, но выглядит парвда как маникен, а не как реальный противник. Я предлагаю начать вводить, назовем так руководитель отряда, я не знаю может уже есть термин у этого. То есть все должно сильно меняться, от ситуации на поле боя, если противник один остался и потерял гг из виду, то наиболее уместо не ходить искать по среди зала как дибил, что бы тебе сзади зашли, а пойти и занять такую позицию где тебе не зайдут в спину. Позже я думаю мы введем некие элемент как мину ловушки,  смокове гранаты(что бы рашить когда надо и что бы скрыться) и что бы проитивник всем этим активно пользовался прям по ходу боя.",
+  "owner_message_english_translation": "I played. It is still weak: the enemy makes decisions very slowly. It runs and then searches, but looks like a mannequin rather than a real opponent. I propose starting to introduce what we could call a squad leader; perhaps there is already a term for it. Behavior should change strongly with the battlefield situation. If an enemy is the last one left and loses sight of the protagonist, it should take a position where it cannot be approached from behind rather than foolishly searching in the middle of the hall. Later I think we will introduce mines/traps and smoke grenades for rushing when appropriate and escaping, and enemies should actively use these during combat.",
+  "direction": "Begin developing situational tactical coordination. Prioritize responsiveness and a defensible lost-contact policy for an isolated or last remaining enemy. Persistent alert/search may include protected observation and control of approaches instead of continuous exposed movement.",
+  "owner_play_feedback": "Owner observed running and continued searching, but considers overall combat behavior weak. This is not owner acceptance of combat feel or all pending runtime criteria.",
+  "future_scope": "Mines/traps and smoke for advance/withdrawal are later mechanics. Prepare their role in tactical decisions without representing them as implemented or requested for immediate production.",
+  "controller_response": "Audit current source and record a concrete tactical design refinement. Ask which nearest delivery the owner prefers: one tactically capable enemy first or immediate two/three-member cooperation. The default recommendation is the former.",
+  "interpretation_boundary": "The owner supplies the tactical direction. Detailed architecture, package slicing, reaction tuning and population are controller proposals unless separately selected. This record does not assert a new implementation run, alter live task dependencies or waive independent technical review.",
+  "verification": "Retain the existing owner-only gameplay-testing boundary. Source observations of timers are not runtime measurements of the owner's session.",
+  "design": "Docs/Design/CombatAI01TacticalCoordinator01.md"
+}

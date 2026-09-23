@@ -4,6 +4,11 @@ Date: 2026-09-23. Status: implementation proposal prepared at the owner's reques
 Companion: [ordered implementation packages](../Tasks/CombatAI01Plan.md).
 Authority: [exact owner request](../Approvals/CombatAI01-Planning01.json).
 
+Later owner-play refinement: [situational tactics and squad coordination](CombatAI01TacticalCoordinator01.md)
+defines protected lost-contact observation, decision responsiveness and future
+smoke/trap use after MSQ-103. Its source audit describes the later implementation;
+the MSQ-70 baseline table below remains the original planning snapshot.
+
 Later administrative update: the owner requested task formalization. The
 [MSQ-101 family](../Tasks/CombatAI01.md) now maps this design to 16 prepared backlog
 tasks under the [task-creation decision](../Approvals/CombatAI01-TaskCreation01.json).

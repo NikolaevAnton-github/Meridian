@@ -1,5 +1,9 @@
 # CombatAI01 implementation plan
 
+Later refinement after MSQ-103 owner play: [situational tactics and coordinator](../Design/CombatAI01TacticalCoordinator01.md).
+It proposes exposing useful protected-position decisions earlier, then adding
+group cooperation. Live task dependencies remain unchanged by that design note.
+
 Prepared 2026-09-23 for the owner's request for a very detailed plan for surprising,
 high-quality arcade shooter AI. Parent context: MSQ-67; starting delivery: MSQ-70.
 Status: **tasks prepared in Multica; implementation not started**.

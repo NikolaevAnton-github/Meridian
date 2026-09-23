@@ -44,6 +44,19 @@ sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
 
+## Owner feedback: situational tactics and squad coordination
+
+After playing MSQ-103, the owner observes running/searching but finds decisions
+slow and the opponent mannequin-like. The [new tactical direction](Approvals/CombatAI01-TacticalDirection01.json)
+calls for a squad coordinator and situation-dependent behavior, especially a
+lone enemy choosing protected observation after losing contact. Persistent search
+can include controlling approaches; it need not mean exposed wandering.
+The [design refinement](Design/CombatAI01TacticalCoordinator01.md) records the
+current timer/search limitations, protected-position behavior, proposed early
+tactical delivery and future smoke/trap roles. Detailed slicing/population remain
+proposals; no new candidate or live dependency change is claimed. Overall owner
+combat-feel acceptance remains unmet. Equipment is later scope.
+
 ## Owner-test handoff: MSQ-103 persistent intent and running
 
 The owner [starts the next task and delegates reasoning selection](Approvals/CombatAI01-CAI01-OwnerStart01.json).
