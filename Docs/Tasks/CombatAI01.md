@@ -17,8 +17,13 @@ The later [MSQ-103 start](../Approvals/CombatAI01-CAI01-OwnerStart01.json) autho
 CAI-01 through Multica at Astra/high, retaining owner-only gameplay testing.
 It now delivers [Candidate01/build05](../CombatAI01-CAI01Acceptance.md) with passing
 build, 35 focused checks and independent source review; runtime remains pending owner testing.
-MSQ-104 through MSQ-117 remain undispatched. Core native
+The later [owner follow-up](../Approvals/CombatAI01-CAI02-OwnerStart01.json) starts
+MSQ-104 with lower-exposure positioning, quiet crouch and stronger senses after
+MSQ-118 play. MSQ-105 through MSQ-117 remain undispatched. Core native
 stages describe the sequence only; conditional future integrations are unstaged.
+MSQ-104 now delivers [Candidate03/build01](../CombatAI01-CAI02Acceptance.md) with
+passing native builds, affected checks and primary finding closure. Owner gameplay,
+motion, audibility, position usefulness, difficulty and performance remain pending.
 The controller verifies evidence and execution authorization before dispatch.
 The owner retains play/visual judgement. No gameplay/editor work starts from task creation.
 
@@ -43,7 +48,8 @@ The later [owner start](../Approvals/CombatAI01-Tactical01-OwnerStart01.json)
 authorizes **MSQ-118 / CAI-T01** as a bounded early single-enemy tactical slice
 after MSQ-103 and before the remaining core packages. It uses existing sight/local
 navigation and introduces protected lost-contact observation plus faster known
-contact response. MSQ-104 through MSQ-117 retain their unfinished scope.
+contact response. MSQ-104 now delivers the owner's sensory/tactical follow-up;
+MSQ-105 through MSQ-117 retain their unfinished scope and remain undispatched.
 MSQ-118 now delivers [Candidate02/build01](../CombatAI01-Tactical01Acceptance.md)
 with passing build, focused evidence and the same primary review's finding closure.
 Gameplay acceptance remains pending owner. MSQ-104 consumes this current policy.

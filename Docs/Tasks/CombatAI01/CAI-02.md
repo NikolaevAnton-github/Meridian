@@ -2,7 +2,18 @@
 
 Multica issue: **MSQ-104**.
 Parent: [MSQ-101 / CombatAI01](../CombatAI01.md), under MSQ-67.
-Prepared 2026-09-23; no implementation started.
+Authorized 2026-09-23 after the owner's MSQ-118 playtest under the
+[owner follow-up](../../Approvals/CombatAI01-CAI02-OwnerStart01.json).
+
+Delivered 2026-09-24: **Candidate03/build01**, accepted for owner testing within
+build/source scope. Native builds, focused checks and the sole primary reviewer's
+finding closure pass. See [controller acceptance](../../CombatAI01-CAI02Acceptance.md),
+[base handoff](../../CombatAI01-CAI02.md),
+[navigation correction](../../CombatAI01-CAI02Navigation01.md),
+[R1/R2 correction](../../CombatAI01-CAI02Correction01.md) and
+[finding closure](../../CombatAI01-CAI02Correction01Review.md).
+Gameplay, motion, audibility, position usefulness, difficulty and performance remain
+pending owner. Successors are undispatched.
 
 Authority: [task preparation](../../Approvals/CombatAI01-TaskCreation01.json).
 Read the [implementation plan](../CombatAI01Plan.md) and [design](../../Design/CombatAI01.md).
@@ -12,7 +23,47 @@ Hard prerequisites: MSQ-103, MSQ-118.
 The later [early tactical delivery](../../CombatAI01-Tactical01Acceptance.md)
 provides the current sight-based policy. Preserve its protected-position,
 reacquisition, weapon-gate and action contracts while adding sensory evidence.
-This prerequisite update does not dispatch MSQ-104.
+The later owner follow-up now authorizes this package and the bounded corrections
+below. Historical MSQ-118 evidence remains preserved.
+
+## Owner follow-up: capable hunter and useful protection
+
+The owner confirms more column use but rejects exposed positions toward the
+center and weak tracking. Incorporate these corrections in the one-enemy policy:
+
+1. Prefer low exposure to multiple plausible firing approaches. A column behind
+   the enemy alone must not outweigh broad exposure from the center and sides.
+   Use static geometry and permitted threat evidence; no hidden-player transform.
+   Include a bounded way to consider the protected side of a column and a feasible
+   short route around it rather than accepting only scanner-visible/direct points.
+2. Choose a nearby reachable point among comparably safe choices. Open view and
+   escape count must not outweigh safety. Keep useful facing, clearance, actual-feet
+   arrival validation, finite retries and switch hysteresis.
+3. Use actual GASP crouch locomotion for cautious protected repositioning and
+   observation, with quiet footstep presentation. Audit the audible enemy step
+   path and connect stance to volume/emission; a boolean or speed change alone
+   is insufficient. Urgent exposed crossing may retain running if safer.
+4. Give sight sufficient range for the retained location, justified by static
+   dimensions. Use body visibility samples and bounded contact hysteresis so a
+   blocked camera sample or brief column crossing does not erase tracking.
+   Actual launch remains gated by current sight and muzzle safety, not memory.
+5. Connect hearing to prompt attention, investigation and protected repositioning.
+   Retain evidence, uncertainty and alert through occlusion/physical recovery.
+   Silent hidden relocation must not update position, velocity or aim secretly.
+6. Keep reactions/retention on world time so existing slowdown supplies its player
+   advantage. No damage, cadence or player-movement tuning for difficulty.
+7. Check the existing 28 m home navigation cap against the retained 60.8 x 24.8 m
+   floor. If it prevents useful pursuit of fresh evidence across the room, make a
+   bounded adjustment to the existing navigator and verify its work limits. Full
+   topology/Recast remains deferred; long sight alone is not full-room pursuit.
+
+Additional focused acceptance: safer point beats an exposed column-back point;
+nearest comparably safe point wins; crouch locomotion and quiet step wiring agree;
+location-scale sight and brief-loss retention coexist with blocked-shot rejection;
+fresh sound updates intent without exact hidden-player tracking. Test production
+policy and producers/consumers with adversarial pure/source fixtures. Include
+blocked/stationary/airborne/reset motion and stale sound. Complement S02-S05 and
+affected S06/S10/S11. Actual gameplay remains pending owner testing.
 
 ## Package work and acceptance
 **Purpose:** give the hunter multiple honest sources of information.
@@ -54,8 +105,8 @@ relocate quietly. Observe how the enemy searches the old sound/shot region.
 
 ## Execution and verification contract
 
-Prepared only: backlog, unassigned, no run. Dispatch requires a later execution
-instruction under the standing project workflow. Read `Docs/ProjectState.md` first,
+The linked owner follow-up authorizes execution through Multica. Read
+`Docs/ProjectState.md` first,
 then this task, the linked plan/design and only relevant prerequisite decisions.
 
 - One production writer and one Unreal writer; max reasoning at standard speed,
@@ -77,4 +128,6 @@ then this task, the linked plan/design and only relevant prerequisite decisions.
 Provide scope, candidate identity, changed files/assets, tuning, build result,
 applicable focused evidence, review findings/closure, owner controls/route and known
 limits. Keep generated evidence in `Saved/CombatAI01/<package>/<candidate>/`.
-Commit verified task-scoped changes locally with the real MSQ task ID before handoff.
+Executor delivers `Docs/CombatAI01-CAI02.md`, immutable candidate identity including
+the DLL, and `Saved/CombatAI01/CAI-02/Worker/Candidate01/` evidence. Controller owns
+primary-review dispatch and the verified local MSQ-104 closure commit.

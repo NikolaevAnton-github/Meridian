@@ -1,6 +1,6 @@
 # MeridianSquad current project state
 
-Updated 2026-09-23. This is a navigation snapshot of current scope and decisions,
+Updated 2026-09-24. This is a navigation snapshot of current scope and decisions,
 not a second task database or a new execution authorization. Read the relevant
 linked task before work and verify live Multica/editor state when needed. Later
 explicit owner instructions take precedence within their scope. When dated summaries
@@ -44,6 +44,36 @@ sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
 
+## Owner-test handoff: MSQ-104 senses and protected movement
+
+After playing MSQ-118, the owner confirms frequent column use but reports exposed
+positions toward the center, poor sight, easy loss of contact and absent hearing.
+The [new instruction](Approvals/CombatAI01-CAI02-OwnerStart01.json) authorizes
+[MSQ-104 / CAI-02](Tasks/CombatAI01/CAI-02.md), including nearby lower-exposure
+positions, quiet crouched tactical movement, sight across the retained location
+and persistent evidence-based attention. Difficulty should make slowdown or
+skilled deception useful; occlusion and uncertain knowledge remain.
+
+**Candidate03/build01** delivers exposure-first positioning with nearby safe
+choices and bounded column detours, actual quiet crouch, 70 m sight with body
+samples, uncertain footstep/shot/impact hearing and retained sensory evidence.
+The existing navigator now has a 45 m home radius (50 m hard ceiling) and a
+24-world-second pursuit deadline. Repeated sounds preserve scan/action progress;
+tactical probes and movement/holding validation use proposed and achieved stance.
+See [acceptance](CombatAI01-CAI02Acceptance.md), [base handoff](CombatAI01-CAI02.md),
+[navigation correction](CombatAI01-CAI02Navigation01.md),
+[review correction](CombatAI01-CAI02Correction01.md) and the sole primary reviewer's
+[finding closure](CombatAI01-CAI02Correction01Review.md).
+
+Native builds, affected source/fixture checks and primary technical review pass.
+All 100 final manifest entries match; owner config/project/map and all historical
+evidence remain preserved. Multica executor/reviewer native Astra/max/default is
+verified and shared profiles retain it. The task runtime is stopped; the ordinary
+editor has the matching final DLL and retained lobby open, without PIE or dirty
+packages. No agent gameplay or firing ran. Position usefulness, motion, audibility,
+difficulty and performance remain pending owner testing. MSQ-105 onward remain
+undispatched; full topology, group cooperation and equipment remain later scope.
+
 ## Owner-test handoff: MSQ-118 situational tactics
 
 The [owner start](Approvals/CombatAI01-Tactical01-OwnerStart01.json) authorizes
@@ -59,8 +89,8 @@ preserved. Native executor/reviewer Astra/max/default is verified. Gameplay,
 position usefulness, motion and performance remain pending owner; no agent Play
 or firing ran. The task runtime is stopped, profiles remain max/default, and the
 retained lobby is reopened with the accepted DLL for owner Play. Current
-sight/local-navigation limits remain. MSQ-104 hearing
-must consume this policy and remains undispatched, as do MSQ-105 through MSQ-117.
+sight/local-navigation limits remain in that historical candidate. MSQ-104 now
+consumes this policy under the follow-up above; MSQ-105 through MSQ-117 remain undispatched.
 Full CAI-03/04/05, group cooperation and equipment are not declared complete.
 
 After playing MSQ-103, the owner observes running/searching but finds decisions
@@ -87,8 +117,9 @@ Executor/reviewer native Astra/high is verified; the shared profile is restored 
 max/default and task runtime stopped. The retained lobby is reopened for owner Play.
 S01/S06/S07/S10, visible running/braking, motion, feel and performance remain pending
 owner testing. No agent Play/firing ran. Navigation retains its local one-layer,
-28 m home-radius limits. MSQ-104 hearing/incoming-fire awareness and later successors
-remain undispatched. Multica owns live execution status.
+28 m home-radius limits in that historical candidate. MSQ-104 now extends senses
+and the existing navigation domain as recorded above; MSQ-105 onward remain
+undispatched. Multica owns live execution status.
 
 ## Owner-test handoff: MSQ-102 baseline, contracts and observability
 

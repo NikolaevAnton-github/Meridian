@@ -163,6 +163,9 @@ int64 ACombatProjectileWorld::LaunchTimed(AActor* Shooter, const FVector& Positi
     FBullet Bullet;
     Bullet.Id = NextShotId++;
     Bullet.Shooter = Shooter;
+    Bullet.Category = Cast<AOpeningLobbyCharacter>(Shooter) ? CombatAI::SourceTeam::Player :
+        (Cast<AGASPEnemyFixture>(Shooter) || AGASPEnemyFixture::FromFoundation(Shooter)) ?
+        CombatAI::SourceTeam::Enemy : CombatAI::SourceTeam::Unknown;
     Bullet.ShooterIdentity = Shooter ? FName(*Shooter->GetPathName()) : NAME_None;
     if (const APawn* Pawn = Cast<APawn>(Shooter)) Bullet.Instigator = Pawn->GetController();
     if (const auto* Fixture = Cast<AGASPEnemyFixture>(Shooter); Fixture && Fixture->Foundation)
@@ -200,6 +203,7 @@ int64 ACombatProjectileWorld::LaunchTimed(AActor* Shooter, const FVector& Positi
         }
     Bullets.Add(Bullet);
     ++LaunchedCount;
+    QueueSound(Shooter, Bullet.Category, CombatAI::Sense::Shot, Position, 7000, Bullet.Id, Time);
     return Bullet.Id;
 }
 void ACombatProjectileWorld::RecordCapsules()
@@ -269,6 +273,8 @@ void ACombatProjectileWorld::Tick(float DeltaSeconds)
     const double Now = FPlatformTime::Seconds();
     ACharacter* Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
     AdvanceFrame(DeltaSeconds, Now, Player ? Player->FindComponentByClass<UCombatRifleComponent>() : nullptr);
+    SampleMovementSounds();
+    DeliverStimuli();
     Impacts.RemoveAll([&](const FImpact& Impact) { return Now - Impact.Born > .3; });
     for (const FImpact& Impact : Impacts)
     {
@@ -564,6 +570,13 @@ void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult&
     LastHitRealTime = Now;
     const uint64 Generation = ResetGeneration;
     auto* PhysicalTarget = Cast<APhysicsControlDummy>(Victim);
+    // Normalize contact evidence before ReceiveBullet can take physical authority.
+    // Tactical delivery is deferred until the sorted projectile frame has ended.
+    QueueSound(Bullet.Shooter.Get(), Bullet.Category, CombatAI::Sense::Impact,
+        Hit.ImpactPoint, 1800, Bullet.Id, LastContactTime);
+    if (!bSelf && Cast<AGASPEnemyFixture>(Victim))
+        QueueSound(Bullet.Shooter.Get(), Bullet.Category, CombatAI::Sense::Damage,
+            Hit.ImpactPoint, 1, Bullet.Id, LastContactTime, Victim, Bullet.Velocity);
     const float Applied = IsValid(PhysicalTarget) ? PhysicalTarget->ReceiveBullet(Bullet.Id, Bullet.Damage,
         Bullet.Velocity.GetSafeNormal(), Hit, LastContactTime, Bullet.BirthTime, FrameSerial,
         Bullet.FallImpulseMultiplier, Bullet.DeathImpulseMultiplier) :
@@ -599,6 +612,7 @@ void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult&
 void ACombatProjectileWorld::ClearProjectiles()
 {
     ++ResetGeneration;
+    Stimuli.Reset();
     RetiredCount += Bullets.Num();
     Bullets.Reset();
     Impacts.Reset();
@@ -608,6 +622,7 @@ void ACombatProjectileWorld::ClearProjectiles()
 void ACombatProjectileWorld::ResetTargets()
 {
     ++EncounterGeneration;
+    PlayerTravel.Reset(); EnemyTravel.Reset(); TravelPlayer.Reset();
     ClearProjectiles();
     for (ACombatTarget* Target : Targets) if (IsValid(Target)) Target->ResetTarget();
     for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy))
@@ -640,6 +655,9 @@ FString ACombatProjectileWorld::GetCombatState() const
     auto Root = MakeShared<FJsonObject>();
     Root->SetStringField(TEXT("encounter_generation"), LexToString(EncounterGeneration));
     Root->SetNumberField(TEXT("encounter_seed"), EncounterSeed);
+    Root->SetNumberField(TEXT("sensory_queue_pending"),Stimuli.Num());
+    Root->SetNumberField(TEXT("sensory_deliveries"),DeliveredStimuli);
+    Root->SetNumberField(TEXT("sensory_dropped"),DroppedStimuli);
     Root->SetNumberField(TEXT("scale"), ProjectileTimeScale);
     Root->SetNumberField(TEXT("physics_preview_scale"), ActivePreviewScale);
     Root->SetBoolField(TEXT("physics_dummy_enabled"), !PhysicsDummies.IsEmpty());

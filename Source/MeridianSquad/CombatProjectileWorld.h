@@ -4,11 +4,14 @@
 #include "GameFramework/Actor.h"
 #include "EnemyPrototypeCharacter.h"
 #include "PhysicsControlDummy.h"
+#include "CombatAISenses.h"
 #include "CombatProjectileWorld.generated.h"
 
 class ACharacter;
 class ACombatTarget;
 class UCombatRifleComponent;
+class USoundBase;
+class USoundAttenuation;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_SevenParams(FCombatBulletHit, int64, ShotId, FName, ShooterIdentity, AActor*, Shooter,
     AActor*, Victim, float, Damage, FVector, Position, bool, bSelfHit);
@@ -99,6 +102,9 @@ public:
     double GetPlayerActionClock() const { return PlayerActionClock; }
     void ClearProjectiles();
     void BuildQuery(FCollisionQueryParams& Query, const AActor* Ignore = nullptr) const;
+    void QueueSound(AActor* Attribution, CombatAI::SourceTeam Category, CombatAI::Sense Kind,
+        FVector Position, double Range, uint64 Shot = 0, double SimulationTime = -1,
+        AActor* DirectVictim = nullptr, FVector Incoming = FVector::ZeroVector);
     bool TraceEnemyAim(const FVector& Start, const FVector& End, double Time, FHitResult& Hit) const;
     int32 GetActiveCount() const { return Bullets.Num(); }
     FString LastHitText;
@@ -124,6 +130,7 @@ private:
         int64 Id = 0;
         TWeakObjectPtr<AActor> Shooter;
         FName ShooterIdentity;
+        CombatAI::SourceTeam Category = CombatAI::SourceTeam::Unknown;
         TWeakObjectPtr<AController> Instigator;
         FVector Position = FVector::ZeroVector;
         FVector Velocity = FVector::ZeroVector;
@@ -182,6 +189,23 @@ private:
     uint64 ResetGeneration = 0;
     uint64 EncounterGeneration = 1;
     bool bAdvancing = false;
+    struct FQueuedStimulus
+    {
+        CombatAI::Stimulus Record;
+        // Attribution and lifecycle only. Never passed into personal knowledge.
+        TWeakObjectPtr<AActor> Attribution, DirectVictim;
+        double Range = 0;
+    };
+    TArray<FQueuedStimulus> Stimuli;
+    uint64 NextStimulusId = 1;
+    int32 DroppedStimuli = 0, DeliveredStimuli = 0;
+    CombatAI::GroundTravel PlayerTravel;
+    TWeakObjectPtr<ACharacter> TravelPlayer;
+    TMap<TWeakObjectPtr<AActor>, CombatAI::GroundTravel> EnemyTravel;
+    UPROPERTY() TObjectPtr<USoundBase> StepSound;
+    UPROPERTY() TArray<TObjectPtr<USoundAttenuation>> StepAttenuation;
+    void SampleMovementSounds();
+    void DeliverStimuli();
     static constexpr double MaxFrameTime = .250;
     static constexpr double MaxStepTime = .010;
     static constexpr int32 MaxFrameSteps = 32;

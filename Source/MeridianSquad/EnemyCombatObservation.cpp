@@ -39,6 +39,7 @@ const TCHAR* EventName(CombatAI::Event E)
     case CombatAI::Event::Authority: return TEXT("authority");
     case CombatAI::Event::Action: return TEXT("action");
     case CombatAI::Event::Tactical: return TEXT("tactical");
+    case CombatAI::Event::Stimulus: return TEXT("stimulus");
     default: return TEXT("stop");
     }
 }
@@ -125,9 +126,22 @@ TSharedRef<FJsonObject> SnapshotJson(const CombatAI::InputSnapshot& S)
     J->SetStringField(TEXT("physical_authority"), StaticEnum<EGASPEnemyAuthority>()->GetNameStringByValue(S.Authority));
     J->SetStringField(TEXT("alert"), S.Alert ? TEXT("confirmed_alert") : TEXT("unaware"));
     J->SetStringField(TEXT("evidence"), S.TargetEvidence == CombatAI::Evidence::Sight ? TEXT("direct_sight") :
-        S.TargetEvidence == CombatAI::Evidence::LastSight ? TEXT("last_sight") : TEXT("none"));
+        S.TargetEvidence == CombatAI::Evidence::LastSight ? TEXT("last_sight") :
+        S.TargetEvidence == CombatAI::Evidence::Sound ? TEXT("uncertain_sound") :
+        S.TargetEvidence == CombatAI::Evidence::Bearing ? TEXT("incoming_bearing") : TEXT("none"));
     J->SetStringField(TEXT("path_outcome"), PathName(S.Path));
     J->SetBoolField(TEXT("enabled"), S.Enabled); J->SetBoolField(TEXT("ready"), S.Ready);
+    J->SetBoolField(TEXT("requested_crouch"),S.RequestedCrouch);
+    J->SetBoolField(TEXT("actual_crouch"),S.ActualCrouch);
+    J->SetBoolField(TEXT("retained_contact"),S.RetainedContact);
+    J->SetStringField(TEXT("knowledge_revision"),LexToString(S.KnowledgeRevision));
+    J->SetStringField(TEXT("sensory_event_id"),LexToString(S.DominantEvidence.Id));
+    J->SetNumberField(TEXT("sensory_kind"),static_cast<uint8>(S.DominantEvidence.Kind));
+    J->SetNumberField(TEXT("sensory_occurred_world"),S.DominantEvidence.OccurredWorld);
+    J->SetNumberField(TEXT("sensory_received_world"),S.DominantEvidence.ReceivedWorld);
+    J->SetNumberField(TEXT("sensory_simulation_time"),S.DominantEvidence.SimulationTime);
+    J->SetNumberField(TEXT("uncertainty_cm"),S.DominantEvidence.Uncertainty);
+    J->SetField(TEXT("sensory_region"),JsonPosition(S.DominantEvidence.Region));
     J->SetBoolField(TEXT("has_memory"), S.HasMemory); J->SetBoolField(TEXT("visible"), S.Visible);
     J->SetBoolField(TEXT("dead"), S.Dead); J->SetBoolField(TEXT("rifle_held"), S.RifleHeld);
     J->SetBoolField(TEXT("right_hand_occupied"), S.RightHandOccupied);
@@ -146,7 +160,7 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
     S.WorldTime = GetWorld() ? GetWorld()->GetTimeSeconds() : 0;
     S.DeltaSeconds = CaptureDeltaSeconds;
     S.SelfFeet = ValuePosition(Feet()); S.Home = ValuePosition(Home);
-    // Only the successful sight adapter writes these memories. Never dereference Target.
+    // Only normalized evidence writes these memories. Never dereference Target.
     S.HasMemory = Memory.HasObservation; S.Alert = Memory.Alert; S.Visible = bTargetVisible;
     if (Memory.HasObservation)
     {
@@ -157,6 +171,13 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
         S.SearchAnchor = ValuePosition(SearchAnchor); S.SearchLook = ValuePosition(SearchLook);
     }
     S.StateStarted = StateStarted; S.ReadyAt = Gates.ReadyAt(NextShot); S.NextShot = NextShot;
+    S.KnowledgeRevision=Knowledge.Revision; S.RetainedContact=Knowledge.RetainsContact(S.WorldTime);
+    if (const auto* H=Knowledge.Dominant(S.WorldTime,bTargetVisible))
+    {
+        S.DominantEvidence=H->Evidence.Get();
+        if (!bTargetVisible && S.DominantEvidence.Kind!=CombatAI::Sense::Sight)
+            S.TargetEvidence=S.DominantEvidence.Kind==CombatAI::Sense::Damage ? CombatAI::Evidence::Bearing : CombatAI::Evidence::Sound;
+    }
     S.MoveRetryAt = MoveBackoff.Until; S.WeaponRetryAt = WeaponBackoff.Until; S.SearchRetryAt = NextTacticalScan;
     S.ActionId = Action.Token; S.Action = Action.Kind; S.ActionState = Action.Status; S.Failure = Action.Failure;
     S.ActionStarted = Action.Started; S.ActionUpdated = Action.Updated;
@@ -172,7 +193,7 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
     S.HasPosition = bSelectedPosition || bHeldPosition;
     S.SelectedPosition = ValuePosition(S.HasPosition ? Position.Ground : Feet());
     S.SelectedFacing = ValuePosition(bSelectedPosition ? SelectedPosition.Ground +
-        TacticalDirection(SelectedPosition.Rating.Facing)*400 + FVector(0,0,140) :
+        SelectedPosition.FacingBasis.RotateAngleAxis(45.f*SelectedPosition.Rating.Facing,FVector::UpVector)*400 + FVector(0,0,140) :
         Assignment.Objective == CombatAI::TacticalObjective::Engage ? LastKnownAim : SearchLook);
     if (S.HasPosition) { S.PositionScore = Position.Rating.Score; S.Protection = Position.Rating.Protection; S.Exposure = Position.Rating.Exposure; }
     S.CandidateCount = TacticalCandidates.Num(); S.EvaluatedCount = CandidateIndex; S.RejectedCount = TacticalRejected;
@@ -186,6 +207,7 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
     {
         S.Authority = static_cast<uint8>(E->Authority); S.Ready = E->IsReady(); S.Dead = E->IsDead();
         S.RifleHeld = E->IsRifleHeld(); S.RightHandOccupied = E->bRightHandOccupied;
+        S.RequestedCrouch=E->bCrouchCommand; S.ActualCrouch=E->IsMovementCrouched();
     }
     using Gate = CombatAI::DecisionGate;
     if (!bEnabled || State == EEnemyCombatState::Disabled) S.Gate = Gate::Disabled;
@@ -206,7 +228,7 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
 }
 void UEnemyCombatComponent::RecordTrace(CombatAI::Event Kind, const TCHAR* Why)
 {
-    DecisionTrace.Push(Kind, CaptureDecisionInput(), TCHAR_TO_UTF8(Why));
+    DecisionTrace->Push(Kind, CaptureDecisionInput(), TCHAR_TO_UTF8(Why));
 }
 void UEnemyCombatComponent::RecordPath(CombatAI::PathOutcome Outcome, const TCHAR* Why)
 {
@@ -227,13 +249,13 @@ void UEnemyCombatComponent::AppendObservationStatus(const TSharedRef<FJsonObject
     Root->SetObjectField(TEXT("tuning_at_status_request"), Settings);
     Root->SetObjectField(TEXT("decision_input"), SnapshotJson(CaptureDecisionInput()));
     Root->SetNumberField(TEXT("trace_capacity"), CombatAI::TraceCapacity);
-    Root->SetStringField(TEXT("trace_total"), LexToString(DecisionTrace.Total()));
+    Root->SetStringField(TEXT("trace_total"), LexToString(DecisionTrace->Total()));
     Root->SetStringField(TEXT("capture_policy"), TEXT("sight-cadence input samples and events; bounded tail, not full physics replay"));
     Root->SetStringField(TEXT("fairness_channel"), TEXT("reserved separate contract; no privileged inputs collected or consumed"));
     TArray<TSharedPtr<FJsonValue>> Entries;
-    for (size_t I = 0; I < DecisionTrace.Size(); ++I)
+    for (size_t I = 0; I < DecisionTrace->Size(); ++I)
     {
-        const auto& E = DecisionTrace.At(I);
+        const auto& E = DecisionTrace->At(I);
         auto J = MakeShared<FJsonObject>();
         J->SetStringField(TEXT("sequence"), LexToString(E.Sequence));
         J->SetStringField(TEXT("event"), EventName(E.Kind));

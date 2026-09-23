@@ -14,7 +14,7 @@ void UEnemyCombatComponent::BeginSearch(const TCHAR* Why, bool bRestart)
         SearchLook = Feet() + SearchForward*400 + FVector(0,0,140);
     }
     const double Now = GetWorld()->GetTimeSeconds();
-    Assignment.Assign(EncounterGeneration, CombatAI::SelectObjective({Memory.Alert, Memory.HasObservation, false, true}), SightEventId, Now);
+    Assignment.Assign(EncounterGeneration, CombatAI::SelectObjective({Memory.Alert, Memory.HasObservation, false, true}), IntentEvidenceId, Now);
     HoldStartedAt = Now;
     ChangeState(Memory.Alert ? EEnemyCombatState::Search : EEnemyCombatState::Idle, Why);
 }
@@ -55,6 +55,7 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
         RecordTrace(CombatAI::Event::DecisionInput, TEXT("post-perception persistent policy input"));
     }
     Action.Update(Action.Token, Now);
+    ApplyEvidenceIntent(Now);
     const bool MoveSuppressed = MoveBackoff.Blocks(LastKnownGround.X, LastKnownGround.Y, Now);
     const bool WeaponSuppressed = WeaponBackoff.Blocks(LastKnownGround.X, LastKnownGround.Y, Now);
     const float AttackRange = FMath::Clamp(Tuning.AttackRange, 150.f, 5000.f);
@@ -97,10 +98,20 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
     }
     if (!bTargetVisible)
     {
+        // A brief column crossing does not tear down the established action/contact.
+        // Movement and launch stop immediately; only intent survives this 0.5 s window.
+        if (Knowledge.RetainsContact(Now) && Assignment.Objective == CombatAI::TacticalObjective::Engage)
+        {
+            E->StopMovementCommand(); E->SetRifleAimTarget(LastKnownAim);
+            E->SetRifleStance(EGASPALSRifleStance::Aim); return;
+        }
         if (State != EEnemyCombatState::Search || Assignment.Objective != CombatAI::TacticalObjective::ProtectedObservation)
             BeginSearch(TEXT("lost sight; protected observation from permitted evidence"));
         AdvanceSearch(Now); return;
     }
+    // Contact requests standing even when backoff postpones engagement. Mover
+    // may refuse it under geometry; actual head/muzzle probes remain authoritative.
+    E->SetCrouchCommand(false);
     if (State == EEnemyCombatState::Search && !CanReacquire)
     {
         E->StopMovementCommand(); E->SetRifleStance(EGASPALSRifleStance::Aim);
@@ -108,7 +119,7 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
         TacticalReason = WeaponSuppressed ? TEXT("known visible contact; weapon backoff") : TEXT("known visible contact; route backoff");
         return;
     }
-    E->SetRifleAimTarget(LastKnownAim); E->SetCrouchCommand(false);
+    E->SetRifleAimTarget(LastKnownAim);
     if (!E->IsRifleHeld() || !E->bRightHandOccupied)
     { FailTactic(TEXT("no held usable weapon"), CombatAI::ActionFailure::Weapon, true); return; }
     if (State == EEnemyCombatState::Acquire)

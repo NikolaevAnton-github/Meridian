@@ -5,11 +5,12 @@
 #include <cstddef>
 #include "CombatAIAction.h"
 #include "CombatAITactics.h"
+#include "CombatAISenses.h"
 
 // Value-only decision capture. No UObject, target getter or fairness input.
 namespace CombatAI
 {
-constexpr std::uint32_t SchemaVersion = 3;
+constexpr std::uint32_t SchemaVersion = 4;
 constexpr std::size_t TraceCapacity = 64;
 constexpr std::uint32_t DefaultEncounterSeed = 102;
 
@@ -22,14 +23,9 @@ constexpr std::uint32_t AgentSeed(std::uint32_t EncounterSeed, std::uint32_t Spa
     return (X ^ (X >> 16)) & 0x7fffffffu;
 }
 
-struct Position
-{
-    double X = 0, Y = 0, Z = 0;
-    bool operator==(const Position&) const = default;
-};
-enum class Evidence : std::uint8_t { None, Sight, LastSight };
+enum class Evidence : std::uint8_t { None, Sight, LastSight, Sound, Bearing };
 enum class PathOutcome : std::uint8_t { None, Planning, Ready, Following, Arrived, Failed, Canceled };
-enum class Event : std::uint8_t { Reset, DecisionInput, Sight, SightLost, State, Path, Shot, Stop, Authority, Action, Tactical };
+enum class Event : std::uint8_t { Reset, DecisionInput, Sight, SightLost, State, Path, Shot, Stop, Authority, Action, Tactical, Stimulus };
 
 struct InputSnapshot
 {
@@ -62,6 +58,9 @@ struct InputSnapshot
     std::array<char, 96> TacticalReason{};
     int SearchIndex = 0;
     bool Alert = false, RequestedWalk = true;
+    bool RequestedCrouch = false, ActualCrouch = false, RetainedContact = false;
+    StimulusData DominantEvidence;
+    std::uint64_t KnowledgeRevision = 0;
     MovePurpose Purpose = MovePurpose::Pursuit;
     std::uint64_t SightEventId = 0;
     // Native EEnemyCombatState / EGASPEnemyAuthority numeric values in schema v1.

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CombatAIAction.h"
+#include "CombatAISenses.h"
 #include <array>
 #include <algorithm>
 #include <cmath>
@@ -75,7 +76,7 @@ struct TransferBudget
 };
 
 constexpr int TacticalSectors = 8;
-constexpr int MaxTacticalCandidates = 29; // Current + 8 surfaces * 3 + 4 nearby probes.
+constexpr int MaxTacticalCandidates = 53; // Bounded surfaces, column sides/corners and local probes.
 constexpr int MaxTacticalTransfers = 2;
 constexpr double InvalidPositionScore = -1e9;
 inline int Sector(int Index) { return (Index + TacticalSectors * 2) % TacticalSectors; }
@@ -93,6 +94,17 @@ struct PositionFeatures
     unsigned ProtectionMask = 0, WeaponMask = 0, EscapeMask = 0, RegionVisibleMask = 0;
     double Exposure = 1, Travel = 0;
 };
+// Nominal planning probes in centimeters above supported feet. These describe
+// proposed stance, not animation socket measurements or permission to fire.
+// Actual sight and launch retain their head/weapon socket collision checks.
+struct TacticalProbeProfile
+{
+    double Chest, Eye, Weapon, Exposure;
+};
+inline TacticalProbeProfile TacticalProbes(bool Crouched)
+{
+    return Crouched ? TacticalProbeProfile{60, 100, 85, 90} : TacticalProbeProfile{95, 150, 125, 130};
+}
 struct PositionRating
 {
     bool Valid = false;
@@ -134,8 +146,7 @@ inline PositionRating RatePosition(const PositionFeatures& F)
     const double Side = (Protected(2) + Protected(6)) / 2;
     R.Protection = Rear * .6 + Side * .4;
     R.Exposure = std::clamp(F.Exposure, 0.0, 1.0);
-    R.Score = R.Protection * 60 + (1 - R.Exposure) * 30 + Best * .35 +
-        std::min(BitCount(R.OpenMask), 5) * 2 + std::min(BitCount(F.EscapeMask), 3) * 6 - F.Travel * .025;
+    R.Score = (1 - R.Exposure) * 1000 + R.Protection * 10 + Best * .05 - F.Travel * .008;
     R.Valid = true;
     return R;
 }
@@ -146,20 +157,77 @@ inline bool WorthSwitching(const PositionRating& Held, const PositionRating& Pro
     if (!Proposed.Valid) return false;
     if (!Held.Valid) return true;
     if (RecentlyVisited) return false;
-    if (HoldAge < Commitment || Travel < 100) return false;
+    if (HoldAge < Commitment || Travel < 35) return false;
+    // Safety is a hard ordering rule, independent of facing/open/escape rewards.
+    if (Proposed.Exposure > Held.Exposure + .025) return false;
+    if (Proposed.Exposure < Held.Exposure - .06) return true;
     if (Proposed.Score > Held.Score + Margin) return true;
     const int NovelSectors = BitCount(Proposed.OpenMask & ~Held.OpenMask);
     // A stale hold can yield to a safer informative neighboring look. A timer
     // alone never licenses an exposed walk or a move between equivalent points.
     return HoldAge >= ProbeAfter && Travel <= 450 && NovelSectors > 0 &&
-        Proposed.Protection >= Held.Protection - .1 && Proposed.Exposure <= Held.Exposure + .05 &&
+        Proposed.Protection >= Held.Protection - .1 && Proposed.Exposure <= Held.Exposure &&
         Proposed.Score + std::min(NovelSectors, 2) * 12 > Held.Score + Margin;
 }
 
 inline bool AcceptTacticalArrival(const PositionRating& Selected, const PositionRating& Actual)
 {
     return Selected.Valid && Actual.Valid && Actual.Protection + .15 >= Selected.Protection &&
-        Actual.Exposure <= Selected.Exposure + .34;
+        Actual.Exposure <= Selected.Exposure + .06;
+}
+
+inline bool PreferNearbySafe(double SafestExposure, double ProposedExposure, double ProposedTravel,
+    double BestTravel, double ProposedScore, double BestScore)
+{
+    return ProposedExposure <= SafestExposure + .04 &&
+        (ProposedTravel < BestTravel-1 || (std::abs(ProposedTravel-BestTravel) <= 1 && ProposedScore > BestScore));
+}
+
+struct ShortRoute
+{
+    bool Valid = false;
+    std::array<Position, 6> Points{};
+    int Count = 0;
+    double Length = 0;
+};
+// A tiny visibility ring around one static obstacle, not full navigation. The
+// adapter supplies supported capsule strips. Cache at most 13 distinct strips.
+template<class Walk>
+ShortRoute AroundColumn(Position From, Position To, const std::array<Position,4>& Corners, Walk CanWalk)
+{
+    ShortRoute R;
+    if (Distance2D(From,To) <= 900 && CanWalk(From,To)) return {true,{To},1,Distance2D(From,To)};
+    struct Option { std::array<int,6> Nodes{}; int Count=0; double Length=0; };
+    std::array<Position,6> Nodes{From,Corners[0],Corners[1],Corners[2],Corners[3],To};
+    std::array<Option,32> Options{};
+    int N=0;
+    for (int Start=0; Start<4; ++Start) for (int Direction : {-1,1}) for (int Steps=0; Steps<4; ++Steps)
+    {
+        auto& O=Options[N++]; O.Nodes[O.Count++]=0;
+        for (int I=0; I<=Steps; ++I) O.Nodes[O.Count++]=1+(Start+Direction*I+8)%4;
+        O.Nodes[O.Count++]=5;
+        for (int I=1; I<O.Count; ++I) O.Length+=Distance2D(Nodes[O.Nodes[I-1]],Nodes[O.Nodes[I]]);
+    }
+    std::sort(Options.begin(),Options.end(),[](const Option& A,const Option& B){return A.Length<B.Length;});
+    std::array<std::array<int,6>,6> Cache{};
+    for (const auto& O : Options)
+    {
+        if (O.Length>1200) break;
+        bool Clear=true;
+        for (int I=1; I<O.Count; ++I)
+        {
+            const int A=O.Nodes[I-1], B=O.Nodes[I];
+            if (!Cache[A][B]) Cache[A][B]=Cache[B][A]=CanWalk(Nodes[A],Nodes[B]) ? 1 : -1;
+            if (Cache[A][B]<0) { Clear=false; break; }
+        }
+        if (Clear)
+        {
+            R.Valid=true; R.Length=O.Length;
+            for (int I=1; I<O.Count; ++I) R.Points[R.Count++]=Nodes[O.Nodes[I]];
+            return R;
+        }
+    }
+    return R;
 }
 
 inline int ObservationSector(const PositionFeatures& F, unsigned ViewedMask)

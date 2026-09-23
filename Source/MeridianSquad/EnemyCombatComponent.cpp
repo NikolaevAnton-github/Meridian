@@ -26,6 +26,7 @@ UEnemyCombatComponent::UEnemyCombatComponent()
     // The fixture advances decisions before its foundation produces Mover input.
     // No timer manager, second pawn/controller, or independent movement tick.
     PrimaryComponentTick.bCanEverTick = false;
+    DecisionTrace = MakeUnique<CombatAI::TraceRing>();
 }
 AGASPEnemyFixture* UEnemyCombatComponent::Enemy() const { return Cast<AGASPEnemyFixture>(GetOwner()); }
 
@@ -76,6 +77,7 @@ void UEnemyCombatComponent::SetEnabled(bool bEnable)
     Action.Reset(EncounterGeneration);
     PathRequest = {}; ReloadRequest = {};
     Target.Reset(); Memory.Reset(); bTargetVisible = false;
+    Knowledge.Reset(EncounterGeneration); IntentEvidenceId=0; bEvidencePending=false; NextEvidenceResponse=0;
     SearchGoal = SearchAnchor = SearchLook = PathGoal = FVector::ZeroVector;
     bRequestedWalk = true;
     ResetTactics(); bReposition = false;
@@ -105,7 +107,7 @@ void UEnemyCombatComponent::ResetCombat(FVector HomeGround, FRotator HomeRotatio
     // Clear old intent before opening the new ring; no old-generation cancellation survives.
     SetEnabled(bEnabled);
     LastPathOutcome = CombatAI::PathOutcome::None;
-    DecisionTrace.Reset(EncounterGeneration);
+    DecisionTrace->Reset(EncounterGeneration);
     RecordTrace(CombatAI::Event::Reset, TEXT("encounter reset; seed retained; player ammo unchanged"));
 }
 void UEnemyCombatComponent::StopCombat()
@@ -113,6 +115,7 @@ void UEnemyCombatComponent::StopCombat()
     ClearIntent(CombatAI::ActionFailure::Stopped);
     ResetTactics(); Gates = {};
     Target.Reset(); bTargetVisible = false; Memory.Reset();
+    Knowledge.Reset(EncounterGeneration); bEvidencePending=false; IntentEvidenceId=0;
     NextShot = TNumericLimits<double>::Max();
     ChangeState(EEnemyCombatState::Disabled, TEXT("combat stopped"));
     RecordTrace(CombatAI::Event::Stop, TEXT("combat stopped"));
@@ -122,7 +125,7 @@ void UEnemyCombatComponent::SuspendForPhysics(bool bDead)
     if (!bEnabled) return;
     ClearIntent(bDead ? CombatAI::ActionFailure::Death : CombatAI::ActionFailure::Authority); bTargetVisible = false;
     ResetTactics();
-    if (bDead) { Target.Reset(); Memory.Reset(); }
+    if (bDead) { Target.Reset(); Memory.Reset(); Knowledge.Reset(EncounterGeneration); bEvidencePending=false; }
     ChangeState(bDead ? EEnemyCombatState::Dead : EEnemyCombatState::Recovery,
         bDead ? TEXT("death cancels combat") : TEXT("physical authority owns movement"));
     RecordTrace(CombatAI::Event::Authority, TEXT("physical authority handover"));
@@ -136,7 +139,6 @@ bool UEnemyCombatComponent::ObservePlayer()
     bTargetVisible = TryObservePlayer();
     if (bTargetVisible)
     {
-        ++SightEventId;
         const double Now = GetWorld()->GetTimeSeconds();
         const FVector Direction = (LastKnownGround - Feet()).GetSafeNormal2D();
         const double Dot = PriorDirection.IsNearlyZero() || Direction.IsNearlyZero() ? 1 : FVector::DotProduct(PriorDirection, Direction);
@@ -157,24 +159,42 @@ bool UEnemyCombatComponent::TryObservePlayer()
     FVector Eye; FRotator View;
     PC->GetPlayerViewPoint(Eye, View);
     const FVector Origin = E->Body->GetSocketLocation(TEXT("head"));
-    const FVector Delta = Eye - Origin;
-    if (Delta.SizeSquared() > FMath::Square(FMath::Clamp(Tuning.SightRange, 200.f, 10000.f))) return false;
-    const float Angle = FMath::Clamp(Tuning.SightHalfAngle, 5.f, 179.f);
-    if (FVector::DotProduct(Delta.GetSafeNormal2D(), E->Foundation->GetActorForwardVector().GetSafeNormal2D()) <
-        FMath::Cos(FMath::DegreesToRadians(Angle))) return false;
+    const auto* Capsule = Player->FindComponentByClass<UCapsuleComponent>();
+    const FVector Center = Player->GetActorLocation();
+    const float HalfHeight = Capsule ? Capsule->GetScaledCapsuleHalfHeight() : 88;
+    const FVector Ground = Center - FVector(0,0,HalfHeight);
+    const double Now = GetWorld()->GetTimeSeconds();
+    const float Angle = FMath::Clamp(Tuning.SightHalfAngle + (Knowledge.RetainsContact(Now) ? 20.f : 0.f), 5.f, 179.f);
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemySight), true);
     if (auto* World = ACombatProjectileWorld::Find(GetWorld())) World->BuildQuery(Query, E);
     Query.AddIgnoredActor(Player); Query.AddIgnoredActor(E->Foundation);
-    FHitResult Hit;
-    if (GetWorld()->LineTraceSingleByChannel(Hit, Origin, Eye, ECC_Visibility, Query)) return false;
+    // Camera, upper torso and lower torso have independent geometry tests. Reading
+    // candidate points is confined to this sensor; no failed sample enters memory.
+    const FVector Samples[] = {Eye, Ground+FVector(0,0,HalfHeight*1.45), Ground+FVector(0,0,HalfHeight*.8)};
+    const int32 VisibleSample = CombatAI::FirstVisibleSample(3, [&](int32 Index)
+    {
+        const FVector& Sample=Samples[Index];
+        const FVector Delta = Sample-Origin;
+        if (Delta.SizeSquared() > FMath::Square(FMath::Clamp(Tuning.SightRange, 200.f, 10000.f)) ||
+            FVector::DotProduct(Delta.GetSafeNormal2D(), E->Foundation->GetActorForwardVector().GetSafeNormal2D()) <
+                FMath::Cos(FMath::DegreesToRadians(Angle))) return false;
+        FHitResult Hit;
+        return !GetWorld()->LineTraceSingleByChannel(Hit, Origin, Sample, ECC_Visibility, Query);
+    });
+    if (VisibleSample < 0) return false;
     // Only successful visibility may refresh these positions. Search never reads
     // the hidden player's transform, velocity or follow-player rifle seam.
     Target = Player;
-    LastKnownAim = Eye;
-    LastKnownGround = Player->GetActorLocation();
-    if (const auto* Capsule = Player->FindComponentByClass<UCapsuleComponent>())
-        LastKnownGround.Z -= Capsule->GetScaledCapsuleHalfHeight();
-    Memory.Observe(GetWorld()->GetTimeSeconds());
+    LastKnownAim = Samples[VisibleSample];
+    LastKnownGround = Ground;
+    CombatAI::StimulusData S;
+    S.Id = (uint64(1)<<63) | (uint64(StableSpawnIndex)<<48) | ++SightEventId;
+    S.Generation=EncounterGeneration; S.Observer=StableSpawnIndex; S.KnownIdentity=1;
+    S.Kind=CombatAI::Sense::Sight; S.Category=CombatAI::SourceTeam::Player;
+    S.Region={Ground.X,Ground.Y,Ground.Z}; S.Confidence=1;
+    S.OccurredWorld=S.ReceivedWorld=Now;
+    Knowledge.Accept(CombatAI::Stimulus(S), Now);
+    Memory.Observe(Now); IntentEvidenceId=S.Id;
     return true;
 }
 
@@ -247,6 +267,7 @@ FString UEnemyCombatComponent::GetCombatState() const
 {
     auto Root = MakeShared<FJsonObject>();
     AppendObservationStatus(Root);
+    AppendSensesStatus(Root);
     Root->SetBoolField(TEXT("enabled"), bEnabled);
     Root->SetStringField(TEXT("state"), StaticEnum<EEnemyCombatState>()->GetNameStringByValue(int64(State)));
     Root->SetStringField(TEXT("reason"), Reason);
@@ -295,7 +316,7 @@ void EnemyCommand(const TArray<FString>& Args, UWorld* World)
         else if (Op == TEXT("status")) { UE_LOG(LogEnemyCombat, Display, TEXT("%s"), *Combat->GetCombatState()); }
         else if (Op == TEXT("trace"))
         {
-            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-T01/Traces");
+            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-02/Traces");
             IFileManager::Get().MakeDirectory(*Directory, true);
             const auto Snapshot = Combat->CaptureDecisionInput();
             const FString File = Directory / FString::Printf(TEXT("G%llu_S%u_%lld.json"),

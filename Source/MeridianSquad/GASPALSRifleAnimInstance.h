@@ -1,13 +1,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Animation/AnimInstance.h"
+#include "CombatLocomotionAnimInstance.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GASPALSRifleAnimInstance.generated.h"
 
 /** Mover/physical-authority adapter for the imported GASPALS rifle poses. */
 UCLASS(Transient, Blueprintable)
-class MERIDIANSQUAD_API UGASPALSRifleAnimInstance : public UAnimInstance
+class MERIDIANSQUAD_API UGASPALSRifleAnimInstance : public UCombatLocomotionAnimInstance
 {
     GENERATED_BODY()
 public:

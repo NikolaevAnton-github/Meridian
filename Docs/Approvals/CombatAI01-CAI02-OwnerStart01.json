@@ -1,0 +1,18 @@
+{
+  "record_id": "CombatAI01-CAI02-OwnerStart01",
+  "date_local": "2026-09-23",
+  "source": "Owner direct chat after playing MSQ-118 Candidate02",
+  "owner_message_original": "Поиграл. Плюс - противник действительно теперь часто занимает позицию у колоны скажем, но он может занять место в центральной части скажем к колоне спиной, получается со всех сторон обстреливается из центра, нужно что бы он занимал точку, ближайющую и при этом где наименьший обзор на его позицию, логичнее идти в присяде, что бы и его по шагам не слышали. Так же у него нету пока слуха, он очень не зоркий, локации не большая наша, он должен видишь через всю локацию, теряеет в целом очень легко, думаю, надо делать такого противника от котрого можной уйти только в замедлении, либо ну очень грамотно обманув",
+  "owner_message_english_translation": "I played. The enemy now often takes a position near a column, but can stand toward the center with his back to the column, exposed from all sides. He needs a nearby point with the least visibility onto his position and should move crouched so his footsteps are not heard. He has no hearing yet, poor sight, should see across our small location, and loses the player too easily. We should make an enemy one can escape only using slowdown or very skillful deception.",
+  "decision": "Implement nearby lower-exposure positions, quiet crouched tactical movement, hearing, sight across the retained location and stronger evidence-based tracking and reacquisition.",
+  "controller_slicing": "Dispatch existing MSQ-104 / CAI-02 with a bounded correction to delivered MSQ-118 tactics. Do not dispatch CAI-03/04. Preserve historical MSQ-118 candidates; owner position quality and combat-feel acceptance remain unmet.",
+  "behavior_interpretation": "Difficult escape is a combat-feel target through sustained attention and useful sensory evidence. Preserve occlusion and uncertainty so deliberate quiet deception remains possible. No omniscience, damage buff or player-health implementation is implied.",
+  "execution": "One Multica Unreal executor at Astra/max/default and one primary independent technical reviewer at max. Verify profiles, native arguments and turn contexts. Controller owns administration, acceptance and local MSQ-104 closure commit.",
+  "verification": "Continue owner-only gameplay testing: native build, affected pure/source checks and independent source review. Read-only editor/geometry/audio-wiring inspection is allowed. No agent Play, simulated combat, firing, gameplay screenshots or performance probes. Difficulty, audibility and position usefulness remain pending owner play.",
+  "editor_lifecycle": "Necessary guarded native rebuild/reload is authorized. Confirm project/map/Play/dirty state before lifecycle changes; preserve unsaved assets and any newly active owner session.",
+  "preservation": "Preserve owner config/project/map edits, asset sources, prior frozen evidence, GASP/Mover authority, finite projectile timing and world/bullets/rifle 0.25 versus hero movement 0.65 slowdown.",
+  "later_scope": "Full topology, squads, pressure scheduling, equipment, health/death and unrelated successors remain separate.",
+  "task": "MSQ-104",
+  "task_document": "Docs/Tasks/CombatAI01/CAI-02.md",
+  "evidence_root": "Saved/CombatAI01/CAI-02/"
+}

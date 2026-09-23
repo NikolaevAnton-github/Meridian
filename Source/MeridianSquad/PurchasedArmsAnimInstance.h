@@ -1,12 +1,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Animation/AnimInstance.h"
+#include "CombatLocomotionAnimInstance.h"
 #include "PurchasedArmsAnimInstance.generated.h"
 
 /** Source animation graph host with evaluated-frame telemetry for recovery checks. */
 UCLASS(Transient)
-class MERIDIANSQUAD_API UPurchasedArmsAnimInstance : public UAnimInstance
+class MERIDIANSQUAD_API UPurchasedArmsAnimInstance : public UCombatLocomotionAnimInstance
 {
     GENERATED_BODY()
 public:

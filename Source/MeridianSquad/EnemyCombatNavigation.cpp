@@ -70,9 +70,9 @@ bool UEnemyCombatComponent::PlanPath(FVector Goal, float Acceptance)
     PathRequest = EnsureAction(CombatAI::ActionKind::Move, GetWorld()->GetTimeSeconds());
     Path.Reset(); PathIndex = 0; Nodes.Reset(); OpenNodes.Reset(); CellNodes.Reset();
     bPlanning = bPlanFailed = false; LastPathExpanded = 0;
-    PathGoal = Goal; PathAcceptance = FMath::Max(Acceptance, 45.f);
+    PathGoal = Goal; PathAcceptance = FMath::Max(Acceptance, 25.f);
     PathCell = FMath::Clamp(Tuning.NavigationCell, 60.f, 120.f);
-    const float Radius = FMath::Clamp(Tuning.NavigationRadius, 400.f, 4000.f);
+    const float Radius = FMath::Clamp(Tuning.NavigationRadius, 400.f, 5000.f);
     const FVector Start = Feet();
     // Refuse destinations beyond the explicit home region, instead of snapping
     // them to a misleading reachable point and endlessly restarting pursuit.
@@ -103,7 +103,7 @@ void UEnemyCombatComponent::ContinuePath()
     }
     const double BudgetStart = FPlatformTime::Seconds();
     const int32 ExpansionLimit = FMath::Clamp(Tuning.MaxPathExpansions, 64, 2000);
-    const float Radius = FMath::Clamp(Tuning.NavigationRadius, 400.f, 4000.f);
+    const float Radius = FMath::Clamp(Tuning.NavigationRadius, 400.f, 5000.f);
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyPathExpand), false); NavigationQuery(Query);
     const bool bTactical = MovementPurpose == CombatAI::MovePurpose::Search;
     // Grid connectivity is separate from the pawn's final arrival tolerance.
@@ -216,7 +216,8 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
     if (!Action.Accepts(PathRequest) || PathRequest.Generation != EncounterGeneration)
     { ClearIntent(); return false; }
     Action.Update(PathRequest, Now);
-    while (Path.IsValidIndex(PathIndex) && FVector::Dist2D(Position, Path[PathIndex]) < 32.f) ++PathIndex;
+    while (Path.IsValidIndex(PathIndex) && FVector::Dist2D(Position, Path[PathIndex]) <
+        (Purpose == CombatAI::MovePurpose::Search ? 18.f : 32.f)) ++PathIndex;
     if (!Path.IsValidIndex(PathIndex)) { E->StopMovementCommand(); return true; }
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyPathFollow), false); NavigationQuery(Query);
     if (!WalkSegment(Position, Path[PathIndex], Query)) return Failed(TEXT("next segment blocked or unsupported"));
@@ -226,7 +227,7 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
     const FVector Direction = (Path[PathIndex] - Position).GetSafeNormal2D();
     const float TurnDot = Path.IsValidIndex(PathIndex + 1) ? FVector::DotProduct(Direction,
         (Path[PathIndex + 1] - Path[PathIndex]).GetSafeNormal2D()) : 1.f;
-    bRequestedWalk = CombatAI::WantsWalk(Purpose, FVector::Dist2D(Position, Goal) - Acceptance, TurnDot);
+    bRequestedWalk = E->bCrouchCommand || CombatAI::WantsWalk(Purpose, FVector::Dist2D(Position, Goal) - Acceptance, TurnDot);
     E->SetMovementCommand(Direction, bRequestedWalk);
     RecordPath(CombatAI::PathOutcome::Following, bRequestedWalk ? TEXT("walk: approach or corner") : TEXT("run: pursuit or search transit"));
     return true;

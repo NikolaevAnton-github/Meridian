@@ -23,7 +23,8 @@ USTRUCT(BlueprintType)
 struct FEnemyCombatTuning
 {
     GENERATED_BODY()
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) float SightRange = 2400.f;
+    // Retained floor is 6080 x 2480 cm (~6567 cm diagonal).
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float SightRange = 7000.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SightHalfAngle = 100.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SightInterval = .12f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float AcquireSeconds = .65f;
@@ -46,10 +47,12 @@ struct FEnemyCombatTuning
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float TacticalCommitSeconds = 4.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float TacticalProbeSeconds = 6.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float TacticalSwitchMargin = 10.f;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) float PursuitSeconds = 12.f;
+    // Room diagonal / retained 375 cm/s run, plus bounded planning/turning time.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float PursuitSeconds = 24.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float ReturnSeconds = 12.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float RetryCooldown = 5.f;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) float NavigationRadius = 2800.f;
+    // Home (-950,-320) is <=4285 cm from every retained floor corner.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float NavigationRadius = 4500.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float NavigationCell = 80.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float MaxStepHeight = 30.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float MaxSlopeDegrees = 40.f;
@@ -85,6 +88,7 @@ public:
     // Set once from the explicit placement slot before deferred FinishSpawning.
     void SetStableSpawnIndex(uint32 Index) { StableSpawnIndex = Index; }
     CombatAI::InputSnapshot CaptureDecisionInput() const;
+    void ReceiveStimulus(const CombatAI::Stimulus& Record);
 
 private:
     AGASPEnemyFixture* Enemy() const;
@@ -104,6 +108,12 @@ private:
     int32 ObstructionAttempts = 0;
     int64 LastShotId = 0;
     CombatAI::EncounterMemory Memory;
+    CombatAI::Knowledge Knowledge;
+    uint64 IntentEvidenceId = 0;
+    bool bEvidencePending = false;
+    double NextEvidenceResponse = 0;
+    void ApplyEvidenceIntent(double Now);
+    void AppendSensesStatus(const TSharedRef<FJsonObject>& Root) const;
     CombatAI::ActionRuntime Action;
     CombatAI::ActionToken PathRequest;
     CombatAI::ActionToken ReloadRequest;
@@ -135,7 +145,7 @@ private:
     uint64 SightEventId = 0;
     double CaptureDeltaSeconds = 0;
     CombatAI::PathOutcome LastPathOutcome = CombatAI::PathOutcome::None;
-    CombatAI::TraceRing DecisionTrace;
+    TUniquePtr<CombatAI::TraceRing> DecisionTrace;
     void RecordTrace(CombatAI::Event Kind, const TCHAR* Why);
     void RecordPath(CombatAI::PathOutcome Outcome, const TCHAR* Why);
     void AppendObservationStatus(const TSharedRef<FJsonObject>& Root) const;
@@ -156,6 +166,11 @@ private:
         FVector Ground = FVector::ZeroVector;
         CombatAI::PositionFeatures Features;
         CombatAI::PositionRating Rating;
+        FVector FacingBasis = FVector::ForwardVector;
+        TArray<FVector> Route;
+        FBox Obstacle = FBox(ForceInit);
+        bool bCrouched = false;
+        uint64 EvidenceId = 0;
     };
     CombatAI::TacticalAssignment Assignment;
     CombatAI::ActionToken ScanRequest;
@@ -180,8 +195,9 @@ private:
     void RejectTacticalPosition(const FVector& Ground, CombatAI::PositionRejection Why, double Now);
     void HoldTacticalPosition(double Now);
     void SetObservationFacing(double Now);
-    void AddTacticalCandidate(FVector Ground);
-    FTacticalPosition AssessTacticalPosition(FVector Reference, FVector From, bool bCheckRoute);
+    void AddTacticalCandidate(FVector Ground, FBox Obstacle = FBox(ForceInit));
+    FTacticalPosition AssessTacticalPosition(FVector Reference, FVector From, bool bCheckRoute, bool bCrouched, FBox Obstacle = FBox(ForceInit));
+    bool TacticalRoute(FVector From, FVector To, const FBox& Obstacle, TArray<FVector>& Route, double& Length);
     bool TacticalGround(FVector Reference, FVector& Ground, CombatAI::PositionRejection& Failure);
     bool TacticalWalk(FVector From, FVector To);
     bool TacticalTrace(FVector From, FVector To, FHitResult& Hit, ECollisionChannel Response = ECC_Visibility);

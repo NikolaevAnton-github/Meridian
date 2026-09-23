@@ -3,12 +3,14 @@
 Later refinement after MSQ-103 owner play: [situational tactics and coordinator](../Design/CombatAI01TacticalCoordinator01.md).
 The later [owner start](../Approvals/CombatAI01-Tactical01-OwnerStart01.json)
 authorizes [MSQ-118 / CAI-T01](CombatAI01/CAI-T01.md), a bounded sight-based early
-tactical slice on MSQ-103. Full hearing, topology, individual/squad packages retain
-their remaining scope and existing acceptance prerequisites.
+tactical slice on MSQ-103. The later owner sensory/tactical follow-up delivers
+[MSQ-104 / CAI-02 Candidate03](../CombatAI01-CAI02Acceptance.md) for owner testing.
+Full topology and individual/squad packages retain their remaining scope and
+existing acceptance prerequisites.
 
 Prepared 2026-09-23 for the owner's request for a very detailed plan for surprising,
 high-quality arcade shooter AI. Parent context: MSQ-67; starting delivery: MSQ-70.
-Original status: tasks prepared in Multica. CAI-00/01 and the later early CAI-T01
+Original status: tasks prepared in Multica. CAI-00/01/02 and the later early CAI-T01
 slice are now delivered for owner testing; see the current task index.
 The later [task-creation request](../Approvals/CombatAI01-TaskCreation01.json)
 formalized this plan as parent **MSQ-101** and children **MSQ-102 through MSQ-117**.

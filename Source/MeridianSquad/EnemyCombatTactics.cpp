@@ -6,7 +6,7 @@
 
 namespace
 {
-constexpr float TacticalAcceptance = 45.f;
+constexpr float TacticalAcceptance = 25.f;
 constexpr float MaxCandidateTravel = 900.f;
 }
 
@@ -19,12 +19,12 @@ void UEnemyCombatComponent::ResetTactics(bool bClearHistory)
     TacticalCandidates.Reset(); bTacticalScan = bHeldPosition = bSelectedPosition = false;
     TacticalPhase = CombatAI::TacticalPhase::None;
     HeldPosition = {}; SelectedPosition = {};
-    SurfaceIndex = CandidateIndex = TacticalRejected = 0; Transfers = {};
+    SurfaceIndex = CandidateIndex = TacticalRejected = 0;
     TacticalQueryCount = TacticalPeakQueries = 0; RejectionCounts = {};
     NextTacticalWork = NextTacticalScan = NextHoldValidation = NextLookAt = 0;
     HoldStartedAt = ScanStartedAt = TacticalMoveStartedAt = 0;
     LookSector = -1; ViewedSectors = 0; TacticalReason.Reset();
-    if (bClearHistory) { RejectedPositions = {}; VisitedPositions = {}; }
+    if (bClearHistory) { RejectedPositions = {}; VisitedPositions = {}; Transfers = {}; }
 }
 
 bool UEnemyCombatComponent::TacticalTrace(FVector From, FVector To, FHitResult& Hit, ECollisionChannel Response)
@@ -41,7 +41,7 @@ bool UEnemyCombatComponent::TacticalTrace(FVector From, FVector To, FHitResult& 
 bool UEnemyCombatComponent::TacticalGround(FVector Reference, FVector& Ground, CombatAI::PositionRejection& Failure)
 {
     Failure = CombatAI::PositionRejection::Support;
-    if (Reference.ContainsNaN() || FVector::Dist2D(Reference, Home) > FMath::Clamp(Tuning.NavigationRadius, 400.f, 4000.f)) return false;
+    if (Reference.ContainsNaN() || FVector::Dist2D(Reference, Home) > FMath::Clamp(Tuning.NavigationRadius, 400.f, 5000.f)) return false;
     const float Step = FMath::Clamp(Tuning.MaxStepHeight, 0.f, 35.f);
     FHitResult Floor;
     const float Slope = FMath::Cos(FMath::DegreesToRadians(FMath::Clamp(Tuning.MaxSlopeDegrees, 0.f, 45.f)));
@@ -87,29 +87,54 @@ bool UEnemyCombatComponent::TacticalWalk(FVector From, FVector To)
     return FMath::Abs(Previous.Z-To.Z) <= StepHeight+2;
 }
 
-UEnemyCombatComponent::FTacticalPosition UEnemyCombatComponent::AssessTacticalPosition(FVector Reference, FVector From, bool bCheckRoute)
+bool UEnemyCombatComponent::TacticalRoute(FVector From, FVector To, const FBox& Obstacle, TArray<FVector>& Route, double& Length)
+{
+    auto Point=[](FVector P)->CombatAI::Position { return {P.X,P.Y,P.Z}; };
+    if (!Obstacle.IsValid)
+    {
+        if (!TacticalWalk(From,To)) return false;
+        Route={To}; Length=FVector::Dist2D(From,To); return true;
+    }
+    std::array<CombatAI::Position,4> Corners{{
+        {Obstacle.Min.X,Obstacle.Min.Y,From.Z},{Obstacle.Max.X,Obstacle.Min.Y,From.Z},
+        {Obstacle.Max.X,Obstacle.Max.Y,From.Z},{Obstacle.Min.X,Obstacle.Max.Y,From.Z}}};
+    const auto Result=CombatAI::AroundColumn(Point(From),Point(To),Corners,
+        [&](CombatAI::Position A,CombatAI::Position B) { return TacticalWalk(FVector(A.X,A.Y,A.Z),FVector(B.X,B.Y,B.Z)); });
+    if (!Result.Valid) return false;
+    Route.Reset(); Length=Result.Length;
+    for (int I=0; I<Result.Count; ++I) Route.Add(FVector(Result.Points[I].X,Result.Points[I].Y,Result.Points[I].Z));
+    return true;
+}
+
+UEnemyCombatComponent::FTacticalPosition UEnemyCombatComponent::AssessTacticalPosition(FVector Reference, FVector From, bool bCheckRoute, bool bCrouched, FBox Obstacle)
 {
     const int32 QueriesBefore = TacticalQueryCount;
     ON_SCOPE_EXIT { TacticalPeakQueries = FMath::Max(TacticalPeakQueries, TacticalQueryCount - QueriesBefore); };
-    FTacticalPosition P; P.Ground = Reference;
+    FTacticalPosition P; P.Ground = Reference; P.Obstacle=Obstacle;
+    P.bCrouched = bCrouched; P.EvidenceId = IntentEvidenceId;
+    const auto Probes = CombatAI::TacticalProbes(bCrouched);
     auto& F = P.Features;
     CombatAI::PositionRejection Failure;
     if (!TacticalGround(Reference, P.Ground, Failure))
     { P.Rating.Rejection = Failure; return P; }
     F.Supported = F.CapsuleClear = true;
     F.Travel = FVector::Dist2D(From, P.Ground);
-    F.RouteClear = !bCheckRoute || (F.Travel <= MaxCandidateTravel && TacticalWalk(From, P.Ground));
+    F.RouteClear = !bCheckRoute || TacticalRoute(From, P.Ground, Obstacle, P.Route, F.Travel);
     if (!F.RouteClear) { P.Rating.Rejection = CombatAI::PositionRejection::Route; return P; }
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyTacticalWeapon), false);
+    P.FacingBasis=(SearchAnchor-P.Ground).GetSafeNormal2D();
+    if (P.FacingBasis.IsNearlyZero()) P.FacingBasis=SearchForward;
+    double BroadExposure=0;
     for (int32 I = 0; I < CombatAI::TacticalSectors; ++I)
     {
-        const FVector Direction = TacticalDirection(I);
+        const FVector Direction = P.FacingBasis.RotateAngleAxis(45.f*I,FVector::UpVector);
         FHitResult Low, High;
-        const FVector Chest = P.Ground + FVector(0,0,95), Eye = P.Ground + FVector(0,0,150);
+        const FVector Chest = P.Ground + FVector(0,0,Probes.Chest), Eye = P.Ground + FVector(0,0,Probes.Eye);
         const bool bLow = TacticalTrace(Chest, Chest + Direction*600, Low);
         const bool bHigh = TacticalTrace(Eye, Eye + Direction*600, High);
         const double LowDistance = bLow ? Low.Distance : 600;
         const double HighDistance = bHigh ? High.Distance : 600;
+        BroadExposure += ((!bLow || LowDistance>450) ? .5 : 0) + ((!bHigh || HighDistance>450) ? .5 : 0);
         F.OpenDistance[I] = FMath::Min(LowDistance, HighDistance);
         if (bLow && bHigh && LowDistance <= 160 && HighDistance <= 160 &&
             Low.GetComponent()->GetCollisionResponseToChannel(ECC_Pawn) == ECR_Block &&
@@ -119,32 +144,35 @@ UEnemyCombatComponent::FTacticalPosition UEnemyCombatComponent::AssessTacticalPo
         if (F.OpenDistance[I] >= 220)
         {
             FHitResult Weapon; ++TacticalQueryCount;
-            const FVector WeaponRoot = P.Ground + FVector(0,0,125);
+            const FVector WeaponRoot = P.Ground + FVector(0,0,Probes.Weapon);
             if (!GetWorld()->SweepSingleByObjectType(Weapon, WeaponRoot, WeaponRoot + Direction*120, FQuat::Identity,
                 FCollisionObjectQueryParams(ECC_WorldStatic), FCollisionShape::MakeSphere(10), Query)) F.WeaponMask |= 1u << I;
         }
         // Four independently supported local exits, not just an empty sight ray.
         if (I % 2 == 0 && TacticalWalk(P.Ground, P.Ground + Direction*105)) F.EscapeMask |= 1u << I;
     }
-    const float Age = FMath::Max(0.0, GetWorld()->GetTimeSeconds() - Memory.LastSeen);
-    const float Uncertainty = FMath::Clamp(180.f + Age*35.f, 180.f, 500.f);
-    const FVector Lateral = FVector::CrossProduct(FVector::UpVector, SearchForward);
-    for (int32 I = 0; I < 3; ++I)
+    const auto* Hypothesis=Knowledge.Dominant(GetWorld()->GetTimeSeconds(),false);
+    const float Uncertainty=Hypothesis ? FMath::Clamp(static_cast<float>(Hypothesis->Evidence.Get().Uncertainty),180.f,650.f) : 300;
+    const FVector Lateral = FVector::CrossProduct(FVector::UpVector, P.FacingBasis);
+    // Five plausible firing approaches around the permitted evidence, plus the
+    // eight local approach sectors. A rear column cannot cancel broad exposure.
+    for (int32 I = 0; I < 5; ++I)
     {
         FHitResult Hit;
-        const FVector Region = SearchAnchor + Lateral*((I-1)*Uncertainty) + FVector(0,0,130);
-        if (!TacticalTrace(P.Ground + FVector(0,0,130), Region, Hit)) F.RegionVisibleMask |= 1u << I;
+        const FVector Offset=I<3 ? Lateral*((I-1)*Uncertainty) : P.FacingBasis*((I==3 ? -1 : 1)*Uncertainty);
+        const FVector Region = SearchAnchor + Offset + FVector(0,0,130);
+        if (!TacticalTrace(P.Ground + FVector(0,0,Probes.Exposure), Region, Hit)) F.RegionVisibleMask |= 1u << I;
     }
-    F.Exposure = CombatAI::BitCount(F.RegionVisibleMask) / 3.0;
+    F.Exposure = .65*CombatAI::BitCount(F.RegionVisibleMask)/5.0 + .35*BroadExposure/8.0;
     P.Rating = CombatAI::RatePosition(F);
     return P;
 }
 
-void UEnemyCombatComponent::AddTacticalCandidate(FVector Ground)
+void UEnemyCombatComponent::AddTacticalCandidate(FVector Ground, FBox Obstacle)
 {
     if (TacticalCandidates.Num() >= CombatAI::MaxTacticalCandidates || Ground.ContainsNaN()) return;
-    for (const auto& P : TacticalCandidates) if (FVector::Dist2D(P.Ground, Ground) < 65) return;
-    FTacticalPosition P; P.Ground = Ground; TacticalCandidates.Add(P);
+    for (const auto& P : TacticalCandidates) if (FVector::Dist2D(P.Ground, Ground) < 30) return;
+    FTacticalPosition P; P.Ground = Ground; P.Obstacle=Obstacle; TacticalCandidates.Add(P);
 }
 
 void UEnemyCombatComponent::BeginTacticalScan(double Now)
@@ -164,7 +192,7 @@ void UEnemyCombatComponent::AdvanceTacticalScan(double Now)
     if (!bTacticalScan || Now < NextTacticalWork) return;
     if (!Assignment.Accepts(ScanRequest)) { bTacticalScan = false; return; }
     // One surface ray OR one candidate assessment per tick, at most 40/world second.
-    // No A-star query per candidate; only proven direct supported strips qualify.
+    // No A-star query per candidate; at most a four-corner supported column ring.
     NextTacticalWork = Now + .025;
     const int32 QueriesBefore = TacticalQueryCount;
     if (SurfaceIndex < 8)
@@ -183,6 +211,22 @@ void UEnemyCombatComponent::AdvanceTacticalScan(double Now)
             AddTacticalCandidate(Surface);
             AddTacticalCandidate(Surface + Tangent*140);
             AddTacticalCandidate(Surface - Tangent*140);
+            // Static component bounds reveal the protected side without seeing a
+            // hidden player. Wide walls are not treated as walk-around columns.
+            const FBox Bounds=Hit.GetComponent()->Bounds.GetBox();
+            const FVector Extent=Bounds.GetExtent();
+            if (Extent.X<=260 && Extent.Y<=260)
+            {
+                const FBox Ring=Bounds.ExpandBy(Radius+35);
+                for (int32 I=0; I<4; ++I)
+                {
+                    const float X=(I==0 || I==3) ? Ring.Min.X : Ring.Max.X;
+                    const float Y=I<2 ? Ring.Min.Y : Ring.Max.Y;
+                    AddTacticalCandidate(FVector(X,Y,ScanOrigin.Z),Ring);
+                    const FVector Center=Ring.GetCenter();
+                    AddTacticalCandidate(I%2==0 ? FVector(Center.X,Y,ScanOrigin.Z) : FVector(X,Center.Y,ScanOrigin.Z),Ring);
+                }
+            }
         }
         if (SurfaceIndex == 8)
             for (int32 I = 0; I < 4; ++I)
@@ -193,7 +237,7 @@ void UEnemyCombatComponent::AdvanceTacticalScan(double Now)
         auto& P = TacticalCandidates[CandidateIndex++];
         if (FVector::Dist2D(P.Ground, ScanOrigin) > 60 && RejectedPositions.Contains(P.Ground.X, P.Ground.Y, Now))
             P.Rating.Rejection = CombatAI::PositionRejection::RecentFailure;
-        else P = AssessTacticalPosition(P.Ground, ScanOrigin, true);
+        else P = AssessTacticalPosition(P.Ground, ScanOrigin, true, true, P.Obstacle);
         if (!P.Rating.Valid)
         { ++TacticalRejected; ++RejectionCounts[static_cast<size_t>(P.Rating.Rejection)]; }
     }
@@ -211,34 +255,48 @@ void UEnemyCombatComponent::ChooseTacticalPosition(double Now)
     // Actual feet can drift while braking. A displaced scan cannot authorize travel.
     if (FVector::Dist2D(Feet(), ScanOrigin) > 60)
     { NextTacticalScan = Now + .5; TacticalReason = TEXT("scan origin displaced; rebuild at actual feet"); return; }
-    FTacticalPosition Current = AssessTacticalPosition(Feet(), Feet(), false);
+    FTacticalPosition Current = AssessTacticalPosition(Feet(), Feet(), false, Enemy()->IsMovementCrouched());
     const bool bWasHolding = TacticalPhase == CombatAI::TacticalPhase::Holding && bHeldPosition && Current.Rating.Valid;
     if (!bWasHolding) HoldStartedAt = Now;
     int32 Best = INDEX_NONE;
-    double Score = Current.Rating.Valid ? Current.Rating.Score : CombatAI::InvalidPositionScore;
+    double Score = CombatAI::InvalidPositionScore;
+    double Safest=2, BestTravel=TNumericLimits<double>::Max();
+    TArray<int32> Eligible;
     // First seek protection without an artificial hold commitment. Subsequent
     // scans compare against freshly validated feet, never the old goal's score.
     const double HoldAge = bWasHolding ? Now - HoldStartedAt : TNumericLimits<double>::Max();
     for (int32 I = 0; I < CandidateIndex; ++I)
     {
         const auto& P = TacticalCandidates[I];
-        const double Travel = FVector::Dist2D(Feet(), P.Ground);
-        if (!Transfers.CanStart() || Travel < 100 ||
+        const double Travel = P.Features.Travel;
+        if (!Transfers.CanStart() || FVector::Dist2D(Feet(), P.Ground) < 35 ||
             RejectedPositions.Contains(P.Ground.X, P.Ground.Y, Now) ||
             MoveBackoff.Blocks(P.Ground.X, P.Ground.Y, Now)) continue;
         if (!CombatAI::WorthSwitching(Current.Rating, P.Rating, HoldAge, Travel,
             VisitedPositions.Contains(P.Ground.X, P.Ground.Y, Now), FMath::Clamp(Tuning.TacticalCommitSeconds, 1.f, 10.f),
             FMath::Clamp(Tuning.TacticalSwitchMargin, 3.f, 30.f), FMath::Clamp(Tuning.TacticalProbeSeconds, 3.f, 20.f))) continue;
-        const double Utility = P.Rating.Score + (HoldAge >= Tuning.TacticalProbeSeconds ?
-            FMath::Min(CombatAI::BitCount(P.Rating.OpenMask & ~Current.Rating.OpenMask), 2)*12 : 0);
-        if (Utility > Score) { Best = I; Score = Utility; }
+        Eligible.Add(I); Safest=FMath::Min(Safest,P.Rating.Exposure);
+    }
+    for (int32 I : Eligible)
+    {
+        const auto& P=TacticalCandidates[I];
+        if (CombatAI::PreferNearbySafe(Safest,P.Rating.Exposure,P.Features.Travel,BestTravel,P.Rating.Score,Score))
+        { Best=I; BestTravel=P.Features.Travel; Score=P.Rating.Score; }
     }
     NextTacticalScan = Now + FMath::Clamp(Tuning.TacticalReassessSeconds, 1.5f, 8.f);
     if (Best != INDEX_NONE)
     {
         // The incremental scan is a proposal cache, not permanent geometry truth.
         // Refresh the single winner before committing movement as well as at arrival.
-        const auto Winner = AssessTacticalPosition(TacticalCandidates[Best].Ground, Feet(), true);
+        const auto Winner = AssessTacticalPosition(TacticalCandidates[Best].Ground, Feet(), true, true, TacticalCandidates[Best].Obstacle);
+        if (Winner.bCrouched != Enemy()->IsMovementCrouched())
+        {
+            // An unachieved request cannot authorize travel through crouch-only
+            // space. Observe/reassess actual standing feet until Mover complies.
+            NextTacticalScan = Now + .5; NextHoldValidation = 0;
+            TacticalReason = TEXT("requested crouch not achieved; retain actual-stance observation");
+            return;
+        }
         if (!CombatAI::WorthSwitching(Current.Rating, Winner.Rating, HoldAge, Winner.Features.Travel,
             VisitedPositions.Contains(Winner.Ground.X, Winner.Ground.Y, Now), FMath::Clamp(Tuning.TacticalCommitSeconds, 1.f, 10.f),
             FMath::Clamp(Tuning.TacticalSwitchMargin, 3.f, 30.f), FMath::Clamp(Tuning.TacticalProbeSeconds, 3.f, 20.f)))
@@ -247,7 +305,12 @@ void UEnemyCombatComponent::ChooseTacticalPosition(double Now)
         bHeldPosition = false; SearchGoal = SelectedPosition.Ground; Transfers.Start();
         TacticalMoveStartedAt = Now; NextRepath = 0; FailedAttempts = 0;
         TacticalPhase = CombatAI::TacticalPhase::Moving;
-        TacticalReason = TEXT("better validated protection or informative adjacent observation");
+        // Execute the checked short route itself; do not discard it into a grid
+        // search that may miss a narrow but proven side of the column.
+        Path=Winner.Route; PathIndex=0; PathGoal=SearchGoal;
+        PathRequest=EnsureAction(CombatAI::ActionKind::Move,Now);
+        ProgressPosition=Feet(); LastProgress=Now;
+        TacticalReason = TEXT("nearby lowest-exposure supported position; checked short route");
     }
     else
     {
@@ -286,18 +349,18 @@ void UEnemyCombatComponent::SetObservationFacing(double Now)
         if (LookSector >= 0)
         {
             ViewedSectors |= 1u << LookSector;
-            SearchLook = Feet() + TacticalDirection(LookSector) * FMath::Clamp(HeldPosition.Features.OpenDistance[LookSector]*.75, 220.0, 450.0) + FVector(0,0,140);
+            SearchLook = Feet() + HeldPosition.FacingBasis.RotateAngleAxis(45.f*LookSector,FVector::UpVector) * FMath::Clamp(HeldPosition.Features.OpenDistance[LookSector]*.75, 220.0, 450.0) + FVector(0,0,CombatAI::TacticalProbes(HeldPosition.bCrouched).Eye);
         }
     }
     else
     {
-        // No valid standing/weapon space: inspect only a freshly clear horizontal
+        // No valid stance/weapon space: inspect only a freshly clear horizontal
         // sector. If every sector is blocked, do not assert a valid facing.
         LookSector = -1;
         for (int32 I = 0; I < 8; ++I)
         {
             const int32 Sector = (CandidateIndex + I) % 8;
-            FHitResult Hit; const FVector Origin = Feet() + FVector(0,0,140);
+            FHitResult Hit; const FVector Origin = Feet() + FVector(0,0,CombatAI::TacticalProbes(Enemy()->IsMovementCrouched()).Eye);
             if (!TacticalTrace(Origin, Origin + TacticalDirection(Sector)*250, Hit))
             { LookSector = Sector; SearchLook = Origin + TacticalDirection(Sector)*250; break; }
         }
@@ -308,27 +371,25 @@ void UEnemyCombatComponent::SetObservationFacing(double Now)
 void UEnemyCombatComponent::HoldTacticalPosition(double Now)
 {
     auto* E = Enemy(); E->StopMovementCommand();
-    if (Now >= NextHoldValidation)
+    const bool bStanceChanged = HeldPosition.bCrouched != E->IsMovementCrouched();
+    if (Now >= NextHoldValidation || bStanceChanged)
     {
         const auto Before = HeldPosition.Rating;
         const int32 QueriesBefore = TacticalQueryCount;
-        HeldPosition = AssessTacticalPosition(Feet(), Feet(), false);
+        HeldPosition = AssessTacticalPosition(Feet(), Feet(), false, E->IsMovementCrouched());
         TacticalPeakQueries = FMath::Max(TacticalPeakQueries, TacticalQueryCount - QueriesBefore);
         bHeldPosition = HeldPosition.Rating.Valid;
         NextHoldValidation = Now + 1;
-        if (!bHeldPosition || (Before.Valid && HeldPosition.Rating.Protection + .15 < Before.Protection))
+        if (!bHeldPosition || (Before.Valid && !CombatAI::AcceptTacticalArrival(Before,HeldPosition.Rating)))
         {
-            // Lost prerequisites override commitment and invalidate cached work.
-            if (Before.Valid)
-            {
-                bTacticalScan = false;
-                Assignment.Assign(EncounterGeneration, Assignment.Objective, Assignment.EvidenceId, Now);
-            }
+            // Invalidate this hold, not the bounded proposal scan. A changed
+            // evidence region must not repeatedly discard incremental work;
+            // the selected winner still receives fresh geometry/stance checks.
             TacticalPhase = CombatAI::TacticalPhase::Fallback;
             NextTacticalScan = FMath::Min(NextTacticalScan, Now);
             TacticalReason = TEXT("held geometry changed; reassess actual feet");
         }
-        if (LookSector < 0 || (HeldPosition.Rating.OpenMask & (1u << LookSector)) == 0) NextLookAt = 0;
+        if (bStanceChanged || LookSector < 0 || (HeldPosition.Rating.OpenMask & (1u << LookSector)) == 0) NextLookAt = 0;
     }
     SetObservationFacing(Now);
     // Aim/strafe inputs turn the adopted foundation, with no follow-player seam.
@@ -341,14 +402,28 @@ void UEnemyCombatComponent::HoldTacticalPosition(double Now)
 void UEnemyCombatComponent::AdvanceSearch(double Now)
 {
     if (!Memory.Alert || !Memory.HasObservation) return;
-    auto* E = Enemy(); E->SetCrouchCommand(false);
+    auto* E = Enemy(); E->SetCrouchCommand(true);
     if (bSelectedPosition)
     {
+        if (SelectedPosition.bCrouched != E->IsMovementCrouched())
+        {
+            // A standing transition invalidates a route selected for crouch.
+            RejectTacticalPosition(SearchGoal, CombatAI::PositionRejection::Arrival, Now);
+            return;
+        }
+        if (SelectedPosition.EvidenceId != IntentEvidenceId)
+        {
+            const auto Updated = AssessTacticalPosition(SearchGoal, Feet(), false, E->IsMovementCrouched());
+            if (!CombatAI::AcceptTacticalArrival(SelectedPosition.Rating, Updated.Rating))
+            { RejectTacticalPosition(SearchGoal, CombatAI::PositionRejection::Arrival, Now); return; }
+            SelectedPosition.EvidenceId = IntentEvidenceId;
+        }
         E->SetRifleStance(EGASPALSRifleStance::Ready);
-        E->SetRifleFollowPlayer(false); // Locomotion faces travel until arrival.
+        if (Now < NextLookAt) E->SetRifleAimTarget(SearchLook); // Brief attention to fresh sound while traveling.
+        else E->SetRifleFollowPlayer(false);
         if (FVector::Dist2D(Feet(), SearchGoal) <= TacticalAcceptance && FMath::Abs(Feet().Z - SearchGoal.Z) <= 40)
         {
-            const auto Arrived = AssessTacticalPosition(Feet(), Feet(), false);
+            const auto Arrived = AssessTacticalPosition(Feet(), Feet(), false, E->IsMovementCrouched());
             // A path's tolerance is not evidence of protection at actual feet.
             if (!CombatAI::AcceptTacticalArrival(SelectedPosition.Rating, Arrived.Rating))
             { RejectTacticalPosition(SearchGoal, CombatAI::PositionRejection::Arrival, Now); }
