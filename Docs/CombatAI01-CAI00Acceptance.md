@@ -56,11 +56,15 @@ turn contexts do not independently expose a response service tier. The shared Un
 profile is restored to its prior max/default configuration and instructions. The
 Multica runtime is stopped; administrative services remain available.
 
-Final executor state records ordinary editor PID 41272, the retained lobby, stopped
-Play and no dirty packages. The earlier script-mode launch exited normally and is
-preserved as bootstrap history. No agent gameplay, shots, screenshots, performance
-sample or runtime acceptance matrix ran. The controller preserves the live editor
-for owner testing and owns task closure and the local commit.
+Executor state records ordinary editor PID 41272, the retained lobby, stopped Play
+and no dirty packages. At controller handoff, after worker/runtime completion,
+that process was no longer running. The controller opened an ordinary retained
+session as PID **43352** and verified the final DLL's loaded module hash, retained
+lobby and stopped Play. See `Controller/editor-launch-final.json`,
+`editor-loaded-final.json` and `editor-state-final.json`; no candidate bytes changed.
+The earlier script-mode launch exited normally and is preserved as bootstrap history.
+No agent gameplay, shots, screenshots, performance sample or runtime acceptance
+matrix ran. The controller owns task closure and the local commit.
 
 In Play, `msq.EnemyCombat status` prints diagnostic state and
 `msq.EnemyCombat trace` exports a bounded tail under
