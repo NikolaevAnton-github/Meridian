@@ -2,6 +2,26 @@
 
 Multica issue: **MSQ-70**.
 Stage 4 of [CombatSlice01](CombatSlice01Plan.md).
+
+## Current owner authorization
+
+On 2026-09-23 the owner [authorized direct implementation outside Multica and
+reserved testing for themselves](../Approvals/EnemyCombat01-OwnerStart02.json).
+Use the delivered GASPALS armed foundation and current physical corrections.
+This delivery uses native build and focused source checks, with one independent
+source reviewer; no agent gameplay, firing, PIE automation or visual tests.
+The runtime acceptance rows below remain owner test criteria, not claimed passes.
+Do not start Multica execution or any successor task.
+
+Candidate01/build03 is now delivered for owner testing. See the
+[implementation and controls](../EnemyCombat01.md),
+[sole independent source review](../EnemyCombat01Review.md) and
+[controller acceptance](../EnemyCombat01Acceptance.md). Native build and source
+checks pass; gameplay/visual criteria remain pending the owner's test. This direct
+delivery does not change Multica execution state or authorize MSQ-71.
+
+## Foundation
+
 Predecessor: [EnemyPrototype01](EnemyPrototype01.md), with its asset contract.
 The later [owner priority decision](../Approvals/GASPEnemyFoundation01-TaskCreation01.json)
 adds [GASPEnemyFoundation01 / MSQ-98](GASPEnemyFoundation01.md) as a prerequisite.

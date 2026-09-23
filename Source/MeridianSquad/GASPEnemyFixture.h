@@ -12,8 +12,9 @@ class APawn;
 class UMoverComponent;
 class UCapsuleComponent;
 class UAnimInstance;
+class UEnemyCombatComponent;
 
-/** Supplies a control rotation to GASP without player input or autonomous AI. */
+/** Supplies the fixture's control rotation to GASP without player input. */
 UCLASS()
 class AGASPEnemyCommandController : public AController
 {
@@ -61,7 +62,7 @@ public:
     virtual void ApplyExternalDisturbance(FVector Impulse, FVector WorldPoint, FName Bone = "pelvis") override;
     virtual void ProduceInput_Implementation(int32 SimTimeMs, FMoverInputCmdContext& InputCmdResult) override;
 
-    /** Persistent command, gated by physical authority. No perception or autonomous decision. */
+    /** Persistent movement command, gated by physical authority. */
     UFUNCTION(BlueprintCallable, Category="Enemy|Movement")
     void SetMovementCommand(FVector WorldDirection, bool bWalk = true);
     UFUNCTION(BlueprintCallable, Category="Enemy|Movement")
@@ -69,6 +70,12 @@ public:
     /** Occupancy seam retained for later combat/disarming/gesture work. */
     UFUNCTION(BlueprintCallable, Category="Enemy|Combat")
     void SetHandOccupancy(bool bLeftOccupied, bool bRightOccupied);
+    UFUNCTION(BlueprintCallable, Category="Enemy|Combat")
+    void SetRifleHeld(bool bHeld);
+    UFUNCTION(BlueprintPure, Category="Enemy|Combat")
+    bool IsRifleHeld() const { return bRifleHeld && IsValid(Rifle); }
+    UFUNCTION(BlueprintPure, Category="Enemy|Combat")
+    USkeletalMeshComponent* GetHeldWeapon() const { return IsRifleHeld() ? Rifle.Get() : nullptr; }
     UFUNCTION(BlueprintCallable, Category="Enemy|Rifle")
     void SetRifleStance(EGASPALSRifleStance NewStance);
     UFUNCTION(BlueprintCallable, Category="Enemy|Rifle")
@@ -86,6 +93,10 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Enemy")
     TObjectPtr<APawn> Foundation;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Enemy|Combat")
+    TObjectPtr<UEnemyCombatComponent> Combat;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Enemy|Combat")
+    bool bRifleHeld = true;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Enemy")
     EGASPEnemyAuthority Authority = EGASPEnemyAuthority::Locomotion;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Enemy|Movement")

@@ -63,6 +63,12 @@ public:
     void SetPhysicsDummyEnabled(bool Enabled);
     UFUNCTION(BlueprintPure, Category="Combat|Prototype")
     bool IsPhysicsDummyEnabled() const { return bEnablePhysicsDummy; }
+    UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
+    void SetEnemyCombatMode(bool bCombat);
+    UFUNCTION(BlueprintPure, Category="Combat|Prototype")
+    bool IsEnemyCombatMode() const { return bEnemyCombatMode; }
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Prototype")
+    bool bEnemyCombatMode = true;
     /** Development preview only. Applied after this combat frame to avoid mixed clock deltas. */
     UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
     void SetPhysicsPreviewScale(float Scale);

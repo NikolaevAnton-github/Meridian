@@ -1,0 +1,17 @@
+{
+  "record_id": "EnemyCombat01-OwnerStart02",
+  "date_local": "2026-09-23",
+  "source": "Owner direct chat after selecting the next enemy gameplay task",
+  "owner_message_original": "MSQ-70 Давай сделаем вне мультики, тестирировать буду я",
+  "owner_message_english_translation": "MSQ-70: let's do it outside Multica; I will do the testing.",
+  "decision": "Implement the existing MSQ-70 EnemyCombat01 scope directly, outside Multica execution. The owner performs gameplay testing.",
+  "scope": "One functioning autonomous opponent on the current GASP/Mover and GASPALS rifle foundation: perception, reachable pursuit, aiming, finite-flight weapon fire, finite lost-sight behavior, ammunition/reload policy and physical recovery/death/reset handover. Expose player damage events for later MSQ-71 and hand/weapon state for MSQ-99/100. Preserve existing geometry, sources, owner settings and physical tuning.",
+  "execution": "One native production writer at Astra/max and standard speed. Do not create or dispatch Multica tasks or start its runtime. The controller owns scope, administrative records and the local task-scoped closure commit.",
+  "verification": "Build and focused source checks only. Do not run agent gameplay tests, firing probes, PIE automation or visual motion tests. One independent source reviewer may inspect implementation and build evidence under the standing review workflow; this does not establish gameplay or visual acceptance. The owner tests the delivered behavior.",
+  "acceptance": "Deliver a successful Development Editor build, source-review findings and closure, clear owner controls and known limits. Gameplay acceptance remains pending owner testing; do not represent the task's runtime acceptance rows as passed.",
+  "preservation": "Preserve pre-existing Config/DefaultEngine.ini and MeridianSquad.uproject owner modifications, retained lobby geometry, existing three fixture/profile sources, GASPALS/GASP/Mixamo sources, historical evidence and current damage/fall tuning. Preserve any unsaved editor assets before a necessary controlled native rebuild/restart.",
+  "task": "MSQ-70",
+  "task_document": "Docs/Tasks/EnemyCombat01.md",
+  "evidence_root": "Saved/CombatSlice01/EnemyCombat01/",
+  "supersedes": "Earlier undispatched/planning-only status for MSQ-70 and its agent-run gameplay verification requirement within this delivery. No later task is started."
+}

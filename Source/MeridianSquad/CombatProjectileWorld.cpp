@@ -1,5 +1,7 @@
 #include "CombatProjectileWorld.h"
 #include "GASPEnemyFixture.h"
+#include "EnemyCombatComponent.h"
+#include "OpeningLobbyCharacter.h"
 #include "CombatTarget.h"
 #include "CombatRifleComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -82,7 +84,8 @@ void ACombatProjectileWorld::BeginPlay()
     // Replace the old transient comparison (including its obstructing test boxes).
     // No fixtures are saved into the retained map; test-box source/probes survive.
     // Legacy enemy implementation/assets remain available for historical probes.
-    // The active experiment is now the six Physics Control fixtures only.
+    // MSQ-70 defaults to one combat opponent; the three passive fixture profiles
+    // remain available through msq.EnemyCombat fixtures.
     SetPhysicsDummyEnabled(bEnablePhysicsDummy);
 }
 ACombatProjectileWorld* ACombatProjectileWorld::Find(const UWorld* World)
@@ -162,6 +165,8 @@ int64 ACombatProjectileWorld::LaunchTimed(AActor* Shooter, const FVector& Positi
     Bullet.Shooter = Shooter;
     Bullet.ShooterIdentity = Shooter ? FName(*Shooter->GetPathName()) : NAME_None;
     if (const APawn* Pawn = Cast<APawn>(Shooter)) Bullet.Instigator = Pawn->GetController();
+    if (const auto* Fixture = Cast<AGASPEnemyFixture>(Shooter); Fixture && Fixture->Foundation)
+        Bullet.Instigator = Fixture->Foundation->GetController();
     Bullet.Position = Position;
     Bullet.Velocity = Velocity;
     Bullet.Damage = Damage;
@@ -184,6 +189,15 @@ int64 ACombatProjectileWorld::LaunchTimed(AActor* Shooter, const FVector& Positi
             Bullet.bLaunchClear = CapsuleDistanceSquared(Position - Capsule->Center,
                 Capsule->HalfHeight - Capsule->Radius) > FMath::Square(Capsule->Radius + BulletRadius + 2.f);
     }
+    const auto* PhysicalShooter = Cast<APhysicsControlDummy>(Shooter);
+    if (!PhysicalShooter) PhysicalShooter = AGASPEnemyFixture::FromFoundation(Shooter);
+    if (PhysicalShooter)
+        if (const auto* Pose = Bullet.BirthDummies.Find(const_cast<APhysicsControlDummy*>(PhysicalShooter)))
+        {
+            FHitResult Clearance;
+            Bullet.bLaunchClear = !PhysicalShooter->TracePhysicalPose(*Pose, *Pose, Position, Position,
+                BulletRadius + 2.f, Clearance);
+        }
     Bullets.Add(Bullet);
     ++LaunchedCount;
     return Bullet.Id;
@@ -491,6 +505,14 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
         for (const auto& Entry : EndDummies)
             if (const auto* Dummy = Entry.Key.Get())
             {
+                const bool bShooterBody = Dummy == Bullet.Shooter.Get() || Dummy == AGASPEnemyFixture::FromFoundation(Bullet.Shooter.Get());
+                if (bShooterBody && !Bullet.bLaunchClear)
+                {
+                    FHitResult Clearance;
+                    Bullet.bLaunchClear = !Dummy->TracePhysicalPose(Entry.Value, Entry.Value, End, End,
+                        BulletRadius + 2.f, Clearance);
+                    continue;
+                }
                 const auto* Old = Bullet.bFirstAdvance ? Bullet.BirthDummies.Find(Entry.Key) : StartDummies.Find(Entry.Key);
                 FHitResult BodyHit;
                 if (Dummy->TracePhysicalPose(Old ? *Old : Entry.Value, Entry.Value, Start, End, BulletRadius, BodyHit) && BodyHit.Time < Earliest)
@@ -556,6 +578,9 @@ void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult&
         FString::Printf(TEXT("HIT %.0f  |  %s  |  ENEMY %.0f"), Applied, *EnemyTarget->LastRegion.ToString(), EnemyTarget->Health) : TEXT("SURFACE IMPACT");
     if (IsValid(PhysicalTarget)) LastHitText = FString::Printf(TEXT("PHYSICS %s  |  %s  |  %.0f HP"),
         PhysicalTarget->IsDead() ? TEXT("CORPSE") : TEXT("HIT"), *Hit.BoneName.ToString(), PhysicalTarget->Health);
+    if (const auto* Player = Cast<AOpeningLobbyCharacter>(Victim))
+        LastHitText = FString::Printf(TEXT("PLAYER HIT %.0f  |  RECEIVED %d  |  TOTAL %.0f"),
+            Applied, Player->ReceivedCombatHits, Player->ReceivedCombatDamage);
     bool bMetal = Victim && Victim->ActorHasTag(TEXT("CombatMetal"));
     LastHitMaterial.Empty();
     if (const auto* Part = Hit.GetComponent())
@@ -584,12 +609,19 @@ void ACombatProjectileWorld::ResetTargets()
 {
     ClearProjectiles();
     for (ACombatTarget* Target : Targets) if (IsValid(Target)) Target->ResetTarget();
-    for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy)) Dummy->ResetDummy();
+    for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy))
+    {
+        if (auto* Fixture = Cast<AGASPEnemyFixture>(Dummy)) Fixture->Combat->bEnabled = bEnemyCombatMode;
+        Dummy->ResetDummy();
+    }
     SetPhysicsPreviewScale(1);
     PreviousDummies.Reset(); FrameStartDummies.Reset(); FrameEndDummies.Reset();
     RecordCapsules();
     for (TActorIterator<ACharacter> It(GetWorld()); It; ++It)
+    {
         if (auto* Rifle = It->FindComponentByClass<UCombatRifleComponent>()) Rifle->ClearTransientFeedback();
+        if (auto* Player = Cast<AOpeningLobbyCharacter>(*It)) Player->ResetCombatReceiver();
+    }
     LastHitText = TEXT("TARGETS RESET  |  AMMO UNCHANGED");
     LastHitRealTime = FPlatformTime::Seconds();
 }
@@ -609,6 +641,7 @@ FString ACombatProjectileWorld::GetCombatState() const
     Root->SetNumberField(TEXT("physics_preview_scale"), ActivePreviewScale);
     Root->SetBoolField(TEXT("physics_dummy_enabled"), !PhysicsDummies.IsEmpty());
     Root->SetNumberField(TEXT("physics_dummy_count"), PhysicsDummies.Num());
+    Root->SetBoolField(TEXT("enemy_combat_mode"), bEnemyCombatMode);
     Root->SetBoolField(TEXT("immortal_dummies"), bImmortalDummies);
     Root->SetBoolField(TEXT("recovery_assistance"), bRecoveryAssistance);
     Root->SetNumberField(TEXT("player_action_clock"), PlayerActionClock);

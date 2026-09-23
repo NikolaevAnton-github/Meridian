@@ -1,5 +1,6 @@
 #include "GASPEnemyFixture.h"
 #include "GASPALSRifleAnimInstance.h"
+#include "EnemyCombatComponent.h"
 #include "CombatProjectileWorld.h"
 #include "DummyRecoveryAnimInstance.h"
 #include "PhysicsControlComponent.h"
@@ -57,6 +58,7 @@ AGASPEnemyFixture::AGASPEnemyFixture()
     UnusedLegacyBody->SetComponentTickEnabled(false);
     UnusedLegacyControls->SetComponentTickEnabled(false);
     FoundationPhysicsTick = CreateDefaultSubobject<UGASPEnemyPhysicsTick>(TEXT("FoundationPhysicsTick"));
+    Combat = CreateDefaultSubobject<UEnemyCombatComponent>(TEXT("EnemyCombat"));
     FoundationPhysicsTick->AddTickPrerequisiteActor(this);
     ConfigureReactionProfile(1);
 }
@@ -70,6 +72,8 @@ void AGASPEnemyFixture::SetAuthority(EGASPEnemyAuthority NewAuthority)
 {
     if (Authority == NewAuthority) return;
     Authority = NewAuthority;
+    if (Combat && NewAuthority != EGASPEnemyAuthority::Locomotion)
+        Combat->SuspendForPhysics(NewAuthority == EGASPEnemyAuthority::Dead);
     ++AuthorityChanges;
     UpdateRagdollLegLimits(0.f);
 }
@@ -172,6 +176,7 @@ void AGASPEnemyFixture::SetSourceProfile(FName Profile)
 
 void AGASPEnemyFixture::ResetDummy()
 {
+    if (Combat) Combat->StopCombat();
     ClearBalanceProbeFixtures();
     bReady = bAdopted = false;
     PreFallLegLimits.Reset();
@@ -206,6 +211,9 @@ void AGASPEnemyFixture::ResetDummy()
     StopMovementCommand();
     RifleStance = EGASPALSRifleStance::Ready;
     bCrouchCommand = bRifleFollowPlayer = bHasRifleAimTarget = false;
+    bRifleHeld = true;
+    SetHandOccupancy(false, false);
+    if (Combat) Combat->ResetCombat(Home.GetLocation(), Home.Rotator());
     ResetBalance();
     UClass* Class = LoadClass<APawn>(nullptr, FoundationPath);
     if (!Class) { BalanceReason = TEXT("GASP foundation class unavailable"); return; }
@@ -654,6 +662,7 @@ void AGASPEnemyFixture::Tick(float DeltaSeconds)
             FoundationPhysicsTick->PrimaryComponentTick.AddPrerequisite(Prerequisite.PrerequisiteObject.Get(), *Tick);
     if (AllowsSamplePhysics()) BoundSampleControls();
     APhysicsControlDummy::Tick(DeltaSeconds);
+    if (Combat) Combat->AdvanceCombat(DeltaSeconds);
 }
 
 void AGASPEnemyFixture::OnFoundationContact(UPrimitiveComponent* HitComponent, AActor* OtherActor,
@@ -724,6 +733,12 @@ FString AGASPEnemyFixture::GetDummyState(bool IncludeContacts) const
     GASP->SetObjectField(TEXT("arm_trunk_contacts"), SelfContacts);
     GASP->SetNumberField(TEXT("peak_arm_trunk_impulse"), PeakArmTrunkImpulse);
     Root->SetObjectField(TEXT("gasp"), GASP);
+    if (Combat)
+    {
+        TSharedPtr<FJsonObject> CombatState;
+        if (FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Combat->GetCombatState()), CombatState))
+            Root->SetObjectField(TEXT("enemy_combat"), CombatState);
+    }
     FString Result;
     FJsonSerializer::Serialize(Root.ToSharedRef(), TJsonWriterFactory<>::Create(&Result));
     return Result;
@@ -731,6 +746,7 @@ FString AGASPEnemyFixture::GetDummyState(bool IncludeContacts) const
 
 void AGASPEnemyFixture::EndPlay(const EEndPlayReason::Type Reason)
 {
+    if (Combat) Combat->StopCombat();
     if (IsValid(Body)) Body->OnComponentHit.RemoveDynamic(this, &AGASPEnemyFixture::OnBodyContact);
     if (IsValid(Body)) Body->OnComponentHit.RemoveDynamic(this, &AGASPEnemyFixture::OnFoundationContact);
     APhysicsControlDummy::EndPlay(Reason);

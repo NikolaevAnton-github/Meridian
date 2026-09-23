@@ -21,6 +21,28 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Owner-test handoff: MSQ-70 enemy combat
+
+The owner [selected MSQ-70 outside Multica and will perform gameplay testing](Approvals/EnemyCombat01-OwnerStart02.json).
+[EnemyCombat01](EnemyCombat01.md) delivers Candidate01/build03 directly on the
+GASP/Mover and GASPALS armed foundation. Play defaults to one profile-1 opponent
+with perception, bounded local navigation, aiming/finite-flight firing, finite
+search/return, magazine/reload policy and physical recovery/death/reset handover.
+F6 restarts the current mode; `msq.EnemyCombat fixtures` restores the three passive
+profiles and `one` restores the combat opponent. Player hit/damage counters prepare
+MSQ-71; player health/death remain later scope. The native build and
+[sole independent source review](EnemyCombat01Review.md) pass, with EC70-R1 closed;
+[controller acceptance](EnemyCombat01Acceptance.md) verifies scope, identity and
+preservation. Gameplay, path reachability, motion and performance remain pending
+owner testing. No agent Play, firing tests, screenshots or Multica execution ran.
+The retained lobby editor is loaded with the build, Play stopped and no dirty
+packages. Navigation covers one bounded floor layer; reserve ammunition is
+unlimited and timed reload uses the Ready pose. Owner config/project/map bytes,
+content sources and historical evidence remain preserved.
+Earlier MSQ-70 undispatched statements below describe Multica/history and do not
+supersede this direct delivery. MSQ-71 onward, MSQ-93 through
+MSQ-96 and MSQ-99/100 remain separate and are not started.
+
 ## Owner-test handoff: GASPALS armed enemies
 
 The owner [authorized direct integration outside Multica tasks](Approvals/GASPALSEnemy01-OwnerStart01.json).

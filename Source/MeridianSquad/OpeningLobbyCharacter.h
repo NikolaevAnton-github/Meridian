@@ -27,6 +27,15 @@ public:
     virtual void Landed(const FHitResult& Hit) override;
     virtual void OnStartCrouch(float HalfHeightAdjust, float ScaledHalfHeightAdjust) override;
     virtual void OnEndCrouch(float HalfHeightAdjust, float ScaledHalfHeightAdjust) override;
+    /** Instrumented point-damage receiver only; MSQ-71 owns player health/death. */
+    virtual float TakeDamage(float Amount, const FDamageEvent& Event, AController* EventInstigator, AActor* Causer) override;
+    UFUNCTION(BlueprintCallable, Category="Combat|Receiver") void ResetCombatReceiver();
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat|Receiver") int32 ReceivedCombatHits = 0;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat|Receiver") float ReceivedCombatDamage = 0;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat|Receiver") float LastCombatDamage = 0;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat|Receiver") FVector LastCombatHitDirection = FVector::ZeroVector;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat|Receiver") TObjectPtr<AActor> LastCombatDamageCauser;
+    double LastCombatHitRealTime = -1000;
 
     UFUNCTION(BlueprintCallable, Category="Lobby|Verification")
     bool ProbeKey(FName KeyName, float Amount, bool Pressed);

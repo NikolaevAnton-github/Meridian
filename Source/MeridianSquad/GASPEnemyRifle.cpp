@@ -1,5 +1,6 @@
 #include "GASPEnemyFixture.h"
 #include "GASPALSRifleAnimInstance.h"
+#include "EnemyCombatComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "DefaultMovementSet/CharacterMoverComponent.h"
 #include "Engine/SkeletalMesh.h"
@@ -11,6 +12,12 @@
 #include "UObject/UnrealType.h"
 
 void AGASPEnemyFixture::SetRifleStance(EGASPALSRifleStance NewStance) { RifleStance = NewStance; }
+void AGASPEnemyFixture::SetRifleHeld(bool bHeld)
+{
+    bRifleHeld = bHeld;
+    SetHandOccupancy(bHeld && Authority == EGASPEnemyAuthority::Locomotion, bHeld);
+    if (!bHeld && Combat) Combat->SuspendForPhysics(false);
+}
 void AGASPEnemyFixture::SetRifleAimTarget(FVector WorldTarget)
 {
     if (WorldTarget.ContainsNaN()) return;
@@ -91,7 +98,7 @@ void AGASPEnemyFixture::UpdateRifleInput()
         if (bLocomotion && bCrouchCommand) CharacterMover->Crouch();
         else CharacterMover->UnCrouch();
     }
-    SetHandOccupancy(bLocomotion, true);
+    SetHandOccupancy(bLocomotion && IsRifleHeld(), IsRifleHeld());
 }
 void AGASPEnemyFixture::CreateRifle()
 {
@@ -121,6 +128,9 @@ void RifleCommand(const TArray<FString>& Args, UWorld* World)
     for (TActorIterator<AGASPEnemyFixture> It(World); It; ++It)
     {
         auto* Enemy = *It;
+        // Explicit manual commands take control until resume/reset; AI cannot
+        // overwrite an owner's pose or movement command on the following tick.
+        if (Enemy->Combat && Enemy->Combat->bEnabled) Enemy->Combat->SetEnabled(false);
         const FString Operation = Args[0].ToLower();
         if (Operation == TEXT("relax")) Enemy->SetRifleStance(EGASPALSRifleStance::Relax);
         else if (Operation == TEXT("ready")) Enemy->SetRifleStance(EGASPALSRifleStance::Ready);

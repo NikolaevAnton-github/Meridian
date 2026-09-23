@@ -50,8 +50,10 @@ instructions supersede earlier guidance within their stated scope.
   MSQ-69, MSQ-68 and MSQ-82 are verified prerequisites in the sequential
   [CombatSlice01 task family](Docs/Tasks/CombatSlice01Plan.md).
   [MSQ-82 review](Docs/CombatTiming01Review.md) records timing acceptance and the
-  retained low-FPS recoil limitation. Manny remains a technical placeholder;
-  MSQ-70 and successors remain undispatched. See ProjectState for current scope.
+  retained low-FPS recoil limitation. Manny remains a technical placeholder. The later
+  [MSQ-70 direct start and owner testing request](Docs/Approvals/EnemyCombat01-OwnerStart02.json)
+  authorizes enemy combat outside Multica, with build/source checks and gameplay
+  testing by the owner. Successors remain undispatched. See ProjectState for current scope.
   PurchasedArms06 is the retained rifle presentation baseline.
   Original modeling and its successors are paused;
   lobby architecture remains deferred. Preserve character sources and evidence.

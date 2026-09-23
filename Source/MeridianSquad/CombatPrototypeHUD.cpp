@@ -5,6 +5,9 @@
 #include "Engine/Engine.h"
 #include "GameFramework/PlayerController.h"
 #include "PhysicsControlDummy.h"
+#include "GASPEnemyFixture.h"
+#include "EnemyCombatComponent.h"
+#include "OpeningLobbyCharacter.h"
 #include "EngineUtils.h"
 
 void ACombatPrototypeHUD::DrawHUD()
@@ -36,6 +39,19 @@ void ACombatPrototypeHUD::DrawHUD()
         X, Y + 123 * Scale, GEngine->GetSmallFont(), Scale);
     const float CX = Canvas->SizeX * .5f, CY = Canvas->SizeY * .5f;
     DrawRect(FLinearColor(1,1,1,.65f), CX - 1, CY - 1, 2, 2);
+    if (const auto* Player = Cast<AOpeningLobbyCharacter>(Pawn))
+    {
+        DrawText(FString::Printf(TEXT("PLAYER HITS %d   DAMAGE %.0f   |   F6 restart"),
+            Player->ReceivedCombatHits, Player->ReceivedCombatDamage), FLinearColor(1.f,.65f,.5f),
+            X, Y - 55 * Scale, GEngine->GetSmallFont(), Scale);
+        const float HitFade = FMath::Clamp(float(1.0 - (FPlatformTime::Seconds() - Player->LastCombatHitRealTime) / .65), 0.f, 1.f);
+        if (HitFade > 0)
+        {
+            DrawRect(FLinearColor(.8f,.05f,.02f, .18f * HitFade), 0, 0, Canvas->SizeX, 12 * Scale);
+            DrawText(FString::Printf(TEXT("HIT -%.0f"), Player->LastCombatDamage), FLinearColor(1,.2f,.08f,HitFade),
+                CX - 32 * Scale, CY - 70 * Scale, GEngine->GetMediumFont(), Scale);
+        }
+    }
     for (TActorIterator<APhysicsControlDummy> It(GetWorld()); It; ++It)
     {
         const FVector Point = It->GetPhysicalBodyLocation(TEXT("head")) + FVector(0, 0, 28);
@@ -49,9 +65,14 @@ void ACombatPrototypeHUD::DrawHUD()
         if (GetWorld()->LineTraceSingleByChannel(Obstruction, Eye, Point, ECC_Visibility, Query)) continue;
         if (const auto* Manager = ACombatProjectileWorld::Find(GetWorld()))
             if (Manager->TraceEnemyAim(Eye, Point, Manager->GetFiringClock(), Obstruction) && Obstruction.GetActor() != *It) continue;
-        DrawRect(FLinearColor(.01f,.02f,.025f,.85f), Screen.X - 65 * Scale, Screen.Y - 4 * Scale, 130 * Scale, 26 * Scale);
+        const auto* GASP = Cast<AGASPEnemyFixture>(*It);
+        const bool bCombat = GASP && GASP->Combat && GASP->Combat->bEnabled;
+        DrawRect(FLinearColor(.01f,.02f,.025f,.85f), Screen.X - 88 * Scale, Screen.Y - 4 * Scale, 176 * Scale, (bCombat ? 48 : 26) * Scale);
         DrawText(FString::Printf(TEXT("%d  |  %.0f HP%s"), It->ReactionProfile, It->Health, It->IsDead() ? TEXT("  CORPSE") : TEXT("")),
             FLinearColor(.4f,.9f,1.f), Screen.X - 56 * Scale, Screen.Y, GEngine->GetMediumFont(), Scale);
+        if (bCombat)
+            DrawText(GASP->Combat->GetLabel(), FLinearColor(1.f,.75f,.35f), Screen.X - 80 * Scale,
+                Screen.Y + 23 * Scale, GEngine->GetSmallFont(), Scale);
     }
     if (const auto* World = ACombatProjectileWorld::Find(GetWorld()))
     {

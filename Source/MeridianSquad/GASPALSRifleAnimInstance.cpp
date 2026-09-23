@@ -72,7 +72,7 @@ void UGASPALSRifleAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
     Super::NativeUpdateAnimation(DeltaSeconds);
     const auto* Enemy = AGASPEnemyFixture::FromFoundation(TryGetPawnOwner());
     if (!Enemy) { RifleAlpha = 0; return; }
-    const bool bRifleOwnsPose = Enemy->Authority == EGASPEnemyAuthority::Locomotion && !Enemy->IsDead();
+    const bool bRifleOwnsPose = Enemy->Authority == EGASPEnemyAuthority::Locomotion && !Enemy->IsDead() && Enemy->IsRifleHeld();
     // Physical snapshots, ragdoll and get-up own the arms immediately. The return
     // is gradual and participates in the existing physical-target handoff blend.
     RifleAlpha = bRifleOwnsPose ? FMath::FInterpTo(RifleAlpha, 1.f, DeltaSeconds, 5.f) : 0.f;

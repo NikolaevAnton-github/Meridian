@@ -1,5 +1,6 @@
 #include "CombatProjectileWorld.h"
 #include "GASPEnemyFixture.h"
+#include "EnemyCombatComponent.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "GameFramework/Character.h"
@@ -11,6 +12,7 @@ void ACombatProjectileWorld::SetPhysicsDummyEnabled(bool Enabled)
     bEnablePhysicsDummy = Enabled;
     if (!Enabled)
     {
+        ClearProjectiles();
         for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy)) Dummy->Destroy();
         PhysicsDummies.Reset();
         PreviousDummies.Reset(); FrameStartDummies.Reset(); FrameEndDummies.Reset();
@@ -18,7 +20,8 @@ void ACombatProjectileWorld::SetPhysicsDummyEnabled(bool Enabled)
         return;
     }
     PhysicsDummies.RemoveAll([](const auto& Dummy) { return !IsValid(Dummy); });
-    if (PhysicsDummies.Num() != 3)
+    const int32 Count = bEnemyCombatMode ? 1 : 3;
+    if (PhysicsDummies.Num() != Count)
     {
         for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy)) Dummy->Destroy();
         PhysicsDummies.Reset();
@@ -26,18 +29,26 @@ void ACombatProjectileWorld::SetPhysicsDummyEnabled(bool Enabled)
         Params.ObjectFlags |= RF_Transient;
         Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
         Params.bDeferConstruction = true;
-        for (int32 I = 0; I < 3; ++I)
+        for (int32 I = 0; I < Count; ++I)
         {
             // Retain the three fixture slots and reaction profiles on the GASP foundation.
             const FTransform Placement(FRotator(0, 180, 0), FVector(-950, -320 + I * 320, 0));
             auto* Dummy = GetWorld()->SpawnActor<AGASPEnemyFixture>(AGASPEnemyFixture::StaticClass(), Placement, Params);
             if (!Dummy) continue;
             Dummy->ConfigureReactionProfile(I + 1);
+            Dummy->Combat->bEnabled = bEnemyCombatMode;
             Dummy->FinishSpawning(Placement);
             PhysicsDummies.Add(Dummy);
         }
         RecordCapsules();
     }
+}
+void ACombatProjectileWorld::SetEnemyCombatMode(bool bCombat)
+{
+    SetPhysicsDummyEnabled(false);
+    bEnemyCombatMode = bCombat;
+    ResetTargets();
+    SetPhysicsDummyEnabled(true);
 }
 TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> ACombatProjectileWorld::SampleDummies() const
 {
