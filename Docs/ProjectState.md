@@ -21,6 +21,25 @@ review. Reuse passing evidence and justify only affected rechecks. See
 [the owner decision](Approvals/ReviewResponsibilities01.json). Existing visual
 and owner gates remain; this administrative change does not expand gameplay scope.
 
+## Prepared direction: surprising arcade combat AI
+
+The owner reports that the delivered MSQ-70 opponent is too weak, does not run and
+loses the player too easily. The owner requires continued search, footstep hearing
+and awareness of incoming fire, then explicitly requests a very detailed plan as an
+arcade shooter: surprise and quality without oppressive pressure. See the
+[exact planning request](Approvals/CombatAI01-Planning01.json),
+[design and architecture](Design/CombatAI01.md), and
+[ordered implementation plan](Tasks/CombatAI01Plan.md).
+The plan proposes a persistent hunter, tactical individual, coordinated three-enemy
+encounter and later integration with actual destruction/abilities. Its CAI identifiers
+are planning references, not Multica issues. Limited sensory knowledge, pressure
+permissions, architecture, tuning and future order are recommendations, not separately
+approved implementation. The intended persistent-search direction supersedes the
+old finite-search target; the existing build/evidence remain unchanged. No production,
+editor change, gameplay test or successor dispatch is authorized by planning alone.
+The sole independent [planning review](CombatAI01PlanningReview.md) passes after two
+bounded contract clarifications; controller acceptance is documentation-only.
+
 ## Owner-test handoff: MSQ-70 enemy combat
 
 The owner [selected MSQ-70 outside Multica and will perform gameplay testing](Approvals/EnemyCombat01-OwnerStart02.json).

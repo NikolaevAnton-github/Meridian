@@ -5,6 +5,14 @@ Stage 4 of [CombatSlice01](CombatSlice01Plan.md).
 
 ## Current owner authorization
 
+Later on 2026-09-23, the owner reports weak behavior and requests a detailed plan
+for surprising arcade combat AI, including running, persistent search, footsteps
+and incoming-fire awareness. See [CombatAI01Plan](CombatAI01Plan.md) and the
+[exact request](../Approvals/CombatAI01-Planning01.json). Persistent search replaces
+finite disengagement as the future design target. This is planning authorization;
+the delivered candidate, its source/build verdict and historical scope below remain
+unchanged, and no follow-up implementation is started by that request.
+
 On 2026-09-23 the owner [authorized direct implementation outside Multica and
 reserved testing for themselves](../Approvals/EnemyCombat01-OwnerStart02.json).
 Use the delivered GASPALS armed foundation and current physical corrections.

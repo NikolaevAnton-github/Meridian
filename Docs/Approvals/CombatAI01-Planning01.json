@@ -1,0 +1,34 @@
+{
+  "record_id": "CombatAI01-Planning01",
+  "date_local": "2026-09-23",
+  "source": "Owner direct chat after testing the delivered MSQ-70 enemy combat prototype",
+  "related_task": "MSQ-70",
+  "owner_feedback_original": "Внесли базую комбат логику для врагов, она очень слабая, противник не бегает даже, легко теряет из виду(у нас кстати такого не должно быть)  - должен всегда искать искать и не переставать это делать. На звуки шагов должен реагировать. На выстрелы по себе идентифицировать где противник. Вообще хотелось бы с тобой обсудить ИИ противника. Я бы хотел его сделать крайне хорошим с твоей помощью, действительно тяжелым для игрока и удивляющим еще. Помниться все хвалили fear. Нам надо сделать лучше.",
+  "owner_feedback_english_translation": "The basic enemy combat logic is very weak: the opponent does not even run and loses the player too easily. This should not happen; it should always keep searching. It should react to footsteps and identify where the opponent is from shots fired at it. I want to discuss enemy AI and make it extremely good, genuinely challenging and surprising, exceeding the F.E.A.R. reference.",
+  "owner_request_original": "Смотри ты техлид по боевому ИИ и твоя задача сделать лучший ИИ в шутерах, не значит что он должен быть супер душным, все таки у нас аркадный шутер, но он должен именно удивлять. Подготовь подробнейщий план по реализации.",
+  "owner_request_english_translation": "You are the combat AI technical lead, and your task is to make the best AI in shooters. This does not mean it should be excessively oppressive: ours is an arcade shooter, and the AI should specifically surprise the player. Prepare a very detailed implementation plan.",
+  "decision": "Prepare a detailed combat AI design and implementation plan grounded in the current project. Prioritize surprising, understandable arcade combat over oppressive difficulty. Include running, persistent search, footstep hearing and awareness of incoming fire.",
+  "authorized_now": [
+    "Read-only source, engine capability and reference research",
+    "Bounded architecture and gameplay-design advisory work",
+    "Detailed English project design and ordered implementation documents",
+    "Preservation of exact owner direction and updates to current navigation/product direction",
+    "Focused documentation review and a task-scoped local planning commit"
+  ],
+  "planning_assumptions": {
+    "knowledge": "Recommend perception-limited evidence with uncertainty and persistent encounter alert. The owner has not explicitly selected omniscient tracking or approved all proposed knowledge rules.",
+    "population": "Propose one enemy first, then two and three; expansion depends on measured cost and owner play judgement.",
+    "architecture_and_tuning": "Class names, utility/action design, Recast adapter, pressure policy, parameter ranges and package order are implementation proposals, not previously accepted facts.",
+    "ambition": "Best shooter AI is a product ambition, not a demonstrated comparison or an acceptance claim."
+  },
+  "supersedes": [
+    "Finite search followed by forgetting/return as the intended future combat AI behavior; the immutable delivered MSQ-70 candidate and historical evidence remain preserved.",
+    "Any interpretation of earlier realistic-shooter wording that requires simulation-style combat or maximum pressure; the current owner explicitly describes arcade combat."
+  ],
+  "execution_boundary": "This request prepares a plan. It does not create or dispatch Multica issues, authorize gameplay implementation or editor changes, start later combat tasks, select new art, or change the current owner's gameplay-testing reservation.",
+  "preservation": "Retain owner configuration/project edits, existing map/geometry, sources, physical tuning and all previous evidence. Keep proposed CAI package identifiers separate from real Multica issue IDs.",
+  "deliverables": [
+    "Docs/Design/CombatAI01.md",
+    "Docs/Tasks/CombatAI01Plan.md"
+  ]
+}

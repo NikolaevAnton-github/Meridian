@@ -1,5 +1,16 @@
 # Game direction
 
+Combat AI direction update, 2026-09-23: the owner explicitly describes an **arcade
+shooter** and asks for surprising, excellent enemy AI without excessive pressure.
+Enemies should run, keep searching after contact, hear footsteps and respond to the
+source of incoming fire. See the [exact request](../Approvals/CombatAI01-Planning01.json),
+[design proposal](CombatAI01.md) and [implementation plan](../Tasks/CombatAI01Plan.md).
+The plan does not start gameplay production or approve all proposed mechanisms.
+Existing visual/narrative direction remains; realistic presentation does not impose
+simulation-style combat. The latest [cadence decision](../Approvals/CombatSlowdownCadence01-OwnerScope01.json)
+sets world, bullets and rifle cadence to 0.25 while hero movement stays at 0.65,
+superseding the earlier normal-player/faster-player-firing descriptions below.
+
 Combat execution update, 2026-09-18: the owner authorizes MSQ-68 and fixes the
 [time/projectile policy](../Approvals/CombatFoundation01-OwnerScope01.json): player
 movement remains normal while the rest of the world slows or stops. All bullets,
@@ -28,8 +39,8 @@ project/repository name; a final public game title has not been established.
 
 ## Fixed product direction
 
-- A realistic first-person shooter in a dark near-future setting, in **2043**
-  (owner direction on 2026-09-16).
+- An arcade first-person shooter in a dark near-future setting, in **2043**
+  (setting direction on 2026-09-16; arcade combat clarification on 2026-09-23).
 - Shooting is the highest gameplay priority. The owner wants strong perceived
   impact, enemy body destruction, and extensive environmental destruction.
 - Player abilities: world time slowdown/stop, force push, and telekinesis. Their costs,
