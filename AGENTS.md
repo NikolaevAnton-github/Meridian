@@ -1,190 +1,60 @@
-# MeridianSquad agent instructions
+﻿# MeridianSquad agent instructions
 
-Read [current project state](Docs/ProjectState.md) before choosing or dispatching
-work, then read only the relevant task and its linked decisions. This file holds
-durable rules; task history is not an execution queue. Later explicit owner
-instructions supersede earlier guidance within their stated scope.
+## Start small
 
-## Communication and authorization
+Read [ProjectState](Docs/ProjectState.md) once before choosing or dispatching work.
+Then open the relevant task and only the decisions/sections needed for that work.
+Links are navigation, not a recursive reading list. Do not reload instructions
+already present in this session. Historical reports are not an execution queue;
+later explicit owner instructions supersede earlier guidance within their scope.
 
-- Use Russian in the owner's direct chat with Codex. Write all project content
-  in English: documentation, code comments, names, commits and internal Multica
-  progress messages, task discussions and final reports.
-- Codex may launch existing applications and local project services needed for
-  authorized work without asking again. Starting a service does not authorize
-  unrelated execution, purchases or a pending design selection.
-- Current AI direction: [MSQ-122 / UtilityGOAP01](Docs/Tasks/UtilityGOAP01.md)
-  selects Utility AI + GOAP and early removal of obsolete active AI, retaining
-  justified primitives under the [owner request](Docs/Approvals/UtilityGOAP01-TaskCreation01.json).
-  MSQ-123..137 are prepared only; MSQ-105..117 are superseded/cancelled. Read
-  ProjectState and the replacement plan before AI work. Preserve historical
-  deliveries and canonical GASPALS/CMC; no selectable legacy AI fallback.
-- Earlier physics family: MSQ-90 [stance, balance and terrain support](Docs/Tasks/PhysicsControlRefinement01Plan.md)
-  contains MSQ-91 through MSQ-96 under the
-  [owner's task-creation request](Docs/Approvals/PhysicsControlRefinement01-TaskCreation01.json).
-  The later [MSQ-97 next-task decision](Docs/Approvals/PhysicsControlRecoverability01-NextTask01.json)
-  inserts physical recoverability after MSQ-91 and before MSQ-92. The later
-  [MSQ-97 start and review waiver](Docs/Approvals/PhysicsControlRecoverability01-OwnerStart01.json)
-  authorized the delivered Candidate07 without an independent reviewer. See
-  [the task](Docs/Tasks/PhysicsControlRecoverability01.md) and
-  [handoff](Docs/PhysicsControlRecoverability01Handoff.md); focused self-checks and
-  controller scope/evidence acceptance pass, with owner motion/play judgement separate.
-  The later [MSQ-91 start and review waiver](Docs/Approvals/PhysicsControlLegPose01-OwnerStart01.json)
-  authorized the delivered Candidate07 stance correction. See the
-  [handoff](Docs/PhysicsControlLegPose01Handoff.md); MSQ-89 Candidate05 and its
-  evidence remain preserved.
-  The later [MSQ-92 start and tempo request](Docs/Approvals/PhysicsControlAdaptiveSteps01-OwnerStart01.json)
-  authorized delivered Candidate06 adaptive steps with approximately 25 percent
-  faster recovery. Build, focused self-checks and the sole independent technical
-  review pass; see the [handoff](Docs/PhysicsControlAdaptiveSteps01Handoff.md).
-  MSQ-93 through MSQ-96 remain undispatched.
-  The later [GASP priority decision](Docs/Approvals/GASPEnemyFoundation01-TaskCreation01.json)
-  places [MSQ-98 enemy migration](Docs/Tasks/GASPEnemyFoundation01.md) after MSQ-92
-  and before MSQ-93/MSQ-70. MSQ-99 disarming and MSQ-100 wound gestures are secondary.
-  The later [MSQ-98 start and review waiver](Docs/Approvals/GASPEnemyFoundation01-OwnerStart01.json)
-  authorized delivered Candidate01 without an independent reviewer. Focused executor
-  self-checks and [controller acceptance](Docs/GASPEnemyFoundation01Acceptance.md)
-  pass; owner motion/play judgement remains separate. MSQ-99/100 are prepared only.
-  See ProjectState for dependencies and scope.
-  Review waivers stay task-scoped. Owner play/motion acceptance stays separate. The MSQ-85
-  [relative slowdown decision](Docs/Approvals/PhysicsControlVariants01-OwnerScope01.json)
-  requires partial player movement slowdown while the world slows more,
-  superseding the earlier normal-player slowdown rule. The later
-  [slowdown cadence correction](Docs/Approvals/CombatSlowdownCadence01-OwnerScope01.json)
-  sets rifle cadence, bullets and world to 0.25 while hero movement stays at 0.65.
-  Full stop remains later scope.
-  MSQ-69, MSQ-68 and MSQ-82 are verified prerequisites in the sequential
-  [CombatSlice01 task family](Docs/Tasks/CombatSlice01Plan.md).
-  [MSQ-82 review](Docs/CombatTiming01Review.md) records timing acceptance and the
-  retained low-FPS recoil limitation. Manny remains a technical placeholder. The later
-  [MSQ-70 direct start and owner testing request](Docs/Approvals/EnemyCombat01-OwnerStart02.json)
-  authorizes enemy combat outside Multica, with build/source checks and gameplay
-  testing by the owner. Successors remain undispatched. See ProjectState for current scope.
-  PurchasedArms06 is the retained rifle presentation baseline.
-  Original modeling and its successors are paused;
-  lobby architecture remains deferred. Preserve character sources and evidence.
-  The protagonist concept batch is evaluated by the owner alone; do not dispatch
-  an independent concept reviewer. Later integrated review is separate.
+Use bounded `rg` searches and section reads. Keep full tool results/logs in
+`Saved/`; return only relevant findings. Discover tool names first, then the schema
+of the selected tool, never the full catalog. Delegate with a short task brief and
+paths rather than full conversation history. Load the policies below only when
+their trigger applies; do not read all policies at startup.
 
-## Budget and preservation
+## Standing rules
 
-- Use the existing $200/month Codex subscription. The owner's existing Tripo
-  Studio and Meshy web allowances are the scoped exception for the protagonist
-  AI3D pipeline; free Hunyuan3D Studio is an alternative subject to verified terms.
-  No new paid services, purchases, credit top-ups or separately billed API usage.
-  Local models are allowed within measured RAM/VRAM and project disk capacity.
-- The entire project must fit within 250 GB, including generated data, local
-  version history and project services. Avoid duplicate Unreal worktrees and
-  unrestricted caches. Never delete owner assets to reclaim space.
-- Preserve owner edits, original sources, accepted assets, rejected candidates
-  and exact review/approval evidence. Do not restore historical worker bytes
-  over owner edits or silently rebaseline an immutable candidate manifest.
-- Track code, configuration, accepted decisions and asset sources in Git; use
-  Git LFS for binary assets. Keep generated data and large logs outside Git.
-  Never put credentials in tracked files or tool output.
-- After closing each task, the controller must commit its verified, task-scoped
-  changes locally before the final owner handoff. Include the task ID in an
-  English commit message; preserve unrelated owner edits. Workers leave the
-  closure commit to the controller unless explicitly delegated. See the
-  [standing owner instruction](Docs/Approvals/TaskClosureCommits01.json).
+- Russian in the owner's direct chat; English in project content, code comments,
+  names, commits and internal agent/Multica reports.
+- Existing apps/services needed for authorized work may be launched without asking
+  again. Starting services or preparing tasks does not authorize their execution.
+- Use the existing $200/month Codex subscription; no new paid services, purchases,
+  top-ups or separately billed APIs. Existing Tripo/Meshy web allowances are scoped
+  to protagonist AI3D; verify free Hunyuan terms. Local models need measured capacity.
+- Total project footprint, including history/services/generated data: 250 GB maximum.
+  Avoid duplicate Unreal worktrees/unbounded caches; never delete owner assets.
+- Preserve owner edits, sources, accepted/rejected candidates and exact evidence.
+  Never restore old worker bytes over owner edits or rebaseline immutable manifests.
+  Git tracks code/config/decisions/sources; binary assets use LFS. Logs/generated data
+  stay outside Git. Never expose or commit credentials.
+- Multica is the default implementation route, with one production worker. Direct
+  chat handles administration and trivial local corrections without a task-sized
+  workflow. No competing dispatcher/database. Stay active through verified delivery.
+- Executors/reviewers use **max reasoning, standard speed**; verify configured and
+  actual native settings. Restoring task-local settings must retain max.
+- One writer per editor instance; one memory-heavy build/bake/render/model at a time.
+  Confirm live project/editor/bridge capability before mutations.
+- Substantive changes have one primary independent technical reviewer. Controller
+  acceptance checks scope/evidence/finding closure, not a duplicate full review.
+  Small obvious changes may use self-checks. Waivers remain task-scoped. Recheck only
+  affected behavior/transitions for a concrete change, gap, contradiction or risk.
+  Preserve independent visual and owner design/play gates.
+- Controller commits verified task-scoped changes locally before final handoff,
+  using an English message with the task ID; exclude unrelated owner edits.
 
-## Execution and tools
+## Load by task
 
-- Multica is the default implementation route; use the existing project and
-  keep production concurrency at one. Direct chat handles clarification,
-  dispatch, review and small administrative updates.
-- For trivial local corrections such as changing one key binding, the controller
-  edits directly without dispatching an executor or reviewer. Use only the build
-  or narrow check needed to make the change effective; avoid a task-sized workflow.
-- For administrative access, use `Scripts/multica.ps1 -Action StartServices`
-  (database/API/web); start the task runtime only for intended execution.
-  Use `suppress_run=true` / CLI `--no-start` for administrative status, assignment
-  or description changes. Dispatch intended runs explicitly.
-- The controller stays active through the run, handoff review and required
-  bounded corrections until a verified result or a concrete owner decision gate.
-  Dispatch or background execution alone does not complete the work.
-- Do not build a competing dispatcher or task database. Reuse existing validators;
-  do not rebuild the benchmark harness or repeat A/B runs for routine assets.
-  Track native input, cache and output separately.
-- Optimize for a verified result including rework. Use Astra for difficult work;
-  use other models when appropriate and available. All project executors and
-  reviewers must use **max reasoning**, at standard speed, per the
-  [standing owner instruction](Docs/Approvals/WorkerReviewerMax01.json).
-  Verify both configured profiles/native arguments and actual execution settings;
-  a profile label alone is insufficient. Restore task-local settings afterward
-  without reverting this standing max requirement to an older saved level.
-- Delegate bounded independent tasks with focused context and concise findings;
-  save full logs under `Saved/`.
-- One writer per running Unreal/Blender/Substance instance, coordinated for the
-  entire editing operation. Run one memory-heavy build, bake, render or local
-  model workload at a time until measurements justify more.
-- Prefer official Epic MCP for Unreal editor operations: `unreal_epic` at
-  `http://127.0.0.1:8000/mcp`. Discover toolsets on demand and confirm the project
-  and live editor state before mutations. Rider's code/debug connection is separate.
-- Check installed versions and actual capabilities before using any DCC bridge;
-  configuration alone is not evidence of a working connection.
+| Trigger | Read |
+| --- | --- |
+| Dispatch, review, Multica or editor/registry operations | [Execution](Docs/AgentPolicies/Execution.md) |
+| AI, combat, movement, physics or gameplay variants | [Gameplay](Docs/AgentPolicies/Gameplay.md) |
+| Environment, character, materials, visual assets or narrative | [Art](Docs/AgentPolicies/Art.md) |
+| Changing instructions, context routing or worker prompts | [Context](Docs/AgentPolicies/Context.md) |
 
-## Acceptance and sources
-
-- Define acceptance criteria, make a bounded change and verify it. Repeat failed
-  actions only with new evidence; after two equivalent failures change the
-  diagnostic approach. Avoid redundant passing tests.
-- Follow [review responsibilities](Docs/AgentDevelopment.md#review-responsibilities):
-  the executor implements and self-checks; one primary independent reviewer owns
-  technical review for substantive changes; the controller accepts owner scope,
-  evidence applicability and finding closure without a second full technical review.
-  Assign additional reviewers distinct criteria only. Reuse applicable passing
-  evidence; repeat checks only for a recorded change, gap, contradiction or uncovered
-  risk, limited to affected criteria. Small obvious low-impact changes may use
-  executor self-checks and controller acceptance unless independent review is
-  explicitly required. Preserve visual and owner gates. See the
-  [owner decision](Docs/Approvals/ReviewResponsibilities01.json).
-- For animation and gameplay corrections, verify only behavior directly affected
-  by the change and its related transitions. Do not run the full animation or
-  feature matrix. This is a standing owner instruction for future tasks; see
-  [focused verification](Docs/Approvals/FocusedVerification01.json).
-- For variant sets requested for owner experimentation, verify the requested set
-  renders and shared functionality works on one representative instance. Leave
-  subjective comparison to the owner; do not run a per-variant matrix or independent
-  visual comparison unless requested or a concrete distinct defect needs a bounded
-  check. See [owner variant testing](Docs/Approvals/OwnerVariantTesting01.json).
-- Before environment layout or model production, create a separate concept-art
-  task and obtain explicit owner approval of an identified art version. Environment
-  preproduction requires dimensioned plans/sections with human scale, approved as
-  a named package before renewed 3D work. Preserve approved scale and label proposed
-  dimensional changes for owner review.
-- Follow [visual acceptance](Docs/VisualAcceptance.md) within current scope.
-  Independent visual reviewers inspect actual art and comparable views, subject
-  to the explicit protagonist concept exception above. Technical validation,
-  independent review and owner visual acceptance are distinct; prototype acceptance
-  or a request for the next task does not itself approve a visual design.
-- Use [GameBrief](Docs/Design/GameBrief.md) for game/level requirements and also
-  [StoryCanon](Docs/Design/StoryCanon.md) for narrative work. Keep fixed facts,
-  working proposals and unresolved details separate. The documented first playable
-  is the [lobby walkthrough](Docs/Tasks/OpeningLobby.md); its environment backlog
-  remains subject to the owner's current deferral.
-- For the original protagonist and FP arms, read the [task plan](Docs/Tasks/PlayerCharacter01Plan.md),
-  [task index](Docs/Tasks/PlayerCharacter01Tasks.md) and [AI3D pipeline](Docs/PlayerCharacter01AI3DPipeline.md).
-  Use `Assets/Source/PlayerCharacter01/` as the canonical editable source root.
-  Preserve all concept packages and owner experiments; named approval is required
-  before production modeling, including when a concept is used as a planning example.
-- For material authoring, read the verified [native Painter workflow](Docs/PainterWorkflow.md).
-  Preserve editable native sources; do not reuse rejected texture pixels or wrap
-  them in a ceremonial Painter project.
-- Asset metadata belongs in the separate local PostgreSQL database `meridian_assets`.
-  Use register/inspect/validate from [AssetRegistry](Docs/AssetRegistry.md), preserving
-  accepted fingerprints and relationship uncertainty. Registration is not acceptance
-  of changed asset bytes. See [registry acceptance](Docs/AssetRegistryAcceptance.md)
-  and [agent development](Docs/AgentDevelopment.md) for evidence and tooling details.
-
-## Maintaining these instructions
-
-- Keep this file to durable rules and a small navigation index. Update the dated
-  `Docs/ProjectState.md` snapshot when active scope changes; put task detail in
-  `Docs/Tasks/` and exact owner decisions in `Docs/Approvals/`.
-- Preserve historical evidence unchanged; clearly identify superseded directions
-  in the current summary instead of appending a running diary here. Multica remains
-  the source of live task state, not the summary or archived instructions.
-- The [pre-compaction archive](Docs/Archive/AgentInstructions/README.md) preserves
-  the original instructions exactly. Consult it only for relevant historical
-  context; its old "current", "latest" and dispatch wording is not active authority.
+Keep current scope in ProjectState, task details in `Docs/Tasks/`, exact decisions
+in `Docs/Approvals/`. Replace stale summaries; do not append delivery history here.
+When changing these entrypoints/policies run `Scripts/check_context_budget.ps1`.
+AGENTS + ProjectState have an 8 KiB combined budget; move detail to the task/policy.
+Multica remains the source of live task state.

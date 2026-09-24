@@ -25,3 +25,12 @@ Existing task reports, approval records and assets remain in place and unchanged
 The snapshot is intentionally not named `AGENTS.md`, so it cannot become a nested
 project instruction file. Do not append new status entries to the frozen snapshot.
 Local preservation and verification records are under `Saved/AgentInstructions/Compaction01/`.
+
+## ContextBudget01 snapshot, 2026-09-24
+
+[2026-09-24-before-compaction.md](2026-09-24-before-compaction.md) preserves the
+13,596-byte root instructions exactly. The companion ProjectState snapshot and
+lookup routes are indexed in [ContextHistory](../../ContextHistory.md). Exact
+fingerprints are in [ContextBudget.json](../../../Tools/ContextBudget.json).
+This snapshot is historical evidence; its relative links retain repository-root
+semantics. Do not read it as additional startup instructions.

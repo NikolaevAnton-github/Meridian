@@ -1,0 +1,10 @@
+{
+  "record_id": "ContextBudget01-OwnerRequest01",
+  "date_local": "2026-09-24",
+  "source": "Owner direct chat",
+  "owner_message_original": "Тебе надо сильно уменьшить входной контекст. я заметил, что запускаю задачу и 70к контекста как не бывало, неужели нельзя уменьшить? Думай архитектурно и сделай это",
+  "owner_message_english_translation": "You need to greatly reduce input context. I noticed that I start a task and 70k of context is gone. Surely it can be reduced? Think architecturally and do it.",
+  "authorized_scope": "Reduce project context loading architecturally; inspect actual injection sources, use compact entrypoints and task-scoped retrieval, preserve project decisions and historical evidence, and verify the result.",
+  "implementation_id": "ContextBudget01",
+  "execution_route": "Direct administrative maintenance with a bounded read-only audit; no production task dispatch."
+}

@@ -1,0 +1,2 @@
+# Preserve exact frozen context snapshots, including original line endings.
+2026-09-24-BeforeContextBudget01.md -text -whitespace

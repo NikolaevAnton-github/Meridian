@@ -1,0 +1,24 @@
+{
+  "startup_max_bytes": 8192,
+  "startup": [
+    { "path": "AGENTS.md", "max_bytes": 4096 },
+    { "path": "Docs/ProjectState.md", "max_bytes": 4096 }
+  ],
+  "policy_directory": "Docs/AgentPolicies",
+  "policy_max_bytes": 5120,
+  "navigation": ["Docs/ContextHistory.md", "Docs/Tasks/ContextBudget01.md"],
+  "snapshots": [
+    {
+      "source": "AGENTS.md",
+      "path": "Docs/Archive/AgentInstructions/2026-09-24-before-compaction.md",
+      "bytes": 13596,
+      "sha256": "30754634308c5363405752b55651625e1fc7465fed5d101d71569f7089661fbc"
+    },
+    {
+      "source": "Docs/ProjectState.md",
+      "path": "Docs/Archive/ProjectState/2026-09-24-BeforeContextBudget01.md",
+      "bytes": 70412,
+      "sha256": "2550e23ba9e17235fdfdb84eac7295e4ab5bfeb11cce60c3d88a74a405036624"
+    }
+  ]
+}
