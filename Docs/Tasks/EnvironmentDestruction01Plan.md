@@ -1,7 +1,8 @@
 # EnvironmentDestruction01: copied-lobby destruction laboratory
 
-Date: 2026-09-24. Parent: **MSQ-74** under MSQ-67.
-Authority: [owner lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json).
+Updated: 2026-09-25. Parent: **MSQ-74** under MSQ-67.
+Authority: [owner lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json)
+and [layered-column clarification](../Approvals/EnvironmentDestruction01-ColumnLayers01.json).
 Multica owns live state. This document defines scope and sequence, not a scheduler.
 
 ## Direction and execution boundary
@@ -19,7 +20,8 @@ are technically delivered under the [scoped start](../Approvals/EnvironmentDestr
 ED-01 independent review was [waived by the owner](../Approvals/EnvironmentDestruction01-ED01ReviewWaiver01.json);
 owner visual/play acceptance remains pending. ED-02..07 remain prepared sequential
 work; their creation does not auto-dispatch implementation.
-No new architecture, structural walls/floors/columns, building collapse, resumed
+The clarification revises prepared scope only; it does not dispatch successors.
+No new architecture, structural failure of walls/floors/columns, building collapse, resumed
 glazing refinement or new art selection is implied. New specimen art follows the
 existing bounded source/visual selection rules. Reuse existing editable sources.
 
@@ -34,8 +36,8 @@ Actual player/enemy traversal over rubble retains the MSQ-78/MSQ-95/96 boundary.
 | --- | --- | --- | --- |
 | ED-00 | MSQ-140 | [Isolated copied lobby and baseline inventory](EnvironmentDestruction01/ED-00.md) | Verified current source map and editor |
 | ED-01 | MSQ-141 | [First rifle-driven destruction specimen](EnvironmentDestruction01/ED-01.md) | ED-00 |
-| ED-02 | MSQ-142 | [Local accumulated damage and truthful openings](EnvironmentDestruction01/ED-02.md) | ED-01 |
-| ED-03 | MSQ-143 | [Bounded debris, support and reset](EnvironmentDestruction01/ED-03.md) | ED-02 |
+| ED-02 | MSQ-142 | [Layered cladding/concrete damage and truthful openings](EnvironmentDestruction01/ED-02.md) | ED-01 |
+| ED-03 | MSQ-143 | [Stable cladding/concrete debris, support and reset](EnvironmentDestruction01/ED-03.md) | ED-02 |
 | ED-04 | MSQ-144 | [Second material and reusable specimen authoring](EnvironmentDestruction01/ED-04.md) | ED-03 |
 | ED-05 | MSQ-145 | [Progressive population and measured optimization](EnvironmentDestruction01/ED-05.md) | ED-04 |
 | ED-06 | MSQ-146 | [Impact presentation and existing slow-time consistency](EnvironmentDestruction01/ED-06.md) | ED-05 |
@@ -46,10 +48,15 @@ parent executor. Later AI/ability tasks consume the delivered destruction contra
 
 ## Specimen behavior
 
-Begin with one bounded specimen. ED-01 uses the existing column's cladding:
-local removal exposes an intact visible core that still blocks bullets. A later
-standalone thin specimen must establish actual pass-through to a target; never
-remove structural core collision to manufacture that result. Actual rifle hits
+Begin with one bounded specimen. Delivered ED-01 removes existing column cladding
+and exposes intact backing. ED-02 extends this specimen under the owner's later
+clarification: cladding and a bounded concrete surface volume can shed, leaving a
+permanent visible structural core that still blocks bullets. Columns do not collapse
+or sever through, and the ceiling remains unaffected. Record the maximum damage
+depth and retained core envelope before implementation; numeric tuning is not yet
+approved. Retain existing placement, outside dimensions and original/shared assets.
+A separately selected thin specimen must establish actual pass-through to a target;
+never remove structural core collision to manufacture that result. Actual rifle hits
 must produce localized visible breaks and corresponding collision changes.
 Default first behavior: the impacting bullet damages the obstacle and stops;
 later shots can pass through the resulting opening if their actual sweep fits.
@@ -61,7 +68,21 @@ are the initial technical candidate, validated against local installed capabilit
 Do not promise arbitrary runtime mesh cutting or physically exact structural failure.
 Record fracture granularity, support/anchor rules, mass, thresholds and impulses.
 
-Add a second materially distinct specimen after the first loop works. Select two
+ED-02 must demonstrate persistent irregular recesses and material-specific cladding
+and concrete fragments, including identifiable textured/relief-treated interiors.
+Use varied fracture directions, depth and fragment sizes within the declared damage
+volume; avoid only straight full-thickness extrusions or replacing peeled cladding
+with another uniformly smooth concrete shell. Even the exhausted-depth state must
+remain visibly damaged while the residual core stops shots. Selected secondary
+fragmentation may be used if needed; arbitrary runtime cutting is not required.
+Large visible fragments need world and mutual collision from the first layered
+candidate. ED-03 establishes stable piles, sleep, lifecycle and support semantics;
+sleep must not silently become noncolliding visible rubble. Treat fine cosmetic
+chips separately. Basic fracture materials/geometry and collision quality are
+prerequisites for population, not work deferred wholesale to ED-06 effects.
+
+Add a second materially distinct specimen after the first loop works. Two layers
+on one column do not alone satisfy the second-specimen requirement. Select two
 or three actual sources with identified derivations; do not assume a wooden box,
 masonry barrier or any proposed visual has already been approved or exists.
 Progressive population uses sparse, representative and bounded dense layouts in

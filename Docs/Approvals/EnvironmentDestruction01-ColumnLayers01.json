@@ -1,0 +1,25 @@
+{
+  "record_id": "EnvironmentDestruction01-ColumnLayers01",
+  "date": "2026-09-25",
+  "source": "Owner direct-chat clarification after inspecting ED-01 and discussing its surface and debris limitations",
+  "owner_message_original": "Перебивание колонны насквозь и обрушение перекрытия это тут пока не нужно, эти колоны не будут рушаться, но я бы хотел, что бы достаточно хорошо осыпались и плитка и бетон. Как это впишется в наш текущий план?",
+  "owner_message_english_translation": "Severing the column through and collapsing the ceiling are not needed here for now; these columns will not collapse, but I would like both tile and concrete to shed convincingly. How does this fit our current plan?",
+  "decision": "Extend the planned first column specimen from removable cladding to locally breakable cladding and a bounded concrete surface volume over a permanent solid structural core. Columns and supported construction do not collapse.",
+  "planning_authority": "Record this scope clarification in the existing MSQ-74 plan and prepared children. This conversation does not dispatch ED-02 or later implementation, approve candidate visuals, or extend the ED-01 review waiver.",
+  "planned_behavior": [
+    "Actual localized repeated rifle hits can shed both cladding and exposed concrete, with material-specific fragments and persistent volumetric damage.",
+    "The concrete damage volume has a declared finite depth and leaves a permanent visible bullet-blocking core; no through-severing, column disappearance or ceiling collapse.",
+    "Retain the current selected column, original outer envelope and lab-only derivation boundary; do not expand into unselected walls, architecture or original/shared assets."
+  ],
+  "controller_plan_mapping": {
+    "ED-02_MSQ-142": "Layered local damage, concrete depth bounds, irregular fracture geometry and identifiable interior materials; basic large-fragment collision quality and explicit residual-core tests. Retain a separate selected thin witness specimen for through-shot evidence.",
+    "ED-03_MSQ-143": "Stable cladding/concrete rubble, fragment interaction and sleep, bounded lifecycle, support and reset.",
+    "ED-04_MSQ-144": "Reuse the layered authoring contract on a distinct selected specimen; two layers on one column do not alone satisfy the second-specimen requirement.",
+    "ED-05_MSQ-145": "Increase density only after first-specimen fracture-surface and settling quality is demonstrated; measure both layers and accumulated rubble.",
+    "ED-06_MSQ-146": "Material-specific dust, small chips and audio, plus presentation refinement and slowdown transitions; do not defer missing basic fracture surfaces or collision correctness to this stage.",
+    "ED-07_MSQ-147": "Hand over the layered damage, exhausted-depth residual-core and settled-debris states with the existing technical and owner gates."
+  },
+  "unresolved_tuning": "Exact concrete damage depth, break thresholds, fragment distribution, impulses and active-body budgets require a measured candidate. The owner has not approved numeric values or physically exact ballistics.",
+  "preservation": "Keep ED-01 Candidate01 and all historic approvals/evidence unchanged. Use task-owned lab derivatives and preserve original/shared assets and owner edits.",
+  "supersedes": "For future planned work on the selected specimen, the requirement that all exposed concrete backing remain completely undamageable. Permanent structural continuity and shot blocking, no column collapse, no through-column witness test and all other laboratory boundaries remain in force."
+}

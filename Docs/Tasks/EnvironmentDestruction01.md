@@ -6,7 +6,9 @@ stage 8 is historical placement, not the current dispatch order.
 Current route: [copied-lobby plan and children](EnvironmentDestruction01Plan.md),
 under the [owner lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json).
 Initial laboratory/specimen work precedes Utility AI and does not wait for MSQ-72.
-ED-00 copy/baseline is authorized now; later children are prepared sequential work.
+ED-00 and ED-01 are technically delivered; later children remain prepared.
+The [layered-column clarification](../Approvals/EnvironmentDestruction01-ColumnLayers01.json)
+extends ED-02 planning without dispatching implementation.
 
 The [owner priority decision](../Approvals/CombatPriorities01-OwnerScope01.json)
 places environmental destruction among the priority combat features. MSQ-73
@@ -26,6 +28,10 @@ two or three specimens, for intact/damaged/destroyed states. Use removable gamep
 instances and preserved editable sources. State which objects are cover and which
 are cosmetic debris. Existing columns, floor, ceiling and owner-authored architectural
 assets remain structurally intact; deferred glass refinement is not reopened.
+On the selected column, cladding and a bounded concrete surface volume may shed
+over a permanent solid core. No column severing, collapse or ceiling failure is
+included. Declare depth bounds and preserve the existing outer envelope. ED-02
+owns local layered damage and basic fracture surfaces; ED-03 owns stable rubble.
 
 Connect rifle damage to visible breaks, suitable sound/particles and bounded
 physics. Document mass, damage threshold, fragmentation and cleanup choices as
@@ -53,6 +59,10 @@ MSQ-70's responsibility; integrated player/enemy crossing remains MSQ-78's.
   expose cover invalidation; MSQ-131 owns new AI cover choices and in-flight plans.
 - Debris count, lifetime and collision are bounded; no explosive physics, permanent
   blocked route or sustained growth after encounter resets.
+- The column shows distinct cladding/concrete loss and persistent irregular depth,
+  including material-appropriate exposed interiors. Repeated hits at the declared
+  depth limit leave a visibly damaged, solid residual core. Large visible fragments
+  collide and settle without persistent interpenetration or overlap flicker.
 - Supply an identified reproducible traversable rubble patch and its support/
   cleanup contract for MSQ-78, including a physics-enabled piece that can move.
   This fixture handoff does not itself prove player or enemy traversal.

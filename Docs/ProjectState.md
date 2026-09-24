@@ -1,6 +1,6 @@
 ﻿# MeridianSquad current project state
 
-Updated 2026-09-24. Navigation only; verify live Multica/editor state when needed.
+Updated 2026-09-25. Navigation only; verify live Multica/editor state when needed.
 This snapshot grants no task execution or design approval. Read the relevant task,
 not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.md).
 
@@ -12,7 +12,9 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
   [MSQ-141 / ED-01 column cladding](EnvironmentDestruction01ED01.md) is technically
   delivered; [review waived](Approvals/EnvironmentDestruction01-ED01ReviewWaiver01.json),
   owner visual/play gate pending.
-  MSQ-142..147 remain prepared for specimens and measured density growth in
+  [Layered-column scope](Approvals/EnvironmentDestruction01-ColumnLayers01.json):
+  ED-02 adds shedding cladding/concrete over a permanent core; no column collapse.
+  MSQ-142..147 remain prepared, not dispatched, for specimens and density growth in
   `/Game/Maps/L_OpeningLobby_DestructionLab01`. Preserve original
   lobby/shared assets. Quality-preserving optimization is required throughout.
 - **Utility AI + GOAP**, [MSQ-122 program](Tasks/UtilityGOAP01.md) and
