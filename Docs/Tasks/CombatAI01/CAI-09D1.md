@@ -1,5 +1,15 @@
 # CAI-09D1: Disarming and combat capability integration
 
+## Superseded architecture and pending scope: 2026-09-24
+
+This unfinished task is **cancelled as superseded**, not completed. Successors: **MSQ-134**.
+Follow [UtilityGOAP01](../UtilityGOAP01.md) and the
+[owner replacement decision](../../Approvals/UtilityGOAP01-TaskCreation01.json).
+Do not dispatch this old task or use it as a new completion dependency.
+
+The remaining content records the earlier scope and is historical where it
+conflicts with the replacement decision. Original reviews/candidate evidence remain unchanged.
+
 Multica issue: **MSQ-114**.
 Parent: [MSQ-101 / CombatAI01](../CombatAI01.md), under MSQ-67.
 Prepared 2026-09-23; no implementation started.

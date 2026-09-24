@@ -1,0 +1,85 @@
+{
+  "record_id": "UtilityGOAP01-TaskCreation01",
+  "date_local": "2026-09-24",
+  "source": "Owner direct chat after selecting Utility AI and GOAP",
+  "owner_messages_original": [
+    "Предположим я выбираю Utility AI и GOAP. Какой бы у нас был план на текущей стадии? существуюшее перепишем тогда?",
+    "Тогда давай подробный план и задачи новые, будем перестриаваить и строить новую систему в соответствии с Utility AI + GOAP",
+    "все что нужно снести касательно ИИ и сделать заного, лучше снести сразу кстати, оставляем только действительно хорошее."
+  ],
+  "owner_messages_english_translation": [
+    "Suppose I choose Utility AI and GOAP. What would our plan be at the current stage? Would we rewrite the existing system then?",
+    "Then give me a detailed plan and new tasks; we will restructure and build a new system based on Utility AI + GOAP.",
+    "Everything concerning AI that needs to be removed and made again is better removed immediately, by the way; keep only the genuinely good parts."
+  ],
+  "decision": "Select Utility AI for goal arbitration and GOAP for action planning. Prepare a detailed replacement design, implementation sequence and new Multica tasks. Remove obsolete active AI early in implementation; retain only individually justified primitives.",
+  "interpretation": "The latest message steers the requested plan and task preparation toward clean replacement. The first implementation package removes the old autonomous policy, ownership and local navigation, with an explicitly passive/manual intermediate. The next package restores a minimal autonomous enemy using the new brain. No selectable legacy fallback or dual autonomous controllers.",
+  "administrative_scope": "Create a coordination parent under MSQ-67 and bounded backlog children. Supersede the thirteen verified unassigned zero-run MSQ-105 through MSQ-117 tasks with explicit successor links and cancelled status. Retain MSQ-101 as a historical coordination index with its delivered children and a supersession notice. Preserve external mechanics tasks, except the minimal MSQ-72 dependency and dispatch note required to use new individual cover before its one-enemy lifecycle fixture; its original acceptance and cap of three remain, with group enablement in UG-04.",
+  "execution_boundary": "This package delivers the requested plan and new tasks. It does not dispatch production or perform the planned source removal. Use administrative services, --no-start for issue updates and unassigned backlog creation. Future execution uses the standing project workflow.",
+  "supersedes": "Earlier proposals to keep an active legacy selector/local-navigation fallback, wrap complete cover/mobile controllers, or defer the choice of GOAP. Earlier architecture and future-task ordering remain historical; their gameplay intent and applicable evidence survive through the explicit replacement mapping.",
+  "preservation": "Preserve owner edits, assets, sources, Git history, delivered task status, historical reviews and exact candidate evidence. Clean replacement is not permission to delete assets or evidence. Keep canonical GASPALS/CMC, finite projectiles, actual weapon safety and physical authority through verified extracted interfaces.",
+  "review": "One primary independent technical planning review, max reasoning and standard speed. This decision grants no inherited review waiver and no new gameplay-testing exception.",
+  "plan": "Docs/Tasks/UtilityGOAP01Plan.md",
+  "design": "Docs/Design/UtilityGOAP01.md",
+  "task_index": "Docs/Tasks/UtilityGOAP01.md",
+  "multica_parent": "MSQ-122",
+  "multica_issues": {
+    "UG-00": "MSQ-123",
+    "UG-01": "MSQ-124",
+    "UG-02": "MSQ-125",
+    "UG-03": "MSQ-126",
+    "UG-04": "MSQ-127",
+    "UG-05": "MSQ-128",
+    "UG-06": "MSQ-129",
+    "UG-07": "MSQ-130",
+    "UG-08": "MSQ-131",
+    "UG-09": "MSQ-132",
+    "UG-10": "MSQ-133",
+    "UG-11": "MSQ-134",
+    "UG-12": "MSQ-135",
+    "UG-13": "MSQ-136",
+    "UG-14": "MSQ-137"
+  },
+  "superseded_issues": {
+    "MSQ-105": [
+      "MSQ-125"
+    ],
+    "MSQ-106": [
+      "MSQ-124",
+      "MSQ-126"
+    ],
+    "MSQ-107": [
+      "MSQ-127"
+    ],
+    "MSQ-108": [
+      "MSQ-128"
+    ],
+    "MSQ-109": [
+      "MSQ-129"
+    ],
+    "MSQ-110": [
+      "MSQ-130"
+    ],
+    "MSQ-111": [
+      "MSQ-131"
+    ],
+    "MSQ-112": [
+      "MSQ-132"
+    ],
+    "MSQ-113": [
+      "MSQ-133"
+    ],
+    "MSQ-114": [
+      "MSQ-134"
+    ],
+    "MSQ-115": [
+      "MSQ-135"
+    ],
+    "MSQ-116": [
+      "MSQ-136"
+    ],
+    "MSQ-117": [
+      "MSQ-137"
+    ]
+  }
+}

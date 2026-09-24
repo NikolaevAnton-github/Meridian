@@ -1,5 +1,16 @@
 # LobbyEncounter01: a short repeatable lobby firefight
 
+## UtilityGOAP01 implementation dependency: 2026-09-24
+
+The replacement AI supplies individual reachable-cover behavior in **MSQ-126**.
+Hard prerequisites are now **MSQ-71 and MSQ-126**. Deliver this lifecycle fixture
+with **one enemy**, within the existing cap of three; preserve all original
+acceptance criteria, including reachable cover. **MSQ-127** subsequently enables
+two/three enemies after shared firing safety and pressure permissions exist.
+Follow [the replacement plan](UtilityGOAP01Plan.md) and
+[owner architecture decision](../Approvals/UtilityGOAP01-TaskCreation01.json).
+This dependency update does not dispatch implementation or approve new level art.
+
 Multica issue: **MSQ-72**.
 Stage 6 of [CombatSlice01](CombatSlice01Plan.md).
 Predecessor: [PlayerSurvival01](PlayerSurvival01.md).

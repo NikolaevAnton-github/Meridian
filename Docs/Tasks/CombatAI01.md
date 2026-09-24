@@ -1,5 +1,14 @@
 # CombatAI01: surprising arcade combat AI program
 
+## Superseded architecture and pending scope: 2026-09-24
+
+Pending MSQ-105..117 are cancelled as superseded by [MSQ-122 / UtilityGOAP01](UtilityGOAP01.md).
+Delivered children and their evidence remain unchanged. The replacement task index
+contains exact successor IDs. MSQ-101 remains a historical coordination index.
+
+The remaining content records the earlier scope and is historical where it
+conflicts with the replacement decision. Original reviews/candidate evidence remain unchanged.
+
 Multica issue: **MSQ-101**.
 Parent context: MSQ-67. Coordination only; do not assign a production executor here.
 

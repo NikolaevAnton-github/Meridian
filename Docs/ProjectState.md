@@ -29,6 +29,31 @@ and owner gates remain; this administrative change does not expand gameplay scop
 
 ## Owner priority: AI, shooting and environmental destruction
 
+Current architecture decision, 2026-09-24: the owner selects **Utility AI + GOAP**
+and requests clean replacement, retaining only justified primitives. The
+[MSQ-122 program](Tasks/UtilityGOAP01.md), [detailed plan](Tasks/UtilityGOAP01Plan.md)
+and [design](Design/UtilityGOAP01.md) supersede the older AI architecture/future
+ordering below. [Exact authority](Approvals/UtilityGOAP01-TaskCreation01.json).
+MSQ-123 removes the obsolete active policy/custom navigator and extracts verified
+CMC/sensory/weapon/geometry primitives; its explicit passive/manual intermediate
+is followed immediately by MSQ-124's first Utility+GOAP enemy. There is no selectable
+legacy brain or old-navigation fallback. MSQ-125 supplies encounter navigation/search.
+The source baseline remains direct GASPALS correction Build07 (`7ba267f`).
+
+MSQ-123..137 are prepared backlog tasks, unassigned with zero runs. MSQ-105..117
+are cancelled as superseded with explicit successor links; delivered historical
+children remain unchanged and MSQ-101 is retained as their index. The task-creation
+request has not dispatched implementation or removed production source. Existing
+MSQ-71/72/74..78/99/100 stay separate. The priority lane is MSQ-125 hunter,
+MSQ-71 survival, MSQ-126 initial cover, one-enemy MSQ-72, then a bounded MSQ-74
+specimen plus MSQ-131 before extensive tuning/group work. MSQ-72 gains MSQ-126 as
+an explicit dependency; MSQ-127 later extends its fixture to two/three enemies.
+Optional mechanics do not block core profiling/handoff. See
+[setup and planning review](UtilityGOAP01TaskSetup01.md).
+
+The remainder of this section and older AI handoffs below retain historical scope;
+their statements that MSQ-105..117 await dispatch no longer describe the live backlog.
+
 The owner places good AI, shooting and environmental destruction ahead of
 dismemberment; see the [exact priority decision](Approvals/CombatPriorities01-OwnerScope01.json).
 MSQ-73 advanced body damage/separation is deferred to low-priority stage 16,

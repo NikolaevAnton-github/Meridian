@@ -13,7 +13,13 @@ instructions supersede earlier guidance within their stated scope.
 - Codex may launch existing applications and local project services needed for
   authorized work without asking again. Starting a service does not authorize
   unrelated execution, purchases or a pending design selection.
-- Current family: MSQ-90 [stance, balance and terrain support](Docs/Tasks/PhysicsControlRefinement01Plan.md)
+- Current AI direction: [MSQ-122 / UtilityGOAP01](Docs/Tasks/UtilityGOAP01.md)
+  selects Utility AI + GOAP and early removal of obsolete active AI, retaining
+  justified primitives under the [owner request](Docs/Approvals/UtilityGOAP01-TaskCreation01.json).
+  MSQ-123..137 are prepared only; MSQ-105..117 are superseded/cancelled. Read
+  ProjectState and the replacement plan before AI work. Preserve historical
+  deliveries and canonical GASPALS/CMC; no selectable legacy AI fallback.
+- Earlier physics family: MSQ-90 [stance, balance and terrain support](Docs/Tasks/PhysicsControlRefinement01Plan.md)
   contains MSQ-91 through MSQ-96 under the
   [owner's task-creation request](Docs/Approvals/PhysicsControlRefinement01-TaskCreation01.json).
   The later [MSQ-97 next-task decision](Docs/Approvals/PhysicsControlRecoverability01-NextTask01.json)

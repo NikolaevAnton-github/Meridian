@@ -1,5 +1,16 @@
 # CombatAI01: surprising arcade combat AI
 
+## Superseded architecture and pending scope: 2026-09-24
+
+The selected architecture is now [Utility AI + GOAP](UtilityGOAP01.md), under
+the [owner decision](../Approvals/UtilityGOAP01-TaskCreation01.json).
+The old active policy/navigation is removed at the first implementation cutover;
+only justified primitives survive. Earlier local-navigation fallback and progressive
+controller reuse proposals below are superseded. Product intent remains applicable.
+
+The remaining content records the earlier scope and is historical where it
+conflicts with the replacement decision. Original reviews/candidate evidence remain unchanged.
+
 Date: 2026-09-23. Status: implementation proposal prepared at the owner's request.
 Companion: [ordered implementation packages](../Tasks/CombatAI01Plan.md).
 Authority: [exact owner request](../Approvals/CombatAI01-Planning01.json).

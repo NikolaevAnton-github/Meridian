@@ -1,5 +1,14 @@
 # Game direction
 
+Combat AI architecture update, 2026-09-24: the owner selects **Utility AI + GOAP**
+and early removal of obsolete AI, retaining only proven primitives. Follow the
+[replacement design](UtilityGOAP01.md), [plan and new tasks](../Tasks/UtilityGOAP01.md)
+and [exact decision](../Approvals/UtilityGOAP01-TaskCreation01.json).
+Utility ranks goals; GOAP plans actions; the executor uses canonical GASPALS/CMC
+and actual weapon/physical authority. Earlier AI architecture and future-task
+ordering below are superseded within this scope. This is prepared work; the current
+Build07 production source remains until the first implementation task executes.
+
 Combat priority update, 2026-09-23: prioritize good enemy AI, shooting quality and
 environmental destruction. Advanced body damage and dismemberment are deferred
 until after that priority work; they do not block the initial combat slice.

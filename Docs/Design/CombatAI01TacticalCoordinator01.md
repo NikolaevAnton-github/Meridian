@@ -1,5 +1,15 @@
 # CombatAI01: situational tactics and squad coordination
 
+## Superseded architecture and pending scope: 2026-09-24
+
+The selected implementation is now [UtilityGOAP01](UtilityGOAP01.md).
+Its source inventory separates retained mechanics from replaced tactical/cover/mobile
+controllers. Earlier architecture and implementation ordering are historical;
+arcade initiative, protected observation and cooperation remain product requirements.
+
+The remaining content records the earlier scope and is historical where it
+conflicts with the replacement decision. Original reviews/candidate evidence remain unchanged.
+
 Date: 2026-09-23. Parent: MSQ-101. Design refinement following the owner's
 playtest of MSQ-103; this is not an implemented candidate or runtime acceptance.
 Source: [exact owner feedback](../Approvals/CombatAI01-TacticalDirection01.json).

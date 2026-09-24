@@ -1,5 +1,15 @@
 # CombatAI01 implementation plan
 
+## Superseded architecture and pending scope: 2026-09-24
+
+The active architecture and future implementation order are now
+[UtilityGOAP01](UtilityGOAP01Plan.md), following the
+[owner decision](../Approvals/UtilityGOAP01-TaskCreation01.json).
+MSQ-105..117 are cancelled with explicit successor tasks; do not dispatch this old sequence.
+
+The remaining content records the earlier scope and is historical where it
+conflicts with the replacement decision. Original reviews/candidate evidence remain unchanged.
+
 Later refinement after MSQ-103 owner play: [situational tactics and coordinator](../Design/CombatAI01TacticalCoordinator01.md).
 The later [owner start](../Approvals/CombatAI01-Tactical01-OwnerStart01.json)
 authorizes [MSQ-118 / CAI-T01](CombatAI01/CAI-T01.md), a bounded sight-based early
