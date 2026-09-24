@@ -44,6 +44,16 @@ sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
 
+## Direct follow-up: enemy base combat speed
+
+After playing MSQ-120, the owner requests equal enemy/player base combat speed
+without a new task or reviewer. The [direct correction](CombatAI01-CombatSpeed01.md)
+raises enabled standing combat walking from 165 to **360 cm/s**, shared with the
+protagonist, and updates mobile fire to support that speed. This supersedes the
+220 cm/s envelope below. Native build and focused source/asset inspection pass;
+gameplay remains owner-tested. No Multica run or new task was created. See the
+[exact instruction](Approvals/CombatAI01-CombatSpeed01-OwnerScope01.json).
+
 ## Owner-test handoff: MSQ-120 mobile fire and torso lean
 
 After playing MSQ-119, the owner requests firing during movement and clarifies

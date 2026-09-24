@@ -1,4 +1,5 @@
 #include "GASPEnemyFixture.h"
+#include "CombatMovement.h"
 #include "GASPALSRifleAnimInstance.h"
 #include "EnemyCombatComponent.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -9,6 +10,7 @@
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/Pawn.h"
 #include "HAL/IConsoleManager.h"
+#include "MovementMode.h"
 #include "UObject/UnrealType.h"
 
 void AGASPEnemyFixture::SetRifleStance(EGASPALSRifleStance NewStance) { RifleStance = NewStance; }
@@ -64,6 +66,16 @@ FVector AGASPEnemyFixture::GetRifleAimDirection() const
 void AGASPEnemyFixture::UpdateRifleInput()
 {
     if (!Foundation) return;
+    // Set the instance value consumed by GASP's gait selector before input/simulation.
+    // Manual fixtures retain their authored speed when combat is disabled.
+    if (auto* Walking = Mover ? Mover->FindMovementModeByName(TEXT("Walking")) : nullptr)
+        if (auto* Speed = FindFProperty<FNumericProperty>(Walking->GetClass(), TEXT("WalkSpeed"));
+            Speed && Speed->IsFloatingPoint())
+        {
+            const double Value = Combat && Combat->bEnabled ? CombatMovement::BaseSpeed :
+                Speed->GetFloatingPointPropertyValue(Speed->ContainerPtrToValuePtr<void>(Walking->GetClass()->GetDefaultObject()));
+            Speed->SetFloatingPointPropertyValue(Speed->ContainerPtrToValuePtr<void>(Walking), Value);
+        }
     if (bRifleFollowPlayer)
         if (auto* Player = GetWorld()->GetFirstPlayerController())
         {

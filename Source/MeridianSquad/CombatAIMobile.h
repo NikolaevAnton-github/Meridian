@@ -1,4 +1,5 @@
 #pragma once
+#include "CombatMovement.h"
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
@@ -15,12 +16,13 @@ struct FireMotion
         if (!Authority) return MotionGate::Authority;
         if (!Grounded) return MotionGate::Airborne;
         if (!Walking && Speed > 15) return MotionGate::Gait;
-        if (!std::isfinite(Speed) || Speed < 0 || Speed > 220) return MotionGate::Speed;
+        // Allow numerical drift at the shared movement cap, not running fire.
+        if (!std::isfinite(Speed) || Speed < 0 || Speed > CombatMovement::BaseSpeed + 1.0) return MotionGate::Speed;
         if (!std::isfinite(VerticalSpeed) || std::abs(VerticalSpeed) > 45) return MotionGate::Vertical;
         return MotionGate::Ready;
     }
     double SpreadCost(double Maximum) const
-    { return std::clamp(Maximum, 0.0, 4.0) * std::clamp(Speed / 220.0, 0.0, 1.0); }
+    { return std::clamp(Maximum, 0.0, 4.0) * std::clamp(Speed / CombatMovement::BaseSpeed, 0.0, 1.0); }
     bool operator==(const FireMotion&) const = default;
 };
 enum class MobilePhase : std::uint8_t { None, Strafe, Approach, Cooldown };

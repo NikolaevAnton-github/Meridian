@@ -1,0 +1,9 @@
+{
+  "record_id": "CombatAI01-CombatSpeed01-OwnerScope01",
+  "date_local": "2026-09-24",
+  "source": "Owner direct chat after playing MSQ-120",
+  "owner_message_original": "Поиграл, пока плохо с пративником. Что бы это стало хоть сколько нибудь интересно, его базовая скорость в режиме боя должна быть такой же как у гг. Сделай это, без такси и проверяющего",
+  "owner_message_english_translation": "I played; the opponent is still poor. To make this at least somewhat interesting, his base speed in combat mode must be the same as the protagonist's. Do this without a task or reviewer.",
+  "decision": "Direct bounded follow-up to MSQ-120: match the enabled enemy's ordinary standing combat movement to the player's 360 cm/s base speed and keep mobile fire compatible with that speed.",
+  "execution": "Controller edits directly; no new Multica task, executor or independent reviewer. Native build and focused source/asset inspection only; gameplay remains owner-tested. Commit the scoped changes locally."
+}

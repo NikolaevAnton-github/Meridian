@@ -1,4 +1,5 @@
 #include "OpeningLobbyCharacter.h"
+#include "CombatMovement.h"
 #include "CombatRifleComponent.h"
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimMontage.h"
@@ -85,7 +86,7 @@ AOpeningLobbyCharacter::AOpeningLobbyCharacter()
     bUseControllerRotationYaw = true;
     auto* Movement = GetCharacterMovement();
     Movement->bOrientRotationToMovement = false;
-    Movement->MaxWalkSpeed = 360.f;
+    Movement->MaxWalkSpeed = CombatMovement::BaseSpeed;
     Movement->MaxWalkSpeedCrouched = 180.f;
     Movement->MaxAcceleration = 1800.f;
     Movement->BrakingDecelerationWalking = 1800.f;
@@ -218,7 +219,7 @@ void AOpeningLobbyCharacter::Tick(float DeltaSeconds)
             if (const FStructProperty* P = FindFProperty<FStructProperty>(Config->GetClass(), TEXT("OffsetCrouch")))
                 CrouchOffset = *P->ContainerPtrToValuePtr<FTransform>(Config);
     SetStruct(this, TEXT("TargetCrouchOffset"), CrouchOffset);
-    Movement->MaxWalkSpeed = Flag(this, TEXT("bIsSprinting")) ? 720.f : Flag(this, TEXT("bIsRunning")) ? 540.f : 360.f;
+    Movement->MaxWalkSpeed = Flag(this, TEXT("bIsSprinting")) ? 720.f : Flag(this, TEXT("bIsRunning")) ? 540.f : CombatMovement::BaseSpeed;
     if (bJumpPresentation && Movement->IsFalling())
     {
         // Releasing the speed key in flight must not brake away the takeoff momentum.

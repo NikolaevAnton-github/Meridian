@@ -107,7 +107,7 @@ TSharedRef<FJsonObject> SnapshotJson(const CombatAI::InputSnapshot& S)
     J->SetNumberField(TEXT("next_cover_scan"),S.NextCoverScan);
     J->SetBoolField(TEXT("cover_scanning"),S.CoverScanning);
     static const TCHAR* MobileNames[]={TEXT("none"),TEXT("strafe"),TEXT("cautious_approach"),TEXT("cooldown")};
-    static const TCHAR* MotionNames[]={TEXT("ready"),TEXT("physical_authority"),TEXT("airborne"),TEXT("running_gait"),TEXT("speed_over_220"),TEXT("vertical_speed_over_45")};
+    static const TCHAR* MotionNames[]={TEXT("ready"),TEXT("physical_authority"),TEXT("airborne"),TEXT("running_gait"),TEXT("speed_over_fire_limit"),TEXT("vertical_speed_over_45")};
     static const TCHAR* FireNames[]={TEXT("ready"),TEXT("authority_or_weapon"),TEXT("current_contact"),TEXT("achieved_stance"),TEXT("achieved_motion"),TEXT("rifle_pose"),TEXT("achieved_lean_geometry"),TEXT("barrel_alignment"),TEXT("muzzle_corridor")};
     J->SetStringField(TEXT("movement_action_id"),LexToString(S.MovementId.Id));
     J->SetStringField(TEXT("movement_action_status"),Outcomes[static_cast<uint8>(S.MovementState)]);
