@@ -14,8 +14,10 @@ map, owner configuration, shared assets, editable sources and immutable evidence
 An edited referenced asset needs its own lab-derived copy; copying the map alone
 does not isolate shared materials, Blueprints, meshes or map-owned dependencies.
 
-ED-00 copy and baseline inventory are authorized now. The remaining children are
-prepared sequential work; their creation does not auto-dispatch implementation.
+ED-00 copy and baseline inventory are delivered. The later
+[column-cladding start](../Approvals/EnvironmentDestruction01-ColumnCladding01.json)
+authorizes ED-01 on one existing column in the lab. ED-02..07 remain prepared
+sequential work; their creation does not auto-dispatch implementation.
 No new architecture, structural walls/floors/columns, building collapse, resumed
 glazing refinement or new art selection is implied. New specimen art follows the
 existing bounded source/visual selection rules. Reuse existing editable sources.
@@ -43,7 +45,10 @@ parent executor. Later AI/ability tasks consume the delivered destruction contra
 
 ## Specimen behavior
 
-Begin with one bounded cover object and a target behind it. Actual rifle hits
+Begin with one bounded specimen. ED-01 uses the existing column's cladding:
+local removal exposes an intact visible core that still blocks bullets. A later
+standalone thin specimen must establish actual pass-through to a target; never
+remove structural core collision to manufacture that result. Actual rifle hits
 must produce localized visible breaks and corresponding collision changes.
 Default first behavior: the impacting bullet damages the obstacle and stops;
 later shots can pass through the resulting opening if their actual sweep fits.

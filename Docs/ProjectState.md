@@ -8,8 +8,10 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
 
 - **Destruction first:** [MSQ-74 copied-lobby laboratory](Tasks/EnvironmentDestruction01Plan.md)
   under the [owner request](Approvals/EnvironmentDestruction01-LobbyLab01.json).
-  [MSQ-140 / ED-00 copy and baseline](EnvironmentDestruction01ED00.md) are delivered;
-  MSQ-141..147 remain prepared for specimens and measured density growth in
+  [MSQ-140 / ED-00 copy and baseline](EnvironmentDestruction01ED00.md) are delivered.
+  [MSQ-141 / ED-01](Tasks/EnvironmentDestruction01/ED-01.md) is owner-started for one
+  column's cladding under the [scoped start](Approvals/EnvironmentDestruction01-ColumnCladding01.json);
+  MSQ-142..147 remain prepared for specimens and measured density growth in
   `/Game/Maps/L_OpeningLobby_DestructionLab01`. Preserve original
   lobby/shared assets. Quality-preserving optimization is required throughout.
 - **Utility AI + GOAP**, [MSQ-122 program](Tasks/UtilityGOAP01.md) and

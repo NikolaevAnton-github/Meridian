@@ -1,0 +1,20 @@
+{
+  "record_id": "EnvironmentDestruction01-ColumnCladding01",
+  "date": "2026-09-24",
+  "source": "Owner direct chat requesting the next destruction task and suggesting tiles on columns",
+  "owner_message_original": "Давай приступим к следующей задачке по разрушаемости, а какой объект ты хочешь сделать разрушаемым? Может начать с плитки на колоннах?",
+  "owner_message_english_translation": "Let us start the next destruction task. Which object do you want to make destructible? Maybe start with the tiles on the columns?",
+  "decision": "Start MSQ-141 / ED-01 using existing column cladding as the first bounded destruction specimen in the copied laboratory.",
+  "scope_interpretation": "Use one representative existing column. Current slab joints are material effects on solid geometry; deriving a separate, locally breakable cladding layer is the technical implementation of the selected specimen. Preserve its existing outer dimensions, placement, slab pattern and face appearance. This does not approve a new architectural design or structural column destruction.",
+  "authorized_now": [
+    "One Multica production worker for MSQ-141, followed by one independent primary technical review",
+    "Task-owned cladding, fracture, collision and exposed backing derivatives with editable sources in the existing lab map",
+    "Actual rifle integration, bounded physical fragments, repeatable reset and focused automated/editor gameplay verification",
+    "Existing local editor/services startup, focused compilation and task-scoped local closure commit"
+  ],
+  "runtime_test_authority": "Focused lab PIE and actual-rifle tests are part of implementation verification. Preserve owner settings and dirty packages. Technical runtime evidence does not grant owner visual/play acceptance.",
+  "collision_contract": "Removed cladding must stop blocking at its removed surface. Visible structural backing remains solid and continues to stop bullets. A cladding scar is not a through-hole in the column; never disable or destroy the core to satisfy a witness-target test. A future standalone thin specimen is required for full pass-through evidence.",
+  "preservation": "Modify only the lab instance and derived task-owned assets. Preserve the original lobby, shared mesh/material/source bytes, owner Config/DefaultEngine.ini and MeridianSquad.uproject edits, previous accepted/rejected candidates and immutable evidence.",
+  "boundaries": "Only ED-01 is dispatched. ED-02..07 remain prepared. New architecture, other column population, structural damage, final dust/audio and Utility/GOAP integration are outside this start. Owner visual/play acceptance remains pending.",
+  "supersedes": "The prepared-only and unspecified-specimen status for MSQ-141, and any ED-01 assumption that removing the chosen surface must open a shot path through a solid column. All other laboratory preservation and quality rules continue."
+}
