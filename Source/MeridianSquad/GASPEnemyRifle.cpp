@@ -50,6 +50,12 @@ CombatAI::FireMotion AGASPEnemyFixture::GetFireMotion() const
         IsReady() && !IsDead() && Authority == EGASPEnemyAuthority::Locomotion,
         CharacterMover && CharacterMover->IsOnGround(), bWalkCommand};
 }
+FEnemyRiflePose AGASPEnemyFixture::GetRiflePose() const
+{
+    if (const auto* Anim = Body ? Cast<UGASPALSRifleAnimInstance>(Body->GetAnimInstance()) : nullptr)
+        return {true, Anim->RifleAlpha, Anim->RifleAimAlpha, Anim->RifleLeanDegrees};
+    return {};
+}
 void AGASPEnemyFixture::SetRifleLean(float Degrees, bool bImmediate)
 {
     RifleLeanTarget = FMath::IsFinite(Degrees) ? FMath::Clamp(Degrees, -35.f, 35.f) : 0.f;

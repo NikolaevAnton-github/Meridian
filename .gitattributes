@@ -124,3 +124,22 @@ Scripts/AssetRegistry/manifests/GASPALSEnemy01.json -text
 Plugins/GASPALSEnemy01/GASPALSEnemy01.uplugin -text
 Source/MeridianSquad/GASPALSRifleAnimInstance.* -text
 Source/MeridianSquad/GASPEnemyRifle.cpp -text
+
+# Preserve exact MSQ-121 candidate, source intake and registry identities.
+MeridianSquad.uproject -text
+Source/MeridianSquad/GASPALSLocomotion* -text
+Source/MeridianSquad/CombatAIMobile.h -text
+Source/MeridianSquad/EnemyCombatComponent.cpp -text
+Source/MeridianSquad/EnemyCombatLean.cpp -text
+Source/MeridianSquad/EnemyCombatMobile.cpp -text
+Source/MeridianSquad/EnemyCombatObservation.cpp -text
+Scripts/GASPALSLocomotion01/** -text
+Assets/Source/GASPALSLocomotion01/** -text
+Docs/GASPALSLocomotion01.md -text
+Scripts/AssetRegistry/manifests/GASPALSLocomotion01-Candidate01.json -text
+Plugins/GASPALS/** -text
+
+# Preserve reviewed MSQ-121 correction and registration bytes on checkout.
+Source/MeridianSquad/EnemyCombatCover.cpp -text
+Docs/GASPALSLocomotion01*.md -text
+Scripts/AssetRegistry/manifests/GASPALSLocomotion01-Candidate*.json -text

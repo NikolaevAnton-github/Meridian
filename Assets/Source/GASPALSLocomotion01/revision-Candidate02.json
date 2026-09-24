@@ -1,0 +1,57 @@
+{
+  "task": "MSQ-121",
+  "candidate": "Candidate02",
+  "correction": "Correction01",
+  "closes": [
+    "GL01-R1",
+    "GL01-R2"
+  ],
+  "status": "executor correction; review closure, controller acceptance and owner Play remain separate",
+  "inherited_candidate": {
+    "path": "Saved/GASPALSLocomotion01/Worker/Candidate01/candidate-manifest.json",
+    "size_bytes": 534427,
+    "sha256": "768c86198fed639105411d297a49729c6464c1c3408fec2616a58d95b248d3e4"
+  },
+  "intake_provenance": {
+    "path": "Assets/Source/GASPALSLocomotion01/intake-manifest.json",
+    "size_bytes": 1116278,
+    "sha256": "c097badeee26557c9a0b32f7b69956ece5e854879276cdb120d40f91e2331404"
+  },
+  "inherited_asset_revision": {
+    "path": "Assets/Source/GASPALSLocomotion01/revision-Candidate01.json",
+    "size_bytes": 1068244,
+    "sha256": "37fb1853d86daa4c64117809bd427f78776967e23d2beb19402e93e0c3d9bdad"
+  },
+  "all_inherited_asset_bytes_unchanged": true,
+  "assets_reimported": 0,
+  "runtime_source_dependency": false,
+  "source_graph_nodes": {
+    "full_path_unique_non_comment_nodes": 1172,
+    "added_nodes": 4,
+    "evidence": {
+      "path": "Saved/GASPALSLocomotion01/Review/technical-evidence.json",
+      "size_bytes": 41367,
+      "sha256": "be2041e652cfa2ff61125cc7c3a85ee416c05277d6d7aa951ee4879b4c9f97df"
+    },
+    "note": "Use the sole primary review count; the original Candidate01 report remains immutable."
+  },
+  "native_corrections": [
+    {
+      "path": "Source/MeridianSquad/CombatProjectileWorld.cpp",
+      "size_bytes": 52331,
+      "sha256": "40a0820ed50fd7e6a08ba34794e2e6a7a9ec5d6f489b576ad3607df0c3d62fbb"
+    },
+    {
+      "path": "Source/MeridianSquad/EnemyCombatCover.cpp",
+      "size_bytes": 24554,
+      "sha256": "e3914ad53c7152aa09161fd15a5a877281b51d0a7b79416d4361a244d74dec1c"
+    }
+  ],
+  "dll": {
+    "path": "Binaries/Win64/UnrealEditor-MeridianSquad.dll",
+    "size_bytes": 1853952,
+    "sha256": "600731ab8e22aba32834ec33bd2b26798377b69879f1de0f70d3a0f28667f3b8"
+  },
+  "report": "Docs/GASPALSLocomotion01Correction01.md",
+  "final_identity_manifest": "Saved/GASPALSLocomotion01/Worker/Candidate02/candidate-manifest.json"
+}

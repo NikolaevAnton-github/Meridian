@@ -16,6 +16,13 @@ class UCapsuleComponent;
 class UAnimInstance;
 class UEnemyCombatComponent;
 
+/** Observed animation state shared by locomotion adapters and combat consumers. */
+struct FEnemyRiflePose
+{
+    bool bValid = false;
+    float Layer = 0, Aim = 0, Lean = 0;
+};
+
 /** Supplies the fixture's control rotation to GASP without player input. */
 UCLASS()
 class AGASPEnemyCommandController : public AController
@@ -87,11 +94,12 @@ public:
     UFUNCTION(BlueprintCallable, Category="Enemy|Movement")
     void SetCrouchCommand(bool bCrouch);
     UFUNCTION(BlueprintPure, Category="Enemy|Movement")
-    bool IsMovementCrouched() const;
-    FVector GetRifleAimDirection() const;
-    float GetRifleMovementAlpha() const;
-    CombatAI::FireMotion GetFireMotion() const;
-    void SetRifleLean(float Degrees, bool bImmediate = false);
+    virtual bool IsMovementCrouched() const;
+    virtual FVector GetRifleAimDirection() const;
+    virtual float GetRifleMovementAlpha() const;
+    virtual CombatAI::FireMotion GetFireMotion() const;
+    virtual FEnemyRiflePose GetRiflePose() const;
+    virtual void SetRifleLean(float Degrees, bool bImmediate = false);
     float RifleLeanTarget = 0;
     UFUNCTION(BlueprintPure, Category="Enemy|Movement")
     APawn* GetMovementPawn() const { return Foundation; }
@@ -135,7 +143,7 @@ protected:
     virtual FVector StepJointLimits(FName Bone) const override;
     virtual void PrepareStepLanding(FName Bone, FTransform& Target) const override;
 
-private:
+protected:
     friend class UGASPEnemyPhysicsTick;
     UPROPERTY() TObjectPtr<UGASPEnemyPhysicsTick> FoundationPhysicsTick;
     UPROPERTY() TObjectPtr<USkeletalMeshComponent> UnusedLegacyBody;

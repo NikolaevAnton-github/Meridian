@@ -1,6 +1,5 @@
 #include "EnemyCombatComponent.h"
 #include "GASPEnemyFixture.h"
-#include "GASPALSRifleAnimInstance.h"
 #include "CombatProjectileWorld.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -231,8 +230,8 @@ bool UEnemyCombatComponent::CanShoot(FVector& Muzzle, FVector& Direction, bool& 
     if (!Target.IsValid() || !bTargetVisible) { LastFireGate=CombatAI::FireGate::Contact; return false; }
     if (E->bCrouchCommand != E->IsMovementCrouched()) { LastFireGate=CombatAI::FireGate::Stance; return false; }
     if (E->GetFireMotion().Gate()!=CombatAI::MotionGate::Ready) { LastFireGate=CombatAI::FireGate::Motion; return false; }
-    const auto* Anim = Cast<UGASPALSRifleAnimInstance>(E->Body->GetAnimInstance());
-    if (!Anim || Anim->RifleAlpha < .9f || Anim->RifleAimAlpha < .9f) { LastFireGate=CombatAI::FireGate::Pose; return false; }
+    const auto Pose = E->GetRiflePose();
+    if (!Pose.bValid || Pose.Layer < .9f || Pose.Aim < .9f) { LastFireGate=CombatAI::FireGate::Pose; return false; }
     if (LeanSign()!=0 && !AchievedLeanClear()) { LastFireGate=CombatAI::FireGate::Lean; return false; }
     // The retained M4's measured barrel axis is local +Y. Prefer an authored
     // socket if a later weapon supplies one; this prototype ends at Y=61.96 cm.

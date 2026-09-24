@@ -1,6 +1,5 @@
 #include "EnemyCombatComponent.h"
 #include "GASPEnemyFixture.h"
-#include "GASPALSRifleAnimInstance.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/World.h"
 
@@ -31,8 +30,8 @@ void UEnemyCombatComponent::AdvanceMobile(double Now, double Distance)
         MoveBackoff.Blocks(LastKnownGround.X,LastKnownGround.Y,Now) ||
         E->GetFireMotion().Gate()!=CombatAI::MotionGate::Ready || E->IsMovementCrouched() ||
         !(Context.Weapon.Capabilities & CombatAI::CautiousMove)) return;
-    const auto* Anim=E->Body ? Cast<UGASPALSRifleAnimInstance>(E->Body->GetAnimInstance()) : nullptr;
-    if (!Anim || FMath::Abs(Anim->RifleLeanDegrees)>.5f) return;
+    const auto Pose=E->GetRiflePose();
+    if (!Pose.bValid || FMath::Abs(Pose.Lean)>.5f) return;
     const bool Approach=RangeIntent==CombatAI::RangeIntent::CautiousAdvance;
     if (!Approach && (Distance>Context.Weapon.EffectiveRange || Shots==0 || ObstructedSince>=0)) return;
     const FVector Start=Feet(), Forward=(LastKnownGround-Start).GetSafeNormal2D();

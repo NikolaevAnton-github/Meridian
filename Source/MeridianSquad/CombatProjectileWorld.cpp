@@ -22,6 +22,30 @@ namespace
 {
 constexpr float BulletRadius = .5f;
 
+const APhysicsControlDummy* PhysicalProjectileOwner(const AActor* Actor)
+{
+    if (!IsValid(Actor)) return nullptr;
+    if (const auto* Body = Cast<APhysicsControlDummy>(Actor)) return Body;
+    const auto* Fixture = AGASPEnemyFixture::FromFoundation(Actor);
+    // Ownership alone may also identify a held/display actor. Only the adopted
+    // pawn is another identity for this fixture's authoritative skeletal body.
+    return Fixture && Fixture->Foundation == Actor ? Fixture : nullptr;
+}
+bool UsesProjectileCapsule(const ACharacter* Character)
+{
+    // A movement capsule must never compete with its fixture's bone contacts.
+    // Keep this classification independent of health, ragdoll and readiness.
+    return IsValid(Character) && !PhysicalProjectileOwner(Character) &&
+        Character->GetCapsuleComponent() && Character->GetCapsuleComponent()->IsQueryCollisionEnabled();
+}
+bool SameProjectileBody(const AActor* A, const AActor* B)
+{
+    if (!A || !B) return false;
+    if (A == B) return true;
+    const auto* Body = PhysicalProjectileOwner(A);
+    return Body && Body == PhysicalProjectileOwner(B);
+}
+
 TSharedPtr<FJsonValue> JsonVector(const FVector& V)
 {
     return MakeShared<FJsonValueArray>(TArray<TSharedPtr<FJsonValue>>{
@@ -118,7 +142,7 @@ bool ACombatProjectileWorld::TraceEnemyAim(const FVector& Start, const FVector& 
         ACharacter* Character = Entry.Key.Get();
         // A prior birth can kill an enemy after this frame's spheres were cached.
         // Match the damage query's live collision gate before considering them.
-        if (!IsValid(Character) || !Character->GetCapsuleComponent()->IsQueryCollisionEnabled()) continue;
+        if (!UsesProjectileCapsule(Character)) continue;
         for (const auto& Sphere : Entry.Value.Regions)
         {
             double Time;
@@ -192,8 +216,7 @@ int64 ACombatProjectileWorld::LaunchTimed(AActor* Shooter, const FVector& Positi
             Bullet.bLaunchClear = CapsuleDistanceSquared(Position - Capsule->Center,
                 Capsule->HalfHeight - Capsule->Radius) > FMath::Square(Capsule->Radius + BulletRadius + 2.f);
     }
-    const auto* PhysicalShooter = Cast<APhysicsControlDummy>(Shooter);
-    if (!PhysicalShooter) PhysicalShooter = AGASPEnemyFixture::FromFoundation(Shooter);
+    const auto* PhysicalShooter = PhysicalProjectileOwner(Shooter);
     if (PhysicalShooter)
         if (const auto* Pose = Bullet.BirthDummies.Find(const_cast<APhysicsControlDummy*>(PhysicalShooter)))
         {
@@ -217,7 +240,7 @@ TMap<TWeakObjectPtr<ACharacter>, ACombatProjectileWorld::FCapsuleSample> ACombat
     for (TActorIterator<ACharacter> It(GetWorld()); It; ++It)
     {
         const auto* Capsule = It->GetCapsuleComponent();
-        if (Capsule->IsQueryCollisionEnabled())
+        if (UsesProjectileCapsule(*It))
         {
             FCapsuleSample Sample{Capsule->GetComponentLocation(), Capsule->GetScaledCapsuleRadius(), Capsule->GetScaledCapsuleHalfHeight(), {}};
             if (const auto* Target = Cast<AEnemyPrototypeCharacter>(*It)) Sample.Regions = Target->SampleHitSpheres();
@@ -455,9 +478,9 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
         for (const auto& Entry : EndCapsules)
         {
             ACharacter* Character = Entry.Key.Get();
-            if (!IsValid(Character)) continue;
+            // Also reject a stale generic sample after pawn ownership changes.
+            if (!UsesProjectileCapsule(Character)) continue;
             auto* Capsule = Character->GetCapsuleComponent();
-            if (!Capsule->IsQueryCollisionEnabled()) continue;
             const FCapsuleSample& Current = Entry.Value;
             const FVector Center = Current.Center;
             const FCapsuleSample* Old = Bullet.bFirstAdvance ? Bullet.BirthCapsules.Find(Character) : StartCapsules.Find(Character);
@@ -511,7 +534,7 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
         for (const auto& Entry : EndDummies)
             if (const auto* Dummy = Entry.Key.Get())
             {
-                const bool bShooterBody = Dummy == Bullet.Shooter.Get() || Dummy == AGASPEnemyFixture::FromFoundation(Bullet.Shooter.Get());
+                const bool bShooterBody = SameProjectileBody(Dummy, Bullet.Shooter.Get());
                 if (bShooterBody && !Bullet.bLaunchClear)
                 {
                     FHitResult Clearance;
@@ -562,7 +585,7 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
 void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult& Hit, double Now)
 {
     AActor* Victim = Hit.GetActor();
-    const bool bSelf = Victim && Victim == Bullet.Shooter.Get();
+    const bool bSelf = SameProjectileBody(Victim, Bullet.Shooter.Get());
     ++HitCount;
     if (bSelf) ++SelfHitCount;
     LastHitShotId = Bullet.Id;

@@ -1,6 +1,5 @@
 #include "EnemyCombatComponent.h"
 #include "GASPEnemyFixture.h"
-#include "GASPALSRifleAnimInstance.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Dom/JsonObject.h"
 #include "Engine/World.h"
@@ -257,8 +256,7 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
     {
         S.Motion=E->GetFireMotion(); S.MovingSpread=S.Motion.SpreadCost(Tuning.MovingSpreadDegrees);
         S.LeanRequested=E->RifleLeanTarget;
-        if (const auto* Anim=E->Body ? Cast<UGASPALSRifleAnimInstance>(E->Body->GetAnimInstance()) : nullptr)
-            S.LeanAnimated=Anim->RifleLeanDegrees;
+        S.LeanAnimated=E->GetRiflePose().Lean;
     }
     S.PauseUntil = Gates.PauseUntil; S.ReloadUntil = Gates.ReloadUntil;
     S.HoldStartedAt = HoldStartedAt; S.MoveStartedAt = TacticalMoveStartedAt;

@@ -9,6 +9,8 @@
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 CombatAI::WeaponProfile UEnemyCombatComponent::WeaponProfile() const
 {
@@ -64,6 +66,25 @@ bool UEnemyCombatComponent::PoseCapsuleSize(bool bCrouched, float& Radius, float
 {
     const auto* E = Enemy();
     if (!E || !E->Foundation) return false;
+    if (const auto* Character = Cast<ACharacter>(E->Foundation))
+    {
+        const auto* Movement = Character->GetCharacterMovement();
+        const auto* Current = Character->GetCapsuleComponent();
+        const auto* Defaults = Character->GetClass()->GetDefaultObject<ACharacter>();
+        const auto* Standing = Defaults ? Defaults->GetCapsuleComponent() : nullptr;
+        if (!Movement || !Current || !Standing) return false;
+        const FVector Scale = Current->GetComponentScale();
+        const float UnscaledRadius = bCrouched ? Current->GetUnscaledCapsuleRadius() : Standing->GetUnscaledCapsuleRadius();
+        const float RequestedHeight = bCrouched ? Movement->GetCrouchedHalfHeight() : Standing->GetUnscaledCapsuleHalfHeight();
+        if (Scale.ContainsNaN() || Scale.X <= 0 || Scale.Y <= 0 || Scale.Z <= 0 ||
+            !FMath::IsFinite(UnscaledRadius) || UnscaledRadius <= 0 || !FMath::IsFinite(RequestedHeight)) return false;
+        // CMC Crouch clamps height to the current radius. UnCrouch restores the
+        // class-default size, even when the achieved capsule is still crouched.
+        // UE 5.8 capsule getters scale radius by min(X,Y), half-height by Z.
+        Radius = UnscaledRadius * FMath::Min(Scale.X, Scale.Y);
+        HalfHeight = FMath::Max3(0.f, UnscaledRadius, RequestedHeight) * Scale.Z;
+        return FMath::IsFinite(Radius) && FMath::IsFinite(HalfHeight) && Radius > 0 && HalfHeight >= Radius;
+    }
     const auto* Mover = E->Foundation->FindComponentByClass<UCharacterMoverComponent>();
     const auto* Original = UMovementUtils::GetOriginalComponentType<UCapsuleComponent>(E->Foundation);
     const auto* Current = E->Foundation->FindComponentByClass<UCapsuleComponent>();
@@ -72,7 +93,7 @@ bool UEnemyCombatComponent::PoseCapsuleSize(bool bCrouched, float& Radius, float
     Radius = Current->GetScaledCapsuleRadius();
     // Match Mover's actual stance expansion contract, including its original capsule.
     HalfHeight = bCrouched ? Settings->CrouchHalfHeight : Original->GetScaledCapsuleHalfHeight();
-    return FMath::IsFinite(HalfHeight) && Radius > 0 && HalfHeight >= Radius;
+    return FMath::IsFinite(Radius) && FMath::IsFinite(HalfHeight) && Radius > 0 && HalfHeight >= Radius;
 }
 bool UEnemyCombatComponent::CoverCapsule(FVector Ground, bool bCrouched)
 {

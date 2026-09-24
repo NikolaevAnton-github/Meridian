@@ -1,6 +1,5 @@
 #include "EnemyCombatComponent.h"
 #include "GASPEnemyFixture.h"
-#include "GASPALSRifleAnimInstance.h"
 #include "CombatProjectileWorld.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/PrimitiveComponent.h"
@@ -73,8 +72,8 @@ bool UEnemyCombatComponent::LeanProposal(FVector Ground, float Degrees)
 bool UEnemyCombatComponent::CaptureLeanPose()
 {
     const auto* E=Enemy();
-    const auto* Anim=E && E->Body ? Cast<UGASPALSRifleAnimInstance>(E->Body->GetAnimInstance()) : nullptr;
-    if (!Anim || Anim->RifleAlpha<.99f || Anim->RifleAimAlpha<.99f || FMath::Abs(Anim->RifleLeanDegrees)>.25f) return false;
+    const auto Pose=E ? E->GetRiflePose() : FEnemyRiflePose{};
+    if (!Pose.bValid || Pose.Layer<.99f || Pose.Aim<.99f || FMath::Abs(Pose.Lean)>.25f) return false;
     LeanNeutral=LeanPoints();
     if (LeanNeutral.Num()!=4) return false;
     LeanPivot=E->Body->GetSocketLocation(TEXT("spine_01"));
@@ -99,9 +98,9 @@ bool UEnemyCombatComponent::CaptureLeanPose()
 bool UEnemyCombatComponent::AchievedLeanClear() const
 {
     const auto* E=Enemy();
-    const auto* Anim=E && E->Body ? Cast<UGASPALSRifleAnimInstance>(E->Body->GetAnimInstance()) : nullptr;
-    if (!bLeanPoseCaptured || LeanNeutral.Num()!=4 || !Anim || LeanSign()==0 ||
-        FMath::Abs(Anim->RifleLeanDegrees-LeanSign()*FMath::Clamp(Tuning.CoverLeanDegrees,20.f,35.f))>1 ||
+    const auto Pose=E ? E->GetRiflePose() : FEnemyRiflePose{};
+    if (!bLeanPoseCaptured || LeanNeutral.Num()!=4 || !Pose.bValid || LeanSign()==0 ||
+        FMath::Abs(Pose.Lean-LeanSign()*FMath::Clamp(Tuning.CoverLeanDegrees,20.f,35.f))>1 ||
         E->GetFireMotion().Gate()!=CombatAI::MotionGate::Ready || E->GetFireMotion().Speed>15 ||
         FVector::Dist2D(Feet(),CoverPlan.Anchor)>12 || E->IsMovementCrouched()) return false;
     const auto Actual=LeanPoints();
@@ -128,8 +127,8 @@ bool UEnemyCombatComponent::AdvanceLeanCover(double Now)
 {
     using Phase=CombatAI::CoverPhase; using Gate=CombatAI::CoverGate;
     auto* E=Enemy();
-    const auto* Anim=E->Body ? Cast<UGASPALSRifleAnimInstance>(E->Body->GetAnimInstance()) : nullptr;
-    const float Actual=Anim ? Anim->RifleLeanDegrees : 0;
+    const auto Pose=E->GetRiflePose();
+    const float Actual=Pose.Lean;
     const bool AtAnchor=FVector::Dist2D(Feet(),CoverPlan.Anchor)<=12 && FMath::Abs(Feet().Z-CoverPlan.Anchor.Z)<=12;
     const bool Settled=E->GetFireMotion().Gate()==CombatAI::MotionGate::Ready && E->GetFireMotion().Speed<=15;
     E->SetCrouchCommand(false);

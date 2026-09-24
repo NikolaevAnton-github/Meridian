@@ -12,6 +12,10 @@
 	],
 	"Plugins": [
 		{
+			"Name": "GASPALS",
+			"Enabled": true
+		},
+		{
 			"Name": "ModelContextProtocol",
 			"Enabled": true,
 			"TargetAllowList": ["Editor"]

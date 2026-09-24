@@ -1,0 +1,16 @@
+{
+  "record_id": "GASPALSLocomotion01-OwnerStart02",
+  "date_local": "2026-09-24",
+  "source": "Owner direct chat after discussing CharacterMovement, Mover and physical reactions",
+  "owner_messages_original": [
+    "Нет, глубокое физическое равновесие не должно быть центральной механикой. У нас динамичный шутер от первого лица, нам важно скорее что бы попадания были физичными и было весело с этим играться",
+    "Давай устроим перенос тогда, можно без задачи в мультика"
+  ],
+  "owner_messages_english_translation": [
+    "Deep physical balance must not be a central mechanic. We are making a dynamic first-person shooter; physical-feeling hits that are fun to play with matter more.",
+    "Let's do the migration then; it can be without a Multica task."
+  ],
+  "decision": "Proceed directly outside Multica with CharacterMovement and the complete source GASPALS locomotion/overlay path, selecting Masculine and retaining source rifle transitions and movement settings. Add or adapt Physics Control for physical localized hits, knockdown/death and corpse response. Remove custom deep balance/recovery-step ownership from the active enemy. Ordinary hits should permit continuing combat rather than entering a long balance-recovery loop.",
+  "supersedes": "The Multica execution route prepared under OwnerStart01. MSQ-121 was created administratively but had no runs; do not dispatch it. Preserve the historical preparation record.",
+  "execution": "Direct implementation under the existing subscription, max reasoning at standard speed. One production/editor writer and one primary independent technical review; the owner waived Multica, not technical review. Native build and focused source/asset checks, with owner gameplay/motion testing. Preserve sources, historical candidates, owner edits and the retained lobby. Controller commits verified scoped changes locally using the prepared work identifier."
+}

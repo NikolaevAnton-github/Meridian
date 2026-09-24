@@ -44,6 +44,41 @@ sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
 
+## Owner-test handoff: source GASPALS enemy locomotion
+
+The [new owner request](Approvals/GASPALSLocomotion01-OwnerStart01.json) authorizes
+[GASPALSLocomotion01 / MSQ-121](Tasks/GASPALSLocomotion01.md): replace the partial transfer
+with the source `D:/devgames/GASPALS_UE58` Masculine locomotion, forward/back/side
+movement and rifle aim transitions/movement at source demonstration speeds.
+Remove custom balance holding and recovery steps from the active enemy path.
+This supersedes the 360 cm/s enemy override below and earlier requirements to
+retain custom balance in the migration. Preserve historical sources/evidence,
+combat AI and damage/death through the appropriate adapter. The later
+[direct start and gameplay direction](Approvals/GASPALSLocomotion01-OwnerStart02.json)
+selects CharacterMovement/GASPALS with physical hit reactions and authorizes
+implementation outside Multica. Deep physical balance is not a central mechanic.
+The prepared MSQ-121 issue is cancelled with zero runs. Direct execution
+and one primary technical review use Astra/max/default. Native build and focused
+source/asset verification are in scope; gameplay/motion remains owner-tested.
+
+**Candidate02 / Correction01** is technically accepted and delivered for owner
+testing. The active enemy now uses the local canonical GASPALS CharacterMovement
+character, complete Masculine/Rifle graphs and source directional gait settings.
+Custom balance holding/recovery steps are inactive; localized physical hits,
+source ragdoll/get-up, death and corpse impulses retain bounded adapters.
+The sole primary review closed the two migration defects in projectile ownership
+and proposed CMC stance geometry. Native build, 55 focused correction assertions
+and retained source/asset checks pass. See the [implementation](GASPALSLocomotion01.md),
+[correction](GASPALSLocomotion01Correction01.md),
+[review closure](GASPALSLocomotion01Correction01Review.md) and
+[controller acceptance](GASPALSLocomotion01Acceptance.md).
+Candidate02 asset registration validates 2,099 artifacts without replacing
+historical fingerprints. Original source/assets/evidence and owner edits remain
+preserved. The retained lobby editor has the matching DLL; no agent Play ran.
+Visual source equivalence, hit feel and practical combat/get-up behavior remain
+owner judgment. Earlier 360 cm/s and custom-balance requirements below are
+superseded for this active enemy path; successor task dispatch is unchanged.
+
 ## Direct follow-up: enemy base combat speed
 
 After playing MSQ-120, the owner requests equal enemy/player base combat speed

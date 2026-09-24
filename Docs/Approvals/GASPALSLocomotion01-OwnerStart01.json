@@ -1,0 +1,10 @@
+{
+  "record_id": "GASPALSLocomotion01-OwnerStart01",
+  "date_local": "2026-09-24",
+  "source": "Owner direct chat after the MSQ-120 combat-speed follow-up",
+  "owner_message_original": "Короче нам нужно убрать нашу логику удержания баланса, полностью скопировать мувмент D:\\devgames\\GASPALS_UE58, да мы его переносили, но не очень пока. Выбрать мускулиную позу, все анимции касаемые - Движения вперед, назад, вбок, входа в прицел винтовки и передвижения с ней, нужно перенести в точь в точь, как и скорость противника из демонстрации. Сейчас же не так сдеално верно?",
+  "owner_message_english_translation": "We need to remove our balance-maintenance logic and fully copy movement from D:\\devgames\\GASPALS_UE58. We transferred it before, but not very well yet. Choose the masculine pose and transfer all forward, backward and sideways movement animations, entering rifle aim and moving with it exactly, along with the opponent's speed from the demonstration. This is not how it is currently done, correct?",
+  "decision": "Replace the active enemy's partial GASP/Mover plus rifle-pose integration with the source GASPALS movement and animation behavior for the requested locomotion and rifle scope. Select the source Masculine style. Remove custom active balance holding/recovery steps and restore source movement-speed behavior instead of the 360 cm/s player-matching override.",
+  "interpretation": "Masculine refers to the source locomotion style. Demonstration speed means the corresponding source gait, direction, stance and aiming settings, not one guessed scalar. Existing combat AI and damage/death continue through an adapter; the request does not erase historical balance sources or replace the protagonist.",
+  "execution": "Use the existing Multica route with one production writer and one primary technical reviewer, Astra/max/default with fast mode disabled. Preserve sources, owner edits and historical evidence. Carry forward owner gameplay-testing preference: native build and focused source/asset checks; no agent PIE or firing. Necessary guarded editor build/reload is in scope. Controller closes with a scoped local commit."
+}
