@@ -1,0 +1,21 @@
+{
+  "record_id": "EnvironmentDestruction01-ED02Start01",
+  "date": "2026-09-25",
+  "source": "Owner direct chat after the layered-column planning clarification",
+  "owner_message_original": "Давай приступим к следующей задачке по разрушаемости, без независимого проверяющего",
+  "owner_message_english_translation": "Let us start the next destruction task, without an independent reviewer.",
+  "decision": "Start MSQ-142 / ED-02 and waive independent review for this task and its bounded corrections only. Deliver through executor self-checks and bounded controller acceptance; owner visual/play acceptance remains separate.",
+  "scope": "Extend the selected ED-01 column in the existing destruction lab with shedding cladding and bounded concrete over a permanent visible solid core, under EnvironmentDestruction01-ColumnLayers01. Preserve the column envelope and placement. No column or ceiling collapse.",
+  "controller_technical_fixture_selection": "Use one standalone thin test panel derived from the existing selected ED-01 lower-course cladding recipe and unchanged face material, plus a temporary PIE witness target. This is the bounded technical pass-through fixture required by ED-02, not a new environment-art selection or the ED-04 second material. Record its placement and dimensions before authoring; keep it isolated from retained architecture.",
+  "authorized_now": [
+    "One Multica production worker for MSQ-142, with max reasoning and standard/default speed on the existing subscription",
+    "Task-owned layered column and thin test-panel derivatives, editable sources and focused source changes",
+    "Existing local services/editor, compilation, focused lab PIE and actual-rifle verification in normal time and canonical slowdown",
+    "Executor self-checks, bounded controller acceptance and task-scoped local commits without an independent reviewer"
+  ],
+  "runtime_test_authority": "Focused automated/editor lab PIE and actual-rifle tests are necessary implementation verification. Preserve owner settings and dirty packages; runtime evidence does not grant owner visual/play acceptance.",
+  "preservation": "Preserve original lobby/shared assets, ED-00/ED-01 candidate assets, editable sources and immutable evidence, and owner edits in Config/DefaultEngine.ini and MeridianSquad.uproject. Derive new ED-02 assets instead of overwriting historic candidate assets.",
+  "retained_requirements": "Local accumulation, connection transition, irregular textured damage interiors, truthful residual-core and thin-panel collision, large-fragment world/mutual collision, safe firing during motion, normal/slowdown behavior, revision notifications, reset and preservation evidence remain required.",
+  "boundaries": "Only MSQ-142 is dispatched. ED-03..07, new architecture, other column population, structural collapse, final dust/audio and Utility/GOAP integration remain outside scope. No new paid services or APIs.",
+  "supersedes": "ED-02 prepared-only wording and independent-review requirement for this task. The ED-01 review waiver remains historic and unchanged. This decision does not approve candidate visuals or waive review for successors."
+}

@@ -18,9 +18,9 @@ does not isolate shared materials, Blueprints, meshes or map-owned dependencies.
 ED-00 copy/baseline and the [ED-01 column-cladding specimen](../EnvironmentDestruction01ED01.md)
 are technically delivered under the [scoped start](../Approvals/EnvironmentDestruction01-ColumnCladding01.json).
 ED-01 independent review was [waived by the owner](../Approvals/EnvironmentDestruction01-ED01ReviewWaiver01.json);
-owner visual/play acceptance remains pending. ED-02..07 remain prepared sequential
+owner visual/play acceptance remains pending. [ED-02 is now authorized](../Approvals/EnvironmentDestruction01-ED02Start01.json)
+with its own scoped independent-review waiver. ED-03..07 remain prepared sequential
 work; their creation does not auto-dispatch implementation.
-The clarification revises prepared scope only; it does not dispatch successors.
 No new architecture, structural failure of walls/floors/columns, building collapse, resumed
 glazing refinement or new art selection is implied. New specimen art follows the
 existing bounded source/visual selection rules. Reuse existing editable sources.

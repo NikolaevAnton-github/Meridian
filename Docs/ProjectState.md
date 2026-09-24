@@ -14,9 +14,10 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
   owner visual/play gate pending.
   [Layered-column scope](Approvals/EnvironmentDestruction01-ColumnLayers01.json):
   ED-02 adds shedding cladding/concrete over a permanent core; no column collapse.
-  MSQ-142..147 remain prepared, not dispatched, for specimens and density growth in
-  `/Game/Maps/L_OpeningLobby_DestructionLab01`. Preserve original
-  lobby/shared assets. Quality-preserving optimization is required throughout.
+  [MSQ-142 / ED-02 is authorized](Approvals/EnvironmentDestruction01-ED02Start01.json)
+  without independent review. MSQ-143..147 remain prepared for
+  `/Game/Maps/L_OpeningLobby_DestructionLab01`. Preserve original/shared assets
+  and visual quality throughout optimization.
 - **Utility AI + GOAP**, [MSQ-122 program](Tasks/UtilityGOAP01.md) and
   [replacement plan](Tasks/UtilityGOAP01Plan.md), under the
   [owner decision](Approvals/UtilityGOAP01-TaskCreation01.json).
