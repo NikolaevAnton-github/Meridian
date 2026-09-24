@@ -1,0 +1,16 @@
+{
+  "record_id": "EnvironmentDestruction01-ED01ReviewWaiver01",
+  "date": "2026-09-24",
+  "source": "Owner direct chat during MSQ-141 execution",
+  "owner_message_original": "независмое ревью не нужно",
+  "owner_message_english_translation": "Independent review is not needed.",
+  "decision": "Waive independent review for MSQ-141 / ED-01 only. Cancel the queued MSQ-148 independent technical review and deliver using executor self-checks and bounded controller acceptance.",
+  "scope": "MSQ-141-Candidate01 column cladding specimen and its task-scoped corrections. This does not waive review for later destruction tasks or other project work.",
+  "retained_requirements": "Actual rifle, collision, movable-debris, reset and preservation evidence still apply. Owner visual/play acceptance remains separate. Complete the authorized implementation and task-scoped local commit without waiting for independent review.",
+  "execution": {
+    "cancelled_review_issue": "MSQ-148",
+    "cancelled_queued_run": "01a0d520-1934-7576-b62f-668bc798b49d",
+    "production_issue": "MSQ-141",
+    "production_run": "01a0d4e6-d82c-774e-aa22-f6fd17b944f1"
+  }
+}

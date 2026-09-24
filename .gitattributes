@@ -1,5 +1,11 @@
 * text=auto
 
+# Preserve the delivered MSQ-141 source and handoff fingerprints exactly.
+Source/MeridianSquad/DestructibleCladding.* -text
+Scripts/EnvironmentDestruction01/ed01_*.py -text
+Assets/Source/EnvironmentDestruction01/MSQ-141-Candidate01/** -text
+Docs/EnvironmentDestruction01ED01.md -text
+
 # Preserve exact MSQ-98 source, evidence-script and handoff fingerprints.
 Source/MeridianSquad/GASPEnemyFixture.* -text
 Scripts/GASPEnemyFoundation01/** -text

@@ -14,10 +14,11 @@ map, owner configuration, shared assets, editable sources and immutable evidence
 An edited referenced asset needs its own lab-derived copy; copying the map alone
 does not isolate shared materials, Blueprints, meshes or map-owned dependencies.
 
-ED-00 copy and baseline inventory are delivered. The later
-[column-cladding start](../Approvals/EnvironmentDestruction01-ColumnCladding01.json)
-authorizes ED-01 on one existing column in the lab. ED-02..07 remain prepared
-sequential work; their creation does not auto-dispatch implementation.
+ED-00 copy/baseline and the [ED-01 column-cladding specimen](../EnvironmentDestruction01ED01.md)
+are technically delivered under the [scoped start](../Approvals/EnvironmentDestruction01-ColumnCladding01.json).
+ED-01 independent review was [waived by the owner](../Approvals/EnvironmentDestruction01-ED01ReviewWaiver01.json);
+owner visual/play acceptance remains pending. ED-02..07 remain prepared sequential
+work; their creation does not auto-dispatch implementation.
 No new architecture, structural walls/floors/columns, building collapse, resumed
 glazing refinement or new art selection is implied. New specimen art follows the
 existing bounded source/visual selection rules. Reuse existing editable sources.
