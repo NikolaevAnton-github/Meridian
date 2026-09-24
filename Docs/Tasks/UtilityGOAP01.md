@@ -39,9 +39,12 @@ apply to future execution; owner gameplay/motion judgement remains separate.
 
 ## Priority lane
 
-UG-00 -> UG-01 -> UG-02 supplies the clean foundation, first combat enemy and hunt.
-Then complete MSQ-71 survival, UG-03 initial cover and one-enemy MSQ-72. Prioritize
-the bounded MSQ-74 specimen plus UG-08 next, before extensive tuning/group work.
+The [owner destruction-lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json)
+places the initial [MSQ-74 laboratory/specimens](EnvironmentDestruction01Plan.md)
+before AI replacement; MSQ-74 no longer waits for MSQ-72.
+Then UG-00 -> UG-01 -> UG-02 supplies the clean foundation, first combat enemy and
+hunt, followed by MSQ-71 survival, UG-03 cover and one-enemy MSQ-72. Integrate the
+delivered destruction through UG-08 before extensive tuning/group work.
 MSQ-72 gains UG-03 as a dependency; UG-04 extends its fixture to two/three enemies.
 UG-08 is high priority without making future destruction a mandatory core
 completion barrier. MSQ-73 dismemberment remains deferred. External mechanics retain
@@ -75,7 +78,8 @@ tasks. The cancelled MSQ-121 preparation issue is not a completion gate: inspect
 [the direct correction](../GASPALSAIFix01.md) and its applicable evidence instead.
 External task statuses are preserved. MSQ-72 gains the explicit UG-03 dependency
 and one-enemy-first dispatch note; its original acceptance and cap of three remain.
-Other MSQ-71/74..78/99/100 fields are unchanged. Read current CMC and adapter
+Other external mechanic scopes are unchanged except the later MSQ-74 lab amendment.
+Read current CMC and adapter
 contracts at future dispatch. Existing old Mover wording is historical.
 
 Setup verification and the primary planning review are recorded in

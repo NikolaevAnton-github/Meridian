@@ -1,0 +1,21 @@
+{
+  "record_id": "EnvironmentDestruction01-LobbyLab01",
+  "date": "2026-09-24",
+  "source": "Owner direct chat after discussing environmental destruction before Utility AI implementation",
+  "owner_message_original": "Давай тогда подробим на задачки, скопируем лобби и будем постепенно заставлять его разрушающимися объектами. И на них проверять, нужно в уме держать и оптимизацию, но постараться не в ущерб качеству. Что скажешь на счет производительности? основная нагрузка же идет на процессор?",
+  "owner_message_english_translation": "Let us break it into tasks, copy the lobby and gradually fill it with destructible objects, testing on them. Keep optimization in mind, preferably without sacrificing quality. What about performance: is the main load on the processor?",
+  "decision": "Prioritize a destruction laboratory in a separate copy of the retained lobby. Decompose MSQ-74 into sequential child tasks, preserve visual and gameplay quality while measuring cost as object density increases, and separate later AI integration.",
+  "authorized_now": [
+    "Administrative task and dependency preparation in existing Multica",
+    "Create and verify one isolated lobby map copy with preservation and baseline inventory under ED-00",
+    "Launch existing local services/editor needed for the authorized copy"
+  ],
+  "execution_boundary": "ED-00 may execute now. Later children describe the incremental implementation route; preparation does not automatically dispatch them or select new object art. Owner gameplay/visual judgement remains separate; earlier task-specific testing reservations are not universally revoked.",
+  "source_map": "/Game/Maps/L_OpeningLobby_PainterStone01",
+  "laboratory_map": "/Game/Maps/L_OpeningLobby_DestructionLab01",
+  "preservation": "Preserve source map, unsaved owner state, shared assets, editable sources, owner config changes and all prior evidence. Duplicate assets that require lab-specific edits; handle external actors and map-owned dependencies through verified editor facilities. No duplicate project/worktree.",
+  "scope": "Existing reusable nonstructural objects and their rifle-driven damage, debris, reset and measured incremental placement. No renewed lobby architecture, whole-building collapse, structural redesign, deferred glazing refinement or approved new art is implied.",
+  "dependencies": "MSQ-74 laboratory and specimens no longer wait for MSQ-72 or Utility AI replacement. MSQ-131 remains dependent on actual destruction evidence and new AI cover/navigation; rubble traversal remains separately integrated in MSQ-78 with applicable support contracts.",
+  "quality_policy": "Optimize active simulation, collision complexity, sleeping, event-driven updates, rendering and effect scalability from measurements. Do not silently erase visible destruction, remove gameplay collision, freeze all movable debris or lower visual settings to claim success.",
+  "supersedes": "Earlier ordering that places the initial MSQ-74 specimen after MSQ-72, and the blanket lobby deferral only for this isolated copy and destruction-lab scope. Other paused scopes and accepted evidence are unchanged."
+}

@@ -1,16 +1,25 @@
 # EnvironmentDestruction01: bounded destructible objects and cover
 
 Multica issue: **MSQ-74**.
-Stage 8 of [CombatSlice01](CombatSlice01Plan.md).
-Predecessor: [LobbyEncounter01 / MSQ-72](LobbyEncounter01.md).
+Coordination parent under [CombatSlice01](CombatSlice01Plan.md); retained native
+stage 8 is historical placement, not the current dispatch order.
+Current route: [copied-lobby plan and children](EnvironmentDestruction01Plan.md),
+under the [owner lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json).
+Initial laboratory/specimen work precedes Utility AI and does not wait for MSQ-72.
+ED-00 copy/baseline is authorized now; later children are prepared sequential work.
 
 The [owner priority decision](../Approvals/CombatPriorities01-OwnerScope01.json)
 places environmental destruction among the priority combat features. MSQ-73
 advanced body damage/dismemberment is deferred and is no longer a prerequisite.
-Stage 8 is retained; the former stage 7 is vacant. This administrative change
-does not start production or select any destruction asset.
+Stage 8 is retained; the former stage 7 is vacant. The later lab request supersedes
+the MSQ-72 predecessor and authorizes the isolated copy, not a new art selection.
 
 ## Scope
+
+Work in `/Game/Maps/L_OpeningLobby_DestructionLab01`, preserving the original map
+and shared sources. Duplicate any referenced asset before lab-specific edits.
+Progressively populate this single copy; measure intact, breaking and settled
+states as density increases, with quality-preserving optimization in each stage.
 
 Select a small explicit set of existing reusable nonstructural objects, initially
 two or three specimens, for intact/damaged/destroyed states. Use removable gameplay
@@ -21,7 +30,9 @@ assets remain structurally intact; deferred glass refinement is not reopened.
 Connect rifle damage to visible breaks, suitable sound/particles and bounded
 physics. Document mass, damage threshold, fragmentation and cleanup choices as
 tuning. Adjust hit obstruction, player collision and enemy navigation/cover state
-when a selected object breaks. Preserve the original map/assets for reset.
+when a selected object breaks. Expose change/revision notifications now; the new
+AI's in-flight plans and cover/route requery remain MSQ-131's acceptance.
+Preserve the original map/assets and provide laboratory reset.
 
 The owner subsequently requests movement over debris; see
 [PhysicsControlRefinement01 / MSQ-90](PhysicsControlRefinement01Plan.md). Provide
@@ -38,8 +49,8 @@ MSQ-70's responsibility; integrated player/enemy crossing remains MSQ-78's.
 - Each identified specimen reaches its stated damage states through actual rifle
   hits. Visual destruction and collision/hit blocking change together.
 - An intact cover object protects the target; its declared destroyed state allows
-  the expected shot or traversal. Enemy cover choices do not retain a destroyed
-  position as valid indefinitely.
+  the expected shot or traversal. Actual geometry and destruction notifications
+  expose cover invalidation; MSQ-131 owns new AI cover choices and in-flight plans.
 - Debris count, lifetime and collision are bounded; no explosive physics, permanent
   blocked route or sustained growth after encounter resets.
 - Supply an identified reproducible traversable rubble patch and its support/

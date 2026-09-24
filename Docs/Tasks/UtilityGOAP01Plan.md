@@ -7,6 +7,11 @@ not report the new brain as delivered.
 
 ## Delivery sequence
 
+The later [owner lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json)
+places initial [MSQ-74 destruction](EnvironmentDestruction01Plan.md) before this AI
+sequence. Its laboratory/specimen work no longer waits for MSQ-72. The sequence
+below remains the order within AI; UG-08 consumes the resulting specimen later.
+
 1. **UG-00:** remove the obsolete active AI and extract verified primitives. Deliver
    an explicitly passive/manual compilable intermediate, then proceed to UG-01 as
    the next AI implementation package. Do not spend further milestones improving the
@@ -16,8 +21,8 @@ not report the new brain as delivered.
    independent of first shot, moving fire/reload and evidence-based investigation.
 3. **UG-02:** deliver real encounter navigation and persistent spatial search.
    Complete existing MSQ-71 for health/restart, UG-03 for initial individual cover,
-   then MSQ-72 as a one-enemy repeatable encounter. Prioritize a bounded MSQ-74
-   destruction specimen plus UG-08 before extensive tuning and group work.
+   then MSQ-72 as a one-enemy repeatable encounter. Integrate the earlier MSQ-74
+   destruction specimen through UG-08 before extensive tuning and group work.
    UG-04 later extends the fixture to two/three enemies behind group safety.
    This scheduling lane is explicit; missing destruction does
    not hold the initial core technically incomplete forever.

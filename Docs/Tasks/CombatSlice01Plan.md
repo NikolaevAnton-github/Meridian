@@ -9,13 +9,17 @@ Multica issue: **MSQ-67**.
 Current priority amendment, 2026-09-23: the owner prioritizes good AI, shooting
 and environmental destruction, with dismemberment last. See the
 [exact decision](../Approvals/CombatPriorities01-OwnerScope01.json).
-MSQ-73 moves from stage 7 to deferred low-priority stage 16. MSQ-74 depends on
-MSQ-72 directly; other native stage numbers remain unchanged and stage 7 is vacant.
+MSQ-73 moves from stage 7 to deferred low-priority stage 16. Native stage numbers
+remain unchanged and stage 7 is vacant. The 2026-09-24
+[owner lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json) now places
+[MSQ-74 laboratory/specimens](EnvironmentDestruction01Plan.md) first, removing its
+MSQ-72 prerequisite. Its retained stage 8 is not the current dispatch order.
 MSQ-78/MSQ-81 exclude advanced wounds/separation from their initial acceptance
 while retaining ordinary regional damage, reactions and death. MSQ-73 remains
 an open expansion and later owns its newly coupled integration checks. Historical
 statements preserving the original order below are superseded within this scope.
-This is an administrative priority update, not implementation dispatch.
+The later amendment authorizes ED-00's isolated lobby copy; other children are
+prepared sequential work without automatic dispatch.
 
 The MSQ-68 execution instruction authorized that child and fixed the
 [projectile/time/self-hit policy](../Approvals/CombatFoundation01-OwnerScope01.json).
@@ -93,7 +97,8 @@ stages; other vendor gestures are not working mechanics.
 ## Ordered tasks
 
 Multica owns live status. This table defines order and scope, not a parallel
-task database. Every child has a unique native stage and a recorded predecessor.
+task database. Native stages retain historical identity; the explicit MSQ-74
+priority amendment takes precedence for dispatch.
 
 | Stage | Multica | Task | Reviewable result |
 | --- | --- | --- | --- |

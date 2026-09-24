@@ -6,6 +6,11 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
 
 ## Active direction
 
+- **Destruction first:** [MSQ-74 copied-lobby laboratory](Tasks/EnvironmentDestruction01Plan.md)
+  under the [owner request](Approvals/EnvironmentDestruction01-LobbyLab01.json).
+  Copy/baseline ED-00 is authorized; prepare sequential specimens and measured
+  density growth in `/Game/Maps/L_OpeningLobby_DestructionLab01`. Preserve original
+  lobby/shared assets. Quality-preserving optimization is required throughout.
 - **Utility AI + GOAP**, [MSQ-122 program](Tasks/UtilityGOAP01.md) and
   [replacement plan](Tasks/UtilityGOAP01Plan.md), under the
   [owner decision](Approvals/UtilityGOAP01-TaskCreation01.json).
@@ -18,9 +23,9 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
   [Primary review](GASPALSAIFix01Review.md) closes the audited runtime defects.
   Source locomotion and moving fire/reload remain; custom enemy balance/recovery
   steps are inactive. Technical delivery does not grant owner motion/play acceptance.
-- Priority: AI, shooting and environmental destruction. After MSQ-125 hunter:
-  MSQ-71 survival, MSQ-126 cover, one-enemy MSQ-72, then bounded MSQ-74 destruction
-  plus MSQ-131 before extensive tuning/group work. MSQ-127 later adds 2/3 enemies.
+- After initial MSQ-74 destruction: resume MSQ-123..125, MSQ-71 survival,
+  MSQ-126 cover and one-enemy MSQ-72; MSQ-131 integrates destroyed cover/routes
+  before extensive tuning/group work. MSQ-127 later adds 2/3 enemies.
   MSQ-73 dismemberment is deferred; MSQ-99/100 and other mechanics remain separate.
   [Priority authority](Approvals/CombatPriorities01-OwnerScope01.json).
 
@@ -32,7 +37,7 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
   [gameplay policy](AgentPolicies/Gameplay.md) for relevant baseline/slowdown rules.
 - Original protagonist production/successors are paused; preserve all sources and
   experiments. [Direction](Approvals/PurchasedArms01-OwnerScope01.json).
-- Lobby architecture is deferred under the [owner closure](Approvals/LobbyDeferred01-OwnerClosure01.json).
+- Original lobby architecture stays deferred under the [owner closure](Approvals/LobbyDeferred01-OwnerClosure01.json).
   Retained map: `/Game/Maps/L_OpeningLobby_PainterStone01`; preserve owner edits.
   New environment production still requires named art/drawing approval.
   [Preservation details](OpeningLobbyDeferred01.md).
