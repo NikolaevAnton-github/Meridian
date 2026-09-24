@@ -1,0 +1,10 @@
+{
+  "record_id": "GASPALSAIAudit01-OwnerRequest01",
+  "date_local": "2026-09-24",
+  "source": "Owner direct chat after playing the GASPALS migration",
+  "owner_message_original": "`GASPALS` полный переход на эту систему сломал совсем логику ИИ, он почти не стрелят, почти даже не двигается, стоит на месте и все. Проведи полный аудит технчиеский аудит ИИ системы, сам, без задачи",
+  "owner_message_english_translation": "The complete transition to GASPALS has broken the AI logic: it almost never shoots or moves and just stands still. Conduct a full technical audit of the AI system yourself, without a task.",
+  "scope": "Direct controller audit of the active AI integration, source and retained evidence, with bounded diagnostic runtime checks. No new task, Multica dispatch, executor or independent reviewer. This records an audit request, not authorization for production corrections or a replacement design.",
+  "work_reference": "MSQ-121 is used only to identify the existing migration and the local audit closure commit. Its cancelled issue is not restarted.",
+  "preservation": "Preserve owner changes, production sources/assets and historical acceptance evidence. Save new diagnostic evidence separately under Saved/GASPALSAIAudit01. Findings and recommended corrections are in Docs/GASPALSAIAudit01.md."
+}

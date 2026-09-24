@@ -44,7 +44,22 @@ sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
 
-## Owner-test handoff: source GASPALS enemy locomotion
+## Direct audit: GASPALS AI regression
+
+The later [owner request](Approvals/GASPALSAIAudit01-OwnerRequest01.json) asks the
+controller personally for a full technical AI audit, without a new task or Multica
+run. The [audit](GASPALSAIAudit01.md) reproduces a basic combat failure on the delivered
+MSQ-121 baseline: clear sight and full aim weight, but 13-15 degree barrel error
+against a 6 degree launch tolerance; zero shots and zero movement during the
+10-second decisive capture. First-shot-dependent movement and indefinite aim retry
+amplify this integration failure. Direct CMC walking/running work. Additional
+findings cover the retained Mover dependency in footsteps, invalid control teardown
+and missing physics pose-data warnings. Production corrections remain open.
+The audit ran bounded diagnostic PIE, then restored the editor settings and stopped
+PIE with no dirty packages. It changes no production code/assets and does not
+replace historical technical acceptance or grant motion/play acceptance.
+
+## Earlier owner-test handoff: source GASPALS enemy locomotion
 
 The [new owner request](Approvals/GASPALSLocomotion01-OwnerStart01.json) authorizes
 [GASPALSLocomotion01 / MSQ-121](Tasks/GASPALSLocomotion01.md): replace the partial transfer
@@ -61,8 +76,9 @@ The prepared MSQ-121 issue is cancelled with zero runs. Direct execution
 and one primary technical review use Astra/max/default. Native build and focused
 source/asset verification are in scope; gameplay/motion remains owner-tested.
 
-**Candidate02 / Correction01** is technically accepted and delivered for owner
-testing. The active enemy now uses the local canonical GASPALS CharacterMovement
+**Candidate02 / Correction01** passed its scoped technical acceptance and was
+delivered for owner testing. The later audit above identifies open runtime defects.
+The active enemy now uses the local canonical GASPALS CharacterMovement
 character, complete Masculine/Rifle graphs and source directional gait settings.
 Custom balance holding/recovery steps are inactive; localized physical hits,
 source ragdoll/get-up, death and corpse impulses retain bounded adapters.
@@ -74,7 +90,8 @@ and retained source/asset checks pass. See the [implementation](GASPALSLocomotio
 [controller acceptance](GASPALSLocomotion01Acceptance.md).
 Candidate02 asset registration validates 2,099 artifacts without replacing
 historical fingerprints. Original source/assets/evidence and owner edits remain
-preserved. The retained lobby editor has the matching DLL; no agent Play ran.
+preserved. At that handoff the retained lobby editor had the matching DLL and no
+agent Play had run; the later owner-requested audit above adds diagnostic PIE evidence.
 Visual source equivalence, hit feel and practical combat/get-up behavior remain
 owner judgment. Earlier 360 cm/s and custom-balance requirements below are
 superseded for this active enemy path; successor task dispatch is unchanged.
