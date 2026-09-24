@@ -319,7 +319,7 @@ void UEnemyCombatComponent::ChooseTacticalPosition(double Now)
         // Execute the checked short route itself; do not discard it into a grid
         // search that may miss a narrow but proven side of the column.
         Path=Winner.Route; PathIndex=0; PathGoal=SearchGoal;
-        PathRequest=EnsureAction(CombatAI::ActionKind::Move,Now);
+        PathRequest=EnsureMoveAction(Now);
         ProgressPosition=Feet(); LastProgress=Now;
         TacticalReason = TEXT("nearby lowest-exposure supported position; checked short route");
     }
@@ -440,7 +440,7 @@ void UEnemyCombatComponent::AdvanceSearch(double Now)
             { RejectTacticalPosition(SearchGoal, CombatAI::PositionRejection::Arrival, Now); }
             else
             {
-                FinishAction(Action.Token, CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None);
+                FinishMoveAction(CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None);
                 RecordPath(CombatAI::PathOutcome::Arrived, TEXT("actual tactical feet and useful facing validated"));
                 ClearIntent(); HeldPosition = Arrived; bHeldPosition = true; bSelectedPosition = false;
                 E->SetCrouchCommand(HeldPosition.bCrouched);

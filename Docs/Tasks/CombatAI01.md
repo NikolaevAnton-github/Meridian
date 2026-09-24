@@ -44,6 +44,16 @@ owner testing boundaries and source/evidence identity.
 
 ## Task index
 
+The [mobile-fire and lean follow-up](../Approvals/CombatAI01-MobileLean01-OwnerStart01.json)
+authorizes **MSQ-120 / CAI-T03** on MSQ-119: useful combat movement while firing
+and actual left/right upper-body leaning at cover edges. The earlier stationary
+fire restriction and step-out-only interpretation are superseded within this
+scope. Owner-only gameplay testing and the unfinished full packages remain.
+It now delivers [Candidate01/build03](../CombatAI01-MobileLean01Acceptance.md),
+with passing build, focused code/pose checks and sole primary technical review.
+The owner has started Play on the matching build; final motion/play judgement
+remains separate. All existing undispatched successors retain their scope.
+
 The later [cover-fire follow-up](../Approvals/CombatAI01-CoverFire01-OwnerStart01.json)
 authorizes **MSQ-119 / CAI-T02** after MSQ-104: weapon-aware ranged engagement,
 left/right cover peeks, low-cover stand/burst/crouch, prompt fire and extensible
@@ -65,6 +75,7 @@ Gameplay acceptance remains pending owner. MSQ-104 consumes this current policy.
 
 | Package | Issue | Task | Prerequisites | Stage |
 | --- | --- | --- | --- | --- |
+| CAI-T03 | MSQ-120 | [Mobile enemy fire and torso-lean cover peeking](CombatAI01/CAI-T03.md) | MSQ-119 | Unstaged early slice |
 | CAI-T02 | MSQ-119 | [Weapon-aware cover peeking and prompt fire](CombatAI01/CAI-T02.md) | MSQ-104 | Unstaged early slice |
 | CAI-T01 | MSQ-118 | [Situational single-enemy tactics and coordinator foundation](CombatAI01/CAI-T01.md) | MSQ-103 | Unstaged early slice |
 | CAI-00 | MSQ-102 | [Baseline, contracts and observability](CombatAI01/CAI-00.md) | MSQ-70 | 1 |

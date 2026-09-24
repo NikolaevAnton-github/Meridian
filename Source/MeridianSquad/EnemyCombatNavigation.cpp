@@ -66,8 +66,8 @@ bool UEnemyCombatComponent::WalkSegment(FVector Start, FVector End, const FColli
 
 bool UEnemyCombatComponent::PlanPath(FVector Goal, float Acceptance)
 {
-    FinishAction(Action.Token, CombatAI::ActionStatus::Canceled, CombatAI::ActionFailure::Replaced);
-    PathRequest = EnsureAction(CombatAI::ActionKind::Move, GetWorld()->GetTimeSeconds());
+    FinishMoveAction(CombatAI::ActionStatus::Canceled, CombatAI::ActionFailure::Replaced);
+    PathRequest = EnsureMoveAction(GetWorld()->GetTimeSeconds());
     Path.Reset(); PathIndex = 0; Nodes.Reset(); OpenNodes.Reset(); CellNodes.Reset();
     bPlanning = bPlanFailed = false; LastPathExpanded = 0;
     PathGoal = Goal; PathAcceptance = FMath::Max(Acceptance, 25.f);
@@ -94,7 +94,7 @@ bool UEnemyCombatComponent::PlanPath(FVector Goal, float Acceptance)
 void UEnemyCombatComponent::ContinuePath()
 {
     if (!bPlanning) return;
-    if (!Action.Accepts(PathRequest) || PathRequest.Generation != EncounterGeneration)
+    if (!MoveAction.Accepts(PathRequest) || PathRequest.Generation != EncounterGeneration)
     {
         Path.Reset(); Nodes.Reset(); OpenNodes.Reset(); CellNodes.Reset();
         bPlanning = false; bPlanFailed = true;
@@ -181,7 +181,7 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
     const FVector Position = Feet();
     if (FVector::Dist2D(Position, Goal) <= Acceptance && FMath::Abs(Position.Z - Goal.Z) <= 40.f)
     {
-        FinishAction(Action.Token, CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None);
+        FinishMoveAction(CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None);
         E->StopMovementCommand(); RecordPath(CombatAI::PathOutcome::Arrived, TEXT("destination acceptance reached")); return true;
     }
     auto Failed = [&](const TCHAR* Why)
@@ -190,7 +190,7 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
         Path.Reset(); bPlanning = bPlanFailed = false;
         NextRepath = Now + FMath::Clamp(Tuning.RepathSeconds, .3f, 5.f);
         E->StopMovementCommand();
-        FinishAction(Action.Token, CombatAI::ActionStatus::Failed, CombatAI::ActionFailure::Route);
+        FinishMoveAction(CombatAI::ActionStatus::Failed, CombatAI::ActionFailure::Route);
         RecordPath(CombatAI::PathOutcome::Failed, Why);
         return FailedAttempts < 2;
     };
@@ -198,7 +198,7 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
     const bool bChangedGoal = FVector::Dist2D(Goal, PathGoal) > FMath::Clamp(Tuning.NavigationCell, 60.f,120.f) * 2.f;
     if (bChangedGoal && (bPlanning || !Path.IsEmpty()))
     {
-        ClearIntent(); NextRepath = 0;
+        ClearMovement(); NextRepath = 0;
     }
     if (bPlanning)
     {
@@ -214,11 +214,12 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
         return true;
     }
     if (!Path.IsValidIndex(PathIndex)) { E->StopMovementCommand(); return true; }
-    if (!Action.Accepts(PathRequest) || PathRequest.Generation != EncounterGeneration)
-    { ClearIntent(); return false; }
-    Action.Update(PathRequest, Now);
+    if (!MoveAction.Accepts(PathRequest) || PathRequest.Generation != EncounterGeneration)
+    { ClearMovement(); return false; }
+    MoveAction.Update(PathRequest, Now);
     while (Path.IsValidIndex(PathIndex) && FVector::Dist2D(Position, Path[PathIndex]) <
-        (Purpose == CombatAI::MovePurpose::Search || Purpose == CombatAI::MovePurpose::Cover || Purpose == CombatAI::MovePurpose::Cautious ? 18.f : 32.f)) ++PathIndex;
+        (PathIndex==Path.Num()-1 ? FMath::Min(18.f,Acceptance*.75f) :
+         Purpose == CombatAI::MovePurpose::Search || Purpose == CombatAI::MovePurpose::Cover || Purpose == CombatAI::MovePurpose::Cautious ? 18.f : 32.f)) ++PathIndex;
     if (!Path.IsValidIndex(PathIndex)) { E->StopMovementCommand(); return true; }
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyPathFollow), false); NavigationQuery(Query);
     if (!WalkSegment(Position, Path[PathIndex], Query)) return Failed(TEXT("next segment blocked or unsupported"));

@@ -29,7 +29,17 @@ void UEnemyCombatComponent::FailTactic(const TCHAR* Why, CombatAI::ActionFailure
 bool UEnemyCombatComponent::AdvanceWeapon(double Now, bool bFromCover)
 {
     auto* E=Enemy();
-    E->StopMovementCommand(); E->SetRifleStance(EGASPALSRifleStance::Aim); E->SetRifleAimTarget(LastKnownAim);
+    if (bFromCover) E->StopMovementCommand();
+    E->SetRifleStance(EGASPALSRifleStance::Aim); E->SetRifleAimTarget(LastKnownAim);
+    if (E->GetFireMotion().Gate()!=CombatAI::MotionGate::Ready)
+    {
+        LastFireGate=CombatAI::FireGate::Motion;
+        FinishAction(Action.Token,CombatAI::ActionStatus::Canceled,CombatAI::ActionFailure::Authority);
+        BurstRemaining=0; E->SetRifleStance(EGASPALSRifleStance::Ready);
+        ChangeState(EEnemyCombatState::Aim,TEXT("unsupported achieved motion; cancel pending burst and lower rifle"));
+        Gates.AimUntil=FMath::Max(Gates.AimUntil,Now+Context.Weapon.Aim);
+        return false;
+    }
     if (Magazine<=0)
     {
         if (bFromCover) { ReturnToCover(Now,TEXT("empty magazine; reload after protected return"),false,false); return false; }
@@ -132,7 +142,6 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
     RefreshObstruction(Now,Distance);
     RangeIntent=CombatAI::SelectRangeIntent(Context,Distance,ObstructedSince>=0);
     const bool WeaponSuppressed=WeaponBackoff.Blocks(LastKnownGround.X,LastKnownGround.Y,Now);
-    const bool MoveSuppressed=MoveBackoff.Blocks(LastKnownGround.X,LastKnownGround.Y,Now);
     if (bTargetVisible && (State==EEnemyCombatState::Idle || State==EEnemyCombatState::Search || State==EEnemyCombatState::Blocked))
     {
         ClearIntent(); ResetTactics(false); FailedAttempts=0; NextRepath=0;
@@ -162,11 +171,13 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
         BurstRemaining=0; Gates.PauseUntil=FMath::Max(Gates.PauseUntil,Now+Context.Weapon.Rest);
         ChangeState(EEnemyCombatState::Aim,TEXT("direct burst lost useful sight; preserve scan and rest"));
     }
-    if (State!=EEnemyCombatState::Pursue) AdvanceCoverScan(Now);
+    if (MobilePhase!=CombatAI::MobilePhase::Strafe && MobilePhase!=CombatAI::MobilePhase::Approach) AdvanceCoverScan(Now);
     if (CoverPhase!=CombatAI::CoverPhase::None) { AdvanceCover(Now); return; }
     if (!bTargetVisible)
     {
-        E->StopMovementCommand();
+        if (MobilePhase==CombatAI::MobilePhase::Strafe || MobilePhase==CombatAI::MobilePhase::Approach)
+            ClearMovement(CombatAI::ActionFailure::Sight);
+        else E->StopMovementCommand();
         if (bCoverScan)
         { E->SetRifleAimTarget(CoverThreatAim); E->SetRifleStance(EGASPALSRifleStance::Aim); return; }
         if (Knowledge.RetainsContact(Now) && Assignment.Objective==CombatAI::TacticalObjective::Engage)
@@ -181,30 +192,7 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
         if (Now<Gates.ContactUntil) return;
         ChangeState(EEnemyCombatState::Aim,TEXT("short response paid; useful existing range"));
     }
-    if (Distance>Context.Weapon.EffectiveRange && State!=EEnemyCombatState::Burst)
-    {
-        if (RangeIntent!=CombatAI::RangeIntent::CautiousAdvance || MoveSuppressed || Now<NextAdvanceAt || bCoverScan)
-        { E->StopMovementCommand(); TacticalReason=TEXT("outside effective range; protected observation or cautious-step backoff"); return; }
-        if (State!=EEnemyCombatState::Pursue)
-        {
-            ClearIntent(); bTacticalScan=bCoverScan=bCoverScanReady=false;
-            SearchGoal=Feet()+(LastKnownGround-Feet()).GetSafeNormal2D()*CombatAI::CautiousStep(Context,Distance);
-            NextRepath=0; FailedAttempts=0;
-            ChangeState(EEnemyCombatState::Pursue,TEXT("bounded weapon-range approach at walk speed"));
-        }
-        E->SetRifleStance(EGASPALSRifleStance::Ready);
-        if (Now-StateStarted>5 || !FollowPath(SearchGoal,25,Now,CombatAI::MovePurpose::Cautious))
-        { FailTactic(TEXT("cautious step failed; hold range and reassess"),CombatAI::ActionFailure::Route,false); return; }
-        if (FVector::Dist2D(Feet(),SearchGoal)<=25)
-        {
-            ClearIntent(); NextAdvanceAt=Now+.8; Gates.AimUntil=Now+Context.Weapon.Aim;
-            ChangeState(EEnemyCombatState::Aim,TEXT("cautious step complete; reassess from actual feet"));
-        }
-        return;
-    }
-    if (State==EEnemyCombatState::Pursue)
-    { ClearIntent(); Gates.AimUntil=Now+Context.Weapon.Aim; ChangeState(EEnemyCombatState::Aim,TEXT("target within effective range; stop approach")); }
-    E->StopMovementCommand();
+    AdvanceMobile(Now,Distance);
     if (WeaponSuppressed) { TacticalReason=TEXT("bounded weapon retry; cover scan remains available"); return; }
     if (Distance>Context.Weapon.EffectiveRange) return;
     AdvanceWeapon(Now,false);

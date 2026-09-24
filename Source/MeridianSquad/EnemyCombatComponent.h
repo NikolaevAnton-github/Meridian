@@ -5,6 +5,7 @@
 #include "CombatAIObservation.h"
 #include "CombatAIAction.h"
 #include "CombatAITactics.h"
+#include "CombatAIMobile.h"
 #include "EnemyCombatComponent.generated.h"
 
 class AGASPEnemyFixture;
@@ -41,6 +42,10 @@ struct FEnemyCombatTuning
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float BulletSpeed = 14000.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float BulletDamage = 10.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SpreadDegrees = .6f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float MovingSpreadDegrees = 1.6f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float CombatStrafeDistance = 180.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float CombatMoveRest = 3.2f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float CoverLeanDegrees = 32.f;
     // Local inspection dwell, never an encounter/memory expiry.
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SearchSeconds = 2.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SearchRadius = 360.f;
@@ -120,6 +125,7 @@ private:
     void ApplyEvidenceIntent(double Now);
     void AppendSensesStatus(const TSharedRef<FJsonObject>& Root) const;
     CombatAI::ActionRuntime Action;
+    CombatAI::ActionRuntime MoveAction;
     CombatAI::ActionToken PathRequest;
     CombatAI::ActionToken ReloadRequest;
     CombatAI::DestinationBackoff MoveBackoff, WeaponBackoff;
@@ -160,6 +166,15 @@ private:
     void ChangeState(EEnemyCombatState NewState, const TCHAR* Why);
     void ClearIntent(CombatAI::ActionFailure Why = CombatAI::ActionFailure::Replaced);
     CombatAI::ActionToken EnsureAction(CombatAI::ActionKind Kind, double Now);
+    CombatAI::ActionToken EnsureMoveAction(double Now);
+    bool FinishMoveAction(CombatAI::ActionStatus Outcome, CombatAI::ActionFailure Why);
+    void ClearMovement(CombatAI::ActionFailure Why = CombatAI::ActionFailure::Replaced);
+    void AdvanceMobile(double Now, double Distance);
+    CombatAI::MobilePhase MobilePhase = CombatAI::MobilePhase::None;
+    FVector MobileGoal = FVector::ZeroVector;
+    double MobileStarted = 0, NextMobileAt = 0;
+    int32 MobileSerial = 0;
+    mutable CombatAI::FireGate LastFireGate = CombatAI::FireGate::Contact;
     bool FinishAction(CombatAI::ActionToken Request, CombatAI::ActionStatus Outcome, CombatAI::ActionFailure Why);
     bool ObservePlayer();
     bool CanShoot(FVector& Muzzle, FVector& Direction, bool& bObstructed) const;
@@ -216,6 +231,18 @@ private:
     void ReturnToCover(double Now, const TCHAR* Why, bool bEnd, bool bFailed);
     void FailCoverReturn(double Now, const TCHAR* Why);
     bool AdvanceCover(double Now);
+    bool AdvanceLeanCover(double Now);
+    bool LeanProtected(FVector Ground);
+    bool LeanProposal(FVector Ground, float Degrees);
+    bool LeanSweep(const TArray<FVector>& From, const TArray<FVector>& To) const;
+    bool CaptureLeanPose();
+    bool AchievedLeanClear() const;
+    bool LeanReturned() const;
+    TArray<FVector> LeanPoints() const;
+    TArray<FVector> LeanNeutral;
+    FVector LeanPivot = FVector::ZeroVector, LeanAxis = FVector::ForwardVector;
+    bool bLeanPoseCaptured = false;
+    float LeanSign() const;
     bool AdvanceWeapon(double Now, bool bFromCover);
     bool StartCoverMove(FVector Goal, double Now);
     bool PoseCapsuleSize(bool bCrouched, float& Radius, float& HalfHeight) const;

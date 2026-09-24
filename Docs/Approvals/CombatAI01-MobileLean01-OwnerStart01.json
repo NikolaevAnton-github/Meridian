@@ -1,0 +1,16 @@
+{
+  "record_id": "CombatAI01-MobileLean01-OwnerStart01",
+  "date_local": "2026-09-24",
+  "source": "Owner direct chat after playing MSQ-119",
+  "owner_message_original": "Поиграл в версию. Что нужно сделать сейчас - научить врага стрелять в движении, он должен быть более динамичным. На счет выглядывания из-за угла, нужно именно выглядывание с наклоном корпуса, котороые обычно делается на Q и E в шутерах. Сможешь такое сделать?",
+  "owner_message_english_translation": "I played the version. What needs doing now is teaching the enemy to shoot while moving; he should be more dynamic. As for peeking around corners, I mean peeking with a torso lean, like Q and E in shooters. Can you do that?",
+  "decision": "Implement mobile enemy fire and actual left/right torso-lean cover peeking on delivered MSQ-119. The Q/E reference describes enemy posture, not new player controls.",
+  "controller_slicing": "CAI-T03 under MSQ-101, consuming existing senses, navigation, cover and GASP/Mover rifle presentation. Supersedes the prior stationary-only fire restriction for supported tactical movement and step-out-only lateral peek interpretation.",
+  "execution": "One Multica production executor and one primary independent technical reviewer at verified Astra/max/default, fast disabled. Controller handles administration, acceptance and local task closure commit.",
+  "verification": "Retain owner-only gameplay testing: native build, focused production-policy/pose wiring checks and independent source review. Read-only editor/asset inspection and guarded native reload are allowed. No agent PIE, firing, gameplay simulation, gameplay screenshots or performance probes.",
+  "preservation": "Preserve owner config/project/map edits, accepted asset sources and historical evidence, physical recovery authority, finite projectiles and current slowdown. Archive exact pre-edit asset bytes and register any changed asset revisions without altering historical fingerprints.",
+  "later_scope": "Player lean controls, additional weapons, live group tactics, health/death, map/art redesign and undispatched successors remain separate.",
+  "task_document": "Docs/Tasks/CombatAI01/CAI-T03.md",
+  "evidence_root": "Saved/CombatAI01/CAI-T03/",
+  "task": "MSQ-120"
+}

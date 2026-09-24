@@ -45,15 +45,34 @@ bool UEnemyCombatComponent::FinishAction(CombatAI::ActionToken Request, CombatAI
     RecordTrace(CombatAI::Event::Action, TEXT("action terminal outcome"));
     return true;
 }
-void UEnemyCombatComponent::ClearIntent(CombatAI::ActionFailure Why)
+CombatAI::ActionToken UEnemyCombatComponent::EnsureMoveAction(double Now)
 {
-    FinishAction(Action.Token, CombatAI::ActionStatus::Canceled, Why);
-    Gates.ReloadUntil = 0;
-    PathRequest = {}; ReloadRequest = {};
+    if (!MoveAction.Accepts(MoveAction.Token)) MoveAction.Start(EncounterGeneration,CombatAI::ActionKind::Move,Now);
+    MoveAction.Update(MoveAction.Token,Now);
+    return MoveAction.Token;
+}
+bool UEnemyCombatComponent::FinishMoveAction(CombatAI::ActionStatus Outcome, CombatAI::ActionFailure Why)
+{
+    if (!MoveAction.Finish(PathRequest,Outcome,Why,GetWorld()->GetTimeSeconds())) return false;
+    RecordTrace(CombatAI::Event::Action,TEXT("movement action terminal outcome"));
+    return true;
+}
+void UEnemyCombatComponent::ClearMovement(CombatAI::ActionFailure Why)
+{
+    FinishMoveAction(CombatAI::ActionStatus::Canceled,Why);
+    PathRequest = {};
     if ((bPlanning || !Path.IsEmpty()) && LastPathOutcome != CombatAI::PathOutcome::Arrived && LastPathOutcome != CombatAI::PathOutcome::Failed)
         RecordPath(CombatAI::PathOutcome::Canceled, TEXT("intent cleared"));
     Path.Reset(); Nodes.Reset(); OpenNodes.Reset(); CellNodes.Reset();
     PathIndex = 0; bPlanning = bPlanFailed = false;
+    MobilePhase = CombatAI::MobilePhase::None;
+    if (auto* E = Enemy()) E->StopMovementCommand();
+}
+void UEnemyCombatComponent::ClearIntent(CombatAI::ActionFailure Why)
+{
+    FinishAction(Action.Token, CombatAI::ActionStatus::Canceled, Why);
+    ClearMovement(Why);
+    Gates.ReloadUntil = 0; ReloadRequest = {};
     BurstRemaining = 0;
     if (auto* E = Enemy())
     {
@@ -61,6 +80,7 @@ void UEnemyCombatComponent::ClearIntent(CombatAI::ActionFailure Why)
         E->SetRifleFollowPlayer(false);
         E->SetRifleStance(EGASPALSRifleStance::Ready);
         E->SetCrouchCommand(false);
+        E->SetRifleLean(0, Why != CombatAI::ActionFailure::Replaced);
     }
 }
 void UEnemyCombatComponent::ChangeState(EEnemyCombatState NewState, const TCHAR* Why)
@@ -76,6 +96,7 @@ void UEnemyCombatComponent::SetEnabled(bool bEnable)
     bEnabled = bEnable;
     ClearIntent(CombatAI::ActionFailure::Reset);
     Action.Reset(EncounterGeneration);
+    MoveAction.Reset(EncounterGeneration); NextMobileAt=0; MobileSerial=0; MobileGoal=FVector::ZeroVector;
     PathRequest = {}; ReloadRequest = {};
     Target.Reset(); Memory.Reset(); bTargetVisible = false;
     Knowledge.Reset(EncounterGeneration); IntentEvidenceId=0; bEvidencePending=false; NextEvidenceResponse=0;
@@ -203,20 +224,26 @@ bool UEnemyCombatComponent::TryObservePlayer()
 bool UEnemyCombatComponent::CanShoot(FVector& Muzzle, FVector& Direction, bool& bObstructed) const
 {
     bObstructed = false;
+    LastFireGate = CombatAI::FireGate::Authority;
     const auto* E = Enemy();
     if (!E || !E->IsReady() || E->IsDead() || E->Authority != EGASPEnemyAuthority::Locomotion ||
-        !E->IsRifleHeld() || !E->bRightHandOccupied || !E->Rifle || !Target.IsValid() || !bTargetVisible) return false;
-    if (E->bCrouchCommand != E->IsMovementCrouched()) return false;
+        !E->IsRifleHeld() || !E->bRightHandOccupied || !E->Body || !E->Rifle) return false;
+    if (!Target.IsValid() || !bTargetVisible) { LastFireGate=CombatAI::FireGate::Contact; return false; }
+    if (E->bCrouchCommand != E->IsMovementCrouched()) { LastFireGate=CombatAI::FireGate::Stance; return false; }
+    if (E->GetFireMotion().Gate()!=CombatAI::MotionGate::Ready) { LastFireGate=CombatAI::FireGate::Motion; return false; }
     const auto* Anim = Cast<UGASPALSRifleAnimInstance>(E->Body->GetAnimInstance());
-    if (!Anim || Anim->RifleAlpha < .9f || Anim->RifleAimAlpha < .9f || E->GetRifleMovementAlpha() > .15f) return false;
+    if (!Anim || Anim->RifleAlpha < .9f || Anim->RifleAimAlpha < .9f) { LastFireGate=CombatAI::FireGate::Pose; return false; }
+    if (LeanSign()!=0 && !AchievedLeanClear()) { LastFireGate=CombatAI::FireGate::Lean; return false; }
     // The retained M4's measured barrel axis is local +Y. Prefer an authored
     // socket if a later weapon supplies one; this prototype ends at Y=61.96 cm.
     Muzzle = E->Rifle->DoesSocketExist(TEXT("Muzzle")) ? E->Rifle->GetSocketLocation(TEXT("Muzzle")) :
         E->Rifle->GetComponentTransform().TransformPosition(FVector(0, 62.f, 9.f));
     Direction = (LastKnownAim - Muzzle).GetSafeNormal();
     const float Alignment = FVector::DotProduct(E->Rifle->GetRightVector(), Direction);
-    if (Alignment < FMath::Cos(FMath::DegreesToRadians(FMath::Clamp(Tuning.AimToleranceDegrees, .5f, 12.f)))) return false;
+    if (Alignment < FMath::Cos(FMath::DegreesToRadians(FMath::Clamp(Tuning.AimToleranceDegrees, .5f, 12.f))))
+    { LastFireGate=CombatAI::FireGate::Alignment; return false; }
     bObstructed = MuzzleCorridorBlocked(Muzzle);
+    LastFireGate=bObstructed ? CombatAI::FireGate::Muzzle : CombatAI::FireGate::Ready;
     return !bObstructed;
 }
 bool UEnemyCombatComponent::MuzzleCorridorBlocked(const FVector& Muzzle) const
@@ -264,15 +291,17 @@ bool UEnemyCombatComponent::Fire(double Now, CombatAI::ActionToken Request)
     if (CoverPhase != CombatAI::CoverPhase::None &&
         (!RefreshCoverThreat(Now) ||
          FVector::Dist2D(Feet(),CoverPlan.Pose) > 20 || !CoverCapsule(Feet(),false) ||
-         !CoverWalk(Feet(),CoverPlan.Anchor) || !CoverProtected(CoverPlan.Anchor))) return false;
+         (LeanSign()!=0 ? (!LeanProtected(CoverPlan.Anchor) || !AchievedLeanClear()) :
+             (!CoverWalk(Feet(),CoverPlan.Anchor) || !CoverProtected(CoverPlan.Anchor))))) return false;
     FVector Muzzle, Direction; bool bObstructed;
     if (!bTargetVisible || Magazine <= 0 || Now < Gates.ReadyAt(NextShot) ||
         FVector::Dist2D(Feet(),LastKnownGround) > WeaponProfile().EffectiveRange ||
         !CanShoot(Muzzle, Direction, bObstructed)) return false;
     auto* World = ACombatProjectileWorld::Find(GetWorld());
     if (!World) return false;
-    const FVector ShotDirection = Spread.VRandCone(Direction,
-        FMath::DegreesToRadians(FMath::Clamp(Tuning.SpreadDegrees, 0.f, 5.f)));
+    const double Cone = FMath::Clamp(Tuning.SpreadDegrees, 0.f, 5.f) +
+        Enemy()->GetFireMotion().SpreadCost(Tuning.MovingSpreadDegrees);
+    const FVector ShotDirection = Spread.VRandCone(Direction, FMath::DegreesToRadians(Cone));
     const int64 Shot = World->Launch(Enemy(), Muzzle, ShotDirection * FMath::Clamp(Tuning.BulletSpeed, 100.f, 100000.f),
         FMath::Clamp(Tuning.BulletDamage, .1f, 1000.f));
     if (!Shot) return false;
@@ -352,7 +381,7 @@ void EnemyCommand(const TArray<FString>& Args, UWorld* World)
         else if (Op == TEXT("status")) { UE_LOG(LogEnemyCombat, Display, TEXT("%s"), *Combat->GetCombatState()); }
         else if (Op == TEXT("trace"))
         {
-            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-T02/Traces");
+            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-T03/Traces");
             IFileManager::Get().MakeDirectory(*Directory, true);
             const auto Snapshot = Combat->CaptureDecisionInput();
             const FString File = Directory / FString::Printf(TEXT("G%llu_S%u_%lld.json"),
@@ -369,6 +398,10 @@ void EnemyCommand(const TArray<FString>& Args, UWorld* World)
             if (Name == TEXT("range")) Combat->Tuning.AttackRange = FMath::Clamp(Value, 150.f, 7000.f);
             else if (Name == TEXT("preferred")) Combat->Tuning.PreferredRange = FMath::Clamp(Value, 100.f, 7000.f);
             else if (Name == TEXT("advance")) Combat->Tuning.AdvanceStep = FMath::Clamp(Value, 100.f, 600.f);
+            else if (Name == TEXT("strafe")) Combat->Tuning.CombatStrafeDistance = FMath::Clamp(Value,100.f,240.f);
+            else if (Name == TEXT("moverest")) Combat->Tuning.CombatMoveRest = FMath::Clamp(Value,2.f,8.f);
+            else if (Name == TEXT("movespread")) Combat->Tuning.MovingSpreadDegrees = FMath::Clamp(Value,0.f,4.f);
+            else if (Name == TEXT("lean")) Combat->Tuning.CoverLeanDegrees = FMath::Clamp(Value,20.f,35.f);
             else if (Name == TEXT("reaction")) Combat->Tuning.AcquireSeconds = FMath::Clamp(Value, 0.f, 5.f);
             else if (Name == TEXT("sight")) Combat->Tuning.SightRange = FMath::Clamp(Value, 200.f, 10000.f);
             else if (Name == TEXT("aim")) Combat->Tuning.AimSeconds = FMath::Clamp(Value, 0.f, 5.f);

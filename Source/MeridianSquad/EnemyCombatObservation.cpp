@@ -1,5 +1,7 @@
 #include "EnemyCombatComponent.h"
 #include "GASPEnemyFixture.h"
+#include "GASPALSRifleAnimInstance.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Dom/JsonObject.h"
 #include "Engine/World.h"
 #include "UObject/UnrealType.h"
@@ -104,6 +106,25 @@ TSharedRef<FJsonObject> SnapshotJson(const CombatAI::InputSnapshot& S)
     J->SetNumberField(TEXT("cover_completed_bursts"),S.CoverBursts);
     J->SetNumberField(TEXT("next_cover_scan"),S.NextCoverScan);
     J->SetBoolField(TEXT("cover_scanning"),S.CoverScanning);
+    static const TCHAR* MobileNames[]={TEXT("none"),TEXT("strafe"),TEXT("cautious_approach"),TEXT("cooldown")};
+    static const TCHAR* MotionNames[]={TEXT("ready"),TEXT("physical_authority"),TEXT("airborne"),TEXT("running_gait"),TEXT("speed_over_220"),TEXT("vertical_speed_over_45")};
+    static const TCHAR* FireNames[]={TEXT("ready"),TEXT("authority_or_weapon"),TEXT("current_contact"),TEXT("achieved_stance"),TEXT("achieved_motion"),TEXT("rifle_pose"),TEXT("achieved_lean_geometry"),TEXT("barrel_alignment"),TEXT("muzzle_corridor")};
+    J->SetStringField(TEXT("movement_action_id"),LexToString(S.MovementId.Id));
+    J->SetStringField(TEXT("movement_action_status"),Outcomes[static_cast<uint8>(S.MovementState)]);
+    J->SetStringField(TEXT("movement_action_failure"),Failures[static_cast<uint8>(S.MovementFailure)]);
+    J->SetStringField(TEXT("mobile_phase"),MobileNames[static_cast<uint8>(S.Mobile)]);
+    J->SetField(TEXT("mobile_goal"),JsonPosition(S.MobileGoal));
+    J->SetNumberField(TEXT("mobile_started"),S.MobileStarted);
+    J->SetNumberField(TEXT("next_mobile_at"),S.NextMobileAt);
+    J->SetNumberField(TEXT("actual_ground_speed"),S.Motion.Speed);
+    J->SetNumberField(TEXT("actual_vertical_speed"),S.Motion.VerticalSpeed);
+    J->SetBoolField(TEXT("grounded"),S.Motion.Grounded);
+    J->SetStringField(TEXT("motion_fire_gate"),MotionNames[static_cast<uint8>(S.Motion.Gate())]);
+    J->SetStringField(TEXT("last_launch_gate"),FireNames[static_cast<uint8>(S.LaunchGate)]);
+    J->SetNumberField(TEXT("motion_spread_degrees"),S.MovingSpread);
+    J->SetNumberField(TEXT("lean_requested_degrees"),S.LeanRequested);
+    J->SetNumberField(TEXT("lean_animated_degrees"),S.LeanAnimated);
+    J->SetBoolField(TEXT("lean_neutral_pose_captured"),S.LeanCaptured);
     const auto Risk=CombatAI::EvaluateRisk(S.Context);
     auto Context=MakeShared<FJsonObject>();
     Context->SetBoolField(TEXT("weapon_usable"),S.Context.WeaponUsable);
@@ -229,6 +250,16 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
     S.CoverOwner=CoverOwner; S.CoverAnchor=ValuePosition(CoverPlan.Anchor); S.CoverPose=ValuePosition(CoverPlan.Pose);
     S.CoverThreat=ValuePosition(CoverThreatGround); S.CoverStarted=CoverStarted; S.CoverPhaseAt=CoverPhaseAt;
     S.CoverBursts=CoverBursts; S.NextCoverScan=NextCoverScan; S.CoverScanning=bCoverScan;
+    S.MovementId=MoveAction.Token; S.MovementState=MoveAction.Status; S.MovementFailure=MoveAction.Failure;
+    S.Mobile=MobilePhase; S.MobileGoal=ValuePosition(MobileGoal); S.MobileStarted=MobileStarted; S.NextMobileAt=NextMobileAt;
+    S.LaunchGate=LastFireGate; S.LeanCaptured=bLeanPoseCaptured;
+    if (const auto* E=Enemy())
+    {
+        S.Motion=E->GetFireMotion(); S.MovingSpread=S.Motion.SpreadCost(Tuning.MovingSpreadDegrees);
+        S.LeanRequested=E->RifleLeanTarget;
+        if (const auto* Anim=E->Body ? Cast<UGASPALSRifleAnimInstance>(E->Body->GetAnimInstance()) : nullptr)
+            S.LeanAnimated=Anim->RifleLeanDegrees;
+    }
     S.PauseUntil = Gates.PauseUntil; S.ReloadUntil = Gates.ReloadUntil;
     S.HoldStartedAt = HoldStartedAt; S.MoveStartedAt = TacticalMoveStartedAt;
     S.NextReassess = NextTacticalScan; S.NextSector = NextLookAt;

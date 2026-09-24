@@ -44,6 +44,32 @@ sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
 
+## Owner-test handoff: MSQ-120 mobile fire and torso lean
+
+After playing MSQ-119, the owner requests firing during movement and clarifies
+that corner peeking must use a Q/E-style torso lean. The
+[exact instruction](Approvals/CombatAI01-MobileLean01-OwnerStart01.json) authorizes
+[MSQ-120 / CAI-T03](Tasks/CombatAI01/CAI-T03.md) on Candidate02/build01.
+This supersedes stationary-only fire for supported tactical movement and the
+step-out-only lateral peek interpretation. It retains low-cover stand/burst/crouch,
+weapon-aware range, current sight/muzzle safety and physical recovery authority.
+One Multica executor and one primary technical reviewer use Astra/max/default.
+Native build and focused source/pose-wiring checks are authorized; gameplay and
+motion judgement remain owner-only. MSQ-105 through MSQ-117 remain undispatched.
+
+**Candidate01/build03** delivers grounded walking fire through 220 cm/s,
+deliberate 1.8 m lateral combat steps and actual left/right 32-degree upper-body
+lean at protected cover edges. Native build, 67 production assertions, 18 native
+pose cases and the sole primary review pass; its 33 extra assertions close the
+scan-to-edge-route evidence gap. All 298 current/archive entries match. See
+[implementation](CombatAI01-MobileLean01.md),
+[primary review](CombatAI01-MobileLean01Review.md) and
+[controller acceptance](CombatAI01-MobileLean01Acceptance.md).
+Owner inputs, 157 asset files and 362 historical evidence files are preserved.
+No binary asset changed. The ordinary editor has the matching DLL; the owner's
+newly active Play session is preserved. Actual motion, practical edge usefulness,
+combat feel and performance remain pending owner. No agent gameplay ran.
+
 ## Owner-test handoff: MSQ-119 cover peeking and prompt rifle fire
 
 After playing MSQ-104, the owner requests both lateral peeks, a low-cover

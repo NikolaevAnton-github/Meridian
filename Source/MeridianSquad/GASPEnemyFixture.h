@@ -1,5 +1,7 @@
 #pragma once
 
+#include "CombatAIMobile.h"
+
 #include "CoreMinimal.h"
 #include "PhysicsControlDummy.h"
 #include "Components/ActorComponent.h"
@@ -88,6 +90,9 @@ public:
     bool IsMovementCrouched() const;
     FVector GetRifleAimDirection() const;
     float GetRifleMovementAlpha() const;
+    CombatAI::FireMotion GetFireMotion() const;
+    void SetRifleLean(float Degrees, bool bImmediate = false);
+    float RifleLeanTarget = 0;
     UFUNCTION(BlueprintPure, Category="Enemy|Movement")
     APawn* GetMovementPawn() const { return Foundation; }
 

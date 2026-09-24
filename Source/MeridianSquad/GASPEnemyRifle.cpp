@@ -40,6 +40,20 @@ float AGASPEnemyFixture::GetRifleMovementAlpha() const
 {
     return Mover ? FMath::Clamp(Mover->GetVelocity().Size2D() / 100.f, 0.f, 1.f) : 0.f;
 }
+CombatAI::FireMotion AGASPEnemyFixture::GetFireMotion() const
+{
+    const auto* CharacterMover = Cast<UCharacterMoverComponent>(Mover);
+    const FVector Velocity = Mover ? Mover->GetVelocity() : FVector::ZeroVector;
+    return {Velocity.Size2D(), Velocity.Z,
+        IsReady() && !IsDead() && Authority == EGASPEnemyAuthority::Locomotion,
+        CharacterMover && CharacterMover->IsOnGround(), bWalkCommand};
+}
+void AGASPEnemyFixture::SetRifleLean(float Degrees, bool bImmediate)
+{
+    RifleLeanTarget = FMath::IsFinite(Degrees) ? FMath::Clamp(Degrees, -35.f, 35.f) : 0.f;
+    if (bImmediate && Body)
+        if (auto* Anim = Cast<UGASPALSRifleAnimInstance>(Body->GetAnimInstance())) Anim->RifleLeanDegrees = 0;
+}
 FVector AGASPEnemyFixture::GetRifleAimDirection() const
 {
     const FVector Forward = Foundation ? Foundation->GetActorForwardVector() : GetActorForwardVector();

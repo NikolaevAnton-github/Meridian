@@ -1,4 +1,5 @@
 #pragma once
+#include "CombatAIMobile.h"
 
 #include <array>
 #include <cstdint>
@@ -61,6 +62,16 @@ struct InputSnapshot
     double CoverStarted = 0, CoverPhaseAt = 0, NextCoverScan = 0;
     int CoverBursts = 0;
     bool CoverScanning = false;
+    ActionToken MovementId;
+    ActionStatus MovementState = ActionStatus::None;
+    ActionFailure MovementFailure = ActionFailure::None;
+    MobilePhase Mobile = MobilePhase::None;
+    Position MobileGoal;
+    double MobileStarted = 0, NextMobileAt = 0, MovingSpread = 0;
+    FireMotion Motion;
+    FireGate LaunchGate = FireGate::Contact;
+    double LeanRequested = 0, LeanAnimated = 0;
+    bool LeanCaptured = false;
     int CandidateCount = 0, EvaluatedCount = 0, RejectedCount = 0, TransferAttempts = 0, LookSector = -1;
     int GeometryQueries = 0, PeakAssessmentQueries = 0;
     bool Scanning = false, HasPosition = false;

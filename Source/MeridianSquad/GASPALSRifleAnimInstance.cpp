@@ -71,11 +71,18 @@ void UGASPALSRifleAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
     Super::NativeUpdateAnimation(DeltaSeconds);
     const auto* Enemy = AGASPEnemyFixture::FromFoundation(TryGetPawnOwner());
-    if (!Enemy) { RifleAlpha = 0; return; }
+    if (!Enemy) { RifleAlpha = RifleLeanDegrees = 0; return; }
     const bool bRifleOwnsPose = Enemy->Authority == EGASPEnemyAuthority::Locomotion && !Enemy->IsDead() && Enemy->IsRifleHeld();
     // Physical snapshots, ragdoll and get-up own the arms immediately. The return
     // is gradual and participates in the existing physical-target handoff blend.
     RifleAlpha = bRifleOwnsPose ? FMath::FInterpTo(RifleAlpha, 1.f, DeltaSeconds, 5.f) : 0.f;
+    const auto Motion = Enemy->GetFireMotion();
+    const bool CanLean = bRifleOwnsPose && Motion.Gate() == CombatAI::MotionGate::Ready &&
+        Motion.Speed <= 15 && !Enemy->IsMovementCrouched() && !Enemy->bCrouchCommand;
+    // About .27 world seconds to full 32-degree exposure, symmetric blend back.
+    // Physical authority/weapon loss clears the offset immediately.
+    RifleLeanDegrees = bRifleOwnsPose ? FMath::FInterpConstantTo(RifleLeanDegrees,
+        CanLean ? Enemy->RifleLeanTarget : 0.f, DeltaSeconds, 120.f) : 0.f;
     const float Ready = Enemy->RifleStance == EGASPALSRifleStance::Relax ? 0.f : 1.f;
     const float Aim = Enemy->RifleStance == EGASPALSRifleStance::Aim ? 1.f : 0.f;
     RifleReadyAlpha = FMath::FInterpTo(RifleReadyAlpha, Ready, DeltaSeconds, 8.f);
@@ -103,7 +110,13 @@ FRotator UGASPALSRifleAnimInstance::GetRifleAimCorrection(FVector2D RootRelative
     // A rear target belongs to the source turn-in-place. Fade before its 110
     // degree idle AO limit so crossing +/-180 cannot twist the physical spine.
     const float TurnBlend = 1.f - FMath::SmoothStep(60.f, 110.f, float(FMath::Abs(RootRelativeAim.X)));
-    return FRotator(0.f, Yaw * RifleAimAlpha * TurnBlend, 0.f);
+    const FQuat Heading = FRotator(0.f, Yaw * RifleAimAlpha * TurnBlend, 0.f).Quaternion();
+    // The existing component-space spine_01 control is upstream of grip IK and
+    // downstream of the leg-preserving rifle layer. Roll about the corrected
+    // barrel vector so pitch/yaw survive; positive lean exposes the right side.
+    const FVector Axis = Heading.RotateVector(SweptBarrel.GetSafeNormal());
+    const FQuat Lean(Axis, FMath::DegreesToRadians(-RifleLeanDegrees * RifleAimAlpha * TurnBlend));
+    return (Lean * Heading).Rotator();
 }
 
 bool UGASPALSAnimationLibrary::AssignSkeleton(UAnimSequence* Sequence, USkeleton* Skeleton)

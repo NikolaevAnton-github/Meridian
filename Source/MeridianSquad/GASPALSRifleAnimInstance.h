@@ -18,6 +18,7 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="Enemy|Rifle") float RifleMoveAlpha = 0;
     UPROPERTY(BlueprintReadOnly, Category="Enemy|Rifle") float RifleCrouchAlpha = 0;
     UPROPERTY(BlueprintReadOnly, Category="Enemy|Rifle") float RiflePitchTime = .5f;
+    UPROPERTY(BlueprintReadOnly, Category="Enemy|Rifle") float RifleLeanDegrees = 0;
     UFUNCTION(BlueprintPure, Category="Enemy|Rifle", meta=(BlueprintThreadSafe))
     FRotator GetRifleAimCorrection(FVector2D RootRelativeAim) const;
 };
