@@ -34,6 +34,7 @@ void ACombatProjectileWorld::QueueSound(AActor* Attribution, CombatAI::SourceTea
     S.OccurredWorld = GetWorld()->GetTimeSeconds(); S.SimulationTime = SimulationTime;
     S.Strength = Range;
     Stimuli.Add({CombatAI::Stimulus(S), Attribution, DirectVictim, Range});
+    if (Category==CombatAI::SourceTeam::Enemy && Kind==CombatAI::Sense::Step) ++EnemyStepStimuli;
 }
 
 void ACombatProjectileWorld::SampleMovementSounds()
@@ -46,6 +47,10 @@ void ACombatProjectileWorld::SampleMovementSounds()
         if (Team == CombatAI::SourceTeam::Enemy && Emission.Kind == CombatAI::MotionEvent::Landing) return;
         QueueSound(Actor, Team, Emission.Kind == CombatAI::MotionEvent::Landing ? CombatAI::Sense::Landing : CombatAI::Sense::Step,
             Feet, Emission.Range);
+        // Source CMC animation notifies own its audible foley. Hearing remains
+        // driven by paid displacement, independent of audio and virtualization.
+        if (const auto* Enemy = Cast<AGASPEnemyFixture>(Actor))
+            if (Enemy->Foundation && Enemy->Foundation->FindComponentByClass<UCharacterMovementComponent>()) return;
         if (!StepSound) StepSound = LoadObject<USoundBase>(nullptr,
             TEXT("/Game/InfimaGames/TacticalFPSAnimations/Common/Audio/Foley/A_TFA_Foley_Footsteps_Cue.A_TFA_Foley_Footsteps_Cue"));
         // Audio is a second consumer. Muting/virtualization cannot cancel hearing.
@@ -85,11 +90,12 @@ void ACombatProjectileWorld::SampleMovementSounds()
         if (!E || !IsValid(E->Foundation) || ++Count > 8) continue;
         auto* Capsule = E->Foundation->FindComponentByClass<UCapsuleComponent>();
         auto* Mover = E->Foundation->FindComponentByClass<UCharacterMoverComponent>();
-        if (!Capsule || !Mover) continue;
+        auto* CMC = E->Foundation->FindComponentByClass<UCharacterMovementComponent>();
+        if (!Capsule || (!Mover && !CMC)) continue;
         FVector Feet = E->Foundation->GetActorLocation() - FVector(0,0,Capsule->GetScaledCapsuleHalfHeight());
         auto& Travel = EnemyTravel.FindOrAdd(E);
         const auto Emission = Travel.Advance({Point(Feet), Now, EncounterGeneration,
-            Mover->IsOnGround(), E->IsMovementCrouched(), !E->bWalkCommand,
+            CMC ? CMC->IsMovingOnGround() : Mover->IsOnGround(), E->IsMovementCrouched(), !E->bWalkCommand,
             E->IsReady() && !E->IsDead() && E->Authority == EGASPEnemyAuthority::Locomotion});
         Emit(E, Feet, Emission, CombatAI::SourceTeam::Enemy);
     }

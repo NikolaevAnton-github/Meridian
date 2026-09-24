@@ -13,11 +13,15 @@ float UEnemyCombatComponent::LeanSign() const
 }
 bool UEnemyCombatComponent::LeanProtected(FVector Ground)
 {
+    TArray<FVector> Points; FVector Pivot;
+    if (!CoverAnatomyAt(Ground,false,Points,Pivot)) return false;
+    TArray<FVector> Probes={Ground+FVector(0,0,125),Ground+FVector(0,0,150),Ground+FVector(0,0,165)};
+    if (!Points.IsEmpty()) Probes={Points[1],(Points[1]+Points[0])*.5,Points[0]};
     // Standing chest/head must be concealed at the same feet that will lean.
-    for (float Height : {125.f,150.f,165.f})
+    for (const FVector& Probe:Probes)
     {
         FHitResult Hit;
-        if (!TacticalTrace(Ground+FVector(0,0,Height),CoverThreatAim,Hit) || Hit.Distance>180 ||
+        if (!TacticalTrace(Probe,CoverThreatAim,Hit) || Hit.Distance>180 ||
             !Hit.GetComponent() || Hit.GetComponent()->GetCollisionResponseToChannel(ECC_Pawn)!=ECR_Block ||
             FMath::Abs(Hit.ImpactNormal.Z)>.4) return false;
     }
@@ -53,11 +57,16 @@ bool UEnemyCombatComponent::LeanSweep(const TArray<FVector>& From, const TArray<
 }
 bool UEnemyCombatComponent::LeanProposal(FVector Ground, float Degrees)
 {
-    const FVector Forward=(CoverThreatAim-(Ground+FVector(0,0,145))).GetSafeNormal();
+    TArray<FVector> Neutral; FVector Pivot;
+    if (!CoverAnatomyAt(Ground,false,Neutral,Pivot)) return false;
+    const FVector Forward=(CoverThreatAim-(Neutral.IsEmpty() ? Ground+FVector(0,0,145) : Neutral[3])).GetSafeNormal();
     const FVector Right=FVector::CrossProduct(FVector::UpVector,Forward).GetSafeNormal();
-    const FVector Pivot=Ground+FVector(0,0,95);
-    const TArray<FVector> Neutral={Ground+FVector(0,0,170),Ground+FVector(0,0,140),
-        Ground+FVector(0,0,145)+Right*12+Forward*15,Ground+FVector(0,0,145)+Right*12+Forward*75};
+    if (Neutral.IsEmpty())
+    {
+        Pivot=Ground+FVector(0,0,95);
+        Neutral={Ground+FVector(0,0,170),Ground+FVector(0,0,140),
+            Ground+FVector(0,0,145)+Right*12+Forward*15,Ground+FVector(0,0,145)+Right*12+Forward*75};
+    }
     TArray<FVector> Prior=Neutral, Proposed;
     for (int32 Step=1; Step<=4; ++Step)
     {
@@ -174,21 +183,8 @@ bool UEnemyCombatComponent::AdvanceLeanCover(double Now)
         E->StopMovementCommand(); E->SetRifleLean(0); E->SetRifleStance(EGASPALSRifleStance::Aim);
         if (!AtAnchor || !Settled || E->IsMovementCrouched() || !LeanProtected(Feet()))
         { ReturnToCover(Now,TEXT("lean support, standing protection or position invalidated"),true,true); return true; }
-        if (Magazine<=0 || State==EEnemyCombatState::Reload)
-        {
-            CoverGate=Gate::Reload; E->SetRifleStance(EGASPALSRifleStance::Ready);
-            if (State!=EEnemyCombatState::Reload)
-            {
-                ClearIntent(); ReloadRequest=EnsureAction(CombatAI::ActionKind::Reload,Now);
-                Gates.ReloadUntil=Now+FMath::Clamp(Tuning.ReloadSeconds,.3f,15.f);
-                ChangeState(EEnemyCombatState::Reload,TEXT("reload behind upright cover edge"));
-            }
-            if (Now<Gates.ReloadUntil) return true;
-            if (!FinishAction(ReloadRequest,CombatAI::ActionStatus::Succeeded,CombatAI::ActionFailure::None))
-            { ReturnToCover(Now,TEXT("stale lean reload canceled"),true,false); return true; }
-            Magazine=FMath::Clamp(Tuning.MagazineCapacity,1,60); ++Reloads; ReloadRequest={}; Gates.ReloadUntil=0;
-            SetCoverPhase(Phase::Protected,Now,TEXT("protected lean reload complete")); return true;
-        }
+        if (Gates.ReloadUntil>0)
+        { CoverGate=Gate::Reload; E->SetRifleStance(EGASPALSRifleStance::Ready); return true; }
         if (Now<Gates.ReadyAt(NextShot) || Now-CoverPhaseAt<.15) { CoverGate=Gate::Rest; return true; }
         if (!CoverCapsule(Feet(),false) || !CaptureLeanPose())
         {

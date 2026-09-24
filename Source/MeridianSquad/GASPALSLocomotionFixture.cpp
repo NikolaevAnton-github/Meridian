@@ -75,13 +75,52 @@ void UGASPALSLocomotionAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
         MSQLeanRotation = FRotator::ZeroRotator;
         return;
     }
+    // Never calibrate against a physics-blended pose during a localized hit.
+    if (!Enemy->LocalHitRemaining.IsEmpty()) return;
     MSQLeanDegrees = FMath::FInterpConstantTo(MSQLeanDegrees,Enemy->RifleLeanTarget,
         FMath::Clamp(DeltaSeconds,0.f,.2f),120.f);
-    // Rotate the upper-body subtree about the actual source rifle barrel axis.
-    // This preserves source aim/IK and the barrel direction during tactical lean.
-    const FVector Axis = GetOwningComponent()->GetComponentTransform().InverseTransformVectorNoScale(
+    const auto* Mesh = GetOwningComponent();
+    const FTransform Component = Mesh->GetComponentTransform();
+    const FVector ActualAxis = Component.InverseTransformVectorNoScale(
         Enemy->Rifle ? Enemy->Rifle->GetRightVector() : Enemy->GetRifleAimDirection()).GetSafeNormal();
-    MSQLeanRotation = FQuat(Axis,FMath::DegreesToRadians(-MSQLeanDegrees)).Rotator();
+    FQuat Aim = FQuat::Identity;
+    const auto Pose = Enemy->GetRiflePose();
+    if (Enemy->Rifle && Enemy->bHasRifleAimTarget && Pose.bValid && Pose.Aim > .01f)
+    {
+        // The existing final spine control rotates the complete source pose,
+        // including both hands and the held rifle. Remove last frame's additive
+        // rotation before measuring the source barrel; never accumulate feedback.
+        const FQuat Undo = EvaluatedCorrection.Inverse();
+        const FVector Axis = Undo.RotateVector(ActualAxis).GetSafeNormal();
+        const FVector Pivot = Mesh->GetSocketTransform(TEXT("spine_01"),RTS_Component).GetLocation();
+        const FVector Muzzle = Enemy->Rifle->DoesSocketExist(TEXT("Muzzle")) ? Enemy->Rifle->GetSocketLocation(TEXT("Muzzle")) :
+            Enemy->Rifle->GetComponentTransform().TransformPosition(FVector(0,62,9));
+        const FVector NeutralMuzzle = Pivot + Undo.RotateVector(Component.InverseTransformPosition(Muzzle)-Pivot);
+        const FVector Target = Component.InverseTransformPosition(Enemy->RifleAimTarget);
+        // Account for the muzzle moving around the spine pivot as we correct it.
+        for (int32 I=0; I<4; ++I)
+        {
+            const FVector Proposed = Pivot + Aim.RotateVector(NeutralMuzzle-Pivot);
+            Aim = (FQuat::FindBetweenNormals(Aim.RotateVector(Axis),(Target-Proposed).GetSafeNormal())*Aim).GetNormalized();
+        }
+        // Large/rear turns belong to source locomotion, not a twisted spine.
+        const float Heading = FMath::Abs(FMath::FindDeltaAngleDegrees(
+            Enemy->Foundation->GetActorRotation().Yaw,Enemy->GetRifleAimDirection().Rotation().Yaw));
+        const float Blend = Pose.Aim * (1.f-FMath::SmoothStep(60.f,110.f,Heading));
+        const float Angle = Aim.GetAngle();
+        const float Limit = FMath::DegreesToRadians(35.f);
+        Aim = FQuat::Slerp(FQuat::Identity,Aim,Blend*FMath::Min(1.f,Limit/FMath::Max(Angle,1.e-6f))).GetNormalized();
+    }
+    const FVector NeutralAxis = EvaluatedCorrection.Inverse().RotateVector(ActualAxis);
+    const FVector CorrectedAxis = Aim.RotateVector(NeutralAxis).GetSafeNormal();
+    MSQLeanRotation = (FQuat(CorrectedAxis,FMath::DegreesToRadians(-MSQLeanDegrees))*Aim).Rotator();
+}
+
+void UGASPALSLocomotionAnimInstance::NativePostEvaluateAnimation()
+{
+    Super::NativePostEvaluateAnimation();
+    EvaluatedCorrection = MSQLeanRotation.Quaternion();
+    EvaluatedFrame = GFrameCounter;
 }
 
 AGASPALSLocomotionFixture::AGASPALSLocomotionFixture()
@@ -100,8 +139,12 @@ void AGASPALSLocomotionFixture::DestroySourcePawn()
 {
     bReady = false;
     if (IsValid(PhysicsControl) && PhysicsControl != UnusedLegacyControls)
-        PhysicsControl->DestroyControls(PhysicsControl->GetAllControlNames());
+    {
+        const TArray<FName> Names = PhysicsControl->GetAllControlNames();
+        PhysicsControl->DestroyControls(Names);
+    }
     LocalHitControls.Reset(); LocalHitRemaining.Reset();
+    CoverAnatomy[0]={}; CoverAnatomy[1]={};
     if (IsValid(Foundation))
     {
         // The sample creates optional mesh-display actors on possession. They
@@ -188,7 +231,14 @@ void AGASPALSLocomotionFixture::ResetDummy()
     Foundation->AddTickPrerequisiteActor(this);
     TInlineComponentArray<UActorComponent*> SourceComponents(Foundation);
     for (UActorComponent* Component:SourceComponents)
-        if (Component->GetName().Contains(TEXT("PreCMCTick"))) Component->AddTickPrerequisiteActor(this);
+        if (Component->GetName().Contains(TEXT("PreCMCTick")))
+        {
+            // The source Blueprint component defaults to DuringPhysics. Because
+            // CMC depends on it, that also postpones the mesh and physical drives.
+            Component->PrimaryComponentTick.TickGroup=TG_PrePhysics;
+            Component->PrimaryComponentTick.EndTickGroup=TG_PrePhysics;
+            Component->AddTickPrerequisiteActor(this);
+        }
     CharacterMovement->AddTickPrerequisiteActor(this);
     ConfigureHitControls();
     bReady=Rifle && Rifle->GetSkeletalMeshAsset() && !LocalHitControls.IsEmpty();
@@ -242,7 +292,9 @@ CombatAI::FireMotion AGASPALSLocomotionFixture::GetFireMotion() const
     const FVector V=CharacterMovement ? CharacterMovement->Velocity : FVector::ZeroVector;
     CombatAI::FireMotion Result{V.Size2D(),V.Z,
         IsReady() && !IsDead() && Authority==EGASPEnemyAuthority::Locomotion,
-        CharacterMovement && CharacterMovement->IsMovingOnGround(),ReadEnum(Character,TEXT("Gait"))==0};
+        CharacterMovement && CharacterMovement->IsMovingOnGround(),ReadEnum(Character,TEXT("Gait"))<=1};
+    // Source walking and running both support aimed ground fire. Sprint is not
+    // requested by this adapter; actual speed/vertical/airborne checks still apply.
     Result.SpeedLimit=CharacterMovement ? CharacterMovement->GetMaxSpeed() : 0;
     return Result;
 }
@@ -322,6 +374,22 @@ FString AGASPALSLocomotionFixture::GetDummyState(bool IncludeContacts) const
     Data->SetNumberField(TEXT("source_speed_limit"),CharacterMovement ? CharacterMovement->GetMaxSpeed() : 0);
     Data->SetNumberField(TEXT("source_gait"),ReadEnum(Character,TEXT("Gait")));
     Data->SetNumberField(TEXT("local_physical_regions"),LocalHitRemaining.Num());
+    Data->SetNumberField(TEXT("local_pose_frames"),LocalPoseFrames);
+    Data->SetNumberField(TEXT("invalid_local_pose_frames"),InvalidLocalPoseFrames);
+    Data->SetNumberField(TEXT("deferred_local_pose_frames"),DeferredLocalPoseFrames);
+    Data->SetNumberField(TEXT("peak_local_pose_cache_age"),PeakLocalPoseCacheAge);
+    Data->SetNumberField(TEXT("active_local_drives"),ActiveLocalDrives);
+    Data->SetBoolField(TEXT("local_pose_cache_primed"),bLocalPoseCachePrimed);
+    for (int32 I=0; I<2; ++I)
+    {
+        const auto Anatomy=GetCoverAnatomy(I!=0);
+        TArray<TSharedPtr<FJsonValue>> Points;
+        for (const FVector& P:Anatomy.Points) Points.Add(JsonVector(P));
+        Points.Add(JsonVector(Anatomy.Pivot));
+        Data->SetArrayField(I ? TEXT("cover_anatomy_crouched") : TEXT("cover_anatomy_standing"),Points);
+        Data->SetBoolField(I ? TEXT("cover_crouch_measured") : TEXT("cover_standing_measured"),CoverAnatomy[I].IsValid());
+    }
+    Data->SetNumberField(TEXT("body_tick_end_group"),Body ? int32(Body->PrimaryComponentTick.EndTickGroup) : -1);
     Data->SetNumberField(TEXT("source_getups"),SourceGetUps);
     const auto Pose=GetRiflePose();
     Data->SetNumberField(TEXT("source_aim_weight"),Pose.Aim);

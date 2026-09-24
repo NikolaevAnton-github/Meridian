@@ -69,9 +69,12 @@ void UEnemyCombatComponent::ClearMovement(CombatAI::ActionFailure Why)
 }
 void UEnemyCombatComponent::ClearIntent(CombatAI::ActionFailure Why)
 {
-    FinishAction(Action.Token, CombatAI::ActionStatus::Canceled, Why);
+    // A tactical destination/stance change does not cancel a magazine reload.
+    // Death, reset, loss of weapon/authority and explicit stop still cancel it.
+    const bool KeepReload = Why==CombatAI::ActionFailure::Replaced && Gates.ReloadUntil>0 && Action.Accepts(ReloadRequest);
+    if (!KeepReload) FinishAction(Action.Token, CombatAI::ActionStatus::Canceled, Why);
     ClearMovement(Why);
-    Gates.ReloadUntil = 0; ReloadRequest = {};
+    if (!KeepReload) { Gates.ReloadUntil = 0; ReloadRequest = {}; }
     BurstRemaining = 0;
     if (auto* E = Enemy())
     {
@@ -84,6 +87,9 @@ void UEnemyCombatComponent::ClearIntent(CombatAI::ActionFailure Why)
 }
 void UEnemyCombatComponent::ChangeState(EEnemyCombatState NewState, const TCHAR* Why)
 {
+    if (Gates.ReloadUntil>0 && Action.Kind==CombatAI::ActionKind::Reload && Action.Accepts(ReloadRequest) &&
+        (NewState==EEnemyCombatState::Aim || NewState==EEnemyCombatState::Acquire || NewState==EEnemyCombatState::Search))
+        NewState=EEnemyCombatState::Reload;
     Reason = Why;
     if (State == NewState) return;
     State = NewState;

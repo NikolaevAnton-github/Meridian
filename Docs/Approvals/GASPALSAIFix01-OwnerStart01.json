@@ -1,0 +1,9 @@
+{
+  "record_id": "GASPALSAIFix01-OwnerStart01",
+  "date_local": "2026-09-24",
+  "source": "Owner direct chat following GASPALSAIAudit01",
+  "owner_message_original": "Все это тебе надо поправить, причем перемещение не должно быть только после первого выстрела, он должен стрелять и перезаряжаться на ходу уметь, никаких оставноков.",
+  "owner_message_english_translation": "You need to fix all of this. Movement must not happen only after the first shot; the enemy must be able to shoot and reload while moving, without stops.",
+  "scope": "Correct audit findings F1-F5 on the existing MSQ-121 migration, and remove weapon-imposed stops during acquisition, firing and reloading. Useful combat movement must not depend on a first shot. Preserve physical authority, actual sight/muzzle safety, source locomotion and owner changes. Check the identified cover-geometry risk against the active pose.",
+  "execution": "Continue directly outside Multica without a new task. Controller implements; one primary technical reviewer per the standing review workflow. Focused native build and runtime checks cover the reported failures and affected movement/fire/reload, localized-hit and reset transitions. Preserve the earlier audit and candidate evidence; close with a scoped local MSQ-121 commit."
+}

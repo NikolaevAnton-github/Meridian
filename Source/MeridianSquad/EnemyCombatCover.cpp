@@ -3,6 +3,7 @@
 #include "CombatProjectileWorld.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/PrimitiveComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "DefaultMovementSet/CharacterMoverComponent.h"
 #include "DefaultMovementSet/Settings/StanceSettings.h"
 #include "MoveLibrary/MovementUtils.h"
@@ -117,11 +118,20 @@ bool UEnemyCombatComponent::RefreshCoverThreat(double Now)
 }
 bool UEnemyCombatComponent::CoverProtected(FVector Ground)
 {
+    TArray<FVector> Points; FVector Pivot;
+    if (!CoverAnatomyAt(Ground,true,Points,Pivot)) return false;
+    TArray<FVector> Probes={Ground+FVector(0,0,60),Ground+FVector(0,0,85),Ground+FVector(0,0,100)};
+    if (!Points.IsEmpty()) Probes={Pivot,Points[1],Points[0]};
+    // A stance estimate may propose travel, but protection at achieved crouched
+    // feet is checked against the actual ready/aim transition, including the head.
+    const auto* E=Enemy();
+    if (!Points.IsEmpty() && E && E->Body && E->IsMovementCrouched() && FVector::Dist2D(Feet(),Ground)<2 && FMath::Abs(Feet().Z-Ground.Z)<2)
+        Probes={E->Body->GetSocketLocation(TEXT("spine_01")),E->Body->GetSocketLocation(TEXT("spine_05")),E->Body->GetSocketLocation(TEXT("head"))};
     int32 Blocked = 0;
-    for (float Height : {60.f, 85.f, 100.f})
+    for (const FVector& Probe:Probes)
     {
         FHitResult Hit;
-        if (TacticalTrace(Ground+FVector(0,0,Height), CoverThreatAim, Hit) && Hit.Distance < 180 &&
+        if (TacticalTrace(Probe, CoverThreatAim, Hit) && Hit.Distance < 180 &&
             Hit.GetComponent() && Hit.GetComponent()->GetCollisionResponseToChannel(ECC_Pawn) == ECR_Block &&
             FMath::Abs(Hit.ImpactNormal.Z) < .4) ++Blocked;
     }
@@ -129,12 +139,14 @@ bool UEnemyCombatComponent::CoverProtected(FVector Ground)
 }
 bool UEnemyCombatComponent::CoverLane(FVector Ground)
 {
+    TArray<FVector> Points; FVector Pivot;
+    if (!CoverAnatomyAt(Ground,false,Points,Pivot)) return false;
     FHitResult Hit;
-    if (TacticalTrace(Ground+FVector(0,0,150), CoverThreatAim, Hit)) return false;
+    if (TacticalTrace(Points.IsEmpty() ? Ground+FVector(0,0,150) : Points[0], CoverThreatAim, Hit)) return false;
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyCoverLane), false);
     FCollisionResponseParams StaticOnly(ECR_Ignore);
     StaticOnly.CollisionResponse.SetResponse(ECC_WorldStatic, ECR_Block);
-    const FVector Root = Ground+FVector(0,0,125);
+    const FVector Root = Points.IsEmpty() ? Ground+FVector(0,0,125) : Points[2];
     const FVector Direction = (CoverThreatAim-Root).GetSafeNormal();
     ++TacticalQueryCount;
     if (GetWorld()->SweepSingleByChannel(Hit, Root, Root+Direction*120, FQuat::Identity, ECC_Visibility,
@@ -143,11 +155,23 @@ bool UEnemyCombatComponent::CoverLane(FVector Ground)
     return !GetWorld()->SweepSingleByChannel(Hit, Root, CoverThreatAim, FQuat::Identity, ECC_Visibility,
         FCollisionShape::MakeSphere(1), Query, StaticOnly);
 }
+bool UEnemyCombatComponent::CoverAnatomyAt(FVector Ground, bool bCrouched, TArray<FVector>& Points, FVector& Pivot) const
+{
+    Points.Reset(); Pivot=FVector::ZeroVector;
+    const auto* E=Enemy();
+    if (!E) return false;
+    const auto Anatomy=E->GetCoverAnatomy(bCrouched);
+    if (!Anatomy.IsValid()) return !Anatomy.bRequired;
+    const FRotator Heading(0,(CoverThreatAim-Ground).Rotation().Yaw,0);
+    for (const FVector& P:Anatomy.Points) Points.Add(Ground+Heading.RotateVector(P));
+    Pivot=Ground+Heading.RotateVector(Anatomy.Pivot);
+    return true;
+}
 UEnemyCombatComponent::FCoverOption UEnemyCombatComponent::AssessCoverOption(FVector Anchor, FVector Pose, CombatAI::CoverSide Side)
 {
     FCoverOption O; O.Anchor=Anchor; O.Pose=Pose;
     auto& F=O.Features; F.Side=Side;
-    F.Travel=FVector::Dist2D(ScanOrigin,Anchor); F.ExposureTravel=FVector::Dist2D(Anchor,Pose);
+    F.Travel=FVector::Dist2D(Feet(),Anchor); F.ExposureTravel=FVector::Dist2D(Anchor,Pose);
     if (Side==CombatAI::CoverSide::Left || Side==CombatAI::CoverSide::Right)
     {
         O.Pose=Anchor; F.ExposureTravel=0;
@@ -198,8 +222,11 @@ void UEnemyCombatComponent::AssessCoverOptions(FTacticalPosition& P)
         const FVector Base=P.Ground-Forward*40;
         auto Hidden=[&](float Distance)
         {
+            const FVector Location=Base+Out*Distance;
+            TArray<FVector> Points; FVector Pivot;
+            if (!CoverAnatomyAt(Location,false,Points,Pivot)) return false;
             FHitResult Hit;
-            return TacticalTrace(Base+Out*Distance+FVector(0,0,165),CoverThreatAim,Hit) && Hit.Distance<180;
+            return TacticalTrace(Points.IsEmpty() ? Location+FVector(0,0,165) : Points[0],CoverThreatAim,Hit) && Hit.Distance<180;
         };
         if (!Hidden(0) || Hidden(600)) continue;
         float Low=0, High=600;
@@ -246,17 +273,20 @@ void UEnemyCombatComponent::ChooseCover(double Now)
 {
     bCoverScan=bCoverScanReady=false; NextCoverScan=Now+2;
     int32 BestCandidate=INDEX_NONE, BestSide=INDEX_NONE; double Best=CombatAI::InvalidPositionScore;
-    if (!Assignment.Accepts(ScanRequest) || FVector::Dist2D(Feet(),ScanOrigin)>60) return;
+    // The scan may finish while moving. AssessCoverOption and TacticalRoute
+    // below revalidate the winner from the current feet before committing it.
+    if (!Assignment.Accepts(ScanRequest)) return;
     for (int32 I=0; I<CandidateIndex; ++I)
     {
         const auto& P=TacticalCandidates[I];
         if (!P.Features.RouteClear) continue;
         for (int32 S=0; S<3; ++S)
         {
-            const auto& O=P.CoverOptions[S];
+            auto O=P.CoverOptions[S];
+            O.Features.Travel=FVector::Dist2D(Feet(),O.Anchor);
             if (MoveBackoff.Blocks(O.Anchor.X,O.Anchor.Y,Now) || CoverFailures[S].Contains(O.Anchor.X,O.Anchor.Y,Now) ||
                 !CombatAI::CoverTransferEligible(Context,O.Features.Travel,bTargetVisible,ObstructedSince>=0)) continue;
-            const double Score=CombatAI::CoverScore(P.CoverOptions[S].Features,Context);
+            const double Score=CombatAI::CoverScore(O.Features,Context);
             if (Score>Best) { Best=Score; BestCandidate=I; BestSide=S; }
         }
     }
@@ -269,6 +299,10 @@ void UEnemyCombatComponent::ChooseCover(double Now)
     const bool Lean=Option.Features.Side!=CombatAI::CoverSide::Up;
     if (Option.Score<=CombatAI::InvalidPositionScore || !TacticalRoute(Feet(),Option.Anchor,Winner.Obstacle,Route,Length,Lean ? 0 : 1))
     { CoverFailures[BestSide].Remember(Option.Anchor.X,Option.Anchor.Y,Now+5); CoverGate=CombatAI::CoverGate::Geometry; return; }
+    Option.Features.Travel=Length;
+    Option.Score=CombatAI::CoverScore(Option.Features,Context);
+    if (!CombatAI::CoverTransferEligible(Context,Length,bTargetVisible,ObstructedSince>=0))
+    { CoverGate=CombatAI::CoverGate::Travel; return; }
     Transfers.Refresh(Now);
     const bool Moving=FVector::Dist2D(Feet(),Option.Anchor)>12;
     if (Moving && !Transfers.Start()) { CoverGate=CombatAI::CoverGate::Travel; return; }
@@ -308,7 +342,7 @@ void UEnemyCombatComponent::ReturnToCover(double Now, const TCHAR* Why, bool bEn
     SetCoverPhase(CombatAI::CoverPhase::Returning,Now,Why);
     Enemy()->SetCrouchCommand(LeanSign()==0);
     // Route is installed after crouch is achieved. Protected return survives clearing
-    // the local weapon action; no unfinished reload is committed during this phase.
+    // the local movement action; an independent reload keeps its original deadline.
 }
 void UEnemyCombatComponent::FailCoverReturn(double Now, const TCHAR* Why)
 {
@@ -386,22 +420,8 @@ bool UEnemyCombatComponent::AdvanceCover(double Now)
             if (Now-CoverPhaseAt>1.2) ReturnToCover(Now,TEXT("protected stance refused or feet displaced"),true,true);
             return true;
         }
-        if (Magazine<=0 || State==EEnemyCombatState::Reload)
-        {
-            CoverGate=Gate::Reload;
-            if (State!=EEnemyCombatState::Reload)
-            {
-                ClearIntent(); ReloadRequest=EnsureAction(CombatAI::ActionKind::Reload,Now);
-                E->SetCrouchCommand(true);
-                Gates.ReloadUntil=Now+FMath::Clamp(Tuning.ReloadSeconds,.3f,15.f);
-                ChangeState(EEnemyCombatState::Reload,TEXT("reload at achieved protected anchor"));
-            }
-            if (Now<Gates.ReloadUntil) return true;
-            if (!FinishAction(ReloadRequest,CombatAI::ActionStatus::Succeeded,CombatAI::ActionFailure::None))
-            { ReturnToCover(Now,TEXT("obsolete protected reload discarded"),true,false); return true; }
-            Magazine=FMath::Clamp(Tuning.MagazineCapacity,1,60); ++Reloads; ReloadRequest={}; Gates.ReloadUntil=0;
-            ChangeState(EEnemyCombatState::Aim,TEXT("protected reload complete"));
-        }
+        if (Gates.ReloadUntil>0)
+        { CoverGate=Gate::Reload; E->SetRifleStance(EGASPALSRifleStance::Ready); return true; }
         if (Now<Gates.ReadyAt(NextShot) || Now-CoverPhaseAt<.15) { CoverGate=Gate::Rest; return true; }
         const auto Fresh=AssessCoverOption(Feet(),CoverPlan.Pose,CoverPlan.Features.Side);
         if (Fresh.Score<=CombatAI::InvalidPositionScore)

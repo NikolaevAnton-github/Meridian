@@ -1,0 +1,95 @@
+{
+  "source_character": "/Game/Development/GASPALSLocomotion01/Candidate01/BP_GASPALSEnemy_Candidate01",
+  "source_evidence": "Saved/GASPALSAIFix01/anatomy-build05-crouch-ready.json",
+  "source_evidence_sha256": "715c419af54e92a94ff76814b67e0aab85334ec5b462d51790fea9955ac3dbd5",
+  "coordinate_frame": "feet-relative, yaw-only heading, centimeters; mesh scale (1,1,1)",
+  "point_order": [
+    "head",
+    "spine_05",
+    "hand_r",
+    "Muzzle socket",
+    "spine_01 pivot"
+  ],
+  "standing_aim": [
+    [
+      8.405024010313173,
+      8.734101761737316,
+      133.62259191382122
+    ],
+    [
+      -2.2088564029180033,
+      0.6923670702198395,
+      117.47568408102335
+    ],
+    [
+      13.140868638838118,
+      21.464886812538996,
+      112.38441127754884
+    ],
+    [
+      82.53538043725709,
+      23.170850080583616,
+      123.5959865614311
+    ],
+    [
+      -9.53616833150057,
+      -5.303386854656051,
+      87.7568914219006
+    ]
+  ],
+  "crouched_ready": [
+    [
+      4.645535538368166,
+      -0.652521438974331,
+      90.27652536386178
+    ],
+    [
+      -7.909037346291168,
+      -1.7742074549609799,
+      73.32428206352161
+    ],
+    [
+      6.846578474153037,
+      20.250198650583837,
+      66.86178779267473
+    ],
+    [
+      34.80622052671176,
+      -41.73520809214287,
+      48.96553773880754
+    ],
+    [
+      -18.945170937952003,
+      -2.326109944272206,
+      44.10833810896217
+    ]
+  ],
+  "crouched_ready_minus_standing_aim": [
+    [
+      -3.7595,
+      -9.3866,
+      -43.3461
+    ],
+    [
+      -5.7002,
+      -2.4666,
+      -44.1514
+    ],
+    [
+      -6.2943,
+      -1.2147,
+      -45.5226
+    ],
+    [
+      -47.7292,
+      -64.9061,
+      -74.6304
+    ],
+    [
+      -9.409,
+      2.9773,
+      -43.6486
+    ]
+  ],
+  "usage": "Candidate01 source-specific proposal estimate for an unmeasured stance. A measured achieved pose replaces it. Actual geometry remains authoritative."
+}

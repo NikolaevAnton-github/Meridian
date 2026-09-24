@@ -44,6 +44,20 @@ sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
 
+## Direct correction: GASPALS AI and movement during weapon actions
+
+The [later owner instruction](Approvals/GASPALSAIFix01-OwnerStart01.json) authorizes
+correction of all five audit findings directly, without a new task or Multica run.
+Movement must be independent of the first shot, and firing/reloading must not
+impose stops. Controller implementation and one primary technical review cover
+focused native/runtime verification, preserving source locomotion, actual launch
+safety, physical authority and owner edits. The [correction](GASPALSAIFix01.md)
+is delivered: all five audit defects and the measured source cover-anatomy mismatch
+are corrected. Focused runtime checks demonstrate movement before the first shot,
+moving fire/reload, actual muzzle alignment, localized hit drives and clean reset.
+Build07 passes; the [sole primary review](GASPALSAIFix01Review.md) records finding
+closure. Owner judgement of combat feel and motion remains separate.
+
 ## Direct audit: GASPALS AI regression
 
 The later [owner request](Approvals/GASPALSAIAudit01-OwnerRequest01.json) asks the
@@ -54,7 +68,8 @@ against a 6 degree launch tolerance; zero shots and zero movement during the
 10-second decisive capture. First-shot-dependent movement and indefinite aim retry
 amplify this integration failure. Direct CMC walking/running work. Additional
 findings cover the retained Mover dependency in footsteps, invalid control teardown
-and missing physics pose-data warnings. Production corrections remain open.
+and missing physics pose-data warnings. These findings are closed by the later
+direct correction above; the original audit and failed baseline evidence remain preserved.
 The audit ran bounded diagnostic PIE, then restored the editor settings and stopped
 PIE with no dirty packages. It changes no production code/assets and does not
 replace historical technical acceptance or grant motion/play acceptance.
@@ -77,7 +92,8 @@ and one primary technical review use Astra/max/default. Native build and focused
 source/asset verification are in scope; gameplay/motion remains owner-tested.
 
 **Candidate02 / Correction01** passed its scoped technical acceptance and was
-delivered for owner testing. The later audit above identifies open runtime defects.
+delivered for owner testing. The later audit identified runtime defects now
+addressed by the direct correction above.
 The active enemy now uses the local canonical GASPALS CharacterMovement
 character, complete Masculine/Rifle graphs and source directional gait settings.
 Custom balance holding/recovery steps are inactive; localized physical hits,

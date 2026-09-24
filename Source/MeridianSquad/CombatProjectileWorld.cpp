@@ -681,6 +681,7 @@ FString ACombatProjectileWorld::GetCombatState() const
     Root->SetNumberField(TEXT("sensory_queue_pending"),Stimuli.Num());
     Root->SetNumberField(TEXT("sensory_deliveries"),DeliveredStimuli);
     Root->SetNumberField(TEXT("sensory_dropped"),DroppedStimuli);
+    Root->SetNumberField(TEXT("enemy_step_stimuli"),EnemyStepStimuli);
     Root->SetNumberField(TEXT("scale"), ProjectileTimeScale);
     Root->SetNumberField(TEXT("physics_preview_scale"), ActivePreviewScale);
     Root->SetBoolField(TEXT("physics_dummy_enabled"), !PhysicsDummies.IsEmpty());

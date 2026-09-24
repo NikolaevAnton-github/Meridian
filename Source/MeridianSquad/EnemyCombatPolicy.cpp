@@ -26,10 +26,32 @@ void UEnemyCombatComponent::FailTactic(const TCHAR* Why, CombatAI::ActionFailure
     BeginSearch(Why);
 }
 
+bool UEnemyCombatComponent::AdvanceReload(double Now)
+{
+    if (Magazine>0 && Gates.ReloadUntil<=0) return false;
+    auto* E=Enemy();
+    if (Gates.ReloadUntil<=0 || !Action.Accepts(ReloadRequest))
+    {
+        BurstRemaining=0;
+        ReloadRequest=EnsureAction(CombatAI::ActionKind::Reload,Now);
+        Gates.ReloadUntil=Now+FMath::Clamp(Tuning.ReloadSeconds,.3f,15.f);
+        ChangeState(EEnemyCombatState::Reload,TEXT("empty magazine; reload independently of movement"));
+    }
+    E->SetRifleStance(EGASPALSRifleStance::Ready);
+    if (Now<Gates.ReloadUntil) return true;
+    if (!FinishAction(ReloadRequest,CombatAI::ActionStatus::Succeeded,CombatAI::ActionFailure::None)) return true;
+    Magazine=FMath::Clamp(Tuning.MagazineCapacity,1,60); ++Reloads;
+    Gates.ReloadUntil=0; ReloadRequest={};
+    Gates.AimUntil=Now+Context.Weapon.Aim;
+    ChangeState(bTargetVisible ? EEnemyCombatState::Aim : EEnemyCombatState::Search,
+        TEXT("reload complete; movement retained"));
+    return false;
+}
+
 bool UEnemyCombatComponent::AdvanceWeapon(double Now, bool bFromCover)
 {
     auto* E=Enemy();
-    if (bFromCover) E->StopMovementCommand();
+    if (AdvanceReload(Now)) return false;
     E->SetRifleStance(EGASPALSRifleStance::Aim); E->SetRifleAimTarget(LastKnownAim);
     if (E->GetFireMotion().Gate()!=CombatAI::MotionGate::Ready)
     {
@@ -39,13 +61,6 @@ bool UEnemyCombatComponent::AdvanceWeapon(double Now, bool bFromCover)
         ChangeState(EEnemyCombatState::Aim,TEXT("unsupported achieved motion; cancel pending burst and lower rifle"));
         Gates.AimUntil=FMath::Max(Gates.AimUntil,Now+Context.Weapon.Aim);
         return false;
-    }
-    if (Magazine<=0)
-    {
-        if (bFromCover) { ReturnToCover(Now,TEXT("empty magazine; reload after protected return"),false,false); return false; }
-        ClearIntent(); ReloadRequest=EnsureAction(CombatAI::ActionKind::Reload,Now);
-        Gates.ReloadUntil=Now+FMath::Clamp(Tuning.ReloadSeconds,.3f,15.f);
-        ChangeState(EEnemyCombatState::Reload,TEXT("empty magazine; guarded reload")); return false;
     }
     if (State!=EEnemyCombatState::Burst) EnsureAction(CombatAI::ActionKind::Aim,Now);
     if (Now<Gates.ReadyAt(NextShot)) return false;
@@ -71,7 +86,14 @@ bool UEnemyCombatComponent::AdvanceWeapon(double Now, bool bFromCover)
             }
         }
         else if (Now-StateStarted>3 && !bFromCover)
-        { WeaponBackoff.Set(LastKnownGround.X,LastKnownGround.Y,Now+.5); ChangeState(EEnemyCombatState::Aim,TEXT("physical aim pending; hold actual feet")); }
+        {
+            FinishAction(Action.Token,CombatAI::ActionStatus::Failed,CombatAI::ActionFailure::Timeout);
+            BurstRemaining=0; Gates.AimUntil=Now+.15;
+            WeaponBackoff.Set(LastKnownGround.X,LastKnownGround.Y,Now+.15);
+            NextMobileAt=0; ++MobileSerial;
+            E->SetRifleStance(EGASPALSRifleStance::Ready);
+            ChangeState(EEnemyCombatState::Acquire,TEXT("physical aim deadline; reorient and retry while moving"));
+        }
         return false;
     }
     if (State!=EEnemyCombatState::Burst)
@@ -136,13 +158,15 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
     if (bTargetVisible && ContactAt>ContactDecisionAt) ContactDecisionAt=Now;
     // Own ducking must not pass through search/reacquire cancellation. Sounds are
     // retained in Knowledge; the active cover action consumes its frozen evidence.
-    if (AdvanceCover(Now)) return;
+    const bool Reloading=AdvanceReload(Now);
+    if (AdvanceCover(Now))
+    { if (Reloading) E->SetRifleStance(EGASPALSRifleStance::Ready); return; }
     ApplyEvidenceIntent(Now);
     const double Distance=FVector::Dist2D(Feet(),LastKnownGround);
     RefreshObstruction(Now,Distance);
     RangeIntent=CombatAI::SelectRangeIntent(Context,Distance,ObstructedSince>=0);
     const bool WeaponSuppressed=WeaponBackoff.Blocks(LastKnownGround.X,LastKnownGround.Y,Now);
-    if (bTargetVisible && (State==EEnemyCombatState::Idle || State==EEnemyCombatState::Search || State==EEnemyCombatState::Blocked))
+    if (!Reloading && bTargetVisible && (State==EEnemyCombatState::Idle || State==EEnemyCombatState::Search || State==EEnemyCombatState::Blocked))
     {
         ClearIntent(); ResetTactics(false); FailedAttempts=0; NextRepath=0;
         Assignment.Assign(EncounterGeneration,CombatAI::TacticalObjective::Engage,IntentEvidenceId,Now);
@@ -152,18 +176,7 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
         ChangeState(EEnemyCombatState::Acquire,TEXT("current contact; concurrent reaction and aim"));
     }
     if (State==EEnemyCombatState::Idle) { E->StopMovementCommand(); return; }
-    if (State==EEnemyCombatState::Reload)
-    {
-        E->StopMovementCommand(); E->SetRifleStance(EGASPALSRifleStance::Ready);
-        if (Now<Gates.ReloadUntil) return;
-        if (!FinishAction(ReloadRequest,CombatAI::ActionStatus::Succeeded,CombatAI::ActionFailure::None))
-        { BeginSearch(TEXT("stale reload discarded")); return; }
-        Magazine=FMath::Clamp(Tuning.MagazineCapacity,1,60); ++Reloads;
-        Gates.ReloadUntil=0; ReloadRequest={};
-        if (!bTargetVisible) { BeginSearch(TEXT("reload complete; continue evidence-based observation")); return; }
-        ChangeState(EEnemyCombatState::Aim,TEXT("timed reload complete")); Gates.AimUntil=Now+Context.Weapon.Aim;
-    }
-    // Scans coexist with stationary engagement. They cannot replace a running
+    // Scans coexist with mobile engagement. They cannot replace a running
     // burst, reset weapon deadlines, or consume a live concealed target transform.
     if (!bTargetVisible && State==EEnemyCombatState::Burst)
     {
@@ -171,10 +184,26 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
         BurstRemaining=0; Gates.PauseUntil=FMath::Max(Gates.PauseUntil,Now+Context.Weapon.Rest);
         ChangeState(EEnemyCombatState::Aim,TEXT("direct burst lost useful sight; preserve scan and rest"));
     }
-    if (MobilePhase!=CombatAI::MobilePhase::Strafe && MobilePhase!=CombatAI::MobilePhase::Approach) AdvanceCoverScan(Now);
+    if (bTargetVisible)
+    {
+        E->SetCrouchCommand(false); E->SetRifleAimTarget(LastKnownAim);
+        E->SetRifleStance(Reloading ? EGASPALSRifleStance::Ready : EGASPALSRifleStance::Aim);
+        AdvanceMobile(Now,Distance);
+    }
+    AdvanceCoverScan(Now);
     if (CoverPhase!=CombatAI::CoverPhase::None) { AdvanceCover(Now); return; }
     if (!bTargetVisible)
     {
+        if (Reloading)
+        {
+            // Finish the already validated short leg using its frozen goal.
+            // No hidden player transform or new approach is used during reload.
+            if (MobilePhase==CombatAI::MobilePhase::Strafe || MobilePhase==CombatAI::MobilePhase::Approach)
+                if (!FollowPath(MobileGoal,18,Now,CombatAI::MovePurpose::Cautious))
+                    ClearMovement(CombatAI::ActionFailure::Route);
+            E->SetRifleStance(EGASPALSRifleStance::Ready);
+            return;
+        }
         if (MobilePhase==CombatAI::MobilePhase::Strafe || MobilePhase==CombatAI::MobilePhase::Approach)
             ClearMovement(CombatAI::ActionFailure::Sight);
         else E->StopMovementCommand();
@@ -185,14 +214,14 @@ void UEnemyCombatComponent::AdvanceCombat(float DeltaSeconds)
         if (State!=EEnemyCombatState::Search) BeginSearch(TEXT("no current sight; protected observation"));
         AdvanceSearch(Now); return;
     }
+    if (Reloading) return;
     E->SetCrouchCommand(false); E->SetRifleAimTarget(LastKnownAim); E->SetRifleStance(EGASPALSRifleStance::Aim);
     if (State==EEnemyCombatState::Acquire)
     {
-        E->StopMovementCommand(); EnsureAction(CombatAI::ActionKind::Aim,Now);
+        EnsureAction(CombatAI::ActionKind::Aim,Now);
         if (Now<Gates.ContactUntil) return;
         ChangeState(EEnemyCombatState::Aim,TEXT("short response paid; useful existing range"));
     }
-    AdvanceMobile(Now,Distance);
     if (WeaponSuppressed) { TacticalReason=TEXT("bounded weapon retry; cover scan remains available"); return; }
     if (Distance>Context.Weapon.EffectiveRange) return;
     AdvanceWeapon(Now,false);

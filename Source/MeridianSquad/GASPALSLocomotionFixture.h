@@ -18,15 +18,21 @@ public:
     virtual void TickComponent(float DeltaTime,ELevelTick TickType,FActorComponentTickFunction* TickFunction) override;
 };
 
-/** Retains source GASPALS graph/class identity. Adds only the existing combat lean. */
+/** Retains source graphs; the existing final spine control aligns the rifle and leans. */
 UCLASS(Transient, Blueprintable)
 class MERIDIANSQUAD_API UGASPALSLocomotionAnimInstance : public UAnimInstance
 {
     GENERATED_BODY()
 public:
     virtual void NativeUpdateAnimation(float DeltaSeconds) override;
+    virtual void NativePostEvaluateAnimation() override;
+    uint64 GetEvaluatedFrame() const { return EvaluatedFrame; }
     UPROPERTY(BlueprintReadOnly, Category="Enemy|Locomotion") float MSQLeanDegrees = 0;
+    // Retained Blueprint binding: composed physical aim correction and torso lean.
     UPROPERTY(BlueprintReadOnly, Category="Enemy|Locomotion") FRotator MSQLeanRotation = FRotator::ZeroRotator;
+private:
+    FQuat EvaluatedCorrection = FQuat::Identity;
+    uint64 EvaluatedFrame = MAX_uint64;
 };
 
 /** Combat shell around the original CMC pawn. Never ticks the legacy balance solver. */
@@ -34,6 +40,8 @@ UCLASS()
 class MERIDIANSQUAD_API AGASPALSLocomotionFixture : public AGASPEnemyFixture
 {
     GENERATED_BODY()
+    friend class UGASPALSLocomotionAnimInstance;
+    friend class UGASPALSPostSourceTick;
 public:
     AGASPALSLocomotionFixture();
     virtual void ResetDummy() override;
@@ -47,6 +55,7 @@ public:
     virtual float GetRifleMovementAlpha() const override;
     virtual CombatAI::FireMotion GetFireMotion() const override;
     virtual FEnemyRiflePose GetRiflePose() const override;
+    virtual FEnemyCoverAnatomy GetCoverAnatomy(bool bCrouched) const override;
     virtual void SetRifleLean(float Degrees, bool bImmediate = false) override;
     virtual FString GetDummyState(bool IncludeContacts = true) const override;
 
@@ -60,9 +69,16 @@ private:
     float GettingUpSeconds = 0;
     bool bHadSourceGetUp = false;
     int32 SourceGetUps = 0;
+    int32 LocalPoseFrames = 0, InvalidLocalPoseFrames = 0;
+    int32 DeferredLocalPoseFrames = 0;
+    int32 ActiveLocalDrives = 0;
+    float PoseCacheElapsed = 0, PeakLocalPoseCacheAge = 0;
+    bool bLocalPoseCachePrimed = false;
+    FEnemyCoverAnatomy CoverAnatomy[2];
     FString SourceFailure;
     void DestroySourcePawn();
     void ApplySourceCommands();
+    void UpdateCoverAnatomy();
     void ConfigureHitControls();
     void UpdateLocalHits(float DeltaSeconds);
     FName StartLocalHit(FName HitBone);

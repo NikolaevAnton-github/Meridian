@@ -199,6 +199,7 @@ private:
     TArray<FQueuedStimulus> Stimuli;
     uint64 NextStimulusId = 1;
     int32 DroppedStimuli = 0, DeliveredStimuli = 0;
+    int32 EnemyStepStimuli = 0;
     CombatAI::GroundTravel PlayerTravel;
     TWeakObjectPtr<ACharacter> TravelPlayer;
     TMap<TWeakObjectPtr<AActor>, CombatAI::GroundTravel> EnemyTravel;

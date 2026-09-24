@@ -30,13 +30,73 @@ UGASPALSPostSourceTick::UGASPALSPostSourceTick()
 void UGASPALSPostSourceTick::TickComponent(float DeltaTime,ELevelTick TickType,FActorComponentTickFunction* TickFunction)
 {
     Super::TickComponent(DeltaTime,TickType,TickFunction);
-    const auto* Enemy=Cast<AGASPALSLocomotionFixture>(AGASPEnemyFixture::FromFoundation(GetOwner()));
+    if (TickType!=LEVELTICK_All) return;
+    auto* Enemy=Cast<AGASPALSLocomotionFixture>(AGASPEnemyFixture::FromFoundation(GetOwner()));
+    if (Enemy && Enemy->Body)
+    {
+        // UE rewrites the mesh end group while ticking. Keep its next frame's
+        // animation evaluation before PhysicsControl and the EndPhysics blend,
+        // which temporarily swaps out the editable component-space pose buffer.
+        Enemy->Body->PrimaryComponentTick.EndTickGroup=TG_PrePhysics;
+        if (Enemy->IsReady() && IsValid(Enemy->PhysicsControl))
+        {
+            auto* Mesh=Enemy->Body.Get();
+            const auto* Anim=Cast<UGASPALSLocomotionAnimInstance>(Mesh->GetAnimInstance());
+            const int32 ReadCount=Mesh->GetComponentSpaceTransforms().Num();
+            const int32 EditCount=Mesh->GetEditableComponentSpaceTransforms().Num();
+            const bool Parallel=Mesh->IsRunningParallelEvaluation();
+            const bool Complete=ReadCount==Mesh->GetNumBones() && EditCount==ReadCount && ReadCount>0;
+            const bool Fresh=Anim && Anim->GetEvaluatedFrame()==GFrameCounter;
+            const bool CacheReady=Complete && Fresh && !Parallel && TickFunction->GetActualTickGroup()==TG_PrePhysics;
+            Enemy->PoseCacheElapsed+=DeltaTime;
+            if (!Enemy->LocalHitRemaining.IsEmpty())
+            {
+                ++Enemy->LocalPoseFrames;
+                if (!Complete) ++Enemy->InvalidLocalPoseFrames;
+                if (!CacheReady)
+                {
+                    ++Enemy->DeferredLocalPoseFrames;
+                    Enemy->PeakLocalPoseCacheAge=FMath::Max(Enemy->PeakLocalPoseCacheAge,Enemy->PoseCacheElapsed);
+                }
+                if (Enemy->LocalPoseFrames<=2 || !CacheReady)
+                    UE_LOG(LogTemp,Display,TEXT("MSQ121 LocalPose frame=%llu time=%.6f read=%d edit=%d bones=%d parallel=%d fresh=%d body_group=%d body_end=%d helper_group=%d cache_ready=%d cache_age=%.6f"),
+                        GFrameCounter,GetWorld()->GetTimeSeconds(),ReadCount,EditCount,Mesh->GetNumBones(),Parallel,Fresh,
+                        int32(Mesh->PrimaryComponentTick.GetActualTickGroup()),int32(Mesh->PrimaryComponentTick.GetActualEndTickGroup()),
+                        int32(TickFunction->GetActualTickGroup()),CacheReady,Enemy->PoseCacheElapsed);
+            }
+            // PhysicsControl's supported manual update API lets us retain the
+            // last complete animation cache through a transient buffer swap.
+            // Never replace that cache with an empty or in-flight pose.
+            if (CacheReady)
+            {
+                Enemy->UpdateCoverAnatomy();
+                Enemy->PhysicsControl->UpdateTargetCaches(Enemy->PoseCacheElapsed);
+                Enemy->PoseCacheElapsed=0;
+                Enemy->bLocalPoseCachePrimed=true;
+            }
+            // A prolonged unavailable pose must zero drives, not leave a stale
+            // target active indefinitely. Re-enable only still-live local hits.
+            const bool Usable=Enemy->bLocalPoseCachePrimed && Enemy->PoseCacheElapsed<=.1f;
+            Enemy->ActiveLocalDrives=0;
+            for (const auto& Pair:Enemy->LocalHitControls)
+            {
+                const bool Enabled=Usable && Enemy->LocalHitRemaining.Contains(Pair.Key);
+                Enemy->PhysicsControl->SetControlEnabled(Pair.Value,Enabled);
+                if (Enabled) ++Enemy->ActiveLocalDrives;
+            }
+            Enemy->PhysicsControl->UpdateControls(DeltaTime);
+        }
+    }
     if (Enemy && Enemy->IsDead() && Enemy->Body)
         Enemy->Body->SetAllMotorsAngularDriveParams(0,0,0);
 }
 
 void AGASPALSLocomotionFixture::ConfigureHitControls()
 {
+    LocalPoseFrames=InvalidLocalPoseFrames=ActiveLocalDrives=0;
+    DeferredLocalPoseFrames=0; PoseCacheElapsed=PeakLocalPoseCacheAge=0; bLocalPoseCachePrimed=false;
+    Body->PrimaryComponentTick.TickGroup=TG_PrePhysics;
+    Body->PrimaryComponentTick.EndTickGroup=TG_PrePhysics;
     auto* PostSource=NewObject<UGASPALSPostSourceTick>(Character,TEXT("MSQ121PassiveCorpse"),RF_Transient);
     Character->AddInstanceComponent(PostSource);
     PostSource->RegisterComponent();
@@ -45,9 +105,11 @@ void AGASPALSLocomotionFixture::ConfigureHitControls()
     PhysicsControl=NewObject<UPhysicsControlComponent>(Character,TEXT("MSQ121LocalizedHits"),RF_Transient);
     Character->AddInstanceComponent(PhysicsControl);
     PhysicsControl->RegisterComponent();
+    PhysicsControl->SetComponentTickEnabled(false);
     PhysicsControl->AddTickPrerequisiteActor(this);
     PhysicsControl->AddTickPrerequisiteComponent(Body);
     PhysicsControl->AddTickPrerequisiteComponent(CharacterMovement);
+    PhysicsControl->AddTickPrerequisiteComponent(PostSource);
     const auto* Asset=Body->GetPhysicsAsset();
     for (const auto& Setup:Asset->SkeletalBodySetups)
     {

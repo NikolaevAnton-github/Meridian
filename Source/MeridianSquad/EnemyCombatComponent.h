@@ -44,7 +44,8 @@ struct FEnemyCombatTuning
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SpreadDegrees = .6f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float MovingSpreadDegrees = 1.6f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float CombatStrafeDistance = 180.f;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) float CombatMoveRest = 3.2f;
+    // Retry only after a blocked corridor; successful movement has no dwell.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float CombatMoveRest = .25f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float CoverLeanDegrees = 32.f;
     // Local inspection dwell, never an encounter/memory expiry.
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SearchSeconds = 2.f;
@@ -170,6 +171,7 @@ private:
     bool FinishMoveAction(CombatAI::ActionStatus Outcome, CombatAI::ActionFailure Why);
     void ClearMovement(CombatAI::ActionFailure Why = CombatAI::ActionFailure::Replaced);
     void AdvanceMobile(double Now, double Distance);
+    bool AdvanceReload(double Now);
     CombatAI::MobilePhase MobilePhase = CombatAI::MobilePhase::None;
     FVector MobileGoal = FVector::ZeroVector;
     double MobileStarted = 0, NextMobileAt = 0;
@@ -225,6 +227,7 @@ private:
     bool CoverProtected(FVector Ground);
     bool RefreshCoverThreat(double Now);
     bool CoverLane(FVector Ground);
+    bool CoverAnatomyAt(FVector Ground, bool bCrouched, TArray<FVector>& Points, FVector& Pivot) const;
     bool CoverCapsule(FVector Ground, bool bCrouched);
     bool CoverWalk(FVector From, FVector To);
     void SetCoverPhase(CombatAI::CoverPhase Phase, double Now, const TCHAR* Why);

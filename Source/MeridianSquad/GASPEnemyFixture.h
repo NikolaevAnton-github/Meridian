@@ -23,6 +23,15 @@ struct FEnemyRiflePose
     float Layer = 0, Aim = 0, Lean = 0;
 };
 
+/** Candidate geometry in feet-relative, horizontal rifle-heading coordinates. */
+struct FEnemyCoverAnatomy
+{
+    bool bRequired = false;
+    TArray<FVector> Points; // Head, chest, firing hand, muzzle.
+    FVector Pivot = FVector::ZeroVector;
+    bool IsValid() const { return Points.Num()==4; }
+};
+
 /** Supplies the fixture's control rotation to GASP without player input. */
 UCLASS()
 class AGASPEnemyCommandController : public AController
@@ -99,6 +108,7 @@ public:
     virtual float GetRifleMovementAlpha() const;
     virtual CombatAI::FireMotion GetFireMotion() const;
     virtual FEnemyRiflePose GetRiflePose() const;
+    virtual FEnemyCoverAnatomy GetCoverAnatomy(bool bCrouched) const { return {}; }
     virtual void SetRifleLean(float Degrees, bool bImmediate = false);
     float RifleLeanTarget = 0;
     UFUNCTION(BlueprintPure, Category="Enemy|Movement")
