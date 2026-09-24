@@ -44,6 +44,39 @@ sample after the persistent hunter and a repeatable encounter, before extensive
 tactical tuning, remains a scheduling recommendation. No implementation starts
 from this priority update; existing owner gameplay-testing boundaries remain.
 
+## Owner-test handoff: MSQ-119 cover peeking and prompt rifle fire
+
+After playing MSQ-104, the owner requests both lateral peeks, a low-cover
+stand/burst/crouch cycle, faster valid fire and weapon-aware cautious engagement
+instead of rushing into short range. [MSQ-119 / CAI-T02](Tasks/CombatAI01/CAI-T02.md)
+implements this bounded early slice under the
+[exact instruction](Approvals/CombatAI01-CoverFire01-OwnerStart01.json).
+The tactical context must support weapon profiles, health knowledge and available
+ally composition. Player health is currently absent; the initial scope keeps it
+explicitly unknown behind an extension input and uses actual self-health.
+Full CAI-03/04/05, player health/death and live group behavior remain separate.
+
+**Candidate02/build01** delivers independent left/right step-outs and low-cover
+stand/burst/crouch through actual GASP/Mover commands. Rifle effective/preferred
+range is 55/28 m; reaction/aim gates are .08/.10 world seconds in parallel.
+The former 85 cm obstruction chase is removed. Cautious advance uses bounded
+4.5 m walking steps; actual sight/stance/aim/muzzle safety still gates every shot.
+Own health and typed weapon/known-health/ally-capability inputs influence policy.
+See [base handoff](CombatAI01-CoverFire01.md),
+[correction](CombatAI01-CoverFire01Correction01.md),
+[primary finding closure](CombatAI01-CoverFire01Correction01Review.md) and
+[controller acceptance](CombatAI01-CoverFire01Acceptance.md).
+
+Native builds, 71 original and 44 affected assertions, and sole primary technical
+review pass. CFT02-R1/R2 are closed: protected search preserves achieved crouch
+requests across route/arrival ownership, and stale muzzle obstruction is revalidated
+before range choice. All 98 final manifest entries match. Owner config/project/map
+and historical evidence remain preserved. Executor/reviewer native Astra/max/default
+is verified; profiles retain those settings. No agent gameplay ran. Actual motion,
+cover usefulness, reaction feel, difficulty and performance remain pending owner.
+The ordinary retained-lobby editor is reopened with the matching final DLL for Play.
+MSQ-105 through MSQ-117 remain undispatched; Multica owns live execution state.
+
 ## Owner-test handoff: MSQ-104 senses and protected movement
 
 After playing MSQ-118, the owner confirms frequent column use but reports exposed

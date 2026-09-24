@@ -15,6 +15,7 @@ FVector UEnemyCombatComponent::TacticalDirection(int32 Sector) const
 
 void UEnemyCombatComponent::ResetTactics(bool bClearHistory)
 {
+    ResetCover(bClearHistory);
     Assignment.Cancel(EncounterGeneration); ScanRequest = {};
     TacticalCandidates.Reset(); bTacticalScan = bHeldPosition = bSelectedPosition = false;
     TacticalPhase = CombatAI::TacticalPhase::None;
@@ -38,7 +39,7 @@ bool UEnemyCombatComponent::TacticalTrace(FVector From, FVector To, FHitResult& 
     return GetWorld()->LineTraceSingleByChannel(Hit, From, To, Response, Query, StaticOnly);
 }
 
-bool UEnemyCombatComponent::TacticalGround(FVector Reference, FVector& Ground, CombatAI::PositionRejection& Failure)
+bool UEnemyCombatComponent::TacticalGround(FVector Reference, FVector& Ground, CombatAI::PositionRejection& Failure, int32 Stance)
 {
     Failure = CombatAI::PositionRejection::Support;
     if (Reference.ContainsNaN() || FVector::Dist2D(Reference, Home) > FMath::Clamp(Tuning.NavigationRadius, 400.f, 5000.f)) return false;
@@ -49,6 +50,7 @@ bool UEnemyCombatComponent::TacticalGround(FVector Reference, FVector& Ground, C
         Floor.ImpactNormal.Z < Slope || FMath::Abs(Floor.ImpactPoint.Z - Home.Z) > 160) return false;
     Ground = Floor.ImpactPoint;
     float Radius, HalfHeight; CapsuleSize(Radius, HalfHeight);
+    if (Stance >= 0 && !PoseCapsuleSize(Stance != 0, Radius, HalfHeight)) return false;
     // A single center ray is not proof of capsule support on a ledge.
     for (int32 I = 0; I < 4; ++I)
     {
@@ -65,19 +67,20 @@ bool UEnemyCombatComponent::TacticalGround(FVector Reference, FVector& Ground, C
     return true;
 }
 
-bool UEnemyCombatComponent::TacticalWalk(FVector From, FVector To)
+bool UEnemyCombatComponent::TacticalWalk(FVector From, FVector To, int32 Stance)
 {
     const float Distance = FVector::Dist2D(From, To);
     if (Distance > MaxCandidateTravel || FMath::Abs(From.Z-To.Z) > 160) return false;
     const int32 Steps = FMath::Clamp(FMath::CeilToInt(Distance / 35.f), 1, 26);
     const float StepHeight = FMath::Clamp(Tuning.MaxStepHeight, 0.f, 35.f);
     float Radius, HalfHeight; CapsuleSize(Radius, HalfHeight);
+    if (Stance >= 0 && !PoseCapsuleSize(Stance != 0, Radius, HalfHeight)) return false;
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyTacticalRoute), false);
     FVector Previous = From;
     for (int32 I = 1; I <= Steps; ++I)
     {
         FVector Ground; CombatAI::PositionRejection Failure;
-        if (!TacticalGround(FMath::Lerp(From, To, float(I)/Steps), Ground, Failure) || FMath::Abs(Ground.Z-Previous.Z) > StepHeight+2) return false;
+        if (!TacticalGround(FMath::Lerp(From, To, float(I)/Steps), Ground, Failure, Stance) || FMath::Abs(Ground.Z-Previous.Z) > StepHeight+2) return false;
         const double Height = FMath::Max(Previous.Z, Ground.Z) + HalfHeight + 4;
         FHitResult Hit; ++TacticalQueryCount;
         if (GetWorld()->SweepSingleByObjectType(Hit, FVector(Previous.X,Previous.Y,Height), FVector(Ground.X,Ground.Y,Height),
@@ -87,19 +90,19 @@ bool UEnemyCombatComponent::TacticalWalk(FVector From, FVector To)
     return FMath::Abs(Previous.Z-To.Z) <= StepHeight+2;
 }
 
-bool UEnemyCombatComponent::TacticalRoute(FVector From, FVector To, const FBox& Obstacle, TArray<FVector>& Route, double& Length)
+bool UEnemyCombatComponent::TacticalRoute(FVector From, FVector To, const FBox& Obstacle, TArray<FVector>& Route, double& Length, int32 Stance)
 {
     auto Point=[](FVector P)->CombatAI::Position { return {P.X,P.Y,P.Z}; };
     if (!Obstacle.IsValid)
     {
-        if (!TacticalWalk(From,To)) return false;
+        if (!TacticalWalk(From,To,Stance)) return false;
         Route={To}; Length=FVector::Dist2D(From,To); return true;
     }
     std::array<CombatAI::Position,4> Corners{{
         {Obstacle.Min.X,Obstacle.Min.Y,From.Z},{Obstacle.Max.X,Obstacle.Min.Y,From.Z},
         {Obstacle.Max.X,Obstacle.Max.Y,From.Z},{Obstacle.Min.X,Obstacle.Max.Y,From.Z}}};
     const auto Result=CombatAI::AroundColumn(Point(From),Point(To),Corners,
-        [&](CombatAI::Position A,CombatAI::Position B) { return TacticalWalk(FVector(A.X,A.Y,A.Z),FVector(B.X,B.Y,B.Z)); });
+        [&](CombatAI::Position A,CombatAI::Position B) { return TacticalWalk(FVector(A.X,A.Y,A.Z),FVector(B.X,B.Y,B.Z),Stance); });
     if (!Result.Valid) return false;
     Route.Reset(); Length=Result.Length;
     for (int I=0; I<Result.Count; ++I) Route.Add(FVector(Result.Points[I].X,Result.Points[I].Y,Result.Points[I].Z));
@@ -115,11 +118,11 @@ UEnemyCombatComponent::FTacticalPosition UEnemyCombatComponent::AssessTacticalPo
     const auto Probes = CombatAI::TacticalProbes(bCrouched);
     auto& F = P.Features;
     CombatAI::PositionRejection Failure;
-    if (!TacticalGround(Reference, P.Ground, Failure))
+    if (!TacticalGround(Reference, P.Ground, Failure, bCrouched ? 1 : 0))
     { P.Rating.Rejection = Failure; return P; }
     F.Supported = F.CapsuleClear = true;
     F.Travel = FVector::Dist2D(From, P.Ground);
-    F.RouteClear = !bCheckRoute || TacticalRoute(From, P.Ground, Obstacle, P.Route, F.Travel);
+    F.RouteClear = !bCheckRoute || TacticalRoute(From, P.Ground, Obstacle, P.Route, F.Travel, bCrouched ? 1 : 0);
     if (!F.RouteClear) { P.Rating.Rejection = CombatAI::PositionRejection::Route; return P; }
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyTacticalWeapon), false);
     P.FacingBasis=(SearchAnchor-P.Ground).GetSafeNormal2D();
@@ -149,7 +152,7 @@ UEnemyCombatComponent::FTacticalPosition UEnemyCombatComponent::AssessTacticalPo
                 FCollisionObjectQueryParams(ECC_WorldStatic), FCollisionShape::MakeSphere(10), Query)) F.WeaponMask |= 1u << I;
         }
         // Four independently supported local exits, not just an empty sight ray.
-        if (I % 2 == 0 && TacticalWalk(P.Ground, P.Ground + Direction*105)) F.EscapeMask |= 1u << I;
+        if (I % 2 == 0 && TacticalWalk(P.Ground, P.Ground + Direction*105, bCrouched ? 1 : 0)) F.EscapeMask |= 1u << I;
     }
     const auto* Hypothesis=Knowledge.Dominant(GetWorld()->GetTimeSeconds(),false);
     const float Uncertainty=Hypothesis ? FMath::Clamp(static_cast<float>(Hypothesis->Evidence.Get().Uncertainty),180.f,650.f) : 300;
@@ -164,7 +167,7 @@ UEnemyCombatComponent::FTacticalPosition UEnemyCombatComponent::AssessTacticalPo
         if (!TacticalTrace(P.Ground + FVector(0,0,Probes.Exposure), Region, Hit)) F.RegionVisibleMask |= 1u << I;
     }
     F.Exposure = .65*CombatAI::BitCount(F.RegionVisibleMask)/5.0 + .35*BroadExposure/8.0;
-    P.Rating = CombatAI::RatePosition(F);
+    P.Rating = CombatAI::RatePosition(F, Context);
     return P;
 }
 
@@ -195,10 +198,11 @@ void UEnemyCombatComponent::AdvanceTacticalScan(double Now)
     // No A-star query per candidate; at most a four-corner supported column ring.
     NextTacticalWork = Now + .025;
     const int32 QueriesBefore = TacticalQueryCount;
-    if (SurfaceIndex < 8)
+    if (SurfaceIndex < 16)
     {
-        const FVector Direction = TacticalDirection(SurfaceIndex++);
-        const FVector Origin = ScanOrigin + FVector(0,0,100);
+        const FVector Direction = TacticalDirection(SurfaceIndex / 2);
+        // Include low cover which the former 100 cm discovery ray missed.
+        const FVector Origin = ScanOrigin + FVector(0,0,(SurfaceIndex++ % 2) ? 100 : 60);
         FHitResult Hit;
         if (TacticalTrace(Origin, Origin + Direction * FMath::Clamp(Tuning.TacticalRadius, 250.f, 750.f), Hit, ECC_Pawn) &&
             FMath::Abs(Hit.ImpactNormal.Z) < .35)
@@ -228,7 +232,7 @@ void UEnemyCombatComponent::AdvanceTacticalScan(double Now)
                 }
             }
         }
-        if (SurfaceIndex == 8)
+        if (SurfaceIndex == 16)
             for (int32 I = 0; I < 4; ++I)
                 AddTacticalCandidate(ScanOrigin + TacticalDirection(I*2) * FMath::Clamp(Tuning.SearchRadius, 200.f, 400.f));
     }
@@ -237,15 +241,20 @@ void UEnemyCombatComponent::AdvanceTacticalScan(double Now)
         auto& P = TacticalCandidates[CandidateIndex++];
         if (FVector::Dist2D(P.Ground, ScanOrigin) > 60 && RejectedPositions.Contains(P.Ground.X, P.Ground.Y, Now))
             P.Rating.Rejection = CombatAI::PositionRejection::RecentFailure;
-        else P = AssessTacticalPosition(P.Ground, ScanOrigin, true, true, P.Obstacle);
+        else
+        {
+            P = AssessTacticalPosition(P.Ground, ScanOrigin, true, true, P.Obstacle);
+            if (bCoverScan && P.Features.RouteClear) AssessCoverOptions(P);
+        }
         if (!P.Rating.Valid)
         { ++TacticalRejected; ++RejectionCounts[static_cast<size_t>(P.Rating.Rejection)]; }
     }
     TacticalPeakQueries = FMath::Max(TacticalPeakQueries, TacticalQueryCount - QueriesBefore);
-    if ((SurfaceIndex >= 8 && CandidateIndex >= TacticalCandidates.Num()) || Now - ScanStartedAt >= 4)
+    if ((SurfaceIndex >= 16 && CandidateIndex >= TacticalCandidates.Num()) || Now - ScanStartedAt >= 4)
     {
         bTacticalScan = false;
-        ChooseTacticalPosition(Now);
+        if (bCoverScan) bCoverScanReady = true;
+        else ChooseTacticalPosition(Now);
     }
 }
 
@@ -302,6 +311,8 @@ void UEnemyCombatComponent::ChooseTacticalPosition(double Now)
             FMath::Clamp(Tuning.TacticalSwitchMargin, 3.f, 30.f), FMath::Clamp(Tuning.TacticalProbeSeconds, 3.f, 20.f)))
         { RejectTacticalPosition(Winner.Ground, Winner.Rating.Valid ? CombatAI::PositionRejection::Arrival : Winner.Rating.Rejection, Now); return; }
         ClearIntent(); SelectedPosition = Winner; bSelectedPosition = true;
+        // ClearIntent cancels the old pose owner; this checked route owns its stance.
+        Enemy()->SetCrouchCommand(SelectedPosition.bCrouched);
         bHeldPosition = false; SearchGoal = SelectedPosition.Ground; Transfers.Start();
         TacticalMoveStartedAt = Now; NextRepath = 0; FailedAttempts = 0;
         TacticalPhase = CombatAI::TacticalPhase::Moving;
@@ -432,6 +443,7 @@ void UEnemyCombatComponent::AdvanceSearch(double Now)
                 FinishAction(Action.Token, CombatAI::ActionStatus::Succeeded, CombatAI::ActionFailure::None);
                 RecordPath(CombatAI::PathOutcome::Arrived, TEXT("actual tactical feet and useful facing validated"));
                 ClearIntent(); HeldPosition = Arrived; bHeldPosition = true; bSelectedPosition = false;
+                E->SetCrouchCommand(HeldPosition.bCrouched);
                 HoldStartedAt = Now; NextHoldValidation = Now+1; NextLookAt = 0; ViewedSectors = 0;
                 LookSector = -1; TacticalPhase = CombatAI::TacticalPhase::Holding;
                 VisitedPositions.Remember(Feet().X, Feet().Y, Now+20);

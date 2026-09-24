@@ -2,6 +2,7 @@
 
 #include "CombatAIAction.h"
 #include "CombatAISenses.h"
+#include "CombatAICover.h"
 #include <array>
 #include <algorithm>
 #include <cmath>
@@ -11,7 +12,7 @@
 // neither an actor reference nor privileged player data is an input here.
 namespace CombatAI
 {
-enum class TacticalObjective : std::uint8_t { None, Engage, ProtectedObservation };
+enum class TacticalObjective : std::uint8_t { None, Engage, ProtectedObservation, CoverEngagement };
 enum class ContactKind : std::uint8_t { None, Initial, Continuous, Brief, Known, NewDirection };
 enum class TacticalPhase : std::uint8_t { None, Scanning, Moving, Holding, Fallback };
 enum class DecisionGate : std::uint8_t { None, Disabled, Physics, Readiness, Reload, Contact, Aim, BurstPause, Cadence, Path, Travel, Scan, Observation, WeaponBackoff, RouteBackoff, LaunchSafety };
@@ -57,7 +58,7 @@ struct ResponseGates
     void Sight(ContactKind Kind, double Now, double InitialDelay)
     {
         if (Kind == ContactKind::Continuous || Kind == ContactKind::None) return;
-        const double Delay = Kind == ContactKind::Initial ? InitialDelay : Kind == ContactKind::NewDirection ? .2 : 0;
+        const double Delay = Kind == ContactKind::Initial ? InitialDelay : Kind == ContactKind::NewDirection ? .08 : 0;
         // Brief hiding cannot cancel an unpaid first-contact deadline.
         ContactUntil = std::max(ContactUntil, Now + Delay);
     }
@@ -124,7 +125,7 @@ inline double SectorUtility(const PositionFeatures& F, int I)
     const double ThreatAlignment = std::cos(I * 3.141592653589793 / 4);
     return Rear * 24 + Side * 16 + std::min(F.OpenDistance[I], 600.0) / 30 + ThreatAlignment * 6;
 }
-inline PositionRating RatePosition(const PositionFeatures& F)
+inline PositionRating RatePosition(const PositionFeatures& F, const TacticalContext& Context = {})
 {
     PositionRating R;
     if (!F.Supported) { R.Rejection = PositionRejection::Support; return R; }
@@ -146,7 +147,9 @@ inline PositionRating RatePosition(const PositionFeatures& F)
     const double Side = (Protected(2) + Protected(6)) / 2;
     R.Protection = Rear * .6 + Side * .4;
     R.Exposure = std::clamp(F.Exposure, 0.0, 1.0);
-    R.Score = (1 - R.Exposure) * 1000 + R.Protection * 10 + Best * .05 - F.Travel * .008;
+    const auto Risk = EvaluateRisk(Context);
+    R.Score = (1 - R.Exposure) * 1000 * Risk.Protection + R.Protection * 10 + Best * .05 - F.Travel * .008 +
+        Risk.CautiousAttack * BitCount(F.WeaponMask) * 2;
     R.Valid = true;
     return R;
 }

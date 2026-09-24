@@ -10,7 +10,7 @@
 // Value-only decision capture. No UObject, target getter or fairness input.
 namespace CombatAI
 {
-constexpr std::uint32_t SchemaVersion = 4;
+constexpr std::uint32_t SchemaVersion = 5;
 constexpr std::size_t TraceCapacity = 64;
 constexpr std::uint32_t DefaultEncounterSeed = 102;
 
@@ -51,6 +51,16 @@ struct InputSnapshot
     double ContactUntil = 0, AimUntil = 0, PauseUntil = 0, ReloadUntil = 0;
     double HoldStartedAt = 0, MoveStartedAt = 0, NextReassess = 0, NextSector = 0, EvidenceAge = -1;
     double PositionScore = InvalidPositionScore, Protection = 0, Exposure = 1;
+    TacticalContext Context;
+    RangeIntent Range = RangeIntent::NoWeapon;
+    CoverPhase Cover = CoverPhase::None;
+    CoverSide Side = CoverSide::None;
+    CoverGate CoverWait = CoverGate::None;
+    ActionToken CoverOwner;
+    Position CoverAnchor, CoverPose, CoverThreat;
+    double CoverStarted = 0, CoverPhaseAt = 0, NextCoverScan = 0;
+    int CoverBursts = 0;
+    bool CoverScanning = false;
     int CandidateCount = 0, EvaluatedCount = 0, RejectedCount = 0, TransferAttempts = 0, LookSector = -1;
     int GeometryQueries = 0, PeakAssessmentQueries = 0;
     bool Scanning = false, HasPosition = false;

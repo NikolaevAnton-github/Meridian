@@ -60,6 +60,7 @@ void UEnemyCombatComponent::ClearIntent(CombatAI::ActionFailure Why)
         E->StopMovementCommand();
         E->SetRifleFollowPlayer(false);
         E->SetRifleStance(EGASPALSRifleStance::Ready);
+        E->SetCrouchCommand(false);
     }
 }
 void UEnemyCombatComponent::ChangeState(EEnemyCombatState NewState, const TCHAR* Why)
@@ -80,12 +81,12 @@ void UEnemyCombatComponent::SetEnabled(bool bEnable)
     Knowledge.Reset(EncounterGeneration); IntentEvidenceId=0; bEvidencePending=false; NextEvidenceResponse=0;
     SearchGoal = SearchAnchor = SearchLook = PathGoal = FVector::ZeroVector;
     bRequestedWalk = true;
-    ResetTactics(); bReposition = false;
+    ResetTactics(); Context={}; TargetHealthEvidence={}; AllyRoster={}; NextAllyRefresh=0; NextAdvanceAt=0;
     MoveBackoff = {}; WeaponBackoff = {};
     Gates = {}; Contact = CombatAI::ContactKind::None; ContactAt = ContactDecisionAt = 0;
-    NextShot = GetWorld()->GetTimeSeconds() + 1.f;
+    NextShot = GetWorld()->GetTimeSeconds();
     NextSight = NextRepath = 0; FailedAttempts = 0;
-    ObstructionAttempts = 0; ObstructedSince = -1;
+    ObstructionAttempts = 0; ObstructedSince = -1; ObstructionValidUntil = 0;
     ChangeState(bEnabled ? EEnemyCombatState::Idle : EEnemyCombatState::Disabled, bEnabled ? TEXT("combat enabled") : TEXT("manual fixture"));
 }
 void UEnemyCombatComponent::ResetCombat(FVector HomeGround, FRotator HomeRotation)
@@ -125,6 +126,7 @@ void UEnemyCombatComponent::SuspendForPhysics(bool bDead)
     if (!bEnabled) return;
     ClearIntent(bDead ? CombatAI::ActionFailure::Death : CombatAI::ActionFailure::Authority); bTargetVisible = false;
     ResetTactics();
+    ObstructionAttempts=0; ObstructedSince=-1; ObstructionValidUntil=0;
     if (bDead) { Target.Reset(); Memory.Reset(); Knowledge.Reset(EncounterGeneration); bEvidencePending=false; }
     ChangeState(bDead ? EEnemyCombatState::Dead : EEnemyCombatState::Recovery,
         bDead ? TEXT("death cancels combat") : TEXT("physical authority owns movement"));
@@ -143,7 +145,7 @@ bool UEnemyCombatComponent::ObservePlayer()
         const FVector Direction = (LastKnownGround - Feet()).GetSafeNormal2D();
         const double Dot = PriorDirection.IsNearlyZero() || Direction.IsNearlyZero() ? 1 : FVector::DotProduct(PriorDirection, Direction);
         const auto Kind = CombatAI::ClassifyContact(Prior.Alert, Prior.HasObservation, WasVisible, Now-Prior.LastSeen, Dot);
-        Gates.Sight(Kind, Now, FMath::Clamp(Tuning.AcquireSeconds, .1f, 5.f));
+        Gates.Sight(Kind, Now, WeaponProfile().Reaction);
         if (Kind != CombatAI::ContactKind::Continuous) { Contact = Kind; ContactAt = Now; }
     }
     RecordTrace(bTargetVisible ? CombatAI::Event::Sight : CombatAI::Event::SightLost,
@@ -204,6 +206,7 @@ bool UEnemyCombatComponent::CanShoot(FVector& Muzzle, FVector& Direction, bool& 
     const auto* E = Enemy();
     if (!E || !E->IsReady() || E->IsDead() || E->Authority != EGASPEnemyAuthority::Locomotion ||
         !E->IsRifleHeld() || !E->bRightHandOccupied || !E->Rifle || !Target.IsValid() || !bTargetVisible) return false;
+    if (E->bCrouchCommand != E->IsMovementCrouched()) return false;
     const auto* Anim = Cast<UGASPALSRifleAnimInstance>(E->Body->GetAnimInstance());
     if (!Anim || Anim->RifleAlpha < .9f || Anim->RifleAimAlpha < .9f || E->GetRifleMovementAlpha() > .15f) return false;
     // The retained M4's measured barrel axis is local +Y. Prefer an authored
@@ -213,26 +216,59 @@ bool UEnemyCombatComponent::CanShoot(FVector& Muzzle, FVector& Direction, bool& 
     Direction = (LastKnownAim - Muzzle).GetSafeNormal();
     const float Alignment = FVector::DotProduct(E->Rifle->GetRightVector(), Direction);
     if (Alignment < FMath::Cos(FMath::DegreesToRadians(FMath::Clamp(Tuning.AimToleranceDegrees, .5f, 12.f)))) return false;
+    bObstructed = MuzzleCorridorBlocked(Muzzle);
+    return !bObstructed;
+}
+bool UEnemyCombatComponent::MuzzleCorridorBlocked(const FVector& Muzzle) const
+{
+    const auto* E = Enemy();
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyMuzzle), true);
     if (auto* World = ACombatProjectileWorld::Find(GetWorld())) World->BuildQuery(Query, E);
     FHitResult Hit;
     // A barrel clipped through thin cover is not a valid launch. Validate the
     // origin corridor as well as the full muzzle-to-observed-target corridor.
-    bObstructed = GetWorld()->SweepSingleByChannel(Hit, E->Body->GetSocketLocation(TEXT("spine_05")),
+    return GetWorld()->SweepSingleByChannel(Hit, E->Body->GetSocketLocation(TEXT("spine_05")),
         Muzzle, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(1.f), Query) ||
         GetWorld()->SweepSingleByChannel(Hit, Muzzle, LastKnownAim, FQuat::Identity,
             ECC_Visibility, FCollisionShape::MakeSphere(1.f), Query);
-    return !bObstructed;
+}
+void UEnemyCombatComponent::RefreshObstruction(double Now, double Distance)
+{
+    const bool HadObstruction = ObstructedSince >= 0;
+    if (Now >= ObstructionValidUntil) ObstructedSince = -1;
+    const auto* E = Enemy();
+    if (!bTargetVisible || !Target.IsValid() || !E || !E->Body || !E->Rifle ||
+        (!HadObstruction && Distance <= Context.Weapon.EffectiveRange)) return;
+    // Range movement needs current geometry, even while aim/stance is settling.
+    // Use the same actual barrel corridors as launch, with permitted sight only;
+    // this does not grant firing readiness or read a hidden target transform.
+    const FVector Muzzle = E->Rifle->DoesSocketExist(TEXT("Muzzle")) ? E->Rifle->GetSocketLocation(TEXT("Muzzle")) :
+        E->Rifle->GetComponentTransform().TransformPosition(FVector(0, 62.f, 9.f));
+    if (MuzzleCorridorBlocked(Muzzle))
+    {
+        if (ObstructedSince < 0) ObstructedSince = Now;
+        ObstructionValidUntil = Now + .5;
+    }
+    else { ObstructedSince = -1; ObstructionValidUntil = 0; }
 }
 bool UEnemyCombatComponent::Fire(double Now, CombatAI::ActionToken Request)
 {
     if (!Action.Accepts(Request) || Action.Kind != CombatAI::ActionKind::Burst ||
         Request.Generation != EncounterGeneration) return false;
+    if (Now < Gates.ReadyAt(NextShot) || BurstRemaining <= 0) return false;
+    if (CoverPhase != CombatAI::CoverPhase::None &&
+        (CoverPhase != CombatAI::CoverPhase::Firing || !Assignment.Accepts(CoverOwner))) return false;
     // Recheck visibility at the actual birth; cached perception cannot authorize
     // an extra round through newly entered cover or a replaced player pawn.
     bTargetVisible = ObservePlayer();
+    if (CoverPhase != CombatAI::CoverPhase::None &&
+        (!RefreshCoverThreat(Now) ||
+         FVector::Dist2D(Feet(),CoverPlan.Pose) > 20 || !CoverCapsule(Feet(),false) ||
+         !CoverWalk(Feet(),CoverPlan.Anchor) || !CoverProtected(CoverPlan.Anchor))) return false;
     FVector Muzzle, Direction; bool bObstructed;
-    if (!bTargetVisible || Magazine <= 0 || !CanShoot(Muzzle, Direction, bObstructed)) return false;
+    if (!bTargetVisible || Magazine <= 0 || Now < Gates.ReadyAt(NextShot) ||
+        FVector::Dist2D(Feet(),LastKnownGround) > WeaponProfile().EffectiveRange ||
+        !CanShoot(Muzzle, Direction, bObstructed)) return false;
     auto* World = ACombatProjectileWorld::Find(GetWorld());
     if (!World) return false;
     const FVector ShotDirection = Spread.VRandCone(Direction,
@@ -241,10 +277,10 @@ bool UEnemyCombatComponent::Fire(double Now, CombatAI::ActionToken Request)
         FMath::Clamp(Tuning.BulletDamage, .1f, 1000.f));
     if (!Shot) return false;
     LastShotId = Shot; ++Shots; --Magazine; --BurstRemaining;
-    ObstructionAttempts = 0; ObstructedSince = -1;
+    ObstructionAttempts = 0; ObstructedSince = -1; ObstructionValidUntil = 0;
     // Never repay missed-frame debt as an unbounded burst. Enemy cadence, reload
     // and thought deadlines share genuine world time (including 0.25 slowdown).
-    NextShot = Now + FMath::Clamp(Tuning.ShotInterval, .08f, 5.f);
+    NextShot = Now + WeaponProfile().Interval;
     LastMuzzle = Muzzle; LastBarrel = Direction; FlashUntil = Now + .06;
     if (!ShotSound) ShotSound = LoadObject<USoundBase>(nullptr,
         TEXT("/Game/InfimaGames/TacticalFPSAnimations/Weapons/AssaultRifle/Audio/Firing/A_TFA_AR_Fire_Single_Cue.A_TFA_AR_Fire_Single_Cue"));
@@ -316,7 +352,7 @@ void EnemyCommand(const TArray<FString>& Args, UWorld* World)
         else if (Op == TEXT("status")) { UE_LOG(LogEnemyCombat, Display, TEXT("%s"), *Combat->GetCombatState()); }
         else if (Op == TEXT("trace"))
         {
-            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-02/Traces");
+            const FString Directory = FPaths::ProjectSavedDir() / TEXT("CombatAI01/CAI-T02/Traces");
             IFileManager::Get().MakeDirectory(*Directory, true);
             const auto Snapshot = Combat->CaptureDecisionInput();
             const FString File = Directory / FString::Printf(TEXT("G%llu_S%u_%lld.json"),
@@ -330,9 +366,12 @@ void EnemyCommand(const TArray<FString>& Args, UWorld* World)
             const float Value = FCString::Atof(*Args[2]);
             if (!FMath::IsFinite(Value)) continue;
             const FString Name = Args[1].ToLower();
-            if (Name == TEXT("range")) Combat->Tuning.AttackRange = FMath::Clamp(Value, 150.f, 5000.f);
+            if (Name == TEXT("range")) Combat->Tuning.AttackRange = FMath::Clamp(Value, 150.f, 7000.f);
+            else if (Name == TEXT("preferred")) Combat->Tuning.PreferredRange = FMath::Clamp(Value, 100.f, 7000.f);
+            else if (Name == TEXT("advance")) Combat->Tuning.AdvanceStep = FMath::Clamp(Value, 100.f, 600.f);
+            else if (Name == TEXT("reaction")) Combat->Tuning.AcquireSeconds = FMath::Clamp(Value, 0.f, 5.f);
             else if (Name == TEXT("sight")) Combat->Tuning.SightRange = FMath::Clamp(Value, 200.f, 10000.f);
-            else if (Name == TEXT("aim")) Combat->Tuning.AimSeconds = FMath::Clamp(Value, .1f, 5.f);
+            else if (Name == TEXT("aim")) Combat->Tuning.AimSeconds = FMath::Clamp(Value, 0.f, 5.f);
             else if (Name == TEXT("interval")) Combat->Tuning.ShotInterval = FMath::Clamp(Value, .08f, 5.f);
             else if (Name == TEXT("pause")) Combat->Tuning.BurstPause = FMath::Clamp(Value, .1f, 10.f);
             else if (Name == TEXT("reload")) Combat->Tuning.ReloadSeconds = FMath::Clamp(Value, .3f, 15.f);

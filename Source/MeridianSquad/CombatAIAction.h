@@ -17,7 +17,7 @@ struct EncounterMemory
 enum class ActionKind : std::uint8_t { None, Move, Aim, Burst, Reload, Observe };
 enum class ActionStatus : std::uint8_t { None, Running, Succeeded, Canceled, Failed };
 enum class ActionFailure : std::uint8_t { None, Replaced, Authority, Death, Reset, Stopped, Route, Timeout, Weapon, Sight, Obstruction };
-enum class MovePurpose : std::uint8_t { Pursuit, Search, Return };
+enum class MovePurpose : std::uint8_t { Pursuit, Search, Return, Cautious, Cover };
 
 struct ActionToken
 {
@@ -82,5 +82,5 @@ struct LocalSearchCycle
 };
 
 inline bool WantsWalk(MovePurpose Purpose, double Remaining, double TurnDot)
-{ return Purpose == MovePurpose::Return || Remaining < 250.0 || TurnDot < 0.8; }
+{ return Purpose == MovePurpose::Return || Purpose == MovePurpose::Cautious || Purpose == MovePurpose::Cover || Remaining < 250.0 || TurnDot < 0.8; }
 }

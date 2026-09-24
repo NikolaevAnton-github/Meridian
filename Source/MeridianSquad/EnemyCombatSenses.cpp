@@ -38,7 +38,8 @@ void UEnemyCombatComponent::ApplyEvidenceIntent(double Now)
             DrawDebugDirectionalArrow(GetWorld(), Feet()+FVector(0,0,100),
                 Feet()+Vector(S.Bearing)*350+FVector(0,0,100), 30, FColor::Orange, false, 0);
     }
-    if (!bEvidencePending || bTargetVisible || Now < NextEvidenceResponse || State == EEnemyCombatState::Reload) return;
+    if (!bEvidencePending || bTargetVisible || Now < NextEvidenceResponse || State == EEnemyCombatState::Reload ||
+        CoverPhase != CombatAI::CoverPhase::None || bCoverScan) return;
     if (S.Kind == CombatAI::Sense::Sight || S.Id == IntentEvidenceId) { bEvidencePending=false; return; }
     const FVector Region = Vector(S.Region);
     bEvidencePending=false; IntentEvidenceId=S.Id;

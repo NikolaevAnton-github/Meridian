@@ -44,6 +44,15 @@ owner testing boundaries and source/evidence identity.
 
 ## Task index
 
+The later [cover-fire follow-up](../Approvals/CombatAI01-CoverFire01-OwnerStart01.json)
+authorizes **MSQ-119 / CAI-T02** after MSQ-104: weapon-aware ranged engagement,
+left/right cover peeks, low-cover stand/burst/crouch, prompt fire and extensible
+health/support inputs. This early slice preserves the unfinished full CAI-03/04/05
+scope and current owner-only gameplay testing.
+It now delivers [Candidate02/build01](../CombatAI01-CoverFire01Acceptance.md),
+with passing build, focused checks and primary finding closure. Actual motion,
+position usefulness and combat feel remain pending owner testing.
+
 The later [owner start](../Approvals/CombatAI01-Tactical01-OwnerStart01.json)
 authorizes **MSQ-118 / CAI-T01** as a bounded early single-enemy tactical slice
 after MSQ-103 and before the remaining core packages. It uses existing sight/local
@@ -56,6 +65,7 @@ Gameplay acceptance remains pending owner. MSQ-104 consumes this current policy.
 
 | Package | Issue | Task | Prerequisites | Stage |
 | --- | --- | --- | --- | --- |
+| CAI-T02 | MSQ-119 | [Weapon-aware cover peeking and prompt fire](CombatAI01/CAI-T02.md) | MSQ-104 | Unstaged early slice |
 | CAI-T01 | MSQ-118 | [Situational single-enemy tactics and coordinator foundation](CombatAI01/CAI-T01.md) | MSQ-103 | Unstaged early slice |
 | CAI-00 | MSQ-102 | [Baseline, contracts and observability](CombatAI01/CAI-00.md) | MSQ-70 | 1 |
 | CAI-01 | MSQ-103 | [Persistent intent and running](CombatAI01/CAI-01.md) | MSQ-102 | 2 |

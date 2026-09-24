@@ -10,6 +10,15 @@ Later [owner start](../Approvals/CombatAI01-Tactical01-OwnerStart01.json) author
 slice using current sight evidence/local navigation. This explicit early slice
 precedes the full sensory/topology packages without claiming their completion.
 
+After MSQ-104 senses/protected movement, the
+[later cover-fire instruction](../Approvals/CombatAI01-CoverFire01-OwnerStart01.json)
+authorizes [MSQ-119 / CAI-T02](../Tasks/CombatAI01/CAI-T02.md). Cover now needs
+an attack lifecycle with independent left/right exposure positions and a low-cover
+stand/burst/crouch option. A weapon engagement profile governs useful range;
+health knowledge and available ally capabilities enter explicit tactical context.
+Unknown target health remains unknown until its actual producer exists. These
+extension inputs do not establish live group cooperation or survival balance.
+
 ## Required behavior
 
 The owner reports visible running and continued search, but finds decisions slow

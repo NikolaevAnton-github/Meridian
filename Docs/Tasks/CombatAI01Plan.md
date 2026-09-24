@@ -8,6 +8,14 @@ tactical slice on MSQ-103. The later owner sensory/tactical follow-up delivers
 Full topology and individual/squad packages retain their remaining scope and
 existing acceptance prerequisites.
 
+The subsequent [cover-fire instruction](../Approvals/CombatAI01-CoverFire01-OwnerStart01.json)
+authorizes [MSQ-119 / CAI-T02](CombatAI01/CAI-T02.md) on MSQ-104: both lateral
+peeks, low-cover stand/burst/crouch, prompt ranged fire and extensible weapon,
+health-knowledge and ally-capability inputs. This early portion of individual
+tactics does not complete CAI-04 or remove player-survival/group prerequisites.
+CAI-T02 now delivers [Candidate02/build01](../CombatAI01-CoverFire01Acceptance.md)
+with passing build/source acceptance; gameplay judgement remains with the owner.
+
 Prepared 2026-09-23 for the owner's request for a very detailed plan for surprising,
 high-quality arcade shooter AI. Parent context: MSQ-67; starting delivery: MSQ-70.
 Original status: tasks prepared in Multica. CAI-00/01/02 and the later early CAI-T01

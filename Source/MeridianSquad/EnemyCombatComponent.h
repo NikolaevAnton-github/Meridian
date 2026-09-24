@@ -27,13 +27,15 @@ struct FEnemyCombatTuning
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SightRange = 7000.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SightHalfAngle = 100.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float SightInterval = .12f;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) float AcquireSeconds = .65f;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) float AttackRange = 1000.f;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) float AimSeconds = .65f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float AcquireSeconds = .08f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float AttackRange = 5500.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float PreferredRange = 2800.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float AdvanceStep = 450.f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float AimSeconds = .10f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float AimToleranceDegrees = 6.f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float ShotInterval = .18f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 BurstSize = 3;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) float BurstPause = 1.1f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) float BurstPause = .45f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 MagazineCapacity = 12;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float ReloadSeconds = 2.6f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite) float BulletSpeed = 14000.f;
@@ -89,6 +91,9 @@ public:
     void SetStableSpawnIndex(uint32 Index) { StableSpawnIndex = Index; }
     CombatAI::InputSnapshot CaptureDecisionInput() const;
     void ReceiveStimulus(const CombatAI::Stimulus& Record);
+    // Future evidence producer only; the current player has no health contract.
+    // Generation, known identity, provenance and a <=5s lifetime are mandatory.
+    void ReceiveTargetHealth(const CombatAI::HealthKnowledge& Evidence);
 
 private:
     AGASPEnemyFixture* Enemy() const;
@@ -122,7 +127,6 @@ private:
     FVector SearchAnchor = FVector::ZeroVector;
     FVector SearchForward = FVector::ForwardVector;
     FVector SearchLook = FVector::ZeroVector;
-    bool bReposition = false;
     CombatAI::MovePurpose MovementPurpose = CombatAI::MovePurpose::Pursuit;
     bool bRequestedWalk = true;
     double StateStarted = 0;
@@ -135,6 +139,7 @@ private:
     double LastProgress = 0;
     double FlashUntil = 0;
     double ObstructedSince = -1;
+    double ObstructionValidUntil = 0;
     FVector LastMuzzle = FVector::ZeroVector;
     FVector LastBarrel = FVector::ForwardVector;
     FRandomStream Spread;
@@ -158,9 +163,17 @@ private:
     bool FinishAction(CombatAI::ActionToken Request, CombatAI::ActionStatus Outcome, CombatAI::ActionFailure Why);
     bool ObservePlayer();
     bool CanShoot(FVector& Muzzle, FVector& Direction, bool& bObstructed) const;
+    bool MuzzleCorridorBlocked(const FVector& Muzzle) const;
+    void RefreshObstruction(double Now, double Distance);
     bool Fire(double Now, CombatAI::ActionToken Request);
     void BeginSearch(const TCHAR* Why, bool bRestart = true);
     void AdvanceSearch(double Now);
+    struct FCoverOption
+    {
+        FVector Anchor = FVector::ZeroVector, Pose = FVector::ZeroVector;
+        CombatAI::CoverFeatures Features;
+        double Score = CombatAI::InvalidPositionScore;
+    };
     struct FTacticalPosition
     {
         FVector Ground = FVector::ZeroVector;
@@ -171,7 +184,41 @@ private:
         FBox Obstacle = FBox(ForceInit);
         bool bCrouched = false;
         uint64 EvidenceId = 0;
+        std::array<FCoverOption,3> CoverOptions{};
     };
+    CombatAI::TacticalContext Context;
+    CombatAI::HealthKnowledge TargetHealthEvidence;
+    CombatAI::AllySummary AllyRoster;
+    CombatAI::RangeIntent RangeIntent = CombatAI::RangeIntent::NoWeapon;
+    CombatAI::CoverPhase CoverPhase = CombatAI::CoverPhase::None;
+    CombatAI::CoverGate CoverGate = CombatAI::CoverGate::None;
+    CombatAI::ActionToken CoverOwner;
+    FCoverOption CoverPlan;
+    std::array<CombatAI::PositionHistory,3> CoverFailures;
+    FVector CoverThreatGround = FVector::ZeroVector, CoverThreatAim = FVector::ZeroVector;
+    double CoverStarted = 0, CoverPhaseAt = 0, CoverValidateAt = 0, NextAllyRefresh = 0;
+    double NextCoverScan = 0, CoverScanAt = 0, NextAdvanceAt = 0;
+    bool bCoverScan = false, bCoverScanReady = false, bEndCoverAfterReturn = false;
+    int32 CoverBursts = 0;
+    CombatAI::WeaponProfile WeaponProfile() const;
+    void RefreshTacticalContext(double Now);
+    void ResetCover(bool bHistory = false);
+    void AdvanceCoverScan(double Now);
+    void ChooseCover(double Now);
+    void AssessCoverOptions(FTacticalPosition& Position);
+    FCoverOption AssessCoverOption(FVector Anchor, FVector Pose, CombatAI::CoverSide Side);
+    bool CoverProtected(FVector Ground);
+    bool RefreshCoverThreat(double Now);
+    bool CoverLane(FVector Ground);
+    bool CoverCapsule(FVector Ground, bool bCrouched);
+    bool CoverWalk(FVector From, FVector To);
+    void SetCoverPhase(CombatAI::CoverPhase Phase, double Now, const TCHAR* Why);
+    void ReturnToCover(double Now, const TCHAR* Why, bool bEnd, bool bFailed);
+    void FailCoverReturn(double Now, const TCHAR* Why);
+    bool AdvanceCover(double Now);
+    bool AdvanceWeapon(double Now, bool bFromCover);
+    bool StartCoverMove(FVector Goal, double Now);
+    bool PoseCapsuleSize(bool bCrouched, float& Radius, float& HalfHeight) const;
     CombatAI::TacticalAssignment Assignment;
     CombatAI::ActionToken ScanRequest;
     CombatAI::TacticalPhase TacticalPhase = CombatAI::TacticalPhase::None;
@@ -197,9 +244,9 @@ private:
     void SetObservationFacing(double Now);
     void AddTacticalCandidate(FVector Ground, FBox Obstacle = FBox(ForceInit));
     FTacticalPosition AssessTacticalPosition(FVector Reference, FVector From, bool bCheckRoute, bool bCrouched, FBox Obstacle = FBox(ForceInit));
-    bool TacticalRoute(FVector From, FVector To, const FBox& Obstacle, TArray<FVector>& Route, double& Length);
-    bool TacticalGround(FVector Reference, FVector& Ground, CombatAI::PositionRejection& Failure);
-    bool TacticalWalk(FVector From, FVector To);
+    bool TacticalRoute(FVector From, FVector To, const FBox& Obstacle, TArray<FVector>& Route, double& Length, int32 Stance = -1);
+    bool TacticalGround(FVector Reference, FVector& Ground, CombatAI::PositionRejection& Failure, int32 Stance = -1);
+    bool TacticalWalk(FVector From, FVector To, int32 Stance = -1);
     bool TacticalTrace(FVector From, FVector To, FHitResult& Hit, ECollisionChannel Response = ECC_Visibility);
     FVector TacticalDirection(int32 Sector) const;
     void FailTactic(const TCHAR* Why, CombatAI::ActionFailure Failure, bool bWeapon);

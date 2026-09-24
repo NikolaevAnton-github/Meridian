@@ -78,7 +78,7 @@ TSharedRef<FJsonObject> SnapshotJson(const CombatAI::InputSnapshot& S)
     J->SetStringField(TEXT("action_failure"), Failures[static_cast<uint8>(S.Failure)]);
     J->SetNumberField(TEXT("action_started"), S.ActionStarted);
     J->SetNumberField(TEXT("action_updated"), S.ActionUpdated);
-    static const TCHAR* Objectives[] = {TEXT("none"), TEXT("engage_observed_threat"), TEXT("protected_observation")};
+    static const TCHAR* Objectives[] = {TEXT("none"), TEXT("engage_observed_threat"), TEXT("protected_observation"), TEXT("cover_engagement")};
     static const TCHAR* Phases[] = {TEXT("none"), TEXT("scanning"), TEXT("moving"), TEXT("holding"), TEXT("fallback")};
     static const TCHAR* Contacts[] = {TEXT("none"), TEXT("initial"), TEXT("continuous"), TEXT("brief_reacquisition"), TEXT("known_reacquisition"), TEXT("new_direction")};
     static const TCHAR* Gates[] = {TEXT("none"), TEXT("disabled"), TEXT("physical_authority"), TEXT("readiness"), TEXT("reload"), TEXT("contact_response"), TEXT("aim_settle"), TEXT("burst_pause"), TEXT("cadence"), TEXT("path_planning"), TEXT("travel"), TEXT("geometry_scan"), TEXT("active_observation"), TEXT("weapon_backoff"), TEXT("route_backoff"), TEXT("alignment_and_launch_safety")};
@@ -87,6 +87,46 @@ TSharedRef<FJsonObject> SnapshotJson(const CombatAI::InputSnapshot& S)
     J->SetStringField(TEXT("contact_class"), Contacts[static_cast<uint8>(S.Contact)]);
     J->SetStringField(TEXT("pending_gate"), Gates[static_cast<uint8>(S.Gate)]);
     J->SetStringField(TEXT("tactical_reason"), UTF8_TO_TCHAR(S.TacticalReason.data()));
+    static const TCHAR* CoverPhases[]={TEXT("none"),TEXT("to_anchor"),TEXT("protected"),TEXT("exposing"),TEXT("aiming"),TEXT("firing"),TEXT("returning")};
+    static const TCHAR* CoverSides[]={TEXT("none"),TEXT("left"),TEXT("right"),TEXT("up")};
+    static const TCHAR* CoverGates[]={TEXT("none"),TEXT("geometry"),TEXT("travel"),TEXT("achieved_crouch"),TEXT("achieved_stand"),TEXT("fresh_contact"),TEXT("actual_weapon_safety"),TEXT("burst_rest"),TEXT("protected_reload"),TEXT("stale_evidence"),TEXT("return_failed"),TEXT("deadline"),TEXT("no_option")};
+    static const TCHAR* Ranges[]={TEXT("no_weapon"),TEXT("hold_effective_range"),TEXT("seek_firing_lane"),TEXT("bounded_cautious_advance"),TEXT("favor_protection")};
+    J->SetStringField(TEXT("cover_phase"),CoverPhases[static_cast<uint8>(S.Cover)]);
+    J->SetStringField(TEXT("cover_side"),CoverSides[static_cast<uint8>(S.Side)]);
+    J->SetStringField(TEXT("cover_gate"),CoverGates[static_cast<uint8>(S.CoverWait)]);
+    J->SetStringField(TEXT("range_intent"),Ranges[static_cast<uint8>(S.Range)]);
+    J->SetField(TEXT("cover_anchor"),JsonPosition(S.CoverAnchor));
+    J->SetField(TEXT("cover_firing_pose"),JsonPosition(S.CoverPose));
+    J->SetField(TEXT("cover_evidence_region"),JsonPosition(S.CoverThreat));
+    J->SetStringField(TEXT("cover_owner_id"),LexToString(S.CoverOwner.Id));
+    J->SetNumberField(TEXT("cover_started"),S.CoverStarted);
+    J->SetNumberField(TEXT("cover_phase_started"),S.CoverPhaseAt);
+    J->SetNumberField(TEXT("cover_completed_bursts"),S.CoverBursts);
+    J->SetNumberField(TEXT("next_cover_scan"),S.NextCoverScan);
+    J->SetBoolField(TEXT("cover_scanning"),S.CoverScanning);
+    const auto Risk=CombatAI::EvaluateRisk(S.Context);
+    auto Context=MakeShared<FJsonObject>();
+    Context->SetBoolField(TEXT("weapon_usable"),S.Context.WeaponUsable);
+    Context->SetNumberField(TEXT("weapon_capabilities"),S.Context.Weapon.Capabilities);
+    Context->SetNumberField(TEXT("effective_range_cm"),S.Context.Weapon.EffectiveRange);
+    Context->SetNumberField(TEXT("preferred_range_cm"),S.Context.Weapon.PreferredRange);
+    Context->SetNumberField(TEXT("max_advance_step_cm"),S.Context.Weapon.AdvanceStep);
+    Context->SetBoolField(TEXT("self_health_known"),S.Context.SelfHealthKnown);
+    Context->SetNumberField(TEXT("self_health_fraction"),S.Context.SelfHealth);
+    Context->SetBoolField(TEXT("target_health_known"),S.Context.TargetHealth.Known);
+    if (S.Context.TargetHealth.Known) Context->SetNumberField(TEXT("target_health_fraction"),S.Context.TargetHealth.Fraction);
+    Context->SetStringField(TEXT("target_health_evidence_id"),LexToString(S.Context.TargetHealth.EvidenceId));
+    Context->SetBoolField(TEXT("allies_known"),S.Context.Allies.Known);
+    if (S.Context.Allies.Known)
+    {
+        Context->SetNumberField(TEXT("available_allies"),S.Context.Allies.Available);
+        Context->SetNumberField(TEXT("direct_fire_allies"),S.Context.Allies.Capable[0]);
+        Context->SetNumberField(TEXT("cover_fire_allies"),S.Context.Allies.Capable[1]);
+        Context->SetNumberField(TEXT("mobile_allies"),S.Context.Allies.Capable[2]);
+    }
+    Context->SetNumberField(TEXT("protection_preference"),Risk.Protection);
+    Context->SetNumberField(TEXT("cautious_attack_preference"),Risk.CautiousAttack);
+    J->SetObjectField(TEXT("tactical_context"),Context);
     J->SetStringField(TEXT("assignment_generation"), LexToString(S.AssignmentId.Generation));
     J->SetStringField(TEXT("assignment_id"), LexToString(S.AssignmentId.Id));
     J->SetField(TEXT("selected_position"), JsonPosition(S.SelectedPosition));
@@ -185,6 +225,10 @@ CombatAI::InputSnapshot UEnemyCombatComponent::CaptureDecisionInput() const
     S.Objective = Assignment.Objective; S.AssignmentId = Assignment.Token; S.ObjectiveDecidedAt = Assignment.DecidedAt;
     S.PositionPhase = TacticalPhase; S.Contact = Contact; S.ContactAt = ContactAt; S.ContactDecisionAt = ContactDecisionAt;
     S.ScanStartedAt = ScanStartedAt; S.ContactUntil = Gates.ContactUntil; S.AimUntil = Gates.AimUntil;
+    S.Context=Context; S.Range=RangeIntent; S.Cover=CoverPhase; S.Side=CoverPlan.Features.Side; S.CoverWait=CoverGate;
+    S.CoverOwner=CoverOwner; S.CoverAnchor=ValuePosition(CoverPlan.Anchor); S.CoverPose=ValuePosition(CoverPlan.Pose);
+    S.CoverThreat=ValuePosition(CoverThreatGround); S.CoverStarted=CoverStarted; S.CoverPhaseAt=CoverPhaseAt;
+    S.CoverBursts=CoverBursts; S.NextCoverScan=NextCoverScan; S.CoverScanning=bCoverScan;
     S.PauseUntil = Gates.PauseUntil; S.ReloadUntil = Gates.ReloadUntil;
     S.HoldStartedAt = HoldStartedAt; S.MoveStartedAt = TacticalMoveStartedAt;
     S.NextReassess = NextTacticalScan; S.NextSector = NextLookAt;

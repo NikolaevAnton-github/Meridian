@@ -105,7 +105,8 @@ void UEnemyCombatComponent::ContinuePath()
     const int32 ExpansionLimit = FMath::Clamp(Tuning.MaxPathExpansions, 64, 2000);
     const float Radius = FMath::Clamp(Tuning.NavigationRadius, 400.f, 5000.f);
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyPathExpand), false); NavigationQuery(Query);
-    const bool bTactical = MovementPurpose == CombatAI::MovePurpose::Search;
+    const bool bTactical = MovementPurpose == CombatAI::MovePurpose::Search ||
+        MovementPurpose == CombatAI::MovePurpose::Cover || MovementPurpose == CombatAI::MovePurpose::Cautious;
     // Grid connectivity is separate from the pawn's final arrival tolerance.
     // Cover a cell diagonal while keeping the connector below 180 cm / six samples.
     const float ConnectionRadius = bTactical ? PathCell * 1.5f : PathAcceptance;
@@ -217,7 +218,7 @@ bool UEnemyCombatComponent::FollowPath(FVector Goal, float Acceptance, double No
     { ClearIntent(); return false; }
     Action.Update(PathRequest, Now);
     while (Path.IsValidIndex(PathIndex) && FVector::Dist2D(Position, Path[PathIndex]) <
-        (Purpose == CombatAI::MovePurpose::Search ? 18.f : 32.f)) ++PathIndex;
+        (Purpose == CombatAI::MovePurpose::Search || Purpose == CombatAI::MovePurpose::Cover || Purpose == CombatAI::MovePurpose::Cautious ? 18.f : 32.f)) ++PathIndex;
     if (!Path.IsValidIndex(PathIndex)) { E->StopMovementCommand(); return true; }
     FCollisionQueryParams Query(SCENE_QUERY_STAT(EnemyPathFollow), false); NavigationQuery(Query);
     if (!WalkSegment(Position, Path[PathIndex], Query)) return Failed(TEXT("next segment blocked or unsupported"));
