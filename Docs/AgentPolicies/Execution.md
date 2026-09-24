@@ -22,6 +22,15 @@ Send bounded briefs: objective, scope, acceptance, relevant file/section paths,
 current candidate, allowed writes and evidence destination. Do not embed global
 history or repeat repository instructions. Keep full logs under `Saved/` and report
 concise findings. Native input, cache and output are separate measurements.
+For this project, prepare the bounded role-specific brief before dispatch and a
+current checkpoint before resume using [the lifecycle commands](../../Scripts/ContextBudget/README.md).
+The daemon validates them before injection; repair stale identity explicitly.
+Use the role's required capabilities and check effective native settings. Keep
+ordinary tool responses within 2,000 tokens; save complete outputs under Saved and
+retrieve only needed ranges. See [context policy](Context.md) for budgets/usage.
+A new Multica run ID does not prove a fresh model session: this runner can resume
+the source session on rerun. Use a new scoped issue for independent work and verify
+native fresh/resumed identity; keep intentional continuation on its valid checkpoint.
 
 ## Verification and closure
 

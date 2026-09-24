@@ -47,4 +47,5 @@ section. Never load the history snapshot as routine startup context.
 
 Keep this file to current scope and blockers. Delivery details belong in task
 handoffs. The context budget and preservation checks are described in
-[ContextBudget01](Tasks/ContextBudget01.md).
+[ContextBudget02](Tasks/ContextBudget02.md); source routes are indexed in
+[Subsystems](Subsystems/README.md), loaded only for the relevant task.

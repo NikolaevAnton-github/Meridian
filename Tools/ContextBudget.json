@@ -7,6 +7,13 @@
   "policy_directory": "Docs/AgentPolicies",
   "policy_max_bytes": 5120,
   "navigation": ["Docs/ContextHistory.md", "Docs/Tasks/ContextBudget01.md"],
+  "maps": [
+    { "path": "Docs/Subsystems/README.md", "max_bytes": 5120 },
+    { "path": "Docs/Subsystems/AI.md", "max_bytes": 5120 },
+    { "path": "Docs/Subsystems/Navigation.md", "max_bytes": 5120 },
+    { "path": "Docs/Subsystems/Weapons.md", "max_bytes": 5120 },
+    { "path": "Docs/Subsystems/Animation.md", "max_bytes": 5120 }
+  ],
   "snapshots": [
     {
       "source": "AGENTS.md",

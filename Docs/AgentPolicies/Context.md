@@ -25,11 +25,35 @@ bounded independent work. Keep task descriptions and profile prompts short; refe
 to canonical project rules rather than copying them. Do not inherit unrelated task
 resume sessions. This is a prompt discipline, not a second dispatcher/database.
 
-When modifying entrypoints/policies run:
-`powershell -NoProfile -ExecutionPolicy Bypass -File Scripts/check_context_budget.ps1`
-The guard checks size, direct navigation targets and immutable archive fingerprints.
-Fix overflow by moving detail into the existing relevant task/handoff. Do not raise
-limits to accommodate a new diary. Scoped policies have a 5 KiB per-file limit.
+## Enforced lifecycle
+
+Use [ContextBudget tooling](../../Scripts/ContextBudget/README.md) for exact commands.
+The installed Git hook checks staged context files, navigation and immutable
+archive fingerprints. The Multica gate checks each project task before runtime
+injection, including cold resume. Keep startup at 8 KiB, each policy/map at 5 KiB;
+move detail into the relevant task/handoff rather than raising limits.
+
+Before dispatch, write a validated brief (4 KiB maximum), selecting the task role,
+candidate, owner authority, allowed writes and acceptance. Before resume, replace
+the active checkpoint (2 KiB maximum) with remaining work and evidence paths.
+Scope/revision/authority/candidate changes invalidate stale identity; closed tasks
+cannot resume from an old checkpoint. Multica remains the live state authority.
+Select code, Unreal, art or review capabilities for the actual task; document any
+necessary profile extension. Preserve max reasoning and standard speed.
+
+For source navigation, open one relevant [subsystem map](../Subsystems/README.md),
+then only its relevant entrypoints. Ordinary tool output should be at most 2,000
+tokens; request explicit larger ranges only for concrete missing evidence.
+Capture full command results with `context_budget.py run`; retrieve bounded ranges
+with `preview`. Native history limits do not preserve full diagnostics by themselves.
+Avoid whole-file dumps and repeated passing test logs. Calls outside the repository
+helpers/native integration still require this output discipline.
+
+When changing context files, run `Scripts/check_context_budget.ps1`; the installed
+hook separately checks the index. Automatic native usage records distinguish first,
+bootstrap-proxy and peak input from cached/output totals. Compare compatible native
+version, role, configuration, session kind and workload; inspect reported growth
+before accepting a new baseline. See [ContextBudget02](../Tasks/ContextBudget02.md).
 
 Existing conversation history cannot be removed by editing repository files.
 Measure a fresh session separately from this migration session. Report repository

@@ -34,6 +34,59 @@ def timestamp(value):
     return datetime.fromisoformat(value.replace("Z", "+00:00")).timestamp()
 
 
+def collect_native_usage(path, since, thread_id=None, until=None):
+    """Reusable metadata-only run slice; never sum cumulative native counters.
+
+    First/second/peak inputs describe observed requests after the boundary. The
+    second request is NOT asserted to be a universal bootstrap-complete event.
+    Output includes reasoning and input includes cached input.
+    """
+    cutoff = timestamp(since)
+    end = timestamp(until) if until else float('inf')
+    meta, contexts, responses = {}, [], {}
+    for row in lines(Path(path)):
+        kind, payload = row.get('type'), row.get('payload') or {}
+        if kind == 'session_meta':
+            meta = {k: payload.get(k) for k in ('id', 'session_id', 'cli_version', 'source', 'model_provider')}
+            if thread_id and meta['id'] != thread_id:
+                raise ValueError('Native thread identity mismatch')
+        if kind not in ('turn_context', 'token_usage_record'):
+            continue
+        try:
+            at = timestamp(row.get('timestamp', '1970-01-01T00:00:00Z'))
+        except (ValueError, TypeError):
+            continue
+        if at < cutoff or at > end:
+            continue
+        if kind == 'turn_context':
+            contexts.append({k: payload.get(k) for k in ('model', 'effort', 'service_tier', 'turn_id')})
+            continue
+        if payload.get('thread_id') not in (None, thread_id or meta.get('id')):
+            continue
+        response_id = payload.get('response_id')
+        if not response_id:
+            # A timestamp fallback cannot prove unique response accounting.
+            continue
+        usage = payload.get('usage') or {}
+        if not all(isinstance(usage.get(k, 0), int) and usage.get(k, 0) >= 0 for k in FIELDS):
+            raise ValueError('Invalid native usage record')
+        responses[response_id] = {'at': row.get('timestamp'), 'usage': {k: usage.get(k, 0) for k in FIELDS}}
+    ordered = sorted(responses.values(), key=lambda x: x['at'])
+    totals = {k: sum(r['usage'][k] for r in ordered) for k in FIELDS}
+    inputs = [r['usage']['input_tokens'] for r in ordered]
+    return {'native': meta, 'contexts': contexts, 'unique_response_count': len(ordered),
+            'first_response_at': ordered[0]['at'] if ordered else None,
+            'last_response_at': ordered[-1]['at'] if ordered else None,
+            'first_input_tokens': inputs[0] if inputs else None,
+            'input_after_first_response_tokens': inputs[1] if len(inputs) > 1 else None,
+            'peak_input_tokens': max(inputs) if inputs else None,
+            'last_input_tokens': inputs[-1] if inputs else None,
+            'observed_growth_tokens': max(inputs) - inputs[0] if inputs else None,
+            'native_usage': totals,
+            'output_includes_reasoning_check': all(r['usage']['total_tokens'] == r['usage']['input_tokens'] + r['usage']['output_tokens'] for r in ordered),
+            'responses': ordered}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sessions-dir", type=Path, default=Path.home() / ".codex/sessions/2026/09/13")

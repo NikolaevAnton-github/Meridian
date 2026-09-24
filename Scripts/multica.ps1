@@ -131,6 +131,9 @@ if ($Action -in @('Start', 'StartServices', 'StartWeb')) {
 }
 
 if ($Action -in @('Start', 'StartRuntime')) {
+    # This project-scoped daemon policy runs for every task before injection.
+    . (Join-Path $PSScriptRoot 'ContextBudget/python.ps1')
+    $contextPython = Get-ContextPython
     if (-not (Test-Path -LiteralPath $settings.environment.MULTICA_CODEX_PATH -PathType Leaf)) {
         throw 'The configured native Codex executable is missing; update the local path after a Rider upgrade.'
     }
@@ -139,6 +142,8 @@ if ($Action -in @('Start', 'StartRuntime')) {
         OPENAI_API_KEY = ''; ANTHROPIC_API_KEY = ''; GEMINI_API_KEY = ''; GOOGLE_API_KEY = ''
         AZURE_OPENAI_API_KEY = ''; MULTICA_LLM_API_KEY = ''; MULTICA_LLM_BASE_URL = ''
         MULTICA_CLOUD_URL = ''; MULTICA_DAEMON_AUTO_RELOAD = 'false'
+        MULTICA_CONTEXT_PROJECT_ROOT = $projectRoot
+        CONTEXT_BUDGET_PYTHON = $contextPython
     }
     foreach ($key in @('MULTICA_SERVER_URL', 'MULTICA_CODEX_PATH', 'MULTICA_DAEMON_MAX_CONCURRENT_TASKS',
         'MULTICA_DAEMON_AUTO_UPDATE', 'MULTICA_CODEX_MULTI_AGENT', 'MULTICA_WORKSPACES_ROOT')) {

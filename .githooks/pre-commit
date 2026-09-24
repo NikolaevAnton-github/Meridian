@@ -1,0 +1,5 @@
+#!/bin/sh
+# MSQ-138: Git invokes this through the installed preserving wrapper.
+set -eu
+root=$(git rev-parse --show-toplevel)
+exec powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$root/Scripts/check_context_budget.ps1" -RepositoryRoot "$root" -Mode Staged -RelevantOnly

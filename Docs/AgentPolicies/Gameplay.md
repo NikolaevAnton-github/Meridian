@@ -4,6 +4,9 @@ Read only for AI/combat/movement/physics work. Current scope is in
 [ProjectState](../ProjectState.md); historical starts are not new authorization.
 Use [GameBrief](../Design/GameBrief.md) when defining game/level requirements,
 including AI/combat behavior; read the sections relevant to the active task.
+For code navigation, open only the relevant [subsystem map](../Subsystems/README.md):
+AI, navigation, weapons or animation. Maps identify entrypoints and boundaries;
+the active task and owner decisions still determine authorized changes.
 
 ## AI and locomotion
 

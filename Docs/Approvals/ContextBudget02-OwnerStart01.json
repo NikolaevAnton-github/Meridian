@@ -1,0 +1,17 @@
+{
+  "record_id": "ContextBudget02-OwnerStart01",
+  "date_local": "2026-09-24",
+  "source": "Owner direct chat after ContextBudget01 and the six-point architectural proposal",
+  "owner_message_original": "Сделай это все",
+  "owner_message_english_translation": "Do all of this.",
+  "authorized_scope": [
+    "Automatic context validation at commit and each task launch",
+    "Bounded task briefs and replaceable task checkpoints",
+    "Bounded default tool/script output with complete evidence on disk",
+    "On-demand subsystem navigation",
+    "Automatic native context usage measurements and regression detection",
+    "Measured role-specific tool and plugin configurations"
+  ],
+  "execution": "One Multica production executor for tooling implementation; one independent primary technical reviewer; controller integration, acceptance and local closure commit.",
+  "preservation": "Preserve gameplay, owner files, existing local Multica patches, Git LFS hooks, historical evidence, subscription-only execution, max reasoning and standard speed. No gameplay backlog dispatch."
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "roles": {
+    "code": {
+      "mcp_allow": ["rider"], "plugin_allow": [],
+      "skill_allow": ["multica-platform", "openai-docs", "debugging-code", "refactoring-code"],
+      "thinking_level": "max", "service_tier": "default", "tool_output_token_limit": 2048
+    },
+    "unreal": {
+      "mcp_allow": ["rider", "unreal_epic"], "plugin_allow": [],
+      "skill_allow": ["multica-platform", "openai-docs", "debugging-code", "refactoring-code"],
+      "thinking_level": "max", "service_tier": "default", "tool_output_token_limit": 2048
+    },
+    "art": {
+      "mcp_allow": ["unreal_epic", "blender", "substance_painter"],
+      "plugin_allow": ["meshy-openai-plugin@*"],
+      "skill_allow": ["multica-platform", "openai-docs", "imagegen", "environment-*", "meshy-3d-generation"],
+      "thinking_level": "max", "service_tier": "default", "tool_output_token_limit": 2048
+    },
+    "review": {
+      "mcp_allow": ["rider", "unreal_epic", "blender", "substance_painter"], "plugin_allow": [],
+      "skill_allow": ["multica-platform", "openai-docs", "debugging-code", "refactoring-code", "environment-architecture-review"],
+      "thinking_level": "max", "service_tier": "default", "tool_output_token_limit": 2048
+    }
+  }
+}

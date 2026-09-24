@@ -3,7 +3,10 @@
     "version": "0.4.43",
     "repository": "https://github.com/multica-ai/multica.git",
     "commit": "2ae2dbbb8f9ed9ffe1739ecf5abfe31a940ee50c",
-    "patch": "Tools/Patches/multica-0.4.43-local.patch"
+    "patch": "Tools/Patches/multica-0.4.43-local.patch",
+    "context_budget_patch": "Tools/ContextBudget02-Multica.patch",
+    "context_budget_patch_sha256": "db29fe56b9b776b92b9fc9710a9e5d1c8c6ab5a25dbe387603d4a214262f368c",
+    "context_budget_task": "MSQ-138"
   },
   "go": "1.26.8",
   "postgresql": "17.11",
@@ -37,7 +40,7 @@
     }
   ],
   "binaries_sha256": {
-    "multica.exe": "31dc6f22f25cb725469301bf693476da2fd631bb557739ff82958396418801f3",
+    "multica.exe": "74e8cfed8eaab7ecb97fabd21912bc4af370e53cadd034f6a0cc8f4465285a95",
     "server.exe": "b9fddf1fbe9c37c52243c3abdd7517598cbefe4b89fa5870b5ee3f3ed0ed07c8",
     "migrate.exe": "74402eb0d5b34ea9febfba63650a8bb3fac9c76ce7a0def6bdaa7074d6efff3c"
   },
