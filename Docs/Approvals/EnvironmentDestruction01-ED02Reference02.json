@@ -1,0 +1,31 @@
+{
+  "record_id": "EnvironmentDestruction01-ED02Reference02",
+  "date": "2026-09-25",
+  "source": "Owner direct chat rejecting the running ED-02 candidate and supplying a video reference",
+  "owner_message_original": "Нет нет и нет, это абсолютно не то, что там надо, что за ровные слои у тебя выходят!!! https://www.youtube.com/watch?v=fyY5w8T444w посмотри видео в хроме пожалуйста,там показано разружение колон нормальное",
+  "owner_message_english_translation": "No, no and no, this is absolutely not what is needed. Why are you producing these even layers? Please watch this video in Chrome; it shows proper column destruction.",
+  "decision": "MSQ-142-Candidate01 is owner-rejected for its even, plate-like layered fracture geometry. Stop its execution and acceptance. Preserve its assets, editable sources and evidence. Continue the authorized ED-02 correction as MSQ-142-Candidate02, using the reference observations below.",
+  "reference": {
+    "url": "https://www.youtube.com/watch?v=fyY5w8T444w",
+    "title": "Shooter in Unreal Engine 5 - Chaos Destruction and Physical Casings Test #unrealengine #vfx",
+    "channel": "GAME PHYSICS BY DNMN",
+    "inspection": "Controller opened and viewed the video in Chrome, including playback and selected frames. Column observations concern approximately 00:26-00:37 and 00:47-01:07; earlier thin-panel shots are a different specimen.",
+    "observed_column_features": [
+      "Concrete breaks away as varied, irregular three-dimensional chunks, with smaller chips accompanying larger pieces.",
+      "Damage leaves ragged boundaries, inclined rough fracture surfaces, uneven recess depths and a changed local silhouette, including near a corner.",
+      "Repeated local damage creates connected irregular cavities while adjacent unhit concrete remains intact.",
+      "Exposed reinforcement is visible in deeply damaged regions. Dust accompanies impacts, but the irregular concrete geometry remains visible after dust clears."
+    ],
+    "limits": "These are visual observations, not access to the video's implementation, exact dimensions, material parameters or fracture algorithm. Reinforcement is an observed reference feature; structural collapse or a new structural simulation is not authorized by it."
+  },
+  "controller_diagnosis": "The rejected generator repeats one two-dimensional face partition through matched depth strata. Slightly tilting planes and adding faceted cap tips does not remove the dominant plate/shell appearance. Exposure, texture and dust cannot correct that geometry.",
+  "correction_requirements": [
+    "Replace the repeated aligned-depth partition with genuinely volumetric, spatially irregular concrete fracture. Material regions do not imply regularly peeled geometric strata.",
+    "Use varied chunk proportions, ragged multi-scale boundaries, uneven cavity depth and rough fracture interiors. Avoid repeated matching outlines, broad planar backing and orderly stacks of plates.",
+    "Create an early in-engine visual checkpoint: intact, first local concrete loss, repeated local loss and retained-core limit, with comparable front, oblique and close views and visible debris. Verify the damage shape before spending effort on the full runtime matrix.",
+    "Keep the permanent visible blocking core and no-collapse constraint. Candidate depth and fragment sizes may be retuned and must be recorded; reference appearance is not approval of numeric tuning.",
+    "Keep Candidate01 assets and evidence immutable; use separate Candidate02 assets and source recipe. Preserve a source/map snapshot before shared task code or the lab map changes."
+  ],
+  "retained_authority": "EnvironmentDestruction01-ED02Start01 remains the start, runtime and ED-02-only independent-review waiver. One Multica production worker, executor self-checks and bounded controller acceptance; owner visual/play acceptance remains separate. No successor dispatch, new paid services or original/shared asset edits.",
+  "acceptance_status": "Candidate01 rejected. Candidate02 correction authorized within the existing ED-02 scope; no Candidate02 visual approval or technical delivery is claimed."
+}
