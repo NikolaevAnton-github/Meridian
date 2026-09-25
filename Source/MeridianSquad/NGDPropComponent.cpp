@@ -1,5 +1,6 @@
 #include "NGDPropComponent.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/LatentActionManager.h"
 #include "Engine/World.h"
@@ -151,7 +152,14 @@ void UNGDPropComponent::BeginPlay()
     // from a detached chip must not fracture the rest of that shell; the vendor
     // bullet field still supplies strain, and debris keeps physical collision.
     if (SourceData->GetPathName() == TEXT("/Game/ReinforcedColumn01/DA_RC01_Column.DA_RC01_Column"))
+    {
         Collection->SetEnableDamageFromCollision(false);
+        // Fragments enclose the embedded reinforcement before they break. A
+        // solver contact with those rods starts in penetration and traps debris.
+        // Keep reinforcement query/pawn collision while letting fragments clear it.
+        if (UStaticMeshComponent* Rebar = GetOwner()->FindComponentByClass<UStaticMeshComponent>())
+            Rebar->SetCollisionResponseToChannel(ECC_Destructible, ECR_Ignore);
+    }
     Collection->SetNotifyBreaks(true);
     Collection->OnChaosBreakEvent.AddUniqueDynamic(this, &UNGDPropComponent::OnBreak);
     PreviousBounds = Collection->Bounds.GetBox();

@@ -9,8 +9,8 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
 - **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
   retains the integration. [MSQ-156](ReinforcedColumn02.md) delivers revised column
-  spalling. [Direct repair](ColumnRuntimeRepair01.md): rifle damage, Nanite and
-  convex contacts verified in cold PIE and after F6. Owner acceptance pending.
+  spalling. [Direct repair](ColumnRuntimeRepair01.md): debris/rebar and core collision
+  optimized; four-column load measured. Owner acceptance pending.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
   technically complete, owner review waiver. MSQ-150/151 are
   [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);

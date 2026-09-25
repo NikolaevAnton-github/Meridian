@@ -10,6 +10,7 @@
 #include "GeometryCollection/GeometryCollectionEngineConversion.h"
 #include "GeometryCollection/GeometryCollectionClusteringUtility.h"
 #include "GeometryCollection/GeometryCollectionConvexUtility.h"
+#include "Chaos/Convex.h"
 #include "GeometryCollection/Facades/CollectionAnchoringFacade.h"
 #include "GeometryCollection/GeometryCollectionProximityUtility.h"
 #include "Materials/MaterialInterface.h"
@@ -300,6 +301,14 @@ FString UNGDColumnAuthoring::InspectCollection(UGeometryCollection* Collection)
     if (HullData.IsSet())
     {
         Out->SetNumberField(TEXT("convex_hulls"), HullData->ConvexHull.Num());
+        int32 TotalVertices = 0, MaxVertices = 0;
+        for (const auto& Hull : HullData->ConvexHull) if (Hull)
+        {
+            TotalVertices += Hull->NumVertices();
+            MaxVertices = FMath::Max(MaxVertices, Hull->NumVertices());
+        }
+        Out->SetNumberField(TEXT("convex_vertices"), TotalVertices);
+        Out->SetNumberField(TEXT("max_convex_vertices"), MaxVertices);
         TArray<TSharedPtr<FJsonValue>> Missing;
         for (int32 I = 0; I < C.Transform.Num(); ++I)
             if (C.TransformToGeometryIndex[I] != INDEX_NONE && C.Children[I].Num() == 0 && HullData->TransformToConvexIndices[I].Num() == 0)
@@ -392,6 +401,8 @@ FString UNGDColumnAuthoring::BuildColumn(const FString& SourceFile)
     Asset->bRemoveOnMaxSleep = true;
     Asset->MaximumSleepTime = FVector2D(3., 5.);
     Asset->RemovalDuration = FVector2D(1., 2.);
+    Asset->bSlowMovingAsSleeping = true;
+    Asset->SlowMovingVelocityThreshold = 10.f;
     Asset->SizeSpecificData.SetNum(1);
     Asset->SizeSpecificData[0].CollisionShapes.SetNum(1);
     auto& Shape = Asset->SizeSpecificData[0].CollisionShapes[0];

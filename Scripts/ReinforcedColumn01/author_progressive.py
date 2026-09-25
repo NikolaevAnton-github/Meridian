@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import unreal as u
 import progressive_audit as audit
+import optimize_collision
 
 ROOT=audit.ROOT
 DEST='/Game/ReinforcedColumn01/'
@@ -26,6 +27,7 @@ def build(evidence='asset-build03.json',source='Assets/Source/ReinforcedColumn01
     assert not result['leaves_without_convex']
     data=u.load_asset(DEST+'DA_RC01_Column')
     data.set_editor_property('DamageRadius',.48)
+    optimize_collision.build(audit.OUT / (Path(evidence).stem + '-collision.json'))
     assert u.EditorAssetLibrary.save_directory(DEST,only_if_is_dirty=True,recursive=True)
     print(json.dumps({k:v for k,v in result.items() if k not in ['geometry','hierarchy']}))
 
