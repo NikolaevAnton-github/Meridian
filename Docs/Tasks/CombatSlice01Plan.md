@@ -22,7 +22,9 @@ an open expansion and later owns its newly coupled integration checks. Historica
 statements preserving the original order below are superseded within this scope.
 MSQ-140/141 remain historical done; MSQ-142..147 are cancelled as superseded.
 Fresh MSQ-149..151 prepare toolkit integration sequentially, unassigned with zero
-runs. This rewrite grants no implementation start or lobby placement.
+runs. The later [owner lobby scope](../Approvals/NextGenDestruction01-LobbyScope01.json)
+selects ready-made demo props placed directly in the existing lobby as the first
+NGD-01 handoff; broader architecture stays deferred. No implementation is dispatched.
 
 The MSQ-68 execution instruction authorized that child and fixed the
 [projectile/time/self-hit policy](../Approvals/CombatFoundation01-OwnerScope01.json).

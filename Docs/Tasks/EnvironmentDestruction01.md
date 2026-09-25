@@ -1,7 +1,8 @@
 # EnvironmentDestruction01: Next Gen toolkit gameplay integration
 
 Multica issue: **MSQ-74**. Coordination parent under [CombatSlice01](CombatSlice01Plan.md).
-Updated 2026-09-25 under the [owner task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json).
+Updated 2026-09-25 under the [task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json)
+and later [owner lobby scope](../Approvals/NextGenDestruction01-LobbyScope01.json).
 Follow the [current plan and child mapping](EnvironmentDestruction01Plan.md).
 Prepared scope only; no implementation is dispatched by this rewrite.
 
@@ -12,16 +13,18 @@ Vendor demo acceptance proves package migration, not integration with our rifle,
 cover, AI, support or lobby. The custom ED laboratory implementation is retired.
 MSQ-140/141 retain historical done status; MSQ-142..147 are superseded/cancelled.
 
-Use the imported toolkit for a bounded playable destruction fixture, initially one
-identified existing vendor object/material in a task-owned test map or derivative.
+Integrate only in the existing `/Game/Maps/L_OpeningLobby_PainterStone01`. Initially
+place a small set of ready-made breakable props from the imported demo directly in
+available lobby space. Verify one source with our rifle, then add the remaining
+props during NGD-01 so the first handoff is already playable in the actual lobby.
 Connect the current MeridianSquad rifle/projectile damage path to real breakage.
 Make visible damage, weapon blocking and Pawn collision agree. Establish a usable
 material response, bounded physical debris, reset, and change/support notifications;
 then measure several objects and canonical slowdown. Reuse working vendor behavior
 and extend only documented gaps. Do not rebuild the retired custom fracture system.
 
-The three sequential children are NGD-01 (weapon/first object), NGD-02 (playable
-specimen/debris contract), and NGD-03 (load/slowdown/handoff). Their exact Multica IDs,
+The three sequential children are NGD-01 (demo props in the lobby with our rifle),
+NGD-02 (their debris/reset contract), and NGD-03 (lobby load/slowdown/handoff). Their Multica IDs,
 prerequisites and acceptance are in the plan. MSQ-74 remains unassigned coordination.
 MSQ-68 and MSQ-82 remain the established combat prerequisites; the migrated package
 and current rifle baseline must be verified before implementation.
@@ -37,7 +40,7 @@ and current rifle baseline must be verified before implementation.
   support invalidation and reset generation form a documented consumer contract.
 - Identified small-population runs cover intact, breaking and settled states,
   repeated resets and normal/slowdown/restoration behavior at stated settings.
-- Handoff identifies the exact fixture, controls, candidate, limits, review closure
+- Handoff identifies the lobby actor set, controls, candidate, limits, review closure
   and pending owner visual/play judgement. Migration evidence is not runtime proof.
 
 MSQ-131 consumes NGD-02's usable specimen and notifications after new AI cover and
@@ -47,7 +50,9 @@ compatibility with that contract when available without depending on its deliver
 MSQ-78 consumes actual toolkit debris plus movement/support handoffs and proves
 player/enemy crossing. These consumers do not gate destruction parent completion.
 
-No lobby placement, architecture changes, structural collapse, renewed layered-column
-production, whole-level destruction, new abilities or new art is granted. Preserve
-vendor originals, original lobby/shared assets and owner edits. Use the plan's
+The owner authorizes this ready-made gameplay-prop placement scope, not architecture
+changes, structural collapse, renewed layered-column production, whole-level
+destruction, new abilities or new art. Preserve existing lobby content and owner
+edits while adding removable instances; keep vendor/shared source assets unchanged.
+No separate laboratory or duplicate gameplay map is the delivery target. Use the plan's
 review/evidence rules; earlier ED task-specific waivers do not transfer.

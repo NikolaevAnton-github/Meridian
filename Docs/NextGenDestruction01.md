@@ -56,4 +56,7 @@ Open `/Game/NextGenDestruction/Maps/DemoMap` to use the vendor demonstration.
 The owner subsequently authorized a [task rewrite](Approvals/NextGenDestruction01-TaskRewrite01.json).
 The [MSQ-74 integration plan](Tasks/EnvironmentDestruction01Plan.md) prepares fresh
 MSQ-149..151 for weapon integration, gameplay debris/reset and measured slowdown/load.
-This does not change the accepted migration scope or start future implementation.
+The later [lobby clarification](Approvals/NextGenDestruction01-LobbyScope01.json)
+places ready-made demo breakables directly in `/Game/Maps/L_OpeningLobby_PainterStone01`
+from the first task; all stages use that existing lobby. This does not change the
+accepted migration's historical scope or dispatch future implementation.

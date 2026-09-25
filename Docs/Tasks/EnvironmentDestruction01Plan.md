@@ -2,25 +2,34 @@
 
 Updated 2026-09-25. Coordination parent: **MSQ-74**, under MSQ-67.
 Authority: [owner task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json).
+Location and first pass: [later owner lobby scope](../Approvals/NextGenDestruction01-LobbyScope01.json).
 Baseline: [accepted toolkit migration](../NextGenDestruction01.md).
 Multica owns live state. All new children are unassigned backlog with zero runs;
 this planning rewrite does not dispatch implementation or accept future visuals.
 
 ## Direction and sequence
 
-Build gameplay integration on `/Game/NextGenDestruction`, preserving vendor originals
-and using task-owned derivatives. Start with one existing vendor specimen in a
-bounded fixture; record its asset, material, dimensions and supported break behavior.
-A derivative test map is sufficient. The old copied-lobby map and custom ED-00..02
-implementation were retired; original lobby placement/architecture remain deferred.
-Choose the concrete source at future execution from the imported content; migration
-acceptance is not blanket design acceptance or proof of weapon/fragment behavior.
+Use `/Game/NextGenDestruction` as the asset source and the existing
+`/Game/Maps/L_OpeningLobby_PainterStone01` as the sole integration and handoff map.
+Start by bringing a small set of ready-made demo breakable props into available
+lobby space. Verify the first source with our rifle, then place the remaining props
+within NGD-01; approximately three to five props is a planning default. Record
+sources, materials, transforms and supported break states. Reuse vendor behavior;
+derive assets only if a necessary integration change would modify a vendor source.
+
+Capture current saved/unsaved owner state and a recoverable pre-change map snapshot
+before future edits. Preserve existing architecture, lighting, materials, actors,
+player start and circulation; add identifiable removable instances. An old lobby
+hash is not permission to overwrite current owner work. No separate laboratory or
+duplicate gameplay map is a delivery milestone. The retired copied-lobby/custom ED
+implementation stays retired. This gameplay placement does not resume broader
+architecture/dressing production or grant final visual acceptance.
 
 | Package | Multica | Result | Prerequisite |
 | --- | --- | --- | --- |
-| NGD-01 | MSQ-149 | [Our rifle drives one toolkit object](NextGenDestruction01/NGD-01.md) | MSQ-68, MSQ-82, accepted toolkit migration |
-| NGD-02 | MSQ-150 | [Playable material, debris, reset and change contract](NextGenDestruction01/NGD-02.md) | NGD-01 |
-| NGD-03 | MSQ-151 | [Bounded population, slowdown and owner-ready handoff](NextGenDestruction01/NGD-03.md) | NGD-02 |
+| NGD-01 | MSQ-149 | [Demo props placed in our lobby and working with our rifle](NextGenDestruction01/NGD-01.md) | MSQ-68, MSQ-82, accepted toolkit migration |
+| NGD-02 | MSQ-150 | [Their material, debris, reset and change contract](NextGenDestruction01/NGD-02.md) | NGD-01 |
+| NGD-03 | MSQ-151 | [Lobby load, slowdown and owner-ready handoff](NextGenDestruction01/NGD-03.md) | NGD-02 |
 
 Children execute sequentially only after an explicit start, with one production
 worker/editor writer. They get fresh issues/native sessions rather than resuming
@@ -57,9 +66,10 @@ acceptance, distinct from destruction and routing around unsupported debris.
 
 ## Measurements and acceptance
 
-NGD-01 proves the real weapon loop. NGD-02 proves the usable object/material,
-debris/reset and notification contract before density increases. NGD-03 measures
-empty-fixture baseline, intact objects, individual/overlapping breaks, settled
+NGD-01 delivers a small playable demo-prop placement and real weapon loop in the
+lobby. NGD-02 proves its material, debris/reset and notification contract before
+additional density tuning. NGD-03 measures the same lobby with task-added props
+disabled as baseline, intact props, individual/overlapping breaks, settled
 debris and repeated reset using reproducible counts, camera and shot sequences.
 Record engine/hardware, resolution/scalability, frame cap, execution mode, sample
 duration, frame/Game/Render/GPU and available physics timings, P95/max spikes,
@@ -80,8 +90,10 @@ authority, verify live editor/project/bridge, max reasoning and standard speed, 
 prepare the bounded brief/checkpoint under the execution/context policies.
 Keep generated evidence under `Saved/NextGenDestructionIntegration01/<package>/<candidate>/`;
 track source/config/docs in Git and binary assets in LFS. Preserve owner changes.
-Parent closure requires all three child deliveries and an identified owner-ready
-fixture with known limits, without claiming owner acceptance or later AI/traversal.
+Parent closure requires all three child deliveries and the existing lobby ready
+to play with the identified prop set and known limits, without claiming owner
+acceptance or later AI/traversal. Existing lobby walls/columns are not automatically
+converted to destructible architecture by this first-pass placement.
 
 ## Retired route and preservation
 

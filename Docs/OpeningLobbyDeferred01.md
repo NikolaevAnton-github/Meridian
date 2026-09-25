@@ -5,6 +5,12 @@ close the current tasks. The owner will provide a new list after gameplay has
 been integrated into this space. The authoritative decision is
 [LobbyDeferred01-OwnerClosure01](Approvals/LobbyDeferred01-OwnerClosure01.json).
 
+Current gameplay exception, 2026-09-25: the [owner toolkit lobby scope](Approvals/NextGenDestruction01-LobbyScope01.json)
+selects ready-made imported demo breakables placed directly in the retained lobby
+under prepared MSQ-74/149..151. Preserve current architecture, lighting, materials
+and owner edits; add removable gameplay instances. This changes the planned scope,
+not the closed task statuses, broader art deferral or owner visual acceptance.
+
 The seven open tasks are closed in Multica with terminal status `cancelled`
 and disposition `CLOSED_BY_OWNER_DEFERRAL`:
 
@@ -23,7 +29,8 @@ rejected, and deferred work has not been declared complete or newly accepted.
 Previous scoped acceptances and completed reviews keep their original meaning.
 UpperVoid01 remains owner accepted; MSQ-31 and MSQ-32 remain done.
 
-Deferred items include glass refinement; dressing, signage, fixtures and any
+Outside that explicit gameplay-prop scope, deferred items include glass refinement;
+dressing, signage, fixtures and any
 chosen static damage; final scene route/performance verification; outstanding
 whole-lobby/material acceptance and stable accepted asset registration/handoff.
 Existing movement and collision remain implemented. Old pending/backlog wording

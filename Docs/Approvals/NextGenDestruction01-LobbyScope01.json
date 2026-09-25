@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-25",
+  "source": "Owner direct-chat clarification of the prepared toolkit integration plan",
+  "owner_instruction_english_translation": "We need destruction transferred only to our lobby map. Initially we can bring the assets from the demo and place them in the lobby so we can destroy them.",
+  "decision": "Use the existing /Game/Maps/L_OpeningLobby_PainterStone01 as the sole gameplay integration and handoff map. Start by placing a small set of existing imported demo breakable objects and making them destructible with the MeridianSquad rifle.",
+  "task_amendment": "Keep MSQ-74 and MSQ-149..151. MSQ-149 now delivers several ready-made demo props placed in the actual lobby with the real weapon loop; MSQ-150 stabilizes their debris/reset/change contract; MSQ-151 measures that same lobby placement and slowdown. No separate destruction laboratory or derivative test map is a delivery milestone.",
+  "placement_boundary": "The owner selects reuse of existing demo props as the initial gameplay placement. Preserve current lobby architecture, materials, lighting, routes, player start, shared assets and unsaved owner edits; add identifiable removable instances in available space. Record source assets/transforms and capture the current saved/unsaved state before mutation. Derive vendor assets only if integration requires changing them. Do not reset the lobby to a historical snapshot.",
+  "first_pass": "A small set of approximately three to five existing breakable props is a controller planning default, not an owner-specified count. Verify one source with the actual rifle, then place the remaining ready-made props during MSQ-149. Prefer existing behavior; this is not new asset or architecture production.",
+  "retained_boundaries": "No automatic conversion of existing lobby walls/columns/floor, structural collapse, new art production, final dressing approval or broader architecture resumption. MSQ-131 AI and MSQ-78 traversal retain their independent scope.",
+  "execution_boundary": "This clarification amends the prepared tasks and authorizes their lobby placement scope. It does not itself dispatch a production worker; tasks remain unassigned backlog with zero runs at this planning update.",
+  "supersedes": "The no-lobby-placement and separate-fixture location restrictions in NextGenDestruction01-TaskRewrite01 and current NGD planning. LobbyDeferred01 remains applicable outside this explicit gameplay-prop scope. Prior migration acceptance and retired ED starts/waivers remain unchanged.",
+  "canonical_plan": "Docs/Tasks/EnvironmentDestruction01Plan.md"
+}

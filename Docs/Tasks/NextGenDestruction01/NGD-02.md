@@ -1,19 +1,22 @@
-# NGD-02: Playable toolkit specimen, debris and reset contract
+# NGD-02: Lobby demo props, debris and reset contract
 
 Multica issue: **MSQ-150**. Parent: [MSQ-74](../EnvironmentDestruction01.md).
-Prepared 2026-09-25; unassigned backlog, no execution authorized.
+Updated 2026-09-25; unassigned backlog, no implementation dispatched.
 Authority and shared rules: [toolkit integration plan](../EnvironmentDestruction01Plan.md)
-and [owner task rewrite](../../Approvals/NextGenDestruction01-TaskRewrite01.json).
+and the later [owner lobby scope](../../Approvals/NextGenDestruction01-LobbyScope01.json).
 Prerequisite: [NGD-01](NGD-01.md). No dependency on new AI or MSQ-96 delivery.
 
 ## Work
 
-Turn NGD-01's object into one reusable gameplay specimen with a declared material
-response and supported damage states. Reuse vendor fracture/interior materials,
+Stabilize NGD-01's placed demo props in `/Game/Maps/L_OpeningLobby_PainterStone01`,
+using one representative source for the complete gameplay/support contract and
+checking changed behavior on the other placed types. Declare material responses
+and supported damage states. Reuse vendor fracture/interior materials,
 audio and effects where suitable; correct documented readability/behavior gaps.
 A second material or the retired layered-column recipe is not an automatic gate.
 New visual design still requires its own approval; identify the actual source and
-bounded derivations instead of assuming a lobby asset is already selected.
+bounded derivations. Existing demo props are the selected initial route; existing
+lobby architecture is not thereby selected for conversion to destructible assets.
 
 Define intact/damaged/destroyed blocking and cover behavior, mass/impulse tuning,
 large physical fragments versus cosmetic chips, stable settling/sleep, maximum
@@ -26,7 +29,8 @@ collision/cover revision, support invalidation before removal, and reset generat
 Declare eligible support, unstable/too-small fragments and nonblocking effects.
 Check compatibility with MSQ-96's interface if delivered; otherwise document the
 producer side and fixture-observed invalidation without implementing foot contacts.
-Supply a bounded rubble patch and consumer example for MSQ-131 and MSQ-78.
+Supply a bounded rubble patch from the placed props in this lobby and a consumer
+example for MSQ-131 and MSQ-78. Keep current owner architecture and circulation.
 
 ## Acceptance
 
@@ -40,9 +44,10 @@ Supply a bounded rubble patch and consumer example for MSQ-131 and MSQ-78.
   in time for consumers to stop using removed cover/support. Observe ordering with a
   small test consumer; real AI plans and foot-contact behavior are separate tasks.
 - Handoff includes a representative rubble patch, support/collision table, limits,
-  reset controls, exact fixture/candidate and reusable evidence for NGD-03/MSQ-131.
+  reset controls, exact lobby actor set/candidate and evidence for NGD-03/MSQ-131.
 
 MSQ-131 owns AI invalidation/requery; MSQ-96 owns contact capability; MSQ-78 proves
 ordinary player/enemy crossing. This task's fixture does not claim those results.
-Follow the plan's independent review and owner visual/play gates. No lobby population.
+Follow the plan's independent review and owner visual/play gates. Work on the
+initial lobby placement; do not expand dressing or redesign the architecture.
 Evidence: `Saved/NextGenDestructionIntegration01/NGD-02/<candidate>/`.
