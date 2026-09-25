@@ -280,7 +280,10 @@ FString UNGDPropComponent::GetState() const
 AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Transform, FName Id, int32 Generation, int32 Revision, FBox PriorBounds,
     const TMap<int32, TObjectPtr<UMaterialInterface>>& MaterialOverrides)
 {
-    if (!World || !DataAsset || Id.IsNone() || !DataAsset->GetPathName().StartsWith(TEXT("/Game/NextGenDestruction/Blueprints/DataAssets/Destructible/"))) return nullptr;
+    if (!World || !DataAsset || Id.IsNone()) return nullptr;
+    const FString DataPath = DataAsset->GetPathName();
+    if (!DataPath.StartsWith(TEXT("/Game/NextGenDestruction/Blueprints/DataAssets/Destructible/")) &&
+        DataPath != TEXT("/Game/ReinforcedColumn01/DA_RC01_Column.DA_RC01_Column")) return nullptr;
     UClass* Class = LoadClass<AActor>(nullptr, VendorClass);
     if (!Class) return nullptr;
     AActor* Actor = World->SpawnActorDeferred<AActor>(Class, Transform, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AlwaysSpawn);

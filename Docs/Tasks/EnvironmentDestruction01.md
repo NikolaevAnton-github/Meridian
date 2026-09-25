@@ -6,9 +6,11 @@ and later [owner lobby scope](../Approvals/NextGenDestruction01-LobbyScope01.jso
 Follow the [current plan and child mapping](EnvironmentDestruction01Plan.md).
 Current owner decision: [MSQ-150/151 are cancelled for now](../Approvals/NextGenDestruction01-Cancellation01.json),
 before dispatch. MSQ-149 and MSQ-152 remain delivered, including 14 lobby specimens
-and F6 reset. The remaining scope below is retained for reference; no replacement
-is dispatched and MSQ-74 is not declared complete. The planned NGD-02 consumer
-contract is unavailable while cancelled. Other task states remain unchanged.
+and F6 reset. [MSQ-154](ReinforcedColumn01.md) is technically complete for one existing
+noncollapsing reinforced column; its focused scope overrides the older architecture
+exclusion below and prohibits slowdown tests. The remaining NGD-02/03 scope is
+retained for reference. MSQ-74 is not complete and the cancelled NGD-02 consumer
+contract remains unavailable.
 
 ## Baseline and scope
 

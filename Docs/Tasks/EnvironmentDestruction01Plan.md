@@ -9,9 +9,14 @@ under its later task-scoped start and review waiver; see the
 [delivery](../NextGenDestructionIntegration01NGD01.md). MSQ-150/151 are
 [cancelled for now by the owner](../Approvals/NextGenDestruction01-Cancellation01.json),
 before dispatch. Their scopes below are retained for reference, not an active queue.
-MSQ-152's 14 lobby specimens and F6 reset remain delivered. No replacement or
-successor is dispatched; MSQ-74 is not declared complete by this cancellation.
+MSQ-152's 14 lobby specimens and F6 reset remain delivered. The later
+[MSQ-154 owner start](../Approvals/ReinforcedColumn01-OwnerStart01.json) authorizes
+[one noncollapsing reinforced lobby column](ReinforcedColumn01.md), with no
+slowdown tests and principal owner playtesting. It does not reopen MSQ-150/151;
+MSQ-74 is not declared complete.
 Owner visual/play acceptance remains separate.
+MSQ-154's [Candidate01 handoff](../ReinforcedColumn01.md) is technically complete;
+MSQ-155 technical and visual-evidence review passed, with owner playtesting pending.
 
 ## Direction and sequence
 
