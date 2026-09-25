@@ -12,6 +12,7 @@
 #include "GameFramework/PlayerController.h"
 #include "InputKeyEventArgs.h"
 #include "Kismet/GameplayStatics.h"
+#include "Materials/MaterialInterface.h"
 #include "Serialization/JsonSerializer.h"
 #include "TimerManager.h"
 #include "UObject/StructOnScope.h"
@@ -42,6 +43,34 @@ FStructProperty* HitParameter(UFunction* Function)
 FObjectPropertyBase* DataProperty(AActor* Actor)
 {
     return Actor ? FindFProperty<FObjectPropertyBase>(Actor->GetClass(), TEXT("DataAsset")) : nullptr;
+}
+TMap<int32, TObjectPtr<UMaterialInterface>> ReadMaterialOverrides(AActor* Actor)
+{
+    TMap<int32, TObjectPtr<UMaterialInterface>> Result;
+    auto* P = FindFProperty<FMapProperty>(Actor->GetClass(), TEXT("Material Overrides"));
+    auto* Key = P ? CastField<FIntProperty>(P->KeyProp) : nullptr;
+    auto* Value = P ? CastField<FObjectPropertyBase>(P->ValueProp) : nullptr;
+    if (!Key || !Value) return Result;
+    FScriptMapHelper Map(P, P->ContainerPtrToValuePtr<void>(Actor));
+    for (int32 I = 0; I < Map.GetMaxIndex(); ++I) if (Map.IsValidIndex(I))
+        Result.Add(Key->GetPropertyValue(Map.GetKeyPtr(I)), Cast<UMaterialInterface>(Value->GetObjectPropertyValue(Map.GetValuePtr(I))));
+    return Result;
+}
+void WriteMaterialOverrides(AActor* Actor, const TMap<int32, TObjectPtr<UMaterialInterface>>& Overrides)
+{
+    auto* P = FindFProperty<FMapProperty>(Actor->GetClass(), TEXT("Material Overrides"));
+    auto* Key = P ? CastField<FIntProperty>(P->KeyProp) : nullptr;
+    auto* Value = P ? CastField<FObjectPropertyBase>(P->ValueProp) : nullptr;
+    if (!ensure(Key && Value)) return;
+    FScriptMapHelper Map(P, P->ContainerPtrToValuePtr<void>(Actor));
+    Map.EmptyValues();
+    for (const auto& Entry : Overrides)
+    {
+        const int32 I = Map.AddDefaultValue_Invalid_NeedsRehash();
+        Key->SetPropertyValue(Map.GetKeyPtr(I), Entry.Key);
+        Value->SetObjectPropertyValue(Map.GetValuePtr(I), Entry.Value);
+    }
+    Map.Rehash();
 }
 void CancelWork(AActor* Actor)
 {
@@ -109,6 +138,7 @@ void UNGDPropComponent::BeginPlay()
 {
     Super::BeginPlay();
     InitialTransform = GetOwner()->GetActorTransform();
+    SourceMaterialOverrides = ReadMaterialOverrides(GetOwner());
     if (auto* P = DataProperty(GetOwner())) SourceData = P->GetObjectPropertyValue_InContainer(GetOwner());
     Collection = GetOwner()->FindComponentByClass<UGeometryCollectionComponent>();
     bReady = Collection && SourceData && !ObjectId.IsNone() && HitParameter(ImpactFunction(GetOwner()));
@@ -203,6 +233,7 @@ void UNGDPropComponent::ResetAll(UWorld* World)
     {
         if (!C->SourceData) continue;
         UObject* Data = C->SourceData;
+        const auto MaterialOverrides = C->SourceMaterialOverrides;
         const FTransform Transform = C->InitialTransform;
         const FName Id = C->ObjectId;
         const int32 Generation = C->ResetGeneration + 1, Revision = C->CollisionRevision + 1;
@@ -212,7 +243,7 @@ void UNGDPropComponent::ResetAll(UWorld* World)
         // per-particle collision overrides and delegate targets together.
         C->GetOwner()->SetActorEnableCollision(false);
         C->GetOwner()->Destroy();
-        if (!UNGDTools::Spawn(World, Data, Transform, Id, Generation, Revision, PriorBounds))
+        if (!UNGDTools::Spawn(World, Data, Transform, Id, Generation, Revision, PriorBounds, MaterialOverrides))
             UE_LOG(LogTemp, Error, TEXT("NGD reset failed: %s"), *Id.ToString());
     }
 }
@@ -228,6 +259,10 @@ FString UNGDPropComponent::GetState() const
     O->SetNumberField(TEXT("delivered_hits"), DeliveredHits);
     O->SetNumberField(TEXT("break_events"), BreakEvents);
     O->SetNumberField(TEXT("last_shot"), LastShotId);
+    auto Overrides = MakeShared<FJsonObject>();
+    for (const auto& Entry : SourceMaterialOverrides)
+        Overrides->SetStringField(FString::FromInt(Entry.Key), Entry.Value ? Entry.Value->GetPathName() : TEXT(""));
+    O->SetObjectField(TEXT("material_overrides"), Overrides);
     O->SetNumberField(TEXT("live_fields"), Fields.FilterByPredicate([](const auto& F){ return F.IsValid(); }).Num());
     if (Collection)
     {
@@ -235,10 +270,15 @@ FString UNGDPropComponent::GetState() const
         VectorField(O, TEXT("bounds_max"), Collection->Bounds.GetBox().Max);
         O->SetStringField(TEXT("collision_profile"), Collection->GetCollisionProfileName().ToString());
         O->SetBoolField(TEXT("root_broken"), Collection->IsRootBroken());
+        TArray<TSharedPtr<FJsonValue>> Materials;
+        for (int32 I = 0; I < Collection->GetNumMaterials(); ++I)
+            Materials.Add(MakeShared<FJsonValueString>(Collection->GetMaterial(I) ? Collection->GetMaterial(I)->GetPathName() : TEXT("")));
+        O->SetArrayField(TEXT("materials"), Materials);
     }
     return Json(O);
 }
-AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Transform, FName Id, int32 Generation, int32 Revision, FBox PriorBounds)
+AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Transform, FName Id, int32 Generation, int32 Revision, FBox PriorBounds,
+    const TMap<int32, TObjectPtr<UMaterialInterface>>& MaterialOverrides)
 {
     if (!World || !DataAsset || Id.IsNone() || !DataAsset->GetPathName().StartsWith(TEXT("/Game/NextGenDestruction/Blueprints/DataAssets/Destructible/"))) return nullptr;
     UClass* Class = LoadClass<AActor>(nullptr, VendorClass);
@@ -248,6 +288,9 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
     auto* P = DataProperty(Actor);
     if (!P || !DataAsset->IsA(P->PropertyClass)) { Actor->Destroy(); return nullptr; }
     P->SetObjectPropertyValue_InContainer(Actor, DataAsset);
+    // Apply before construction so the vendor initializes the same visual
+    // variant after reset, including demo instances with material overrides.
+    if (!MaterialOverrides.IsEmpty()) WriteMaterialOverrides(Actor, MaterialOverrides);
     auto* C = NewObject<UNGDPropComponent>(Actor, TEXT("NGDIntegration"), RF_Transactional);
     C->ObjectId = Id;
     C->ResetGeneration = Generation;
@@ -270,6 +313,14 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
 AActor* UNGDTools::SpawnProp(UObject* Context, UObject* DataAsset, FVector Location, FRotator Rotation, FName ObjectId)
 {
     return Spawn(GEngine->GetWorldFromContextObject(Context, EGetWorldErrorMode::ReturnNull), DataAsset, FTransform(Rotation, Location), ObjectId, 0, 0);
+}
+AActor* UNGDTools::SpawnPropWithMaterials(UObject* Context, UObject* DataAsset, FVector Location, FRotator Rotation, FName ObjectId,
+    const TMap<int32, UMaterialInterface*>& MaterialOverrides)
+{
+    TMap<int32, TObjectPtr<UMaterialInterface>> Overrides;
+    for (const auto& Entry : MaterialOverrides) Overrides.Add(Entry.Key, Entry.Value);
+    return Spawn(GEngine->GetWorldFromContextObject(Context, EGetWorldErrorMode::ReturnNull), DataAsset,
+        FTransform(Rotation, Location), ObjectId, 0, 0, FBox(ForceInit), Overrides);
 }
 bool UNGDTools::RifleInput(UObject* Context, bool bPressed)
 {

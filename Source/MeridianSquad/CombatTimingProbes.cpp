@@ -245,7 +245,10 @@ FString ACombatProjectileWorld::ProbeTiming(const FString& Configuration)
         const int32 BeforeBarrierShots = Rifle->ShotCount;
         AdvanceFrame(.25, FPlatformTime::Seconds(), Rifle);
         Check(TEXT("moving_unrecorded_geometry_fails_closed"), GeometryBarriers == 1 &&
-            Rifle->ShotCount == BeforeBarrierShots && !Rifle->bFireHeld && Bullets.IsEmpty());
+            Rifle->ShotCount == BeforeBarrierShots && Rifle->bFireHeld && Bullets.IsEmpty());
+        AdvanceFrame(.01, FPlatformTime::Seconds(), Rifle);
+        Check(TEXT("held_trigger_recovers_without_geometry_backlog"),
+            Rifle->ShotCount == BeforeBarrierShots + 1 && Rifle->FrameShotCount == 1 && Rifle->bFireHeld);
         Report->SetNumberField(TEXT("max_steps"), PeakFrameSteps);
     }
     else Report->SetStringField(TEXT("error"), TEXT("Unknown timing probe kind"));

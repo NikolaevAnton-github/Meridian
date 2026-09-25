@@ -1,0 +1,8 @@
+{
+  "date": "2026-09-25",
+  "source": "Later owner direct chat during MSQ-152 delivery",
+  "owner_instruction_english_translation": "Independent review is not needed.",
+  "decision": "Waive the independent technical review for MSQ-152 Candidate01 / Build02. Cancel the queued MSQ-153 review and complete controller acceptance using executor checks, candidate evidence and preservation verification.",
+  "scope": "This waiver applies only to the interrupted rifle firing correction and complete default demo assortment delivered by MSQ-152. It does not waive review for other tasks or grant owner play/layout acceptance.",
+  "supersedes": "The independent technical review requirement for this task in LobbyPlaytestFix01-OwnerStart01.json and its task briefs."
+}

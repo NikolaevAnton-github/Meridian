@@ -8,6 +8,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "GeometryCollection/GeometryCollectionComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/World.h"
 #include "Engine/StaticMeshActor.h"
@@ -276,7 +277,16 @@ TMap<TWeakObjectPtr<UPrimitiveComponent>, ACombatProjectileWorld::FBlockerSample
         TInlineComponentArray<UPrimitiveComponent*> Parts(*It);
         for (UPrimitiveComponent* Part : Parts)
             if (Part->IsQueryCollisionEnabled() && Part->GetCollisionResponseToChannel(ECC_Visibility) == ECR_Block)
-                Samples.Add(Part, {Part->GetComponentTransform(), Part->Bounds.BoxExtent});
+            {
+                // An opted-in Chaos collection deforms as its pieces move. Its
+                // aggregate bounds are not a rigid blocker resize: the finite
+                // sweeps query the live per-piece collision directly. Retain
+                // registration/transform barriers and all launch-cover queries.
+                const bool bNGDCollection = Part->IsA<UGeometryCollectionComponent>() &&
+                    It->FindComponentByClass<UNGDPropComponent>();
+                Samples.Add(Part, {Part->GetComponentTransform(),
+                    bNGDCollection ? FVector::ZeroVector : Part->Bounds.BoxExtent});
+            }
     }
     return Samples;
 }
@@ -377,11 +387,12 @@ void ACombatProjectileWorld::AdvanceFrame(double WorldDelta, double RealNow, UCo
     {
         // There is no trustworthy transform history for skipped time or moving
         // arbitrary geometry. Fail closed instead of tracing a past world using
-        // today's blockers. No delayed ammunition debit or trigger debt survives.
+        // today's blockers. Discard cadence debt without inventing a release of
+        // the physical trigger. A still-held press may resume at the new boundary.
         if (bOverload) ++OverloadFrames; else ++GeometryBarriers;
         DroppedTime += WorldDelta;
         ClearProjectiles();
-        if (Rifle) Rifle->CancelFiringSession();
+        if (Rifle) Rifle->SuspendFiringFrame(ActionEnd);
     }
     const uint64 Generation = ResetGeneration;
     double Cursor = FrameStart;
@@ -418,7 +429,7 @@ void ACombatProjectileWorld::AdvanceFrame(double WorldDelta, double RealNow, UCo
         ++OverloadFrames;
         DroppedTime += FrameEnd - Cursor;
         ClearProjectiles();
-        if (Rifle) Rifle->CancelFiringSession();
+        if (Rifle) Rifle->SuspendFiringFrame(ActionEnd);
     }
     FiringClock = FrameEnd;
     PlayerActionClock = ActionEnd;

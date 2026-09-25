@@ -207,6 +207,10 @@ void UCombatRifleComponent::FireReleased()
         LastReleaseSample = GFrameCounter;
     }
     bFireHeld = false;
+    // A press rebased across an unsafe simulation interval is valid only while
+    // still held. Ordinary same-frame taps keep their existing timestamped path.
+    if (bDeferredPress) bSemiPending = false;
+    bDeferredPress = false;
     bDryForPress = false;
     bCadenceActive = false;
     ++FiringSession;
@@ -241,6 +245,7 @@ void UCombatRifleComponent::PrepareTimingFrame(double Start, double End)
         NextShotTime = End;
         bCadenceActive = false;
         bSemiPending = false;
+        bDeferredPress = false;
         return;
     }
     if (bFireHeld && !bCadenceActive)
@@ -262,6 +267,7 @@ bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, c
     const double Birth = ProjectileBirth >= 0 ? ProjectileBirth : Now;
     const uint64 ShotSession = bSemiPending ? PendingPressSession : FiringSession;
     bSemiPending = false;
+    bDeferredPress = false;
     // Every attempted event consumes its schedule slot, including a capacity
     // rejection. No denied round is retained as debt or charged ammunition.
     const double Interval = FMath::Max(.05, double(ShotInterval));
@@ -362,6 +368,19 @@ void UCombatRifleComponent::CancelFiringSession()
     // Discard obsolete intent without shortening an accepted launch's cooldown.
     NextShotTime = FMath::Max(FiringNow(), NextAllowedShotTime);
 }
+void UCombatRifleComponent::SuspendFiringFrame(double ResumeTime)
+{
+    // Drop the untrustworthy interval, not the input state. Never replay missed
+    // automatic rounds, repeat an accepted semi shot, or shorten its cooldown.
+    bSemiPending = bSemiPending && bFireHeld;
+    bDeferredPress = bSemiPending;
+    PendingPressTime = FMath::Max(ResumeTime, NextAllowedShotTime);
+    NextShotTime = PendingPressTime;
+    bCadenceActive = false;
+    bFrameCanFire = false;
+    bDryFeedbackPending = false;
+    FrameShotCount = 0;
+}
 void UCombatRifleComponent::ChangeFireMode()
 {
     if (!CanAct() || bFireHeld) return;
@@ -404,6 +423,9 @@ void UCombatRifleComponent::CommitReload(USkeletalMeshComponent* Mesh, UAnimSequ
     const int32 Missing = FMath::Max(0, MagazineCapacity - Magazine);
     const int32 Transfer = bInfiniteReserve ? Missing : FMath::Min(Missing, FMath::Max(0, Reserve));
     Magazine += Transfer;
+    // A dry automatic hold can resume only after real ammunition is committed.
+    // Semiautomatic still requires a fresh press after its accepted empty event.
+    if (Transfer > 0) bDryForPress = false;
     if (!bInfiniteReserve) Reserve -= Transfer;
     TransferredRounds += Transfer;
     ++TransferCount;

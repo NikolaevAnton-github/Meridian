@@ -1,0 +1,9 @@
+{
+  "date": "2026-09-25",
+  "source": "Owner direct chat after playing the lobby destruction placement",
+  "owner_instruction_english_translation": "I played in the lobby with destructible objects. 1) Something is wrong with shooting: often when holding the trigger in automatic mode, shots stop and do not continue, and it happens in semiautomatic too. 2) I would like to see all the objects from the demo.",
+  "authorized_work": "Diagnose and fix interrupted rifle firing and expand the retained lobby placement to the ready-made destruction demo object assortment. Execute through one Multica production worker, then independent technical review and controller closure.",
+  "verification": "Focused editor/runtime reproduction, debugger investigation when needed, builds, and affected fire/reload/mode/obstruction/reset checks are authorized. Verify demo coverage and rifle destruction on the expanded set. Owner play/design acceptance remains separate.",
+  "boundaries": "Preserve current saved and unsaved owner changes, vendor source assets, retained lobby architecture, lighting, materials and circulation. Capture recoverable current map state before mutation. Reuse identifiable removable vendor specimens; no new architecture/art production or conversion of existing lobby structure. Do not dispatch MSQ-150/151 or AI tasks.",
+  "review": "One independent primary technical review; previous MSQ-149 review waiver does not transfer. Existing ready-made specimen expansion is gameplay placement, not renewed environment architectural design. Owner evaluates the resulting demo arrangement."
+}

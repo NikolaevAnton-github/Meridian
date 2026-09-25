@@ -84,6 +84,7 @@ public:
     bool EmitScheduledShot(double Time, const FVector& View, const FQuat& Rotation, double ProjectileBirth = -1.0);
     void FinishTimingFrame(bool bCanceled);
     void CancelFiringSession();
+    void SuspendFiringFrame(double ResumeTime);
     void SampleView(FVector& Position, FQuat& Rotation) const;
 
 private:
@@ -121,6 +122,7 @@ private:
     uint64 LastReleaseSample = 0;
     double TimingFrameEnd = 0.0;
     bool bSemiPending = false;
+    bool bDeferredPress = false;
     bool bCadenceActive = false;
     bool bTimingBarrier = false;
     bool bAllowedAtFrameStart = false;

@@ -8,6 +8,7 @@
 #include "NGDPropComponent.generated.h"
 
 class UGeometryCollectionComponent;
+class UMaterialInterface;
 
 /** Initial collision contract. Bounds are conservative envelopes, not a navigation rebuild. */
 USTRUCT(BlueprintType)
@@ -58,6 +59,7 @@ public:
 private:
     friend class UNGDTools;
     UPROPERTY(Transient) TObjectPtr<UGeometryCollectionComponent> Collection;
+    UPROPERTY(Transient) TMap<int32, TObjectPtr<UMaterialInterface>> SourceMaterialOverrides;
     UPROPERTY(Transient) TObjectPtr<UObject> SourceData;
     UPROPERTY(Transient) TArray<TWeakObjectPtr<AActor>> Fields;
     FTransform InitialTransform;
@@ -79,11 +81,15 @@ class MERIDIANSQUAD_API UNGDTools : public UBlueprintFunctionLibrary
 public:
     UFUNCTION(BlueprintCallable, Category="Destruction", meta=(WorldContext="Context"))
     static AActor* SpawnProp(UObject* Context, UObject* DataAsset, FVector Location, FRotator Rotation, FName ObjectId);
+    UFUNCTION(BlueprintCallable, Category="Destruction", meta=(WorldContext="Context"))
+    static AActor* SpawnPropWithMaterials(UObject* Context, UObject* DataAsset, FVector Location, FRotator Rotation, FName ObjectId,
+        const TMap<int32, UMaterialInterface*>& MaterialOverrides);
     UFUNCTION(BlueprintCallable, Category="Destruction|Verification", meta=(WorldContext="Context"))
     static bool RifleInput(UObject* Context, bool bPressed);
     UFUNCTION(BlueprintCallable, Category="Destruction|Verification", meta=(WorldContext="Context"))
     static bool AimPlayer(UObject* Context, FVector Target);
     UFUNCTION(BlueprintCallable, Category="Destruction|Verification", meta=(WorldContext="Context"))
     static FString Sweep(UObject* Context, FVector Start, FVector End, float Radius = .5f);
-    static AActor* Spawn(UWorld* World, UObject* DataAsset, const FTransform& Transform, FName Id, int32 Generation, int32 Revision, FBox PriorBounds = FBox(ForceInit));
+    static AActor* Spawn(UWorld* World, UObject* DataAsset, const FTransform& Transform, FName Id, int32 Generation, int32 Revision, FBox PriorBounds = FBox(ForceInit),
+        const TMap<int32, TObjectPtr<UMaterialInterface>>& MaterialOverrides = {});
 };
