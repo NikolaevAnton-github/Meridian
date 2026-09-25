@@ -5,6 +5,7 @@
 #include "NGDColumnAuthoring.generated.h"
 
 class UGeometryCollection;
+class UStaticMesh;
 
 /** Editor-only import of the bounded MSQ-154 column source; no runtime damage system. */
 UCLASS()
@@ -16,4 +17,6 @@ public:
     static FString BuildColumn(const FString& SourceFile);
     UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
     static FString InspectCollection(UGeometryCollection* Collection);
+    UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
+    static FString InspectMesh(UStaticMesh* Mesh);
 };

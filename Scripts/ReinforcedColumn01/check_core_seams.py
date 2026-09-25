@@ -3,9 +3,14 @@ import collections
 import hashlib
 import json
 import math
+import argparse
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
-source=ROOT/'Assets/Source/ReinforcedColumn01/column.json'
+parser=argparse.ArgumentParser()
+parser.add_argument('--source',default='Assets/Source/ReinforcedColumn01/column.json')
+parser.add_argument('--output',default='Saved/ReinforcedColumn01/Candidate01/core-seams01.json')
+options=parser.parse_args()
+source=ROOT/options.source
 core=json.loads(source.read_text())['core']
 edges=collections.defaultdict(list)
 for ai,bi,ci,_ in core['triangles']:
@@ -35,7 +40,7 @@ report=dict(source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),initia
     method='Split unmatched edges at existing collinear boundary endpoints; require two opposite orientations per resulting segment.',
     tolerance_cm=tolerance_cm,paired_subsegments=len(segments),unmatched_subsegments=unmatched,
     interior_orientation_failures=interior_orientation_failures,passed=not unmatched and not interior_orientation_failures)
-out=ROOT/'Saved/ReinforcedColumn01/Candidate01/core-seams01.json'
+out=ROOT/options.output
 assert not out.exists()
 out.write_text(json.dumps(report,indent=2),encoding='utf-8')
 print(json.dumps(report))

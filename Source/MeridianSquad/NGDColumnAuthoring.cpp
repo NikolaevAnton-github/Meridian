@@ -15,6 +15,9 @@
 #include "Materials/MaterialInterface.h"
 #include "MeshDescription.h"
 #include "StaticMeshAttributes.h"
+#include "StaticMeshOperations.h"
+#include "StaticMeshResources.h"
+#include "Misc/PackageName.h"
 #include "PhysicsEngine/BodySetup.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
@@ -57,24 +60,60 @@ FMeshDescription ReadMesh(const TSharedPtr<FJsonObject>& Source)
         Points.Add(Point);
         Vertices.Add(Id);
     }
+    const TArray<TSharedPtr<FJsonValue>>* SourceNormals = nullptr;
+    const TArray<TSharedPtr<FJsonValue>>* SourceUVs = nullptr;
+    Source->TryGetArrayField(TEXT("normals"), SourceNormals);
+    Source->TryGetArrayField(TEXT("uvs"), SourceUVs);
     for (const auto& V : Source->GetArrayField(TEXT("triangles")))
     {
         const auto& T = V->AsArray();
         int32 Ids[3] = {int32(T[0]->AsNumber()), int32(T[1]->AsNumber()), int32(T[2]->AsNumber())};
-        const FVector3f N = FVector3f::CrossProduct(Points[Ids[1]] - Points[Ids[0]], Points[Ids[2]] - Points[Ids[0]]).GetSafeNormal();
-        const FVector3f Tangent = FVector3f::CrossProduct(FMath::Abs(N.Z) > .9f ? FVector3f(0, 1, 0) : FVector3f(0, 0, 1), N).GetSafeNormal();
+        const FVector3f Edge1 = Points[Ids[1]] - Points[Ids[0]], Edge2 = Points[Ids[2]] - Points[Ids[0]];
+        const FVector3f N = FVector3f::CrossProduct(Edge1, Edge2).GetSafeNormal(1.e-20f);
+        FVector3f Tangent = FVector3f::CrossProduct(FMath::Abs(N.Z) > .9f ? FVector3f(0, 1, 0) : FVector3f(0, 0, 1), N).GetSafeNormal(1.e-20f);
+        FVector3f Bitangent = FVector3f::CrossProduct(N, Tangent);
+        if (SourceUVs)
+        {
+            const auto ReadUV = [&](int32 Id)
+            {
+                const auto& UV = (*SourceUVs)[Id]->AsArray();
+                return FVector2f(UV[0]->AsNumber(), UV[1]->AsNumber());
+            };
+            const FVector2f UV1 = ReadUV(Ids[1]) - ReadUV(Ids[0]), UV2 = ReadUV(Ids[2]) - ReadUV(Ids[0]);
+            const float Determinant = UV1.X * UV2.Y - UV1.Y * UV2.X;
+            if (FMath::Abs(Determinant) > 1.e-14f)
+            {
+                Tangent = ((Edge1 * UV2.Y - Edge2 * UV1.Y) / Determinant).GetSafeNormal(1.e-20f);
+                Bitangent = ((Edge2 * UV1.X - Edge1 * UV2.X) / Determinant).GetSafeNormal(1.e-20f);
+            }
+        }
         TArray<FVertexInstanceID> Corners;
         for (int32 Id : Ids)
         {
             const FVertexInstanceID VI = Mesh.CreateVertexInstance(Vertices[Id]);
-            A.GetVertexInstanceNormals()[VI] = N;
-            A.GetVertexInstanceTangents()[VI] = Tangent;
-            A.GetVertexInstanceBinormalSigns()[VI] = 1;
+            FVector3f VertexNormal = N;
+            if (SourceNormals && SourceNormals->IsValidIndex(Id))
+            {
+                const auto& SN = (*SourceNormals)[Id]->AsArray();
+                VertexNormal = FVector3f(SN[0]->AsNumber(), SN[1]->AsNumber(), SN[2]->AsNumber()).GetSafeNormal();
+            }
+            A.GetVertexInstanceNormals()[VI] = VertexNormal;
+            FVector3f VertexTangent = (Tangent - VertexNormal * FVector3f::DotProduct(Tangent, VertexNormal)).GetSafeNormal(1.e-20f);
+            if (VertexTangent.IsNearlyZero())
+                VertexTangent = FVector3f::CrossProduct(FMath::Abs(VertexNormal.Z) > .9f ? FVector3f(0, 1, 0) : FVector3f(0, 0, 1), VertexNormal).GetSafeNormal();
+            A.GetVertexInstanceTangents()[VI] = VertexTangent;
+            A.GetVertexInstanceBinormalSigns()[VI] = FVector3f::DotProduct(FVector3f::CrossProduct(VertexNormal, VertexTangent), Bitangent) < 0.f ? -1.f : 1.f;
             A.GetVertexInstanceColors()[VI] = FVector4f(1, 1, 1, 1);
             const FVector3f P = Points[Id];
             const FVector2f UV = FMath::Abs(N.Z) > .7f ? FVector2f(P.X, P.Y) :
                 (FMath::Abs(N.X) > FMath::Abs(N.Y) ? FVector2f(P.Y, P.Z) : FVector2f(P.X, P.Z));
-            A.GetVertexInstanceUVs().Set(VI, 0, UV / 100.f);
+            FVector2f VertexUV = UV / 100.f;
+            if (SourceUVs && SourceUVs->IsValidIndex(Id))
+            {
+                const auto& SU = (*SourceUVs)[Id]->AsArray();
+                VertexUV = FVector2f(SU[0]->AsNumber(), SU[1]->AsNumber());
+            }
+            A.GetVertexInstanceUVs().Set(VI, 0, VertexUV);
             Corners.Add(VI);
         }
         // Editable source uses outward right-handed winding; UE mesh faces are clockwise.
@@ -90,6 +129,11 @@ UStaticMesh* MakeStatic(const TCHAR* Name, FMeshDescription& Mesh, const TArray<
     UPackage* Package = CreatePackage(*PackageName);
     // Re-authoring is explicit and task-scoped; never replaces a vendor/source mesh.
     UStaticMesh* Asset = FindObject<UStaticMesh>(Package, Name);
+    // Existing preview meshes are not referenced by the lobby. Fully load their
+    // packages before replacing source models, or a later load/save can restore
+    // stale disk source over the newly authored object.
+    if (!Asset && FPackageName::DoesPackageExist(PackageName))
+        Asset = LoadObject<UStaticMesh>(nullptr, *(PackageName + TEXT(".") + Name));
     const bool bNew = !Asset;
     if (!Asset) Asset = NewObject<UStaticMesh>(Package, Name, RF_Public | RF_Standalone);
     Asset->Modify();
@@ -99,6 +143,14 @@ UStaticMesh* MakeStatic(const TCHAR* Name, FMeshDescription& Mesh, const TArray<
         const FName Slot(*FString::Printf(TEXT("Slot%d"), I));
         Asset->GetStaticMaterials().Add(FStaticMaterial(Materials[I], Slot, Slot));
     }
+    // Preserve the imported smooth fracture normals; recomputing across the
+    // coincident interfaces of an intact preview can cancel opposing normals.
+    Asset->SetNumSourceModels(1);
+    auto& Settings = Asset->GetSourceModel(0).BuildSettings;
+    Settings.bRecomputeNormals = false;
+    Settings.bRecomputeTangents = false;
+    Settings.bUseFullPrecisionUVs = true;
+    Settings.bUseHighPrecisionTangentBasis = true;
     UStaticMesh::FBuildMeshDescriptionsParams Params;
     Params.bBuildSimpleCollision = false;
     Params.bFastBuild = false;
@@ -112,6 +164,31 @@ UStaticMesh* MakeStatic(const TCHAR* Name, FMeshDescription& Mesh, const TArray<
     Asset->MarkPackageDirty();
     return Asset;
 }
+#endif
+}
+
+FString UNGDColumnAuthoring::InspectMesh(UStaticMesh* Mesh)
+{
+#if WITH_EDITOR
+    if (!Mesh || !Mesh->GetMeshDescription(0)) return TEXT("{}");
+    TSharedRef<FJsonObject> Out = MakeShared<FJsonObject>();
+    const FMeshDescription& Description = *Mesh->GetMeshDescription(0);
+    FStaticMeshConstAttributes Attributes(Description);
+    int32 InvalidNormals = 0, InvalidTangents = 0;
+    for (const auto Id : Description.VertexInstances().GetElementIDs())
+    {
+        InvalidNormals += Attributes.GetVertexInstanceNormals()[Id].IsNearlyZero() ? 1 : 0;
+        InvalidTangents += Attributes.GetVertexInstanceTangents()[Id].IsNearlyZero() ? 1 : 0;
+    }
+    Out->SetNumberField(TEXT("source_triangles"), Description.Triangles().Num());
+    Out->SetNumberField(TEXT("source_vertices"), Description.Vertices().Num());
+    Out->SetNumberField(TEXT("invalid_normals"), InvalidNormals);
+    Out->SetNumberField(TEXT("invalid_tangents"), InvalidTangents);
+    if (Mesh->GetRenderData() && Mesh->GetRenderData()->LODResources.Num())
+        Out->SetNumberField(TEXT("render_triangles"), Mesh->GetRenderData()->LODResources[0].GetNumTriangles());
+    return ToJson(Out);
+#else
+    return TEXT("{}");
 #endif
 }
 
@@ -163,6 +240,64 @@ FString UNGDColumnAuthoring::InspectCollection(UGeometryCollection* Collection)
     Out->SetBoolField(TEXT("has_anchored_attribute"), Anchoring.HasAnchoredAttribute());
     Out->SetNumberField(TEXT("anchored_count"), AnchoredCount);
     Out->SetArrayField(TEXT("hierarchy"), Hierarchy);
+    TArray<TSharedPtr<FJsonValue>> Geometry;
+    for (int32 G = 0; G < C.BoundingBox.Num(); ++G)
+    {
+        TSharedRef<FJsonObject> Row = MakeShared<FJsonObject>();
+        const int32 Transform = C.TransformIndex[G];
+        Row->SetNumberField(TEXT("index"), G);
+        Row->SetNumberField(TEXT("transform"), Transform);
+        Row->SetNumberField(TEXT("faces"), C.FaceCount[G]);
+        Row->SetStringField(TEXT("bounds"), C.BoundingBox[G].ToString());
+        Row->SetStringField(TEXT("local_transform"), C.Transform[Transform].ToString());
+        TMap<int32, double> Areas, UVAreas;
+        int32 SmoothCorners = 0;
+        double MinEdge = TNumericLimits<double>::Max(), MaxEdge = 0.;
+        for (int32 F = C.FaceStart[G]; F < C.FaceStart[G] + C.FaceCount[G]; ++F)
+        {
+            const FIntVector T = C.Indices[F];
+            const FVector3f Cross = FVector3f::CrossProduct(C.Vertex[T.Y] - C.Vertex[T.X], C.Vertex[T.Z] - C.Vertex[T.X]);
+            const double Area = .5 * Cross.Length();
+            Areas.FindOrAdd(C.MaterialID[F]) += Area;
+            if (C.NumUVLayers() > 0)
+            {
+                const FVector2f A = C.GetUV(T.Y, 0) - C.GetUV(T.X, 0);
+                const FVector2f B = C.GetUV(T.Z, 0) - C.GetUV(T.X, 0);
+                UVAreas.FindOrAdd(C.MaterialID[F]) += .5 * FMath::Abs(A.X * B.Y - A.Y * B.X);
+            }
+            for (int32 K = 0; K < 3; ++K)
+            {
+                const double Edge = (C.Vertex[T[K]] - C.Vertex[T[(K + 1) % 3]]).Length();
+                MinEdge = FMath::Min(MinEdge, Edge);
+                MaxEdge = FMath::Max(MaxEdge, Edge);
+                SmoothCorners += FMath::Abs(FVector3f::DotProduct(Cross.GetSafeNormal(), C.Normal[T[K]])) < .999f ? 1 : 0;
+            }
+        }
+        TSharedRef<FJsonObject> Surface = MakeShared<FJsonObject>();
+        for (const auto& Area : Areas)
+        {
+            TSharedRef<FJsonObject> Stats = MakeShared<FJsonObject>();
+            Stats->SetNumberField(TEXT("area_cm2"), Area.Value);
+            Stats->SetNumberField(TEXT("uv_area"), UVAreas.FindRef(Area.Key));
+            Surface->SetObjectField(FString::FromInt(Area.Key), Stats);
+        }
+        Row->SetObjectField(TEXT("surface_by_material"), Surface);
+        Row->SetNumberField(TEXT("min_edge_cm"), MinEdge);
+        Row->SetNumberField(TEXT("max_edge_cm"), MaxEdge);
+        Row->SetNumberField(TEXT("smooth_corners"), SmoothCorners);
+        Geometry.Add(MakeShared<FJsonValueObject>(Row));
+    }
+    Out->SetArrayField(TEXT("geometry"), Geometry);
+    const auto HullData = FGeometryCollectionConvexUtility::GetConvexHullDataIfPresent(Collection->GetGeometryCollection().Get());
+    if (HullData.IsSet())
+    {
+        Out->SetNumberField(TEXT("convex_hulls"), HullData->ConvexHull.Num());
+        TArray<TSharedPtr<FJsonValue>> Missing;
+        for (int32 I = 0; I < C.Transform.Num(); ++I)
+            if (C.TransformToGeometryIndex[I] != INDEX_NONE && C.Children[I].Num() == 0 && HullData->TransformToConvexIndices[I].Num() == 0)
+                Missing.Add(MakeShared<FJsonValueNumber>(I));
+        Out->SetArrayField(TEXT("leaves_without_convex"), Missing);
+    }
 #endif
     return ToJson(Out);
 }
@@ -220,13 +355,25 @@ FString UNGDColumnAuthoring::BuildColumn(const FString& SourceFile)
     // present in the physical collection; invisible geometry can be pruned.
     C->ReindexMaterials();
     FGeometryCollectionClusteringUtility::ClusterAllBonesUnderNewRoot(C.Get());
+    // Local clusters group neighbouring fragments at one depth, with one embedded
+    // persistent support each. No cluster is a full-depth removable column cell.
+    const TArray<TSharedPtr<FJsonValue>>* Clusters = nullptr;
+    if (Source->TryGetArrayField(TEXT("clusters"), Clusters))
+    {
+        for (const auto& Group : *Clusters)
+        {
+            TArray<int32> Members;
+            for (const auto& Member : Group->AsArray()) Members.Add(int32(Member->AsNumber()));
+            if (Members.Num() > 1)
+                FGeometryCollectionClusteringUtility::ClusterBonesUnderNewNodeWithParent(C.Get(), Number, Members, false);
+        }
+    }
     FGeometryCollectionClusteringUtility::UpdateHierarchyLevelOfChildren(C.Get(), -1);
-    for (int32 I = 0; I < Number; ++I)
+    for (int32 I = 0; I < C->Transform.Num(); ++I)
         C->InitialDynamicState[I] = int32(I < DynamicCount ? Chaos::EObjectStateType::Dynamic : Chaos::EObjectStateType::Kinematic);
-    C->InitialDynamicState[Number] = int32(Chaos::EObjectStateType::Kinematic);
     Chaos::Facades::FCollectionAnchoringFacade Anchoring(*C);
     Anchoring.AddAnchoredAttribute();
-    for (int32 I = 0; I <= Number; ++I)
+    for (int32 I = 0; I < C->Transform.Num(); ++I)
         Anchoring.SetAnchored(I, I >= DynamicCount && I < Number);
     FGeometryCollectionConvexUtility::CreateNonOverlappingConvexHullData(C.Get());
     FGeometryCollectionProximityUtility(C.Get()).UpdateProximity();
@@ -248,6 +395,26 @@ FString UNGDColumnAuthoring::BuildColumn(const FString& SourceFile)
     Asset->RebuildRenderData();
     if (bNew) FAssetRegistryModule::AssetCreated(Asset);
     Asset->MarkPackageDirty();
+    const TArray<TSharedPtr<FJsonValue>>* Previews = nullptr;
+    if (Source->TryGetArrayField(TEXT("previews"), Previews))
+    {
+        for (const auto& PreviewValue : *Previews)
+        {
+            const auto Preview = PreviewValue->AsObject();
+            const FString Name = Preview->GetStringField(TEXT("name"));
+            if (!Name.StartsWith(TEXT("SM_RC02_Preview_")) || Name.Contains(TEXT("/"))) continue;
+            FMeshDescription Combined;
+            FStaticMeshAttributes Attributes(Combined);
+            Attributes.Register();
+            Attributes.GetVertexInstanceUVs().SetNumChannels(1);
+            for (const auto& Index : Preview->GetArrayField(TEXT("pieces")))
+            {
+                const FMeshDescription Part = ReadMesh(Source->GetArrayField(TEXT("pieces"))[int32(Index->AsNumber())]->AsObject());
+                FStaticMeshOperations::AppendMeshDescription(Part, Combined, FStaticMeshOperations::FAppendSettings());
+            }
+            MakeStatic(*Name, Combined, Materials);
+        }
+    }
     return InspectCollection(Asset);
 #else
     return TEXT("{\"error\":\"Editor only\"}");

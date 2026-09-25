@@ -1,0 +1,10 @@
+{
+  "date": "2026-09-25",
+  "source": "Owner direct chat",
+  "owner_instruction_english_translation": "No independent review is needed; I will inspect it myself.",
+  "scope": "MSQ-156 ReinforcedColumn02 Candidate01 RimCorrection01, source revision 04 only.",
+  "decision": "Waive the independent technical review for this delivery. Cancel MSQ-157 and its running reviewer without recording a review PASS. Preserve partial review evidence.",
+  "supersedes": "The independent-review requirement in ReinforcedColumn02-OwnerStart01.json and the task brief, within this delivery only. The original authority and evidence remain unchanged.",
+  "verification": "Use the completed production source/build/asset checks and controller scope, evidence identity and preservation closure. No additional gameplay testing. Owner visual and gameplay acceptance remain pending.",
+  "delivery": "Save the existing lobby column and make the task-scoped local commit. No further reviewer dispatch or approval request."
+}

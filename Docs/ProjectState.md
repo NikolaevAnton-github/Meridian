@@ -8,9 +8,9 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
 
 - **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
-  retains the delivered integration. [MSQ-154](ReinforcedColumn01.md) is technically
-  complete: one noncollapsing column, destructible lower 2.8 m and rebar; MSQ-155 PASS.
-  No slowdown tests; owner play/design acceptance pending.
+  retains the integration. [MSQ-156](ReinforcedColumn02.md) delivers revised column
+  spalling. Independent review waived for this task; owner visual/gameplay check
+  pending. Agents ran source/build/asset checks only.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
   technically complete, owner review waiver. MSQ-150/151 are
   [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);

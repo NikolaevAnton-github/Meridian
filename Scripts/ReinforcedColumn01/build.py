@@ -4,11 +4,17 @@ import json
 import subprocess
 import sys
 import time
+import argparse
 from pathlib import Path
 
 ROOT = Path('D:/devgames/MeridianSquad')
-OUT = ROOT / 'Saved/ReinforcedColumn01/Candidate01'
-name = sys.argv[1]
+parser = argparse.ArgumentParser()
+parser.add_argument('name')
+parser.add_argument('--evidence-root', default='Saved/ReinforcedColumn01/Candidate01')
+options = parser.parse_args()
+OUT = ROOT / options.evidence_root
+OUT.mkdir(parents=True, exist_ok=True)
+name = options.name
 assert name.replace('-', '').isalnum()
 log = OUT / (name + '.log')
 assert not log.exists()

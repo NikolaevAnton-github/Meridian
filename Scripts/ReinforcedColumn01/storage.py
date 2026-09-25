@@ -1,9 +1,13 @@
 """Bounded project footprint audit, including Git, services and generated files."""
 import json
 import os
+import argparse
 from pathlib import Path
 ROOT=Path('D:/devgames/MeridianSquad')
-OUT=ROOT/'Saved/ReinforcedColumn01/Candidate01'
+parser=argparse.ArgumentParser()
+parser.add_argument('--evidence-root',default='Saved/ReinforcedColumn01/Candidate01')
+options=parser.parse_args()
+OUT=ROOT/options.evidence_root
 pending=[ROOT]
 size=count=0
 errors=[]
