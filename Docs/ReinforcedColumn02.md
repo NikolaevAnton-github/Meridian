@@ -1,5 +1,8 @@
 # ReinforcedColumn02 — MSQ-156 Candidate01, rim correction
 
+Runtime follow-up: [2026-09-26 repair](ColumnRuntimeRepair01.md) supersedes this
+delivery's damage/render/collision settings and untested gameplay status.
+
 2026-09-25. Source revision 04 addresses the controller's finding in thread
 `01a0da05-77f0-7cc8-a4a9-56baa7adac6b`: long straight fracture rims and large
 planar cavity walls remained visible behind the reinforcement. The current

@@ -147,6 +147,11 @@ void UNGDPropComponent::BeginPlay()
         UE_LOG(LogTemp, Error, TEXT("NGD adapter unavailable: %s"), *GetOwner()->GetPathName());
         return;
     }
+    // The supported column shell overlaps its retained core. Contact impulses
+    // from a detached chip must not fracture the rest of that shell; the vendor
+    // bullet field still supplies strain, and debris keeps physical collision.
+    if (SourceData->GetPathName() == TEXT("/Game/ReinforcedColumn01/DA_RC01_Column.DA_RC01_Column"))
+        Collection->SetEnableDamageFromCollision(false);
     Collection->SetNotifyBreaks(true);
     Collection->OnChaosBreakEvent.AddUniqueDynamic(this, &UNGDPropComponent::OnBreak);
     PreviousBounds = Collection->Bounds.GetBox();

@@ -22,10 +22,10 @@ def build(evidence='asset-build03.json',source='Assets/Source/ReinforcedColumn01
     audit.write(evidence,result)
     assert 'error' not in result
     assert result['geometries']==764 and result['anchored_count']==120
-    assert result['level_counts']=={'0':1,'1':120,'2':764}, result['level_counts']
+    assert result['level_counts']=={'0':1,'1':764}, result['level_counts']
     assert not result['leaves_without_convex']
     data=u.load_asset(DEST+'DA_RC01_Column')
-    data.set_editor_property('DamageRadius',.14)
+    data.set_editor_property('DamageRadius',.48)
     assert u.EditorAssetLibrary.save_directory(DEST,only_if_is_dirty=True,recursive=True)
     print(json.dumps({k:v for k,v in result.items() if k not in ['geometry','hierarchy']}))
 
@@ -41,7 +41,7 @@ def integrate(evidence='integration03.json'):
     assert prop.get_component_by_class(u.NGDPropComponent)
     # MinDamageRadius is computed by the vendor construction script from the
     # editable DataAsset; it is deliberately read-only on actor instances.
-    assert abs(prop.get_editor_property('MinDamageRadius')-.14)<1e-5
+    assert abs(prop.get_editor_property('MinDamageRadius')-.48)<1e-5
     assert u.get_editor_subsystem(u.LevelEditorSubsystem).save_current_level()
     audit.write(evidence,dict(target=target.get_path_name(),target_transform=str(target.get_actor_transform()),
         prop=prop.get_path_name(),prop_transform=str(prop.get_actor_transform()),radius=prop.get_editor_property('MinDamageRadius'),

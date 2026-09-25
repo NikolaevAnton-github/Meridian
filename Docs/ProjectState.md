@@ -1,6 +1,6 @@
 # MeridianSquad current project state
 
-Updated 2026-09-25. Verify live Multica/editor state when needed.
+Updated 2026-09-26. Verify live Multica/editor state when needed.
 This snapshot grants no task execution or design approval. Read the relevant task,
 not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.md).
 
@@ -9,8 +9,8 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
 - **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
   retains the integration. [MSQ-156](ReinforcedColumn02.md) delivers revised column
-  spalling. Independent review waived for this task; owner visual/gameplay check
-  pending. Agents ran source/build/asset checks only.
+  spalling. [Direct repair](ColumnRuntimeRepair01.md): rifle damage, Nanite and
+  convex contacts verified in cold PIE and after F6. Owner acceptance pending.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
   technically complete, owner review waiver. MSQ-150/151 are
   [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);

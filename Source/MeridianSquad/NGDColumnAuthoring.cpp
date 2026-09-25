@@ -146,6 +146,14 @@ UStaticMesh* MakeStatic(const TCHAR* Name, FMeshDescription& Mesh, const TArray<
     // Preserve the imported smooth fracture normals; recomputing across the
     // coincident interfaces of an intact preview can cancel opposing normals.
     Asset->SetNumSourceModels(1);
+    // These dense fracture surfaces must use the same virtualized rendering
+    // path as the vendor meshes, including the intact core and reinforcement.
+    Asset->GetNaniteSettings().bEnabled = true;
+    // Complex-as-simple collision is cooked from the fallback LOD. Preserve its
+    // full source surface while Nanite independently reduces rendering cost.
+    Asset->GetNaniteSettings().FallbackTarget = ENaniteFallbackTarget::PercentTriangles;
+    Asset->GetNaniteSettings().FallbackPercentTriangles = 1.0f;
+    Asset->GetNaniteSettings().FallbackRelativeError = 0.0f;
     auto& Settings = Asset->GetSourceModel(0).BuildSettings;
     Settings.bRecomputeNormals = false;
     Settings.bRecomputeTangents = false;
@@ -355,19 +363,10 @@ FString UNGDColumnAuthoring::BuildColumn(const FString& SourceFile)
     // present in the physical collection; invisible geometry can be pruned.
     C->ReindexMaterials();
     FGeometryCollectionClusteringUtility::ClusterAllBonesUnderNewRoot(C.Get());
-    // Local clusters group neighbouring fragments at one depth, with one embedded
-    // persistent support each. No cluster is a full-depth removable column cell.
-    const TArray<TSharedPtr<FJsonValue>>* Clusters = nullptr;
-    if (Source->TryGetArrayField(TEXT("clusters"), Clusters))
-    {
-        for (const auto& Group : *Clusters)
-        {
-            TArray<int32> Members;
-            for (const auto& Member : Group->AsArray()) Members.Add(int32(Member->AsNumber()));
-            if (Members.Num() > 1)
-                FGeometryCollectionClusteringUtility::ClusterBonesUnderNewNodeWithParent(C.Get(), Number, Members, false);
-        }
-    }
+    // Vendor impact fields sample active particles and their immediate children.
+    // Keep the fine fragments directly below the root: an intermediate anchored
+    // cluster places its centre outside a local bullet field and shields its
+    // disabled children from strain. Embedded anchored leaves retain support.
     FGeometryCollectionClusteringUtility::UpdateHierarchyLevelOfChildren(C.Get(), -1);
     for (int32 I = 0; I < C->Transform.Num(); ++I)
         C->InitialDynamicState[I] = int32(I < DynamicCount ? Chaos::EObjectStateType::Dynamic : Chaos::EObjectStateType::Kinematic);
@@ -378,7 +377,15 @@ FString UNGDColumnAuthoring::BuildColumn(const FString& SourceFile)
     FGeometryCollectionConvexUtility::CreateNonOverlappingConvexHullData(C.Get());
     FGeometryCollectionProximityUtility(C.Get()).UpdateProximity();
     Asset->EnableClustering = true;
-    Asset->DamageThreshold = {500000.f, 50000.f, 5000.f};
+    Asset->EnableNanite = true;
+    // Leaves previously inherited 50000 from their level-one local cluster.
+    // Preserve that resistance after removing the otherwise shielding level.
+    Asset->DamageThreshold = {50000.f};
+    // A bullet should detach pieces inside its field without cascading through
+    // the connection graph into the remaining supported shell.
+    Asset->DamagePropagationData.bEnabled = false;
+    Asset->DamagePropagationData.BreakDamagePropagationFactor = 0.f;
+    Asset->DamagePropagationData.ShockDamagePropagationFactor = 0.f;
     Asset->bMassAsDensity = true;
     Asset->Mass = 2400.f;
     Asset->MinimumMassClamp = .1f;
@@ -388,7 +395,9 @@ FString UNGDColumnAuthoring::BuildColumn(const FString& SourceFile)
     Asset->SizeSpecificData.SetNum(1);
     Asset->SizeSpecificData[0].CollisionShapes.SetNum(1);
     auto& Shape = Asset->SizeSpecificData[0].CollisionShapes[0];
-    Shape.CollisionType = ECollisionTypeEnum::Chaos_Surface_Volumetric;
+    // Convex-to-convex contacts avoid particle/level-set collision on the dense
+    // authored fracture surfaces while retaining the generated convex hulls.
+    Shape.CollisionType = ECollisionTypeEnum::Chaos_Volumetric;
     Shape.ImplicitType = EImplicitTypeEnum::Chaos_Implicit_Convex;
     Asset->InvalidateCollection();
     Asset->CreateSimulationData();

@@ -28,8 +28,14 @@ def verify(name,source_path='Assets/Source/ReinforcedColumn01/ReinforcedColumn02
     assert not altered, altered
     gc=u.load_asset('/Game/ReinforcedColumn01/GC_RC01_BondedConcrete')
     data=json.loads(u.NGDColumnAuthoring.inspect_collection(gc))
-    assert data['level_counts']=={'0':1,'1':120,'2':764}
-    assert data['anchored_count']==120 and data['initial_states']=={'2':241,'4':644}
+    assert data['level_counts']=={'0':1,'1':764}
+    assert data['anchored_count']==120 and data['initial_states']=={'2':121,'4':644}
+    assert gc.get_editor_property('enable_nanite')
+    assert list(gc.get_editor_property('damage_threshold'))==[50000.]
+    assert not gc.get_editor_property('damage_propagation_data').enabled
+    shape=gc.get_editor_property('size_specific_data')[0].get_editor_property('collision_shapes')[0]
+    assert shape.get_editor_property('collision_type')==u.CollisionTypeEnum.CHAOS_VOLUMETRIC
+    assert shape.get_editor_property('implicit_type')==u.ImplicitTypeEnum.CHAOS_IMPLICIT_CONVEX
     assert not data['leaves_without_convex']
     settings=dict(clustering=gc.get_editor_property('enable_clustering'),connection_type=str(gc.get_editor_property('cluster_connection_type')),
                   thresholds=list(gc.get_editor_property('damage_threshold')),
@@ -42,6 +48,10 @@ def verify(name,source_path='Assets/Source/ReinforcedColumn01/ReinforcedColumn02
     sm=u.get_editor_subsystem(u.StaticMeshEditorSubsystem)
     for asset in ['SM_RC01_SupportedColumn','SM_RC01_Rebar','SM_RC02_Preview_Shallow','SM_RC02_Preview_Deep']:
         obj=u.load_asset('/Game/ReinforcedColumn01/'+asset)
+        nanite=sm.get_nanite_settings(obj)
+        assert nanite.enabled
+        assert nanite.fallback_target==u.NaniteFallbackTarget.PERCENT_TRIANGLES
+        assert nanite.fallback_percent_triangles==1.0 and nanite.fallback_relative_error==0.0
         build=sm.get_lod_build_settings(obj,0)
         assert not build.recompute_normals and not build.recompute_tangents
         assert build.use_full_precision_u_vs and build.use_high_precision_tangent_basis
@@ -53,7 +63,7 @@ def verify(name,source_path='Assets/Source/ReinforcedColumn01/ReinforcedColumn02
         assert body.get_editor_property('collision_trace_flag')==u.CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE
         meshes[asset]=dict(build=str(build),bounds=str(obj.get_bounding_box()),collision=str(body.get_editor_property('collision_trace_flag')),geometry=geometry)
     prop=next(a for a in u.get_editor_subsystem(u.EditorActorSubsystem).get_all_level_actors() if a.get_actor_label()=='RC01_ReinforcedColumn')
-    assert abs(prop.get_editor_property('MinDamageRadius')-.14)<1e-5
+    assert abs(prop.get_editor_property('MinDamageRadius')-.48)<1e-5
     assert prop.get_component_by_class(u.NGDPropComponent)
     component=prop.get_component_by_class(u.GeometryCollectionComponent)
     assert component.is_visible() and component.get_editor_property('cast_shadow')
