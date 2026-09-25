@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-25",
+  "source": "Owner direct chat after comparison of the accepted toolkit migration with stale Multica tasks",
+  "owner_instruction_english_translation": "Rewrite the tasks according to the plan.",
+  "decision": "Replace the retired custom destruction execution route with prepared Next Gen Destruction Toolkit gameplay integration tasks under existing coordination parent MSQ-74.",
+  "authorized_administration": [
+    "Rewrite MSQ-74 and its plan around the imported toolkit",
+    "Retain completed MSQ-140/141 as historical deliveries; cancel superseded MSQ-142..147 while preserving descriptions, runs, candidates, approvals and evidence",
+    "Create three fresh unassigned backlog children: weapon/first-object integration, playable material/debris/reset contract, bounded load/slowdown/handoff",
+    "Update MSQ-131 AI integration and relevant support/traversal dependencies and documentation without starting execution"
+  ],
+  "controller_decomposition": "NGD-01 supplies the weapon/collision loop; NGD-02 supplies the usable specimen and change/support contract; NGD-03 supplies measured load, slowdown and the parent handoff. MSQ-131 can consume NGD-02 after new AI cover and the one-enemy encounter, without waiting for the final density handoff. MSQ-78 retains actual player/enemy traversal.",
+  "execution_boundary": "Planning and administrative synchronization only. No worker dispatch, runtime/editor mutation, lobby placement, new art approval or gameplay acceptance is granted. Later execution requires its own start. Prior ED starts and review waivers do not transfer.",
+  "preservation": "Keep original lobby/shared assets, owner edits, vendor source packages, retired implementation bytes and exact historical evidence. Use task-owned derivatives for future integration.",
+  "supersedes": "The old copied-lobby/custom ED-00..07 execution route and future dispatch authority. The accepted toolkit migration remains complete; this creates no migration rerun.",
+  "canonical_plan": "Docs/Tasks/EnvironmentDestruction01Plan.md",
+  "new_children": {
+    "NGD-01": "MSQ-149",
+    "NGD-02": "MSQ-150",
+    "NGD-03": "MSQ-151"
+  },
+  "primary_planning_review": "Saved/NextGenDestructionPlan01/review.md"
+}

@@ -7,10 +7,11 @@ not report the new brain as delivered.
 
 ## Delivery sequence
 
-The later [owner lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json)
-places initial [MSQ-74 destruction](EnvironmentDestruction01Plan.md) before this AI
-sequence. Its laboratory/specimen work no longer waits for MSQ-72. The sequence
-below remains the order within AI; UG-08 consumes the resulting specimen later.
+The [toolkit task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json)
+replaces the custom laboratory with [MSQ-74 integration](EnvironmentDestruction01Plan.md).
+Migration is accepted; MSQ-149..151 are prepared. Toolkit integration does not wait
+for MSQ-72; AI startup does not wait for the final density handoff. The order below
+remains internal to AI. UG-08 consumes MSQ-150's usable specimen/change contract.
 
 1. **UG-00:** remove the obsolete active AI and extract verified primitives. Deliver
    an explicitly passive/manual compilable intermediate, then proceed to UG-01 as
@@ -21,8 +22,8 @@ below remains the order within AI; UG-08 consumes the resulting specimen later.
    independent of first shot, moving fire/reload and evidence-based investigation.
 3. **UG-02:** deliver real encounter navigation and persistent spatial search.
    Complete existing MSQ-71 for health/restart, UG-03 for initial individual cover,
-   then MSQ-72 as a one-enemy repeatable encounter. Integrate the earlier MSQ-74
-   destruction specimen through UG-08 before extensive tuning and group work.
+   then MSQ-72 as a one-enemy repeatable encounter. Integrate MSQ-150's toolkit
+   specimen through UG-08 before extensive tuning and group work.
    UG-04 later extends the fixture to two/three enemies behind group safety.
    This scheduling lane is explicit; missing destruction does
    not hold the initial core technically incomplete forever.
@@ -212,15 +213,16 @@ oscillation. Owner judges whether the changes feel interesting rather than arbit
 
 ## UG-08: Early destroyed-cover and route invalidation
 
-**Result:** the new AI responds to a real bounded destructible specimen without
-retaining invalid cover/routes. Hard prerequisites: UG-03, MSQ-74. Unstaged, high
-priority; schedule after initial individual cover, one-enemy MSQ-72 and an MSQ-74
-specimen, before extensive tuning and group work.
+**Result:** the new AI responds to the real integrated toolkit specimen without
+retaining invalid cover/routes. Hard prerequisites: MSQ-126 (UG-03), MSQ-150 (NGD-02).
+Unstaged, high priority; schedule after initial individual cover, one-enemy MSQ-72
+and NGD-02's delivered change contract, before extensive tuning and group work.
+Accepted vendor migration/demo alone cannot satisfy this prerequisite. NGD-03's
+final density handoff is not a gate on early AI integration.
 
 Work: collision/nav/cover revisions and safe invalidation, cancellation and bounded
-requery through the UG-03 cover actions and UG-02 route adapter. MSQ-74 can establish
-its own obstruction/cover-validity acceptance through the existing actual-geometry
-guards and adapter notification seam; UG-08 extends that evidence to all affected
+requery through the UG-03 cover actions and UG-02 route adapter. NGD-02 supplies
+tested obstruction/cover-validity evidence and toolkit change notifications; UG-08 extends that evidence to all affected
 in-flight plans and query states. MSQ-74 completion does not depend back on UG-08.
 
 Acceptance: cover destroyed before commitment, during movement and during a current
@@ -331,7 +333,8 @@ and MSQ-118..120 remain delivered. MSQ-101 remains a historical coordination ind
 MSQ-71/72/74..78/99/100 retain their external ownership. MSQ-72 gains UG-03 as an
 explicit implementation dependency and starts with one enemy within its existing
 cap of three; UG-04 owns enabling group combat. All original MSQ-72 acceptance
-criteria remain, including reachable cover. Other external task fields stay unchanged.
+criteria remain, including reachable cover. MSQ-74 and its consumers follow the later
+toolkit task rewrite; other external task fields retain their existing scope.
 At their eventual dispatch,
 read current CMC and new adapter contracts rather than applying historical Mover
 or old policy instructions. MSQ-73 stays deferred. AI smoke/trap extensions wait for

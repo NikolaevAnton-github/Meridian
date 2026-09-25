@@ -29,7 +29,7 @@ apply to future execution; owner gameplay/motion judgement remains separate.
 | UG-05 | MSQ-128 | [Arcade pressure and truthful cues](UtilityGOAP01/UG-05.md) | MSQ-127 | 6 |
 | UG-06 | MSQ-129 | [Cooperative actions and interruption](UtilityGOAP01/UG-06.md) | MSQ-128 | 7 |
 | UG-07 | MSQ-130 | [Controlled variety and observed-habit adaptation](UtilityGOAP01/UG-07.md) | MSQ-129 | 8 |
-| UG-08 | MSQ-131 | [Early destroyed-cover and route invalidation](UtilityGOAP01/UG-08.md) | MSQ-126, MSQ-74 | Unstaged integration |
+| UG-08 | MSQ-131 | [Early destroyed-cover and route invalidation](UtilityGOAP01/UG-08.md) | MSQ-126, MSQ-150 | Unstaged integration |
 | UG-09 | MSQ-132 | [Time ability and knowledge integration](UtilityGOAP01/UG-09.md) | MSQ-124, MSQ-75 | Unstaged integration |
 | UG-10 | MSQ-133 | [Force-push and telekinesis capability integration](UtilityGOAP01/UG-10.md) | MSQ-126, MSQ-76, MSQ-77 | Unstaged integration |
 | UG-11 | MSQ-134 | [Disarming and weapon capability integration](UtilityGOAP01/UG-11.md) | MSQ-124, MSQ-99 | Unstaged integration |
@@ -39,12 +39,13 @@ apply to future execution; owner gameplay/motion judgement remains separate.
 
 ## Priority lane
 
-The [owner destruction-lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json)
-places the initial [MSQ-74 laboratory/specimens](EnvironmentDestruction01Plan.md)
-before AI replacement; MSQ-74 no longer waits for MSQ-72.
-Then UG-00 -> UG-01 -> UG-02 supplies the clean foundation, first combat enemy and
+The [toolkit task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json)
+replaces the custom laboratory with [MSQ-74 integration](EnvironmentDestruction01Plan.md).
+Migration is accepted; MSQ-149..151 are prepared. Initial toolkit integration does
+not wait for MSQ-72, and AI startup does not wait for the final density handoff.
+UG-00 -> UG-01 -> UG-02 supplies the clean foundation, first combat enemy and
 hunt, followed by MSQ-71 survival, UG-03 cover and one-enemy MSQ-72. Integrate the
-delivered destruction through UG-08 before extensive tuning/group work.
+MSQ-150's delivered specimen/change contract through UG-08 before extensive tuning/group work.
 MSQ-72 gains UG-03 as a dependency; UG-04 extends its fixture to two/three enemies.
 UG-08 is high priority without making future destruction a mandatory core
 completion barrier. MSQ-73 dismemberment remains deferred. External mechanics retain
@@ -78,7 +79,7 @@ tasks. The cancelled MSQ-121 preparation issue is not a completion gate: inspect
 [the direct correction](../GASPALSAIFix01.md) and its applicable evidence instead.
 External task statuses are preserved. MSQ-72 gains the explicit UG-03 dependency
 and one-enemy-first dispatch note; its original acceptance and cap of three remain.
-Other external mechanic scopes are unchanged except the later MSQ-74 lab amendment.
+Other external mechanic scopes retain their ownership; MSQ-74 follows the later toolkit rewrite.
 Read current CMC and adapter
 contracts at future dispatch. Existing old Mover wording is historical.
 

@@ -1,75 +1,53 @@
-# EnvironmentDestruction01: bounded destructible objects and cover
+# EnvironmentDestruction01: Next Gen toolkit gameplay integration
 
-Multica issue: **MSQ-74**.
-Coordination parent under [CombatSlice01](CombatSlice01Plan.md); retained native
-stage 8 is historical placement, not the current dispatch order.
-Current route: [copied-lobby plan and children](EnvironmentDestruction01Plan.md),
-under the [owner lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json).
-Initial laboratory/specimen work precedes Utility AI and does not wait for MSQ-72.
-ED-00 and ED-01 are technically delivered; later children remain prepared.
-The [layered-column clarification](../Approvals/EnvironmentDestruction01-ColumnLayers01.json)
-extends ED-02 planning without dispatching implementation.
+Multica issue: **MSQ-74**. Coordination parent under [CombatSlice01](CombatSlice01Plan.md).
+Updated 2026-09-25 under the [owner task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json).
+Follow the [current plan and child mapping](EnvironmentDestruction01Plan.md).
+Prepared scope only; no implementation is dispatched by this rewrite.
 
-The [owner priority decision](../Approvals/CombatPriorities01-OwnerScope01.json)
-places environmental destruction among the priority combat features. MSQ-73
-advanced body damage/dismemberment is deferred and is no longer a prerequisite.
-Stage 8 is retained; the former stage 7 is vacant. The later lab request supersedes
-the MSQ-72 predecessor and authorizes the isolated copy, not a new art selection.
+## Baseline and scope
 
-## Scope
+The [Next Gen Destruction Toolkit migration](../NextGenDestruction01.md) is accepted.
+Vendor demo acceptance proves package migration, not integration with our rifle,
+cover, AI, support or lobby. The custom ED laboratory implementation is retired.
+MSQ-140/141 retain historical done status; MSQ-142..147 are superseded/cancelled.
 
-Work in `/Game/Maps/L_OpeningLobby_DestructionLab01`, preserving the original map
-and shared sources. Duplicate any referenced asset before lab-specific edits.
-Progressively populate this single copy; measure intact, breaking and settled
-states as density increases, with quality-preserving optimization in each stage.
+Use the imported toolkit for a bounded playable destruction fixture, initially one
+identified existing vendor object/material in a task-owned test map or derivative.
+Connect the current MeridianSquad rifle/projectile damage path to real breakage.
+Make visible damage, weapon blocking and Pawn collision agree. Establish a usable
+material response, bounded physical debris, reset, and change/support notifications;
+then measure several objects and canonical slowdown. Reuse working vendor behavior
+and extend only documented gaps. Do not rebuild the retired custom fracture system.
 
-Select a small explicit set of existing reusable nonstructural objects, initially
-two or three specimens, for intact/damaged/destroyed states. Use removable gameplay
-instances and preserved editable sources. State which objects are cover and which
-are cosmetic debris. Existing columns, floor, ceiling and owner-authored architectural
-assets remain structurally intact; deferred glass refinement is not reopened.
-On the selected column, cladding and a bounded concrete surface volume may shed
-over a permanent solid core. No column severing, collapse or ceiling failure is
-included. Declare depth bounds and preserve the existing outer envelope. ED-02
-owns local layered damage and basic fracture surfaces; ED-03 owns stable rubble.
+The three sequential children are NGD-01 (weapon/first object), NGD-02 (playable
+specimen/debris contract), and NGD-03 (load/slowdown/handoff). Their exact Multica IDs,
+prerequisites and acceptance are in the plan. MSQ-74 remains unassigned coordination.
+MSQ-68 and MSQ-82 remain the established combat prerequisites; the migrated package
+and current rifle baseline must be verified before implementation.
 
-Connect rifle damage to visible breaks, suitable sound/particles and bounded
-physics. Document mass, damage threshold, fragmentation and cleanup choices as
-tuning. Adjust hit obstruction, player collision and enemy navigation/cover state
-when a selected object breaks. Expose change/revision notifications now; the new
-AI's in-flight plans and cover/route requery remain MSQ-131's acceptance.
-Preserve the original map/assets and provide laboratory reset.
+## Acceptance and consumers
 
-The owner subsequently requests movement over debris; see
-[PhysicsControlRefinement01 / MSQ-90](PhysicsControlRefinement01Plan.md). Provide
-one bounded representative rubble patch from these specimens for later traversal
-in MSQ-78. Identify solid static support, eligible movable support, unstable or
-too-small fragments, and nonblocking cosmetic debris. Document support invalidation
-when pieces fracture, are replaced or are cleaned up, consuming the applicable
-MSQ-96 contact contract when available. Do not silently disable all debris collision
-or permanently freeze it to make traversal pass. Actual enemy movement remains
-MSQ-70's responsibility; integrated player/enemy crossing remains MSQ-78's.
+- Actual MeridianSquad shots cause reproducible damage/break states. Retained solid
+  geometry blocks shots; declared openings permit later shots whose sweep fits.
+  Record the supported localization/granularity instead of promising runtime cutting.
+- Significant visible fragments collide and settle; cosmetic chips are identified.
+  Counts, lifetime, cleanup and reset are bounded without stale blockers/support.
+- Stable object/fragment identity, affected bounds, collision/cover revision,
+  support invalidation and reset generation form a documented consumer contract.
+- Identified small-population runs cover intact, breaking and settled states,
+  repeated resets and normal/slowdown/restoration behavior at stated settings.
+- Handoff identifies the exact fixture, controls, candidate, limits, review closure
+  and pending owner visual/play judgement. Migration evidence is not runtime proof.
 
-## Acceptance
+MSQ-131 consumes NGD-02's usable specimen and notifications after new AI cover and
+one-enemy MSQ-72; it owns invalidating plans and requerying routes/cover.
+MSQ-96 independently owns support/contact capability on fixtures. NGD-02 documents
+compatibility with that contract when available without depending on its delivery.
+MSQ-78 consumes actual toolkit debris plus movement/support handoffs and proves
+player/enemy crossing. These consumers do not gate destruction parent completion.
 
-- Each identified specimen reaches its stated damage states through actual rifle
-  hits. Visual destruction and collision/hit blocking change together.
-- An intact cover object protects the target; its declared destroyed state allows
-  the expected shot or traversal. Actual geometry and destruction notifications
-  expose cover invalidation; MSQ-131 owns new AI cover choices and in-flight plans.
-- Debris count, lifetime and collision are bounded; no explosive physics, permanent
-  blocked route or sustained growth after encounter resets.
-- The column shows distinct cladding/concrete loss and persistent irregular depth,
-  including material-appropriate exposed interiors. Repeated hits at the declared
-  depth limit leave a visibly damaged, solid residual core. Large visible fragments
-  collide and settle without persistent interpenetration or overlap flicker.
-- Supply an identified reproducible traversable rubble patch and its support/
-  cleanup contract for MSQ-78, including a physics-enabled piece that can move.
-  This fixture handoff does not itself prove player or enemy traversal.
-- Compare intact/damaged views and record scoped CPU/GPU/physics observations at
-  stated settings. Technical results do not accept new art or extensive full-level
-  destruction. Missing suitable sources require a bounded asset decision.
-
-No whole-building fracture, structural redesign or new environment modeling without
-the required concept/dimension approvals. Follow the parent plan; deliver
-`Docs/EnvironmentDestruction01.md` and scoped source/runtime evidence.
+No lobby placement, architecture changes, structural collapse, renewed layered-column
+production, whole-level destruction, new abilities or new art is granted. Preserve
+vendor originals, original lobby/shared assets and owner edits. Use the plan's
+review/evidence rules; earlier ED task-specific waivers do not transfer.

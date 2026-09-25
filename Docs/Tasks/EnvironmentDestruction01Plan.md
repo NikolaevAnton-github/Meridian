@@ -1,161 +1,94 @@
-# EnvironmentDestruction01: copied-lobby destruction laboratory
+# EnvironmentDestruction01: Next Gen toolkit integration plan
 
-Updated: 2026-09-25. Parent: **MSQ-74** under MSQ-67.
-Authority: [owner lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json)
-and [layered-column clarification](../Approvals/EnvironmentDestruction01-ColumnLayers01.json).
-Multica owns live state. This document defines scope and sequence, not a scheduler.
+Updated 2026-09-25. Coordination parent: **MSQ-74**, under MSQ-67.
+Authority: [owner task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json).
+Baseline: [accepted toolkit migration](../NextGenDestruction01.md).
+Multica owns live state. All new children are unassigned backlog with zero runs;
+this planning rewrite does not dispatch implementation or accept future visuals.
 
-## Direction and execution boundary
+## Direction and sequence
 
-Destruction is the next implementation lane, ahead of Utility AI replacement.
-Create `/Game/Maps/L_OpeningLobby_DestructionLab01` from the current retained
-`/Game/Maps/L_OpeningLobby_PainterStone01`. Gradually populate the one laboratory
-map with reusable nonstructural destruction specimens. Preserve the original
-map, owner configuration, shared assets, editable sources and immutable evidence.
-An edited referenced asset needs its own lab-derived copy; copying the map alone
-does not isolate shared materials, Blueprints, meshes or map-owned dependencies.
-
-ED-00 copy/baseline and the [ED-01 column-cladding specimen](../EnvironmentDestruction01ED01.md)
-are technically delivered under the [scoped start](../Approvals/EnvironmentDestruction01-ColumnCladding01.json).
-ED-01 independent review was [waived by the owner](../Approvals/EnvironmentDestruction01-ED01ReviewWaiver01.json);
-owner visual/play acceptance remains pending. [ED-02 is now authorized](../Approvals/EnvironmentDestruction01-ED02Start01.json)
-with its own scoped independent-review waiver. ED-03..07 remain prepared sequential
-work; their creation does not auto-dispatch implementation.
-No new architecture, structural failure of walls/floors/columns, building collapse, resumed
-glazing refinement or new art selection is implied. New specimen art follows the
-existing bounded source/visual selection rules. Reuse existing editable sources.
-
-MSQ-72 is no longer an initial destruction prerequisite. The existing rifle point
-damage path can drive a specimen independently of enemy behavior. MSQ-131 later
-integrates changed cover/routes into the new AI; it is not a reverse gate on MSQ-74.
-Actual player/enemy traversal over rubble retains the MSQ-78/MSQ-95/96 boundary.
-
-## Sequential children
+Build gameplay integration on `/Game/NextGenDestruction`, preserving vendor originals
+and using task-owned derivatives. Start with one existing vendor specimen in a
+bounded fixture; record its asset, material, dimensions and supported break behavior.
+A derivative test map is sufficient. The old copied-lobby map and custom ED-00..02
+implementation were retired; original lobby placement/architecture remain deferred.
+Choose the concrete source at future execution from the imported content; migration
+acceptance is not blanket design acceptance or proof of weapon/fragment behavior.
 
 | Package | Multica | Result | Prerequisite |
 | --- | --- | --- | --- |
-| ED-00 | MSQ-140 | [Isolated copied lobby and baseline inventory](EnvironmentDestruction01/ED-00.md) | Verified current source map and editor |
-| ED-01 | MSQ-141 | [First rifle-driven destruction specimen](EnvironmentDestruction01/ED-01.md) | ED-00 |
-| ED-02 | MSQ-142 | [Layered cladding/concrete damage and truthful openings](EnvironmentDestruction01/ED-02.md) | ED-01 |
-| ED-03 | MSQ-143 | [Stable cladding/concrete debris, support and reset](EnvironmentDestruction01/ED-03.md) | ED-02 |
-| ED-04 | MSQ-144 | [Second material and reusable specimen authoring](EnvironmentDestruction01/ED-04.md) | ED-03 |
-| ED-05 | MSQ-145 | [Progressive population and measured optimization](EnvironmentDestruction01/ED-05.md) | ED-04 |
-| ED-06 | MSQ-146 | [Impact presentation and existing slow-time consistency](EnvironmentDestruction01/ED-06.md) | ED-05 |
-| ED-07 | MSQ-147 | [Representative laboratory and owner handoff](EnvironmentDestruction01/ED-07.md) | ED-06 |
+| NGD-01 | MSQ-149 | [Our rifle drives one toolkit object](NextGenDestruction01/NGD-01.md) | MSQ-68, MSQ-82, accepted toolkit migration |
+| NGD-02 | MSQ-150 | [Playable material, debris, reset and change contract](NextGenDestruction01/NGD-02.md) | NGD-01 |
+| NGD-03 | MSQ-151 | [Bounded population, slowdown and owner-ready handoff](NextGenDestruction01/NGD-03.md) | NGD-02 |
 
-Stages are local to MSQ-74. Keep one production worker/editor writer; no automatic
-parent executor. Later AI/ability tasks consume the delivered destruction contract.
+Children execute sequentially only after an explicit start, with one production
+worker/editor writer. They get fresh issues/native sessions rather than resuming
+retired ED candidates. The parent has no executor or automatic successor dispatch.
+The accepted migration is not repeated as a new milestone.
 
-## Specimen behavior
+The replacement direction is now established. The AI lane retains MSQ-123..125,
+MSQ-71, MSQ-126 and one-enemy MSQ-72. MSQ-131 consumes NGD-02's tested specimen/change
+contract after MSQ-126 and the one-enemy encounter, before extensive tuning/group
+work; it need not wait for NGD-03's final population handoff. Neither early toolkit
+integration nor MSQ-74 completion depends on new AI. All execution remains unstarted.
 
-Begin with one bounded specimen. Delivered ED-01 removes existing column cladding
-and exposes intact backing. ED-02 extends this specimen under the owner's later
-clarification: cladding and a bounded concrete surface volume can shed, leaving a
-permanent visible structural core that still blocks bullets. Columns do not collapse
-or sever through, and the ceiling remains unaffected. Record the maximum damage
-depth and retained core envelope before implementation; numeric tuning is not yet
-approved. Retain existing placement, outside dimensions and original/shared assets.
-A separately selected thin specimen must establish actual pass-through to a target;
-never remove structural core collision to manufacture that result. Actual rifle hits
-must produce localized visible breaks and corresponding collision changes.
-Default first behavior: the impacting bullet damages the obstacle and stops;
-later shots can pass through the resulting opening if their actual sweep fits.
-Penetration through intact material is a separate proposed extension.
+## Behavior and interfaces
 
-Damage accumulates near impact; it must not silently become global hit points
-that delete the entire object. Chaos pre-fractured pieces and authored connections
-are the initial technical candidate, validated against local installed capabilities.
-Do not promise arbitrary runtime mesh cutting or physically exact structural failure.
-Record fracture granularity, support/anchor rules, mass, thresholds and impulses.
+Use the actual rifle/projectile path and finite-projectile collision rules. The
+impacting bullet stops at an intact obstacle and applies damage once; subsequent
+shots can pass through an opening only when their actual sweep fits. Intact-material
+penetration is outside this plan. Declare the vendor object's damage granularity,
+thresholds, anchoring, impulse and supported local/whole-object break states; do not
+promise arbitrary cutting or restore the old mandatory two-layer column recipe.
 
-ED-02 must demonstrate persistent irregular recesses and material-specific cladding
-and concrete fragments, including identifiable textured/relief-treated interiors.
-Use varied fracture directions, depth and fragment sizes within the declared damage
-volume; avoid only straight full-thickness extrusions or replacing peeled cladding
-with another uniformly smooth concrete shell. Even the exhausted-depth state must
-remain visibly damaged while the residual core stops shots. Selected secondary
-fragmentation may be used if needed; arbitrary runtime cutting is not required.
-Large visible fragments need world and mutual collision from the first layered
-candidate. ED-03 establishes stable piles, sleep, lifecycle and support semantics;
-sleep must not silently become noncolliding visible rubble. Treat fine cosmetic
-chips separately. Basic fracture materials/geometry and collision quality are
-prerequisites for population, not work deferred wholesale to ED-06 effects.
+Visual state, blocking collision and valid cover must agree. Record substantial
+remaining geometry and settled debris instead of clearing all collision to make a
+shot pass. Significant fragments retain world/mutual collision and stable settling;
+fine nonblocking chips may be cosmetic. Keep counts and lifecycle bounded, preserve
+one reproducibly movable piece, and invalidate support before removal/reset.
 
-Add a second materially distinct specimen after the first loop works. Two layers
-on one column do not alone satisfy the second-specimen requirement. Select two
-or three actual sources with identified derivations; do not assume a wooden box,
-masonry barrier or any proposed visual has already been approved or exists.
-Progressive population uses sparse, representative and bounded dense layouts in
-the same map, with reproducible fixture/configuration identities rather than
-duplicated projects or a growing set of full-map copies.
+Expose object/fragment identity, affected bounds, collision/cover revision, support
+invalidation and reset generation through a narrow adapter. Extend only measured
+vendor gaps; no replacement destruction framework or obsolete AI integration.
+NGD-02 hands this contract to MSQ-131 and MSQ-96/MSQ-78. MSQ-96 can prove contacts on
+independent fixtures; NGD-02 need not wait for it. Real rubble crossing is MSQ-78's
+acceptance, distinct from destruction and routing around unsupported debris.
 
-## Quality-preserving performance plan
+## Measurements and acceptance
 
-The controller observed Ryzen 7 9800X3D and RTX 5090 on 2026-09-24. Record actual
-hardware, resolution, scalability, upscaler, frame cap, engine build and execution
-mode for each comparable measurement; this PC is not a minimum-spec promise.
-No target FPS or universal fragment cap is approved by this planning record.
-Set numeric cost budgets from the first measured specimen and intended scene
-before density tuning; preserve margin for later AI, weapons and abilities.
+NGD-01 proves the real weapon loop. NGD-02 proves the usable object/material,
+debris/reset and notification contract before density increases. NGD-03 measures
+empty-fixture baseline, intact objects, individual/overlapping breaks, settled
+debris and repeated reset using reproducible counts, camera and shot sequences.
+Record engine/hardware, resolution/scalability, frame cap, execution mode, sample
+duration, frame/Game/Render/GPU and available physics timings, P95/max spikes,
+active bodies and memory trends. Use existing Unreal profiling; no new benchmark
+framework, unlimited stress scene or unmeasured universal fragment/FPS promise.
+Tune from measured cost, retain margin for AI/abilities, and disclose visual trades.
 
-Measure the same camera route and bounded hit sequence in four states:
+Check canonical slowdown: world, bullets and rifle cadence 0.25; hero movement 0.65.
+Check entry, restoration, lifetime/cleanup and reset while debris is active.
+Do not add the later full-stop ability. NGD-03 reuses valid NGD-01/02 evidence and
+rechecks only changes, concrete gaps and affected transitions.
 
-1. Copied lobby before specimens: existing CPU/GPU/rendering baseline.
-2. Populated intact scene: idle physics, geometry, materials and memory costs.
-3. A representative break and bounded overlapping breaks: physics/event spikes,
-   fragment activation, dust/audio and dynamic rendering costs.
-4. Settled debris and repeated resets: residual cost, collision truth, bounded
-   memory/body/component counts and remaining gameplay obstacles.
+Substantive implementation has executor self-checks and one primary independent
+technical review, followed by controller scope/evidence/finding closure. Preserve
+independent visual review where applicable and separate owner visual/play acceptance.
+Old ED review waivers do not transfer. At each future dispatch define runtime test
+authority, verify live editor/project/bridge, max reasoning and standard speed, and
+prepare the bounded brief/checkpoint under the execution/context policies.
+Keep generated evidence under `Saved/NextGenDestructionIntegration01/<package>/<candidate>/`;
+track source/config/docs in Git and binary assets in LFS. Preserve owner changes.
+Parent closure requires all three child deliveries and an identified owner-ready
+fixture with known limits, without claiming owner acceptance or later AI/traversal.
 
-Report frame time in milliseconds, Game/Render/GPU and available physics timings,
-sample size/duration, P95 and observed maximum with warm-up/streaming context.
-FPS and averages alone cannot close break-event hitch acceptance. For 60 FPS the
-whole-frame budget would be about 16.7 ms, not 16.7 ms available to destruction.
-CPU/GPU costs may overlap; do not add their displayed times as serial work.
+## Retired route and preservation
 
-Physics work includes active rigid bodies, contacts, collision shape complexity,
-solver/constraint work and activation/break bursts. GPU work includes visible
-geometry, materials, shadows, lighting and particle overdraw; CPU events/render
-submission and RAM/VRAM can also limit the result. Nanite is not a physics budget.
-
-Optimize in this order, checking affected behavior and comparable views:
-
-- Avoid idle per-object work; keep intact clusters cheap and activate locally.
-- Tune stable sleeping and collision proxies while retaining gameplay collision.
-- Bound simultaneous active simulation and batch event/effect work; retain a
-  reproducible movable piece and do not freeze all debris to hide problems.
-- Use cosmetic particles for genuinely nonblocking fine dust/chips, pool where
-  useful, and tune particle coverage/lighting at equivalent perceived quality.
-- Keep significant visible damage, openings and obstacles for the encounter.
-  Sleeping is not removal. Any support/cover removal emits invalidation before
-  deletion; never remove a supporting piece beneath an actor without a safe rule.
-- Apply distance/visibility and effect scalability only with documented visual
-  comparisons. General quality reduction is an explicit tradeoff, not a hidden fix.
-
-ED-05 establishes density measurements; ED-06 repeats presentation-affected
-measurements after dust/audio changes, plus normal and canonical slowdown checks
-for affected physics, debris lifetime and reset transitions. Remeasure any such
-behavior whose implementation changes; presentation-only timing is insufficient.
-No unlimited stress population or new
-benchmark framework. Reuse Unreal profiling and existing focused evidence tools.
-
-## Shared contracts and acceptance
-
-Expose bounded change information: object/fragment identity, affected bounds,
-collision/cover revision, support invalidation and reset generation. Avoid wiring
-new destruction behavior into the obsolete local navigation policy.
-World physics/projectiles/rifle cadence use the current 0.25 slowdown and hero
-movement 0.65. This does not implement the later full time-stop ability.
-
-Each stage identifies its candidate and changed paths; executor checks and one
-primary independent technical review cover substantive changes. The simple map
-copy may use a bounded controller/self-check of preservation and load integrity.
-Owner play/visual judgement stays separate; declare runtime test authority before
-each dispatch and keep untested behavior pending. Keep all logs/captures under
-`Saved/EnvironmentDestruction01/<package>/<candidate>/`; binary assets use LFS.
-Controller makes task-scoped local commits, excluding unrelated owner changes.
-
-Parent completion requires actual shot/collision truth, local damage, bounded
-movable debris, clean resets, repeatable density measurements, reviewed findings
-and an identified owner-ready map. It does not claim whole-level destruction,
-future AI adaptation, integrated rubble traversal or owner visual/play acceptance.
+MSQ-140/141 (ED-00/01) retain done status as historical technical deliveries.
+MSQ-142..147 (ED-02..07) are cancelled as superseded. MSQ-148 remains cancelled.
+Their [old child briefs](EnvironmentDestruction01/ED-00.md), approvals, runs,
+rejected/accepted candidates and exact evidence remain history, not an execution
+queue. Their starts/waivers cannot authorize NGD work. Retired implementation bytes
+and hashes remain under `Saved/NextGenDestruction01/RetiredImplementation` and its
+removal manifest. No historical evidence or immutable manifest is rebaselined.

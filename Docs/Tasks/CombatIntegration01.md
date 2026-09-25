@@ -34,8 +34,10 @@ the implemented time states, death and restart.
 The owner's later debris-traversal requirement is assigned here by
 [PhysicsControlRefinement01 / MSQ-90](PhysicsControlRefinement01Plan.md).
 Consume MSQ-91 through MSQ-96 stance/support handoffs, MSQ-70 movement and MSQ-74
-representative destruction output. The six new tasks can prove reactive support
-capabilities on fixtures; this task retains the open real-traversal gate. Preserve
+integrated toolkit debris output (MSQ-150/151), including support/change/reset
+contracts. Vendor migration/demo acceptance is not evidence of ordinary crossing.
+The support tasks can prove capabilities on fixtures; this task retains the open
+real-traversal gate. Preserve
 the existing stage/predecessor, check these additional handoffs before the coupled
 acceptance, and do not dispatch any prerequisite from this planning amendment.
 
@@ -46,7 +48,7 @@ acceptance, and do not dispatch any prerequisite from this planning amendment.
 - Cover and damage semantics agree across rifle, enemy, body and physics paths;
   controls do not conflict and feedback is readable at normal gameplay distance.
 - Both the player and the adopted enemy enter, cross and leave one declared
-  traversable patch of actual MSQ-74 debris through ordinary movement. For the
+  traversable patch of integrated MSQ-74 toolkit debris through ordinary movement. For the
   enemy, show credible foot contact/clearance and one affected hit-recovery return
   to locomotion. Include a piece that actually shifts or loses support and safe
   behavior when that contact fails. State the supported envelope and the handling

@@ -10,16 +10,19 @@ Current priority amendment, 2026-09-23: the owner prioritizes good AI, shooting
 and environmental destruction, with dismemberment last. See the
 [exact decision](../Approvals/CombatPriorities01-OwnerScope01.json).
 MSQ-73 moves from stage 7 to deferred low-priority stage 16. Native stage numbers
-remain unchanged and stage 7 is vacant. The 2026-09-24
-[owner lab request](../Approvals/EnvironmentDestruction01-LobbyLab01.json) now places
-[MSQ-74 laboratory/specimens](EnvironmentDestruction01Plan.md) first, removing its
-MSQ-72 prerequisite. Its retained stage 8 is not the current dispatch order.
+remain unchanged and stage 7 is vacant. The 2026-09-25
+[toolkit task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json) replaces
+the custom laboratory with [MSQ-74 toolkit integration](EnvironmentDestruction01Plan.md).
+Initial toolkit work does not wait for MSQ-72. The AI lane can proceed after the
+replacement direction is established; MSQ-131 consumes MSQ-150 after new cover and
+one-enemy MSQ-72. Retained stage 8 is not the current dispatch order.
 MSQ-78/MSQ-81 exclude advanced wounds/separation from their initial acceptance
 while retaining ordinary regional damage, reactions and death. MSQ-73 remains
 an open expansion and later owns its newly coupled integration checks. Historical
 statements preserving the original order below are superseded within this scope.
-The later amendment authorizes ED-00's isolated lobby copy; other children are
-prepared sequential work without automatic dispatch.
+MSQ-140/141 remain historical done; MSQ-142..147 are cancelled as superseded.
+Fresh MSQ-149..151 prepare toolkit integration sequentially, unassigned with zero
+runs. This rewrite grants no implementation start or lobby placement.
 
 The MSQ-68 execution instruction authorized that child and fixed the
 [projectile/time/self-hit policy](../Approvals/CombatFoundation01-OwnerScope01.json).
@@ -108,7 +111,7 @@ priority amendment takes precedence for dispatch.
 | 4 | MSQ-70 | [EnemyCombat01](EnemyCombat01.md) | One enemy senses, moves, shoots, reacts and dies. |
 | 5 | MSQ-71 | [PlayerSurvival01](PlayerSurvival01.md) | Player health, death and reliable fight restart. |
 | 6 | MSQ-72 | [LobbyEncounter01](LobbyEncounter01.md) | A small encounter with cover, completion and reset. |
-| 8 | MSQ-74 | [EnvironmentDestruction01](EnvironmentDestruction01.md) | Selected destructible objects with correct cover and debris behavior. |
+| 8 | MSQ-74 | [EnvironmentDestruction01](EnvironmentDestruction01.md) | Toolkit gameplay integration with truthful cover/collision and bounded debris. |
 | 9 | MSQ-75 | [TimeSlow01](TimeSlow01.md) | World slowdown/stop, relative player slowdown and reliable restoration. |
 | 10 | MSQ-76 | [ForcePush01](ForcePush01.md) | Directional push with explicit eligibility and recovery. |
 | 11 | MSQ-77 | [Telekinesis01](Telekinesis01.md) | Acquire, hold, release and throw suitable objects. |
@@ -144,7 +147,7 @@ balance refinements, explicitly including uneven surfaces and movement over
 destruction debris. [PhysicsControlRefinement01 / MSQ-90](PhysicsControlRefinement01Plan.md)
 is an unstaged coordination child containing ordered MSQ-91 through MSQ-96.
 All seven new issues are prepared in backlog, unassigned, without execution.
-MSQ-70 and MSQ-74 carry movement/debris interface handoffs; MSQ-78 owns actual
+MSQ-70 and MSQ-74 carry movement/toolkit-debris handoffs; MSQ-78 owns actual
 player/enemy crossing of representative rubble. The original stages above remain
 unchanged. Support-fixture tests alone do not close the traversal requirement.
 

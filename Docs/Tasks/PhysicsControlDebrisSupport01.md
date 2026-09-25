@@ -19,7 +19,10 @@ Revalidate contact and release safely into a remaining corrective step or physic
 fall when it is lost. Do not weld feet indefinitely to a departing chunk, freeze
 chunks to pass, or keep stale references after fracture/cleanup/reset. Retain
 bounded two-way physics rather than using the support as an invisible kinematic
-platform. Use a small removable dynamic fixture set; MSQ-74 owns actual destruction.
+platform. Use a small removable dynamic fixture set; MSQ-74 owns actual toolkit
+destruction. MSQ-150 (NGD-02) produces its debris/support-change contract; fixture
+contact capability here remains independent of that delivery. Follow the
+[toolkit rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json).
 
 ## Acceptance
 
@@ -33,10 +36,11 @@ platform. Use a small removable dynamic fixture set; MSQ-74 owns actual destruct
   fixture, including during landing. Check affected fall/get-up, relative slowdown,
   and reset/recreation so contact references and constraints do not survive their
   objects. Record scoped physics cost, piece counts and observed motion limits.
-- Deliver the support eligibility/invalidation contract for MSQ-74 and MSQ-78.
+- Deliver the support eligibility/invalidation contract for MSQ-150/74 and MSQ-78.
   Fixture completion proves contact capability only. Real movement across produced
   rubble remains an explicit open acceptance row in MSQ-78, requiring MSQ-70
-  movement and MSQ-74 destruction; do not claim that one/two steps satisfy it.
+  movement and integrated toolkit debris from MSQ-74; migration/demo acceptance
+  and one/two recovery steps cannot satisfy it.
 
 Deliver `Docs/PhysicsControlDebrisSupport01.md` and focused evidence under
 `Saved/CombatSlice01/PhysicsControlDebrisSupport01/`. No fracture pipeline, AI or

@@ -1,4 +1,4 @@
-﻿# MeridianSquad current project state
+# MeridianSquad current project state
 
 Updated 2026-09-25. Navigation only; verify live Multica/editor state when needed.
 This snapshot grants no task execution or design approval. Read the relevant task,
@@ -6,12 +6,12 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
 
 ## Active direction
 
-- **Destruction replacement:** the owner requested removal of our custom ED-00..02
-  laboratory implementation before directly importing the purchased
-  [Next Gen Destruction Toolkit to UE 5.8](NextGenDestruction01.md), without a new
-  Multica task. The old MSQ-74/140..147 execution plan is superseded; do not resume
-  that implementation. Original lobby/shared assets and historical evidence stay
-  preserved. Toolkit migration does not authorize lobby integration or new design.
+- **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
+  the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
+  prepares MSQ-149..151: our rifle/one object, playable debris/reset contract, then
+  load/slowdown/handoff. Unassigned backlog, zero runs; planning is not dispatch.
+  MSQ-140/141 stay historical done; MSQ-142..147 are cancelled as superseded.
+  Preserve original lobby/shared assets and history; no lobby placement/new design.
 - **Utility AI + GOAP**, [MSQ-122 program](Tasks/UtilityGOAP01.md) and
   [replacement plan](Tasks/UtilityGOAP01Plan.md), under the
   [owner decision](Approvals/UtilityGOAP01-TaskCreation01.json).
@@ -24,9 +24,9 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
   [Primary review](GASPALSAIFix01Review.md) closes the audited runtime defects.
   Source locomotion and moving fire/reload remain; custom enemy balance/recovery
   steps are inactive. Technical delivery does not grant owner motion/play acceptance.
-- After the replacement destruction direction is established: resume MSQ-123..125, MSQ-71 survival,
-  MSQ-126 cover and one-enemy MSQ-72; MSQ-131 integrates destroyed cover/routes
-  before extensive tuning/group work. MSQ-127 later adds 2/3 enemies.
+- With the replacement direction established, the AI lane is MSQ-123..125, MSQ-71
+  survival, MSQ-126 cover and one-enemy MSQ-72. MSQ-131 consumes MSQ-150's toolkit
+  specimen to integrate destroyed cover/routes before extensive tuning/group work. MSQ-127 later adds 2/3 enemies.
   MSQ-73 dismemberment is deferred; MSQ-99/100 and other mechanics remain separate.
   [Priority authority](Approvals/CombatPriorities01-OwnerScope01.json).
 

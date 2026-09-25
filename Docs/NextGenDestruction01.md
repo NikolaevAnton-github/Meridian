@@ -50,3 +50,10 @@ existing project files except the intended config additions. The measured local
 project footprint was 58.1 GiB, excluding reparse-point aliases.
 Reproducible editor conversion/check: `Scripts/NextGenDestruction01/validate.py`.
 Open `/Game/NextGenDestruction/Maps/DemoMap` to use the vendor demonstration.
+
+## Subsequent planning
+
+The owner subsequently authorized a [task rewrite](Approvals/NextGenDestruction01-TaskRewrite01.json).
+The [MSQ-74 integration plan](Tasks/EnvironmentDestruction01Plan.md) prepares fresh
+MSQ-149..151 for weapon integration, gameplay debris/reset and measured slowdown/load.
+This does not change the accepted migration scope or start future implementation.

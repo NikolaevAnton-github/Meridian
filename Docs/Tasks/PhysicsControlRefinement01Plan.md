@@ -92,7 +92,8 @@ The owner's traversal requirement remains mandatory and is assigned explicitly t
   handover between locomotion, hit recovery and standing. Preserve usable support
   data and the terrain-contact contract; fixtures alone do not prove locomotion.
 - [EnvironmentDestruction01 / MSQ-74](EnvironmentDestruction01.md): representative
-  destruction debris with bounded physics, collision/navigation updates and cleanup.
+  integrated toolkit debris (MSQ-150/151) with bounded physics, collision/change
+  notifications, support invalidation and cleanup/reset. Migration alone is not this handoff.
 
 MSQ-78 must demonstrate both the player and the adopted enemy entering, crossing
 and leaving a representative traversable debris patch through ordinary movement.
@@ -105,7 +106,8 @@ do not satisfy this row. Reuse focused earlier evidence and check only the newly
 coupled behavior and cleanup. This is not unrestricted traversal over every fragment.
 
 Stage 7 may close its support capability against removable dynamic fixtures before
-MSQ-74 exists. That closure does not close real rubble traversal: MSQ-78 retains the
+MSQ-74's toolkit gameplay debris is delivered. That closure does not close real
+rubble traversal: MSQ-78 retains the
 explicit open integration gate until the movement and destruction prerequisites
 are available. Do not make MSQ-70 depend on MSQ-74/MSQ-78 or reorder the original
 CombatSlice stages; the later owner request adds only MSQ-98 as a new prerequisite
