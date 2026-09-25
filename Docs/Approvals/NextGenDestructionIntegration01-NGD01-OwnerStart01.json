@@ -1,0 +1,14 @@
+{
+  "record_id": "NextGenDestructionIntegration01-NGD01-OwnerStart01",
+  "date_local": "2026-09-25",
+  "source": "Owner direct chat",
+  "owner_message_original": "MSQ-149, уровень исполнителя на твое усмотрение, независмый проверябщий не нужен",
+  "owner_message_english_translation": "MSQ-149; choose the executor level at your discretion; an independent reviewer is not needed.",
+  "decision": "Execute MSQ-149 only through the existing Multica production route. The controller selects Astra, max reasoning and standard speed. The independent reviewer requirement is waived for MSQ-149 only.",
+  "scope": "Deliver the bounded ready-made Next Gen demo-prop set in the current retained lobby with the real MeridianSquad rifle, following Docs/Tasks/NextGenDestruction01/NGD-01.md and the later lobby scope decision.",
+  "verification": "Executor self-checks and controller scope/evidence acceptance replace independent technical review for this task. Focused builds, editor/PIE checks, real-shot collision tests and bounded repeat/reset are authorized implementation verification. Owner visual/play acceptance remains separate.",
+  "preservation": "Capture saved/unsaved owner state and recoverable current map evidence before edits. Preserve existing architecture, materials, lighting, actors, player start, routes, vendor originals and unrelated owner edits. No historical map restoration.",
+  "limits": "No successor dispatch, new environment production, broad AI work, performance program or unrelated changes. Controller makes the verified task-scoped local commit before handoff.",
+  "candidate": "Candidate01",
+  "evidence": "Saved/NextGenDestructionIntegration01/NGD-01/Candidate01/"
+}

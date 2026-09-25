@@ -1,0 +1,307 @@
+#include "NGDPropComponent.h"
+#include "GeometryCollection/GeometryCollectionComponent.h"
+#include "Engine/Engine.h"
+#include "Engine/LatentActionManager.h"
+#include "Engine/World.h"
+#include "EngineUtils.h"
+#include "ChaosSolversModule.h"
+#include "PBDRigidsSolver.h"
+#include "Physics/Experimental/PhysScene_Chaos.h"
+#include "PhysicsField/PhysicsFieldComponent.h"
+#include "PhysicsProxy/PerSolverFieldSystem.h"
+#include "GameFramework/PlayerController.h"
+#include "InputKeyEventArgs.h"
+#include "Kismet/GameplayStatics.h"
+#include "Serialization/JsonSerializer.h"
+#include "TimerManager.h"
+#include "UObject/StructOnScope.h"
+#include "UObject/UnrealType.h"
+
+namespace
+{
+constexpr TCHAR VendorClass[] = TEXT("/Game/NextGenDestruction/Blueprints/Actors/BP_BreakableObject.BP_BreakableObject_C");
+constexpr TCHAR VendorField[] = TEXT("/Game/NextGenDestruction/Blueprints/Actors/BP_DestructionField.BP_DestructionField_C");
+UFunction* ImpactFunction(AActor* Actor)
+{
+    if (!Actor) return nullptr;
+    for (TFieldIterator<UFunction> It(Actor->GetClass()); It; ++It)
+    {
+        FString Name = It->GetName().Replace(TEXT(" "), TEXT(""));
+        if (Name == TEXT("BulletImpact")) return *It;
+    }
+    return nullptr;
+}
+FStructProperty* HitParameter(UFunction* Function)
+{
+    if (!Function) return nullptr;
+    for (TFieldIterator<FProperty> It(Function); It; ++It)
+        if (It->HasAnyPropertyFlags(CPF_Parm))
+            if (auto* P = CastField<FStructProperty>(*It); P && P->Struct == FHitResult::StaticStruct()) return P;
+    return nullptr;
+}
+FObjectPropertyBase* DataProperty(AActor* Actor)
+{
+    return Actor ? FindFProperty<FObjectPropertyBase>(Actor->GetClass(), TEXT("DataAsset")) : nullptr;
+}
+void CancelWork(AActor* Actor)
+{
+    if (!IsValid(Actor) || !Actor->GetWorld()) return;
+    Actor->GetWorld()->GetLatentActionManager().RemoveActionsForObject(Actor);
+    Actor->GetWorld()->GetTimerManager().ClearAllTimersForObject(Actor);
+}
+void CancelQueuedFields(UWorld* World, const TArray<FName>& Names)
+{
+    if (!World || Names.IsEmpty()) return;
+    // Destroying a FieldSystemComponent only removes persistent commands. Its already
+    // queued transient strain/velocity otherwise reaches a replacement collection.
+    if (UPhysicsFieldComponent* Fields = World->PhysicsField)
+    {
+        for (const bool GPU : {false, true})
+        {
+            const auto Buffer = GPU ? EFieldCommandBuffer::GPUFieldBuffer : EFieldCommandBuffer::CPUWriteBuffer;
+            const TArray<FFieldSystemCommand> Commands = Fields->TransientCommands[uint8(Buffer)];
+            for (const auto& Command : Commands)
+                if (Names.Contains(Command.CommandName)) Fields->RemoveTransientCommand(Command, GPU);
+        }
+    }
+    if (FPhysScene* Scene = World->GetPhysicsScene())
+    {
+        TArray<Chaos::FPhysicsSolverBase*> Solvers{Scene->GetSolver()};
+        if (auto* Module = FChaosSolversModule::GetModule()) Module->GetSolversMutable(World, Solvers);
+        for (auto* Solver : Solvers) if (Solver)
+            Solver->CastHelper([&Names](auto& Concrete)
+            {
+                Concrete.EnqueueCommandImmediate([Solver = &Concrete, OwnedNames = Names]()
+                {
+                    // Runs after the vendor's queued additions on this solver. Never clear
+                    // another actor's fields or mutate solver arrays from the game thread.
+                    auto& Commands = Solver->GetPerSolverField().GetTransientCommands();
+                    const int32 Removed = Commands.RemoveAll([&](const FFieldSystemCommand& Command)
+                    { return OwnedNames.Contains(Command.CommandName); });
+                    if (Removed) UE_LOG(LogTemp, Display, TEXT("NGD retired %d owned transient solver commands"), Removed);
+                });
+            });
+    }
+}
+FString Json(const TSharedRef<FJsonObject>& Object)
+{
+    FString Out;
+    FJsonSerializer::Serialize(Object, TJsonWriterFactory<>::Create(&Out));
+    return Out;
+}
+void VectorField(const TSharedRef<FJsonObject>& Object, const TCHAR* Name, const FVector& V)
+{
+    Object->SetArrayField(Name, {MakeShared<FJsonValueNumber>(V.X), MakeShared<FJsonValueNumber>(V.Y), MakeShared<FJsonValueNumber>(V.Z)});
+}
+}
+
+void UNGDWorldSubsystem::Publish(const FNGDCollisionChange& Change)
+{
+    LatestChanges.Add(Change.ObjectId, Change);
+    OnCollisionChanged.Broadcast(Change);
+}
+
+UNGDPropComponent::UNGDPropComponent()
+{
+    PrimaryComponentTick.bCanEverTick = false;
+}
+void UNGDPropComponent::BeginPlay()
+{
+    Super::BeginPlay();
+    InitialTransform = GetOwner()->GetActorTransform();
+    if (auto* P = DataProperty(GetOwner())) SourceData = P->GetObjectPropertyValue_InContainer(GetOwner());
+    Collection = GetOwner()->FindComponentByClass<UGeometryCollectionComponent>();
+    bReady = Collection && SourceData && !ObjectId.IsNone() && HitParameter(ImpactFunction(GetOwner()));
+    if (!bReady)
+    {
+        UE_LOG(LogTemp, Error, TEXT("NGD adapter unavailable: %s"), *GetOwner()->GetPathName());
+        return;
+    }
+    Collection->SetNotifyBreaks(true);
+    Collection->OnChaosBreakEvent.AddUniqueDynamic(this, &UNGDPropComponent::OnBreak);
+    PreviousBounds = Collection->Bounds.GetBox();
+    Publish(ResetGeneration ? TEXT("reset") : TEXT("initial"), ResetBounds.IsValid ? ResetBounds : PreviousBounds);
+}
+void UNGDPropComponent::Publish(FName Reason, const FBox& Previous)
+{
+    if (!Collection || !GetWorld()) return;
+    const FBox Current = Collection->Bounds.GetBox();
+    FNGDCollisionChange Change;
+    Change.ObjectId = ObjectId;
+    Change.CollisionRevision = CollisionRevision;
+    Change.ResetGeneration = ResetGeneration;
+    Change.ChangedBounds = Previous + Current;
+    Change.Reason = Reason;
+    PreviousBounds = Current;
+    GetWorld()->GetSubsystem<UNGDWorldSubsystem>()->Publish(Change);
+}
+void UNGDPropComponent::OnBreak(const FChaosBreakEvent& Event)
+{
+    if (bRetiring || !bReady || Event.Component != Collection) return;
+    ++BreakEvents;
+    ++CollisionRevision;
+    Publish(TEXT("break"), PreviousBounds);
+}
+bool UNGDPropComponent::ReceiveBullet(int64 ShotId, const FHitResult& Hit)
+{
+    if (!bReady || bRetiring || ShotId <= 0 || Hit.GetActor() != GetOwner() || RecentShots.Contains(ShotId)) return true;
+    UFunction* Function = ImpactFunction(GetOwner());
+    FStructProperty* Parameter = HitParameter(Function);
+    if (!Parameter) return true;
+    // The finite sweep already selected and consumed this bullet. Never retrace or send PointDamage too.
+    if (RecentShots.Num() == 64) RecentShots.RemoveAt(0);
+    RecentShots.Add(ShotId);
+    LastShotId = ShotId;
+    ++DeliveredHits;
+    FStructOnScope Params(Function);
+    Parameter->CopyCompleteValue(Parameter->ContainerPtrToValuePtr<void>(Params.GetStructMemory()), &Hit);
+    // The vendor defaults (no radius override) retain per-source strain, anchoring and impulse choices.
+    Fields.RemoveAll([](const TWeakObjectPtr<AActor>& Field) { return !Field.IsValid(); });
+    const FDelegateHandle Handle = GetWorld()->AddOnActorSpawnedHandler(FOnActorSpawned::FDelegate::CreateLambda([this](AActor* Spawned)
+    {
+        if (Spawned && Spawned->GetClass()->GetPathName() == VendorField)
+        {
+            Fields.Add(Spawned);
+            if (FieldNames.Num() == 64) FieldNames.RemoveAt(0);
+            FieldNames.Add(Spawned->GetFName());
+        }
+    }));
+    GetOwner()->ProcessEvent(Function, Params.GetStructMemory());
+    GetWorld()->RemoveOnActorSpawnedHandler(Handle);
+    UE_LOG(LogTemp, Display, TEXT("NGD impact id=%s generation=%d shot=%lld item=%d location=%s"),
+        *ObjectId.ToString(), ResetGeneration, ShotId, Hit.Item, *Hit.ImpactPoint.ToString());
+    return true;
+}
+void UNGDPropComponent::Retire()
+{
+    if (bRetiring) return;
+    bRetiring = true;
+    bReady = false;
+    if (Collection) Collection->OnChaosBreakEvent.RemoveDynamic(this, &UNGDPropComponent::OnBreak);
+    CancelWork(GetOwner());
+    for (const auto& Field : Fields) if (Field.IsValid())
+    {
+        CancelWork(Field.Get());
+        Field->Destroy();
+    }
+    Fields.Reset();
+    CancelQueuedFields(GetWorld(), FieldNames);
+    FieldNames.Reset();
+}
+void UNGDPropComponent::EndPlay(const EEndPlayReason::Type Reason)
+{
+    Retire();
+    Super::EndPlay(Reason);
+}
+void UNGDPropComponent::ResetAll(UWorld* World)
+{
+    if (!World || !World->IsGameWorld()) return;
+    TArray<UNGDPropComponent*> Props;
+    for (TActorIterator<AActor> It(World); It; ++It)
+        if (auto* C = It->FindComponentByClass<UNGDPropComponent>(); C && !C->bRetiring) Props.Add(C);
+    for (UNGDPropComponent* C : Props)
+    {
+        if (!C->SourceData) continue;
+        UObject* Data = C->SourceData;
+        const FTransform Transform = C->InitialTransform;
+        const FName Id = C->ObjectId;
+        const int32 Generation = C->ResetGeneration + 1, Revision = C->CollisionRevision + 1;
+        const FBox PriorBounds = C->Collection ? C->Collection->Bounds.GetBox() : C->PreviousBounds;
+        C->Retire();
+        // Destroying the whole vendor instance retires its physics proxy, latent sound work,
+        // per-particle collision overrides and delegate targets together.
+        C->GetOwner()->SetActorEnableCollision(false);
+        C->GetOwner()->Destroy();
+        if (!UNGDTools::Spawn(World, Data, Transform, Id, Generation, Revision, PriorBounds))
+            UE_LOG(LogTemp, Error, TEXT("NGD reset failed: %s"), *Id.ToString());
+    }
+}
+FString UNGDPropComponent::GetState() const
+{
+    auto O = MakeShared<FJsonObject>();
+    O->SetStringField(TEXT("id"), ObjectId.ToString());
+    O->SetStringField(TEXT("actor"), GetOwner()->GetPathName());
+    O->SetBoolField(TEXT("ready"), bReady);
+    O->SetStringField(TEXT("data_asset"), SourceData ? SourceData->GetPathName() : TEXT(""));
+    O->SetNumberField(TEXT("collision_revision"), CollisionRevision);
+    O->SetNumberField(TEXT("reset_generation"), ResetGeneration);
+    O->SetNumberField(TEXT("delivered_hits"), DeliveredHits);
+    O->SetNumberField(TEXT("break_events"), BreakEvents);
+    O->SetNumberField(TEXT("last_shot"), LastShotId);
+    O->SetNumberField(TEXT("live_fields"), Fields.FilterByPredicate([](const auto& F){ return F.IsValid(); }).Num());
+    if (Collection)
+    {
+        VectorField(O, TEXT("bounds_min"), Collection->Bounds.GetBox().Min);
+        VectorField(O, TEXT("bounds_max"), Collection->Bounds.GetBox().Max);
+        O->SetStringField(TEXT("collision_profile"), Collection->GetCollisionProfileName().ToString());
+        O->SetBoolField(TEXT("root_broken"), Collection->IsRootBroken());
+    }
+    return Json(O);
+}
+AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Transform, FName Id, int32 Generation, int32 Revision, FBox PriorBounds)
+{
+    if (!World || !DataAsset || Id.IsNone() || !DataAsset->GetPathName().StartsWith(TEXT("/Game/NextGenDestruction/Blueprints/DataAssets/Destructible/"))) return nullptr;
+    UClass* Class = LoadClass<AActor>(nullptr, VendorClass);
+    if (!Class) return nullptr;
+    AActor* Actor = World->SpawnActorDeferred<AActor>(Class, Transform, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
+    if (!Actor) return nullptr;
+    auto* P = DataProperty(Actor);
+    if (!P || !DataAsset->IsA(P->PropertyClass)) { Actor->Destroy(); return nullptr; }
+    P->SetObjectPropertyValue_InContainer(Actor, DataAsset);
+    auto* C = NewObject<UNGDPropComponent>(Actor, TEXT("NGDIntegration"), RF_Transactional);
+    C->ObjectId = Id;
+    C->ResetGeneration = Generation;
+    C->CollisionRevision = Revision;
+    C->ResetBounds = PriorBounds;
+    Actor->AddInstanceComponent(C);
+    C->RegisterComponent();
+    Actor->Tags.Add(TEXT("NGD01"));
+    Actor->FinishSpawning(Transform);
+#if WITH_EDITOR
+    if (!World->IsGameWorld())
+    {
+        Actor->SetActorLabel(Id.ToString());
+        Actor->SetFolderPath(TEXT("NGD01_DemoProps"));
+        Actor->MarkPackageDirty();
+    }
+#endif
+    return Actor;
+}
+AActor* UNGDTools::SpawnProp(UObject* Context, UObject* DataAsset, FVector Location, FRotator Rotation, FName ObjectId)
+{
+    return Spawn(GEngine->GetWorldFromContextObject(Context, EGetWorldErrorMode::ReturnNull), DataAsset, FTransform(Rotation, Location), ObjectId, 0, 0);
+}
+bool UNGDTools::RifleInput(UObject* Context, bool bPressed)
+{
+    UWorld* W = GEngine->GetWorldFromContextObject(Context, EGetWorldErrorMode::ReturnNull);
+    APlayerController* PC = W && W->IsGameWorld() ? UGameplayStatics::GetPlayerController(W, 0) : nullptr;
+    return PC && PC->InputKey(FInputKeyEventArgs(nullptr, FInputDeviceId::CreateFromInternalId(0),
+        EKeys::LeftMouseButton, bPressed ? IE_Pressed : IE_Released, bPressed ? 1.f : 0.f, false, FPlatformTime::Cycles64()));
+}
+bool UNGDTools::AimPlayer(UObject* Context, FVector Target)
+{
+    UWorld* W = GEngine->GetWorldFromContextObject(Context, EGetWorldErrorMode::ReturnNull);
+    APlayerController* PC = W && W->IsGameWorld() ? UGameplayStatics::GetPlayerController(W, 0) : nullptr;
+    if (!PC || !PC->GetPawn()) return false;
+    FVector Location; FRotator Rotation;
+    PC->GetPlayerViewPoint(Location, Rotation);
+    PC->SetControlRotation((Target - Location).Rotation());
+    return true;
+}
+FString UNGDTools::Sweep(UObject* Context, FVector Start, FVector End, float Radius)
+{
+    auto O = MakeShared<FJsonObject>();
+    UWorld* W = GEngine->GetWorldFromContextObject(Context, EGetWorldErrorMode::ReturnNull);
+    if (!W || !FMath::IsFinite(Radius) || Radius <= 0 || Start.ContainsNaN() || End.ContainsNaN()) return TEXT("{}");
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(NGDVerification), false);
+    if (auto* PC = UGameplayStatics::GetPlayerController(W, 0)) Query.AddIgnoredActor(PC->GetPawn());
+    FHitResult Hit;
+    const bool Blocked = W->SweepSingleByChannel(Hit, Start, End, FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(Radius), Query);
+    O->SetBoolField(TEXT("blocked"), Blocked);
+    O->SetStringField(TEXT("actor"), Hit.GetActor() ? Hit.GetActor()->GetName() : TEXT(""));
+    O->SetNumberField(TEXT("item"), Hit.Item);
+    VectorField(O, TEXT("impact"), Hit.ImpactPoint);
+    VectorField(O, TEXT("normal"), Hit.ImpactNormal);
+    O->SetNumberField(TEXT("radius"), Radius);
+    return Json(O);
+}

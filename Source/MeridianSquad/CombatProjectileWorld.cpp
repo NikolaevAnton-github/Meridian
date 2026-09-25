@@ -1,4 +1,5 @@
 #include "CombatProjectileWorld.h"
+#include "NGDPropComponent.h"
 #include "GASPEnemyFixture.h"
 #include "EnemyCombatComponent.h"
 #include "OpeningLobbyCharacter.h"
@@ -600,7 +601,9 @@ void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult&
     if (!bSelf && Cast<AGASPEnemyFixture>(Victim))
         QueueSound(Bullet.Shooter.Get(), Bullet.Category, CombatAI::Sense::Damage,
             Hit.ImpactPoint, 1, Bullet.Id, LastContactTime, Victim, Bullet.Velocity);
-    const float Applied = IsValid(PhysicalTarget) ? PhysicalTarget->ReceiveBullet(Bullet.Id, Bullet.Damage,
+    auto* Breakable = IsValid(Victim) ? Victim->FindComponentByClass<UNGDPropComponent>() : nullptr;
+    const float Applied = Breakable && Breakable->ReceiveBullet(Bullet.Id, Hit) ? 0.f :
+        IsValid(PhysicalTarget) ? PhysicalTarget->ReceiveBullet(Bullet.Id, Bullet.Damage,
         Bullet.Velocity.GetSafeNormal(), Hit, LastContactTime, Bullet.BirthTime, FrameSerial,
         Bullet.FallImpulseMultiplier, Bullet.DeathImpulseMultiplier) :
         IsValid(Victim) ? UGameplayStatics::ApplyPointDamage(Victim, Bullet.Damage, Bullet.Velocity.GetSafeNormal(),
@@ -648,6 +651,7 @@ void ACombatProjectileWorld::ResetTargets()
     PlayerTravel.Reset(); EnemyTravel.Reset(); TravelPlayer.Reset();
     ClearProjectiles();
     for (ACombatTarget* Target : Targets) if (IsValid(Target)) Target->ResetTarget();
+    UNGDPropComponent::ResetAll(GetWorld());
     for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy))
     {
         if (auto* Fixture = Cast<AGASPEnemyFixture>(Dummy)) Fixture->Combat->bEnabled = bEnemyCombatMode;

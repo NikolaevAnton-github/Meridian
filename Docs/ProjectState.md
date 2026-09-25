@@ -9,7 +9,9 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
 - **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
   prepares MSQ-149..151: demo props in our lobby with our rifle, debris/reset, then
-  load/slowdown/handoff. Unassigned backlog, zero runs; planning is not dispatch.
+  load/slowdown/handoff. [MSQ-149 Candidate01 / Build03](NextGenDestructionIntegration01NGD01.md)
+  is technically complete: three lobby props, real rifle loop and bounded reset.
+  MSQ-150/151 remain undispatched backlog; owner play/design acceptance is separate.
   MSQ-140/141 stay historical done; MSQ-142..147 are cancelled as superseded.
   [Lobby scope](Approvals/NextGenDestruction01-LobbyScope01.json): place ready-made
   demo breakables in the retained lobby only; preserve existing architecture/edits.

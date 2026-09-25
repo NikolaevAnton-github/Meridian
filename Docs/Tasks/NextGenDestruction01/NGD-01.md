@@ -1,7 +1,11 @@
 # NGD-01: Demo breakable props in the lobby with our rifle
 
 Multica issue: **MSQ-149**. Parent: [MSQ-74](../EnvironmentDestruction01.md).
-Updated 2026-09-25; unassigned backlog, no implementation dispatched.
+Updated 2026-09-25; Candidate01 / Build03 technically complete under
+[NGD-01 start and review waiver](../../Approvals/NextGenDestructionIntegration01-NGD01-OwnerStart01.json).
+Controller scope/evidence acceptance passed; see the
+[delivery and controls](../../NextGenDestructionIntegration01NGD01.md).
+Owner visual/play acceptance remains separate; successors are not dispatched.
 Authority and shared rules: [toolkit integration plan](../EnvironmentDestruction01Plan.md)
 and the later [owner lobby scope](../../Approvals/NextGenDestruction01-LobbyScope01.json).
 Prerequisites: MSQ-68, MSQ-82, [accepted migration](../../NextGenDestruction01.md).
@@ -50,7 +54,8 @@ notifications; NGD-02 finalizes the gameplay/support contract.
 - Handoff names the actual lobby, source/derivative and actor set, controls,
   candidate, observed states, adapter entrypoint, limits and evidence for NGD-02.
 
-Use the plan's independent review and owner acceptance gates; old ED waivers do not
-apply. This first placement is gameplay testing, not final dressing acceptance.
+The owner waived independent review for MSQ-149 in its new task-scoped start.
+Executor self-checks and controller scope/evidence acceptance apply; owner visual/play
+acceptance remains separate. This placement is gameplay testing, not final dressing acceptance.
 No new AI, layered-column reconstruction or broad density/performance pass.
 Evidence: `Saved/NextGenDestructionIntegration01/NGD-01/<candidate>/`.

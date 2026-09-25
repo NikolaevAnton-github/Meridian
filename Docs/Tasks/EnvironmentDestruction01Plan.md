@@ -4,8 +4,10 @@ Updated 2026-09-25. Coordination parent: **MSQ-74**, under MSQ-67.
 Authority: [owner task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json).
 Location and first pass: [later owner lobby scope](../Approvals/NextGenDestruction01-LobbyScope01.json).
 Baseline: [accepted toolkit migration](../NextGenDestruction01.md).
-Multica owns live state. All new children are unassigned backlog with zero runs;
-this planning rewrite does not dispatch implementation or accept future visuals.
+Multica owns live state. MSQ-149 Candidate01 / Build03 is technically complete
+under its later task-scoped start and review waiver; see the
+[delivery](../NextGenDestructionIntegration01NGD01.md). MSQ-150/151 remain
+undispatched backlog. Owner visual/play acceptance remains separate.
 
 ## Direction and sequence
 
@@ -40,7 +42,8 @@ The replacement direction is now established. The AI lane retains MSQ-123..125,
 MSQ-71, MSQ-126 and one-enemy MSQ-72. MSQ-131 consumes NGD-02's tested specimen/change
 contract after MSQ-126 and the one-enemy encounter, before extensive tuning/group
 work; it need not wait for NGD-03's final population handoff. Neither early toolkit
-integration nor MSQ-74 completion depends on new AI. All execution remains unstarted.
+integration nor MSQ-74 completion depends on new AI. NGD-01 delivery does not
+dispatch the AI lane or either remaining destruction child.
 
 ## Behavior and interfaces
 
