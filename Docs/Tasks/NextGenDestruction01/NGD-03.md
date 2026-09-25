@@ -1,7 +1,10 @@
 # NGD-03: Lobby destruction load, slowdown and playable handoff
 
 Multica issue: **MSQ-151**. Parent: [MSQ-74](../EnvironmentDestruction01.md).
-Updated 2026-09-25; unassigned backlog, no implementation dispatched.
+Updated 2026-09-25; cancelled for now by the
+[later owner instruction](../../Approvals/NextGenDestruction01-Cancellation01.json),
+before implementation dispatch. The brief below is retained for reference, not execution.
+Reopening requires a later explicit owner instruction; existing props/F6 remain.
 Authority and shared rules: [toolkit integration plan](../EnvironmentDestruction01Plan.md)
 and the later [owner lobby scope](../../Approvals/NextGenDestruction01-LobbyScope01.json).
 Prerequisite: [NGD-02](NGD-02.md). AI integration/traversal are separate consumers.

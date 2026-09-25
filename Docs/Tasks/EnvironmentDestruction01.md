@@ -4,7 +4,11 @@ Multica issue: **MSQ-74**. Coordination parent under [CombatSlice01](CombatSlice
 Updated 2026-09-25 under the [task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json)
 and later [owner lobby scope](../Approvals/NextGenDestruction01-LobbyScope01.json).
 Follow the [current plan and child mapping](EnvironmentDestruction01Plan.md).
-Prepared scope only; no implementation is dispatched by this rewrite.
+Current owner decision: [MSQ-150/151 are cancelled for now](../Approvals/NextGenDestruction01-Cancellation01.json),
+before dispatch. MSQ-149 and MSQ-152 remain delivered, including 14 lobby specimens
+and F6 reset. The remaining scope below is retained for reference; no replacement
+is dispatched and MSQ-74 is not declared complete. The planned NGD-02 consumer
+contract is unavailable while cancelled. Other task states remain unchanged.
 
 ## Baseline and scope
 

@@ -8,11 +8,11 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
 
 - **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
-  prepares MSQ-149..151: demo props in our lobby with our rifle, debris/reset, then
-  load/slowdown/handoff. [MSQ-152 Candidate01 / Build02](LobbyPlaytestFix01.md) is
+  retains the delivered lobby integration. [MSQ-152 Candidate01 / Build02](LobbyPlaytestFix01.md) is
   technically complete: interrupted fire fixed; 14 default-demo lobby specimens
-  with F6 reset. Its independent review was waived by the owner. MSQ-150/151 remain
-  undispatched; owner play/design acceptance is separate.
+  with F6 reset. Its independent review was waived by the owner. MSQ-150/151 are
+  [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);
+  owner play/design acceptance is separate.
   MSQ-140/141 stay historical done; MSQ-142..147 are cancelled as superseded.
   [Lobby scope](Approvals/NextGenDestruction01-LobbyScope01.json): place ready-made
   demo breakables in the retained lobby only; preserve existing architecture/edits.
@@ -29,8 +29,8 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
   Source locomotion and moving fire/reload remain; custom enemy balance/recovery
   steps are inactive. Technical delivery does not grant owner motion/play acceptance.
 - With the replacement direction established, the AI lane is MSQ-123..125, MSQ-71
-  survival, MSQ-126 cover and one-enemy MSQ-72. MSQ-131 consumes MSQ-150's toolkit
-  specimen to integrate destroyed cover/routes before extensive tuning/group work. MSQ-127 later adds 2/3 enemies.
+  survival, MSQ-126 cover and one-enemy MSQ-72. MSQ-131's planned MSQ-150 contract
+  is unavailable while MSQ-150 is cancelled. MSQ-127 later adds 2/3 enemies.
   MSQ-73 dismemberment is deferred; MSQ-99/100 and other mechanics remain separate.
   [Priority authority](Approvals/CombatPriorities01-OwnerScope01.json).
 

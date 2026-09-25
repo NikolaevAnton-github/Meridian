@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-25",
+  "source": "Owner direct chat, explicitly referring to the proposed MSQ-150 and MSQ-151 next steps",
+  "owner_instruction_english_translation": "Cancel these for now.",
+  "decision": "Cancel MSQ-150 (NGD-02 debris/reset contract) and MSQ-151 (NGD-03 load/slowdown/handoff) for now, without dispatching either task.",
+  "authorized_administration": [
+    "Set MSQ-150 and MSQ-151 to cancelled in Multica without starting runs",
+    "Synchronize current task descriptions, plan and project navigation; preserve the cancelled briefs for possible future reconsideration"
+  ],
+  "preservation": "Keep completed MSQ-149 and MSQ-152, the 14 lobby specimens, existing F6 reset, source assets, owner edits, historical approvals and exact evidence unchanged.",
+  "scope_boundary": "No implementation, removal, replacement task or successor dispatch. No other task is cancelled by this instruction. MSQ-74 is not declared complete; owner play/design acceptance remains separate.",
+  "dependency_effect": "The planned NGD-02 producer contract is unavailable. MSQ-131 and other consumers cannot treat it as delivered; their existing task states remain unchanged.",
+  "resumption": "A later explicit owner instruction is required to restore or replace these cancelled work packages.",
+  "verification_route": "Administrative change with controller self-checks: live statuses, descriptions, documentation diff and context-budget validation."
+}

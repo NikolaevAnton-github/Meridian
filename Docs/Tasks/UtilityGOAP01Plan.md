@@ -9,7 +9,11 @@ not report the new brain as delivered.
 
 The [toolkit task rewrite](../Approvals/NextGenDestruction01-TaskRewrite01.json)
 replaces the custom laboratory with [MSQ-74 integration](EnvironmentDestruction01Plan.md).
-Migration is accepted; MSQ-149..151 are prepared. Toolkit integration does not wait
+Migration and MSQ-149 are delivered; MSQ-150/151 are
+[cancelled for now](../Approvals/NextGenDestruction01-Cancellation01.json).
+UG-08's planned producer contract is unavailable; its task state and the core AI
+order are unchanged. Its integration requires a later authorized producer path.
+Toolkit integration does not wait
 for MSQ-72; AI startup does not wait for the final density handoff. The order below
 remains internal to AI. UG-08 consumes MSQ-150's usable specimen/change contract.
 

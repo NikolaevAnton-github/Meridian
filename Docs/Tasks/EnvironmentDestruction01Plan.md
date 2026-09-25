@@ -6,8 +6,12 @@ Location and first pass: [later owner lobby scope](../Approvals/NextGenDestructi
 Baseline: [accepted toolkit migration](../NextGenDestruction01.md).
 Multica owns live state. MSQ-149 Candidate01 / Build03 is technically complete
 under its later task-scoped start and review waiver; see the
-[delivery](../NextGenDestructionIntegration01NGD01.md). MSQ-150/151 remain
-undispatched backlog. Owner visual/play acceptance remains separate.
+[delivery](../NextGenDestructionIntegration01NGD01.md). MSQ-150/151 are
+[cancelled for now by the owner](../Approvals/NextGenDestruction01-Cancellation01.json),
+before dispatch. Their scopes below are retained for reference, not an active queue.
+MSQ-152's 14 lobby specimens and F6 reset remain delivered. No replacement or
+successor is dispatched; MSQ-74 is not declared complete by this cancellation.
+Owner visual/play acceptance remains separate.
 
 ## Direction and sequence
 
@@ -30,9 +34,10 @@ architecture/dressing production or grant final visual acceptance.
 | Package | Multica | Result | Prerequisite |
 | --- | --- | --- | --- |
 | NGD-01 | MSQ-149 | [Demo props placed in our lobby and working with our rifle](NextGenDestruction01/NGD-01.md) | MSQ-68, MSQ-82, accepted toolkit migration |
-| NGD-02 | MSQ-150 | [Their material, debris, reset and change contract](NextGenDestruction01/NGD-02.md) | NGD-01 |
-| NGD-03 | MSQ-151 | [Lobby load, slowdown and owner-ready handoff](NextGenDestruction01/NGD-03.md) | NGD-02 |
+| NGD-02 | MSQ-150 (cancelled for now) | [Their material, debris, reset and change contract](NextGenDestruction01/NGD-02.md) | NGD-01 |
+| NGD-03 | MSQ-151 (cancelled for now) | [Lobby load, slowdown and owner-ready handoff](NextGenDestruction01/NGD-03.md) | NGD-02 |
 
+Cancelled children require explicit owner reopening before any future start.
 Children execute sequentially only after an explicit start, with one production
 worker/editor writer. They get fresh issues/native sessions rather than resuming
 retired ED candidates. The parent has no executor or automatic successor dispatch.
@@ -41,7 +46,9 @@ The accepted migration is not repeated as a new milestone.
 The replacement direction is now established. The AI lane retains MSQ-123..125,
 MSQ-71, MSQ-126 and one-enemy MSQ-72. MSQ-131 consumes NGD-02's tested specimen/change
 contract after MSQ-126 and the one-enemy encounter, before extensive tuning/group
-work; it need not wait for NGD-03's final population handoff. Neither early toolkit
+work; it need not wait for NGD-03's final population handoff. This planned NGD-02
+contract is unavailable while MSQ-150 is cancelled; consumer states are unchanged.
+Neither early toolkit
 integration nor MSQ-74 completion depends on new AI. NGD-01 delivery does not
 dispatch the AI lane or either remaining destruction child.
 
