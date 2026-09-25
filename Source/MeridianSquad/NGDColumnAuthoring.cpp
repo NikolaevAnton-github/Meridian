@@ -10,6 +10,7 @@
 #include "GeometryCollection/GeometryCollectionEngineConversion.h"
 #include "GeometryCollection/GeometryCollectionClusteringUtility.h"
 #include "GeometryCollection/GeometryCollectionConvexUtility.h"
+#include "GeometryCollection/GeometryCollectionAlgo.h"
 #include "Chaos/Convex.h"
 #include "GeometryCollection/Facades/CollectionAnchoringFacade.h"
 #include "GeometryCollection/GeometryCollectionProximityUtility.h"
@@ -22,6 +23,9 @@
 #include "PhysicsEngine/BodySetup.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include "NiagaraSystem.h"
+#include "NiagaraEmitter.h"
+#include "NiagaraEmitterHandle.h"
 #include "UObject/Package.h"
 #endif
 
@@ -319,6 +323,147 @@ FString UNGDColumnAuthoring::InspectCollection(UGeometryCollection* Collection)
     return ToJson(Out);
 }
 
+FString UNGDColumnAuthoring::ExportColumnCollision(UGeometryCollection* Collection)
+{
+#if WITH_EDITOR
+    if (!Collection) return TEXT("{\"error\":\"Missing collection\"}");
+    const auto C = Collection->GetGeometryCollection();
+    const auto Hulls = FGeometryCollectionConvexUtility::GetConvexHullDataIfPresent(C.Get());
+    if (!Hulls.IsSet()) return TEXT("{\"error\":\"Missing convex data\"}");
+    TArray<FTransform> Global;
+    GeometryCollectionAlgo::GlobalMatrices(C->Transform, C->Parent, Global);
+    TArray<TSharedPtr<FJsonValue>> Leaves;
+    for (int32 I = 0; I < C->Transform.Num(); ++I)
+    {
+        if (C->TransformToGeometryIndex[I] == INDEX_NONE || C->Children[I].Num()) continue;
+        if (Hulls->TransformToConvexIndices[I].Num() != 1)
+            return TEXT("{\"error\":\"Expected one convex per source leaf\"}");
+        const auto& Hull = Hulls->ConvexHull[*Hulls->TransformToConvexIndices[I].CreateConstIterator()];
+        TArray<TSharedPtr<FJsonValue>> Points;
+        for (int32 V = 0; V < Hull->NumVertices(); ++V)
+        {
+            const FVector P = Global[I].TransformPosition(FVector(Hull->GetVertex(V)));
+            Points.Add(MakeShared<FJsonValueArray>(TArray<TSharedPtr<FJsonValue>>{
+                MakeShared<FJsonValueNumber>(P.X), MakeShared<FJsonValueNumber>(P.Y), MakeShared<FJsonValueNumber>(P.Z)}));
+        }
+        Leaves.Add(MakeShared<FJsonValueArray>(Points));
+    }
+    TSharedRef<FJsonObject> Out = MakeShared<FJsonObject>();
+    Out->SetArrayField(TEXT("leaves"), Leaves);
+    Out->SetStringField(TEXT("space"), TEXT("collection"));
+    return ToJson(Out);
+#else
+    return TEXT("{\"error\":\"Editor only\"}");
+#endif
+}
+
+FString UNGDColumnAuthoring::ApplyMergedCollision(UGeometryCollection* Collection, const FString& CollisionSource, const FString& MergeDesign)
+{
+#if WITH_EDITOR
+    if (!Collection || Collection->GetPathName() != TEXT("/Game/ReinforcedColumn01/GC_RC01_BondedConcrete.GC_RC01_BondedConcrete"))
+        return TEXT("{\"error\":\"Expected column collection\"}");
+    auto ReadSource = [](const FString& Path, TSharedPtr<FJsonObject>& Out)
+    {
+        FString Full = FPaths::ConvertRelativePathToFull(Path);
+        FPaths::NormalizeFilename(Full);
+        FPaths::CollapseRelativeDirectories(Full);
+        const FString Allowed = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir() / TEXT("Assets/Source/ReinforcedColumn01/"));
+        FString Raw;
+        return Full.StartsWith(Allowed) && FFileHelper::LoadFileToString(Raw, *Full) && FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Raw), Out);
+    };
+    TSharedPtr<FJsonObject> Source, Design;
+    if (!ReadSource(CollisionSource, Source) || !ReadSource(MergeDesign, Design))
+        return TEXT("{\"error\":\"Invalid collision source or merge design\"}");
+    const auto& Leaves = Source->GetArrayField(TEXT("leaves"));
+    const auto& Groups = Design->GetArrayField(TEXT("merge_groups"));
+    const int32 OriginalCount = int32(Design->GetNumberField(TEXT("original_dynamic_bodies")));
+    const auto C = Collection->GetGeometryCollection();
+    auto Hulls = FGeometryCollectionConvexUtility::GetConvexHullDataIfPresent(C.Get());
+    const int32 LeafCount = Groups.Num() + Leaves.Num() - OriginalCount;
+    if (!Hulls.IsSet() || OriginalCount != 644 || Groups.Num() != 480 || LeafCount != C->NumElements(FGeometryCollection::GeometryGroup))
+        return TEXT("{\"error\":\"Collision/source topology mismatch\"}");
+    TArray<FTransform> Global;
+    GeometryCollectionAlgo::GlobalMatrices(C->Transform, C->Parent, Global);
+    TArray<Chaos::FConvexPtr> NewHulls;
+    for (int32 I = 0; I < LeafCount; ++I)
+    {
+        if (Hulls->TransformToConvexIndices[I].Num() != 1)
+            return TEXT("{\"error\":\"Expected one convex per target leaf\"}");
+        TArray<int32> OldIndices;
+        if (I < Groups.Num())
+            for (const auto& Index : Groups[I]->AsArray()) OldIndices.Add(int32(Index->AsNumber()));
+        else OldIndices.Add(OriginalCount + I - Groups.Num());
+        TArray<Chaos::FConvex::FVec3Type> Points;
+        for (const int32 Old : OldIndices)
+        {
+            if (!Leaves.IsValidIndex(Old)) return TEXT("{\"error\":\"Invalid source leaf index\"}");
+            for (const auto& Value : Leaves[Old]->AsArray())
+            {
+                const auto& P = Value->AsArray();
+                const FVector Local = Global[I].InverseTransformPosition(FVector(P[0]->AsNumber(), P[1]->AsNumber(), P[2]->AsNumber()));
+                Points.Add(Chaos::FConvex::FVec3Type(Local));
+            }
+        }
+        // Reuse the known economical source hull vertices. Only merged pieces
+        // need the convex envelope of two or three prior collision shapes.
+        Chaos::FConvexPtr Hull = new Chaos::FConvex(Points, 0.f);
+        if (Hull->NumVertices() < 4) return TEXT("{\"error\":\"Degenerate merged convex\"}");
+        NewHulls.Add(MoveTemp(Hull));
+    }
+    Collection->Modify();
+    for (int32 I = 0; I < LeafCount; ++I)
+        Hulls->ConvexHull[*Hulls->TransformToConvexIndices[I].CreateConstIterator()] = MoveTemp(NewHulls[I]);
+    Collection->InvalidateCollection();
+    Collection->CreateSimulationData();
+    Collection->RebuildRenderData();
+    Collection->MarkPackageDirty();
+    return InspectCollection(Collection);
+#else
+    return TEXT("{\"error\":\"Editor only\"}");
+#endif
+}
+
+FString UNGDColumnAuthoring::ConfigureConcreteCrumbs(UNiagaraSystem* System)
+{
+#if WITH_EDITOR
+    if (!System || System->GetPathName() != TEXT("/Game/ReinforcedColumn01/NS_RC03_ConcreteCrumbs.NS_RC03_ConcreteCrumbs"))
+        return TEXT("{\"error\":\"Expected column-local effect copy\"}");
+    bool bHasSmallPieces = false;
+    TSet<FGuid> Remove;
+    for (const auto& Handle : System->GetEmitterHandles())
+    {
+        bHasSmallPieces |= Handle.GetName() == TEXT("ConcretePiecesSmall");
+        if (Handle.GetName() == TEXT("ConcretePiecesLarge")) Remove.Add(Handle.GetId());
+    }
+    if (!bHasSmallPieces || Remove.Num() != 1)
+        return TEXT("{\"error\":\"Unexpected source emitter layout\"}");
+    System->Modify();
+    // Keep the existing fine mesh particles and dust presentation. Large flying
+    // chunks are supplied by Chaos; do not duplicate them in the visual effect.
+    System->RemoveEmitterHandlesById(Remove);
+    System->RequestCompile(true);
+    System->WaitForCompilationComplete(true);
+    if (!System->IsValid()) return TEXT("{\"error\":\"Niagara compilation failed\"}");
+    System->MarkPackageDirty();
+    TArray<TSharedPtr<FJsonValue>> Emitters;
+    for (const auto& Handle : System->GetEmitterHandles())
+    {
+        TSharedRef<FJsonObject> Row = MakeShared<FJsonObject>();
+        Row->SetStringField(TEXT("name"), Handle.GetName().ToString());
+        Row->SetBoolField(TEXT("enabled"), Handle.GetIsEnabled());
+        if (const auto* Data = Handle.GetEmitterData())
+            Row->SetStringField(TEXT("simulation"), Data->SimTarget == ENiagaraSimTarget::GPUComputeSim ? TEXT("GPU") : TEXT("CPU"));
+        Emitters.Add(MakeShared<FJsonValueObject>(Row));
+    }
+    TSharedRef<FJsonObject> Out = MakeShared<FJsonObject>();
+    Out->SetArrayField(TEXT("emitters"), Emitters);
+    Out->SetBoolField(TEXT("valid"), true);
+    return ToJson(Out);
+#else
+    return TEXT("{\"error\":\"Editor only\"}");
+#endif
+}
+
 FString UNGDColumnAuthoring::BuildColumn(const FString& SourceFile)
 {
 #if WITH_EDITOR
@@ -340,10 +485,23 @@ FString UNGDColumnAuthoring::BuildColumn(const FString& SourceFile)
         Materials.Add(Material);
     }
     if (Materials.Num() != 4) return TEXT("{\"error\":\"Four source materials required\"}");
-    FMeshDescription Core = ReadMesh(Source->GetObjectField(TEXT("core")));
-    FMeshDescription Steel = ReadMesh(Source->GetObjectField(TEXT("steel")));
-    MakeStatic(TEXT("SM_RC01_SupportedColumn"), Core, Materials);
-    MakeStatic(TEXT("SM_RC01_Rebar"), Steel, Materials);
+    bool bPreserveStaticMeshes = false;
+    Source->TryGetBoolField(TEXT("preserve_static_meshes"), bPreserveStaticMeshes);
+    if (bPreserveStaticMeshes)
+    {
+        // A surface-preserving piece merge must also retain the optimized core
+        // collider and the exact saved reinforcement rather than reimporting them.
+        for (const TCHAR* Name : {TEXT("SM_RC01_SupportedColumn"), TEXT("SM_RC01_Rebar")})
+            if (!LoadObject<UStaticMesh>(nullptr, *(FString(TEXT("/Game/ReinforcedColumn01/")) + Name)))
+                return TEXT("{\"error\":\"Missing retained static mesh\"}");
+    }
+    else
+    {
+        FMeshDescription Core = ReadMesh(Source->GetObjectField(TEXT("core")));
+        FMeshDescription Steel = ReadMesh(Source->GetObjectField(TEXT("steel")));
+        MakeStatic(TEXT("SM_RC01_SupportedColumn"), Core, Materials);
+        MakeStatic(TEXT("SM_RC01_Rebar"), Steel, Materials);
+    }
 
     UPackage* Package = CreatePackage(TEXT("/Game/ReinforcedColumn01/GC_RC01_BondedConcrete"));
     UGeometryCollection* Asset = FindObject<UGeometryCollection>(Package, TEXT("GC_RC01_BondedConcrete"));

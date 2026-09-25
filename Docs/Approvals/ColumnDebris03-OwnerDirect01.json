@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-26",
+  "scope": "MSQ-156 direct follow-up: fewer internal physical pieces, preserved irregular fracture surfaces, visual fine debris",
+  "authority": "Explicit owner instruction in direct chat",
+  "owner_instruction_translation": "Implement that first candidate directly, without a task or independent testing; I will inspect it myself.",
+  "route": "Direct implementation; no new Multica task or run",
+  "independent_testing": "Waived for this candidate only",
+  "independent_review": "Not dispatched under the owner's direct route",
+  "implementation_checks": "Native build, source geometry integrity, asset authoring/readback and preservation checks",
+  "owner_gate": "Visual and gameplay evaluation remains with the owner",
+  "excluded_scope": "Core enlargement, reinforcement relocation, map layout changes and performance acceptance claims"
+}

@@ -1,0 +1,10515 @@
+{
+  "actor": "StaticMeshActor_35",
+  "label": "FB01_newNcolumnNN12p6NN2p4",
+  "location": [
+    -1260,
+    -240,
+    900
+  ],
+  "outer_cm": [
+    240,
+    240,
+    1800
+  ],
+  "affected_height_cm": [
+    0,
+    280
+  ],
+  "stone_thickness_cm": 1.8,
+  "dynamic_bodies": 480,
+  "anchors": 120,
+  "local_clusters": 120,
+  "fixed_voronoi_cells": 45,
+  "seed_layers_cm": [
+    4.5,
+    18,
+    34
+  ],
+  "roughness_max_displacement_per_axis_cm": 8.15,
+  "fracture_edge_spacing_cm": 4.5,
+  "warp": "monotone coordinate flow, including tangential motion through the stone rim",
+  "uv_base_repeat_cm": 1000,
+  "texture_repeat_cm": 50,
+  "shallow_chips": 16,
+  "core_triangles": 171447,
+  "fragment_triangles": 1471054,
+  "steel_preserved": true,
+  "piece_meta": [
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -107.91437034466816,
+        116.8,
+        15.366148570443697
+      ],
+      "cluster": 0,
+      "original_piece_ids": [
+        0
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": true,
+      "seed": [
+        -107.91437034466816,
+        119.6,
+        15.366148570443697
+      ],
+      "cluster": 0,
+      "original_piece_ids": [
+        1
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        0,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -108.39414237550311,
+        115.48299235566162,
+        48.290946120955674
+      ],
+      "cluster": 0,
+      "original_piece_ids": [
+        2
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -105.01285432583212,
+        116.50969741301837,
+        79.67249484911649
+      ],
+      "cluster": 0,
+      "original_piece_ids": [
+        3
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -105.79323866837936,
+        115.43227316825036,
+        102.06987517546904
+      ],
+      "cluster": 1,
+      "original_piece_ids": [
+        4
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        0,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -97.24886698737225,
+        115.54196066752793,
+        135.7756370353791
+      ],
+      "cluster": 1,
+      "original_piece_ids": [
+        5
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -106.65671788335979,
+        114.69941610284587,
+        168.4556854800491
+      ],
+      "cluster": 1,
+      "original_piece_ids": [
+        6
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        0,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -106.42944430258153,
+        115.37071583149142,
+        209.68677334762748
+      ],
+      "cluster": 2,
+      "original_piece_ids": [
+        7
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        0,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -104.95321255586947,
+        116.71498445861344,
+        238.04615986029643
+      ],
+      "cluster": 2,
+      "original_piece_ids": [
+        8
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        0,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -94.80665245231168,
+        114.20055055387954,
+        261.50722926243975
+      ],
+      "cluster": 2,
+      "original_piece_ids": [
+        9
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        1,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -74.92633337745988,
+        114.76472665080762,
+        15.095553379169509
+      ],
+      "cluster": 0,
+      "original_piece_ids": [
+        10
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -72.19337788148245,
+        116.99814823104664,
+        49.526977177110396
+      ],
+      "cluster": 0,
+      "original_piece_ids": [
+        11
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        1,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -74.95509490965424,
+        115.55952554590426,
+        87.14239657757577
+      ],
+      "cluster": 0,
+      "original_piece_ids": [
+        12
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        1,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -75.84670965687457,
+        116.84006013385009,
+        106.09051038142637
+      ],
+      "cluster": 1,
+      "original_piece_ids": [
+        13
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        1,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -74.52793062261,
+        114.81784827359398,
+        134.074685305434
+      ],
+      "cluster": 1,
+      "original_piece_ids": [
+        14
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        1,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -79.99152755562841,
+        116.9854090729715,
+        170.74815818883468
+      ],
+      "cluster": 1,
+      "original_piece_ids": [
+        15
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        1,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -68.51653824638258,
+        116.96062066866597,
+        204.6614633346778
+      ],
+      "cluster": 2,
+      "original_piece_ids": [
+        16
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        1,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -71.16162547385612,
+        114.80244186139348,
+        228.91996727348442
+      ],
+      "cluster": 2,
+      "original_piece_ids": [
+        17
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        1,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -76.64628447211895,
+        116.09282270295621,
+        268.8091326153086
+      ],
+      "cluster": 2,
+      "original_piece_ids": [
+        18
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -45.58942643942529,
+        114.7894821463724,
+        11.479787077747211
+      ],
+      "cluster": 3,
+      "original_piece_ids": [
+        19
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        2,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -49.21088988481878,
+        116.43176985727932,
+        55.966518746842596
+      ],
+      "cluster": 3,
+      "original_piece_ids": [
+        20
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        2,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -35.28507260336379,
+        114.28431877171636,
+        74.23743057912989
+      ],
+      "cluster": 3,
+      "original_piece_ids": [
+        21
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -36.59941121343079,
+        114.67095671785346,
+        115.7618576499851
+      ],
+      "cluster": 4,
+      "original_piece_ids": [
+        22
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -50.59439583741809,
+        114.37299913112659,
+        144.1534360234159
+      ],
+      "cluster": 4,
+      "original_piece_ids": [
+        23
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -45.40007873083873,
+        116.99799561417879,
+        162.88368667373402
+      ],
+      "cluster": 4,
+      "original_piece_ids": [
+        24
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        2,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -38.99201066308992,
+        114.1374341828323,
+        195.82581332605355
+      ],
+      "cluster": 5,
+      "original_piece_ids": [
+        25
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        2,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -43.4392468308548,
+        116.42537920956468,
+        228.33298675217898
+      ],
+      "cluster": 5,
+      "original_piece_ids": [
+        26
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        2,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -36.5455645561128,
+        116.4294183110033,
+        264.94321588871344
+      ],
+      "cluster": 5,
+      "original_piece_ids": [
+        27
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        3,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -19.90969052570989,
+        116.55253051558253,
+        23.586419754689615
+      ],
+      "cluster": 3,
+      "original_piece_ids": [
+        28
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        3,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -13.493876822276187,
+        115.16973714194654,
+        51.03399403253726
+      ],
+      "cluster": 3,
+      "original_piece_ids": [
+        29
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        3,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -13.273272053137967,
+        115.81549556825469,
+        78.047029628454
+      ],
+      "cluster": 3,
+      "original_piece_ids": [
+        30
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        3,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -21.261315006687937,
+        116.95380141947021,
+        118.3172366053193
+      ],
+      "cluster": 4,
+      "original_piece_ids": [
+        31
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        3,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -19.652671358074564,
+        116.87242558077307,
+        146.5103159073545
+      ],
+      "cluster": 4,
+      "original_piece_ids": [
+        32
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        3,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -10.55351528056132,
+        116.49826848311847,
+        172.62834428419012
+      ],
+      "cluster": 4,
+      "original_piece_ids": [
+        33
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        3,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -8.779176101717649,
+        116.49033220177566,
+        211.51898360923337
+      ],
+      "cluster": 5,
+      "original_piece_ids": [
+        34
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        3,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -16.748002220419096,
+        114.96000485388264,
+        232.8438200534096
+      ],
+      "cluster": 5,
+      "original_piece_ids": [
+        35
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        3,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -10.16166426827486,
+        116.8,
+        258.3488444618443
+      ],
+      "cluster": 5,
+      "original_piece_ids": [
+        36
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        3,
+        8
+      ],
+      "shallow": true,
+      "seed": [
+        -10.16166426827486,
+        119.6,
+        258.3488444618443
+      ],
+      "cluster": 5,
+      "original_piece_ids": [
+        37
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        13.310120569200025,
+        114.9985867158059,
+        21.971453476063616
+      ],
+      "cluster": 6,
+      "original_piece_ids": [
+        38
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        4,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        13.703382448348014,
+        114.78801937565659,
+        39.216923757858105
+      ],
+      "cluster": 6,
+      "original_piece_ids": [
+        39
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        9.25966169982947,
+        114.70402475806995,
+        81.01092530132766
+      ],
+      "cluster": 6,
+      "original_piece_ids": [
+        40
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        22.269901735497214,
+        114.69392298946057,
+        104.16331265699012
+      ],
+      "cluster": 7,
+      "original_piece_ids": [
+        41
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        17.666204242360834,
+        116.09881470371938,
+        134.10590353753145
+      ],
+      "cluster": 7,
+      "original_piece_ids": [
+        42
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        4,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        10.852126853001286,
+        115.50473579715434,
+        164.21504918964663
+      ],
+      "cluster": 7,
+      "original_piece_ids": [
+        43
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        4,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        11.997346924637945,
+        115.92848547373441,
+        205.67441009354977
+      ],
+      "cluster": 8,
+      "original_piece_ids": [
+        44
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        4,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        19.050285914294538,
+        116.55952574759962,
+        225.08640653199137
+      ],
+      "cluster": 8,
+      "original_piece_ids": [
+        45
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        4,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        7.4621192216607355,
+        116.51581311637979,
+        263.4093950376506
+      ],
+      "cluster": 8,
+      "original_piece_ids": [
+        46
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        5,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        51.69368924052741,
+        115.36417285600022,
+        13.322417051982882
+      ],
+      "cluster": 6,
+      "original_piece_ids": [
+        47
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        5,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        37.61599763756372,
+        116.99041615744513,
+        38.21081546427781
+      ],
+      "cluster": 6,
+      "original_piece_ids": [
+        48
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        5,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        41.75811527397138,
+        114.93813169069324,
+        79.3605108543241
+      ],
+      "cluster": 6,
+      "original_piece_ids": [
+        49
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        5,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        47.4075735315338,
+        115.86133499113431,
+        109.13152435314782
+      ],
+      "cluster": 7,
+      "original_piece_ids": [
+        50
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        5,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        38.98660463615292,
+        115.84928868122915,
+        131.20599133310162
+      ],
+      "cluster": 7,
+      "original_piece_ids": [
+        51
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        5,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        51.8890319816182,
+        115.2765223251743,
+        162.5367458501702
+      ],
+      "cluster": 7,
+      "original_piece_ids": [
+        52
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        5,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        47.68291817009389,
+        115.61507841933536,
+        206.93481732353055
+      ],
+      "cluster": 8,
+      "original_piece_ids": [
+        53
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        5,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        36.1942419988158,
+        116.8,
+        227.8607088608358
+      ],
+      "cluster": 8,
+      "original_piece_ids": [
+        54
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        5,
+        7
+      ],
+      "shallow": true,
+      "seed": [
+        36.1942419988158,
+        119.6,
+        227.8607088608358
+      ],
+      "cluster": 8,
+      "original_piece_ids": [
+        55
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        5,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        45.044914214361874,
+        114.33368853603717,
+        255.38632867858786
+      ],
+      "cluster": 8,
+      "original_piece_ids": [
+        56
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        6,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        65.81393272303393,
+        114.43605926482314,
+        24.255099796199453
+      ],
+      "cluster": 9,
+      "original_piece_ids": [
+        57
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        6,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        74.67892486848204,
+        116.06569829930545,
+        42.19455244403035
+      ],
+      "cluster": 9,
+      "original_piece_ids": [
+        58
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        6,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        70.02210552886572,
+        116.38991864853648,
+        85.51333015142099
+      ],
+      "cluster": 9,
+      "original_piece_ids": [
+        59
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        6,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        73.02655020998282,
+        114.5716372672181,
+        118.2650198355993
+      ],
+      "cluster": 10,
+      "original_piece_ids": [
+        60
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        6,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        65.67113903426913,
+        116.7578934936281,
+        140.47528564827869
+      ],
+      "cluster": 10,
+      "original_piece_ids": [
+        61
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        6,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        76.72322435430237,
+        115.89197291254992,
+        166.54707803835691
+      ],
+      "cluster": 10,
+      "original_piece_ids": [
+        62
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        6,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        69.07489562925898,
+        115.43367776303504,
+        210.85809364786184
+      ],
+      "cluster": 11,
+      "original_piece_ids": [
+        63
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        6,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        64.33401017927936,
+        116.04750961494527,
+        239.11482573960575
+      ],
+      "cluster": 11,
+      "original_piece_ids": [
+        64
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        6,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        71.44756781486355,
+        115.90871278408837,
+        270.56895660988596
+      ],
+      "cluster": 11,
+      "original_piece_ids": [
+        65
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        7,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        106.92462532118871,
+        116.99155120771685,
+        7.805270622529949
+      ],
+      "cluster": 9,
+      "original_piece_ids": [
+        66
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        7,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        104.7453280114851,
+        116.8726885285901,
+        37.18532508319768
+      ],
+      "cluster": 9,
+      "original_piece_ids": [
+        67
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        7,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        107.29109512908983,
+        115.88708306782766,
+        80.8657211899807
+      ],
+      "cluster": 9,
+      "original_piece_ids": [
+        68
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        7,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        96.29612773216816,
+        116.8307008989195,
+        115.87808172852924
+      ],
+      "cluster": 10,
+      "original_piece_ids": [
+        69
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        7,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        94.1370183827807,
+        115.38176122322608,
+        136.44995328702785
+      ],
+      "cluster": 10,
+      "original_piece_ids": [
+        70
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        7,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        94.1196236544948,
+        116.34823605996198,
+        168.67704560029742
+      ],
+      "cluster": 10,
+      "original_piece_ids": [
+        71
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        7,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        96.50443272992489,
+        116.8,
+        194.42751915260754
+      ],
+      "cluster": 11,
+      "original_piece_ids": [
+        72
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        7,
+        6
+      ],
+      "shallow": true,
+      "seed": [
+        96.50443272992489,
+        119.6,
+        194.42751915260754
+      ],
+      "cluster": 11,
+      "original_piece_ids": [
+        73
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        7,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        107.96930517841895,
+        114.20364926529402,
+        232.67229663270447
+      ],
+      "cluster": 11,
+      "original_piece_ids": [
+        74
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 0,
+      "grid": [
+        7,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        95.99090360655786,
+        114.94487842314352,
+        268.0568837571619
+      ],
+      "cluster": 11,
+      "original_piece_ids": [
+        75
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -82.43196083152958,
+        103.4423137520348,
+        11.032873401337435
+      ],
+      "cluster": 12,
+      "original_piece_ids": [
+        76
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        0,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -91.57640513735356,
+        99.68225639498635,
+        66.4827434068396
+      ],
+      "cluster": 12,
+      "original_piece_ids": [
+        77
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -81.56256971187743,
+        104.92969130339253,
+        96.38129603725031
+      ],
+      "cluster": 12,
+      "original_piece_ids": [
+        78,
+        84,
+        85
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -85.28199478795621,
+        104.99184038582955,
+        140.50880837747516
+      ],
+      "cluster": 13,
+      "original_piece_ids": [
+        79,
+        86
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        0,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -93.95467170219777,
+        103.37878314020813,
+        185.845159855764
+      ],
+      "cluster": 13,
+      "original_piece_ids": [
+        80,
+        87
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -90.66199617033068,
+        99.28477443275611,
+        221.27032098559783
+      ],
+      "cluster": 13,
+      "original_piece_ids": [
+        81,
+        88
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        0,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -87.20097831426291,
+        101.21295419937775,
+        253.8538603562123
+      ],
+      "cluster": 14,
+      "original_piece_ids": [
+        82,
+        89
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        1,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -54.3052324933665,
+        103.71930067149518,
+        31.78785348172314
+      ],
+      "cluster": 12,
+      "original_piece_ids": [
+        83
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -29.646613207802694,
+        101.08805247748668,
+        15.360755885809176
+      ],
+      "cluster": 15,
+      "original_piece_ids": [
+        90,
+        91,
+        98
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        2,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -33.62574442110509,
+        101.59105175470836,
+        93.06486722532081
+      ],
+      "cluster": 15,
+      "original_piece_ids": [
+        92,
+        99
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -20.5095075061503,
+        104.72342159448966,
+        132.97929759755138
+      ],
+      "cluster": 16,
+      "original_piece_ids": [
+        93,
+        100
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -27.71987036673484,
+        100.73786936271514,
+        176.63652442633494
+      ],
+      "cluster": 16,
+      "original_piece_ids": [
+        94,
+        101
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -22.03884946813641,
+        102.52602786099003,
+        221.21714246075757
+      ],
+      "cluster": 16,
+      "original_piece_ids": [
+        95,
+        102
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        2,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -34.54886704022874,
+        104.3992490049111,
+        257.4323865767025
+      ],
+      "cluster": 17,
+      "original_piece_ids": [
+        96,
+        103
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        3,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        4.292358219126447,
+        103.57875070332439,
+        17.853073599229255
+      ],
+      "cluster": 15,
+      "original_piece_ids": [
+        97
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        34.611960456701645,
+        99.23109600505651,
+        17.777537475580697
+      ],
+      "cluster": 18,
+      "original_piece_ids": [
+        104
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        4,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        33.9804783280461,
+        102.45504294539734,
+        53.24346799593978
+      ],
+      "cluster": 18,
+      "original_piece_ids": [
+        105,
+        111,
+        112
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        26.46987317548458,
+        101.05342107344134,
+        89.69805280563484
+      ],
+      "cluster": 18,
+      "original_piece_ids": [
+        106,
+        113
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        35.13763022608765,
+        100.06916217655592,
+        137.04324965121168
+      ],
+      "cluster": 19,
+      "original_piece_ids": [
+        107,
+        114
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        35.859576997251565,
+        104.3191208540044,
+        176.13917358920264
+      ],
+      "cluster": 19,
+      "original_piece_ids": [
+        108,
+        115,
+        116
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        4,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        20.553218644010833,
+        99.23258489641464,
+        222.56074396751745
+      ],
+      "cluster": 19,
+      "original_piece_ids": [
+        109
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        4,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        27.370269082960615,
+        104.13709942691497,
+        269.3480029002704
+      ],
+      "cluster": 20,
+      "original_piece_ids": [
+        110,
+        117
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        6,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        85.86295610499337,
+        103.19781546003557,
+        19.511514441095418
+      ],
+      "cluster": 21,
+      "original_piece_ids": [
+        118
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        6,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        80.72649185310176,
+        103.43898852070542,
+        71.78229185800991
+      ],
+      "cluster": 21,
+      "original_piece_ids": [
+        119,
+        120
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        6,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        83.28146287808232,
+        99.12297543022633,
+        148.352913500216
+      ],
+      "cluster": 22,
+      "original_piece_ids": [
+        121
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        6,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        89.12847740629755,
+        104.96225791606814,
+        187.1179656414539
+      ],
+      "cluster": 22,
+      "original_piece_ids": [
+        122,
+        123
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 1,
+      "grid": [
+        6,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        92.49168428698154,
+        101.63745585310062,
+        271.9480454229238
+      ],
+      "cluster": 23,
+      "original_piece_ids": [
+        124
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -66.7466583304829,
+        87.7352507403372,
+        13.90700533433527
+      ],
+      "cluster": 24,
+      "original_piece_ids": [
+        125,
+        131
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        0,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -66.1053414712226,
+        87.3391157334152,
+        56.28517333610169
+      ],
+      "cluster": 24,
+      "original_piece_ids": [
+        126,
+        132
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -76.07081048914482,
+        84.09591945118413,
+        104.67996518963999
+      ],
+      "cluster": 24,
+      "original_piece_ids": [
+        127,
+        133
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -61.995339487389955,
+        83.64945275825883,
+        161.90488889757887
+      ],
+      "cluster": 25,
+      "original_piece_ids": [
+        128,
+        134
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        0,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -65.36029673168747,
+        85.22200411589176,
+        216.62960970369937
+      ],
+      "cluster": 25,
+      "original_piece_ids": [
+        129,
+        135
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -62.024263935284075,
+        85.48842196915791,
+        255.1536572853122
+      ],
+      "cluster": 25,
+      "original_piece_ids": [
+        130,
+        136
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -13.54733388354521,
+        86.15900292518091,
+        10.809595442580342
+      ],
+      "cluster": 26,
+      "original_piece_ids": [
+        137,
+        143
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        2,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -6.259196025012354,
+        86.89388865369705,
+        70.43997996151103
+      ],
+      "cluster": 26,
+      "original_piece_ids": [
+        138,
+        144
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        2,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -7.868537750427201,
+        85.92232765143223,
+        103.98985034174699
+      ],
+      "cluster": 26,
+      "original_piece_ids": [
+        139,
+        145
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -11.225326091763034,
+        83.76701906751964,
+        163.5671977255883
+      ],
+      "cluster": 27,
+      "original_piece_ids": [
+        140,
+        146
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -9.638002111916332,
+        85.45911893071568,
+        216.62542231715568
+      ],
+      "cluster": 27,
+      "original_piece_ids": [
+        141,
+        147
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -10.16854315494578,
+        88.7860332009324,
+        244.81653195053818
+      ],
+      "cluster": 27,
+      "original_piece_ids": [
+        142,
+        148
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        42.29855180152067,
+        84.26746699926758,
+        17.951154074493175
+      ],
+      "cluster": 28,
+      "original_piece_ids": [
+        149,
+        155
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        4,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        49.0628951858698,
+        85.47336796843703,
+        66.63007668776461
+      ],
+      "cluster": 28,
+      "original_piece_ids": [
+        150,
+        156
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        44.94081740449325,
+        83.82564006336914,
+        113.30148947095682
+      ],
+      "cluster": 28,
+      "original_piece_ids": [
+        151,
+        157
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        44.87920302650811,
+        87.45350636575816,
+        158.58822290190764
+      ],
+      "cluster": 29,
+      "original_piece_ids": [
+        152,
+        158
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        45.329242134371576,
+        84.46385613973479,
+        200.55064313559114
+      ],
+      "cluster": 29,
+      "original_piece_ids": [
+        153,
+        159
+      ]
+    },
+    {
+      "side": 0,
+      "layer": 2,
+      "grid": [
+        4,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        44.809067286880804,
+        85.21227116165926,
+        242.68230445115992
+      ],
+      "cluster": 29,
+      "original_piece_ids": [
+        154,
+        160
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -115.54519240885331,
+        -107.40010170316053,
+        13.62558500217457
+      ],
+      "cluster": 30,
+      "original_piece_ids": [
+        161
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        0,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -115.20872415946705,
+        -104.3460050620693,
+        44.812416447822216
+      ],
+      "cluster": 30,
+      "original_piece_ids": [
+        162
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -114.3603265669242,
+        -104.1973343936909,
+        69.87881943903463
+      ],
+      "cluster": 30,
+      "original_piece_ids": [
+        163
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -114.01841369378367,
+        -107.5560790327823,
+        102.77142292168699
+      ],
+      "cluster": 31,
+      "original_piece_ids": [
+        164
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        0,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -116.13369149140657,
+        -108.38744265045665,
+        144.54290779271284
+      ],
+      "cluster": 31,
+      "original_piece_ids": [
+        165
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -116.57034494465674,
+        -104.99376980214282,
+        164.48149298249783
+      ],
+      "cluster": 31,
+      "original_piece_ids": [
+        166
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        0,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -115.60942384346204,
+        -97.3944720564979,
+        197.1510584116287
+      ],
+      "cluster": 32,
+      "original_piece_ids": [
+        167
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        0,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -116.58908503165783,
+        -105.40231318104242,
+        225.93496759175713
+      ],
+      "cluster": 32,
+      "original_piece_ids": [
+        168
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        0,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -116.8,
+        -97.77732268872043,
+        264.66387033052155
+      ],
+      "cluster": 32,
+      "original_piece_ids": [
+        169
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        0,
+        8
+      ],
+      "shallow": true,
+      "seed": [
+        -119.6,
+        -97.77732268872043,
+        264.66387033052155
+      ],
+      "cluster": 32,
+      "original_piece_ids": [
+        170
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        1,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -115.73769320081135,
+        -67.27499452035069,
+        6.533754256605697
+      ],
+      "cluster": 30,
+      "original_piece_ids": [
+        171
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -115.67195826402727,
+        -77.7351681395068,
+        40.69404482119849
+      ],
+      "cluster": 30,
+      "original_piece_ids": [
+        172
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        1,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -114.15932791454753,
+        -67.3089001411389,
+        74.53757233710073
+      ],
+      "cluster": 30,
+      "original_piece_ids": [
+        173
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        1,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -114.8406916640552,
+        -65.33371351202928,
+        108.996765015072
+      ],
+      "cluster": 31,
+      "original_piece_ids": [
+        174
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        1,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -115.11720844457005,
+        -64.20016187608883,
+        141.89257230460274
+      ],
+      "cluster": 31,
+      "original_piece_ids": [
+        175
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        1,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -115.2824755444692,
+        -73.60769769136095,
+        165.3224912029331
+      ],
+      "cluster": 31,
+      "original_piece_ids": [
+        176
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        1,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -115.45004084441877,
+        -75.07029624539135,
+        198.14546875059148
+      ],
+      "cluster": 32,
+      "original_piece_ids": [
+        177
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        1,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -114.91961541628581,
+        -73.99781999874057,
+        242.39317390082627
+      ],
+      "cluster": 32,
+      "original_piece_ids": [
+        178
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        1,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -115.72455537155984,
+        -71.92672092237405,
+        273.9359735663457
+      ],
+      "cluster": 32,
+      "original_piece_ids": [
+        179
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -116.61496903550737,
+        -46.82141640770247,
+        10.0717388351957
+      ],
+      "cluster": 33,
+      "original_piece_ids": [
+        180
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        2,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -115.00244568100044,
+        -42.53444856779643,
+        50.377141607036684
+      ],
+      "cluster": 33,
+      "original_piece_ids": [
+        181
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        2,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -116.89167567192051,
+        -39.5719417293689,
+        72.75281481045147
+      ],
+      "cluster": 33,
+      "original_piece_ids": [
+        182
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -116.3441411927773,
+        -37.90449741854132,
+        113.46272307163095
+      ],
+      "cluster": 34,
+      "original_piece_ids": [
+        183
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -114.33533524272728,
+        -45.96790835870128,
+        141.52208913623764
+      ],
+      "cluster": 34,
+      "original_piece_ids": [
+        184
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -116.54728585133132,
+        -39.52149412488042,
+        172.6988320652497
+      ],
+      "cluster": 34,
+      "original_piece_ids": [
+        185
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        2,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -114.14806466817201,
+        -37.98368320026221,
+        193.20209928486221
+      ],
+      "cluster": 35,
+      "original_piece_ids": [
+        186
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        2,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -116.8,
+        -37.94389321188015,
+        241.438355414452
+      ],
+      "cluster": 35,
+      "original_piece_ids": [
+        187
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        2,
+        7
+      ],
+      "shallow": true,
+      "seed": [
+        -119.6,
+        -37.94389321188015,
+        241.438355414452
+      ],
+      "cluster": 35,
+      "original_piece_ids": [
+        188
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        2,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -116.10443338563199,
+        -36.67882473178672,
+        272.7037595039843
+      ],
+      "cluster": 35,
+      "original_piece_ids": [
+        189
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        3,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -114.10910589157442,
+        -16.06549478258221,
+        17.3437295635092
+      ],
+      "cluster": 33,
+      "original_piece_ids": [
+        190
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        3,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -114.5051404922552,
+        -17.67366064707277,
+        55.30594650012242
+      ],
+      "cluster": 33,
+      "original_piece_ids": [
+        191
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        3,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -114.31035799991204,
+        -18.52099106880823,
+        79.28217674095661
+      ],
+      "cluster": 33,
+      "original_piece_ids": [
+        192
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        3,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -114.48203375874976,
+        -21.101552534957005,
+        100.02108588519856
+      ],
+      "cluster": 34,
+      "original_piece_ids": [
+        193
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        3,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -115.90479609749441,
+        -16.212465729148935,
+        131.52449887274454
+      ],
+      "cluster": 34,
+      "original_piece_ids": [
+        194
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        3,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -116.65944898207636,
+        -20.882638219304532,
+        173.0791967314741
+      ],
+      "cluster": 34,
+      "original_piece_ids": [
+        195
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        3,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -116.2684103438923,
+        -22.525543785001812,
+        195.00471498825513
+      ],
+      "cluster": 35,
+      "original_piece_ids": [
+        196
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        3,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -115.83960239890827,
+        -14.154420282057803,
+        236.51045940964076
+      ],
+      "cluster": 35,
+      "original_piece_ids": [
+        197
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        3,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -116.3919247209473,
+        -13.78268819232629,
+        271.0428937428941
+      ],
+      "cluster": 35,
+      "original_piece_ids": [
+        198
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -115.43394305232272,
+        21.22210991669141,
+        9.182223438685995
+      ],
+      "cluster": 36,
+      "original_piece_ids": [
+        199
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        4,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -115.07568106073221,
+        19.591614878704313,
+        45.0720331137365
+      ],
+      "cluster": 36,
+      "original_piece_ids": [
+        200
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -116.02607102826921,
+        10.861029730753842,
+        73.49660198560711
+      ],
+      "cluster": 36,
+      "original_piece_ids": [
+        201
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -116.14097705995583,
+        17.596769057469572,
+        112.46818780620502
+      ],
+      "cluster": 37,
+      "original_piece_ids": [
+        202
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -115.13514991124106,
+        11.634726260068376,
+        141.87776896401087
+      ],
+      "cluster": 37,
+      "original_piece_ids": [
+        203
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        4,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -116.43145890041214,
+        10.797812322957945,
+        166.84317114803014
+      ],
+      "cluster": 37,
+      "original_piece_ids": [
+        204
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        4,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -116.8,
+        13.128086720645685,
+        196.54227678495386
+      ],
+      "cluster": 38,
+      "original_piece_ids": [
+        205
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        4,
+        6
+      ],
+      "shallow": true,
+      "seed": [
+        -119.6,
+        13.128086720645685,
+        196.54227678495386
+      ],
+      "cluster": 38,
+      "original_piece_ids": [
+        206
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        4,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -116.47200414300931,
+        15.329575217096037,
+        224.29417260005937
+      ],
+      "cluster": 38,
+      "original_piece_ids": [
+        207
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        4,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -115.87051688607944,
+        18.14195950007438,
+        268.9800683954225
+      ],
+      "cluster": 38,
+      "original_piece_ids": [
+        208
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        5,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -114.98527581617081,
+        35.51174211210408,
+        23.32433461160901
+      ],
+      "cluster": 36,
+      "original_piece_ids": [
+        209
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        5,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -114.78549317357589,
+        51.846736378449805,
+        45.52398754417981
+      ],
+      "cluster": 36,
+      "original_piece_ids": [
+        210
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        5,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -116.84927313285274,
+        49.73308771975891,
+        69.72224516818116
+      ],
+      "cluster": 36,
+      "original_piece_ids": [
+        211
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        5,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -116.42362634819288,
+        50.93799395066682,
+        101.908762989656
+      ],
+      "cluster": 37,
+      "original_piece_ids": [
+        212
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        5,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -116.61141526197741,
+        46.13179068719408,
+        144.178445859499
+      ],
+      "cluster": 37,
+      "original_piece_ids": [
+        213
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        5,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -114.99716556948329,
+        35.391659513873975,
+        169.83418775887358
+      ],
+      "cluster": 37,
+      "original_piece_ids": [
+        214
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        5,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -114.76081865973634,
+        45.63358574588411,
+        206.66217680397105
+      ],
+      "cluster": 38,
+      "original_piece_ids": [
+        215
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        5,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -115.67345577673048,
+        43.47020470453831,
+        240.96423008694512
+      ],
+      "cluster": 38,
+      "original_piece_ids": [
+        216
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        5,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -114.37259355654446,
+        50.860680528152095,
+        273.2561759174074
+      ],
+      "cluster": 38,
+      "original_piece_ids": [
+        217
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        6,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -114.76244210694787,
+        69.43543797127191,
+        8.537928480418394
+      ],
+      "cluster": 39,
+      "original_piece_ids": [
+        218
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        6,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -115.11519913626029,
+        71.73524360217985,
+        50.7263778851977
+      ],
+      "cluster": 39,
+      "original_piece_ids": [
+        219
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        6,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -114.31744929659203,
+        79.02236627017804,
+        85.14888208653112
+      ],
+      "cluster": 39,
+      "original_piece_ids": [
+        220
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        6,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -114.71933888735096,
+        69.27414900213583,
+        103.38592313719575
+      ],
+      "cluster": 40,
+      "original_piece_ids": [
+        221
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        6,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -116.70057829008542,
+        69.93716859261659,
+        148.2485487302396
+      ],
+      "cluster": 40,
+      "original_piece_ids": [
+        222
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        6,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -116.8,
+        77.97848229385488,
+        168.49589298781353
+      ],
+      "cluster": 40,
+      "original_piece_ids": [
+        223
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        6,
+        5
+      ],
+      "shallow": true,
+      "seed": [
+        -119.6,
+        77.97848229385488,
+        168.49589298781353
+      ],
+      "cluster": 40,
+      "original_piece_ids": [
+        224
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        6,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -114.15351654612869,
+        79.87273224311095,
+        203.8875330590655
+      ],
+      "cluster": 41,
+      "original_piece_ids": [
+        225
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        6,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -116.4725829813575,
+        71.81296709435458,
+        242.9475375498344
+      ],
+      "cluster": 41,
+      "original_piece_ids": [
+        226
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        6,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -115.48041177120625,
+        75.21124905970701,
+        255.29475925945744
+      ],
+      "cluster": 41,
+      "original_piece_ids": [
+        227
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        7,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -116.8205060839746,
+        99.40988661564774,
+        19.121993308782805
+      ],
+      "cluster": 39,
+      "original_piece_ids": [
+        228
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        7,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -115.01562966318741,
+        95.35328092287374,
+        43.06942050895312
+      ],
+      "cluster": 39,
+      "original_piece_ids": [
+        229
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        7,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -115.17765761231688,
+        107.52182785366563,
+        70.4518710332164
+      ],
+      "cluster": 39,
+      "original_piece_ids": [
+        230
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        7,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -115.5932506324022,
+        97.013720470415,
+        100.0764109293832
+      ],
+      "cluster": 40,
+      "original_piece_ids": [
+        231
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        7,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -114.11597483642983,
+        99.21492911519938,
+        133.9855551309538
+      ],
+      "cluster": 40,
+      "original_piece_ids": [
+        232
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        7,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -115.53691900870713,
+        105.03434407051829,
+        165.13410520453752
+      ],
+      "cluster": 40,
+      "original_piece_ids": [
+        233
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        7,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -116.62412241378341,
+        97.1843024398647,
+        208.0502280441377
+      ],
+      "cluster": 41,
+      "original_piece_ids": [
+        234
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        7,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -114.09840018198064,
+        93.71164472559006,
+        227.07383298421405
+      ],
+      "cluster": 41,
+      "original_piece_ids": [
+        235
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 0,
+      "grid": [
+        7,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -116.91430818326783,
+        107.15039155418627,
+        259.15235377300496
+      ],
+      "cluster": 41,
+      "original_piece_ids": [
+        236
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -101.86339670332461,
+        -89.85984210795012,
+        9.995147311888093
+      ],
+      "cluster": 42,
+      "original_piece_ids": [
+        237,
+        238,
+        244
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -100.0072784893358,
+        -77.64507088751546,
+        96.5818900300976
+      ],
+      "cluster": 42,
+      "original_piece_ids": [
+        239,
+        245,
+        246
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -100.68053755768618,
+        -78.17641124314012,
+        137.58627897950595
+      ],
+      "cluster": 43,
+      "original_piece_ids": [
+        240,
+        241,
+        247
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -104.87969355738676,
+        -80.82271528364024,
+        218.12874353357586
+      ],
+      "cluster": 43,
+      "original_piece_ids": [
+        242,
+        249
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        0,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -100.24755327562313,
+        -79.81425607345949,
+        262.83541796661433
+      ],
+      "cluster": 44,
+      "original_piece_ids": [
+        243,
+        250
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        1,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -102.46540552315737,
+        -53.66405238312738,
+        186.6154932278801
+      ],
+      "cluster": 43,
+      "original_piece_ids": [
+        248
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -101.09424543553347,
+        -22.256577689494556,
+        27.82283602438479
+      ],
+      "cluster": 45,
+      "original_piece_ids": [
+        251,
+        252,
+        258
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        2,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -104.72387099718314,
+        -34.477589239278224,
+        90.59818642756082
+      ],
+      "cluster": 45,
+      "original_piece_ids": [
+        253
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -100.8957546433891,
+        -21.072676621195782,
+        145.627166038429
+      ],
+      "cluster": 46,
+      "original_piece_ids": [
+        254,
+        255,
+        261
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -103.68242967094207,
+        -30.40509950978128,
+        211.24995108956452
+      ],
+      "cluster": 46,
+      "original_piece_ids": [
+        256,
+        263
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        2,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -103.52971847008918,
+        -33.099663236711365,
+        259.0902499909515
+      ],
+      "cluster": 47,
+      "original_piece_ids": [
+        257
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        3,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -99.55997455515124,
+        1.1318045225668054,
+        66.9403050964439
+      ],
+      "cluster": 45,
+      "original_piece_ids": [
+        259,
+        260
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        3,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -102.6457588933359,
+        2.3829013826256005,
+        173.23131978052055
+      ],
+      "cluster": 46,
+      "original_piece_ids": [
+        262
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        3,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -101.0517129821067,
+        6.886765559951559,
+        249.6186103445115
+      ],
+      "cluster": 47,
+      "original_piece_ids": [
+        264
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -100.06596500191789,
+        35.65260630458823,
+        11.762585063602312
+      ],
+      "cluster": 48,
+      "original_piece_ids": [
+        265,
+        272
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        4,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -104.65780446396127,
+        24.25508685200041,
+        54.26326458175143
+      ],
+      "cluster": 48,
+      "original_piece_ids": [
+        266,
+        273
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -103.45944164628321,
+        24.88849555457475,
+        105.78657849945213
+      ],
+      "cluster": 48,
+      "original_piece_ids": [
+        267,
+        274
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -103.08005131980407,
+        28.57219808236491,
+        145.1552175343703
+      ],
+      "cluster": 49,
+      "original_piece_ids": [
+        268,
+        275
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -103.58312970746597,
+        34.4862151982559,
+        174.90250047305207
+      ],
+      "cluster": 49,
+      "original_piece_ids": [
+        269,
+        276
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        4,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -100.661856305471,
+        32.059853704096156,
+        226.26655855034903
+      ],
+      "cluster": 49,
+      "original_piece_ids": [
+        270,
+        277
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        4,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -102.44304950040512,
+        22.271678338061474,
+        255.7083189672628
+      ],
+      "cluster": 50,
+      "original_piece_ids": [
+        271,
+        278
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        6,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -101.76110811058756,
+        91.18630326781557,
+        17.053218564407814
+      ],
+      "cluster": 51,
+      "original_piece_ids": [
+        279
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        6,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -100.36965324888297,
+        78.18340770677877,
+        58.188512331446
+      ],
+      "cluster": 51,
+      "original_piece_ids": [
+        280
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        6,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -101.2415578428308,
+        79.18914841545994,
+        103.76216847550879
+      ],
+      "cluster": 51,
+      "original_piece_ids": [
+        281
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        6,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -103.96026682179755,
+        82.22262995774777,
+        150.89950616416118
+      ],
+      "cluster": 52,
+      "original_piece_ids": [
+        282,
+        283,
+        284
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 1,
+      "grid": [
+        6,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -100.62878450355554,
+        91.8524492765763,
+        271.78748453105663
+      ],
+      "cluster": 53,
+      "original_piece_ids": [
+        285
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -83.1642033117441,
+        -62.60705798686821,
+        36.351418397393715
+      ],
+      "cluster": 54,
+      "original_piece_ids": [
+        286
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        0,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -84.2997812452279,
+        -72.25591484335135,
+        70.36119106385317
+      ],
+      "cluster": 54,
+      "original_piece_ids": [
+        287,
+        292,
+        293
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -85.73150360454576,
+        -71.52677042906015,
+        109.57611519302492
+      ],
+      "cluster": 54,
+      "original_piece_ids": [
+        288,
+        294
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -84.83152574766277,
+        -71.82710789365636,
+        177.75884334370605
+      ],
+      "cluster": 55,
+      "original_piece_ids": [
+        289,
+        295
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        0,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -88.05873401184644,
+        -64.31181218072712,
+        197.78642984536071
+      ],
+      "cluster": 55,
+      "original_piece_ids": [
+        290,
+        296,
+        297
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -83.67494768030465,
+        -75.26972156212021,
+        253.93791247629386
+      ],
+      "cluster": 55,
+      "original_piece_ids": [
+        291
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -84.0875653488165,
+        -21.585162459088814,
+        9.159857537741305
+      ],
+      "cluster": 56,
+      "original_piece_ids": [
+        298,
+        304,
+        305
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        2,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -88.50508541442994,
+        -20.06777756177236,
+        78.89821965171191
+      ],
+      "cluster": 56,
+      "original_piece_ids": [
+        299,
+        300,
+        306
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -83.79258944481091,
+        -17.53223236243404,
+        170.571741921173
+      ],
+      "cluster": 57,
+      "original_piece_ids": [
+        301,
+        302,
+        308
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -84.54814032023128,
+        -20.848541041370197,
+        259.8933149794419
+      ],
+      "cluster": 57,
+      "original_piece_ids": [
+        303,
+        309
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        3,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -83.80763936161442,
+        11.3802204605944,
+        155.31669048354158
+      ],
+      "cluster": 57,
+      "original_piece_ids": [
+        307
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -84.4129698587499,
+        47.55040161244606,
+        25.158367055451052
+      ],
+      "cluster": 58,
+      "original_piece_ids": [
+        310,
+        316,
+        317
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        4,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -83.09675949222398,
+        34.9242434814511,
+        72.98129908775091
+      ],
+      "cluster": 58,
+      "original_piece_ids": [
+        311,
+        312,
+        318
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -88.44694352643512,
+        38.18277633139904,
+        160.06469676951096
+      ],
+      "cluster": 59,
+      "original_piece_ids": [
+        313,
+        319
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -83.56684461994357,
+        37.688950622034504,
+        221.61632878283143
+      ],
+      "cluster": 59,
+      "original_piece_ids": [
+        314,
+        315
+      ]
+    },
+    {
+      "side": 1,
+      "layer": 2,
+      "grid": [
+        5,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -85.52552596536907,
+        71.15606403148682,
+        219.07523412174928
+      ],
+      "cluster": 59,
+      "original_piece_ids": [
+        320,
+        321
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        105.87496087424064,
+        -116.5419890913152,
+        9.87705832002974
+      ],
+      "cluster": 60,
+      "original_piece_ids": [
+        322
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        0,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        108.21616339461302,
+        -114.52241014927515,
+        54.71435452073649
+      ],
+      "cluster": 60,
+      "original_piece_ids": [
+        323
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        108.15303805363183,
+        -114.12591075493255,
+        75.92539319000959
+      ],
+      "cluster": 60,
+      "original_piece_ids": [
+        324
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        99.46469448729508,
+        -116.63925359036426,
+        106.94509873224752
+      ],
+      "cluster": 61,
+      "original_piece_ids": [
+        325
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        0,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        104.07602910599579,
+        -115.74522168988469,
+        130.63265133878835
+      ],
+      "cluster": 61,
+      "original_piece_ids": [
+        326
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        107.41692369965716,
+        -114.15711328857017,
+        164.77700816210952
+      ],
+      "cluster": 61,
+      "original_piece_ids": [
+        327
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        0,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        94.31627200951081,
+        -114.94946200775752,
+        206.49865917822922
+      ],
+      "cluster": 62,
+      "original_piece_ids": [
+        328
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        0,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        102.41146841989382,
+        -114.24133549548736,
+        231.58825617027296
+      ],
+      "cluster": 62,
+      "original_piece_ids": [
+        329
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        0,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        103.43887864668916,
+        -114.5317423464167,
+        263.2587711130433
+      ],
+      "cluster": 62,
+      "original_piece_ids": [
+        330
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        1,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        79.30659303600513,
+        -116.89354872591942,
+        8.627651267100894
+      ],
+      "cluster": 60,
+      "original_piece_ids": [
+        331
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        72.92286855850134,
+        -114.00811816137913,
+        53.596939487989154
+      ],
+      "cluster": 60,
+      "original_piece_ids": [
+        332
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        1,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        75.89641691906152,
+        -115.200349202522,
+        74.77397281565581
+      ],
+      "cluster": 60,
+      "original_piece_ids": [
+        333
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        1,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        64.4355908775599,
+        -114.14936961972705,
+        102.18429140014258
+      ],
+      "cluster": 61,
+      "original_piece_ids": [
+        334
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        1,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        70.85664033922028,
+        -116.50471306660995,
+        141.67303037947138
+      ],
+      "cluster": 61,
+      "original_piece_ids": [
+        335
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        1,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        73.71867341606657,
+        -114.60883426828131,
+        163.44936077870096
+      ],
+      "cluster": 61,
+      "original_piece_ids": [
+        336
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        1,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        77.22199636192546,
+        -116.8,
+        206.8747113520902
+      ],
+      "cluster": 62,
+      "original_piece_ids": [
+        337
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        1,
+        6
+      ],
+      "shallow": true,
+      "seed": [
+        77.22199636192546,
+        -119.6,
+        206.8747113520902
+      ],
+      "cluster": 62,
+      "original_piece_ids": [
+        338
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        1,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        74.84731666438663,
+        -115.04961083293509,
+        232.73100723689288
+      ],
+      "cluster": 62,
+      "original_piece_ids": [
+        339
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        1,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        78.40523732506009,
+        -116.78743832432582,
+        264.21509435398247
+      ],
+      "cluster": 62,
+      "original_piece_ids": [
+        340
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        50.39803667794043,
+        -116.96045486651352,
+        11.66101874619477
+      ],
+      "cluster": 63,
+      "original_piece_ids": [
+        341
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        2,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        50.416377975950695,
+        -114.27955650373781,
+        54.50498430125292
+      ],
+      "cluster": 63,
+      "original_piece_ids": [
+        342
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        2,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        46.98077842197003,
+        -116.47726394242682,
+        83.2362215446141
+      ],
+      "cluster": 63,
+      "original_piece_ids": [
+        343
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        38.34946668225279,
+        -115.39023396870375,
+        110.36607243129312
+      ],
+      "cluster": 64,
+      "original_piece_ids": [
+        344
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        43.19267692791027,
+        -114.98625671183706,
+        134.08684343550695
+      ],
+      "cluster": 64,
+      "original_piece_ids": [
+        345
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        46.982922608273256,
+        -115.44158070607536,
+        175.14804906150533
+      ],
+      "cluster": 64,
+      "original_piece_ids": [
+        346
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        2,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        38.58769275754778,
+        -115.67986527264077,
+        195.2647725551396
+      ],
+      "cluster": 65,
+      "original_piece_ids": [
+        347
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        2,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        40.73107563827712,
+        -115.4665526925954,
+        240.48587752462112
+      ],
+      "cluster": 65,
+      "original_piece_ids": [
+        348
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        2,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        36.53585232350843,
+        -115.18178891394179,
+        261.5822995171092
+      ],
+      "cluster": 65,
+      "original_piece_ids": [
+        349
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        3,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        17.744022764597744,
+        -115.64586296005999,
+        6.336861272228919
+      ],
+      "cluster": 63,
+      "original_piece_ids": [
+        350
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        3,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        19.80475553896919,
+        -115.18974611494106,
+        45.19492574690836
+      ],
+      "cluster": 63,
+      "original_piece_ids": [
+        351
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        3,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        13.474558091319585,
+        -116.8323553371121,
+        85.22630986634091
+      ],
+      "cluster": 63,
+      "original_piece_ids": [
+        352
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        3,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        13.500496911035563,
+        -115.99848872687033,
+        116.57889192285539
+      ],
+      "cluster": 64,
+      "original_piece_ids": [
+        353
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        3,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        13.312715465830435,
+        -114.23118460499614,
+        140.5552960908053
+      ],
+      "cluster": 64,
+      "original_piece_ids": [
+        354
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        3,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        10.4990528311959,
+        -116.8,
+        165.81494301381997
+      ],
+      "cluster": 64,
+      "original_piece_ids": [
+        355
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        3,
+        5
+      ],
+      "shallow": true,
+      "seed": [
+        10.4990528311959,
+        -119.6,
+        165.81494301381997
+      ],
+      "cluster": 64,
+      "original_piece_ids": [
+        356
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        3,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        7.421012530210962,
+        -116.46112266680721,
+        207.16352540292812
+      ],
+      "cluster": 65,
+      "original_piece_ids": [
+        357
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        3,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        6.619275917750741,
+        -116.13132888270891,
+        234.46657962192728
+      ],
+      "cluster": 65,
+      "original_piece_ids": [
+        358
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        3,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        13.820511598040202,
+        -115.66943196131314,
+        258.42106648035127
+      ],
+      "cluster": 65,
+      "original_piece_ids": [
+        359
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -15.062374001900238,
+        -115.54980011845826,
+        6.5646490296497095
+      ],
+      "cluster": 66,
+      "original_piece_ids": [
+        360
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        4,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -6.944233169014138,
+        -116.63800698171626,
+        51.50333120762388
+      ],
+      "cluster": 66,
+      "original_piece_ids": [
+        361
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -10.338230328363426,
+        -114.62762327315487,
+        71.51947617592624
+      ],
+      "cluster": 66,
+      "original_piece_ids": [
+        362
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -21.40072047383466,
+        -116.27614495896776,
+        104.89558089113054
+      ],
+      "cluster": 67,
+      "original_piece_ids": [
+        363
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -22.014082600409097,
+        -115.44308677771446,
+        140.91274340516142
+      ],
+      "cluster": 67,
+      "original_piece_ids": [
+        364
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        4,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -22.833895793642142,
+        -114.06703822459873,
+        164.50049301313834
+      ],
+      "cluster": 67,
+      "original_piece_ids": [
+        365
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        4,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -13.05096591756984,
+        -115.15321278413046,
+        199.18455796797056
+      ],
+      "cluster": 68,
+      "original_piece_ids": [
+        366
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        4,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -16.678136280785807,
+        -116.52015411446695,
+        238.31344149787716
+      ],
+      "cluster": 68,
+      "original_piece_ids": [
+        367
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        4,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -21.666588032479737,
+        -115.3222584507948,
+        267.32892741027695
+      ],
+      "cluster": 68,
+      "original_piece_ids": [
+        368
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        5,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -41.9192538208547,
+        -116.02523632385913,
+        20.881059991130485
+      ],
+      "cluster": 66,
+      "original_piece_ids": [
+        369
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        5,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -35.44083919087235,
+        -116.60853529668762,
+        45.12983797187012
+      ],
+      "cluster": 66,
+      "original_piece_ids": [
+        370
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        5,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -47.58716476801491,
+        -115.3052632129163,
+        81.62754137412804
+      ],
+      "cluster": 66,
+      "original_piece_ids": [
+        371
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        5,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -36.1936854869822,
+        -116.43870193189363,
+        108.45696398218143
+      ],
+      "cluster": 67,
+      "original_piece_ids": [
+        372
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        5,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -35.26680398488928,
+        -116.8,
+        138.59532384180017
+      ],
+      "cluster": 67,
+      "original_piece_ids": [
+        373
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        5,
+        4
+      ],
+      "shallow": true,
+      "seed": [
+        -35.26680398488928,
+        -119.6,
+        138.59532384180017
+      ],
+      "cluster": 67,
+      "original_piece_ids": [
+        374
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        5,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -36.17652978292833,
+        -116.58403707544903,
+        180.45094481637096
+      ],
+      "cluster": 67,
+      "original_piece_ids": [
+        375
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        5,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -43.981075297324935,
+        -115.9463945652441,
+        206.1361266788732
+      ],
+      "cluster": 68,
+      "original_piece_ids": [
+        376
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        5,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -41.695586092209716,
+        -115.82699289537813,
+        228.91295493480044
+      ],
+      "cluster": 68,
+      "original_piece_ids": [
+        377
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        5,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -49.201108815118275,
+        -115.29584486932815,
+        265.0736667153623
+      ],
+      "cluster": 68,
+      "original_piece_ids": [
+        378
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        6,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -71.56062647964687,
+        -115.94581174524436,
+        12.695597113118119
+      ],
+      "cluster": 69,
+      "original_piece_ids": [
+        379
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        6,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -65.64771434831387,
+        -115.4660753305828,
+        41.80959444712485
+      ],
+      "cluster": 69,
+      "original_piece_ids": [
+        380
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        6,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -67.12906115363091,
+        -115.8639504900954,
+        68.5551578940475
+      ],
+      "cluster": 69,
+      "original_piece_ids": [
+        381
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        6,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -67.6416253450542,
+        -114.84870155411305,
+        108.84611299714467
+      ],
+      "cluster": 70,
+      "original_piece_ids": [
+        382
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        6,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -79.75662042653208,
+        -116.26345640229687,
+        136.1800115484102
+      ],
+      "cluster": 70,
+      "original_piece_ids": [
+        383
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        6,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -70.21675794975855,
+        -114.80547424728756,
+        175.470378154499
+      ],
+      "cluster": 70,
+      "original_piece_ids": [
+        384
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        6,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -80.890774391493,
+        -114.1766815490108,
+        204.52013188275112
+      ],
+      "cluster": 71,
+      "original_piece_ids": [
+        385
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        6,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -78.89498464099056,
+        -116.13995841108252,
+        230.6380209610413
+      ],
+      "cluster": 71,
+      "original_piece_ids": [
+        386
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        6,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -72.77670099890996,
+        -116.93368582884519,
+        271.4078063281835
+      ],
+      "cluster": 71,
+      "original_piece_ids": [
+        387
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        7,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -108.14186335525807,
+        -114.87151931899987,
+        13.936865156651999
+      ],
+      "cluster": 69,
+      "original_piece_ids": [
+        388
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        7,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -104.78638718061235,
+        -116.4395338494795,
+        48.574634485207774
+      ],
+      "cluster": 69,
+      "original_piece_ids": [
+        389
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        7,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -94.1942660136746,
+        -116.98229902215716,
+        82.61186693066728
+      ],
+      "cluster": 69,
+      "original_piece_ids": [
+        390
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        7,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -101.78692756839547,
+        -116.8,
+        109.27219572327711
+      ],
+      "cluster": 70,
+      "original_piece_ids": [
+        391
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        7,
+        3
+      ],
+      "shallow": true,
+      "seed": [
+        -101.78692756839547,
+        -119.6,
+        109.27219572327711
+      ],
+      "cluster": 70,
+      "original_piece_ids": [
+        392
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        7,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -99.76775631246406,
+        -114.16859611729522,
+        132.1972073114366
+      ],
+      "cluster": 70,
+      "original_piece_ids": [
+        393
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        7,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -100.6286372238023,
+        -116.87807740887882,
+        179.31406490469016
+      ],
+      "cluster": 70,
+      "original_piece_ids": [
+        394
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        7,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -104.97661657015877,
+        -114.02354645954416,
+        201.01980118153554
+      ],
+      "cluster": 71,
+      "original_piece_ids": [
+        395
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        7,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        -108.96418383926837,
+        -114.92118199612929,
+        229.83272517206072
+      ],
+      "cluster": 71,
+      "original_piece_ids": [
+        396
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 0,
+      "grid": [
+        7,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        -108.69017489111614,
+        -116.93475770768023,
+        269.92464077021447
+      ],
+      "cluster": 71,
+      "original_piece_ids": [
+        397
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        92.78285572005045,
+        -99.75946009480619,
+        13.307384270316575
+      ],
+      "cluster": 72,
+      "original_piece_ids": [
+        398,
+        405
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        0,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        88.9724521267485,
+        -101.51068088183595,
+        59.47442625257997
+      ],
+      "cluster": 72,
+      "original_piece_ids": [
+        399,
+        406
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        83.80769560714417,
+        -103.17811617458102,
+        89.61519445476233
+      ],
+      "cluster": 72,
+      "original_piece_ids": [
+        400,
+        407
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        84.13415857770384,
+        -101.61062898063965,
+        146.0252680708182
+      ],
+      "cluster": 73,
+      "original_piece_ids": [
+        401,
+        408
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        0,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        82.64419323539262,
+        -103.24335493578357,
+        185.02762977259306
+      ],
+      "cluster": 73,
+      "original_piece_ids": [
+        402,
+        409,
+        410
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        86.31153176990088,
+        -101.73796843243042,
+        231.26397649072894
+      ],
+      "cluster": 73,
+      "original_piece_ids": [
+        403
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        0,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        81.61263949090491,
+        -104.35397597306344,
+        251.70741267370028
+      ],
+      "cluster": 74,
+      "original_piece_ids": [
+        404,
+        411
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        31.629801118829626,
+        -100.14945808235576,
+        13.108530515340695
+      ],
+      "cluster": 75,
+      "original_piece_ids": [
+        412,
+        419
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        2,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        25.8543002965358,
+        -101.26869484475753,
+        68.34475170635471
+      ],
+      "cluster": 75,
+      "original_piece_ids": [
+        413,
+        414,
+        420
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        23.58696269111777,
+        -104.57349247546908,
+        131.45004781473466
+      ],
+      "cluster": 76,
+      "original_piece_ids": [
+        415,
+        422
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        36.602209888451995,
+        -99.84651597177863,
+        174.1752420462144
+      ],
+      "cluster": 76,
+      "original_piece_ids": [
+        416,
+        423
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        32.14179339903753,
+        -99.38317238352701,
+        231.29595922169003
+      ],
+      "cluster": 76,
+      "original_piece_ids": [
+        417,
+        424
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        2,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        27.896294672416513,
+        -104.16772105201815,
+        260.9711285871896
+      ],
+      "cluster": 77,
+      "original_piece_ids": [
+        418
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        3,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -4.558678481909812,
+        -99.3827879303096,
+        105.94506139140498
+      ],
+      "cluster": 75,
+      "original_piece_ids": [
+        421
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        3,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -4.501398862471166,
+        -103.49585477247993,
+        265.43148091542344
+      ],
+      "cluster": 77,
+      "original_piece_ids": [
+        425
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -35.54645611943932,
+        -103.70317935218348,
+        7.9106470982141115
+      ],
+      "cluster": 78,
+      "original_piece_ids": [
+        426,
+        433
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        4,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        -26.6812031054222,
+        -104.8198075787232,
+        48.72122898937005
+      ],
+      "cluster": 78,
+      "original_piece_ids": [
+        427
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -23.55856755408861,
+        -99.22771401798995,
+        100.35554913976696
+      ],
+      "cluster": 78,
+      "original_piece_ids": [
+        428,
+        434,
+        435
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -34.43342025978607,
+        -99.61980903224557,
+        141.9443555633943
+      ],
+      "cluster": 79,
+      "original_piece_ids": [
+        429,
+        436
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -30.548566282740772,
+        -103.02207441924,
+        187.52228139707825
+      ],
+      "cluster": 79,
+      "original_piece_ids": [
+        430,
+        437
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        4,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -35.308068655881755,
+        -101.24504293253523,
+        228.16347837933586
+      ],
+      "cluster": 79,
+      "original_piece_ids": [
+        431,
+        438
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        4,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -34.301943784400386,
+        -101.54550076256945,
+        250.03372867256883
+      ],
+      "cluster": 80,
+      "original_piece_ids": [
+        432,
+        439
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        6,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -91.3511508078875,
+        -103.38263839260091,
+        19.21628080142918
+      ],
+      "cluster": 81,
+      "original_piece_ids": [
+        440,
+        441
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        6,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -85.50980065272644,
+        -103.05218651292918,
+        100.48418340524177
+      ],
+      "cluster": 81,
+      "original_piece_ids": [
+        442
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        6,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -79.03917256512611,
+        -101.12071611621452,
+        131.41483488222065
+      ],
+      "cluster": 82,
+      "original_piece_ids": [
+        443
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        6,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -88.97202531493753,
+        -102.54401148072064,
+        182.4878870530016
+      ],
+      "cluster": 82,
+      "original_piece_ids": [
+        444,
+        445
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 1,
+      "grid": [
+        6,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        -79.57351638411915,
+        -99.70654955708099,
+        247.8449190637128
+      ],
+      "cluster": 83,
+      "original_piece_ids": [
+        446
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        74.27164790140938,
+        -85.37497938292418,
+        30.47006384110108
+      ],
+      "cluster": 84,
+      "original_piece_ids": [
+        447,
+        448,
+        454
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        75.34379473118129,
+        -84.84742625150737,
+        125.02038558247278
+      ],
+      "cluster": 84,
+      "original_piece_ids": [
+        449,
+        455
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        77.1284272401376,
+        -87.06039925787223,
+        154.1822876400624
+      ],
+      "cluster": 85,
+      "original_piece_ids": [
+        450,
+        451,
+        456
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        64.72751930461618,
+        -85.01504128854214,
+        252.43843111447583
+      ],
+      "cluster": 85,
+      "original_piece_ids": [
+        452,
+        457,
+        458
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        1,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        39.41956101188852,
+        -87.02465530581102,
+        15.119829031404368
+      ],
+      "cluster": 84,
+      "original_piece_ids": [
+        453
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        10.30398648207984,
+        -84.60400749415396,
+        16.043570316247866
+      ],
+      "cluster": 86,
+      "original_piece_ids": [
+        459,
+        465
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        2,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        7.956361904911561,
+        -83.24815626484786,
+        70.77561997169408
+      ],
+      "cluster": 86,
+      "original_piece_ids": [
+        460,
+        466
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        2,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        20.77225021174148,
+        -88.17729846720945,
+        105.56300688109408
+      ],
+      "cluster": 86,
+      "original_piece_ids": [
+        461,
+        467
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        20.675069527916108,
+        -87.58838800017413,
+        161.99714760243396
+      ],
+      "cluster": 87,
+      "original_piece_ids": [
+        462,
+        468
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        19.463816554182728,
+        -86.57414953365364,
+        209.70107293609985
+      ],
+      "cluster": 87,
+      "original_piece_ids": [
+        463,
+        469,
+        470
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        18.258133219954196,
+        -88.22282227491671,
+        265.16619530581664
+      ],
+      "cluster": 87,
+      "original_piece_ids": [
+        464
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -39.696914983532984,
+        -86.64422987243412,
+        28.392220846189783
+      ],
+      "cluster": 88,
+      "original_piece_ids": [
+        471,
+        472,
+        478
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        -49.61308640623331,
+        -85.60792087987805,
+        111.4569197861947
+      ],
+      "cluster": 88,
+      "original_piece_ids": [
+        473,
+        479
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        -46.61273447765534,
+        -88.78989967129372,
+        152.11666562634878
+      ],
+      "cluster": 89,
+      "original_piece_ids": [
+        474,
+        480
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        -42.380331434750154,
+        -87.00273520851175,
+        212.5923050677809
+      ],
+      "cluster": 89,
+      "original_piece_ids": [
+        475,
+        481
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        4,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        -49.40904180957017,
+        -84.7568186247671,
+        258.4330991807414
+      ],
+      "cluster": 89,
+      "original_piece_ids": [
+        476,
+        482
+      ]
+    },
+    {
+      "side": 2,
+      "layer": 2,
+      "grid": [
+        5,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        -70.50425857919369,
+        -88.98982390476372,
+        29.36098203791069
+      ],
+      "cluster": 88,
+      "original_piece_ids": [
+        477
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        115.30314460703624,
+        101.29568732763953,
+        21.784162371445177
+      ],
+      "cluster": 90,
+      "original_piece_ids": [
+        483
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        0,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        115.73275305933845,
+        102.04120355703499,
+        38.452515054640585
+      ],
+      "cluster": 90,
+      "original_piece_ids": [
+        484
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        116.26449319563255,
+        105.0651729322052,
+        80.38677863694033
+      ],
+      "cluster": 90,
+      "original_piece_ids": [
+        485
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        116.36489717613858,
+        104.98542048108037,
+        99.76028150473634
+      ],
+      "cluster": 91,
+      "original_piece_ids": [
+        486
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        0,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        114.95447047411001,
+        98.71822985867564,
+        131.50394330070543
+      ],
+      "cluster": 91,
+      "original_piece_ids": [
+        487
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        116.8,
+        107.47349036078775,
+        171.08128488286874
+      ],
+      "cluster": 91,
+      "original_piece_ids": [
+        488
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": true,
+      "seed": [
+        119.6,
+        107.47349036078775,
+        171.08128488286874
+      ],
+      "cluster": 91,
+      "original_piece_ids": [
+        489
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        0,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        114.2810618831189,
+        101.68211380947326,
+        202.09167587940172
+      ],
+      "cluster": 92,
+      "original_piece_ids": [
+        490
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        0,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        115.35049998148337,
+        106.9807329104129,
+        224.86978897377736
+      ],
+      "cluster": 92,
+      "original_piece_ids": [
+        491
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        0,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        114.36660645521638,
+        101.97769811147133,
+        261.61975868467744
+      ],
+      "cluster": 92,
+      "original_piece_ids": [
+        492
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        1,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        114.87701248468457,
+        72.1526675214148,
+        15.387143447461167
+      ],
+      "cluster": 90,
+      "original_piece_ids": [
+        493
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        114.54793678313183,
+        64.44340673954457,
+        38.10462591711414
+      ],
+      "cluster": 90,
+      "original_piece_ids": [
+        494
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        1,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        116.53961789392712,
+        68.3284311234362,
+        79.30124676668999
+      ],
+      "cluster": 90,
+      "original_piece_ids": [
+        495
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        1,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        116.4055856096758,
+        80.24354168807437,
+        109.66497783027427
+      ],
+      "cluster": 91,
+      "original_piece_ids": [
+        496
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        1,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        114.9300724154632,
+        79.39082296319323,
+        145.05195379419666
+      ],
+      "cluster": 91,
+      "original_piece_ids": [
+        497
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        1,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        115.09380008956595,
+        64.18514447138375,
+        177.81414326939364
+      ],
+      "cluster": 91,
+      "original_piece_ids": [
+        498
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        1,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        114.31186248111163,
+        64.14312111407345,
+        205.30667350630046
+      ],
+      "cluster": 92,
+      "original_piece_ids": [
+        499
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        1,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        115.32112022946141,
+        80.5907279039412,
+        241.7706966299878
+      ],
+      "cluster": 92,
+      "original_piece_ids": [
+        500
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        1,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        115.48306244042064,
+        69.98376479532973,
+        263.3034903649303
+      ],
+      "cluster": 92,
+      "original_piece_ids": [
+        501
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        114.93654810446282,
+        50.69521555178545,
+        23.844799480496924
+      ],
+      "cluster": 93,
+      "original_piece_ids": [
+        502
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        2,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        115.28912292676277,
+        46.12666262646987,
+        49.286266392763245
+      ],
+      "cluster": 93,
+      "original_piece_ids": [
+        503
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        2,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        116.23898480988726,
+        46.01059046789429,
+        71.33258824119227
+      ],
+      "cluster": 93,
+      "original_piece_ids": [
+        504
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        114.97562089212718,
+        45.80690270740664,
+        106.0740015605276
+      ],
+      "cluster": 94,
+      "original_piece_ids": [
+        505
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        116.8,
+        42.91656935536615,
+        145.4555066708962
+      ],
+      "cluster": 94,
+      "original_piece_ids": [
+        506
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": true,
+      "seed": [
+        119.6,
+        42.91656935536615,
+        145.4555066708962
+      ],
+      "cluster": 94,
+      "original_piece_ids": [
+        507
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        114.74409508887686,
+        37.31512131474324,
+        179.13029849778064
+      ],
+      "cluster": 94,
+      "original_piece_ids": [
+        508
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        2,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        114.92526914376106,
+        39.91752556481684,
+        200.99252383976278
+      ],
+      "cluster": 95,
+      "original_piece_ids": [
+        509
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        2,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        116.84604123484618,
+        49.545327409796876,
+        227.87954310069196
+      ],
+      "cluster": 95,
+      "original_piece_ids": [
+        510
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        2,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        115.50677798902991,
+        45.16461944969695,
+        255.42686416002863
+      ],
+      "cluster": 95,
+      "original_piece_ids": [
+        511
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        3,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        116.58113464028965,
+        10.191504503167508,
+        5.980201612093548
+      ],
+      "cluster": 93,
+      "original_piece_ids": [
+        512
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        3,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        114.00402506717572,
+        8.467336144528556,
+        45.46799254128544
+      ],
+      "cluster": 93,
+      "original_piece_ids": [
+        513
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        3,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        114.12096596064453,
+        15.740875873291378,
+        78.53845913987189
+      ],
+      "cluster": 93,
+      "original_piece_ids": [
+        514
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        3,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        114.87358294459432,
+        11.028485057869334,
+        115.44515996703582
+      ],
+      "cluster": 94,
+      "original_piece_ids": [
+        515
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        3,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        116.94898493152674,
+        18.30153729204948,
+        140.70339349987125
+      ],
+      "cluster": 94,
+      "original_piece_ids": [
+        516
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        3,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        116.55027903150966,
+        17.701354921628557,
+        174.9067568958712
+      ],
+      "cluster": 94,
+      "original_piece_ids": [
+        517
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        3,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        116.0262644752544,
+        12.34596467559798,
+        211.5036339459824
+      ],
+      "cluster": 95,
+      "original_piece_ids": [
+        518
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        3,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        114.94433773928029,
+        15.300360999472732,
+        237.85181748330635
+      ],
+      "cluster": 95,
+      "original_piece_ids": [
+        519
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        3,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        116.19157063271639,
+        12.198350558945084,
+        262.2960552547068
+      ],
+      "cluster": 95,
+      "original_piece_ids": [
+        520
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        115.78269283463723,
+        -14.761920419020239,
+        15.231693645639389
+      ],
+      "cluster": 96,
+      "original_piece_ids": [
+        521
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        4,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        116.6595234385721,
+        -16.87957672771103,
+        39.324817043323385
+      ],
+      "cluster": 96,
+      "original_piece_ids": [
+        522
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        116.9499134766975,
+        -6.587974426634637,
+        76.92368206428449
+      ],
+      "cluster": 96,
+      "original_piece_ids": [
+        523
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        116.8,
+        -17.340499737064512,
+        118.35834995643664
+      ],
+      "cluster": 97,
+      "original_piece_ids": [
+        524
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": true,
+      "seed": [
+        119.6,
+        -17.340499737064512,
+        118.35834995643664
+      ],
+      "cluster": 97,
+      "original_piece_ids": [
+        525
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        114.36649894773063,
+        -14.998569927645901,
+        137.48441508171877
+      ],
+      "cluster": 97,
+      "original_piece_ids": [
+        526
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        4,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        115.60709494832372,
+        -14.767861448202277,
+        169.46376954360164
+      ],
+      "cluster": 97,
+      "original_piece_ids": [
+        527
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        4,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        116.65762552582513,
+        -14.692776345871225,
+        205.63809786601087
+      ],
+      "cluster": 98,
+      "original_piece_ids": [
+        528
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        4,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        115.59084100215756,
+        -8.090503609419333,
+        226.53809072737403
+      ],
+      "cluster": 98,
+      "original_piece_ids": [
+        529
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        4,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        116.16430118053405,
+        -8.924885455790756,
+        258.7390503349985
+      ],
+      "cluster": 98,
+      "original_piece_ids": [
+        530
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        5,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        116.06401886009384,
+        -38.78704828402822,
+        12.649023300011219
+      ],
+      "cluster": 96,
+      "original_piece_ids": [
+        531
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        5,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        115.53936061618204,
+        -46.11907591517588,
+        39.8243934264736
+      ],
+      "cluster": 96,
+      "original_piece_ids": [
+        532
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        5,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        116.98992270331888,
+        -51.73422340704085,
+        68.67038515682881
+      ],
+      "cluster": 96,
+      "original_piece_ids": [
+        533
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        5,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        114.96117155281158,
+        -40.19654360081966,
+        106.05493309016582
+      ],
+      "cluster": 97,
+      "original_piece_ids": [
+        534
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        5,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        114.00095678219989,
+        -49.476770541255476,
+        141.82537067577016
+      ],
+      "cluster": 97,
+      "original_piece_ids": [
+        535
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        5,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        115.87196981687137,
+        -39.15786438528455,
+        171.88516346603802
+      ],
+      "cluster": 97,
+      "original_piece_ids": [
+        536
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        5,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        116.057011087178,
+        -48.37893799723595,
+        206.05164493180607
+      ],
+      "cluster": 98,
+      "original_piece_ids": [
+        537
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        5,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        114.39496967061174,
+        -42.9422377481748,
+        239.9628810143429
+      ],
+      "cluster": 98,
+      "original_piece_ids": [
+        538
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        5,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        116.43494784100092,
+        -47.274238066637245,
+        258.05886343679634
+      ],
+      "cluster": 98,
+      "original_piece_ids": [
+        539
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        6,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        115.57788350931352,
+        -70.38096777264452,
+        19.119617970542546
+      ],
+      "cluster": 99,
+      "original_piece_ids": [
+        540
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        6,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        114.60903356838263,
+        -80.28736307444471,
+        49.03287816005061
+      ],
+      "cluster": 99,
+      "original_piece_ids": [
+        541
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        6,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        116.8,
+        -76.94819711455159,
+        72.46952782344549
+      ],
+      "cluster": 99,
+      "original_piece_ids": [
+        542
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        6,
+        2
+      ],
+      "shallow": true,
+      "seed": [
+        119.6,
+        -76.94819711455159,
+        72.46952782344549
+      ],
+      "cluster": 99,
+      "original_piece_ids": [
+        543
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        6,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        115.7496978786388,
+        -70.79880404350618,
+        108.73921749966645
+      ],
+      "cluster": 100,
+      "original_piece_ids": [
+        544
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        6,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        114.15496891670031,
+        -67.26750778094987,
+        147.9446064127849
+      ],
+      "cluster": 100,
+      "original_piece_ids": [
+        545
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        6,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        116.34096541545031,
+        -80.092241749717,
+        164.62973662673772
+      ],
+      "cluster": 100,
+      "original_piece_ids": [
+        546
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        6,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        116.38523485002966,
+        -73.96319807405268,
+        210.51004722125037
+      ],
+      "cluster": 101,
+      "original_piece_ids": [
+        547
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        6,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        116.40141531428957,
+        -70.97245043899778,
+        231.4881113932004
+      ],
+      "cluster": 101,
+      "original_piece_ids": [
+        548
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        6,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        116.13807339478143,
+        -74.92450335069623,
+        270.6678764818056
+      ],
+      "cluster": 101,
+      "original_piece_ids": [
+        549
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        7,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        116.30133111594309,
+        -102.84326504927098,
+        23.35187148903878
+      ],
+      "cluster": 99,
+      "original_piece_ids": [
+        550
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        7,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        114.63962645741933,
+        -107.96884746860864,
+        47.89990265379539
+      ],
+      "cluster": 99,
+      "original_piece_ids": [
+        551
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        7,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        115.69056143317655,
+        -105.81161590466564,
+        68.31431835312735
+      ],
+      "cluster": 99,
+      "original_piece_ids": [
+        552
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        7,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        116.28085886872906,
+        -101.72655020281651,
+        113.12005512612063
+      ],
+      "cluster": 100,
+      "original_piece_ids": [
+        553
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        7,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        115.08365006996908,
+        -103.51927826093169,
+        139.38637169161692
+      ],
+      "cluster": 100,
+      "original_piece_ids": [
+        554
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        7,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        115.42184889574635,
+        -94.58348422171784,
+        174.99932819771024
+      ],
+      "cluster": 100,
+      "original_piece_ids": [
+        555
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        7,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        116.87372667258191,
+        -98.28076247048294,
+        208.8582860003474
+      ],
+      "cluster": 101,
+      "original_piece_ids": [
+        556
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        7,
+        7
+      ],
+      "shallow": false,
+      "seed": [
+        116.54816499336643,
+        -105.7883664998907,
+        236.042076766868
+      ],
+      "cluster": 101,
+      "original_piece_ids": [
+        557
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 0,
+      "grid": [
+        7,
+        8
+      ],
+      "shallow": false,
+      "seed": [
+        114.63660977541434,
+        -104.18471891277478,
+        269.230988388316
+      ],
+      "cluster": 101,
+      "original_piece_ids": [
+        558
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        104.30926828849528,
+        82.41473529564581,
+        27.152924697141202
+      ],
+      "cluster": 102,
+      "original_piece_ids": [
+        559,
+        560,
+        566
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        101.08951500161592,
+        92.65005998113112,
+        93.20668210309483
+      ],
+      "cluster": 102,
+      "original_piece_ids": [
+        561,
+        568
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        99.62649625924115,
+        83.23419692389383,
+        150.8790481546419
+      ],
+      "cluster": 103,
+      "original_piece_ids": [
+        562,
+        563
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        102.61469368762897,
+        84.69323643760792,
+        230.62561332614123
+      ],
+      "cluster": 103,
+      "original_piece_ids": [
+        564,
+        571
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        0,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        100.94395697819176,
+        86.76029313953332,
+        250.12521737632005
+      ],
+      "cluster": 104,
+      "original_piece_ids": [
+        565,
+        572
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        1,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        103.09375796331216,
+        52.409081569029766,
+        61.008214430869145
+      ],
+      "cluster": 102,
+      "original_piece_ids": [
+        567
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        1,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        104.97171852001665,
+        58.02710456889464,
+        149.1006309114574
+      ],
+      "cluster": 103,
+      "original_piece_ids": [
+        569,
+        570
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        103.84853952960606,
+        32.385647768568624,
+        15.897536313473896
+      ],
+      "cluster": 105,
+      "original_piece_ids": [
+        573,
+        574,
+        581
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        2,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        102.4654654474105,
+        34.779023930946565,
+        109.55113301451948
+      ],
+      "cluster": 105,
+      "original_piece_ids": [
+        575
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        104.81461677162162,
+        24.18911914967329,
+        133.7723590173589
+      ],
+      "cluster": 106,
+      "original_piece_ids": [
+        576,
+        583
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        100.98199970181162,
+        33.20929604263467,
+        185.99740471402606
+      ],
+      "cluster": 106,
+      "original_piece_ids": [
+        577,
+        578,
+        584
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        2,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        100.54393763211309,
+        31.487340231001,
+        270.45759658378677
+      ],
+      "cluster": 107,
+      "original_piece_ids": [
+        579,
+        586
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        3,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        102.97154878169763,
+        -6.134906565914744,
+        8.251468166913835
+      ],
+      "cluster": 105,
+      "original_piece_ids": [
+        580
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        3,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        104.9966051850388,
+        -2.1486371825214943,
+        110.2214877965356
+      ],
+      "cluster": 105,
+      "original_piece_ids": [
+        582
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        3,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        101.90717495965177,
+        1.5242477884831844,
+        222.9963341917556
+      ],
+      "cluster": 106,
+      "original_piece_ids": [
+        585
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        102.32260524399359,
+        -35.39032314163478,
+        29.532172392249237
+      ],
+      "cluster": 108,
+      "original_piece_ids": [
+        587,
+        588,
+        595
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        100.45792016912812,
+        -34.16191970919418,
+        94.55821856189769
+      ],
+      "cluster": 108,
+      "original_piece_ids": [
+        589,
+        596
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        104.13550929126333,
+        -23.671486594882985,
+        137.77845031855165
+      ],
+      "cluster": 109,
+      "original_piece_ids": [
+        590
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        4,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        99.38905688704871,
+        -30.506816564184085,
+        182.45895365289653
+      ],
+      "cluster": 109,
+      "original_piece_ids": [
+        591,
+        592,
+        599
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        4,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        104.74371694091151,
+        -28.347411041597237,
+        254.62897281281204
+      ],
+      "cluster": 110,
+      "original_piece_ids": [
+        593,
+        600
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        5,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        103.2248775001813,
+        -54.79555085083744,
+        25.295869335393533
+      ],
+      "cluster": 108,
+      "original_piece_ids": [
+        594
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        5,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        103.31620649311132,
+        -64.16852227910977,
+        137.64183805593615
+      ],
+      "cluster": 109,
+      "original_piece_ids": [
+        597,
+        598
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        6,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        101.94751031963949,
+        -85.66120639721245,
+        26.255767872675825
+      ],
+      "cluster": 111,
+      "original_piece_ids": [
+        601,
+        602
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        6,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        101.53151397589723,
+        -89.22098813786764,
+        97.92057211731363
+      ],
+      "cluster": 111,
+      "original_piece_ids": [
+        603
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        6,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        101.83379364042305,
+        -84.50149926518137,
+        144.76437590263635
+      ],
+      "cluster": 112,
+      "original_piece_ids": [
+        604
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        6,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        100.87735059651556,
+        -77.5936212855545,
+        189.56285750879402
+      ],
+      "cluster": 112,
+      "original_piece_ids": [
+        605,
+        606
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 1,
+      "grid": [
+        6,
+        6
+      ],
+      "shallow": false,
+      "seed": [
+        104.9957758670108,
+        -90.29232513964335,
+        268.15018645577703
+      ],
+      "cluster": 113,
+      "original_piece_ids": [
+        607
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        0,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        84.42655532948274,
+        69.52702705357156,
+        26.667951489242657
+      ],
+      "cluster": 114,
+      "original_piece_ids": [
+        608,
+        614
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        0,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        85.68403919509488,
+        62.17197529451243,
+        61.44792408589045
+      ],
+      "cluster": 114,
+      "original_piece_ids": [
+        609,
+        615
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        0,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        87.40601577107799,
+        66.73308698179072,
+        129.81931010543838
+      ],
+      "cluster": 114,
+      "original_piece_ids": [
+        610,
+        616
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        0,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        87.99551250594766,
+        65.22205374360455,
+        160.37258036835686
+      ],
+      "cluster": 115,
+      "original_piece_ids": [
+        611,
+        617
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        0,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        84.441900787869,
+        71.05049002715732,
+        213.81001167315227
+      ],
+      "cluster": 115,
+      "original_piece_ids": [
+        612,
+        618
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        0,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        87.795177416586,
+        76.33686840767811,
+        259.47263718668273
+      ],
+      "cluster": 115,
+      "original_piece_ids": [
+        613,
+        619
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        2,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        87.1401895033336,
+        9.463309014323098,
+        16.510944235636263
+      ],
+      "cluster": 116,
+      "original_piece_ids": [
+        620,
+        626
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        2,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        86.76569773242458,
+        12.696203724629914,
+        58.86539186809419
+      ],
+      "cluster": 116,
+      "original_piece_ids": [
+        621,
+        627
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        2,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        85.14315076656052,
+        9.891780705565711,
+        111.7917887317784
+      ],
+      "cluster": 116,
+      "original_piece_ids": [
+        622,
+        628
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        2,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        87.04102121889508,
+        11.57541925072,
+        149.82067495198982
+      ],
+      "cluster": 117,
+      "original_piece_ids": [
+        623,
+        629
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        2,
+        4
+      ],
+      "shallow": false,
+      "seed": [
+        86.02211312629169,
+        12.172277490528217,
+        215.7012796886527
+      ],
+      "cluster": 117,
+      "original_piece_ids": [
+        624,
+        630,
+        631
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        2,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        86.36372330642135,
+        18.61079583499736,
+        268.7359659025954
+      ],
+      "cluster": 117,
+      "original_piece_ids": [
+        625
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        4,
+        0
+      ],
+      "shallow": false,
+      "seed": [
+        84.11806300815394,
+        -42.79711345709759,
+        18.89697325974805
+      ],
+      "cluster": 118,
+      "original_piece_ids": [
+        632,
+        638
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        4,
+        1
+      ],
+      "shallow": false,
+      "seed": [
+        86.37012429549019,
+        -35.25983354655918,
+        79.57320058536239
+      ],
+      "cluster": 118,
+      "original_piece_ids": [
+        633
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        4,
+        2
+      ],
+      "shallow": false,
+      "seed": [
+        88.89321423202763,
+        -35.36474772806157,
+        128.34668194175413
+      ],
+      "cluster": 118,
+      "original_piece_ids": [
+        634,
+        639,
+        640
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        4,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        88.25483055616047,
+        -35.547966009623096,
+        162.00371694543378
+      ],
+      "cluster": 119,
+      "original_piece_ids": [
+        635,
+        636,
+        642
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        4,
+        5
+      ],
+      "shallow": false,
+      "seed": [
+        86.26823527251446,
+        -41.34222836979006,
+        267.04062831979456
+      ],
+      "cluster": 119,
+      "original_piece_ids": [
+        637,
+        643
+      ]
+    },
+    {
+      "side": 3,
+      "layer": 2,
+      "grid": [
+        5,
+        3
+      ],
+      "shallow": false,
+      "seed": [
+        84.38223975214095,
+        -77.46560930719038,
+        171.88973125855932
+      ],
+      "cluster": 119,
+      "original_piece_ids": [
+        641
+      ]
+    }
+  ],
+  "previews": [
+    {
+      "name": "SM_RC02_Preview_Shallow",
+      "removed": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        40,
+        41,
+        42,
+        43,
+        44,
+        49,
+        50,
+        51,
+        52
+      ]
+    },
+    {
+      "name": "SM_RC02_Preview_Deep",
+      "removed": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        40,
+        41,
+        42,
+        43,
+        44,
+        49,
+        50,
+        51,
+        52,
+        85,
+        86,
+        87,
+        93,
+        94,
+        110,
+        111,
+        112,
+        113
+      ]
+    }
+  ],
+  "source_revision": "04",
+  "original_dynamic_bodies": 644,
+  "removed_internal_triangles": 100874,
+  "surface_pieces_preserved": 304,
+  "merge_groups": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      3
+    ],
+    [
+      4
+    ],
+    [
+      5
+    ],
+    [
+      6
+    ],
+    [
+      7
+    ],
+    [
+      8
+    ],
+    [
+      9
+    ],
+    [
+      10
+    ],
+    [
+      11
+    ],
+    [
+      12
+    ],
+    [
+      13
+    ],
+    [
+      14
+    ],
+    [
+      15
+    ],
+    [
+      16
+    ],
+    [
+      17
+    ],
+    [
+      18
+    ],
+    [
+      19
+    ],
+    [
+      20
+    ],
+    [
+      21
+    ],
+    [
+      22
+    ],
+    [
+      23
+    ],
+    [
+      24
+    ],
+    [
+      25
+    ],
+    [
+      26
+    ],
+    [
+      27
+    ],
+    [
+      28
+    ],
+    [
+      29
+    ],
+    [
+      30
+    ],
+    [
+      31
+    ],
+    [
+      32
+    ],
+    [
+      33
+    ],
+    [
+      34
+    ],
+    [
+      35
+    ],
+    [
+      36
+    ],
+    [
+      37
+    ],
+    [
+      38
+    ],
+    [
+      39
+    ],
+    [
+      40
+    ],
+    [
+      41
+    ],
+    [
+      42
+    ],
+    [
+      43
+    ],
+    [
+      44
+    ],
+    [
+      45
+    ],
+    [
+      46
+    ],
+    [
+      47
+    ],
+    [
+      48
+    ],
+    [
+      49
+    ],
+    [
+      50
+    ],
+    [
+      51
+    ],
+    [
+      52
+    ],
+    [
+      53
+    ],
+    [
+      54
+    ],
+    [
+      55
+    ],
+    [
+      56
+    ],
+    [
+      57
+    ],
+    [
+      58
+    ],
+    [
+      59
+    ],
+    [
+      60
+    ],
+    [
+      61
+    ],
+    [
+      62
+    ],
+    [
+      63
+    ],
+    [
+      64
+    ],
+    [
+      65
+    ],
+    [
+      66
+    ],
+    [
+      67
+    ],
+    [
+      68
+    ],
+    [
+      69
+    ],
+    [
+      70
+    ],
+    [
+      71
+    ],
+    [
+      72
+    ],
+    [
+      73
+    ],
+    [
+      74
+    ],
+    [
+      75
+    ],
+    [
+      76
+    ],
+    [
+      77
+    ],
+    [
+      78,
+      84,
+      85
+    ],
+    [
+      79,
+      86
+    ],
+    [
+      80,
+      87
+    ],
+    [
+      81,
+      88
+    ],
+    [
+      82,
+      89
+    ],
+    [
+      83
+    ],
+    [
+      90,
+      91,
+      98
+    ],
+    [
+      92,
+      99
+    ],
+    [
+      93,
+      100
+    ],
+    [
+      94,
+      101
+    ],
+    [
+      95,
+      102
+    ],
+    [
+      96,
+      103
+    ],
+    [
+      97
+    ],
+    [
+      104
+    ],
+    [
+      105,
+      111,
+      112
+    ],
+    [
+      106,
+      113
+    ],
+    [
+      107,
+      114
+    ],
+    [
+      108,
+      115,
+      116
+    ],
+    [
+      109
+    ],
+    [
+      110,
+      117
+    ],
+    [
+      118
+    ],
+    [
+      119,
+      120
+    ],
+    [
+      121
+    ],
+    [
+      122,
+      123
+    ],
+    [
+      124
+    ],
+    [
+      125,
+      131
+    ],
+    [
+      126,
+      132
+    ],
+    [
+      127,
+      133
+    ],
+    [
+      128,
+      134
+    ],
+    [
+      129,
+      135
+    ],
+    [
+      130,
+      136
+    ],
+    [
+      137,
+      143
+    ],
+    [
+      138,
+      144
+    ],
+    [
+      139,
+      145
+    ],
+    [
+      140,
+      146
+    ],
+    [
+      141,
+      147
+    ],
+    [
+      142,
+      148
+    ],
+    [
+      149,
+      155
+    ],
+    [
+      150,
+      156
+    ],
+    [
+      151,
+      157
+    ],
+    [
+      152,
+      158
+    ],
+    [
+      153,
+      159
+    ],
+    [
+      154,
+      160
+    ],
+    [
+      161
+    ],
+    [
+      162
+    ],
+    [
+      163
+    ],
+    [
+      164
+    ],
+    [
+      165
+    ],
+    [
+      166
+    ],
+    [
+      167
+    ],
+    [
+      168
+    ],
+    [
+      169
+    ],
+    [
+      170
+    ],
+    [
+      171
+    ],
+    [
+      172
+    ],
+    [
+      173
+    ],
+    [
+      174
+    ],
+    [
+      175
+    ],
+    [
+      176
+    ],
+    [
+      177
+    ],
+    [
+      178
+    ],
+    [
+      179
+    ],
+    [
+      180
+    ],
+    [
+      181
+    ],
+    [
+      182
+    ],
+    [
+      183
+    ],
+    [
+      184
+    ],
+    [
+      185
+    ],
+    [
+      186
+    ],
+    [
+      187
+    ],
+    [
+      188
+    ],
+    [
+      189
+    ],
+    [
+      190
+    ],
+    [
+      191
+    ],
+    [
+      192
+    ],
+    [
+      193
+    ],
+    [
+      194
+    ],
+    [
+      195
+    ],
+    [
+      196
+    ],
+    [
+      197
+    ],
+    [
+      198
+    ],
+    [
+      199
+    ],
+    [
+      200
+    ],
+    [
+      201
+    ],
+    [
+      202
+    ],
+    [
+      203
+    ],
+    [
+      204
+    ],
+    [
+      205
+    ],
+    [
+      206
+    ],
+    [
+      207
+    ],
+    [
+      208
+    ],
+    [
+      209
+    ],
+    [
+      210
+    ],
+    [
+      211
+    ],
+    [
+      212
+    ],
+    [
+      213
+    ],
+    [
+      214
+    ],
+    [
+      215
+    ],
+    [
+      216
+    ],
+    [
+      217
+    ],
+    [
+      218
+    ],
+    [
+      219
+    ],
+    [
+      220
+    ],
+    [
+      221
+    ],
+    [
+      222
+    ],
+    [
+      223
+    ],
+    [
+      224
+    ],
+    [
+      225
+    ],
+    [
+      226
+    ],
+    [
+      227
+    ],
+    [
+      228
+    ],
+    [
+      229
+    ],
+    [
+      230
+    ],
+    [
+      231
+    ],
+    [
+      232
+    ],
+    [
+      233
+    ],
+    [
+      234
+    ],
+    [
+      235
+    ],
+    [
+      236
+    ],
+    [
+      237,
+      238,
+      244
+    ],
+    [
+      239,
+      245,
+      246
+    ],
+    [
+      240,
+      241,
+      247
+    ],
+    [
+      242,
+      249
+    ],
+    [
+      243,
+      250
+    ],
+    [
+      248
+    ],
+    [
+      251,
+      252,
+      258
+    ],
+    [
+      253
+    ],
+    [
+      254,
+      255,
+      261
+    ],
+    [
+      256,
+      263
+    ],
+    [
+      257
+    ],
+    [
+      259,
+      260
+    ],
+    [
+      262
+    ],
+    [
+      264
+    ],
+    [
+      265,
+      272
+    ],
+    [
+      266,
+      273
+    ],
+    [
+      267,
+      274
+    ],
+    [
+      268,
+      275
+    ],
+    [
+      269,
+      276
+    ],
+    [
+      270,
+      277
+    ],
+    [
+      271,
+      278
+    ],
+    [
+      279
+    ],
+    [
+      280
+    ],
+    [
+      281
+    ],
+    [
+      282,
+      283,
+      284
+    ],
+    [
+      285
+    ],
+    [
+      286
+    ],
+    [
+      287,
+      292,
+      293
+    ],
+    [
+      288,
+      294
+    ],
+    [
+      289,
+      295
+    ],
+    [
+      290,
+      296,
+      297
+    ],
+    [
+      291
+    ],
+    [
+      298,
+      304,
+      305
+    ],
+    [
+      299,
+      300,
+      306
+    ],
+    [
+      301,
+      302,
+      308
+    ],
+    [
+      303,
+      309
+    ],
+    [
+      307
+    ],
+    [
+      310,
+      316,
+      317
+    ],
+    [
+      311,
+      312,
+      318
+    ],
+    [
+      313,
+      319
+    ],
+    [
+      314,
+      315
+    ],
+    [
+      320,
+      321
+    ],
+    [
+      322
+    ],
+    [
+      323
+    ],
+    [
+      324
+    ],
+    [
+      325
+    ],
+    [
+      326
+    ],
+    [
+      327
+    ],
+    [
+      328
+    ],
+    [
+      329
+    ],
+    [
+      330
+    ],
+    [
+      331
+    ],
+    [
+      332
+    ],
+    [
+      333
+    ],
+    [
+      334
+    ],
+    [
+      335
+    ],
+    [
+      336
+    ],
+    [
+      337
+    ],
+    [
+      338
+    ],
+    [
+      339
+    ],
+    [
+      340
+    ],
+    [
+      341
+    ],
+    [
+      342
+    ],
+    [
+      343
+    ],
+    [
+      344
+    ],
+    [
+      345
+    ],
+    [
+      346
+    ],
+    [
+      347
+    ],
+    [
+      348
+    ],
+    [
+      349
+    ],
+    [
+      350
+    ],
+    [
+      351
+    ],
+    [
+      352
+    ],
+    [
+      353
+    ],
+    [
+      354
+    ],
+    [
+      355
+    ],
+    [
+      356
+    ],
+    [
+      357
+    ],
+    [
+      358
+    ],
+    [
+      359
+    ],
+    [
+      360
+    ],
+    [
+      361
+    ],
+    [
+      362
+    ],
+    [
+      363
+    ],
+    [
+      364
+    ],
+    [
+      365
+    ],
+    [
+      366
+    ],
+    [
+      367
+    ],
+    [
+      368
+    ],
+    [
+      369
+    ],
+    [
+      370
+    ],
+    [
+      371
+    ],
+    [
+      372
+    ],
+    [
+      373
+    ],
+    [
+      374
+    ],
+    [
+      375
+    ],
+    [
+      376
+    ],
+    [
+      377
+    ],
+    [
+      378
+    ],
+    [
+      379
+    ],
+    [
+      380
+    ],
+    [
+      381
+    ],
+    [
+      382
+    ],
+    [
+      383
+    ],
+    [
+      384
+    ],
+    [
+      385
+    ],
+    [
+      386
+    ],
+    [
+      387
+    ],
+    [
+      388
+    ],
+    [
+      389
+    ],
+    [
+      390
+    ],
+    [
+      391
+    ],
+    [
+      392
+    ],
+    [
+      393
+    ],
+    [
+      394
+    ],
+    [
+      395
+    ],
+    [
+      396
+    ],
+    [
+      397
+    ],
+    [
+      398,
+      405
+    ],
+    [
+      399,
+      406
+    ],
+    [
+      400,
+      407
+    ],
+    [
+      401,
+      408
+    ],
+    [
+      402,
+      409,
+      410
+    ],
+    [
+      403
+    ],
+    [
+      404,
+      411
+    ],
+    [
+      412,
+      419
+    ],
+    [
+      413,
+      414,
+      420
+    ],
+    [
+      415,
+      422
+    ],
+    [
+      416,
+      423
+    ],
+    [
+      417,
+      424
+    ],
+    [
+      418
+    ],
+    [
+      421
+    ],
+    [
+      425
+    ],
+    [
+      426,
+      433
+    ],
+    [
+      427
+    ],
+    [
+      428,
+      434,
+      435
+    ],
+    [
+      429,
+      436
+    ],
+    [
+      430,
+      437
+    ],
+    [
+      431,
+      438
+    ],
+    [
+      432,
+      439
+    ],
+    [
+      440,
+      441
+    ],
+    [
+      442
+    ],
+    [
+      443
+    ],
+    [
+      444,
+      445
+    ],
+    [
+      446
+    ],
+    [
+      447,
+      448,
+      454
+    ],
+    [
+      449,
+      455
+    ],
+    [
+      450,
+      451,
+      456
+    ],
+    [
+      452,
+      457,
+      458
+    ],
+    [
+      453
+    ],
+    [
+      459,
+      465
+    ],
+    [
+      460,
+      466
+    ],
+    [
+      461,
+      467
+    ],
+    [
+      462,
+      468
+    ],
+    [
+      463,
+      469,
+      470
+    ],
+    [
+      464
+    ],
+    [
+      471,
+      472,
+      478
+    ],
+    [
+      473,
+      479
+    ],
+    [
+      474,
+      480
+    ],
+    [
+      475,
+      481
+    ],
+    [
+      476,
+      482
+    ],
+    [
+      477
+    ],
+    [
+      483
+    ],
+    [
+      484
+    ],
+    [
+      485
+    ],
+    [
+      486
+    ],
+    [
+      487
+    ],
+    [
+      488
+    ],
+    [
+      489
+    ],
+    [
+      490
+    ],
+    [
+      491
+    ],
+    [
+      492
+    ],
+    [
+      493
+    ],
+    [
+      494
+    ],
+    [
+      495
+    ],
+    [
+      496
+    ],
+    [
+      497
+    ],
+    [
+      498
+    ],
+    [
+      499
+    ],
+    [
+      500
+    ],
+    [
+      501
+    ],
+    [
+      502
+    ],
+    [
+      503
+    ],
+    [
+      504
+    ],
+    [
+      505
+    ],
+    [
+      506
+    ],
+    [
+      507
+    ],
+    [
+      508
+    ],
+    [
+      509
+    ],
+    [
+      510
+    ],
+    [
+      511
+    ],
+    [
+      512
+    ],
+    [
+      513
+    ],
+    [
+      514
+    ],
+    [
+      515
+    ],
+    [
+      516
+    ],
+    [
+      517
+    ],
+    [
+      518
+    ],
+    [
+      519
+    ],
+    [
+      520
+    ],
+    [
+      521
+    ],
+    [
+      522
+    ],
+    [
+      523
+    ],
+    [
+      524
+    ],
+    [
+      525
+    ],
+    [
+      526
+    ],
+    [
+      527
+    ],
+    [
+      528
+    ],
+    [
+      529
+    ],
+    [
+      530
+    ],
+    [
+      531
+    ],
+    [
+      532
+    ],
+    [
+      533
+    ],
+    [
+      534
+    ],
+    [
+      535
+    ],
+    [
+      536
+    ],
+    [
+      537
+    ],
+    [
+      538
+    ],
+    [
+      539
+    ],
+    [
+      540
+    ],
+    [
+      541
+    ],
+    [
+      542
+    ],
+    [
+      543
+    ],
+    [
+      544
+    ],
+    [
+      545
+    ],
+    [
+      546
+    ],
+    [
+      547
+    ],
+    [
+      548
+    ],
+    [
+      549
+    ],
+    [
+      550
+    ],
+    [
+      551
+    ],
+    [
+      552
+    ],
+    [
+      553
+    ],
+    [
+      554
+    ],
+    [
+      555
+    ],
+    [
+      556
+    ],
+    [
+      557
+    ],
+    [
+      558
+    ],
+    [
+      559,
+      560,
+      566
+    ],
+    [
+      561,
+      568
+    ],
+    [
+      562,
+      563
+    ],
+    [
+      564,
+      571
+    ],
+    [
+      565,
+      572
+    ],
+    [
+      567
+    ],
+    [
+      569,
+      570
+    ],
+    [
+      573,
+      574,
+      581
+    ],
+    [
+      575
+    ],
+    [
+      576,
+      583
+    ],
+    [
+      577,
+      578,
+      584
+    ],
+    [
+      579,
+      586
+    ],
+    [
+      580
+    ],
+    [
+      582
+    ],
+    [
+      585
+    ],
+    [
+      587,
+      588,
+      595
+    ],
+    [
+      589,
+      596
+    ],
+    [
+      590
+    ],
+    [
+      591,
+      592,
+      599
+    ],
+    [
+      593,
+      600
+    ],
+    [
+      594
+    ],
+    [
+      597,
+      598
+    ],
+    [
+      601,
+      602
+    ],
+    [
+      603
+    ],
+    [
+      604
+    ],
+    [
+      605,
+      606
+    ],
+    [
+      607
+    ],
+    [
+      608,
+      614
+    ],
+    [
+      609,
+      615
+    ],
+    [
+      610,
+      616
+    ],
+    [
+      611,
+      617
+    ],
+    [
+      612,
+      618
+    ],
+    [
+      613,
+      619
+    ],
+    [
+      620,
+      626
+    ],
+    [
+      621,
+      627
+    ],
+    [
+      622,
+      628
+    ],
+    [
+      623,
+      629
+    ],
+    [
+      624,
+      630,
+      631
+    ],
+    [
+      625
+    ],
+    [
+      632,
+      638
+    ],
+    [
+      633
+    ],
+    [
+      634,
+      639,
+      640
+    ],
+    [
+      635,
+      636,
+      642
+    ],
+    [
+      637,
+      643
+    ],
+    [
+      641
+    ]
+  ],
+  "source_sha256": "f43ad5f18612f022442e7cb5029d423dd87490eb9e7b3e6403244343480cc6ee"
+}

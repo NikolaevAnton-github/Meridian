@@ -6,6 +6,7 @@
 
 class UGeometryCollection;
 class UStaticMesh;
+class UNiagaraSystem;
 
 /** Editor-only import of the bounded MSQ-154 column source; no runtime damage system. */
 UCLASS()
@@ -19,4 +20,10 @@ public:
     static FString InspectCollection(UGeometryCollection* Collection);
     UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
     static FString InspectMesh(UStaticMesh* Mesh);
+    UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
+    static FString ConfigureConcreteCrumbs(UNiagaraSystem* System);
+    UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
+    static FString ExportColumnCollision(UGeometryCollection* Collection);
+    UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
+    static FString ApplyMergedCollision(UGeometryCollection* Collection, const FString& CollisionSource, const FString& MergeDesign);
 };

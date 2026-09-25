@@ -1,5 +1,9 @@
 ﻿# Column runtime repair — MSQ-156 follow-up
 
+Current candidate: [ColumnDebris03](ColumnDebris03.md) reduces internal physical
+pieces and derives a lighter visual debris effect. The measurements below apply
+to this report's 644-piece baseline, not that later candidate.
+
 2026-09-26. Direct owner-authorized repair, with no new task or independent
 reviewer, as explicitly requested. Owner visual/play acceptance remains separate.
 The earlier rifle/Nanite repair is retained; this revision addresses sustained
