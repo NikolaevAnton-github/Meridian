@@ -6,17 +6,12 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
 
 ## Active direction
 
-- **Destruction first:** [MSQ-74 copied-lobby laboratory](Tasks/EnvironmentDestruction01Plan.md)
-  under the [owner request](Approvals/EnvironmentDestruction01-LobbyLab01.json).
-  [MSQ-140 / ED-00 copy and baseline](EnvironmentDestruction01ED00.md) are delivered.
-  [MSQ-141 / ED-01 column cladding](EnvironmentDestruction01ED01.md) is technically
-  delivered; [review waived](Approvals/EnvironmentDestruction01-ED01ReviewWaiver01.json),
-  owner visual/play gate pending.
-  [MSQ-142 / ED-02](Tasks/EnvironmentDestruction01/ED-02.md) is authorized without
-  independent review. Candidate01 rejected for even layers; Candidate02 follows
-  the [column video reference](Approvals/EnvironmentDestruction01-ED02Reference02.json).
-  Preserve the permanent core; no collapse. MSQ-143..147 remain prepared for the
-  destruction lab. Preserve original/shared assets and visual quality.
+- **Destruction replacement:** the owner requested removal of our custom ED-00..02
+  laboratory implementation before directly importing the purchased
+  [Next Gen Destruction Toolkit to UE 5.8](NextGenDestruction01.md), without a new
+  Multica task. The old MSQ-74/140..147 execution plan is superseded; do not resume
+  that implementation. Original lobby/shared assets and historical evidence stay
+  preserved. Toolkit migration does not authorize lobby integration or new design.
 - **Utility AI + GOAP**, [MSQ-122 program](Tasks/UtilityGOAP01.md) and
   [replacement plan](Tasks/UtilityGOAP01Plan.md), under the
   [owner decision](Approvals/UtilityGOAP01-TaskCreation01.json).
@@ -29,7 +24,7 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
   [Primary review](GASPALSAIFix01Review.md) closes the audited runtime defects.
   Source locomotion and moving fire/reload remain; custom enemy balance/recovery
   steps are inactive. Technical delivery does not grant owner motion/play acceptance.
-- After initial MSQ-74 destruction: resume MSQ-123..125, MSQ-71 survival,
+- After the replacement destruction direction is established: resume MSQ-123..125, MSQ-71 survival,
   MSQ-126 cover and one-enemy MSQ-72; MSQ-131 integrates destroyed cover/routes
   before extensive tuning/group work. MSQ-127 later adds 2/3 enemies.
   MSQ-73 dismemberment is deferred; MSQ-99/100 and other mechanics remain separate.
