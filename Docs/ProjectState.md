@@ -1,8 +1,8 @@
 # MeridianSquad current project state
 
 Updated 2026-09-26. Verify live Multica/editor state when needed.
-This snapshot grants no task execution or design approval. Read the relevant task,
-not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.md).
+No execution/design approval. Read the relevant task, not every link.
+Rules and policy routes: [AGENTS](../AGENTS.md).
 
 ## Active direction
 
@@ -10,7 +10,8 @@ not every linked document. Durable rules and policy routes: [AGENTS](../AGENTS.m
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
   retains the integration. [MSQ-156](ReinforcedColumn02.md) delivers revised column
   spalling. [Direct repair](ColumnRuntimeRepair01.md): collision optimized.
-  [Debris candidate](ColumnDebris03.md): 480 pieces, lighter crumbs; owner test pending.
+  [Shape candidate](ColumnShape04.md): rev07 thick angular chunks, smaller core,
+  inset steel; 480 bodies. Further checks waived by owner.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
   technically complete, owner review waiver. MSQ-150/151 are
   [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);
@@ -57,7 +58,7 @@ integration success never proves a live connection. For old decisions missing fr
 the task, search the [history index](ContextHistory.md) and read only the matching
 section. Never load the history snapshot as routine startup context.
 
-Keep this file to current scope and blockers. Delivery details belong in task
-handoffs. The context budget and preservation checks are described in
+Keep current scope/blockers here and delivery details in task handoffs.
+Context budget and preservation checks are described in
 [ContextBudget02](Tasks/ContextBudget02.md); source routes are indexed in
 [Subsystems](Subsystems/README.md), loaded only for the relevant task.

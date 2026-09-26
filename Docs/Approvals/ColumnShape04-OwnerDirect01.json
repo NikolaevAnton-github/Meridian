@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-26",
+  "scope": "MSQ-156 direct follow-up: concrete flake shape, increased irregular retained core and intermittent reinforcement exposure",
+  "authority": "Explicit owner instruction in direct chat",
+  "owner_instruction_translation": "Do it, outside a task, without independent review.",
+  "route": "Direct implementation; no new Multica task or run",
+  "independent_review": "Waived for this candidate only",
+  "implementation_checks": "Revision 06 received source/asset checks and authoring previews. The owner's later correction explicitly waives additional checks and previews for revision 07; perform generation/import/save only.",
+  "owner_gate": "Final visual and shooting evaluation remains with the owner",
+  "later_owner_instructions_translation": [
+    "I already looked: overall better, but the fragments are often too thin, like paper. Just make them larger; no need to test.",
+    "No, better reduce the core and move the reinforcement, thicken the fragments and make them even more like the demonstration. Their shapes are usually straighter; ours have many rounded edges."
+  ],
+  "latest_reference": "Two owner screenshots preserved under Saved/ColumnShape04/Thicker07/owner-current.png and owner-reference.png",
+  "constraints": "Preserve outer envelope, stone appearance, placement and optimized runtime approach; reduce core versus revision 06, inset reinforcement and thicken/angularize fragments; at most 480 removable bodies; preserve previous candidates and evidence"
+}

@@ -11,7 +11,12 @@ ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser()
 parser.add_argument('--source',default='Assets/Source/ReinforcedColumn01/ReinforcedColumn02-Candidate01/column03.json')
 parser.add_argument('--output',default='Saved/ReinforcedColumn02/Candidate01/progression03.json')
+parser.add_argument('--deformation',choices=['progressive','spalling'],default='progressive')
 options=parser.parse_args()
+if options.deformation=='spalling':
+    from shape_spalling import raw_transform as deformation
+else:
+    deformation=g.warp
 SOURCE=ROOT/options.source
 OUT=ROOT/options.output
 assert not OUT.exists()
@@ -77,7 +82,7 @@ else:
             hits=crossings(source['core'],0,1,p[1],p[2],900,240)
             assert len(hits)>=2 and len(hits)%2==0, hits
             clearance=max(min(120-p[0]-a,b-(120-p[0])) for a,b in zip(hits[::2],hits[1::2]))
-            assert clearance>1., (p,hits)
+            assert clearance>(.05 if options.deformation=='spalling' else 1.), (p,hits)
             anchor_clearances.append(clearance)
     anchor_check.write_text(json.dumps(dict(source_sha256=source_hash,clearances=anchor_clearances)),encoding='utf-8')
 rays=[]
@@ -107,12 +112,12 @@ for axis,sign in [(1,1),(0,-1),(1,-1),(0,1)]:
             assert len({c['piece'] for c in cells})>=2, cells
             rays.append(dict(axis=axis,sign=sign,lateral=lateral,height=z,cells=cells,core_depth=core_depth))
 
-rng=random.Random(1);jacobians=[];h=.03
+rng=random.Random(1);jacobians=[];h=.00001 if options.deformation=='spalling' else .03
 for _ in range(2000):
-    p=(rng.uniform(-118,118),rng.uniform(-118,118),rng.uniform(1,279));a=g.warp(p)
-    columns=[g.mul(g.sub(g.warp(g.add(p,v)),a),1/h) for v in [(h,0,0),(0,h,0),(0,0,h)]]
+    p=(rng.uniform(-118,118),rng.uniform(-118,118),rng.uniform(1,279));a=deformation(p)
+    columns=[g.mul(g.sub(deformation(g.add(p,v)),a),1/h) for v in [(h,0,0),(0,h,0),(0,0,h)]]
     jacobians.append(g.dot(columns[0],g.cross(columns[1],columns[2])))
-assert min(jacobians)>.5
+assert min(jacobians)>(.001 if options.deformation=='spalling' else .5), min(jacobians)
 for m in [source['core']]+meshes+source['anchors']:
     assert len(m['vertices'])==len(m['normals'])==len(m['uvs'])
     assert all(.99<g.length(n)<1.01 for n in m['normals'])
@@ -127,5 +132,21 @@ report=dict(source_sha256=hashlib.sha256(SOURCE.read_bytes()).hexdigest(),rays=r
             steel_exact=True,original_materials_exact=True,complete_cluster_partition=True,
             deformation_samples=2000,min_deformation_jacobian=min(jacobians),normal_uv_integrity=True,
             gameplay_tested=False)
+if options.deformation=='spalling':
+    # Probe the actual core triangles at unchanged longitudinal rod positions.
+    # Each test distinguishes full cover, a rod crossing the rough surface,
+    # and a fully exposed rod. This is geometric evidence, not a visual score.
+    bars=[]
+    for axis,sign in [(1,1),(0,-1),(1,-1),(0,1)]:
+        for lateral in [-110.8+221.6*i/7 for i in range(1,7)]:
+            for z in range(20,261,5):
+                hits=crossings(source['core'],axis,sign,lateral,z,900,240)
+                depth=min(hits)
+                state='covered' if depth<7.66 else 'crossing' if depth<10.74 else 'exposed'
+                bars.append(dict(axis=axis,sign=sign,lateral=lateral,height=z,core_depth=depth,state=state))
+    counts={state:sum(p['state']==state for p in bars) for state in ['covered','crossing','exposed']}
+    assert counts['covered']>len(bars)*.15 and counts['exposed']>len(bars)*.15, counts
+    report.update(deformation='spalling',rod_samples=bars,rod_coverage_counts=counts,
+                  minimum_required_anchor_clearance_cm=.05)
 OUT.write_text(json.dumps(report,indent=2),encoding='utf-8')
-print(json.dumps({k:v for k,v in report.items() if k!='rays'}))
+print(json.dumps({k:v for k,v in report.items() if k not in ['rays','rod_samples']}))
