@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-26",
+  "scope": "MSQ-156 direct column follow-up, source revisions 08-11",
+  "authority": "Explicit owner instruction in direct chat",
+  "owner_instruction_translation": "More fragment variations for our column: smaller to larger, compact shapes fitting a square to elongated shapes. Make the interior concrete like the reference: our fractures are straight and unrealistic, while the reference concrete is uneven. No task and no reviewers.",
+  "route": "Direct implementation; no new Multica task or run",
+  "independent_review": "Waived for this follow-up by the owner",
+  "references": [
+    "Saved/ColumnVariation05/owner-reference.png",
+    "Saved/ColumnVariation05/owner-current.png"
+  ],
+  "implementation": "Shared geometric relief and size redistribution, connected surface unions and balancing interior splits. Preserve the outer envelope, inset revision-07 reinforcement, materials, placement and existing destruction integration.",
+  "owner_gate": "Final appearance and shooting feel remain with the owner"
+}
