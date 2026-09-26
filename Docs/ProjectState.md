@@ -10,8 +10,8 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
   retains the integration. [MSQ-156](ReinforcedColumn02.md) delivers revised column
   spalling. [Direct repair](ColumnRuntimeRepair01.md): collision optimized.
-  [Shape candidate](ColumnVariation05.md): rev11 varied compact/elongated chunks,
-  irregular concrete relief, inset steel; 480 bodies. Direct, no reviewer.
+  [Shape correction](ColumnRelief06.md): rev13 bounded concrete relief removes
+  stretched fins; steel inset another 24 cm; 480 bodies. Direct, no reviewer.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
   technically complete, owner review waiver. MSQ-150/151 are
   [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);

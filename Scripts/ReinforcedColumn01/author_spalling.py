@@ -38,9 +38,9 @@ def build(revision='06',evidence_root='Saved/ColumnShape04',preserve_steel=True)
         steel = u.load_asset(DEST+'SM_RC01_Rebar')
         u.EditorLoadingAndSavingUtils.reload_packages([steel.get_outer()],
             u.ReloadPackagesInteractionMode.ASSUME_POSITIVE)
-    if revision == '11':
+    if int(revision) >= 11:
         import repair_core_uv
-        repair_core_uv.build(out/('core-uv'+revision+'.json'))
+        repair_core_uv.build(out/('core-uv'+revision+'.json'), revision)
     optimize_collision.build(out/('core-collision'+revision+'.json'))
     allowed = {DEST+n for n in ['GC_RC01_BondedConcrete', 'SM_RC01_SupportedColumn',
         'SM_RC01_CoreCollision', 'SM_RC02_Preview_Shallow', 'SM_RC02_Preview_Deep']}
