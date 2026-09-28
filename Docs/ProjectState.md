@@ -6,13 +6,13 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
 
 ## Active direction
 
-- **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
-  the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
-  retains integration. [Demo](DemoColumnExperiment09.md): outward debris, facing
-  fracture, solid piles; 80 retained across sides.
-  Direct, owner accepted. [LobbyColumns01](LobbyColumns01.md): 16 columns, damage to
+- **Destruction:** [NGD migration](NextGenDestruction01.md) accepted; custom ED retired.
+  [MSQ-74 plan](Tasks/EnvironmentDestruction01Plan.md) retains integration.
+  [Demo](DemoColumnExperiment09.md): outward debris, facing fracture, solid piles;
+  80 retained, owner accepted. [LobbyColumns01](LobbyColumns01.md): 16 columns, damage to
   8.4 m, concrete seats and rebar; central demo unchanged.
   [Perf01](LobbyColumnsPerf01.md) and [Perf02](Tasks/LobbyColumnsPerf02.md) delivered.
+  [Scaling/MSQ-160](Tasks/DestructionScaling01.md): MSQ-161..168 prepared only.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
   technically complete, owner review waiver. MSQ-150/151 are
   [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);

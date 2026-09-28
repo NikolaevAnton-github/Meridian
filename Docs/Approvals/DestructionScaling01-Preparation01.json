@@ -1,0 +1,30 @@
+{
+    "decision_id":  "DestructionScaling01-Preparation01",
+    "date":  "2026-09-28",
+    "authority":  "Owner instruction in direct chat",
+    "instruction_translation":  "Stop, finish the current stage, commit it, then prepare tasks that I can open in new chats.",
+    "approved_scope":  [
+                           "Close and locally commit the verified LobbyColumnsPerf02 stage.",
+                           "Prepare a sequenced destruction-scaling program and separate Multica tasks with bounded scope, dependencies and acceptance criteria.",
+                           "Commit planning documents and provide task IDs and new-chat entry points."
+                       ],
+    "execution_authorized":  false,
+    "constraints":  [
+                        "Keep all new issues unassigned with zero runs; do not execute the new architecture now.",
+                        "An explicit owner start instruction in a later chat authorizes only the named task, not its successors.",
+                        "Preserve NGD/Chaos integration, appearance, collision fidelity and the intended interaction of gameplay fragments.",
+                        "Do not revive previously cancelled ED or NGD tasks, implement full abilities, or change protected structural geometry through this preparation."
+                    ],
+    "program":  "Docs/Tasks/DestructionScaling01.md",
+    "program_issue":  "MSQ-160",
+    "prepared_tasks":  [
+                           "MSQ-161",
+                           "MSQ-162",
+                           "MSQ-163",
+                           "MSQ-164",
+                           "MSQ-165",
+                           "MSQ-166",
+                           "MSQ-167",
+                           "MSQ-168"
+                       ]
+}
