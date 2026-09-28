@@ -29,6 +29,10 @@ public:
     UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
     static FString BuildDemoColumnRefinement();
     UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
+    static FString BuildDemoColumnRefinement08();
+    UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
+    static FString BuildDemoColumnTileFractures08();
+    UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
     static FString AnchorDemoColumnCore();
     UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
     static FString InspectCollection(UGeometryCollection* Collection);

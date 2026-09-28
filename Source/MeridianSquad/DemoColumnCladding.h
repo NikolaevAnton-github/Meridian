@@ -8,6 +8,17 @@
 class UStaticMesh;
 class UInstancedStaticMeshComponent;
 class UGeometryCollectionComponent;
+class UPrimitiveComponent;
+class UBoxComponent;
+
+USTRUCT()
+struct FDemoColumnTileShard
+{
+    GENERATED_BODY()
+    UPROPERTY() TObjectPtr<UStaticMesh> Mesh;
+    UPROPERTY() FTransform RelativeToTile;
+    UPROPERTY() float AreaCm2 = 0.f;
+};
 
 USTRUCT()
 struct FDemoColumnTile
@@ -21,6 +32,7 @@ struct FDemoColumnTile
     UPROPERTY() float AreaCm2 = 0.f;
     // Every concrete surface intersecting this tile's footprint (coarse variant).
     UPROPERTY() TArray<int32> SupportBones;
+    UPROPERTY() TArray<FDemoColumnTileShard> Shards;
 };
 
 /** Separate facing for the owner's demo-column experiment; never edits the vendor collection. */
@@ -78,6 +90,8 @@ private:
     bool bSurfaceExperiment = false;
     bool bCoarseExperiment = false;
     bool bRefinedExperiment = false;
+    bool bStackingExperiment = false;
+    UPROPERTY(Transient) TObjectPtr<UBoxComponent> CoreBarrier;
     bool bEndingPlay = false;
     int32 ConcreteImpacts = 0;
     int32 LastConcreteBone = INDEX_NONE;
@@ -107,4 +121,10 @@ private:
     int32 ShotCrumbleEvents = 0;
     int32 CrumbledTiles = 0;
     int32 SpawnedCeramicChips = 0;
+    TMap<TWeakObjectPtr<AActor>, int32> WholeTileSources;
+    int32 IndependentTileBreaks = 0;
+    bool HasDebrisSupport(const FVector& Bottom, int32 ExcludedBone, const AActor* ExcludedActor, bool bRetainedOnly) const;
+    void SpawnTileShards(int32 Tile, const FTransform& Pose, const FVector& Velocity, const FVector& Normal);
+    UFUNCTION() void OnLooseTileImpact(UPrimitiveComponent* HitComponent, AActor* OtherActor,
+        UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 };

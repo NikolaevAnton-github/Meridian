@@ -11,3 +11,4 @@ MERIDIANSQUAD_API void ApplyDemoColumnScatter(UGeometryCollectionComponent* Conc
 MERIDIANSQUAD_API void ReleaseDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, const FHitResult& Hit, uint32 Seed);
 MERIDIANSQUAD_API void FreezeDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, TFunction<void(bool)> Completion);
 MERIDIANSQUAD_API void KeepDemoColumnLeafAwake(UGeometryCollectionComponent* Concrete, int32 Bone);
+MERIDIANSQUAD_API void ConfigureDemoColumnDebrisCollision(UGeometryCollectionComponent* Concrete, int32 Bone);

@@ -183,6 +183,69 @@ UStaticMesh* MakeStatic(const TCHAR* Name, FMeshDescription& Mesh, const TArray<
 #endif
 }
 
+FString UNGDColumnAuthoring::BuildDemoColumnTileFractures08()
+{
+#if WITH_EDITOR
+    FString Raw;
+    TSharedPtr<FJsonObject> Source;
+    if (!FFileHelper::LoadFileToString(Raw,*(FPaths::ProjectSavedDir()/TEXT("DemoColumnExperiment08/ceramic.json"))) ||
+        !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Raw),Source)) return TEXT("{\"error\":\"Missing ceramic source\"}");
+    auto* Data = LoadObject<UDemoColumnCladdingData>(nullptr,TEXT("/Game/Experiments/DemoTiledColumn01/Correction08/DA_Cladding08.DA_Cladding08"));
+    if (!Data) return TEXT("{\"error\":\"Missing facing data\"}");
+    int32 MeshCount = 0, TileCount = 0, GroupIndex = 0;
+    for (const auto& GroupValue : Source->GetArrayField(TEXT("groups")))
+    {
+        const auto Group = GroupValue->AsObject();
+        const FString Path = Group->GetStringField(TEXT("source"));
+        auto* Original = LoadObject<UStaticMesh>(nullptr,*(Path+TEXT(".")+FPackageName::GetShortName(Path)));
+        if (!Original) return TEXT("{\"error\":\"Missing original ceramic mesh\"}");
+        TArray<FDemoColumnTileShard> Shards;
+        for (const auto& PieceValue : Group->GetArrayField(TEXT("pieces")))
+        {
+            const auto Piece = PieceValue->AsObject();
+            const auto Geometry = Piece->GetObjectField(TEXT("mesh"));
+            const FString Name = FString::Printf(TEXT("SM_Shards08_%03d_%d"),GroupIndex,Shards.Num());
+            const FString PackageName = TEXT("/Game/Experiments/DemoTiledColumn01/Correction08/Shards/")+Name;
+            if (FPackageName::DoesPackageExist(PackageName)) return TEXT("{\"error\":\"Shard already exists\"}");
+            auto* Mesh = NewObject<UStaticMesh>(CreatePackage(*PackageName),*Name,RF_Public|RF_Standalone);
+            Mesh->GetStaticMaterials() = Original->GetStaticMaterials();
+            Mesh->SetNumSourceModels(1);
+            auto& Settings = Mesh->GetSourceModel(0).BuildSettings;
+            Settings.bRecomputeNormals = Settings.bRecomputeTangents = false;
+            Settings.bUseFullPrecisionUVs = true;
+            FMeshDescription Description = ReadMesh(Geometry);
+            UStaticMesh::FBuildMeshDescriptionsParams Params;
+            Params.bBuildSimpleCollision = false; Params.bFastBuild = false; Params.bCommitMeshDescription = true;
+            Mesh->BuildFromMeshDescriptions({&Description},Params);
+            Mesh->CreateBodySetup();
+            auto* Body = Mesh->GetBodySetup();
+            Body->CollisionTraceFlag = CTF_UseSimpleAndComplex;
+            FKConvexElem Convex;
+            for (const auto& Value : Geometry->GetArrayField(TEXT("vertices")))
+            {
+                const auto& V = Value->AsArray();
+                Convex.VertexData.Add(FVector(V[0]->AsNumber(),V[1]->AsNumber(),V[2]->AsNumber()));
+            }
+            Convex.UpdateElemBox(); Body->AggGeom.ConvexElems.Add(MoveTemp(Convex));
+            Body->InvalidatePhysicsData(); Body->CreatePhysicsMeshes();
+            FAssetRegistryModule::AssetCreated(Mesh); Mesh->MarkPackageDirty();
+            FDemoColumnTileShard Shard;
+            Shard.Mesh = Mesh; Shard.AreaCm2 = Geometry->GetNumberField(TEXT("area_cm2"));
+            const auto& Offset = Piece->GetArrayField(TEXT("offset"));
+            Shard.RelativeToTile = FTransform(FVector(Offset[0]->AsNumber(),Offset[1]->AsNumber(),Offset[2]->AsNumber()));
+            Shards.Add(Shard); ++MeshCount;
+        }
+        for (auto& Tile : Data->Tiles)
+            if (Tile.Mesh == Original) { Tile.Shards = Shards; ++TileCount; }
+        ++GroupIndex;
+    }
+    Data->MarkPackageDirty();
+    return FString::Printf(TEXT("{\"shard_meshes\":%d,\"fracturable_tiles\":%d}"),MeshCount,TileCount);
+#else
+    return TEXT("{\"error\":\"Editor required\"}");
+#endif
+}
+
 FString UNGDColumnAuthoring::InspectMesh(UStaticMesh* Mesh)
 {
 #if WITH_EDITOR

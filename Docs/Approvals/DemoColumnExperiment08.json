@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-28",
+  "baseline": "b7c8ccd",
+  "owner_feedback": [
+    "Throw concrete slightly farther out; pieces can fall into the column core.",
+    "Facing should visibly break on floor impact, especially on large concrete pieces.",
+    "Fallen facing intersects itself and looks broken; fix the contacts.",
+    "Make the large concrete pieces another approximately 20 percent smaller."
+  ],
+  "direction": "Use outward side normals and a protected-core collision barrier; retain stationary debris collision; fracture facing into matching ceramic pieces; reduce selected large concrete pieces again.",
+  "retention_limit": 50,
+  "retained_ceramic_limit": 30,
+  "active_ceramic_shard_limit": 32,
+  "workflow": "Direct continuation without Multica tasks, agents or independent reviewers, under the owner's explicit waiver.",
+  "owner_visual_play_acceptance": "pending"
+}

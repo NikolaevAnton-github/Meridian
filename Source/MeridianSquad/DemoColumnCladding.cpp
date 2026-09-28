@@ -2,6 +2,7 @@
 #include "DemoColumnScatter.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/BoxComponent.h"
 #include "Engine/StaticMeshActor.h"
 #include "Engine/StaticMesh.h"
 #include "PhysicalMaterials/PhysicalMaterial.h"
@@ -15,6 +16,8 @@
 #include "PhysicsProxy/GeometryCollectionPhysicsProxy.h"
 #include "Chaos/PhysicsObjectCollisionInterface.h"
 #include "Chaos/Convex.h"
+#include "Chaos/GeometryQueries.h"
+#include "Chaos/Box.h"
 #include "PhysicsEngine/PhysicsObjectExternalInterface.h"
 #include "Engine/CollisionProfile.h"
 #include "Serialization/JsonSerializer.h"
@@ -53,10 +56,12 @@ UDemoColumnCladding::UDemoColumnCladding()
 void UDemoColumnCladding::Initialize()
 {
     if (!Groups.IsEmpty()) return;
+    bStackingExperiment = GetOwner()->ActorHasTag(TEXT("DemoColumnStacking08"));
     bRefinedExperiment = GetOwner()->ActorHasTag(TEXT("DemoColumnRefined07"));
     bCoarseExperiment = GetOwner()->ActorHasTag(TEXT("DemoColumnCoarse06"));
     bSurfaceExperiment = bCoarseExperiment || GetOwner()->ActorHasTag(TEXT("DemoColumnSurface05"));
-    Data = LoadObject<UDemoColumnCladdingData>(nullptr, bRefinedExperiment
+    Data = LoadObject<UDemoColumnCladdingData>(nullptr, bStackingExperiment
+        ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction08/DA_Cladding08.DA_Cladding08") : bRefinedExperiment
         ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/DA_Cladding07.DA_Cladding07") : bCoarseExperiment
         ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_Cladding06.DA_Cladding06") : bSurfaceExperiment
         ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction05/DA_Cladding05.DA_Cladding05")
@@ -135,6 +140,25 @@ void UDemoColumnCladding::BeginPlay()
         if (bRefinedExperiment)
             if (auto* Heavy = LoadObject<UPhysicalMaterial>(nullptr, TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/PM_HeavyConcrete07.PM_HeavyConcrete07")))
                 Concrete->SetPhysMaterialOverride(Heavy);
+        if (bStackingExperiment)
+        {
+            const auto Rest = Concrete->GetRestCollection()->GetGeometryCollection();
+            FBox Bounds(ForceInit);
+            for (int32 G = 0; G < Rest->BoundingBox.Num(); ++G)
+                Bounds += Rest->BoundingBox[G].TransformBy(RestBones[Rest->TransformIndex[G]]);
+            CoreBarrier = NewObject<UBoxComponent>(GetOwner(), TEXT("ProtectedCoreCollision"));
+            CoreBarrier->SetMobility(EComponentMobility::Movable);
+            CoreBarrier->SetupAttachment(Concrete);
+            CoreBarrier->SetBoxExtent(FVector(34.5,34.5,Bounds.GetExtent().Z));
+            CoreBarrier->SetRelativeLocation(FVector(0,0,Bounds.GetCenter().Z));
+            CoreBarrier->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+            CoreBarrier->SetCollisionObjectType(ECC_WorldStatic);
+            CoreBarrier->SetCollisionResponseToAllChannels(ECR_Ignore);
+            CoreBarrier->SetCollisionResponseToChannel(ECC_PhysicsBody,ECR_Block);
+            CoreBarrier->SetCanEverAffectNavigation(false);
+            GetOwner()->AddInstanceComponent(CoreBarrier);
+            CoreBarrier->RegisterComponent();
+        }
         AddTickPrerequisiteComponent(Concrete);
         // Enlarging the demo multiplies debris mass. Contact impacts must not
         // turn one rifle hit into a full-height secondary destruction cascade.
@@ -181,6 +205,18 @@ void UDemoColumnCladding::Detach(int32 TileIndex, const FVector& Push)
     Part->SetCollisionObjectType(ECC_PhysicsBody);
     Part->SetCollisionResponseToAllChannels(ECR_Ignore);
     Part->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+    if (bStackingExperiment)
+    {
+        Part->SetCollisionResponseToChannel(ECC_PhysicsBody, ECR_Block);
+        Part->SetUseCCD(true);
+        Part->SetPhysMaterialOverride(Concrete->GetBodyInstance() ? Concrete->GetBodyInstance()->GetSimplePhysicalMaterial() : nullptr);
+        if (!Data->Tiles[TileIndex].Shards.IsEmpty())
+        {
+            WholeTileSources.Add(Actor,TileIndex);
+            Part->SetNotifyRigidBodyCollision(true);
+            Part->OnComponentHit.AddDynamic(this,&UDemoColumnCladding::OnLooseTileImpact);
+        }
+    }
     Part->SetCanEverAffectNavigation(false);
     Part->SetSimulatePhysics(true);
     Part->SetPhysicsLinearVelocity(Velocities[TileIndex] + Push);
@@ -426,9 +462,103 @@ bool UDemoColumnCladding::HasStaticSupport(const FVector& Bottom) const
         FCollisionObjectQueryParams(ECC_WorldStatic), Params) && !Hit.bStartPenetrating && Hit.ImpactNormal.Z >= .65f;
 }
 
+bool UDemoColumnCladding::HasDebrisSupport(const FVector& Bottom, int32 ExcludedBone, const AActor* ExcludedActor, bool bRetainedOnly) const
+{
+    if (HasStaticSupport(Bottom)) return true;
+    if (!bStackingExperiment) return false;
+    const FVector Start = Bottom + FVector(0,0,5), End = Bottom - FVector(0,0,8);
+    FCollisionQueryParams Params(SCENE_QUERY_STAT(DemoColumnPile),false,GetOwner());
+    if (ExcludedActor) Params.AddIgnoredActor(ExcludedActor);
+    TArray<FHitResult> HitsOnPile;
+    GetWorld()->LineTraceMultiByObjectType(HitsOnPile,Start,End,FCollisionObjectQueryParams(ECC_PhysicsBody),Params);
+    for (const auto& Hit : HitsOnPile)
+        if (!Hit.bStartPenetrating && Hit.ImpactNormal.Z >= .5f &&
+            (bRetainedOnly ? RetainedTiles.Contains(Hit.GetActor()) : Debris.Contains(Hit.GetActor()))) return true;
+    auto* Proxy = Concrete ? Concrete->GetPhysicsProxy() : nullptr;
+    if (!Proxy) return false;
+    TArray<Chaos::FPhysicsObjectHandle> Objects;
+    for (const int32 Bone : bRetainedOnly ? RetainedConcrete : ReleasedConcrete)
+        if (Bone != ExcludedBone && !RemovedConcrete.Contains(Bone))
+        {
+            const auto* Particle = Proxy->GetParticleByIndex_External(Bone);
+            if (Particle && !Particle->Disabled())
+                if (auto* Object = Concrete->GetPhysicsObjectById(Bone)) Objects.Add(Object);
+        }
+    if (Objects.IsEmpty()) return false;
+    auto Interface = FPhysicsObjectExternalInterface::LockRead(Objects);
+    Chaos::FPhysicsObjectCollisionInterface_External Collision(Interface.GetInterface());
+    ChaosInterface::FRaycastHit Hit;
+    return Collision.LineTrace(Objects,Start,End,false,Hit) && Hit.WorldNormal.Z >= .5f && Hit.Distance > .01f;
+}
+
+void UDemoColumnCladding::OnLooseTileImpact(UPrimitiveComponent* HitComponent, AActor* OtherActor,
+    UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
+{
+    if (!bStackingExperiment || bEndingPlay || !HitComponent || !OtherComponent || Hit.ImpactNormal.Z < .25f) return;
+    AActor* Actor = HitComponent->GetOwner();
+    const int32* Source = WholeTileSources.Find(Actor);
+    if (!Source || NormalImpulse.Size() / FMath::Max(HitComponent->GetMass(), .01f) < 65.f) return;
+    const int32 Tile = *Source;
+    const FTransform Pose = HitComponent->GetComponentTransform();
+    const FVector Velocity = HitComponent->GetPhysicsLinearVelocity();
+    WholeTileSources.Remove(Actor);
+    Actor->Destroy();
+    ++IndependentTileBreaks;
+    SpawnTileShards(Tile,Pose,Velocity,Hit.ImpactNormal);
+}
+
+void UDemoColumnCladding::SpawnTileShards(int32 Tile, const FTransform& Pose, const FVector& Velocity, const FVector& Normal)
+{
+    TArray<FDemoColumnTileShard> Shards = Data->Tiles[Tile].Shards;
+    if (Shards.IsEmpty())
+    {
+        FDemoColumnTileShard Whole;
+        Whole.Mesh = Data->Tiles[Tile].Mesh; Whole.RelativeToTile = FTransform::Identity; Whole.AreaCm2 = Data->Tiles[Tile].AreaCm2;
+        Shards.Add(Whole);
+    }
+    FRandomStream Random(HashCombineFast(Tile,++ImpactSerial+80117u));
+    for (const auto& Shard : Shards)
+    {
+        CeramicDebris.RemoveAll([&](AActor* Actor) { return !IsValid(Actor) || RetainedTiles.Contains(Actor); });
+        while (CeramicDebris.Num() >= 32)
+        {
+            CeramicDebris[0]->Destroy();
+            CeramicDebris.RemoveAt(0);
+        }
+        FTransform World = Shard.RelativeToTile * Pose;
+        World.AddToTranslation(Normal*2.f);
+        FActorSpawnParameters Params;
+        Params.Owner = GetOwner();
+        Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+        auto* Actor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(),World,Params);
+        if (!Actor) continue;
+        auto* Part = Actor->GetStaticMeshComponent();
+        Part->SetMobility(EComponentMobility::Movable);
+        Part->SetStaticMesh(Shard.Mesh);
+        Part->SetWorldTransform(World);
+        Part->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+        Part->SetCollisionObjectType(ECC_PhysicsBody);
+        Part->SetCollisionResponseToAllChannels(ECR_Ignore);
+        Part->SetCollisionResponseToChannel(ECC_WorldStatic,ECR_Block);
+        Part->SetCollisionResponseToChannel(ECC_PhysicsBody,ECR_Block);
+        Part->SetCanEverAffectNavigation(false);
+        Part->SetPhysMaterialOverride(LoadObject<UPhysicalMaterial>(nullptr,TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/PM_HeavyConcrete07.PM_HeavyConcrete07")));
+        Part->SetUseCCD(true);
+        Part->SetSimulatePhysics(true);
+        FVector Spread = (World.GetLocation()-Pose.GetLocation()).GetSafeNormal();
+        Part->SetPhysicsLinearVelocity(Velocity.GetClampedToMaxSize(120.f)*.25f + Spread*35.f + Normal*30.f + FVector(0,0,30));
+        Part->SetPhysicsAngularVelocityInRadians(Random.VRand()*Random.FRandRange(1.f,2.5f));
+        Actor->SetLifeSpan(12.f);
+        Debris.Add(Actor);
+        CeramicDebris.Add(Actor);
+        ++SpawnedCeramicChips;
+    }
+}
+
 void UDemoColumnCladding::UpdateFacingImpacts()
 {
-    CeramicDebris.RemoveAll([](AActor* Actor) { return !IsValid(Actor); });
+    CeramicDebris.RemoveAll([&](AActor* Actor) { return !IsValid(Actor) || (bStackingExperiment && RetainedTiles.Contains(Actor)); });
+    for (auto It = WholeTileSources.CreateIterator(); It; ++It) if (!It.Key().IsValid()) It.RemoveCurrent();
     const auto* Proxy = Concrete ? Concrete->GetPhysicsProxy() : nullptr;
     if (!Proxy) return;
     for (const int32 Bone : ReleasedConcrete)
@@ -443,7 +573,7 @@ void UDemoColumnCladding::UpdateFacingImpacts()
         // A downward velocity arrested at the actual collision hull is a floor
         // impact. A wall contact or a body merely passing the floor is not.
         if (Previous.Z < -100.f && Velocity.Z - Previous.Z > 60.f &&
-            ConcreteBottom(Particle, Bottom) && HasStaticSupport(Bottom))
+            ConcreteBottom(Particle, Bottom) && HasDebrisSupport(Bottom,Bone,nullptr,false))
         {
             GroundCrumbled.Add(Bone);
             CrumbleCarriedFacing(Bone, Bottom, FVector::UpVector, false);
@@ -462,7 +592,7 @@ void UDemoColumnCladding::CrumbleCarriedFacing(int32 Bone, const FVector& Point,
     {
         return FVector::DistSquared(LastWorld[A].GetLocation(), Point) < FVector::DistSquared(LastWorld[B].GetLocation(), Point);
     });
-    const int32 Count = FMath::Min(Candidates.Num(), bShot ? 1 : 2);
+    const int32 Count = FMath::Min(Candidates.Num(), bShot ? 1 : bStackingExperiment ? Candidates.Num() : 2);
     if (!Count) return;
     if (bShot) ++ShotCrumbleEvents; else ++GroundCrumbleEvents;
     FRandomStream Random(HashCombineFast(GetTypeHash(Bone), ++ImpactSerial + 70117u));
@@ -472,6 +602,11 @@ void UDemoColumnCladding::CrumbleCarriedFacing(int32 Bone, const FVector& Point,
         const FTransform Pose = LastWorld[Tile];
         if (!RemoveTileInstance(Tile)) continue;
         ++CrumbledTiles;
+        if (bStackingExperiment)
+        {
+            SpawnTileShards(Tile,Pose,Velocities[Tile],Normal);
+            continue;
+        }
         const FVector Half = Data->Tiles[Tile].Mesh->GetBounds().BoxExtent * Pose.GetScale3D().GetAbs();
         for (int32 K = 0; K < 5; ++K)
         {
@@ -534,13 +669,13 @@ void UDemoColumnCladding::UpdateDebris(float DeltaTime)
             Part->GetPhysicsAngularVelocityInRadians().SizeSquared() < .04f;
         FVector Bottom;
         const FVector Below = Part->Bounds.Origin - FVector(0, 0, 10000. + Part->Bounds.BoxExtent.Z);
-        const bool bSupported = bSlow && Part->GetClosestPointOnCollision(Below, Bottom) >= 0.f && HasStaticSupport(Bottom);
+        const bool bSupported = bSlow && Part->GetClosestPointOnCollision(Below, Bottom) >= 0.f && HasDebrisSupport(Bottom,INDEX_NONE,Actor,true);
         Still = bSupported ? Still + StillStep : 0.f;
         if (bSlow && !bSupported) Part->WakeAllRigidBodies();
-        if (Still < 1.f || RetentionSlotsUsed() >= 50) continue;
+        if (Still < 1.f || RetentionSlotsUsed() >= 50 || (bStackingExperiment && RetainedTiles.Num() >= 30)) continue;
         const FTransform Pose = Part->GetComponentTransform();
         Part->SetSimulatePhysics(false);
-        Part->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        Part->SetCollisionEnabled(bStackingExperiment ? ECollisionEnabled::QueryAndPhysics : ECollisionEnabled::NoCollision);
         Part->SetWorldTransform(Pose);
         Actor->SetLifeSpan(0.f);
         RetainedTiles.Add(Actor);
@@ -564,7 +699,7 @@ void UDemoColumnCladding::UpdateDebris(float DeltaTime)
         float& Still = ConcreteStillTime[Bone];
         const bool bSlow = Particle->GetV().SizeSquared() < 25. && Particle->GetW().SizeSquared() < .04;
         FVector Bottom;
-        const bool bSupported = bSlow && ConcreteBottom(Particle, Bottom) && HasStaticSupport(Bottom);
+        const bool bSupported = bSlow && ConcreteBottom(Particle, Bottom) && HasDebrisSupport(Bottom,Bone,nullptr,true);
         Still = bSupported ? Still + StillStep : 0.f;
         if (bSlow && !bSupported) KeepDemoColumnLeafAwake(Concrete, Bone);
         if (Still >= 1.f && RetentionSlotsUsed() < 50)
@@ -581,7 +716,8 @@ void UDemoColumnCladding::UpdateDebris(float DeltaTime)
                 // The engine UI profile is query-only: Visibility blocks, all
                 // physical channels overlap. It keeps exposed retained concrete
                 // shootable without simulation, floor contacts or pawn blocking.
-                Self->Concrete->SetPerParticleCollisionProfileName(TArray<int32>{Bone}, Self->bRefinedExperiment
+                if (Self->bStackingExperiment) ConfigureDemoColumnDebrisCollision(Self->Concrete,Bone);
+                else Self->Concrete->SetPerParticleCollisionProfileName(TArray<int32>{Bone}, Self->bRefinedExperiment
                     ? FName(TEXT("UI")) : UCollisionProfile::NoCollision_ProfileName);
             });
         }
@@ -627,6 +763,8 @@ FString UDemoColumnCladding::GetState() const
     Out->SetNumberField(TEXT("last_concrete_bone"), LastConcreteBone);
     Out->SetBoolField(TEXT("coarse_experiment"), bCoarseExperiment);
     Out->SetBoolField(TEXT("refined_experiment"), bRefinedExperiment);
+    Out->SetBoolField(TEXT("stacking_experiment"), bStackingExperiment);
+    Out->SetNumberField(TEXT("independent_tile_breaks"),IndependentTileBreaks);
     Out->SetNumberField(TEXT("ground_crumble_events"), GroundCrumbleEvents);
     Out->SetNumberField(TEXT("shot_crumble_events"), ShotCrumbleEvents);
     Out->SetNumberField(TEXT("crumbled_tiles"), CrumbledTiles);
@@ -635,7 +773,7 @@ FString UDemoColumnCladding::GetState() const
     Out->SetNumberField(TEXT("ceramic_templates"), ChipTemplates.Num());
     if (bCoarseExperiment && Concrete)
     {
-        int32 Carried = 0, Unsupported = 0, CarriedCollision = 0, CarriedPhysics = 0, CoreMoved = 0;
+        int32 Carried = 0, Unsupported = 0, CarriedCollision = 0, CarriedPhysics = 0, CoreMoved = 0, GroundedFacing = 0;
         TArray<TSharedPtr<FJsonValue>> Targets;
         for (int32 I = 0; I < Data->Tiles.Num(); ++I)
         {
@@ -643,6 +781,7 @@ FString UDemoColumnCladding::GetState() const
             if (CarriedTiles[I])
             {
                 ++Carried;
+                GroundedFacing += GroundCrumbled.Contains(CarrierByTile[I]);
                 CarriedCollision += Groups[GroupByTile[I]].Instances->GetCollisionEnabled() != ECollisionEnabled::NoCollision;
                 CarriedPhysics += Groups[GroupByTile[I]].Instances->IsPhysicsCollisionEnabled();
                 if (bRefinedExperiment && Targets.Num() < 30)
@@ -667,23 +806,41 @@ FString UDemoColumnCladding::GetState() const
         Out->SetNumberField(TEXT("unsupported_wall_tiles"), Unsupported);
         Out->SetNumberField(TEXT("carried_collision_tiles"), CarriedCollision);
         Out->SetNumberField(TEXT("carried_physics_tiles"), CarriedPhysics);
+        Out->SetNumberField(TEXT("grounded_facing_tiles"),GroundedFacing);
         Out->SetArrayField(TEXT("carried_targets"), Targets);
         Out->SetNumberField(TEXT("protected_core_moved"), CoreMoved);
         Out->SetNumberField(TEXT("protected_core_impacts"), ProtectedCoreImpacts);
         Out->SetNumberField(TEXT("released_concrete"), ReleasedConcrete.Num());
+        int32 CorePenetrations = 0;
+        if (bStackingExperiment && CoreBarrier && Concrete->GetPhysicsProxy())
+        {
+            const FVector Extent = CoreBarrier->GetScaledBoxExtent()-FVector(.5);
+            const Chaos::TBox<Chaos::FReal,3> CoreShape(-Extent,Extent);
+            const Chaos::FRigidTransform3 CorePose(CoreBarrier->GetComponentLocation(),CoreBarrier->GetComponentQuat());
+            for (const int32 Bone : ReleasedConcrete)
+            {
+                const auto* Particle = Concrete->GetPhysicsProxy()->GetParticleByIndex_External(Bone);
+                if (!Particle || Particle->Disabled() || !Particle->GetGeometry()) continue;
+                CorePenetrations += Chaos::OverlapQuery(*Particle->GetGeometry(),
+                    Chaos::FRigidTransform3(Particle->GetX(),Particle->GetR()),CoreShape,CorePose);
+            }
+        }
+        Out->SetNumberField(TEXT("debris_inside_core"),CorePenetrations);
     }
     if (bSurfaceExperiment && Concrete)
     {
         int32 TileSimulating = 0, TileCollision = 0, ConcreteDynamic = 0, ConcreteCollision = 0, ConcreteInvisible = 0;
         int32 TileUnsupported = 0, ConcreteUnsupported = 0, ConcretePhysics = 0, ConcreteQuery = 0;
+        TArray<UStaticMeshComponent*> RetainedParts;
         for (const auto& Weak : RetainedTiles)
             if (const auto* Actor = Weak.Get())
                 if (const auto* Part = Actor->FindComponentByClass<UStaticMeshComponent>())
                 {
+                    RetainedParts.Add(const_cast<UStaticMeshComponent*>(Part));
                     TileSimulating += Part->IsSimulatingPhysics();
                     TileCollision += Part->GetCollisionEnabled() != ECollisionEnabled::NoCollision;
                     const FVector* Bottom = RetainedTileSupport.Find(Weak);
-                    TileUnsupported += !Bottom || !HasStaticSupport(*Bottom);
+                    TileUnsupported += !Bottom || !HasDebrisSupport(*Bottom,INDEX_NONE,Actor,true);
                 }
         const auto* Proxy = Concrete->GetPhysicsProxy();
         const auto& Transforms = Concrete->GetComponentSpaceTransforms3f();
@@ -694,7 +851,7 @@ FString UDemoColumnCladding::GetState() const
             {
                 ConcreteDynamic += Particle->ObjectState() != Chaos::EObjectStateType::Kinematic;
                 FVector Bottom;
-                ConcreteUnsupported += !ConcreteBottom(Particle, Bottom) || !HasStaticSupport(Bottom);
+                ConcreteUnsupported += !ConcreteBottom(Particle, Bottom) || !HasDebrisSupport(Bottom,Bone,nullptr,true);
                 for (const auto& Shape : Particle->ShapesArray())
                 {
                     ConcreteCollision += Shape->GetSimEnabled() || Shape->GetQueryEnabled();
@@ -714,6 +871,20 @@ FString UDemoColumnCladding::GetState() const
         Out->SetNumberField(TEXT("retained_concrete_invisible"), ConcreteInvisible);
         Out->SetNumberField(TEXT("retained_tile_unsupported"), TileUnsupported);
         Out->SetNumberField(TEXT("retained_concrete_unsupported"), ConcreteUnsupported);
+        int32 DeepOverlaps = 0;
+        if (bStackingExperiment)
+            for (int32 A = 0; A < RetainedParts.Num(); ++A)
+                for (int32 B = A+1; B < RetainedParts.Num(); ++B)
+                {
+                    const auto* First = RetainedParts[A]; const auto* Second = RetainedParts[B];
+                    const FVector Normal = First->GetComponentTransform().GetUnitAxis(EAxis::X);
+                    if (!First->Bounds.GetBox().Intersect(Second->Bounds.GetBox()) ||
+                        FMath::Abs(FVector::DotProduct(Normal,Second->GetComponentTransform().GetUnitAxis(EAxis::X))) < .96f) continue;
+                    const auto* Body = First->GetBodyInstance(); auto* Other = RetainedParts[B]->GetBodyInstance();
+                    if (Body && Other && Body->OverlapTestForBody(First->GetComponentLocation()+Normal*.3,First->GetComponentQuat(),Other) &&
+                        Body->OverlapTestForBody(First->GetComponentLocation()-Normal*.3,First->GetComponentQuat(),Other)) ++DeepOverlaps;
+                }
+        Out->SetNumberField(TEXT("retained_tile_deep_overlap_pairs"),DeepOverlaps);
     }
     if (Concrete)
     {

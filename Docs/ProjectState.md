@@ -8,8 +8,8 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
 
 - **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
-  retains integration. [Demo](DemoColumnExperiment07.md): large pieces ~30% smaller,
-  heavier fall, facing chips; fixed core, 50 retained. Baseline `ee196f2`.
+  retains integration. [Demo](DemoColumnExperiment08.md): smaller outward debris,
+  facing fracture, solid piles; fixed core, 50 retained. Baseline `b7c8ccd`.
   Direct; no Multica/reviewer. Play gate open. [MSQ-156](ReinforcedColumn02.md) and its
   [rev13 correction](ColumnRelief06.md) remain separate candidates.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;

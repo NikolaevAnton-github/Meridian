@@ -8,6 +8,7 @@
 #include "PhysicsSolver.h"
 #include "Async/Async.h"
 #include "GameFramework/Actor.h"
+#include "Physics/PhysicsFiltering.h"
 
 void ApplyDemoColumnScatter(UGeometryCollectionComponent* Concrete, const FHitResult& Hit, uint32 Seed)
 {
@@ -108,9 +109,18 @@ void ReleaseDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, c
     auto* Proxy = Concrete ? Concrete->GetPhysicsProxy() : nullptr;
     auto* Solver = Proxy ? Proxy->GetSolver<Chaos::FPhysicsSolver>() : nullptr;
     if (!Solver || Bone == INDEX_NONE) return;
-    const FVector Normal = Hit.ImpactNormal.GetSafeNormal();
+    FVector Normal = Hit.ImpactNormal.GetSafeNormal();
+    const bool bStacking = Concrete->GetOwner()->ActorHasTag(TEXT("DemoColumnStacking08"));
     const bool bHeavy = Concrete->GetOwner()->ActorHasTag(TEXT("DemoColumnRefined07"));
-    Solver->EnqueueCommandImmediate([Proxy, Solver, Bone, Normal, Seed, bHeavy]()
+    if (bStacking)
+    {
+        const FVector Local = Concrete->GetComponentTransform().InverseTransformPosition(Hit.ImpactPoint);
+        const FVector Side = FMath::Abs(Local.X) >= FMath::Abs(Local.Y)
+            ? FVector(FMath::Sign(Local.X),0,0) : FVector(0,FMath::Sign(Local.Y),0);
+        Normal = Concrete->GetComponentTransform().TransformVectorNoScale(Side).GetSafeNormal();
+        ConfigureDemoColumnDebrisCollision(Concrete, Bone);
+    }
+    Solver->EnqueueCommandImmediate([Proxy, Solver, Bone, Normal, Seed, bHeavy, bStacking]()
     {
         auto* Particle = Proxy->GetParticleByIndex_Internal(Bone);
         auto* Leaf = Particle ? Particle->CastToClustered() : nullptr;
@@ -136,7 +146,16 @@ void ReleaseDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, c
             // The bounded debris controller freezes only supported, settled pieces.
             Evolution->SetParticleSleepType(Leaf, Chaos::ESleepType::NeverSleep);
             FRandomStream Random(Seed * 733u + uint32(Bone));
-            if (bHeavy)
+            if (bStacking)
+            {
+                const double Speed = FMath::Clamp(16000. / FMath::Max(double(Leaf->M()), 30.), 135., 190.);
+                // The side's outward normal remains valid inside a shot cavity;
+                // fracture-face normals can point into the protected core.
+                const FVector Sideways = FVector::CrossProduct(Normal, FVector::UpVector);
+                Leaf->SetV(Normal*Speed + Sideways*Random.FRandRange(-10.f,10.f) + FVector(0,0,12));
+                Leaf->SetW(Random.VRand()*Random.FRandRange(.2f,.45f));
+            }
+            else if (bHeavy)
             {
                 const double Speed = FMath::Clamp(9000. / FMath::Max(double(Leaf->M()), 30.), 55., 115.);
                 Leaf->SetV(Leaf->GetV() + Normal * Speed + Random.VRand() * 12. + FVector(0, 0, 8));
@@ -152,6 +171,28 @@ void ReleaseDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, c
         UE_LOG(LogTemp, Display, TEXT("DemoColumn05 hit=%u bone=%d released=%d disabled=%d parent=%d"),
             Seed, Bone, Released, Leaf->Disabled(), Leaf->Parent() != nullptr);
     });
+}
+
+void ConfigureDemoColumnDebrisCollision(UGeometryCollectionComponent* Concrete, int32 Bone)
+{
+    auto* Proxy = Concrete ? Concrete->GetPhysicsProxy() : nullptr;
+    if (!Proxy) return;
+    FCollisionResponseContainer Responses(ECR_Ignore);
+    Responses.SetResponse(ECC_WorldStatic, ECR_Block);
+    Responses.SetResponse(ECC_PhysicsBody, ECR_Block);
+    Responses.SetResponse(ECC_Visibility, ECR_Block);
+    FPhysicsFilterBuilder Builder;
+    Builder.SetOwnerID(Concrete->GetOwner()->GetUniqueID());
+    Builder.SetComponentID(Concrete->GetUniqueID());
+    Builder.SetCollisionChannelIndex(ECC_PhysicsBody);
+    Builder.SetResponses(Responses);
+    Builder.SetFlags(Chaos::EFilterFlags::SimpleCollision | Chaos::EFilterFlags::ComplexCollision | Chaos::EFilterFlags::CCD, true);
+    FGeometryCollectionPhysicsProxy::FParticleCollisionFilterData Filter;
+    Filter.ParticleIndex = Bone;
+    Filter.bIsValid = Filter.bSimEnabled = Filter.bQueryEnabled = true;
+    Filter.ShapeFilterData = Builder.BuildShapeFilterData();
+    Filter.FilterInstanceData = Builder.BuildInstanceData();
+    Proxy->UpdatePerParticleFilterData_External({Filter});
 }
 
 void KeepDemoColumnLeafAwake(UGeometryCollectionComponent* Concrete, int32 Bone)
