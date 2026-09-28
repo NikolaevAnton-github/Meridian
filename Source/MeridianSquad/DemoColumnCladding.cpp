@@ -1,6 +1,8 @@
 #include "DemoColumnCladding.h"
 #include "DemoColumnScatter.h"
 #include "LobbyFacingPool.h"
+#include "NGDPropComponent.h"
+#include "DestructionFragmentWorld.h"
 #include "ProfilingDebugging/CsvProfiler.h"
 #include "HAL/IConsoleManager.h"
 #include "Components/InstancedStaticMeshComponent.h"
@@ -64,6 +66,10 @@ UDemoColumnCladding::UDemoColumnCladding()
 void UDemoColumnCladding::Initialize()
 {
     if (!Groups.IsEmpty()) return;
+    static uint64 NextFragmentOwner = 1; // GT only; never recycled, even across world recreation.
+    FragmentOwner = NextFragmentOwner++;
+    if (const auto* Prop = GetOwner()->FindComponentByClass<UNGDPropComponent>())
+        FragmentGeneration = uint32(Prop->ResetGeneration);
     bStackingExperiment = GetOwner()->ActorHasTag(TEXT("DemoColumnStacking08"));
     bRefinedExperiment = GetOwner()->ActorHasTag(TEXT("DemoColumnRefined07"));
     bCoarseExperiment = GetOwner()->ActorHasTag(TEXT("DemoColumnCoarse06"));
@@ -82,13 +88,21 @@ void UDemoColumnCladding::Initialize()
     GetOwner()->GetComponents(Existing);
     for (auto* Part : Existing) if (Part->ComponentHasTag(TileTag)) Part->DestroyComponent();
     const int32 Count = Data->Tiles.Num();
+    NextLooseLocal = Count;
     GroupByTile.Init(INDEX_NONE, Count);
     InstanceByTile.Init(INDEX_NONE, Count);
     Hits.Init(0, Count);
+    TileStateRevisions.Init(1, Count);
+    TilePoseRevisions.Init(1, Count);
     LastWorld.SetNum(Count);
     Velocities.Init(FVector::ZeroVector, Count);
     RenderHandles.Init(0, Count);
+    CompactSectionByTile.Init(INDEX_NONE, Count);
     if (ULobbyFacingPool::ShouldPool(this)) FacingPool = GetWorld()->GetSubsystem<ULobbyFacingPool>();
+    if (FacingPool)
+        CompactData=LoadObject<UDemoColumnCompactData>(nullptr,
+            TEXT("/Game/OpeningLobby/DestructionScaling01/Candidate01/DA_CompactFacing.DA_CompactFacing"),nullptr,LOAD_NoWarn);
+    if (CompactData && CompactData->Source != Data) CompactData=nullptr;
     CarrierByTile.Init(INDEX_NONE, Count);
     CarrierRelative.SetNum(Count);
     CarriedTiles.Init(false, Count);
@@ -101,6 +115,7 @@ void UDemoColumnCladding::Initialize()
     for (int32 I = 0; I < Count; ++I)
     {
         const auto& Tile = Data->Tiles[I];
+        for (const int32 Support : Tile.SupportBones) TilesBySupport.FindOrAdd(Support).Add(I);
         if (!Tile.Mesh) continue;
         if (bRefinedExperiment && Tile.AreaCm2 >= 30.f && Tile.AreaCm2 <= 300.f)
         {
@@ -141,12 +156,26 @@ void UDemoColumnCladding::Initialize()
         CarrierRelative[I] = Tile.RelativeToBone;
         TilesByCarrier.FindOrAdd(Tile.Bone).Add(I);
     }
+    if (FacingPool && CompactData)
+    {
+        CompactHandles.Init(0,CompactData->Sections.Num());
+        for (int32 S=0; S<CompactData->Sections.Num(); ++S)
+        {
+            const auto& Section=CompactData->Sections[S];
+            auto* Source=NewObject<UStaticMeshComponent>(GetOwner(),NAME_None,RF_Transient);
+            Source->SetStaticMesh(Section.Mesh);
+            CompactHandles[S]=FacingPool->AddDebris(this,-2-S,Source,Concrete->GetComponentTransform());
+            if (CompactHandles[S])
+                for (const int32 Tile : Section.Tiles) if (CompactSectionByTile.IsValidIndex(Tile)) CompactSectionByTile[Tile]=S;
+        }
+    }
     if (FacingPool)
         for (auto& Group : Groups)
         {
             bool bComplete = true;
             for (const int32 Tile : Group.Tiles)
             {
+                if (CompactSectionByTile[Tile]!=INDEX_NONE) continue;
                 RenderHandles[Tile] = FacingPool->Add(this, Tile, Group.Instances, LastWorld[Tile]);
                 bComplete &= RenderHandles[Tile] != 0;
             }
@@ -168,6 +197,13 @@ void UDemoColumnCladding::BeginPlay()
 {
     Super::BeginPlay();
     Initialize();
+    if (bStackingExperiment)
+    {
+        FragmentWorld = GetWorld()->GetSubsystem<UDestructionFragmentWorld>();
+        if (FragmentWorld) FragmentWorld->RegisterOwner(this);
+    }
+    DebrisMaterial = LoadObject<UPhysicalMaterial>(nullptr,
+        TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/PM_HeavyConcrete07.PM_HeavyConcrete07"));
     if (Concrete)
     {
         if (bRefinedExperiment)
@@ -209,12 +245,13 @@ void UDemoColumnCladding::BeginPlay()
             // The candidate asset has RemoveOnMaxSleep disabled. Keep this
             // component permission for explicit per-piece decay rendering only.
             Concrete->bAllowRemovalOnBreak = false;
-            Concrete->bAllowRemovalOnSleep = true;
+            Concrete->bAllowRemovalOnSleep = !FragmentWorld;
             const auto Rest = Concrete->GetRestCollection()->GetGeometryCollection();
             ConcreteAge.Init(-1.f, Rest->Transform.Num());
             ConcreteStillTime.Init(0.f, Rest->Transform.Num());
             for (int32 B = 0; B < Rest->Transform.Num(); ++B)
-                if (Rest->SimulationType[B] == FGeometryCollection::FST_Rigid && Rest->Children[B].IsEmpty()) ConcreteLeaves.Add(B);
+                if (Rest->SimulationType[B] == FGeometryCollection::FST_Rigid && Rest->Children[B].IsEmpty())
+                { ConcreteLeaves.Add(B); ConcreteLeafSet.Add(B); }
         }
     }
 }
@@ -223,13 +260,18 @@ void UDemoColumnCladding::Detach(int32 TileIndex, const FVector& Push)
 {
     if (!Data || !InstanceByTile.IsValidIndex(TileIndex) || InstanceByTile[TileIndex] == INDEX_NONE) return;
     const FTransform Pose = LastWorld[TileIndex];
-    if (!RemoveTileInstance(TileIndex)) return;
     if (Pose.GetScale3D().GetAbsMin() < .02f) return;
     FActorSpawnParameters Params;
     Params.Owner = GetOwner();
     Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-    auto* Actor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), Pose, Params);
+    auto* Actor = FragmentWorld ? FragmentWorld->Acquire(this, Data->Tiles[TileIndex].Mesh, DebrisMaterial, Pose, TileIndex)
+        : GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), Pose, Params);
     if (!Actor) return;
+    if (!RemoveTileInstance(TileIndex))
+    {
+        if (FragmentWorld) FragmentWorld->Return(Actor); else Actor->Destroy();
+        return;
+    }
     auto* Part = Actor->GetStaticMeshComponent();
     Part->SetMobility(EComponentMobility::Movable);
     Part->SetStaticMesh(Data->Tiles[TileIndex].Mesh);
@@ -238,6 +280,7 @@ void UDemoColumnCladding::Detach(int32 TileIndex, const FVector& Push)
     Part->SetCollisionObjectType(ECC_PhysicsBody);
     Part->SetCollisionResponseToAllChannels(ECR_Ignore);
     Part->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+    if (FragmentWorld) Part->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
     if (bStackingExperiment)
     {
         Part->SetCollisionResponseToChannel(ECC_PhysicsBody, ECR_Block);
@@ -255,13 +298,14 @@ void UDemoColumnCladding::Detach(int32 TileIndex, const FVector& Push)
     Part->SetPhysicsLinearVelocity(Velocities[TileIndex] + Push);
     FRandomStream Spin(HashCombineFast(GetTypeHash(TileIndex), ImpactSerial + 9173u));
     Part->SetPhysicsAngularVelocityInDegrees(Spin.VRand() * Spin.FRandRange(280.f, 720.f));
-    Actor->SetLifeSpan(12.f);
+    Actor->SetLifeSpan(FragmentWorld ? 0.f : 12.f);
     Debris.Add(Actor);
 }
 
 bool UDemoColumnCladding::RemoveTileInstance(int32 TileIndex)
 {
     if (!InstanceByTile.IsValidIndex(TileIndex) || InstanceByTile[TileIndex] == INDEX_NONE) return false;
+    if (!ExpandCompactSection(TileIndex)) return false;
     auto& Group = Groups[GroupByTile[TileIndex]];
     const int32 Instance = InstanceByTile[TileIndex];
     const int32 MovedTile = Group.Tiles.Last();
@@ -274,6 +318,7 @@ bool UDemoColumnCladding::RemoveTileInstance(int32 TileIndex)
     Group.Tiles.RemoveAtSwap(Instance);
     if (Instance < Group.Tiles.Num()) InstanceByTile[MovedTile] = Instance;
     InstanceByTile[TileIndex] = INDEX_NONE;
+    ++TileStateRevisions[TileIndex];
     const int32 Carrier = CarrierByTile[TileIndex];
     if (auto* Tiles = TilesByCarrier.Find(Carrier))
     {
@@ -288,11 +333,38 @@ bool UDemoColumnCladding::RemoveTileInstance(int32 TileIndex)
     return true;
 }
 
+bool UDemoColumnCladding::ExpandCompactSection(int32 Tile)
+{
+    if (!CompactSectionByTile.IsValidIndex(Tile) || CompactSectionByTile[Tile]==INDEX_NONE) return true;
+    const int32 Section=CompactSectionByTile[Tile];
+    for (const int32 I : CompactData->Sections[Section].Tiles)
+    {
+        if (InstanceByTile[I]==INDEX_NONE || RenderHandles[I]) continue;
+        auto* Part=Groups[GroupByTile[I]].Instances.Get();
+        Part->SetCastShadow(true);
+        RenderHandles[I]=FacingPool->Add(this,I,Part,LastWorld[I]);
+        Part->SetCastShadow(false);
+        if (!RenderHandles[I])
+        {
+            for (const int32 J : CompactData->Sections[Section].Tiles)
+            { FacingPool->Remove(this,RenderHandles[J]); RenderHandles[J]=0; }
+            UE_LOG(LogTemp,Error,TEXT("Compact facing expansion failed for section %d"),Section);
+            return false;
+        }
+    }
+    FacingPool->Remove(this,CompactHandles[Section]); CompactHandles[Section]=0;
+    for (const int32 I : CompactData->Sections[Section].Tiles) CompactSectionByTile[I]=INDEX_NONE;
+    return true;
+}
+
 void UDemoColumnCladding::CarryTiles(int32 Bone)
 {
     if (!bCoarseExperiment || ReleasedConcrete.Contains(Bone) || !RestBones.IsValidIndex(Bone)) return;
     ReleasedConcrete.Add(Bone);
-    for (int32 I = 0; I < Data->Tiles.Num(); ++I)
+    if (FragmentWorld) FragmentWorld->RegisterConcrete(this, Concrete, Bone);
+    const TArray<int32>* Supported = TilesBySupport.Find(Bone);
+    if (!Supported) return;
+    for (const int32 I : *Supported)
     {
         const auto& Tile = Data->Tiles[I];
         if (InstanceByTile[I] == INDEX_NONE || CarriedTiles[I] || !Tile.SupportBones.Contains(Bone)) continue;
@@ -328,6 +400,7 @@ void UDemoColumnCladding::CarryTiles(int32 Bone)
         }
         if (!RemoveTileInstance(I)) continue;
         CarriedTiles[I] = true;
+        ++TileStateRevisions[I];
         CarrierByTile[I] = Bone;
         CarrierRelative[I] = Tile.RestTransform.GetRelativeTransform(RestBones[Bone]);
         TilesByCarrier.FindOrAdd(Bone).Add(I);
@@ -335,7 +408,65 @@ void UDemoColumnCladding::CarryTiles(int32 Bone)
         GroupByTile[I] = CarriedGroup;
         InstanceByTile[I] = Groups[CarriedGroup].Instances->AddInstance(Tile.RestTransform);
         Groups[CarriedGroup].Tiles.Add(I);
+        if (FacingPool)
+        {
+            auto* Part=Groups[CarriedGroup].Instances.Get();
+            // The source may already be hidden after pooling another instance.
+            Part->SetCastShadow(true);
+            RenderHandles[I]=FacingPool->Add(this,I,Part,LastWorld[I]);
+            if (RenderHandles[I]) { Part->SetVisibility(false); Part->SetCastShadow(false); }
+        }
     }
+}
+
+FDestructionFragmentId UDemoColumnCladding::IdentifyHit(const FHitResult& Hit) const
+{
+    if (bEndingPlay || Hit.GetActor() != GetOwner()) return {};
+    if (bSurfaceExperiment && Hit.GetComponent()==Concrete)
+    {
+        int32 Bone=Hit.Item;
+        if (!ConcreteLeafSet.Contains(Bone))
+        {
+            // Resolve the exact authored leaf while the step-start collision
+            // snapshot still exists, before earlier impacts mutate this cluster.
+            TArray<Chaos::FPhysicsObjectHandle> Objects;
+            Objects.Reserve(ConcreteLeaves.Num());
+            for (const int32 Leaf : ConcreteLeaves)
+                if (!RemovedConcrete.Contains(Leaf))
+                    if (auto Object=Concrete->GetPhysicsObjectById(Leaf)) Objects.Add(Object);
+            auto Read=FPhysicsObjectExternalInterface::LockRead(Objects);
+            Chaos::FPhysicsObjectCollisionInterface_External Collision(Read.GetInterface());
+            FVector Direction=(Hit.TraceEnd-Hit.TraceStart).GetSafeNormal();
+            if (Direction.IsNearlyZero()) Direction=-Hit.ImpactNormal;
+            ChaosInterface::FRaycastHit Result;
+            Bone=INDEX_NONE;
+            if (Collision.LineTrace(Objects,Hit.ImpactPoint-Direction*8.,Hit.ImpactPoint+Direction*500.,false,Result) && Result.Actor)
+                if (const auto* Particle=Result.Actor->CastToRigidParticle())
+                    if (auto* Proxy=Concrete->GetPhysicsProxy())
+                        Bone=Proxy->GetItemIndexFromGTParticleNoInternalCluster_External(Particle).GetItemIndex();
+        }
+        if (ConcreteLeafSet.Contains(Bone)) return {FragmentOwner,FragmentGeneration,-2-Bone};
+        return {};
+    }
+    for (const auto& Group : Groups)
+        if (Group.Instances == Hit.GetComponent() && Group.Tiles.IsValidIndex(Hit.Item))
+            return {FragmentOwner, FragmentGeneration, Group.Tiles[Hit.Item]};
+    return {};
+}
+
+bool UDemoColumnCladding::RefreshHit(const FDestructionFragmentId& Id, FHitResult& Hit) const
+{
+    if (bEndingPlay || Id.Owner != FragmentOwner || Id.Generation != FragmentGeneration) return false;
+    if (Id.Local < -1)
+    {
+        const int32 Bone=-2-Id.Local;
+        if (!Concrete || !ConcreteLeafSet.Contains(Bone) || RemovedConcrete.Contains(Bone)) return false;
+        Hit.Component=Concrete; Hit.Item=Bone; return true;
+    }
+    if (!InstanceByTile.IsValidIndex(Id.Local) || InstanceByTile[Id.Local] == INDEX_NONE) return false;
+    Hit.Component = Groups[GroupByTile[Id.Local]].Instances;
+    Hit.Item = InstanceByTile[Id.Local];
+    return true;
 }
 
 bool UDemoColumnCladding::HandleImpact(FHitResult& Hit)
@@ -394,12 +525,12 @@ void UDemoColumnCladding::DamageConcrete(const FHitResult& Hit)
     if (bSurfaceExperiment)
     {
         ++ConcreteImpacts;
-        LastConcreteBone = INDEX_NONE;
+        LastConcreteBone = ConcreteLeafSet.Contains(Hit.Item) && !RemovedConcrete.Contains(Hit.Item) ? Hit.Item : INDEX_NONE;
         // The engine's generic leaf query also includes a broken root once it
         // loses its children. Its stale collision then masks the next real chip.
         // Trace only authored rigid leaves, including those in the live remainder.
         auto* Proxy = Concrete->GetPhysicsProxy();
-        if (Proxy)
+        if (Proxy && LastConcreteBone == INDEX_NONE)
         {
             FVector Direction = (Hit.TraceEnd - Hit.TraceStart).GetSafeNormal();
             if (Direction.IsNearlyZero()) Direction = -Hit.ImpactNormal;
@@ -427,6 +558,9 @@ void UDemoColumnCladding::DamageConcrete(const FHitResult& Hit)
             if (bRefinedExperiment && ReleasedConcrete.Contains(LastConcreteBone))
             {
                 CrumbleCarriedFacing(LastConcreteBone, Hit.ImpactPoint, Hit.ImpactNormal, true);
+                if (FragmentWorld)
+                    FragmentWorld->Impulse(FragmentWorld->Select(Concrete, LastConcreteBone),
+                        (Hit.TraceEnd-Hit.TraceStart).GetSafeNormal()*120.f);
                 return;
             }
             CarryTiles(LastConcreteBone);
@@ -457,6 +591,8 @@ void UDemoColumnCladding::TickComponent(float DeltaTime, ELevelTick TickType, FA
     if (!Data || !Concrete || !GetWorld()->IsGameWorld()) return;
     const FTransform ComponentWorld = Concrete->GetComponentTransform();
     const FTransform RootTransform = Concrete->GetRootCurrentComponentSpaceTransform();
+    if (FacingPool && !ComponentWorld.Equals(LastUpdatedComponentTransform,0.f))
+        for (const uint64 Handle : CompactHandles) if (Handle) FacingPool->Update(this,Handle,ComponentWorld);
     const bool bStationary = FullUpdateCount > 0 && ComponentWorld.Equals(LastUpdatedComponentTransform, .0001f) &&
         RootTransform.Equals(LastUpdatedRootTransform, .0001f);
     // Keep a cheap sentinel for external movement and fracture, including damage
@@ -519,11 +655,18 @@ void UDemoColumnCladding::TickComponent(float DeltaTime, ELevelTick TickType, FA
         const auto& Tile = Data->Tiles[I];
         const int32 Bone = CarrierByTile[I];
         if (!Bones.IsValidIndex(Bone)) continue;
-        const FTransform Local = CarrierRelative[I] * FTransform(Bones[Bone]);
-        const FTransform World = Local * ComponentWorld;
-        Velocities[I] = ((World.GetLocation() - LastWorld[I].GetLocation()) / FMath::Max(DeltaTime, .001f)).GetClampedToMaxSize(1500.f);
+        FDestructionPoseInput Input;
+        Input.Stamp = {{FragmentOwner, FragmentGeneration, I}, TileStateRevisions[I], TilePoseRevisions[I]};
+        Input.Relative = CarrierRelative[I]; Input.Carrier = FTransform(Bones[Bone]);
+        Input.Component = ComponentWorld; Input.Previous = LastWorld[I]; Input.DeltaTime = DeltaTime;
+        const FDestructionPoseOutput Result = DestructionFragmentMath::Pose(Input);
+        const FTransform& Local = Result.Local;
+        const FTransform& World = Result.World;
+        Velocities[I] = Result.Velocity;
+        if (!World.Equals(LastWorld[I], 0.f)) ++TilePoseRevisions[I];
         const bool bMoved = FVector::DistSquared(Local.GetLocation(), Tile.RestTransform.GetLocation()) > FMath::Square(.8f) ||
             Local.GetRotation().AngularDistance(Tile.RestTransform.GetRotation()) > FMath::DegreesToRadians(3.f);
+        if (CompactSectionByTile[I]!=INDEX_NONE && !Local.Equals(Tile.RestTransform,.0001f) && !ExpandCompactSection(I)) continue;
         if (FacingPool && RenderHandles[I] && !World.Equals(LastWorld[I], .0001f))
             FacingPool->Update(this, RenderHandles[I], World);
         LastWorld[I] = World;
@@ -756,7 +899,8 @@ void UDemoColumnCladding::OnLooseTileImpact(UPrimitiveComponent* HitComponent, A
     const FTransform Pose = HitComponent->GetComponentTransform();
     const FVector Velocity = HitComponent->GetPhysicsLinearVelocity();
     WholeTileSources.Remove(Actor);
-    Actor->Destroy();
+    Debris.Remove(Actor); CeramicDebris.Remove(Actor);
+    if (FragmentWorld) FragmentWorld->Return(Actor); else Actor->Destroy();
     ++IndependentTileBreaks;
     SpawnTileShards(Tile,Pose,Velocity,Hit.ImpactNormal);
 }
@@ -774,7 +918,7 @@ void UDemoColumnCladding::SpawnTileShards(int32 Tile, const FTransform& Pose, co
     for (const auto& Shard : Shards)
     {
         CeramicDebris.RemoveAll([&](AActor* Actor) { return !IsValid(Actor) || RetainedTiles.Contains(Actor); });
-        while (CeramicDebris.Num() >= 32)
+        while (!FragmentWorld && CeramicDebris.Num() >= 32)
         {
             CeramicDebris[0]->Destroy();
             CeramicDebris.RemoveAt(0);
@@ -784,7 +928,8 @@ void UDemoColumnCladding::SpawnTileShards(int32 Tile, const FTransform& Pose, co
         FActorSpawnParameters Params;
         Params.Owner = GetOwner();
         Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-        auto* Actor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(),World,Params);
+        auto* Actor = FragmentWorld ? FragmentWorld->Acquire(this, Shard.Mesh, DebrisMaterial, World, NextLooseLocal++)
+            : GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(),World,Params);
         if (!Actor) continue;
         auto* Part = Actor->GetStaticMeshComponent();
         Part->SetMobility(EComponentMobility::Movable);
@@ -795,14 +940,15 @@ void UDemoColumnCladding::SpawnTileShards(int32 Tile, const FTransform& Pose, co
         Part->SetCollisionResponseToAllChannels(ECR_Ignore);
         Part->SetCollisionResponseToChannel(ECC_WorldStatic,ECR_Block);
         Part->SetCollisionResponseToChannel(ECC_PhysicsBody,ECR_Block);
+        if (FragmentWorld) Part->SetCollisionResponseToChannel(ECC_Visibility,ECR_Block);
         Part->SetCanEverAffectNavigation(false);
-        Part->SetPhysMaterialOverride(LoadObject<UPhysicalMaterial>(nullptr,TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/PM_HeavyConcrete07.PM_HeavyConcrete07")));
+        Part->SetPhysMaterialOverride(DebrisMaterial);
         Part->SetUseCCD(true);
         Part->SetSimulatePhysics(true);
         FVector Spread = (World.GetLocation()-Pose.GetLocation()).GetSafeNormal();
         Part->SetPhysicsLinearVelocity(Velocity.GetClampedToMaxSize(120.f)*.25f + Spread*35.f + Normal*30.f + FVector(0,0,30));
         Part->SetPhysicsAngularVelocityInRadians(Random.VRand()*Random.FRandRange(1.f,2.5f));
-        Actor->SetLifeSpan(12.f);
+        Actor->SetLifeSpan(FragmentWorld ? 0.f : 12.f);
         Debris.Add(Actor);
         CeramicDebris.Add(Actor);
         ++SpawnedCeramicChips;
@@ -908,6 +1054,7 @@ void UDemoColumnCladding::CrumbleCarriedFacing(int32 Bone, const FVector& Point,
 void UDemoColumnCladding::UpdateDebris(float DeltaTime)
 {
     CSV_SCOPED_TIMING_STAT(LobbyColumns, DebrisUpdate);
+    if (FragmentWorld) return; // Shared reversible lifecycle replaces retention/expiry.
     DebrisPollTime += DeltaTime;
     if (DebrisPollTime < .25f) return;
     const float Elapsed = DebrisPollTime;
@@ -1043,6 +1190,9 @@ FString UDemoColumnCladding::GetState() const
     Out->SetNumberField(TEXT("bonded_attached"), Bonded);
     Out->SetNumberField(TEXT("tile_hits"), HitCount);
     Out->SetNumberField(TEXT("debris"), Debris.Num());
+    Out->SetBoolField(TEXT("persistent_fragments"), FragmentWorld != nullptr);
+    Out->SetNumberField(TEXT("fragment_owner"), double(FragmentOwner));
+    Out->SetNumberField(TEXT("fragment_generation"), FragmentGeneration);
     Out->SetBoolField(TEXT("idle"), bIdleLastTick);
     Out->SetNumberField(TEXT("full_updates"), static_cast<double>(FullUpdateCount));
     Out->SetNumberField(TEXT("idle_updates_skipped"), static_cast<double>(SkippedIdleUpdates));
@@ -1058,6 +1208,9 @@ FString UDemoColumnCladding::GetState() const
                     !FacingPool->Matches(this, RenderHandles[I], QueryWorld)) ++RenderMismatches;
             }
     Out->SetNumberField(TEXT("shared_tiles"), SharedTiles);
+    int32 CompactSections=0;
+    for (const uint64 Handle : CompactHandles) CompactSections+=Handle!=0;
+    Out->SetNumberField(TEXT("compact_sections"),CompactSections);
     Out->SetNumberField(TEXT("render_mismatches"), RenderMismatches);
     Out->SetNumberField(TEXT("tile_pose_updates"), static_cast<double>(TilePoseUpdates));
     Out->SetNumberField(TEXT("tile_pose_updates_skipped"), static_cast<double>(TilePoseUpdatesSkipped));
@@ -1078,7 +1231,7 @@ FString UDemoColumnCladding::GetState() const
     Out->SetNumberField(TEXT("retained_concrete"), RetainedConcrete.Num());
     Out->SetNumberField(TEXT("retention_pending"), PendingConcrete.Num());
     Out->SetNumberField(TEXT("retention_slots"), RetentionSlotsUsed());
-    Out->SetNumberField(TEXT("retention_limit"), bStackingExperiment ? 80 : 50);
+    Out->SetNumberField(TEXT("retention_limit"), FragmentWorld ? 0 : bStackingExperiment ? 80 : 50);
     Out->SetNumberField(TEXT("retention_replacements"), RetentionReplacements);
     Out->SetNumberField(TEXT("retention_support_vetoes"), RetentionSupportVetoes);
     if (bStackingExperiment && Concrete)
@@ -1240,9 +1393,14 @@ FString UDemoColumnCladding::GetState() const
 void UDemoColumnCladding::EndPlay(const EEndPlayReason::Type Reason)
 {
     bEndingPlay = true;
+    ++FragmentGeneration;
     if (FacingPool) FacingPool->RemoveOwner(this);
-    for (AActor* Actor : Debris) if (IsValid(Actor)) Actor->Destroy();
-    for (AActor* Actor : CeramicDebris) if (IsValid(Actor)) Actor->Destroy();
+    if (FragmentWorld) FragmentWorld->RemoveOwner(this);
+    else
+    {
+        for (AActor* Actor : Debris) if (IsValid(Actor)) Actor->Destroy();
+        for (AActor* Actor : CeramicDebris) if (IsValid(Actor)) Actor->Destroy();
+    }
     Debris.Reset();
     Super::EndPlay(Reason);
 }

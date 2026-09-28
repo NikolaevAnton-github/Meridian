@@ -1,4 +1,6 @@
 #include "CombatProjectileWorld.h"
+#include "DemoColumnCladding.h"
+#include "DestructionFragmentWorld.h"
 #include "NGDPropComponent.h"
 #include "GASPEnemyFixture.h"
 #include "EnemyCombatComponent.h"
@@ -299,11 +301,13 @@ TArray<ACombatProjectileWorld::FBlockerSample> ACombatProjectileWorld::SampleBlo
     CSV_SCOPED_TIMING_STAT(ProjectileBlockers, Collect);
     TArray<FBlockerSample> Samples;
     Samples.Reserve(PreviousBlockers.Num());
+    const auto* FragmentSystem=GetWorld()->GetSubsystem<UDestructionFragmentWorld>();
     auto SampleOwner = [&](AActor* Actor, auto& Destination)
     {
         if (Actor->IsA<ACharacter>() || Actor->IsA<APhysicsControlDummy>() || AGASPEnemyFixture::FromFoundation(Actor) || Actor->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics"))) return;
         // All facing components share their owner's destruction registration.
         const bool bNGDActor = Actor->FindComponentByClass<UNGDPropComponent>() != nullptr;
+        const bool bFragmentActor=FragmentSystem && Actor->ActorHasTag(TEXT("DestructionFragmentBody"));
         // Read the owned set directly on BOTH history boundaries. New/deleted,
         // reparented and reconfigured components are visible immediately, without
         // relying on editor-only or navigation-only component notifications.
@@ -317,8 +321,15 @@ TArray<ACombatProjectileWorld::FBlockerSample> ACombatProjectileWorld::SampleBlo
                 // registration/transform barriers and all launch-cover queries.
                 const bool bNGDCollection = (Part->IsA<UGeometryCollectionComponent>() || Part->ComponentHasTag(TEXT("DemoColumnCladding"))) &&
                     bNGDActor;
-                Destination.Add(FBlockerSample{Part, Part->GetComponentTransform(),
-                    bNGDCollection ? FVector::ZeroVector : Part->Bounds.BoxExtent});
+                const int64 FragmentHandle=bFragmentActor ? FragmentSystem->Select(Part,INDEX_NONE) : 0;
+                // Registered physical fragments use the collection's live-piece
+                // query contract. Their motion must not cancel every firing frame.
+                // Keep BOTH registration boundaries, owner motion and reuse identity
+                // barriers; ordinary arbitrary moving geometry still fails closed.
+                const FTransform Transform=FragmentHandle && Actor->GetOwner()
+                    ? Actor->GetOwner()->GetActorTransform() : Part->GetComponentTransform();
+                Destination.Add(FBlockerSample{Part, Transform,
+                    (bNGDCollection || FragmentHandle) ? FVector::ZeroVector : Part->Bounds.BoxExtent,FragmentHandle});
             }
     };
     const int32 Mode = BlockerRegistry.GetValueOnGameThread();
@@ -366,7 +377,7 @@ bool ACombatProjectileWorld::SameBlockers(const TArray<FBlockerSample>& Samples,
     if (Samples.Num() != Previous.Num()) return false;
     auto SamePose = [](const FBlockerSample& A, const FBlockerSample& B)
     {
-        return A.Transform.Equals(B.Transform, 1.e-6) && A.Extent.Equals(B.Extent, 1.e-4);
+        return A.FragmentHandle==B.FragmentHandle && A.Transform.Equals(B.Transform, 1.e-6) && A.Extent.Equals(B.Extent, 1.e-4);
     };
     for (int32 I = 0; I < Samples.Num(); ++I)
     {
@@ -610,7 +621,13 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
     if (bAdvancing) return;
     TGuardValue<bool> AdvancingGuard(bAdvancing, true);
     if (Bullets.IsEmpty()) return;
-    struct FPendingHit { FBullet Bullet; FHitResult Hit; double Time; };
+    struct FPendingHit
+    {
+        FBullet Bullet; FHitResult Hit; double Time;
+        TWeakObjectPtr<UDemoColumnCladding> Cladding;
+        FDestructionFragmentId Fragment;
+        int64 LooseHandle = 0;
+    };
     TArray<FPendingHit> PendingHits;
     FCollisionQueryParams Query(SCENE_QUERY_STAT(CombatBullet), true);
     BuildQuery(Query);
@@ -720,7 +737,11 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
             }
         if (bHit)
         {
-            PendingHits.Add({Bullet, Hit, FlightStart + FlightDuration * Hit.Time});
+            auto* Cladding = Hit.GetActor() ? Hit.GetActor()->FindComponentByClass<UDemoColumnCladding>() : nullptr;
+            const auto* Fragments = GetWorld()->GetSubsystem<UDestructionFragmentWorld>();
+            PendingHits.Add({Bullet, Hit, FlightStart + FlightDuration * Hit.Time,
+                Cladding, Cladding ? Cladding->IdentifyHit(Hit) : FDestructionFragmentId{},
+                Fragments ? Fragments->Select(Hit.GetComponent(), Hit.Item) : 0});
             Bullets.RemoveAtSwap(Index);
             continue;
         }
@@ -750,7 +771,22 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
         }
         LastContactTime = PendingHits[Index].Time;
         FiringClock = PendingHits[Index].Time;
-        ResolveHit(PendingHits[Index].Bullet, PendingHits[Index].Hit, RealNow);
+        auto& Pending = PendingHits[Index];
+        if (Pending.LooseHandle)
+        {
+            const auto* Fragments = GetWorld()->GetSubsystem<UDestructionFragmentWorld>();
+            if (!Fragments || Fragments->Select(Pending.Hit.GetComponent(), Pending.Hit.Item) != Pending.LooseHandle)
+            { ++HitCount; continue; }
+        }
+        if (Pending.Fragment.IsValid() && (!Pending.Cladding.IsValid() ||
+            !Pending.Cladding->RefreshHit(Pending.Fragment, Pending.Hit)))
+        {
+            // The step-start blocker consumed this round. Never redirect its stale
+            // instance index to the tile swapped into that slot by an earlier hit.
+            ++HitCount;
+            continue;
+        }
+        ResolveHit(Pending.Bullet, Pending.Hit, RealNow);
     }
 }
 void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult& Hit, double Now)
@@ -772,6 +808,10 @@ void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult&
         QueueSound(Bullet.Shooter.Get(), Bullet.Category, CombatAI::Sense::Damage,
             Hit.ImpactPoint, 1, Bullet.Id, LastContactTime, Victim, Bullet.Velocity);
     auto* Breakable = IsValid(Victim) ? Victim->FindComponentByClass<UNGDPropComponent>() : nullptr;
+    if (!Breakable)
+        if (auto* Fragments = GetWorld()->GetSubsystem<UDestructionFragmentWorld>())
+            if (const int64 Handle = Fragments->Select(Hit.GetComponent(), Hit.Item))
+                Fragments->Impulse(Handle, Bullet.Velocity.GetSafeNormal()*120.f);
     const float Applied = Breakable && Breakable->ReceiveBullet(Bullet.Id, Hit) ? 0.f :
         IsValid(PhysicalTarget) ? PhysicalTarget->ReceiveBullet(Bullet.Id, Bullet.Damage,
         Bullet.Velocity.GetSafeNormal(), Hit, LastContactTime, Bullet.BirthTime, FrameSerial,

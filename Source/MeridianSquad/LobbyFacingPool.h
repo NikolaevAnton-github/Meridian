@@ -7,6 +7,8 @@
 class UDemoColumnCladding;
 class UInstancedStaticMeshComponent;
 class UStaticMesh;
+class UStaticMeshComponent;
+class UMaterialInterface;
 
 /** Render-only copies. Projectile queries and their item indices stay on each column. */
 UCLASS()
@@ -16,18 +18,29 @@ class MERIDIANSQUAD_API ULobbyFacingPool : public UWorldSubsystem
 public:
     static bool ShouldPool(const UDemoColumnCladding* Owner);
     uint64 Add(UDemoColumnCladding* Owner, int32 Tile, UInstancedStaticMeshComponent* Source, const FTransform& World);
+    uint64 AddDebris(UDemoColumnCladding* Owner, int32 Local, UStaticMeshComponent* Source, const FTransform& World);
+    void Flush();
     void Update(UDemoColumnCladding* Owner, uint64 Handle, const FTransform& World);
     void Remove(UDemoColumnCladding* Owner, uint64 Handle);
     void RemoveOwner(UDemoColumnCladding* Owner);
     bool Matches(const UDemoColumnCladding* Owner, uint64 Handle, const FTransform& World) const;
+    bool SourceMatches(const UDemoColumnCladding* Owner, uint64 Handle, const UStaticMeshComponent* Source) const;
     virtual void Deinitialize() override;
 private:
     struct FKey
     {
         FIntPoint Cell;
         TWeakObjectPtr<UStaticMesh> Mesh;
-        bool operator==(const FKey& Other) const { return Cell == Other.Cell && Mesh == Other.Mesh; }
-        friend uint32 GetTypeHash(const FKey& Key) { return HashCombine(GetTypeHash(Key.Cell), GetTypeHash(Key.Mesh)); }
+        TArray<TWeakObjectPtr<UMaterialInterface>> Materials;
+        bool bShadow = true;
+        bool operator==(const FKey& Other) const
+        { return Cell == Other.Cell && Mesh == Other.Mesh && Materials == Other.Materials && bShadow == Other.bShadow; }
+        friend uint32 GetTypeHash(const FKey& Key)
+        {
+            uint32 Hash = HashCombine(GetTypeHash(Key.Cell), GetTypeHash(Key.Mesh));
+            for (const auto& Material : Key.Materials) Hash = HashCombineFast(Hash, GetTypeHash(Material));
+            return HashCombineFast(Hash, GetTypeHash(Key.bShadow));
+        }
     };
     struct FGroup
     {
@@ -47,9 +60,11 @@ private:
     TArray<int32> FreeGroups;
     TMap<FKey, int32> GroupLookup;
     TMap<uint64, FEntry> Entries;
+    TSet<int32> DirtyGroups;
     // Never reset during a world's lifetime, including F6 and empty-pool reuse.
     uint64 NextHandle = 1;
     int32 FindGroup(const FKey& Key);
     void RemoveInstance(int32 Group, int32 Instance);
     static FIntPoint CellFor(const UDemoColumnCladding* Owner);
+    static FIntPoint CellAt(const FVector& Position);
 };

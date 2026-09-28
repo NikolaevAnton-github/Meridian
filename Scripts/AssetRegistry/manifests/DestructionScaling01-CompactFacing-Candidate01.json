@@ -1,0 +1,945 @@
+{
+  "asset": "DestructionScaling01-CompactFacing-Candidate01",
+  "artifacts": [
+    {
+      "path": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "sha256": "12a6a1a93cab43a7e3644fcba9bf13709cd4b4dc0ee14b56a7e8baac75ff0de4",
+      "size_bytes": 109168,
+      "role": "source_provenance",
+      "unreal_package": null,
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/DA_CompactFacing.uasset",
+      "sha256": "064fdaa59ed9ac35ff409a2cc82ff0b2b9f5c01555a1c3b3453361823c648295",
+      "size_bytes": 14530,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/DA_CompactFacing",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_000.uasset",
+      "sha256": "17b9170ae463bec049652942a4f78908bdbe4d3a6247da09f7543664f586875a",
+      "size_bytes": 25345,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_000",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_001.uasset",
+      "sha256": "b0a9e3e052c871b463097d63373a6985ba98d2a6cf205997f3cdda0ff1999488",
+      "size_bytes": 23876,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_001",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_002.uasset",
+      "sha256": "70e0258bd7927ba909a6dff5ece37993116ff7fb2ee8aea95e9424f03e1f4f64",
+      "size_bytes": 24772,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_002",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_003.uasset",
+      "sha256": "7ba96a60c58d3c59ffcfe9ecde0b91499f41dcf48d7d1c9b4f8bccdb2f3893f7",
+      "size_bytes": 25733,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_003",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_004.uasset",
+      "sha256": "7064e47b94bec5d2421407aa5ad7f35e441bbd19a693c6e911da89f88d402e25",
+      "size_bytes": 23218,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_004",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_005.uasset",
+      "sha256": "e626e6c53d6896aa5a9e845457d15498d9c3719e7eb516aa43e3804fe2e86222",
+      "size_bytes": 25122,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_005",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_006.uasset",
+      "sha256": "56cf3814562602527f89c984d525f88af51c4590a6beed37f4bdded395127fb6",
+      "size_bytes": 24901,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_006",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_007.uasset",
+      "sha256": "79dfe821bba25d5304250fd8279b6c80022a51131af3ad7c160e633c03b4956c",
+      "size_bytes": 24386,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_007",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_008.uasset",
+      "sha256": "5e730bf0dfd40d9723907b05ade2cee3e5b6433f437b98bafba333ee46943474",
+      "size_bytes": 22291,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_008",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_009.uasset",
+      "sha256": "1e8140487574f9080e4e85ab3598e2c52e76758990714708d26d2c7d4e26d1f6",
+      "size_bytes": 21942,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_009",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_010.uasset",
+      "sha256": "6e4acb589c7f8bb64035352334ace229aec12c5346167fbd96ec4bd749165607",
+      "size_bytes": 22055,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_010",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_011.uasset",
+      "sha256": "bfd9bbc4fb80a902a2b4c36d365dfe98a00bf7098793c31408891f840a8752db",
+      "size_bytes": 22917,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_011",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_012.uasset",
+      "sha256": "9ae2d3aecb195a35411a48c337ba490792e106c7e2d4f13c401195660ff76116",
+      "size_bytes": 25419,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_012",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_013.uasset",
+      "sha256": "5a9b0736b502103f5315f588d66f8036eb481d12378c45f5d850a245c6bb1c42",
+      "size_bytes": 27773,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_013",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_014.uasset",
+      "sha256": "f5a991964c9b7cb5ecdee82e1578c90dfb9d2378a809ad6865efb8f314475e93",
+      "size_bytes": 27558,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_014",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_015.uasset",
+      "sha256": "57da73ae39fae71a9e39bf6b3e5a28ed90f337681b13c11b37f6dc6e5ed7bae6",
+      "size_bytes": 26785,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_015",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_016.uasset",
+      "sha256": "022face3d26f1a22e5081e836523ec0f4a7d3f7b40bd908a4d03e44007ed4e3b",
+      "size_bytes": 21174,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_016",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_017.uasset",
+      "sha256": "cd83afa2ab661bc97e142bcc5d9850a4e8cc10facb7d3c02ea671cf5935d913b",
+      "size_bytes": 20262,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_017",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_018.uasset",
+      "sha256": "bd6374cca3c2c46c725a37660f260adef505a64317de14a9cf9839190eeb96aa",
+      "size_bytes": 20573,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_018",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_019.uasset",
+      "sha256": "360d5bd02ccbbaf507ddcbca1567c9e2fde7f36ee26726af2d0e402cbcc24c1b",
+      "size_bytes": 21613,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_019",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_020.uasset",
+      "sha256": "ba6099825d003fae263009ca0c391134f2efa574dba42eb2ad3b6eab6c75224a",
+      "size_bytes": 25981,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_020",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_021.uasset",
+      "sha256": "385d82162c9feb86c4d7486b7a0d2a61e6a9463c907904872099bbd37ac9e33e",
+      "size_bytes": 26299,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_021",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_022.uasset",
+      "sha256": "a9307f6d464e203dce79912036a8c889b3c9bcfd2ce080833487a439eea34ccb",
+      "size_bytes": 27010,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_022",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_023.uasset",
+      "sha256": "bd03a00b79272990b39bbbd343d75441745d5c3d7036ad50eeb80526f7824182",
+      "size_bytes": 26008,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_023",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_024.uasset",
+      "sha256": "cf32dd89e593fc3b90afa0b69f66d2f278109b04573c5da3d2b005fd3f1960d2",
+      "size_bytes": 23496,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_024",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_025.uasset",
+      "sha256": "b0d08280f921779a11d8237c7632b1dcd0b1e5342b0ff4be0aaad384df7c2543",
+      "size_bytes": 22991,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_025",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_026.uasset",
+      "sha256": "1fcde8c26c6e0e118555a7de045958f4a304a0ca6761d5606b13303acd34eb85",
+      "size_bytes": 23134,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_026",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_027.uasset",
+      "sha256": "8e6a660c1717e13b0064bd4ecd98cf3a907caa8373d657573214458f3b5ea5aa",
+      "size_bytes": 23959,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_027",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_028.uasset",
+      "sha256": "dc3ea775249090a1af4ef26a6cc14e9abbd40ec86ca309ce9b4530df4e8ba609",
+      "size_bytes": 22186,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_028",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_029.uasset",
+      "sha256": "4b39f1a60b2c64eadf58296bec0a7015374b0a7718c3521c3c2964be98b25d4b",
+      "size_bytes": 22252,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_029",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_030.uasset",
+      "sha256": "a8aee701589160870b7a77d81446bbdc3f01fcea477dc7aea4619016c82cf81c",
+      "size_bytes": 23064,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_030",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_031.uasset",
+      "sha256": "1b04a6f9c14f2754c3220ef5f826cecaebc761cdf40a343904d46f51cd811aff",
+      "size_bytes": 22267,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_031",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_032.uasset",
+      "sha256": "73f654d60dc24e2bbb8374ed476db702911159ece1d803919640fb74f72f4852",
+      "size_bytes": 22720,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_032",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_033.uasset",
+      "sha256": "38894b4e7d8a0e2a7b3e4e584cd63ec6d1cf38a594fda3fbdf8b1cd773af4617",
+      "size_bytes": 21260,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_033",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_034.uasset",
+      "sha256": "645ba8db9fd8175e6ce799c5887bf28f0e1d8652840d5c798c1ed24077693f48",
+      "size_bytes": 22658,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_034",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "path": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_035.uasset",
+      "sha256": "23139e351eefdc3e52e36881e4a52f2ed583f33fa1a33a39fe9dab76199c2a9b",
+      "size_bytes": 22382,
+      "role": "unreal_asset",
+      "unreal_package": "/Game/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_035",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/DA_CompactFacing.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_000.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_001.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_002.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_003.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_004.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_005.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_006.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_007.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_008.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_009.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_010.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_011.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_012.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_013.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_014.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_015.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_016.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_017.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_018.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_019.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_020.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_021.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_022.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_023.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_024.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_025.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_026.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_027.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_028.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_029.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_030.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_031.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_032.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_033.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_034.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    },
+    {
+      "upstream": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+      "downstream": "Content/OpeningLobby/DestructionScaling01/Candidate01/SM_FacingSection_035.uasset",
+      "kind": "derived_render_geometry",
+      "status": "declared",
+      "evidence": [
+        {
+          "source": "Assets/Source/DestructionScaling01/Candidate01/provenance.json",
+          "note": "Derived render-only candidate. Exact triangle count preserved; original collision and assets unchanged. Owner verdict pending."
+        }
+      ]
+    }
+  ]
+}

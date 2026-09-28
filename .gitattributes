@@ -167,3 +167,8 @@ Plugins/GASPALS/** -text
 Source/MeridianSquad/EnemyCombatCover.cpp -text
 Docs/GASPALSLocomotion01*.md -text
 Scripts/AssetRegistry/manifests/GASPALSLocomotion01-Candidate*.json -text
+
+# Preserve MSQ-167 immutable candidate source and registry evidence bytes.
+Source/MeridianSquad/DestructionCompactAuthoring.cpp -text
+Assets/Source/DestructionScaling01/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+Scripts/AssetRegistry/manifests/DestructionScaling01-CompactFacing-Candidate01.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

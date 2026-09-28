@@ -15,6 +15,8 @@ class MERIDIANSQUAD_API UNGDColumnAuthoring : public UBlueprintFunctionLibrary
     GENERATED_BODY()
 public:
     UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
+    static FString BuildCompactLobbyFacing(const FString& Destination);
+    UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
     static FString BuildLobbyColumnMeshes(const FString& SourceFile);
     UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
     static FString BuildLobbyColumnStructure();

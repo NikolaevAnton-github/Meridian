@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-29",
+  "authority": "Owner instruction in the direct implementation chat",
+  "tasks": ["MSQ-162", "MSQ-163", "MSQ-164", "MSQ-165", "MSQ-166", "MSQ-167"],
+  "scope": "Implement the six destruction optimizations together; pursue additional scoped optimizations with minimal quality loss; report approximate frame time before and after.",
+  "execution": "Direct controller only. No Multica launch or dispatch, no other agents, no independent reviewer.",
+  "supersedes": "The separate-chat start restriction and independent implementation/review routing for these six tasks only.",
+  "acceptance": "Build and focused functional/render checks by the controller. Final performance, visual and play verdict belongs to the owner.",
+  "measurement": "One short repeatable representative workload is authorized by the request for before/after frame time. The stopped MSQ-161 fixture remains stopped.",
+  "exclusions": ["MSQ-168 task execution", "New destruction art", "Deletion of owner assets", "Paid services"]
+}

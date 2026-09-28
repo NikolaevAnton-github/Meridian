@@ -1,14 +1,14 @@
 # MSQ-160: DestructionScaling01 implementation sequence
 
-Revised 2026-09-29 under [ImplementationOnly02](../Approvals/DestructionScaling01-ImplementationOnly02.json). Prepare the optimizations for separate owner-started chats. This revision authorizes task administration only, not execution of MSQ-162..168.
+Updated 2026-09-29 under [DirectBatch01](../Approvals/DestructionScaling01-DirectBatch01.json). The owner explicitly started MSQ-162..167 together with direct execution and self-review, no Multica or other agents, and requested approximate before/after frame time. These six implementations are delivered; [batch evidence and measured limitations](../DestructionScaling01Batch01.md). Owner visual/play/performance verdict remains pending. MSQ-168 is not started. The prior [ImplementationOnly02](../Approvals/DestructionScaling01-ImplementationOnly02.json) separate-chat routing is superseded only for the six named tasks.
 
 ## Current state and start point
 
 MSQ-161 / DS-01 is stopped by the owner and removed from the execution sequence. Its unfinished fixture and evidence are archived; [closure note](../DestructionScaling01DS01.md). Do not resume its benchmarks, require its acceptance, or use its preliminary captures as a performance gate.
 
-The production source baseline remains Perf02 `68f911c`, plus subsequent committed task changes as they are delivered. Preserve unrelated owner edits. The next executable task is **MSQ-162**. The first implementation task must build current source before runtime work; the remaining local diagnostic DLL is not an accepted production build.
+The production baseline Perf02 `68f911c` was rebuilt before this batch's runtime work; the stopped diagnostic DLL was not used as the baseline. The batch's final source/DLL hashes and successful build are recorded in `Saved/DestructionScaling01/build-11.json`. Preserve unrelated owner edits. Only **MSQ-168** remains prepared for a future explicit start.
 
-## One task per new chat
+## Implementation sequence
 
 | Order | Task | Concrete implementation |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ The production source baseline remains Perf02 `68f911c`, plus subsequent committ
 | 6 | [MSQ-167 / DS-07](DestructionScaling01-DS07.md) | Compact intact and shared moving/sleeping debris rendering. |
 | 7 | [MSQ-168 / DS-08](DestructionScaling01-DS08.md) | Remaining physics update cleanup, integration and owner handoff. |
 
-Keep the parent and prepared children unassigned; never start a task because its predecessor finished. An explicit owner start authorizes only the named child. Each child uses the preceding committed implementation, not a performance approval or intermediate owner rating. The owner evaluates performance, feel and appearance after the optimization sequence.
+The owner explicitly authorized the first six rows as one direct batch. No Multica service, task execution or task-state update was performed in that batch. Multica remains the live task-state source; this local delivery does not claim its board entries were changed. MSQ-168 still requires its own explicit start. The owner evaluates performance, feel and appearance; intermediate frame-time gains were not an implementation gate.
 
 ## Shared implementation boundaries
 
@@ -30,11 +30,11 @@ Keep the parent and prepared children unassigned; never start a task because its
 - Stable identity, reset generations and state/pose revisions govern reuse and delayed work. Workers own plain input/output data; safe phases retain exact engine queries, UObject changes and solver commands. Verify APIs against installed UE 5.8 source.
 - Full abilities, structural collapse and collision-driven fracture are separate scope. Keep the existing impact-damage policy until separately decided; it must not block the authorized wake/manipulation optimizations.
 - Build and run short, focused checks for changed behavior. Reuse applicable evidence; investigate concrete defects rather than replaying every historical case. No required 1/4/16 stress matrix, long soak, paired PIE/standalone A/B capture, FPS target gate or per-stage performance report. Do not run such campaigns unless the owner asks again.
-- Execution/review routing follows project policy and explicit owner exceptions in the task's chat. The MSQ-161 direct/self-review exception remains scoped to that stopped task. No worker or reviewer is dispatched by this administrative revision. Preserve owner design/play acceptance; concise representative visual checks may establish rendering correctness without a separate capture campaign.
+- Execution/review routing follows project policy and explicit owner exceptions. DirectBatch01 supplies a fresh direct/self-review waiver for MSQ-162..167; the stopped MSQ-161 waiver is not reused. Preserve owner design/play acceptance; concise representative visual checks establish technical rendering correctness only.
 - Restore editor/settings, preserve evidence and commit verified task-scoped changes before handoff. State functional gaps honestly. Do not claim an FPS gain without measurements or make measurements a prerequisite for implementing the already selected optimizations.
 
 ## Navigation
 
 Start with `DemoColumnCladding`, `DemoColumnScatter`, `LobbyFacingPool`, `NGDPropComponent` and `CombatProjectileWorld` under `Source/MeridianSquad/`. Read only the named task and needed predecessor sections. Relevant code findings are preserved in `Saved/LobbyColumnsPerf02/mass-destruction-research.md`; they are reference material, not a request to restart profiling.
 
-Task handoffs: `Docs/DestructionScaling01DSxx.md`. Focused evidence: `Saved/DestructionScaling01/DSxx/`. MSQ-161 archive: `Saved/DestructionScaling01/DS01/Stopped20260929/`. Multica remains the live task-state source; description/status edits use `--no-start`.
+Task handoffs: `Docs/DestructionScaling01DSxx.md`; integrated delivery: `Docs/DestructionScaling01Batch01.md`. Direct-batch focused evidence is at `Saved/DestructionScaling01/`. MSQ-161 archive: `Saved/DestructionScaling01/DS01/Stopped20260929/`. Future Multica description/status edits use `--no-start`.

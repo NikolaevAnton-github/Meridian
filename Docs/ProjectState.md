@@ -1,6 +1,6 @@
 # MeridianSquad current project state
 
-Updated 2026-09-29. No new execution/design approval.
+Updated 2026-09-29. Destruction verdict pending.
 Rules and policy routes: [AGENTS](../AGENTS.md).
 
 ## Active direction
@@ -11,8 +11,8 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
   80 retained, owner accepted. [LobbyColumns01](LobbyColumns01.md): 16 columns, damage to
   8.4 m, concrete seats and rebar; central demo unchanged.
   [Perf01](LobbyColumnsPerf01.md) and [Perf02](Tasks/LobbyColumnsPerf02.md) delivered.
-  [Scaling](Tasks/DestructionScaling01.md): MSQ-161 stopped; MSQ-162..168 await
-  separate starts, without benchmark gates. Owner evaluates after implementation.
+  [Scaling batch](DestructionScaling01Batch01.md): MSQ-162..167 delivered under
+  direct/self-review waiver; owner verdict pending. MSQ-161 stopped; MSQ-168 unstarted.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
   technically complete, owner review waiver. MSQ-150/151 are
   [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);

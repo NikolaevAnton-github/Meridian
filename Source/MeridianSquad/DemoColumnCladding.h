@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Engine/DataAsset.h"
+#include "DestructionFragmentState.h"
 #include "DemoColumnCladding.generated.h"
 
 class UStaticMesh;
@@ -11,6 +12,8 @@ class UGeometryCollectionComponent;
 class UPrimitiveComponent;
 class UBoxComponent;
 class ULobbyFacingPool;
+class UDestructionFragmentWorld;
+class UPhysicalMaterial;
 
 USTRUCT()
 struct FDemoColumnTileShard
@@ -47,6 +50,24 @@ public:
 };
 
 USTRUCT()
+struct FDemoColumnCompactSection
+{
+    GENERATED_BODY()
+    UPROPERTY() TObjectPtr<UStaticMesh> Mesh;
+    UPROPERTY() TArray<int32> Tiles;
+};
+
+/** Derived render-only sections; source tiles remain the collision and fracture authority. */
+UCLASS()
+class MERIDIANSQUAD_API UDemoColumnCompactData : public UDataAsset
+{
+    GENERATED_BODY()
+public:
+    UPROPERTY() TObjectPtr<UDemoColumnCladdingData> Source;
+    UPROPERTY() TArray<FDemoColumnCompactSection> Sections;
+};
+
+USTRUCT()
 struct FDemoColumnTileGroup
 {
     GENERATED_BODY()
@@ -65,10 +86,26 @@ public:
     FString GetState() const;
     // The experiment consumes its facing and concrete contacts exactly once.
     bool HandleImpact(FHitResult& Hit);
+    FDestructionFragmentId IdentifyHit(const FHitResult& Hit) const;
+    bool RefreshHit(const FDestructionFragmentId& Id, FHitResult& Hit) const;
+    uint64 GetFragmentOwner() const { return FragmentOwner; }
+    uint32 GetFragmentGeneration() const { return FragmentGeneration; }
     virtual void BeginPlay() override;
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
     virtual void EndPlay(const EEndPlayReason::Type Reason) override;
 private:
+    uint64 FragmentOwner = 0;
+    uint32 FragmentGeneration = 0;
+    TArray<uint64> TileStateRevisions;
+    TArray<uint64> TilePoseRevisions;
+    TMap<int32, TArray<int32>> TilesBySupport;
+    UPROPERTY(Transient) TObjectPtr<UDestructionFragmentWorld> FragmentWorld;
+    UPROPERTY(Transient) TObjectPtr<UPhysicalMaterial> DebrisMaterial;
+    int32 NextLooseLocal = 0;
+    UPROPERTY(Transient) TObjectPtr<UDemoColumnCompactData> CompactData;
+    TArray<int32> CompactSectionByTile;
+    TArray<uint64> CompactHandles;
+    bool ExpandCompactSection(int32 Tile);
     UPROPERTY(Transient) TObjectPtr<UDemoColumnCladdingData> Data;
     UPROPERTY(Transient) TObjectPtr<UGeometryCollectionComponent> Concrete;
     UPROPERTY(Transient) TArray<FDemoColumnTileGroup> Groups;
@@ -85,6 +122,7 @@ private:
     TSet<int32> PendingConcrete;
     TSet<int32> RemovedConcrete;
     TArray<int32> ConcreteLeaves;
+    TSet<int32> ConcreteLeafSet;
     TArray<float> ConcreteAge;
     TArray<float> ConcreteStillTime;
     float DebrisPollTime = 0.f;

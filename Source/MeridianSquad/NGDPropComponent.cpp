@@ -1,4 +1,5 @@
 #include "NGDPropComponent.h"
+#include "DestructionFragmentWorld.h"
 #include "DemoColumnCladding.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
@@ -174,6 +175,7 @@ void UNGDPropComponent::BeginPlay()
 void UNGDPropComponent::Publish(FName Reason, const FBox& Previous)
 {
     if (!Collection || !GetWorld()) return;
+    if (auto* Fragments=GetWorld()->GetSubsystem<UDestructionFragmentWorld>()) Fragments->InvalidateSupport(GetOwner());
     const FBox Current = Collection->Bounds.GetBox();
     FNGDCollisionChange Change;
     Change.ObjectId = ObjectId;

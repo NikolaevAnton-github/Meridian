@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "DestructionFragmentState.h"
 
 class UGeometryCollectionComponent;
 struct FHitResult;
@@ -12,3 +13,7 @@ MERIDIANSQUAD_API void ReleaseDemoColumnLeaf(UGeometryCollectionComponent* Concr
 MERIDIANSQUAD_API void FreezeDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, TFunction<void(bool)> Completion);
 MERIDIANSQUAD_API void KeepDemoColumnLeafAwake(UGeometryCollectionComponent* Concrete, int32 Bone);
 MERIDIANSQUAD_API void ConfigureDemoColumnDebrisCollision(UGeometryCollectionComponent* Concrete, int32 Bone);
+MERIDIANSQUAD_API bool CommandDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone,
+    uint8 Operation, FVector Velocity, FVector AngularVelocity, FTransform Pose,
+    TSharedPtr<FDestructionCommandGuard, ESPMode::ThreadSafe> Guard, uint64 Revision);
+MERIDIANSQUAD_API bool CommandDemoColumnLeaves(UGeometryCollectionComponent* Concrete, TArray<FDestructionLeafCommand> Commands);

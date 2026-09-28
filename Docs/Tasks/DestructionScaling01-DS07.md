@@ -1,8 +1,8 @@
 # MSQ-167 / DS-07: Compact intact and shared debris rendering
 
-Multica: MSQ-167 (`01a0e9bc-bde2-7088-bb7b-6f64de039f35`), parent MSQ-160, stage 7. Prepared only; unassigned, no execution authorized by this revision. Start this task in a separate owner chat. Dependency: Implemented and committed MSQ-166, DS-04 batching and DS-02 identities.
+Multica: MSQ-167 (`01a0e9bc-bde2-7088-bb7b-6f64de039f35`), parent MSQ-160, stage 7. Implemented in the owner-started direct batch; local delivery verified, owner verdict pending. Multica board state was not changed. Dependency: Implemented and committed MSQ-166, DS-04 batching and DS-02 identities.
 
-Authority: [ImplementationOnly02](../Approvals/DestructionScaling01-ImplementationOnly02.json). Read the [shared implementation boundaries](DestructionScaling01.md); no recursive history read or DS-01 benchmark restart.
+Current authority: [DirectBatch01](../Approvals/DestructionScaling01-DirectBatch01.json), superseding separate-chat and independent-review routing for MSQ-162..167. Delivery: [batch report](../DestructionScaling01Batch01.md). Original implementation scope: [ImplementationOnly02](../Approvals/DestructionScaling01-ImplementationOnly02.json). Read the [shared implementation boundaries](DestructionScaling01.md); no recursive history read or DS-01 benchmark restart.
 
 ## Outcome
 
@@ -20,6 +20,4 @@ Implement fewer render components for intact columns and shared rendering for co
 
 Build, inspect a few representative intact/damaged/moving/settled/reset views, and check exact hit/render mappings across transitions and migration. Owner makes the final visual/play/performance judgement after the optimization sequence. No mandatory same-view A/B campaign, separate visual capture campaign or RT/GPU improvement gate.
 
-Deliver the scoped implementation, `Docs/DestructionScaling01DS07.md`, build result and concise evidence for changed behavior under `Saved/DestructionScaling01/DS07/`. Record exact source/DLL identity for runtime checks. Commit verified task-scoped changes, restore editor state and stop. No performance acceptance gate or owner-rating gate before the next separately started task. Execution/review routing follows the shared policy and any explicit owner exception in that chat.
-
-New chat opener: "Start MSQ-167. Read Docs/Tasks/DestructionScaling01-DS07.md and the indicated shared boundaries/predecessor handoff. Implement this task only, with build and focused correctness checks, without benchmark campaigns. Do not start successors."
+Delivered implementation and [stage handoff](../DestructionScaling01DS07.md) are included in the direct batch. Final successful build, exact source/DLL identity, focused checks and approximate frame-time comparison are recorded in the batch report and `Saved/DestructionScaling01/`. The owner explicitly waived Multica execution and independent review for these six tasks. MSQ-168 remains unstarted; final visual/play/performance acceptance belongs to the owner.

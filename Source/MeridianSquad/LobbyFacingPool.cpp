@@ -5,6 +5,7 @@
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
 #include "HAL/IConsoleManager.h"
+#include "Materials/MaterialInterface.h"
 
 namespace
 {
@@ -15,8 +16,11 @@ TAutoConsoleVariable<int32> SharedFacing(TEXT("msq.Lobby.SharedFacing"), 2,
 FIntPoint ULobbyFacingPool::CellFor(const UDemoColumnCladding* Owner)
 {
     const FVector P = Owner->GetOwner()->GetActorLocation();
-    return FIntPoint(FMath::FloorToInt((P.X + 1000.) / 2000.), FMath::FloorToInt(P.Y / 1360.));
+    return CellAt(P);
 }
+
+FIntPoint ULobbyFacingPool::CellAt(const FVector& P)
+{ return FIntPoint(FMath::FloorToInt((P.X + 1000.) / 2000.), FMath::FloorToInt(P.Y / 1360.)); }
 
 bool ULobbyFacingPool::ShouldPool(const UDemoColumnCladding* Owner)
 {
@@ -42,6 +46,8 @@ int32 ULobbyFacingPool::FindGroup(const FKey& Key)
     Group.Key = Key;
     auto* Part = NewObject<UInstancedStaticMeshComponent>(RenderActor, NAME_None, RF_Transient);
     Part->SetStaticMesh(Key.Mesh.Get());
+    for (int32 I=0; I<Key.Materials.Num(); ++I) Part->SetMaterial(I, Key.Materials[I].Get());
+    Part->SetCastShadow(Key.bShadow);
     Part->SetMobility(EComponentMobility::Movable);
     Part->SetWorldTransform(FTransform::Identity);
     Part->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -58,12 +64,21 @@ int32 ULobbyFacingPool::FindGroup(const FKey& Key)
 uint64 ULobbyFacingPool::Add(UDemoColumnCladding* Owner, int32 Tile,
     UInstancedStaticMeshComponent* Source, const FTransform& World)
 {
+    return AddDebris(Owner, Tile, Source, World);
+}
+
+uint64 ULobbyFacingPool::AddDebris(UDemoColumnCladding* Owner, int32 Tile,
+    UStaticMeshComponent* Source, const FTransform& World)
+{
     if (!Source || !Source->GetStaticMesh()) return 0;
-    // This lane only uses the audited mesh-default materials. A future override
-    // must keep its original renderer rather than silently merging unlike parts.
+    // Unusual per-component rendering retains the exact original renderer.
+    if (Source->bRenderCustomDepth || !Source->bReceivesDecals || Source->bReverseCulling || Source->GetOverlayMaterial()) return 0;
+    FKey Key;
+    Key.Cell = CellAt(World.GetLocation()); Key.Mesh = Source->GetStaticMesh();
+    Key.bShadow = Source->CastShadow;
     for (int32 I = 0; I < Source->GetNumMaterials(); ++I)
-        if (Source->GetMaterial(I) != Source->GetStaticMesh()->GetMaterial(I)) return 0;
-    const int32 G = FindGroup({CellFor(Owner), Source->GetStaticMesh()});
+        Key.Materials.Add(Source->GetMaterial(I));
+    const int32 G = FindGroup(Key);
     if (G == INDEX_NONE) return 0;
     auto& Group = Groups[G];
     const uint64 Handle = NextHandle++;
@@ -84,6 +99,7 @@ void ULobbyFacingPool::RemoveInstance(int32 G, int32 Instance)
         if (auto* Part = Group.Part.Get()) Part->DestroyComponent();
         Group.Part.Reset();
         GroupLookup.Remove(Group.Key);
+        DirtyGroups.Remove(G);
         FreeGroups.Add(G);
     }
 }
@@ -93,11 +109,12 @@ void ULobbyFacingPool::Update(UDemoColumnCladding* Owner, uint64 Handle, const F
     FEntry* Entry = Entries.Find(Handle);
     if (!Entry || Entry->Owner != Owner) return;
     const FKey OldKey = Groups[Entry->Group].Key;
-    const FIntPoint Cell = CellFor(Owner);
+    const FIntPoint Cell = CellAt(World.GetLocation());
     if (Cell != OldKey.Cell)
     {
         // Moving a column must not stretch a previously local render group.
-        const int32 G = FindGroup({Cell, OldKey.Mesh});
+        FKey Key = OldKey; Key.Cell = Cell;
+        const int32 G = FindGroup(Key);
         if (G == INDEX_NONE) return;
         RemoveInstance(Entry->Group, Entry->Instance);
         Entry->Group = G;
@@ -105,7 +122,17 @@ void ULobbyFacingPool::Update(UDemoColumnCladding* Owner, uint64 Handle, const F
         Groups[G].Handles.Add(Handle);
     }
     else if (auto* Part = Groups[Entry->Group].Part.Get())
-        Part->UpdateInstanceTransform(Entry->Instance, World, true, true, true);
+    {
+        Part->UpdateInstanceTransform(Entry->Instance, World, true, false, true);
+        DirtyGroups.Add(Entry->Group);
+    }
+}
+
+void ULobbyFacingPool::Flush()
+{
+    for (const int32 G : DirtyGroups)
+        if (auto* Part = Groups[G].Part.Get()) Part->MarkRenderStateDirty();
+    DirtyGroups.Reset();
 }
 
 void ULobbyFacingPool::Remove(UDemoColumnCladding* Owner, uint64 Handle)
@@ -132,7 +159,18 @@ bool ULobbyFacingPool::Matches(const UDemoColumnCladding* Owner, uint64 Handle, 
     FTransform Actual;
     return Part && Group.Handles.IsValidIndex(Entry->Instance) && Group.Handles[Entry->Instance] == Handle &&
         Part->GetInstanceTransform(Entry->Instance, Actual, true) && Actual.Equals(World, .001f) &&
-        !Part->IsQueryCollisionEnabled() && Part->CastShadow && Part->IsVisible();
+        !Part->IsQueryCollisionEnabled() && Part->CastShadow==Group.Key.bShadow && Part->IsVisible();
+}
+
+bool ULobbyFacingPool::SourceMatches(const UDemoColumnCladding* Owner,uint64 Handle,const UStaticMeshComponent* Source) const
+{
+    const auto* Entry=Entries.Find(Handle);
+    if (!Entry || Entry->Owner!=Owner || !Source || Source->bRenderCustomDepth || !Source->bReceivesDecals ||
+        Source->bReverseCulling || Source->GetOverlayMaterial()) return false;
+    const auto& Key=Groups[Entry->Group].Key;
+    if (Key.Mesh!=Source->GetStaticMesh() || Key.Materials.Num()!=Source->GetNumMaterials()) return false;
+    for (int32 I=0; I<Key.Materials.Num(); ++I) if (Key.Materials[I]!=Source->GetMaterial(I)) return false;
+    return true;
 }
 
 void ULobbyFacingPool::Deinitialize()
@@ -143,5 +181,6 @@ void ULobbyFacingPool::Deinitialize()
     Groups.Reset();
     FreeGroups.Reset();
     GroupLookup.Reset();
+    DirtyGroups.Reset();
     Super::Deinitialize();
 }

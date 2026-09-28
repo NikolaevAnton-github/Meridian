@@ -233,6 +233,7 @@ private:
         TWeakObjectPtr<UPrimitiveComponent> Component;
         FTransform Transform;
         FVector Extent;
+        int64 FragmentHandle = 0;
     };
     TArray<FBlockerSample> PreviousBlockers;
     TSet<TWeakObjectPtr<AActor>> BlockerOwners;

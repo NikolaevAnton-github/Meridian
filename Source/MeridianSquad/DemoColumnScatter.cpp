@@ -140,11 +140,10 @@ void ReleaseDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, c
             Leaf->SetIsAnchored(false);
             Evolution->SetParticleObjectState(Leaf, Chaos::EObjectStateType::Dynamic);
         }
-        if (!Leaf->Disabled() && Leaf->IsDynamic())
+        if (!Leaf->Disabled() && (Leaf->IsDynamic() || Leaf->IsSleeping()))
         {
-            // Material sleep can stop detached GC leaves before ground contact.
-            // The bounded debris controller freezes only supported, settled pieces.
-            Evolution->SetParticleSleepType(Leaf, Chaos::ESleepType::NeverSleep);
+            Evolution->SetParticleSleepType(Leaf, Chaos::ESleepType::MaterialSleep);
+            Evolution->WakeParticle(Leaf);
             FRandomStream Random(Seed * 733u + uint32(Bone));
             if (bStacking)
             {
@@ -207,9 +206,82 @@ void KeepDemoColumnLeafAwake(UGeometryCollectionComponent* Concrete, int32 Bone)
         auto* Leaf = Particle ? Particle->CastToClustered() : nullptr;
         if (!Leaf || Leaf->PhysicsProxy() != Proxy || Leaf->Disabled() || Leaf->Parent() ||
             Leaf->ClusterIds().NumChildren || !Leaf->IsDynamic()) return;
-        Solver->GetEvolution()->SetParticleSleepType(Leaf, Chaos::ESleepType::NeverSleep);
+        Solver->GetEvolution()->SetParticleSleepType(Leaf, Chaos::ESleepType::MaterialSleep);
         Solver->GetEvolution()->WakeParticle(Leaf);
     });
+}
+
+bool CommandDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone,
+    uint8 Operation, FVector Velocity, FVector AngularVelocity, FTransform Pose,
+    TSharedPtr<FDestructionCommandGuard, ESPMode::ThreadSafe> Guard, uint64 Revision)
+{
+    return CommandDemoColumnLeaves(Concrete,{{Bone,Operation,Velocity,AngularVelocity,Pose,Guard,Revision}});
+}
+
+bool CommandDemoColumnLeaves(UGeometryCollectionComponent* Concrete, TArray<FDestructionLeafCommand> Commands)
+{
+    check(IsInGameThread());
+    auto* Proxy = Concrete ? Concrete->GetPhysicsProxy() : nullptr;
+    auto* Solver = Proxy ? Proxy->GetSolver<Chaos::FPhysicsSolver>() : nullptr;
+    if (!Solver || Commands.IsEmpty()) return false;
+    // Same one-shot enqueue lifetime as the engine's per-particle APIs. Resolve
+    // the particle only inside the solver; the guard invalidates reset/reuse work.
+    Solver->EnqueueCommandImmediate([Proxy, Solver, Commands=MoveTemp(Commands)]()
+    {
+      for (const auto& Command : Commands)
+      {
+        const auto& Guard=Command.Guard;
+        const uint64 Revision=Command.Revision;
+        // Valid FIFO operations (including repeated impulses and hold/move/release)
+        // must all run. Lifetime invalidation rejects reset/reuse; applied sequence
+        // rejects stale/duplicate commands without discarding earlier valid ones.
+        if (!Guard || !Guard->Valid.Load() || Revision<=Guard->LastAppliedRevision.Load()) continue;
+        const int32 Bone=Command.Bone; const uint8 Operation=Command.Operation;
+        const FVector& Velocity=Command.Velocity; const FVector& AngularVelocity=Command.AngularVelocity;
+        const FTransform& Pose=Command.Pose;
+        auto* Particle = Proxy->GetParticleByIndex_Internal(Bone);
+        auto* Leaf = Particle ? Particle->CastToClustered() : nullptr;
+        auto* Evolution = Solver->GetEvolution();
+        if (!Evolution || !Leaf || Leaf->PhysicsProxy() != Proxy || Leaf->Disabled() ||
+            Leaf->Parent() || Leaf->ClusterIds().NumChildren) continue;
+        Evolution->SetParticleSleepType(Leaf, Chaos::ESleepType::MaterialSleep);
+        if (Operation == 1)
+        {
+            Leaf->SetV(Chaos::FVec3::ZeroVector); Leaf->SetW(Chaos::FVec3::ZeroVector);
+            Evolution->SetParticleObjectState(Leaf, Chaos::EObjectStateType::Kinematic);
+            Leaf->SetKinematicTarget(Chaos::FKinematicTarget{});
+        }
+        else if (Operation == 2)
+        {
+            if (!Leaf->IsKinematic()) continue;
+            // Register it in Chaos' moving-kinematic list, not only the target
+            // field: a stationary held leaf otherwise never consumes this pose.
+            Evolution->SetParticleKinematicTarget(Leaf, Chaos::FKinematicTarget::MakePositionTarget(
+                Chaos::FRigidTransform3(Pose.GetLocation(), Pose.GetRotation())));
+        }
+        else if (Operation == 5)
+        {
+            if (Leaf->GetV().SizeSquared() >= 25. || Leaf->GetW().SizeSquared() >= .04) continue;
+            Leaf->SetV(Chaos::FVec3::ZeroVector); Leaf->SetW(Chaos::FVec3::ZeroVector);
+            Evolution->SetParticleObjectState(Leaf, Chaos::EObjectStateType::Sleeping);
+        }
+        else
+        {
+            Leaf->SetIsAnchored(false);
+            if (Operation == 3 || Leaf->IsKinematic())
+            {
+                Leaf->SetKinematicTarget(Chaos::FKinematicTarget{});
+                Evolution->SetParticleObjectState(Leaf, Chaos::EObjectStateType::Dynamic);
+            }
+            Evolution->WakeParticle(Leaf);
+            if (Operation == 0) Leaf->SetV(Leaf->GetV() + Velocity);
+            if (Operation == 3) { Leaf->SetV(Velocity); Leaf->SetW(AngularVelocity); }
+        }
+        Solver->GetParticles().MarkTransientDirtyParticle(Leaf);
+        Guard->LastAppliedRevision.Store(Revision);
+      }
+    });
+    return true;
 }
 
 void FreezeDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, TFunction<void(bool)> Completion)
