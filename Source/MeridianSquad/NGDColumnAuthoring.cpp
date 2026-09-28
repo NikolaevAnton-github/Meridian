@@ -183,6 +183,94 @@ UStaticMesh* MakeStatic(const TCHAR* Name, FMeshDescription& Mesh, const TArray<
 #endif
 }
 
+FString UNGDColumnAuthoring::BuildLobbyColumnMeshes(const FString& SourceFile)
+{
+#if WITH_EDITOR
+    FString Full = FPaths::ConvertRelativePathToFull(SourceFile);
+    FString Allowed = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir() / TEXT("LobbyColumns01/source.json"));
+    FPaths::NormalizeFilename(Full); FPaths::NormalizeFilename(Allowed);
+    if (Full != Allowed) return TEXT("{\"error\":\"Unexpected lobby source\"}");
+    FString Raw; TSharedPtr<FJsonObject> Source;
+    if (!FFileHelper::LoadFileToString(Raw, *Full) || !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Raw), Source))
+        return TEXT("{\"error\":\"Invalid source\"}");
+    const FString Destination(TEXT("/Game/OpeningLobby/LobbyColumns01/"));
+    if (FPackageName::DoesPackageExist(Destination + TEXT("DA_Cladding01"))) return TEXT("{\"error\":\"Candidate exists\"}");
+    for (const auto& Value : Source->GetArrayField(TEXT("meshes")))
+    {
+        const auto Row = Value->AsObject();
+        const FString PackageName = Destination + Row->GetStringField(TEXT("name"));
+        if (FPackageName::DoesPackageExist(PackageName)) return TEXT("{\"error\":\"Mesh already exists\"}");
+        const FString Name = FPackageName::GetShortName(PackageName);
+        auto* Mesh = NewObject<UStaticMesh>(CreatePackage(*PackageName), *Name, RF_Public | RF_Standalone);
+        int32 SlotIndex = 0;
+        for (const auto& Material : Row->GetArrayField(TEXT("materials")))
+        {
+            auto* Interface = LoadObject<UMaterialInterface>(nullptr, *Material->AsString());
+            if (!Interface) return TEXT("{\"error\":\"Missing material\"}");
+            const FName Slot(*FString::Printf(TEXT("Slot%d"), SlotIndex++));
+            Mesh->GetStaticMaterials().Add(FStaticMaterial(Interface, Slot, Slot));
+        }
+        Mesh->SetNumSourceModels(1);
+        auto& Settings = Mesh->GetSourceModel(0).BuildSettings;
+        Settings.bRecomputeNormals = Settings.bRecomputeTangents = false;
+        Settings.bUseFullPrecisionUVs = true;
+        const auto Geometry = Row->GetObjectField(TEXT("geometry"));
+        FMeshDescription Description = ReadMesh(Geometry);
+        UStaticMesh::FBuildMeshDescriptionsParams Params;
+        Params.bBuildSimpleCollision = false; Params.bFastBuild = false; Params.bCommitMeshDescription = true;
+        Mesh->BuildFromMeshDescriptions({&Description}, Params);
+        Mesh->CreateBodySetup();
+        auto* Body = Mesh->GetBodySetup();
+        Body->CollisionTraceFlag = Row->GetBoolField(TEXT("convex")) ? CTF_UseSimpleAndComplex : CTF_UseComplexAsSimple;
+        if (Row->GetBoolField(TEXT("convex")))
+        {
+            FKConvexElem Hull;
+            for (const auto& Point : Geometry->GetArrayField(TEXT("vertices")))
+            {
+                const auto& V = Point->AsArray();
+                Hull.VertexData.Add(FVector(V[0]->AsNumber(), V[1]->AsNumber(), V[2]->AsNumber()));
+            }
+            Hull.UpdateElemBox(); Body->AggGeom.ConvexElems.Add(MoveTemp(Hull));
+        }
+        Body->InvalidatePhysicsData(); Body->CreatePhysicsMeshes();
+        FAssetRegistryModule::AssetCreated(Mesh); Mesh->MarkPackageDirty();
+    }
+    auto* Original = LoadObject<UDemoColumnCladdingData>(nullptr, TEXT("/Game/Experiments/DemoTiledColumn01/Correction08/DA_Cladding08.DA_Cladding08"));
+    if (!Original) return TEXT("{\"error\":\"Missing cladding source\"}");
+    auto* Data = DuplicateObject<UDemoColumnCladdingData>(Original, CreatePackage(*(Destination + TEXT("DA_Cladding01"))), TEXT("DA_Cladding01"));
+    Data->Tiles.Reset();
+    auto Offset = [](const TSharedPtr<FJsonObject>& Row)
+    {
+        const auto& V = Row->GetArrayField(TEXT("offset"));
+        return FVector(V[0]->AsNumber(), V[1]->AsNumber(), V[2]->AsNumber());
+    };
+    for (const auto& Value : Source->GetArrayField(TEXT("tiles")))
+    {
+        const auto Row = Value->AsObject();
+        FDemoColumnTile Tile = Original->Tiles[int32(Row->GetNumberField(TEXT("index")))];
+        if (Row->HasField(TEXT("mesh")))
+        {
+            Tile.Mesh = LoadObject<UStaticMesh>(nullptr, *Row->GetStringField(TEXT("mesh")));
+            Tile.RestTransform.AddToTranslation(Tile.RestTransform.TransformVector(Offset(Row)));
+            Tile.AreaCm2 = Row->GetNumberField(TEXT("area"));
+            Tile.Shards.Reset();
+            for (const auto& ShardValue : Row->GetArrayField(TEXT("shards")))
+            {
+                const auto ShardRow = ShardValue->AsObject(); FDemoColumnTileShard Shard;
+                Shard.Mesh = LoadObject<UStaticMesh>(nullptr, *ShardRow->GetStringField(TEXT("mesh")));
+                Shard.RelativeToTile = FTransform(Offset(ShardRow));
+                Shard.AreaCm2 = ShardRow->GetNumberField(TEXT("area")); Tile.Shards.Add(Shard);
+            }
+        }
+        Data->Tiles.Add(Tile);
+    }
+    FAssetRegistryModule::AssetCreated(Data); Data->MarkPackageDirty();
+    return FString::Printf(TEXT("{\"meshes\":%d,\"tiles\":%d}"), Source->GetArrayField(TEXT("meshes")).Num(), Data->Tiles.Num());
+#else
+    return TEXT("{\"error\":\"Editor required\"}");
+#endif
+}
+
 FString UNGDColumnAuthoring::BuildDemoColumnTileFractures08()
 {
 #if WITH_EDITOR

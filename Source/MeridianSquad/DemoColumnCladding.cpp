@@ -61,7 +61,8 @@ void UDemoColumnCladding::Initialize()
     bRefinedExperiment = GetOwner()->ActorHasTag(TEXT("DemoColumnRefined07"));
     bCoarseExperiment = GetOwner()->ActorHasTag(TEXT("DemoColumnCoarse06"));
     bSurfaceExperiment = bCoarseExperiment || GetOwner()->ActorHasTag(TEXT("DemoColumnSurface05"));
-    Data = LoadObject<UDemoColumnCladdingData>(nullptr, bStackingExperiment
+    Data = LoadObject<UDemoColumnCladdingData>(nullptr, GetOwner()->ActorHasTag(TEXT("LobbyColumns01"))
+        ? TEXT("/Game/OpeningLobby/LobbyColumns01/DA_Cladding01.DA_Cladding01") : bStackingExperiment
         ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction08/DA_Cladding08.DA_Cladding08") : bRefinedExperiment
         ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/DA_Cladding07.DA_Cladding07") : bCoarseExperiment
         ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_Cladding06.DA_Cladding06") : bSurfaceExperiment

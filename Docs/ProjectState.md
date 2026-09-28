@@ -9,14 +9,14 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
 - **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
   retains integration. [Demo](DemoColumnExperiment09.md): outward debris, facing
-  fracture, solid piles; 80 retained across sides. Baseline `c0c53b7`.
-  Direct; no Multica/reviewer. Owner accepted. [MSQ-156](ReinforcedColumn02.md) and its
-  [rev13 correction](ColumnRelief06.md) remain separate candidates.
+  fracture, solid piles; 80 retained across sides.
+  Direct; no Multica/reviewer. Owner accepted. [LobbyColumns01](LobbyColumns01.md)
+  copies it to 16 columns: destruction to 8.4 m, concrete floor seats, embedded rebar;
+  central demo unchanged. Direct owner scope, self-checked.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
   technically complete, owner review waiver. MSQ-150/151 are
   [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);
   owner play/design acceptance is separate.
-  MSQ-140/141 stay historical done; MSQ-142..147 are cancelled as superseded.
   Initial [lobby scope](Approvals/NextGenDestruction01-LobbyScope01.json): place ready-made
   demo breakables in the retained lobby only; preserve existing architecture/edits.
 - **Utility AI + GOAP**, [MSQ-122 program](Tasks/UtilityGOAP01.md) and

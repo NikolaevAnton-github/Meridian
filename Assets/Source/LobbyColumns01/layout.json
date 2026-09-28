@@ -1,0 +1,150 @@
+{
+  "columns": [
+    {
+      "label": "Pier_1_-1",
+      "location": [
+        -1260.0,
+        -680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "Pier_2_-1",
+      "location": [
+        -420.0,
+        -680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "Pier_3_-1",
+      "location": [
+        420.0,
+        -680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "Pier_4_-1",
+      "location": [
+        1260.0,
+        -680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "Pier_5_-1",
+      "location": [
+        2100.0,
+        -680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "Pier_1_1",
+      "location": [
+        -1260.0,
+        680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "Pier_2_1",
+      "location": [
+        -420.0,
+        680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "Pier_3_1",
+      "location": [
+        420.0,
+        680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "Pier_4_1",
+      "location": [
+        1260.0,
+        680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "Pier_5_1",
+      "location": [
+        2100.0,
+        680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "RA01_FirstPier_-1",
+      "location": [
+        -2100.0,
+        -680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "RA01_FirstPier_1",
+      "location": [
+        -2100.0,
+        680.0,
+        420.0
+      ],
+      "height": 840
+    },
+    {
+      "label": "FB01_newNcolumnNN12p6NN2p4",
+      "location": [
+        -1260.0,
+        -240.0,
+        900.0
+      ],
+      "height": 1800
+    },
+    {
+      "label": "FB01_newNcolumnNN12p6N2p4",
+      "location": [
+        -1260.0,
+        240.0,
+        900.0
+      ],
+      "height": 1800
+    },
+    {
+      "label": "FB01_newNcolumnN12p6NN2p4",
+      "location": [
+        1260.0,
+        -240.0,
+        900.0
+      ],
+      "height": 1800
+    },
+    {
+      "label": "FB01_newNcolumnN12p6N2p4",
+      "location": [
+        1260.0,
+        240.0,
+        900.0
+      ],
+      "height": 1800
+    }
+  ],
+  "height_cm": 840,
+  "embed_cm": 30
+}

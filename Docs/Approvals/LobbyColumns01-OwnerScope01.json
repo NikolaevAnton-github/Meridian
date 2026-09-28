@@ -1,0 +1,21 @@
+{
+  "id": "LobbyColumns01-OwnerScope01",
+  "date": "2026-09-28",
+  "authority": "Owner direct chat",
+  "execution": "Direct implementation; no Multica task and no independent review, as explicitly requested.",
+  "scope": [
+    "Use the central test column as the structural and destruction reference for the existing lobby columns.",
+    "Remove decorative floor finish beneath the replacement columns and embed reinforcement into the concrete floor.",
+    "Low columns are destructible from bottom to top; tall columns are destructible only up to the low-column height.",
+    "Do not modify the central test column."
+  ],
+  "measured_scope": {
+    "low_columns": 12,
+    "low_height_cm": 840,
+    "tall_columns": 4,
+    "tall_height_cm": 1800,
+    "section_cm": [240, 240],
+    "reference": "EXP_DemoTiledColumn01 / DemoColumnExperiment08 with Experiment09 behavior"
+  },
+  "preservation": "Preserve source assets, central specimen, unrelated scene actors and pre-existing owner working-tree changes. Retire only the overlapping RC01 scene insert as part of its host column replacement."
+}

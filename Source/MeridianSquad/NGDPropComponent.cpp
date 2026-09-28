@@ -308,7 +308,8 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
 {
     if (!World || !DataAsset || Id.IsNone()) return nullptr;
     const FString DataPath = DataAsset->GetPathName();
-    if (!DataPath.StartsWith(TEXT("/Game/NextGenDestruction/Blueprints/DataAssets/Destructible/")) &&
+    const bool bLobbyColumn = DataPath == TEXT("/Game/OpeningLobby/LobbyColumns01/DA_LobbyColumn01.DA_LobbyColumn01");
+    if (!bLobbyColumn && !DataPath.StartsWith(TEXT("/Game/NextGenDestruction/Blueprints/DataAssets/Destructible/")) &&
         DataPath != TEXT("/Game/ReinforcedColumn01/DA_RC01_Column.DA_RC01_Column") &&
         DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/DA_DemoTiledColumn01.DA_DemoTiledColumn01") &&
         DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction02/DA_DemoTiledColumn02.DA_DemoTiledColumn02") &&
@@ -338,7 +339,7 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
     Actor->Tags.Add(TEXT("NGD01"));
     const bool bVariedCladding = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_DemoTiledColumn04.DA_DemoTiledColumn04");
     const bool bSurfaceExperiment = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction05/DA_DemoTiledColumn05.DA_DemoTiledColumn05");
-    const bool bStackingExperiment = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction08/DA_DemoTiledColumn08.DA_DemoTiledColumn08");
+    const bool bStackingExperiment = bLobbyColumn || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction08/DA_DemoTiledColumn08.DA_DemoTiledColumn08");
     const bool bRefinedExperiment = bStackingExperiment || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/DA_DemoTiledColumn07.DA_DemoTiledColumn07");
     const bool bCoarseExperiment = bRefinedExperiment || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_DemoTiledColumn06.DA_DemoTiledColumn06");
     if (bVariedCladding) Actor->Tags.Add(TEXT("DemoColumnCladding04"));
@@ -346,6 +347,7 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
     if (bCoarseExperiment) Actor->Tags.Add(TEXT("DemoColumnCoarse06"));
     if (bRefinedExperiment) Actor->Tags.Add(TEXT("DemoColumnRefined07"));
     if (bStackingExperiment) Actor->Tags.Add(TEXT("DemoColumnStacking08"));
+    if (bLobbyColumn) Actor->Tags.Add(TEXT("LobbyColumns01"));
     Actor->FinishSpawning(Transform);
     if (bCoarseExperiment || bSurfaceExperiment || bVariedCladding || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_DemoTiledColumn03.DA_DemoTiledColumn03"))
     {
@@ -355,7 +357,18 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
         Actor->GetComponents(Meshes);
         for (auto* Mesh : Meshes)
             if (Mesh->GetStaticMesh() && Mesh->GetStaticMesh()->GetName() == TEXT("SM_ConcretePillar_Square_5m_REBAR"))
-                Mesh->SetRelativeScale3D(FVector(2.364, 2.364, 3.6));
+            {
+                // The derived lower segment is 840 cm, with 30 cm of reinforcement
+                // embedded in the structural floor. Reapply on every F6 replacement.
+                double RebarScaleZ = 3.6;
+                if (bLobbyColumn)
+                {
+                    const FBox RebarBounds = Mesh->GetStaticMesh()->GetBoundingBox();
+                    RebarScaleZ = 870. / RebarBounds.GetSize().Z;
+                    Mesh->SetRelativeLocation(FVector(0, 0, -30. - RebarBounds.Min.Z * RebarScaleZ));
+                }
+                Mesh->SetRelativeScale3D(FVector(2.364, 2.364, RebarScaleZ));
+            }
         // The vendor construction script swaps its default collection. In editor
         // worlds SetRestCollection does not always recreate the Nanite proxy.
         if (!World->IsGameWorld())

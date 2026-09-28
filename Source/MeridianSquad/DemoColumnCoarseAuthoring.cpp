@@ -741,3 +741,157 @@ FString UNGDColumnAuthoring::BuildDemoColumnRefinement08()
     return TEXT("{\"error\":\"Editor required\"}");
 #endif
 }
+
+
+FString UNGDColumnAuthoring::BuildLobbyColumnStructure()
+{
+#if WITH_EDITOR
+    const FString Destination(TEXT("/Game/OpeningLobby/LobbyColumns01/"));
+    if (FPackageName::DoesPackageExist(Destination + TEXT("GC_LobbyColumn01"))) return TEXT("{\"error\":\"Candidate exists\"}");
+    auto* Source = LoadObject<UGeometryCollection>(nullptr, TEXT("/Game/Experiments/DemoTiledColumn01/Correction08/GC_DemoColumn08.GC_DemoColumn08"));
+    auto* Data = LoadObject<UDemoColumnCladdingData>(nullptr, *(Destination + TEXT("DA_Cladding01.DA_Cladding01")));
+    if (!Source || !Data) return TEXT("{\"error\":\"Missing source\"}");
+    auto* Asset = DuplicateObject<UGeometryCollection>(Source, CreatePackage(*(Destination + TEXT("GC_LobbyColumn01"))), TEXT("GC_LobbyColumn01"));
+    const auto C = Asset->GetGeometryCollection();
+    TArray<FTransform> Frames;
+    GeometryCollectionAlgo::GlobalMatrices(C->Transform, C->Parent, Frames);
+    TArray<int32> Crossing;
+    int32 Unchanged = 0;
+    for (int32 G = 0; G < C->TransformIndex.Num(); ++G)
+    {
+        const int32 B = C->TransformIndex[G];
+        const FBox Box = C->BoundingBox[G].TransformBy(Frames[B]);
+        if (Box.Min.Z < 839.999 && Box.Max.Z > 840.001) Crossing.Add(B);
+        if (Box.Max.Z <= 840.001) ++Unchanged;
+    }
+    FPlanarCells Cells(FPlane(FVector(0,0,840), FVector::UpVector));
+    Cells.InternalSurfaceMaterials.GlobalMaterialID = 1;
+    Cells.InternalSurfaceMaterials.GlobalUVScale = .01f;
+    CutMultipleWithPlanarCells(Cells, *C, Crossing, 0., 0., 280928, {}, true, false,
+        nullptr, FVector::ZeroVector, FIslandSplitSettings(false));
+    TArray<int32> Leaves;
+    for (int32 B = 0; B < C->Transform.Num(); ++B)
+        if (C->SimulationType[B] == FGeometryCollection::FST_Rigid && C->Children[B].IsEmpty()) Leaves.Add(B);
+    FGeometryCollectionClusteringUtility::UpdateHierarchyLevelOfChildren(C.Get(), -1);
+    FGeometryCollectionClusteringUtility::ClusterBonesUnderExistingRoot(C.Get(), Leaves);
+    FGeometryCollectionClusteringUtility::RemoveDanglingClusters(C.Get());
+    GeometryCollectionAlgo::GlobalMatrices(C->Transform, C->Parent, Frames);
+    TArray<int32> RemoveGeometry;
+    for (int32 G = 0; G < C->TransformIndex.Num(); ++G)
+    {
+        const int32 B = C->TransformIndex[G];
+        const FBox Box = C->BoundingBox[G].TransformBy(Frames[B]);
+        if (C->SimulationType[B] != FGeometryCollection::FST_Rigid || Box.Min.Z >= 839.999) RemoveGeometry.Add(G);
+        else if (Box.Max.Z > 840.01) return TEXT("{\"error\":\"Incomplete boundary cut\"}");
+    }
+    C->RemoveElements(FGeometryCollection::GeometryGroup, RemoveGeometry);
+    TArray<int32> EmptyTransforms;
+    for (int32 B = 0; B < C->Transform.Num(); ++B)
+        if (C->Children[B].IsEmpty() && C->TransformToGeometryIndex[B] == INDEX_NONE) EmptyTransforms.Add(B);
+    C->RemoveElements(FGeometryCollection::TransformGroup, EmptyTransforms);
+    FGeometryCollectionClusteringUtility::UpdateHierarchyLevelOfChildren(C.Get(), -1);
+    TArray<FTransform> Global;
+    GeometryCollectionAlgo::GlobalMatrices(C->Transform, C->Parent, Global);
+    TMap<int32, TArray<FColumnSurfaceTriangle>> Surfaces;
+    TMap<int32, FBox> SurfaceBounds;
+    for (int32 F = 0; F < C->Indices.Num(); ++F)
+    {
+        if (!C->Visible[F] || C->MaterialID[F] != 0) continue;
+        const auto T = C->Indices[F];
+        const int32 B = C->BoneMap[T.X];
+        FColumnSurfaceTriangle Triangle;
+        Triangle.P[0] = Global[B].TransformPosition(FVector(C->Vertex[T.X]));
+        Triangle.P[1] = Global[B].TransformPosition(FVector(C->Vertex[T.Y]));
+        Triangle.P[2] = Global[B].TransformPosition(FVector(C->Vertex[T.Z]));
+        Triangle.Normal = -FVector::CrossProduct(Triangle.P[1] - Triangle.P[0], Triangle.P[2] - Triangle.P[0]).GetSafeNormal();
+        if (Triangle.Normal.IsNearlyZero() || FMath::Abs(Triangle.Normal.Z) > .3) continue;
+        Triangle.Bounds = FBox(Triangle.P, 3);
+        Surfaces.FindOrAdd(B).Add(Triangle);
+        auto* Bounds = SurfaceBounds.Find(B);
+        if (Bounds) *Bounds += Triangle.Bounds; else SurfaceBounds.Add(B, Triangle.Bounds);
+    }
+
+    Surfaces.GetKeys(Data->SurfaceBones);
+    Data->SurfaceBones.Sort();
+    const int32 Core = ProtectCoarseCore(*C, *Data);
+    int32 Links = 0, MaxSupports = 0, EdgeSupports = 0;
+    for (auto& Tile : Data->Tiles)
+    {
+        Tile.SupportBones.Reset();
+        const FVector Point = Tile.RestTransform.GetLocation();
+        const FVector Normal = Tile.RestTransform.GetUnitAxis(EAxis::X);
+        const FVector U = Tile.RestTransform.GetUnitAxis(EAxis::Y), V = Tile.RestTransform.GetUnitAxis(EAxis::Z);
+        auto Project = [&](const FVector& P) { const FVector D = P - Point; return FVector2D(FVector::DotProduct(D, U), FVector::DotProduct(D, V)); };
+        const FMeshDescription* Mesh = Tile.Mesh ? Tile.Mesh->GetMeshDescription(0) : nullptr;
+        if (!Mesh) return TEXT("{\"error\":\"Missing tile source mesh\"}");
+        const auto Positions = FStaticMeshConstAttributes(*Mesh).GetVertexPositions();
+        TArray<FColumnTileTriangle> Footprint;
+        FBox TileBounds(ForceInit);
+        for (const FTriangleID ID : Mesh->Triangles().GetElementIDs())
+        {
+            const auto Vertices = Mesh->GetTriangleVertices(ID);
+            FVector P[3];
+            for (int32 J = 0; J < 3; ++J) P[J] = Tile.RestTransform.TransformPosition(FVector(Positions[Vertices[J]]));
+            const FVector N = FVector::CrossProduct(P[1] - P[0], P[2] - P[0]).GetSafeNormal();
+            if (FMath::Abs(FVector::DotProduct(N, Normal)) < .8) continue;
+            FColumnTileTriangle T;
+            for (int32 J = 0; J < 3; ++J) { T.P[J] = Project(P[J]); TileBounds += P[J]; }
+            T.Bounds = FBox2D(T.P, 3);
+            Footprint.Add(T);
+        }
+        if (Footprint.IsEmpty()) return TEXT("{\"error\":\"Missing tile footprint\"}");
+        TileBounds = TileBounds.ExpandBy(4.);
+        double Best = DBL_MAX;
+        int32 Primary = INDEX_NONE;
+        for (const auto& Pair : Surfaces)
+        {
+            if (!SurfaceBounds[Pair.Key].Intersect(TileBounds)) continue;
+            bool bOverlap = false;
+            for (const auto& T : Pair.Value)
+            {
+                if (FVector::DotProduct(T.Normal, Normal) < .8 || !T.Bounds.Intersect(TileBounds)) continue;
+                const double Distance = FVector::DistSquared(Point, FMath::ClosestPointOnTriangleToPoint(Point, T.P[0], T.P[1], T.P[2]));
+                if (Distance < Best) { Best = Distance; Primary = Pair.Key; }
+                if (bOverlap) continue;
+                FVector2D Projected[3] = {Project(T.P[0]), Project(T.P[1]), Project(T.P[2])};
+                const FBox2D Bounds(Projected, 3);
+                for (const auto& F : Footprint)
+                    if (Bounds.Intersect(F.Bounds) && Overlap(Projected, F.P)) { bOverlap = true; break; }
+            }
+            if (bOverlap) Tile.SupportBones.Add(Pair.Key);
+        }
+        if (Primary == INDEX_NONE || (Tile.SupportBones.IsEmpty() && Best > 64.))
+            return FString::Printf(TEXT("{\"error\":\"Tile has no concrete support\",\"tile\":%d,\"nearest_distance_sq\":%.9f}"), int32(&Tile - Data->Tiles.GetData()), Best);
+        // The preserved facing wraps beyond the concrete's side/bottom bevel.
+        // Tiny rim slivers need the nearest surface within 8 cm rather than a
+        // positive-area intersection. Never accept a distant/unbacked tile.
+        if (Tile.SupportBones.IsEmpty())
+        {
+            ++EdgeSupports;
+            UE_LOG(LogTemp, Display, TEXT("DemoColumn08 edge tile=%d point=%s distance=%.3f area=%.3f"),
+                int32(&Tile - Data->Tiles.GetData()), *Point.ToCompactString(), FMath::Sqrt(Best), Tile.AreaCm2);
+        }
+        Tile.SupportBones.AddUnique(Primary);
+        Tile.SupportBones.Sort();
+        Tile.Bone = Primary;
+        Tile.RelativeToBone = Tile.RestTransform.GetRelativeTransform(Global[Primary]);
+        Links += Tile.SupportBones.Num();
+        MaxSupports = FMath::Max(MaxSupports, Tile.SupportBones.Num());
+    }
+    C->RemoveAttribute(FGeometryCollection::ExternalCollisionsAttribute, FGeometryCollection::TransformGroup);
+    Asset->bImportCollisionFromSource = false;
+    FGeometryCollectionConvexUtility::CreateNonOverlappingConvexHullData(C.Get(), .3, 1., .5);
+    FGeometryCollectionConvexUtility::SetVolumeAttributes(C.Get());
+    FGeometryCollectionProximityUtility(C.Get()).UpdateProximity();
+    FGeometryCollectionProximityUtility(C.Get()).CopyProximityToConnectionGraph();
+
+    Asset->DamagePropagationData.bEnabled = false;
+    Asset->bRemoveOnMaxSleep = false;
+    Asset->InvalidateCollection(); Asset->CreateSimulationData(); Asset->RebuildRenderData();
+    FAssetRegistryModule::AssetCreated(Asset); Asset->MarkPackageDirty(); Data->MarkPackageDirty();
+    return FString::Printf(TEXT("{\"unchanged_lower_leaves\":%d,\"cut_sources\":%d,\"geometries\":%d,\"tiles\":%d,\"core_bones\":%d,\"support_links\":%d}"),
+        Unchanged, Crossing.Num(), C->TransformIndex.Num(), Data->Tiles.Num(), Core, Links);
+#else
+    return TEXT("{\"error\":\"Editor required\"}");
+#endif
+}
