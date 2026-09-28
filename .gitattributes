@@ -1,5 +1,8 @@
 * text=auto
 
+# Preserve the direct demo-column checkpoint's archived authoring sources.
+Assets/Source/DemoTiledColumn01/** -text
+
 # Preserve exact MSQ-156 source fingerprints; large geometry uses LFS.
 Assets/Source/ReinforcedColumn01/ReinforcedColumn02-Candidate01/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 Assets/Source/ReinforcedColumn01/ReinforcedColumn02-Candidate01/column*.json filter=lfs diff=lfs merge=lfs -text

@@ -1,4 +1,5 @@
 #include "NGDPropComponent.h"
+#include "DemoColumnCladding.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
@@ -196,8 +197,15 @@ bool UNGDPropComponent::ReceiveBullet(int64 ShotId, const FHitResult& Hit)
     RecentShots.Add(ShotId);
     LastShotId = ShotId;
     ++DeliveredHits;
+    FHitResult VendorHit = Hit;
+    if (auto* Cladding = GetOwner()->FindComponentByClass<UDemoColumnCladding>(); Cladding && Cladding->HandleImpact(VendorHit))
+    {
+        ++CollisionRevision;
+        Publish(TEXT("experiment_impact"), PreviousBounds);
+        return true;
+    }
     FStructOnScope Params(Function);
-    Parameter->CopyCompleteValue(Parameter->ContainerPtrToValuePtr<void>(Params.GetStructMemory()), &Hit);
+    Parameter->CopyCompleteValue(Parameter->ContainerPtrToValuePtr<void>(Params.GetStructMemory()), &VendorHit);
     // The vendor defaults (no radius override) retain per-source strain, anchoring and impulse choices.
     Fields.RemoveAll([](const TWeakObjectPtr<AActor>& Field) { return !Field.IsValid(); });
     const FDelegateHandle Handle = GetWorld()->AddOnActorSpawnedHandler(FOnActorSpawned::FDelegate::CreateLambda([this](AActor* Spawned)
@@ -296,7 +304,11 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
     if (!World || !DataAsset || Id.IsNone()) return nullptr;
     const FString DataPath = DataAsset->GetPathName();
     if (!DataPath.StartsWith(TEXT("/Game/NextGenDestruction/Blueprints/DataAssets/Destructible/")) &&
-        DataPath != TEXT("/Game/ReinforcedColumn01/DA_RC01_Column.DA_RC01_Column")) return nullptr;
+        DataPath != TEXT("/Game/ReinforcedColumn01/DA_RC01_Column.DA_RC01_Column") &&
+        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/DA_DemoTiledColumn01.DA_DemoTiledColumn01") &&
+        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction02/DA_DemoTiledColumn02.DA_DemoTiledColumn02") &&
+        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_DemoTiledColumn03.DA_DemoTiledColumn03") &&
+        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_DemoTiledColumn04.DA_DemoTiledColumn04")) return nullptr;
     UClass* Class = LoadClass<AActor>(nullptr, VendorClass);
     if (!Class) return nullptr;
     AActor* Actor = World->SpawnActorDeferred<AActor>(Class, Transform, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
@@ -315,7 +327,27 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
     Actor->AddInstanceComponent(C);
     C->RegisterComponent();
     Actor->Tags.Add(TEXT("NGD01"));
+    const bool bVariedCladding = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_DemoTiledColumn04.DA_DemoTiledColumn04");
+    if (bVariedCladding) Actor->Tags.Add(TEXT("DemoColumnCladding04"));
     Actor->FinishSpawning(Transform);
+    if (bVariedCladding || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_DemoTiledColumn03.DA_DemoTiledColumn03"))
+    {
+        // The concrete enlargement is baked. The independent vendor rebar mesh
+        // still uses its original 5 m coordinates, including after F6 replacement.
+        TArray<UStaticMeshComponent*> Meshes;
+        Actor->GetComponents(Meshes);
+        for (auto* Mesh : Meshes)
+            if (Mesh->GetStaticMesh() && Mesh->GetStaticMesh()->GetName() == TEXT("SM_ConcretePillar_Square_5m_REBAR"))
+                Mesh->SetRelativeScale3D(FVector(2.364, 2.364, 3.6));
+        // The vendor construction script swaps its default collection. In editor
+        // worlds SetRestCollection does not always recreate the Nanite proxy.
+        if (!World->IsGameWorld())
+            if (auto* Concrete = Actor->FindComponentByClass<UGeometryCollectionComponent>()) Concrete->ReregisterComponent();
+        auto* Cladding = NewObject<UDemoColumnCladding>(Actor, TEXT("DemoColumnCladding"), RF_Transactional);
+        Actor->AddInstanceComponent(Cladding);
+        Cladding->RegisterComponent();
+        Cladding->Initialize();
+    }
 #if WITH_EDITOR
     if (!World->IsGameWorld())
     {

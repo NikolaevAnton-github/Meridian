@@ -16,6 +16,12 @@ class MERIDIANSQUAD_API UNGDColumnAuthoring : public UBlueprintFunctionLibrary
 public:
     UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
     static FString BuildColumn(const FString& SourceFile);
+    UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
+    static FString AddDemoColumnTiles(UGeometryCollection* Collection, const FString& SourceFile);
+    UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
+    static FString BuildDemoColumnCladding(const FString& SourceFile);
+    UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
+    static FString BakeDemoColumnScale();
     UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
     static FString InspectCollection(UGeometryCollection* Collection);
     UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")

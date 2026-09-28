@@ -1,6 +1,6 @@
 # MeridianSquad current project state
 
-Updated 2026-09-26. Verify live Multica/editor state when needed.
+Updated 2026-09-28. Verify live Multica/editor state when needed.
 No execution/design approval. Read the relevant task, not every link.
 Rules and policy routes: [AGENTS](../AGENTS.md).
 
@@ -8,10 +8,10 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
 
 - **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
-  retains the integration. [MSQ-156](ReinforcedColumn02.md) delivers revised column
-  spalling. [Direct repair](ColumnRuntimeRepair01.md): collision optimized.
-  [Shape correction](ColumnRelief06.md): rev13 bounded concrete relief removes
-  stretched fins; steel inset another 24 cm; 480 bodies. Direct, no reviewer.
+  retains integration. [Demo checkpoint](DemoColumnCheckpoint01.md): center
+  demo Correction04 preserved; per-shot response and debris-retention proposals.
+  Direct, outside Multica, no reviewer. [MSQ-156](ReinforcedColumn02.md) and its
+  [rev13 correction](ColumnRelief06.md) remain separate candidates.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
   technically complete, owner review waiver. MSQ-150/151 are
   [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);

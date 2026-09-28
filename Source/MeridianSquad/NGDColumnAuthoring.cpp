@@ -1,4 +1,5 @@
 #include "NGDColumnAuthoring.h"
+#include "DemoColumnCladding.h"
 #include "GeometryCollection/GeometryCollectionObject.h"
 #include "GeometryCollection/GeometryCollection.h"
 #include "Serialization/JsonSerializer.h"
@@ -12,7 +13,9 @@
 #include "GeometryCollection/GeometryCollectionConvexUtility.h"
 #include "GeometryCollection/GeometryCollectionAlgo.h"
 #include "Chaos/Convex.h"
+#include "Chaos/ImplicitObject.h"
 #include "GeometryCollection/Facades/CollectionAnchoringFacade.h"
+#include "GeometryCollection/Facades/CollectionConnectionGraphFacade.h"
 #include "GeometryCollection/GeometryCollectionProximityUtility.h"
 #include "Materials/MaterialInterface.h"
 #include "MeshDescription.h"
@@ -461,6 +464,371 @@ FString UNGDColumnAuthoring::ConfigureConcreteCrumbs(UNiagaraSystem* System)
     return ToJson(Out);
 #else
     return TEXT("{\"error\":\"Editor only\"}");
+#endif
+}
+
+FString UNGDColumnAuthoring::BuildDemoColumnCladding(const FString& SourceFile)
+{
+#if WITH_EDITOR
+    FString Full = FPaths::ConvertRelativePathToFull(SourceFile);
+    FPaths::NormalizeFilename(Full);
+    FPaths::CollapseRelativeDirectories(Full);
+    FString Allowed = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir() / TEXT("DemoTiledColumn01/Correction02/"));
+    FPaths::NormalizeFilename(Allowed);
+    FString VariedSource = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir() / TEXT("DemoTiledColumn01/Correction04/"));
+    FPaths::NormalizeFilename(VariedSource);
+    const bool bVaried = Full.StartsWith(VariedSource);
+    if (!Full.StartsWith(Allowed) && !bVaried) return TEXT("{\"error\":\"Correction source directory required\"}");
+    FString Raw;
+    TSharedPtr<FJsonObject> Source;
+    if (!FFileHelper::LoadFileToString(Raw, *Full) || !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Raw), Source))
+        return TEXT("{\"error\":\"Invalid cladding source\"}");
+    auto* Vendor = LoadObject<UGeometryCollection>(nullptr, bVaried
+        ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/GC_DemoColumn03.GC_DemoColumn03")
+        : TEXT("/Game/NextGenDestruction/GeometryCollections/Concrete/GC_ConcretePillar_Square_5m.GC_ConcretePillar_Square_5m"));
+    if (!Vendor) return TEXT("{\"error\":\"Missing source collection\"}");
+    const auto C = Vendor->GetGeometryCollection();
+    TArray<FTransform> Global;
+    GeometryCollectionAlgo::GlobalMatrices(C->Transform, C->Parent, Global);
+    const FVector ActorScale = bVaried ? FVector::OneVector : FVector(2.364, 2.364, 3.6);
+    struct FSurface { FVector A, B, D; };
+    struct FExterior { int32 Bone; FBox Bounds = FBox(ForceInit); TArray<FSurface> Surfaces; };
+    TArray<FExterior> Exterior;
+    TMap<int32, int32> ExteriorByBone;
+    for (int32 F = 0; F < C->Indices.Num(); ++F)
+    {
+        if (!C->Visible[F] || C->MaterialID[F] != 0) continue;
+        const FIntVector T = C->Indices[F];
+        const int32 Bone = C->BoneMap[T.X];
+        if (C->SimulationType[Bone] != FGeometryCollection::FST_Rigid || !C->Children[Bone].IsEmpty()) continue;
+        int32* Existing = ExteriorByBone.Find(Bone);
+        const int32 Index = Existing ? *Existing : Exterior.AddDefaulted();
+        if (!Existing) { ExteriorByBone.Add(Bone, Index); Exterior[Index].Bone = Bone; }
+        auto& E = Exterior[Index];
+        const FSurface Surface{Global[Bone].TransformPosition(FVector(C->Vertex[T.X])) * ActorScale,
+            Global[Bone].TransformPosition(FVector(C->Vertex[T.Y])) * ActorScale,
+            Global[Bone].TransformPosition(FVector(C->Vertex[T.Z])) * ActorScale};
+        E.Surfaces.Add(Surface);
+        E.Bounds += Surface.A; E.Bounds += Surface.B; E.Bounds += Surface.D;
+    }
+    if (Exterior.IsEmpty()) return TEXT("{\"error\":\"Missing source exterior\"}");
+    TArray<UMaterialInterface*> Materials;
+    for (const auto& Value : Source->GetArrayField(TEXT("materials")))
+    {
+        auto* Material = LoadObject<UMaterialInterface>(nullptr, *Value->AsString());
+        if (!Material) return TEXT("{\"error\":\"Missing cladding material\"}");
+        Materials.Add(Material);
+    }
+    const FString Destination = bVaried ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/") : TEXT("/Game/Experiments/DemoTiledColumn01/Correction02/");
+    TArray<UStaticMesh*> Meshes;
+    for (const auto& Value : Source->GetArrayField(TEXT("meshes")))
+    {
+        const FString Name = FString::Printf(TEXT("SM_Tile%02d_%03d"), bVaried ? 4 : 2, Meshes.Num());
+        const FString PackageName = Destination + Name;
+        if (FPackageName::DoesPackageExist(PackageName)) return TEXT("{\"error\":\"Cladding mesh already exists\"}");
+        UPackage* Package = CreatePackage(*PackageName);
+        UStaticMesh* MeshAsset = NewObject<UStaticMesh>(Package, *Name, RF_Public | RF_Standalone);
+        for (int32 I = 0; I < Materials.Num(); ++I)
+        {
+            const FName Slot(*FString::Printf(TEXT("Slot%d"), I));
+            MeshAsset->GetStaticMaterials().Add(FStaticMaterial(Materials[I], Slot, Slot));
+        }
+        MeshAsset->SetNumSourceModels(1);
+        auto& Settings = MeshAsset->GetSourceModel(0).BuildSettings;
+        Settings.bRecomputeNormals = false;
+        Settings.bRecomputeTangents = false;
+        Settings.bUseFullPrecisionUVs = true;
+        FMeshDescription Mesh = ReadMesh(Value->AsObject());
+        UStaticMesh::FBuildMeshDescriptionsParams Params;
+        Params.bBuildSimpleCollision = false;
+        Params.bFastBuild = false;
+        Params.bCommitMeshDescription = true;
+        MeshAsset->BuildFromMeshDescriptions({&Mesh}, Params);
+        MeshAsset->CreateBodySetup();
+        auto* Body = MeshAsset->GetBodySetup();
+        Body->CollisionTraceFlag = CTF_UseSimpleAndComplex;
+        FKConvexElem Convex;
+        for (const auto& Vertex : Value->AsObject()->GetArrayField(TEXT("vertices")))
+        {
+            const auto& V = Vertex->AsArray();
+            Convex.VertexData.Add(FVector(V[0]->AsNumber(), V[1]->AsNumber(), V[2]->AsNumber()));
+        }
+        Convex.UpdateElemBox();
+        Body->AggGeom.ConvexElems.Add(MoveTemp(Convex));
+        Body->InvalidatePhysicsData();
+        Body->CreatePhysicsMeshes();
+        FAssetRegistryModule::AssetCreated(MeshAsset);
+        MeshAsset->MarkPackageDirty();
+        Meshes.Add(MeshAsset);
+    }
+    const FString DataName = bVaried ? TEXT("DA_Cladding04") : TEXT("DA_Cladding02");
+    if (FPackageName::DoesPackageExist(Destination + DataName)) return TEXT("{\"error\":\"Cladding data already exists\"}");
+    auto* Data = NewObject<UDemoColumnCladdingData>(CreatePackage(*(Destination + DataName)), *DataName, RF_Public | RF_Standalone);
+    int32 Bonded = 0;
+    for (const auto& Value : Source->GetArrayField(TEXT("tiles")))
+    {
+        const auto Tile = Value->AsObject();
+        const auto& S = Tile->GetArrayField(TEXT("sample"));
+        const FVector Sample(S[0]->AsNumber(), S[1]->AsNumber(), S[2]->AsNumber());
+        double Best = TNumericLimits<double>::Max();
+        int32 Host = INDEX_NONE;
+        const FVector WorldSample = Sample * ActorScale;
+        TArray<int32> Candidates;
+        for (int32 I = 0; I < Exterior.Num(); ++I) Candidates.Add(I);
+        Candidates.Sort([&](int32 L, int32 R) { return Exterior[L].Bounds.ComputeSquaredDistanceToPoint(WorldSample) < Exterior[R].Bounds.ComputeSquaredDistanceToPoint(WorldSample); });
+        for (const int32 Index : Candidates)
+        {
+            const auto& E = Exterior[Index];
+            if (E.Bounds.ComputeSquaredDistanceToPoint(WorldSample) > Best) break;
+            for (const auto& Surface : E.Surfaces)
+            {
+                const FVector Closest = FMath::ClosestPointOnTriangleToPoint(WorldSample, Surface.A, Surface.B, Surface.D);
+                const double Distance = FVector::DistSquared(Closest, WorldSample);
+                if (Distance < Best) { Best = Distance; Host = E.Bone; }
+            }
+        }
+        const auto& P = Tile->GetArrayField(TEXT("position"));
+        FDemoColumnTile Record;
+        Record.Mesh = Meshes[int32(Tile->GetNumberField(TEXT("mesh")))];
+        Record.Bone = Host;
+        Record.RestTransform = FTransform(FRotator(0, Tile->GetNumberField(TEXT("yaw")), 0), FVector(P[0]->AsNumber(), P[1]->AsNumber(), P[2]->AsNumber()));
+        Record.RelativeToBone = Record.RestTransform.GetRelativeTransform(Global[Host]);
+        Record.bBonded = Tile->GetBoolField(TEXT("bonded")) && C->InitialDynamicState[Host] != int32(Chaos::EObjectStateType::Kinematic);
+        double Area = 0.;
+        Tile->TryGetNumberField(TEXT("area_cm2"), Area);
+        Record.AreaCm2 = Area;
+        Bonded += Record.bBonded ? 1 : 0;
+        Data->Tiles.Add(Record);
+    }
+    FAssetRegistryModule::AssetCreated(Data);
+    Data->MarkPackageDirty();
+    const auto Out = MakeShared<FJsonObject>();
+    Out->SetNumberField(TEXT("tiles"), Data->Tiles.Num());
+    Out->SetNumberField(TEXT("bonded"), Bonded);
+    Out->SetNumberField(TEXT("clean_release"), Data->Tiles.Num() - Bonded);
+    Out->SetNumberField(TEXT("mesh_variants"), Meshes.Num());
+    Out->SetStringField(TEXT("concrete"), Vendor->GetPathName());
+    return ToJson(Out);
+#else
+    return TEXT("{\"error\":\"Editor required\"}");
+#endif
+}
+
+FString UNGDColumnAuthoring::BakeDemoColumnScale()
+{
+#if WITH_EDITOR
+    const FString Destination(TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/"));
+    if (FPackageName::DoesPackageExist(Destination + TEXT("GC_DemoColumn03")))
+        return TEXT("{\"error\":\"Scaled source already exists\"}");
+    auto* Vendor = LoadObject<UGeometryCollection>(nullptr, TEXT("/Game/NextGenDestruction/GeometryCollections/Concrete/GC_ConcretePillar_Square_5m.GC_ConcretePillar_Square_5m"));
+    auto* Previous = LoadObject<UDemoColumnCladdingData>(nullptr, TEXT("/Game/Experiments/DemoTiledColumn01/Correction02/DA_Cladding02.DA_Cladding02"));
+    if (!Vendor || !Previous) return TEXT("{\"error\":\"Missing source\"}");
+    const FVector Scale(2.364, 2.364, 3.6);
+    auto* Asset = DuplicateObject<UGeometryCollection>(Vendor, CreatePackage(*(Destination + TEXT("GC_DemoColumn03"))), TEXT("GC_DemoColumn03"));
+    const auto C = Asset->GetGeometryCollection();
+    TArray<FTransform> Global;
+    GeometryCollectionAlgo::GlobalMatrices(C->Transform, C->Parent, Global);
+    const auto Out = MakeShared<FJsonObject>();
+    if (auto* External = C->FindAttribute<Chaos::FImplicitObjectPtr>(FGeometryCollection::ExternalCollisionsAttribute, FGeometryCollection::TransformGroup))
+        for (int32 B = 0; B < External->Num(); ++B)
+            if ((*External)[B])
+            {
+                // This vendor stores external collision in identity rest frames.
+                // Replace shared implicits; never scale a source object in place.
+                if (!Global[B].Equals(FTransform::Identity)) return TEXT("{\"error\":\"Unexpected external collision frame\"}");
+                (*External)[B] = (*External)[B]->DeepCopyGeometryWithScale(Chaos::FVec3(Scale));
+            }
+    if (const auto* Mass = C->FindAttribute<FTransform>(TEXT("MassToLocal"), FGeometryCollection::TransformGroup))
+        if (Mass->Num()) Out->SetStringField(TEXT("vendor_root_mass_to_local"), (*Mass)[0].ToString());
+    // Bake the enlargement into geometry, retaining every fracture, bone ID,
+    // hierarchy edge and anchor. Chaos then runs at unit component scale.
+    for (int32 V = 0; V < C->Vertex.Num(); ++V)
+    {
+        const FTransform& Frame = Global[C->BoneMap[V]];
+        C->Vertex[V] = FVector3f(Frame.TransformPosition(FVector(C->Vertex[V])) * Scale);
+        C->Normal[V] = FVector3f((Frame.TransformVectorNoScale(FVector(C->Normal[V]) / Frame.GetScale3D()) / Scale).GetSafeNormal());
+        C->TangentU[V] = FVector3f((Frame.TransformVector(FVector(C->TangentU[V])) * Scale).GetSafeNormal());
+        C->TangentV[V] = FVector3f((Frame.TransformVector(FVector(C->TangentV[V])) * Scale).GetSafeNormal());
+    }
+    if (auto Hulls = FGeometryCollectionConvexUtility::GetConvexHullDataIfPresent(C.Get()))
+    {
+        TSet<int32> Owners;
+        // The vendor has one owner per hull. Refuse ambiguous shared frames.
+        for (int32 B = 0; B < C->Transform.Num(); ++B)
+            for (int32 H : Hulls->TransformToConvexIndices[B])
+            {
+                if (Owners.Contains(H)) return TEXT("{\"error\":\"Shared hull frame\"}");
+                Owners.Add(H);
+                const auto& Old = Hulls->ConvexHull[H];
+                if (!Old) continue;
+                TArray<Chaos::FConvex::FVec3Type> Points;
+                for (int32 V = 0; V < Old->NumVertices(); ++V)
+                    Points.Add(Chaos::FConvex::FVec3Type(Global[B].TransformPosition(FVector(Old->GetVertex(V))) * Scale));
+                Hulls->ConvexHull[H] = new Chaos::FConvex(Points, 0.f);
+            }
+        Out->SetNumberField(TEXT("retained_collision_hulls"), Owners.Num());
+    }
+    for (int32 B = 0; B < C->Transform.Num(); ++B) C->Transform[B] = FTransform3f::Identity;
+    for (int32 G = 0; G < C->BoundingBox.Num(); ++G)
+    {
+        FBox Box(ForceInit);
+        for (int32 V = C->VertexStart[G]; V < C->VertexStart[G] + C->VertexCount[G]; ++V) Box += FVector(C->Vertex[V]);
+        C->BoundingBox[G] = Box;
+    }
+    FGeometryCollectionConvexUtility::SetVolumeAttributes(C.Get());
+    Asset->DamagePropagationData.bEnabled = false;
+    Asset->DamagePropagationData.BreakDamagePropagationFactor = 0.f;
+    Asset->DamagePropagationData.ShockDamagePropagationFactor = 0.f;
+    Asset->InvalidateCollection();
+    Asset->CreateSimulationData();
+    Asset->RebuildRenderData();
+    FAssetRegistryModule::AssetCreated(Asset);
+    Asset->MarkPackageDirty();
+    auto* Data = DuplicateObject<UDemoColumnCladdingData>(Previous, CreatePackage(*(Destination + TEXT("DA_Cladding03"))), TEXT("DA_Cladding03"));
+    for (auto& Tile : Data->Tiles)
+    {
+        Tile.RestTransform = Tile.RestTransform * FTransform(FQuat::Identity, FVector::ZeroVector, Scale);
+        Tile.RelativeToBone = Tile.RestTransform;
+    }
+    FAssetRegistryModule::AssetCreated(Data);
+    Data->MarkPackageDirty();
+    Out->SetNumberField(TEXT("transforms"), C->Transform.Num());
+    Out->SetNumberField(TEXT("geometries"), C->BoundingBox.Num());
+    Out->SetNumberField(TEXT("faces"), C->Indices.Num());
+    Out->SetNumberField(TEXT("tiles"), Data->Tiles.Num());
+    return ToJson(Out);
+#else
+    return TEXT("{\"error\":\"Editor required\"}");
+#endif
+}
+
+FString UNGDColumnAuthoring::AddDemoColumnTiles(UGeometryCollection* Collection, const FString& SourceFile)
+{
+#if WITH_EDITOR
+    if (!Collection || Collection->GetPathName() != TEXT("/Game/Experiments/DemoTiledColumn01/GC_DemoTiledColumn01.GC_DemoTiledColumn01"))
+        return TEXT("{\"error\":\"Experiment collection required\"}");
+    FString Full = FPaths::ConvertRelativePathToFull(SourceFile);
+    FPaths::NormalizeFilename(Full);
+    FPaths::CollapseRelativeDirectories(Full);
+    FString Allowed = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir() / TEXT("DemoTiledColumn01/"));
+    FPaths::NormalizeFilename(Allowed);
+    if (!Full.StartsWith(Allowed)) return TEXT("{\"error\":\"Experiment source directory required\"}");
+    FString Raw;
+    TSharedPtr<FJsonObject> Source;
+    if (!FFileHelper::LoadFileToString(Raw, *Full) || !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Raw), Source))
+        return TEXT("{\"error\":\"Invalid tile source\"}");
+    const auto C = Collection->GetGeometryCollection();
+    if (!C || C->Transform.Num() != 1086 || C->TransformIndex.Num() != 731 || Collection->Materials.Num() != 4)
+        return TEXT("{\"error\":\"Fresh vendor duplicate with four materials required\"}");
+    TArray<FTransform> Global;
+    GeometryCollectionAlgo::GlobalMatrices(C->Transform, C->Parent, Global);
+    struct FSurface { FVector A, B, D; int32 Bone; };
+    TArray<FSurface> Surfaces;
+    for (int32 F = 0; F < C->Indices.Num(); ++F)
+    {
+        if (C->MaterialID[F] != 0) continue;
+        const FIntVector T = C->Indices[F];
+        const int32 Bone = C->BoneMap[T.X];
+        if (C->SimulationType[Bone] != FGeometryCollection::FST_Rigid || C->Parent[Bone] == INDEX_NONE) continue;
+        Surfaces.Add({Global[Bone].TransformPosition(FVector(C->Vertex[T.X])),
+            Global[Bone].TransformPosition(FVector(C->Vertex[T.Y])),
+            Global[Bone].TransformPosition(FVector(C->Vertex[T.Z])), Bone});
+    }
+    if (Surfaces.IsEmpty()) return TEXT("{\"error\":\"No vendor exterior surface\"}");
+    Collection->Modify();
+    TArray<int32> TileBones;
+    TArray<int32> TileHosts;
+    TMap<int32, TArray<int32>> BondedGroups;
+    int32 Counts[4] = {};
+    for (const auto& Value : Source->GetArrayField(TEXT("pieces")))
+    {
+        const auto Piece = Value->AsObject();
+        const auto& P = Piece->GetArrayField(TEXT("sample"));
+        const FVector Sample(P[0]->AsNumber(), P[1]->AsNumber(), P[2]->AsNumber());
+        double Best = TNumericLimits<double>::Max();
+        int32 Host = INDEX_NONE;
+        for (const auto& S : Surfaces)
+        {
+            const double Distance = FVector::DistSquared(Sample, FMath::ClosestPointOnTriangleToPoint(Sample, S.A, S.B, S.D));
+            if (Distance < Best) { Best = Distance; Host = S.Bone; }
+        }
+        int32 Mode = int32(Piece->GetNumberField(TEXT("mode")));
+        if (Mode == 3 && C->InitialDynamicState[Host] == int32(Chaos::EObjectStateType::Kinematic)) Mode = 2;
+        const int32 Tile = C->Transform.Num();
+        FMeshDescription Mesh = ReadMesh(Piece);
+        FGeometryCollectionEngineConversion::AppendMeshDescription(&Mesh,
+            FString::Printf(TEXT("Tile_%d_%03d"), Mode, TileBones.Num()), 0, FTransform::Identity, C.Get(), nullptr, false, false, false);
+        C->InitialDynamicState[Tile] = int32(Chaos::EObjectStateType::Dynamic);
+        GeometryCollectionAlgo::ParentTransforms(C.Get(), C->Parent[Host], {Tile});
+        TileBones.Add(Tile);
+        TileHosts.Add(Host);
+        ++Counts[Mode];
+        if (Mode == 3) BondedGroups.FindOrAdd(Host).Add(Tile);
+    }
+    for (auto& Group : BondedGroups)
+    {
+        Group.Value.Insert(Group.Key, 0);
+        const int32 Cluster = FGeometryCollectionClusteringUtility::ClusterBonesUnderNewNodeWithParent(
+            C.Get(), C->Parent[Group.Key], Group.Value, true, false);
+        C->InitialDynamicState[Cluster] = C->InitialDynamicState[Group.Key];
+        C->BoneName[Cluster] = FString::Printf(TEXT("TileConcreteBond_%d"), Group.Key);
+    }
+    FGeometryCollectionClusteringUtility::UpdateHierarchyLevelOfChildren(C.Get(), -1);
+    C->ReindexMaterials();
+    // Generate only new tile hulls; the demo's detailed concrete leaf collision is retained.
+    FGeometryCollectionConvexUtility::FLeafConvexHullSettings LeafSettings;
+    FGeometryCollectionConvexUtility::GenerateLeafConvexHulls(*C, true, TileBones, LeafSettings);
+    FGeometryCollectionConvexUtility::FClusterConvexHullSettings ClusterSettings;
+    FGeometryCollectionConvexUtility::GenerateClusterConvexHullsFromChildrenHulls(*C, ClusterSettings);
+    FGeometryCollectionProximityUtility(C.Get()).UpdateProximity();
+    auto& Proximity = C->ModifyAttribute<TSet<int32>>(TEXT("Proximity"), FGeometryCollection::GeometryGroup);
+    for (int32 I = 0; I < TileBones.Num(); ++I)
+    {
+        const int32 TileGeometry = C->TransformToGeometryIndex[TileBones[I]];
+        const int32 HostGeometry = C->TransformToGeometryIndex[TileHosts[I]];
+        Proximity[TileGeometry].Add(HostGeometry);
+        Proximity[HostGeometry].Add(TileGeometry);
+    }
+    FGeometryCollectionProximityUtility(C.Get()).CopyProximityToConnectionGraph();
+    GeometryCollection::Facades::FCollectionConnectionGraphFacade Connections(*C);
+    Connections.DefineSchema();
+    for (int32 I = 0; I < TileBones.Num(); ++I)
+    {
+        int32 Host = TileHosts[I];
+        while (C->Parent[Host] != C->Parent[TileBones[I]] && C->Parent[Host] != INDEX_NONE) Host = C->Parent[Host];
+        if (C->Parent[Host] != C->Parent[TileBones[I]]) continue;
+        bool bConnected = false;
+        for (int32 Edge = 0; Edge < Connections.NumConnections(); ++Edge)
+        {
+            const auto Pair = Connections.GetConnection(Edge);
+            if ((Pair.Key == TileBones[I] && Pair.Value == Host) || (Pair.Value == TileBones[I] && Pair.Key == Host))
+            { bConnected = true; break; }
+        }
+        if (!bConnected)
+        {
+            if (Connections.HasContactAreas()) Connections.ConnectWithContact(TileBones[I], Host, 1.f);
+            else Connections.Connect(TileBones[I], Host);
+        }
+    }
+    // Original two active levels keep their vendor thresholds. The extra bond level
+    // holds selected tiles to the original concrete fragments until a stronger hit.
+    Collection->DamageThreshold = {500000.f, 50000.f, 150000.f, 150000.f};
+    Collection->MaxClusterLevel = 10;
+    Collection->InvalidateCollection();
+    Collection->CreateSimulationData();
+    Collection->RebuildRenderData();
+    Collection->MarkPackageDirty();
+    const auto Out = MakeShared<FJsonObject>();
+    Out->SetNumberField(TEXT("vendor_geometries_retained"), 731);
+    Out->SetNumberField(TEXT("tile_fragments"), TileBones.Num());
+    Out->SetNumberField(TEXT("clean"), Counts[0]);
+    Out->SetNumberField(TEXT("thin_backing"), Counts[1]);
+    Out->SetNumberField(TEXT("thick_backing"), Counts[2]);
+    Out->SetNumberField(TEXT("bonded_to_original_concrete"), Counts[3]);
+    Out->SetNumberField(TEXT("bond_clusters"), BondedGroups.Num());
+    return ToJson(Out);
+#else
+    return TEXT("{\"error\":\"Editor required\"}");
 #endif
 }
 

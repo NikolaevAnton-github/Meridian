@@ -282,7 +282,7 @@ TMap<TWeakObjectPtr<UPrimitiveComponent>, ACombatProjectileWorld::FBlockerSample
                 // aggregate bounds are not a rigid blocker resize: the finite
                 // sweeps query the live per-piece collision directly. Retain
                 // registration/transform barriers and all launch-cover queries.
-                const bool bNGDCollection = Part->IsA<UGeometryCollectionComponent>() &&
+                const bool bNGDCollection = (Part->IsA<UGeometryCollectionComponent>() || Part->ComponentHasTag(TEXT("DemoColumnCladding"))) &&
                     It->FindComponentByClass<UNGDPropComponent>();
                 Samples.Add(Part, {Part->GetComponentTransform(),
                     bNGDCollection ? FVector::ZeroVector : Part->Bounds.BoxExtent});
