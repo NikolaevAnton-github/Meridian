@@ -7,6 +7,7 @@
 #include "Engine/StaticMesh.h"
 #include "PhysicalMaterials/PhysicalMaterial.h"
 #include "Engine/World.h"
+#include "GameFramework/PlayerController.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
 #include "GeometryCollection/GeometryCollectionObject.h"
 #include "GeometryCollection/GeometryCollection.h"
@@ -454,6 +455,157 @@ int32 UDemoColumnCladding::RetentionSlotsUsed() const
     return RetainedTiles.Num() + RetainedConcrete.Num() + PendingConcrete.Num();
 }
 
+int32 UDemoColumnCladding::RetentionSector(const FVector& Position) const
+{
+    const FVector Local = Concrete->GetComponentTransform().InverseTransformPosition(Position);
+    return FMath::Abs(Local.X) >= FMath::Abs(Local.Y) ? (Local.X >= 0. ? 0 : 2) : (Local.Y >= 0. ? 1 : 3);
+}
+
+void UDemoColumnCladding::RetentionSectorCounts(TArray<int32>& Total, TArray<int32>& Tiles) const
+{
+    Total.Init(0, 4); Tiles.Init(0, 4);
+    for (const auto& Weak : RetainedTiles)
+        if (const auto* Actor = Weak.Get())
+        {
+            const int32 Sector = RetentionSector(Actor->GetActorLocation());
+            ++Total[Sector]; ++Tiles[Sector];
+        }
+    const auto* Proxy = Concrete->GetPhysicsProxy();
+    if (!Proxy) return;
+    for (const auto* Bones : {&RetainedConcrete, &PendingConcrete})
+        for (const int32 Bone : *Bones)
+            if (const auto* Particle = Proxy->GetParticleByIndex_External(Bone))
+                ++Total[RetentionSector(Particle->GetX())];
+}
+
+bool UDemoColumnCladding::MakeRetentionRoom(const FVector& Position, bool bTile)
+{
+    if (!bStackingExperiment) return RetentionSlotsUsed() < 50;
+    const bool bTilesFull = bTile && RetainedTiles.Num() >= 48;
+    if (RetentionSlotsUsed() < 80 && !bTilesFull) return true;
+    // Spread replacement over time instead of clearing a visible pile at once.
+    if (ReplacementsThisPoll >= 2) return false;
+    auto* Proxy = Concrete->GetPhysicsProxy();
+    auto* Dynamic = Concrete->GetDynamicCollection();
+    if (!Proxy || !Dynamic) return false;
+    TArray<int32> Counts, TileCounts;
+    RetentionSectorCounts(Counts, TileCounts);
+    const int32 Incoming = RetentionSector(Position);
+    struct FPiece
+    {
+        AActor* Actor = nullptr;
+        UStaticMeshComponent* Part = nullptr;
+        int32 Bone = INDEX_NONE;
+        FBox Bounds = FBox(ForceInit);
+        FVector Bottom = FVector::ZeroVector;
+        int32 Sector = 0;
+        bool bRetained = false;
+        double Score = 0.;
+    };
+    TArray<FPiece> Pieces;
+    for (AActor* Actor : Debris)
+        if (IsValid(Actor))
+            if (auto* Part = Actor->FindComponentByClass<UStaticMeshComponent>())
+            {
+                FPiece Piece;
+                Piece.Actor = Actor; Piece.Part = Part; Piece.Bounds = Part->Bounds.GetBox();
+                const FVector Below = Part->Bounds.Origin - FVector(0, 0, 10000. + Part->Bounds.BoxExtent.Z);
+                if (Part->GetClosestPointOnCollision(Below, Piece.Bottom) < 0.f) continue;
+                Piece.Sector = RetentionSector(Actor->GetActorLocation());
+                Piece.bRetained = RetainedTiles.Contains(Actor);
+                Pieces.Add(Piece);
+            }
+    for (const int32 Bone : ReleasedConcrete)
+    {
+        if (RemovedConcrete.Contains(Bone)) continue;
+        const auto* Particle = Proxy->GetParticleByIndex_External(Bone);
+        FPiece Piece;
+        if (!Particle || Particle->Disabled() || !ConcreteBottom(Particle, Piece.Bottom)) continue;
+        const auto Box = Particle->GetGeometry()->BoundingBox();
+        Piece.Bounds = FBox(FVector(Box.Min()), FVector(Box.Max())).TransformBy(FTransform(Particle->GetR(), Particle->GetX()));
+        Piece.Bone = Bone; Piece.Sector = RetentionSector(Particle->GetX());
+        Piece.bRetained = RetainedConcrete.Contains(Bone);
+        Pieces.Add(Piece);
+    }
+    FVector Eye = FVector::ZeroVector;
+    FRotator View = FRotator::ZeroRotator;
+    const auto* Controller = GetWorld()->GetFirstPlayerController();
+    if (Controller) Controller->GetPlayerViewPoint(Eye, View);
+    TArray<int32> Candidates;
+    for (int32 I = 0; I < Pieces.Num(); ++I)
+    {
+        auto& Piece = Pieces[I];
+        if (!Piece.bRetained || Piece.Sector == Incoming ||
+            Counts[Piece.Sector] <= FMath::Max(16, Counts[Incoming] + 1)) continue;
+        // Keep 32 places available for concrete. Ceramic borrowing must also
+        // improve the ceramic distribution rather than just exchange neighbours.
+        if (bTilesFull && (!Piece.Actor || TileCounts[Piece.Sector] <= TileCounts[Incoming] + 1)) continue;
+        const bool bBehindView = Controller && FVector::DotProduct(Piece.Bounds.GetCenter() - Eye, View.Vector()) < -Piece.Bounds.GetExtent().Size();
+        Piece.Score = Counts[Piece.Sector] * 1.e12 + (bBehindView ? 1.e10 : 0.) +
+            (Piece.Actor ? 1.e9 : 0.) - FMath::Min(Piece.Bounds.GetVolume(), 1.e8);
+        Candidates.Add(I);
+    }
+    Candidates.Sort([&](int32 A, int32 B) { return Pieces[A].Score > Pieces[B].Score; });
+    for (const int32 Index : Candidates)
+    {
+        const auto& Candidate = Pieces[Index];
+        auto MaySupport = [&](const FPiece& Other)
+        {
+            // Match the grounding ray, including its tolerance. This also protects
+            // pending concrete and loose pieces resting on the proposed victim.
+            return Candidate.Bounds.ExpandBy(FVector(1., 1., 8.)).IsInsideOrOn(Other.Bottom);
+        };
+        bool bSupports = false;
+        if (Candidate.Part)
+        {
+            FCollisionQueryParams Params(SCENE_QUERY_STAT(DemoRetentionSupport), false);
+            for (int32 J = 0; J < Pieces.Num() && !bSupports; ++J)
+                if (J != Index && MaySupport(Pieces[J]))
+                {
+                    FHitResult Hit;
+                    bSupports = Candidate.Part->LineTraceComponent(Hit, Pieces[J].Bottom + FVector(0,0,5),
+                        Pieces[J].Bottom - FVector(0,0,8), Params);
+                }
+        }
+        else
+        {
+            TArray<Chaos::FPhysicsObjectHandle> Objects{Concrete->GetPhysicsObjectById(Candidate.Bone)};
+            if (!Objects[0]) continue;
+            auto Interface = FPhysicsObjectExternalInterface::LockRead(Objects);
+            Chaos::FPhysicsObjectCollisionInterface_External Collision(Interface.GetInterface());
+            for (int32 J = 0; J < Pieces.Num() && !bSupports; ++J)
+                if (J != Index && MaySupport(Pieces[J]))
+                {
+                    ChaosInterface::FRaycastHit Hit;
+                    bSupports = Collision.LineTrace(Objects, Pieces[J].Bottom + FVector(0,0,5),
+                        Pieces[J].Bottom - FVector(0,0,8), false, Hit);
+                }
+        }
+        if (bSupports) { ++RetentionSupportVetoes; continue; }
+        if (Candidate.Actor)
+        {
+            RetainedTiles.Remove(Candidate.Actor);
+            RetainedTileSupport.Remove(Candidate.Actor);
+            DebrisStillTime.Remove(Candidate.Actor);
+            WholeTileSources.Remove(Candidate.Actor);
+            Candidate.Actor->Destroy();
+        }
+        else
+        {
+            FGeometryCollectionDecayDynamicFacade Decay(*Dynamic);
+            if (!Decay.IsValid()) Decay.AddAttributes();
+            Decay.SetDecay(Candidate.Bone, 1.f);
+            Dynamic->MakeDirty();
+            RetainedConcrete.Remove(Candidate.Bone);
+            RemovedConcrete.Add(Candidate.Bone);
+            Proxy->DisableParticles_External(TArray<int32>{Candidate.Bone});
+        }
+        ++RetentionReplacements; ++ReplacementsThisPoll; ++RetentionEvictions[Candidate.Sector];
+        return true;
+    }
+    return false;
+}
+
 bool UDemoColumnCladding::HasStaticSupport(const FVector& Bottom) const
 {
     FHitResult Hit;
@@ -657,6 +809,7 @@ void UDemoColumnCladding::UpdateDebris(float DeltaTime)
     const float Elapsed = DebrisPollTime;
     const float StillStep = FMath::Min(Elapsed, .3f);
     DebrisPollTime = 0.f;
+    ReplacementsThisPoll = 0;
     for (auto It = RetainedTiles.CreateIterator(); It; ++It) if (!It->IsValid()) It.RemoveCurrent();
     for (auto It = DebrisStillTime.CreateIterator(); It; ++It) if (!It.Key().IsValid()) It.RemoveCurrent();
     for (AActor* Actor : Debris)
@@ -672,7 +825,31 @@ void UDemoColumnCladding::UpdateDebris(float DeltaTime)
         const bool bSupported = bSlow && Part->GetClosestPointOnCollision(Below, Bottom) >= 0.f && HasDebrisSupport(Bottom,INDEX_NONE,Actor,true);
         Still = bSupported ? Still + StillStep : 0.f;
         if (bSlow && !bSupported) Part->WakeAllRigidBodies();
-        if (Still < 1.f || RetentionSlotsUsed() >= 50 || (bStackingExperiment && RetainedTiles.Num() >= 30)) continue;
+        if (bStackingExperiment && Still >= 1.f)
+        {
+            bool bOverlapping = false;
+            for (const auto& Weak : RetainedTiles)
+                if (const auto* Other = Weak.Get())
+                    if (auto* OtherPart = Other->FindComponentByClass<UStaticMeshComponent>())
+                    {
+                        const FVector Normal = Part->GetComponentTransform().GetUnitAxis(EAxis::X);
+                        if (!Part->Bounds.GetBox().Intersect(OtherPart->Bounds.GetBox()) ||
+                            FMath::Abs(FVector::DotProduct(Normal, OtherPart->GetComponentTransform().GetUnitAxis(EAxis::X))) < .96f) continue;
+                        auto* Body = Part->GetBodyInstance();
+                        auto* OtherBody = OtherPart->GetBodyInstance();
+                        const FVector OtherNormal = OtherPart->GetComponentTransform().GetUnitAxis(EAxis::X);
+                        if (Body && OtherBody &&
+                            ((Body->OverlapTestForBody(Part->GetComponentLocation()+Normal*.3, Part->GetComponentQuat(), OtherBody) &&
+                              Body->OverlapTestForBody(Part->GetComponentLocation()-Normal*.3, Part->GetComponentQuat(), OtherBody)) ||
+                             (OtherBody->OverlapTestForBody(OtherPart->GetComponentLocation()+OtherNormal*.3, OtherPart->GetComponentQuat(), Body) &&
+                              OtherBody->OverlapTestForBody(OtherPart->GetComponentLocation()-OtherNormal*.3, OtherPart->GetComponentQuat(), Body))))
+                        { bOverlapping = true; break; }
+                    }
+            // A sleeping contact may still penetrate. Let the solver separate it
+            // or let its normal lifetime expire; never freeze that intersection.
+            if (bOverlapping) { Still = 0.f; Part->WakeAllRigidBodies(); continue; }
+        }
+        if (Still < 1.f || !MakeRetentionRoom(Part->GetComponentLocation(), true)) continue;
         const FTransform Pose = Part->GetComponentTransform();
         Part->SetSimulatePhysics(false);
         Part->SetCollisionEnabled(bStackingExperiment ? ECollisionEnabled::QueryAndPhysics : ECollisionEnabled::NoCollision);
@@ -702,7 +879,7 @@ void UDemoColumnCladding::UpdateDebris(float DeltaTime)
         const bool bSupported = bSlow && ConcreteBottom(Particle, Bottom) && HasDebrisSupport(Bottom,Bone,nullptr,true);
         Still = bSupported ? Still + StillStep : 0.f;
         if (bSlow && !bSupported) KeepDemoColumnLeafAwake(Concrete, Bone);
-        if (Still >= 1.f && RetentionSlotsUsed() < 50)
+        if (Still >= 1.f && MakeRetentionRoom(Particle->GetX(), false))
         {
             PendingConcrete.Add(Bone);
             TWeakObjectPtr<UDemoColumnCladding> WeakThis(this);
@@ -758,6 +935,24 @@ FString UDemoColumnCladding::GetState() const
     Out->SetNumberField(TEXT("retained_concrete"), RetainedConcrete.Num());
     Out->SetNumberField(TEXT("retention_pending"), PendingConcrete.Num());
     Out->SetNumberField(TEXT("retention_slots"), RetentionSlotsUsed());
+    Out->SetNumberField(TEXT("retention_limit"), bStackingExperiment ? 80 : 50);
+    Out->SetNumberField(TEXT("retention_replacements"), RetentionReplacements);
+    Out->SetNumberField(TEXT("retention_support_vetoes"), RetentionSupportVetoes);
+    if (bStackingExperiment && Concrete)
+    {
+        TArray<int32> Counts, TileCounts;
+        RetentionSectorCounts(Counts, TileCounts);
+        TArray<TSharedPtr<FJsonValue>> Sectors, CeramicSectors, Evictions;
+        for (int32 I = 0; I < 4; ++I)
+        {
+            Sectors.Add(MakeShared<FJsonValueNumber>(Counts[I]));
+            CeramicSectors.Add(MakeShared<FJsonValueNumber>(TileCounts[I]));
+            Evictions.Add(MakeShared<FJsonValueNumber>(RetentionEvictions[I]));
+        }
+        Out->SetArrayField(TEXT("retained_by_sector"), Sectors);
+        Out->SetArrayField(TEXT("retained_ceramic_by_sector"), CeramicSectors);
+        Out->SetArrayField(TEXT("evictions_by_sector"), Evictions);
+    }
     Out->SetNumberField(TEXT("removed_concrete"), RemovedConcrete.Num());
     Out->SetNumberField(TEXT("concrete_impacts"), ConcreteImpacts);
     Out->SetNumberField(TEXT("last_concrete_bone"), LastConcreteBone);

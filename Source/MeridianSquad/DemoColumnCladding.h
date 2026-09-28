@@ -108,6 +108,13 @@ private:
     FVector FacingScatter(int32 Tile, const FHitResult& Hit) const;
     void UpdateDebris(float DeltaTime);
     int32 RetentionSlotsUsed() const;
+    int32 RetentionSector(const FVector& Position) const;
+    void RetentionSectorCounts(TArray<int32>& Total, TArray<int32>& Tiles) const;
+    bool MakeRetentionRoom(const FVector& Position, bool bTile);
+    int32 RetentionReplacements = 0;
+    int32 RetentionSupportVetoes = 0;
+    int32 ReplacementsThisPoll = 0;
+    TArray<int32> RetentionEvictions = {0, 0, 0, 0};
     void CarryTiles(int32 Bone);
     bool RemoveTileInstance(int32 Tile);
     bool HasStaticSupport(const FVector& Bottom) const;

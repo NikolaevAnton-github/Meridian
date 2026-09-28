@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-28",
+  "baseline": "c0c53b7",
+  "owner_direction": "Raise the retained debris limit to 80 and use flexible distribution around the column (option 3).",
+  "retention_limit": 80,
+  "soft_sector_share": 16,
+  "shared_places": 16,
+  "ceramic_limit": 48,
+  "workflow": "Direct continuation under the owner's waiver: no tasks, Multica, agents or independent reviewers.",
+  "scope": "Retention allocation only; reuse Correction08 geometry, facing fractures, scatter and collision.",
+  "acceptance": "Verify borrowing, redistribution to later-shot sides, the shared and ceramic caps, preserved supports and F6 cleanup.",
+  "owner_acceptance": "Owner said everything was okay and explicitly requested the commit."
+}
