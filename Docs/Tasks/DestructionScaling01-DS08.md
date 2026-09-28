@@ -1,23 +1,25 @@
-# MSQ-168 / DS-08: remaining physics costs and final load acceptance
+# MSQ-168 / DS-08: Physics update cleanup and integrated optimization handoff
 
-Multica: MSQ-168 (`01a0e9bc-bdf9-784c-8920-01f1a8032378`), parent MSQ-160, stage 8. Prepared, unassigned, no execution authorized. Dependency: accepted DS-01 through DS-07 handoffs. Read [shared acceptance](DestructionScaling01.md); owner start authorizes this final task only.
+Multica: MSQ-168 (`01a0e9bc-bdf9-784c-8920-01f1a8032378`), parent MSQ-160, stage 8. Prepared only; unassigned, no execution authorized by this revision. Start this task in a separate owner chat. Dependency: Implemented and committed MSQ-162 through MSQ-167; no DS-01 performance prerequisite.
+
+Authority: [ImplementationOnly02](../Approvals/DestructionScaling01-ImplementationOnly02.json). Read the [shared implementation boundaries](DestructionScaling01.md); no recursive history read or DS-01 benchmark restart.
 
 ## Outcome
 
-Attribute the remaining physics/contact costs, apply only justified fidelity-preserving tuning and establish a reproducible supported load envelope for repeated interactive destruction.
+Complete the planned physics-side cleanup, integrate all optimizations and hand the playable result to the owner for evaluation.
 
-## Work
+## Implementation
 
-- Re-run only relevant changed workload transitions with the final representation. Inspect awake/sleeping bodies, collision shapes, contact/constraint pairs, solver step, queries, callbacks, GT/RT/GPU, task waits, memory and transition hitches.
-- Tune measured redundant callbacks, body/shape setup or contact scheduling where correctness is preserved. Investigate CCD selection only with high-speed thin-piece/stack evidence. Ordinary pooling does not remove solver/contact cost.
-- Collision simplification, interaction filtering, lower physics rates, one-way debris, removal or visual-only replacements change the contract and require a separate explicit design decision. Do not silently adopt them to hit a target.
-- Validate 1/4/16-column bursts, repeated explosions after rest, selected-piece grab/throw, mixed-owner support loss, sustained fire and F6 in matched PIE and an appropriate standalone run. If collision-driven damage was separately accepted, include the resulting chain reactions; otherwise state that coverage boundary.
-- Compare against DS-01 and each applicable accepted predecessor. Preserve original captures and clearly state any hardware/configuration difference. Use representative sustained runs long enough to expose pool growth/cleanup and memory accumulation.
+- Remove redundant physics callbacks/subscriptions, repeated body/shape/filter setup and unnecessary work on unchanged sleeping bodies in the implemented fragment lifecycle. Keep required wake/contact notifications and immediate hit correctness.
+- Use selective contact/query/CCD work only where the active state requires it. Preserve high-speed thin-piece and stack safety; do not disable necessary collision or CCD merely to reduce work.
+- Resolve integration defects between identities, sleep/wake, pooling, shared support, worker results and rendering. Do not leave known stale-state or lifecycle defects as future optimization work.
+- Keep collision geometry/fidelity, physics rate, bidirectional interaction and gameplay fragments intact. Collision simplification, lower rates, one-way debris, deletion or visual-only substitutes require a separate owner decision.
+- Provide a short owner play-check guide using available interactions and F6. Full grenade/telekinesis abilities and collision-driven chain fracture remain outside scope unless separately authorized.
 
-## Acceptance and handoff
+## Focused correctness and handoff
 
-Publish the supported workload table, frame mean/p95/p99 and largest transition hitches, finite resource use, functional/visual results and remaining bottlenecks. 120 FPS is an 8.333 ms whole-frame target, not a guarantee for unlimited bodies. If a target case misses budget, report the measured gap and concrete remaining decision; do not relabel a weaker workload as passing.
+Build the integrated result and perform short checks of the transitions changed by this task, including reset and a representative mixed-owner/repeated interaction case. State implemented changes, functional limitations and known unresolved defects. Do not run a final load envelope campaign, long soak, matched PIE/standalone matrix or FPS acceptance test. Owner evaluation follows this handoff; no guaranteed FPS claim.
 
-Deliver `Docs/DestructionScaling01DS08.md`, final reproducible fixtures/evidence, primary independent technical review and relevant independent visual evidence. Keep owner play/design acceptance distinct. Commit verified scoped changes and update the program with final results; start no other work.
+Deliver the scoped implementation, `Docs/DestructionScaling01DS08.md`, build result and concise evidence for changed behavior under `Saved/DestructionScaling01/DS08/`. Record exact source/DLL identity for runtime checks. Commit verified task-scoped changes, restore editor state and stop. No performance acceptance gate or owner-rating gate before the next separately started task. Execution/review routing follows the shared policy and any explicit owner exception in that chat.
 
-New chat opener: "Start MSQ-168. Read Docs/Tasks/DestructionScaling01-DS08.md and the indicated program/predecessor sections. Execute only this task; do not start successors."
+New chat opener: "Start MSQ-168. Read Docs/Tasks/DestructionScaling01-DS08.md and the indicated shared boundaries/predecessor handoff. Implement this task only, with build and focused correctness checks, without benchmark campaigns. Do not start successors."

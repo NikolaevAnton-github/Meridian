@@ -1,0 +1,8 @@
+{
+  "task": "MSQ-161",
+  "date": "2026-09-28",
+  "owner_instruction": "Приступай к MSQ-161. Без мультики, без независимого. Все сам.",
+  "scope": "Execute DS-01 only, directly in the owner chat. Do not use Multica or subagents. The controller performs implementation and self-verification.",
+  "task_scoped_waivers": ["Multica execution route", "independent technical review"],
+  "retained_boundaries": ["No production optimization or behavior changes", "No successor execution", "Owner play/design acceptance remains separate"]
+}

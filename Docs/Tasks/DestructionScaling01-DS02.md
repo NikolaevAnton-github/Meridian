@@ -1,22 +1,24 @@
-# MSQ-162 / DS-02: stable fragment identity and serial snapshot/apply seams
+# MSQ-162 / DS-02: Stable fragment identity and serial state processing
 
-Multica: MSQ-162 (`01a0e9bc-bd60-7be4-ad92-dcc8a82ecd63`), parent MSQ-160, stage 2. Prepared, unassigned, no execution authorized. Dependency: accepted DS-01 fixture/report and its committed baseline. Read [shared acceptance](DestructionScaling01.md); owner start authorizes DS-02 only.
+Multica: MSQ-162 (`01a0e9bc-bd60-7be4-ad92-dcc8a82ecd63`), parent MSQ-160, stage 2. Prepared only; unassigned, no execution authorized by this revision. Start this task in a separate owner chat. Dependency: Perf02 `68f911c`; MSQ-161 is not a dependency.
+
+Authority: [ImplementationOnly02](../Approvals/DestructionScaling01-ImplementationOnly02.json). Read the [shared implementation boundaries](DestructionScaling01.md); no recursive history read or DS-01 benchmark restart.
 
 ## Outcome
 
-Create a small shared fragment contract for the existing lobby NGD lane before changing rest behavior or introducing threads. Every gameplay fragment has owner/reset-generation/local identity and state/pose revisions independent of actor addresses, render indices or Hit.Item.
+Implement the shared identity and state-processing foundation used by the later optimizations. Deliver working code, not a new analysis or benchmark plan.
 
-## Work
+## Implementation
 
-- Resolve exact hit identity before instance swap/removal, object reuse or deferred commands. Preserve existing projectile deduplication, first-hit ordering and both history boundaries.
-- Extract owned immutable state snapshots and pure pose/hull-bottom/candidate calculations, still running serially. Keep exact engine queries, UObject mutation and solver commands in their current safe phases.
-- Add narrow target, force/wake and hold/release test entry points with explicit unsupported-state results. Validate installed per-fragment APIs; do not assume GeometryCollection AddImpulse's BoneName selects one piece. No full abilities, new collision damage or retention-policy changes.
-- Invalidate retired generations/revisions on reset, EndPlay, owner replacement, motion and state changes. Snapshot inputs/results must not retain borrowed components or raw Chaos pointers through those transitions.
+- Give each gameplay fragment an owner/reset-generation/local identity and state/pose revisions independent of actor addresses, render indices and Hit.Item. Resolve exact hit identity before swap/removal, reuse or deferred work.
+- Consolidate repeated state gathering into owned immutable snapshots and reusable serial pose, hull-bottom and support-candidate calculations. Keep exact engine queries, UObject writes and solver commands in their safe phases.
+- Add narrow selected-fragment target, impulse/wake and hold/release adapters, with explicit unsupported-state results. Preserve projectile deduplication, both history boundaries and first-hit ordering.
+- Reject stale generations/revisions after F6, owner replacement/deletion, motion and state changes. Do not retain borrowed component arrays or raw Chaos pointers across these transitions. Leave lifecycle policy changes to DS-03.
 
-## Acceptance and handoff
+## Focused correctness and handoff
 
-Compare the serial extracted path against the accepted baseline: identical selected pieces, poses, support candidates, ordering and supported transitions. No retargeting after instance swap or actor replacement. F6/deletion invalidate queued results and old IDs. Measure snapshot/copy/apply overhead and document exact phase/ownership contracts for DS-03 and DS-06. Existing rest/expiry behavior remains visible until DS-03 replaces it.
+Build the restored production source before runtime work: the stopped DS-01 diagnostic DLL is not the source baseline. Check serial behavior against the existing production path on representative first-hit, instance-swap and F6/deletion cases. Selected identity, ordering, poses and support decisions must remain correct. Document snapshot ownership and apply phases for DS-03/DS-06; no snapshot-overhead campaign is required.
 
-Deliver `Docs/DestructionScaling01DS02.md`, focused fixtures, source/DLL-bound evidence and one primary independent technical review. Keep unmodified specimens and owner assets intact. Commit the accepted change and stop before DS-03.
+Deliver the scoped implementation, `Docs/DestructionScaling01DS02.md`, build result and concise evidence for changed behavior under `Saved/DestructionScaling01/DS02/`. Record exact source/DLL identity for runtime checks. Commit verified task-scoped changes, restore editor state and stop. No performance acceptance gate or owner-rating gate before the next separately started task. Execution/review routing follows the shared policy and any explicit owner exception in that chat.
 
-New chat opener: "Start MSQ-162. Read Docs/Tasks/DestructionScaling01-DS02.md and the indicated program/predecessor sections. Execute only this task; do not start successors."
+New chat opener: "Start MSQ-162. Read Docs/Tasks/DestructionScaling01-DS02.md and the indicated shared boundaries/predecessor handoff. Implement this task only, with build and focused correctness checks, without benchmark campaigns. Do not start successors."

@@ -1,22 +1,25 @@
-# MSQ-164 / DS-04: reuse fragment objects and batch submissions
+# MSQ-164 / DS-04: Fragment reuse, cached resources and batched submissions
 
-Multica: MSQ-164 (`01a0e9bc-bd93-7eea-94bd-6630203989bb`), parent MSQ-160, stage 4. Prepared, unassigned, no execution authorized. Dependency: accepted DS-03 lifecycle and DS-02 identities and DS-01 benchmark. Read [shared acceptance](DestructionScaling01.md); execute this task only after owner start.
+Multica: MSQ-164 (`01a0e9bc-bd93-7eea-94bd-6630203989bb`), parent MSQ-160, stage 4. Prepared only; unassigned, no execution authorized by this revision. Start this task in a separate owner chat. Dependency: Implemented and committed MSQ-163, using DS-02 identities.
+
+Authority: [ImplementationOnly02](../Approvals/DestructionScaling01-ImplementationOnly02.json). Read the [shared implementation boundaries](DestructionScaling01.md); no recursive history read or DS-01 benchmark restart.
 
 ## Outcome
 
-Reduce burst-time allocation, registration and cleanup costs and avoid repeated render/physics submissions. Pooling must not be presented as eliminating active rigid-body or contact cost.
+Implement object reuse and batching to remove repeated allocation, registration and render/physics submissions.
 
-## Work
+## Implementation
 
-- Cache immutable mesh/material/collision references and prewarm a bounded pool of compatible loose-piece actors/bodies where profiling supports it. Preserve first-hit behavior when the pool grows or is exhausted; record capacity without dropping pieces.
-- On return/reuse, reset ownership/generation, delegates, timers, collision/query state, transform, sleep/held state and linear/angular velocity. Old callbacks and queued commands must not affect a new owner.
-- Accumulate transforms by render group and mark rendering dirty once per batch. Batch compatible per-particle commands by solver/proxy while preserving required order and safe access phases.
-- Measure allocation/registration/GC, batch build/apply time, render uploads and memory. Keep the existing exact physical representation; a new aggregate-body architecture is a separately scoped experiment if evidence requires it.
+- Cache immutable mesh/material/collision references. Add compatible loose-piece actor/body pools and a finite prewarm allocation; grow safely when needed instead of dropping fragments or using pool size as a gameplay cap.
+- Reset ownership/generation, delegates, timers, collision/query state, transforms, sleep/held state and velocities on every return/reuse. Old callbacks and pending commands must not affect the next occupant.
+- Accumulate transforms per render group and mark rendering dirty once per batch. Batch compatible solver/proxy commands while preserving required mutation order and safe physics access.
+- Release pool resources on world teardown and reset without stale references. Keep allocation/active/free counters available for diagnosis, without a benchmark deliverable.
+- Retain exact physical representation. Pooling does not replace active rigid bodies or contacts; no aggregate-body redesign in this task.
 
-## Acceptance and handoff
+## Focused correctness and handoff
 
-Repeat burst/settle/reuse cycles, cross-owner reuse, pool growth, held-piece release, immediate hit after reuse, F6 during pending work and repeated PIE. No stale handle, body state, timer callback or projectile-history regression. Compare first-hit/burst p95/p99 and memory against DS-03 at identical workloads; report active solver cost separately.
+Build and check a bounded reuse cycle, cross-owner reuse, growth/exhaustion fallback, immediate hit after reuse, held-piece return and F6/world teardown with pending work. Verify clean body state and bounded ownership of cached resources. No required A/B timing, p95/p99 target or repeated long capture.
 
-Deliver `Docs/DestructionScaling01DS04.md`, scoped code/helpers, independent technical review and exact candidate evidence. Restore editor state and commit verified changes. Stop before DS-05.
+Deliver the scoped implementation, `Docs/DestructionScaling01DS04.md`, build result and concise evidence for changed behavior under `Saved/DestructionScaling01/DS04/`. Record exact source/DLL identity for runtime checks. Commit verified task-scoped changes, restore editor state and stop. No performance acceptance gate or owner-rating gate before the next separately started task. Execution/review routing follows the shared policy and any explicit owner exception in that chat.
 
-New chat opener: "Start MSQ-164. Read Docs/Tasks/DestructionScaling01-DS04.md and the indicated program/predecessor sections. Execute only this task; do not start successors."
+New chat opener: "Start MSQ-164. Read Docs/Tasks/DestructionScaling01-DS04.md and the indicated shared boundaries/predecessor handoff. Implement this task only, with build and focused correctness checks, without benchmark campaigns. Do not start successors."

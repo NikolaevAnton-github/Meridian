@@ -1,23 +1,25 @@
-# MSQ-166 / DS-06: parallel fragment calculation
+# MSQ-166 / DS-06: Parallel fragment calculations with validated apply
 
-Multica: MSQ-166 (`01a0e9bc-bdc8-79ed-9f1f-11f1c1e5bffc`), parent MSQ-160, stage 6. Prepared, unassigned, no execution authorized. Dependency: accepted DS-05 data/dependency model, DS-02 serial snapshot seam and DS-01 measurements. Read [shared acceptance](DestructionScaling01.md); owner start authorizes this task only.
+Multica: MSQ-166 (`01a0e9bc-bdc8-79ed-9f1f-11f1c1e5bffc`), parent MSQ-160, stage 6. Prepared only; unassigned, no execution authorized by this revision. Start this task in a separate owner chat. Dependency: Implemented and committed MSQ-165, using the DS-02 serial reference.
+
+Authority: [ImplementationOnly02](../Approvals/DestructionScaling01-ImplementationOnly02.json). Read the [shared implementation boundaries](DestructionScaling01.md); no recursive history read or DS-01 benchmark restart.
 
 ## Outcome
 
-Implement measured parallelism for expensive pure work: immutable snapshot, coarse worker jobs, then validated authoritative apply. Profile the entire path, including copy, scheduling, locks, waits and application.
+Implement coarse parallel jobs for independent fragment calculations and retain safe authoritative application.
 
-## Work
+## Implementation
 
-- Snapshot stable IDs/revisions, transforms, velocities, flags, immutable hull geometry and candidate relationships at the correct physics phase. Jobs own their input/output storage.
-- Parallelize supported calculations such as candidate selection, fragment poses, convex lowest points and impulse math. No arbitrary worker access to UObjects, world traces, shared mutable maps or borrowed Chaos pointers.
-- Validate generation and pose/state revisions before applying results or queuing physics commands. Stale F6, deletion, movement, grab and reuse results must be rejected or recomputed.
-- Schedule sufficiently early and in coarse batches. Measure a serial path for small workloads; avoid one task per fragment and launch-immediate-wait patterns. Preserve same-frame hit/history dependencies with explicit completion boundaries.
-- Compare task worker contention with existing renderer/Chaos work. Enabling async physics or changing timestep is not a substitute for this task and requires a separate measured correctness experiment.
+- Snapshot owned IDs/revisions, transforms, velocities, flags, immutable hull geometry and candidate relationships at the correct physics phase.
+- Move supported pure calculations, such as candidate selection, fragment poses, convex lowest points and impulse math, into coarse worker batches. Keep UObjects, world traces, mutable shared maps and borrowed Chaos pointers out of jobs.
+- Validate reset-generation and state/pose revisions before apply. Reject or recompute results invalidated by F6, deletion, movement, grab or reuse.
+- Schedule work early enough to overlap useful work; avoid one job per fragment and immediate wait after launch. Keep a serial path for small workloads and explicit completion boundaries for same-frame hit/history dependencies.
+- Use the installed UE 5.8 task APIs and explicit job/storage lifetimes. Do not change async-physics mode or timestep as a substitute.
 
-## Acceptance and handoff
+## Focused correctness and handoff
 
-Equivalent selected fragments, transforms, support decisions and ordering across serial/parallel paths under controlled input. Exercise F6, owner deletion, cross-cell motion and reuse while work is pending. No race, stale pointer or missed first hit. Report snapshot/job/wait/apply distributions and total frame p95/p99 at small and large loads; retain only useful defaults and preserve rejected experiments.
+Build and compare serial/parallel outputs on a small controlled case. Check pending-work cancellation/invalidation during reset, deletion, cross-cell motion and reuse. No races, stale pointers, changed hit ownership or ordering. Supply optional diagnostic job/wait counters; no required parallelism benchmark or frame-time gate.
 
-Deliver `Docs/DestructionScaling01DS06.md`, scoped implementation, meaningful concurrency/regression evidence and primary independent technical review. Verify installed UE 5.8 APIs and max/standard execution settings. Commit and stop before DS-07.
+Deliver the scoped implementation, `Docs/DestructionScaling01DS06.md`, build result and concise evidence for changed behavior under `Saved/DestructionScaling01/DS06/`. Record exact source/DLL identity for runtime checks. Commit verified task-scoped changes, restore editor state and stop. No performance acceptance gate or owner-rating gate before the next separately started task. Execution/review routing follows the shared policy and any explicit owner exception in that chat.
 
-New chat opener: "Start MSQ-166. Read Docs/Tasks/DestructionScaling01-DS06.md and the indicated program/predecessor sections. Execute only this task; do not start successors."
+New chat opener: "Start MSQ-166. Read Docs/Tasks/DestructionScaling01-DS06.md and the indicated shared boundaries/predecessor handoff. Implement this task only, with build and focused correctness checks, without benchmark campaigns. Do not start successors."

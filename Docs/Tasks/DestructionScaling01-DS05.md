@@ -1,23 +1,25 @@
-# MSQ-165 / DS-05: shared local support and event-driven updates
+# MSQ-165 / DS-05: Shared local support and updates driven by changes
 
-Multica: MSQ-165 (`01a0e9bc-bdaf-730f-bc24-9b9eae2be879`), parent MSQ-160, stage 5. Prepared, unassigned, no execution authorized. Dependency: accepted DS-04 and the DS-03 lifecycle. Read [shared acceptance](DestructionScaling01.md); owner start authorizes this task only.
+Multica: MSQ-165 (`01a0e9bc-bdaf-730f-bc24-9b9eae2be879`), parent MSQ-160, stage 5. Prepared only; unassigned, no execution authorized by this revision. Start this task in a separate owner chat. Dependency: Implemented and committed MSQ-164 and the DS-03 lifecycle.
+
+Authority: [ImplementationOnly02](../Approvals/DestructionScaling01-ImplementationOnly02.json). Read the [shared implementation boundaries](DestructionScaling01.md); no recursive history read or DS-01 benchmark restart.
 
 ## Outcome
 
-Make support/pose maintenance follow changed nearby fragments, including piles formed from several owners. Remove redundant scans while preserving exact support and wake behavior.
+Replace repeated broad scans with shared local support dependencies and updates restricted to affected fragments.
 
-## Work
+## Implementation
 
-- Precompute authored bone-to-facing relationships and immutable hull data. Gather reusable state once per safe phase rather than rebuilding leaf lists and locking physics separately for every candidate.
-- Maintain a shared spatial candidate index and explicit support dependencies. Conservative broad-phase selection must retain every possible support; exact collision tests remain authoritative.
-- Propagate moved, removed, fractured, grabbed and awakened support changes to affected dependents. Distinguish structural attachment from physical resting contact; use Chaos contacts/sleep where suitable instead of duplicating the solver.
-- Queue dirty work and stagger nonurgent maintenance. First-hit/history decisions and urgent support-loss wake cannot be delayed arbitrarily. Preserve deterministic selection/mutation ordering where the existing contract needs it.
-- Use the benchmark to distinguish remaining projectile blocker collection cost from fragment support work. Do not rewrite unrelated ballistic history merely to expand this task.
+- Precompute bone-to-facing relationships and immutable hull data. Gather state once per safe phase instead of rebuilding lists or repeatedly locking the same physics data.
+- Maintain a shared spatial candidate index and explicit support dependencies across owners. Conservative candidate selection must include every possible support; exact tests remain authoritative.
+- Invalidate affected dependents when support moves, disappears, fractures, is grabbed or wakes. Distinguish structural attachment from resting physical contact; use Chaos contact/sleep information where appropriate.
+- Queue changed work and stagger nonurgent maintenance. First-hit/history decisions and urgent support-loss wake remain timely. Preserve deterministic selection/mutation order where required.
+- Keep projectile blocker/history semantics intact. Reuse available state within the scoped fragment path; do not expand into unrelated ballistic rewrites.
 
-## Acceptance and handoff
+## Focused correctness and handoff
 
-Own-owner and mixed-owner stacks behave correctly when lower pieces are moved, removed or thrown. No hovering, missed wake or missed support across spatial-cell boundaries. Actor/component lifecycle, F6 and world recreation clear dependencies safely. Record exact query counts and support time for intact, moving and sleeping workloads; stationary work must decrease without hiding interaction.
+Check own-owner and mixed-owner support, spatial-cell crossing, moved/deleted lower pieces, sleep/wake, F6 and world recreation. Verify that unchanged sleeping fragments avoid repeated full scans while affected neighbours update correctly. Use targeted counters/assertions if needed; no timed workload campaign.
 
-Deliver `Docs/DestructionScaling01DS05.md`, focused regression fixtures, source/DLL-bound evidence and primary independent technical review. Commit the accepted task and stop before DS-06.
+Deliver the scoped implementation, `Docs/DestructionScaling01DS05.md`, build result and concise evidence for changed behavior under `Saved/DestructionScaling01/DS05/`. Record exact source/DLL identity for runtime checks. Commit verified task-scoped changes, restore editor state and stop. No performance acceptance gate or owner-rating gate before the next separately started task. Execution/review routing follows the shared policy and any explicit owner exception in that chat.
 
-New chat opener: "Start MSQ-165. Read Docs/Tasks/DestructionScaling01-DS05.md and the indicated program/predecessor sections. Execute only this task; do not start successors."
+New chat opener: "Start MSQ-165. Read Docs/Tasks/DestructionScaling01-DS05.md and the indicated shared boundaries/predecessor handoff. Implement this task only, with build and focused correctness checks, without benchmark campaigns. Do not start successors."

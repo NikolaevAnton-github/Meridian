@@ -1,0 +1,30 @@
+{
+  "decision_id": "DestructionScaling01-ImplementationOnly02",
+  "date": "2026-09-29",
+  "authority": "Owner direct-chat correction",
+  "owner_instruction": "нет ты закрой все прогоны и переделай задачи, что там просто нужно произвести оптимизации. Что бы я в отдельных чатах их запускал.",
+  "scope": [
+    "Stop all current benchmark/build/editor runs belonging to MSQ-161.",
+    "Archive unfinished benchmark work without deleting owner assets or evidence.",
+    "Cancel MSQ-161 as a required benchmark stage; do not claim completion.",
+    "Rewrite MSQ-162 through MSQ-168 as concrete implementation tasks, removing DS-01 benchmark dependencies and mandatory performance campaigns.",
+    "Synchronize task descriptions/status administratively with suppress_run; preserve unassigned zero-run children.",
+    "Keep build and focused correctness checks, source/asset preservation and explicit interaction boundaries.",
+    "Owner evaluates the optimization result after the sequence; each task must be started separately in a new chat."
+  ],
+  "successor_execution_authorized": false,
+  "new_benchmark_campaigns_authorized": false,
+  "performance_acceptance": "Owner evaluation after implementation; no measured gain or FPS gate required per task.",
+  "review_scope": "No execution/reviewer dispatch in this administrative revision; existing rules and explicit per-task owner exceptions govern later chats.",
+  "program": "Docs/Tasks/DestructionScaling01.md",
+  "stopped_task": "MSQ-161",
+  "prepared_tasks": [
+    "MSQ-162",
+    "MSQ-163",
+    "MSQ-164",
+    "MSQ-165",
+    "MSQ-166",
+    "MSQ-167",
+    "MSQ-168"
+  ]
+}
