@@ -12,6 +12,11 @@
 	],
 	"Plugins": [
 		{
+			"Name": "PlanarCut",
+			"Enabled": true,
+			"TargetAllowList": ["Editor"]
+		},
+		{
 			"Name": "GASPALS",
 			"Enabled": true
 		},

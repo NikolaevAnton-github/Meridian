@@ -8,9 +8,9 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
 
 - **Destruction:** [Next Gen toolkit migration](NextGenDestruction01.md) is accepted;
   the custom ED implementation is retired. [MSQ-74's new plan](Tasks/EnvironmentDestruction01Plan.md)
-  retains integration. [Demo checkpoint](DemoColumnCheckpoint01.md): center
-  demo Correction04 preserved; per-shot response and debris-retention proposals.
-  Direct, outside Multica, no reviewer. [MSQ-156](ReinforcedColumn02.md) and its
+  retains integration. [Demo](DemoColumnExperiment06.md): large pieces carry facing,
+  fixed core, 50 retained; checkpoint `6e82d7a`. Fine chips rejected.
+  Direct, no Multica/reviewer; owner play gate open. [MSQ-156](ReinforcedColumn02.md) and its
   [rev13 correction](ColumnRelief06.md) remain separate candidates.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
   technically complete, owner review waiver. MSQ-150/151 are

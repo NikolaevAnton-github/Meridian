@@ -22,6 +22,12 @@ public:
     static FString BuildDemoColumnCladding(const FString& SourceFile);
     UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
     static FString BakeDemoColumnScale();
+    UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
+    static FString BuildDemoColumnSurface();
+    UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
+    static FString BuildDemoColumnCoarse();
+    UFUNCTION(BlueprintCallable, Category="Destruction|Experiments")
+    static FString AnchorDemoColumnCore();
     UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")
     static FString InspectCollection(UGeometryCollection* Collection);
     UFUNCTION(BlueprintCallable, Category="Destruction|Authoring")

@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-28",
+  "scope": "Direct-chat experimental iteration of the center lobby demo column",
+  "owner_instruction": "Implement proposed option 2 for responsive concrete shots; retain up to 50 settled pieces per column. No task and no independent reviewers.",
+  "checkpoint": "6e82d7a",
+  "authorized_changes": [
+    "Finer exterior concrete fragments and local per-shot leaf release",
+    "Shared retention limit of 50 settled tile/concrete pieces with simulation and collision disabled",
+    "Isolated Correction05 candidate and replacement of the existing center demo actor",
+    "Direct local implementation, runtime verification and local commit"
+  ],
+  "workflow_waivers": ["Multica task", "independent technical review"],
+  "owner_visual_play_acceptance": "pending"
+}

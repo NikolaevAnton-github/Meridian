@@ -6,6 +6,7 @@
 #include "Math/RandomStream.h"
 #include "PhysicsProxy/GeometryCollectionPhysicsProxy.h"
 #include "PhysicsSolver.h"
+#include "Async/Async.h"
 
 void ApplyDemoColumnScatter(UGeometryCollectionComponent* Concrete, const FHitResult& Hit, uint32 Seed)
 {
@@ -97,5 +98,92 @@ void ApplyDemoColumnScatter(UGeometryCollectionComponent* Concrete, const FHitRe
             // An already released, active leaf can receive another direct hit.
             Scatter(Body);
         }
+    });
+}
+
+void ReleaseDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, const FHitResult& Hit, uint32 Seed)
+{
+    check(IsInGameThread());
+    auto* Proxy = Concrete ? Concrete->GetPhysicsProxy() : nullptr;
+    auto* Solver = Proxy ? Proxy->GetSolver<Chaos::FPhysicsSolver>() : nullptr;
+    if (!Solver || Bone == INDEX_NONE) return;
+    const FVector Normal = Hit.ImpactNormal.GetSafeNormal();
+    Solver->EnqueueCommandImmediate([Proxy, Solver, Bone, Normal, Seed]()
+    {
+        auto* Particle = Proxy->GetParticleByIndex_Internal(Bone);
+        auto* Leaf = Particle ? Particle->CastToClustered() : nullptr;
+        if (!Leaf || Leaf->PhysicsProxy() != Proxy || Leaf->ClusterIds().NumChildren != 0) return;
+        auto* Evolution = Solver->GetEvolution();
+        if (!Evolution) return;
+        bool Released = false;
+        if (Leaf->Disabled() && Leaf->Parent() && !Leaf->Parent()->Parent())
+        {
+            Evolution->GetRigidClustering().ReleaseClusterParticles(TArray<Chaos::FPBDRigidParticleHandle*>{Leaf}, true);
+            Released = !Leaf->Disabled() && !Leaf->Parent();
+        }
+        // An exposed original support leaf must also respond to its direct hit.
+        // Only this released leaf changes state; untouched support stays fixed.
+        if (!Leaf->Disabled() && !Leaf->Parent() && !Leaf->IsDynamic() && !Leaf->IsSleeping())
+        {
+            Leaf->SetIsAnchored(false);
+            Evolution->SetParticleObjectState(Leaf, Chaos::EObjectStateType::Dynamic);
+        }
+        if (!Leaf->Disabled() && Leaf->IsDynamic())
+        {
+            // Material sleep can stop detached GC leaves before ground contact.
+            // The bounded debris controller freezes only supported, settled pieces.
+            Evolution->SetParticleSleepType(Leaf, Chaos::ESleepType::NeverSleep);
+            FRandomStream Random(Seed * 733u + uint32(Bone));
+            Leaf->SetV(Leaf->GetV() + Normal * 300. + Random.VRand() * 120. + FVector(0, 0, 70));
+            Leaf->SetW(Leaf->GetW() + Random.VRand() * Random.FRandRange(3.f, 7.f));
+            Evolution->WakeParticle(Leaf);
+        }
+        UE_LOG(LogTemp, Display, TEXT("DemoColumn05 hit=%u bone=%d released=%d disabled=%d parent=%d"),
+            Seed, Bone, Released, Leaf->Disabled(), Leaf->Parent() != nullptr);
+    });
+}
+
+void KeepDemoColumnLeafAwake(UGeometryCollectionComponent* Concrete, int32 Bone)
+{
+    check(IsInGameThread());
+    auto* Proxy = Concrete ? Concrete->GetPhysicsProxy() : nullptr;
+    auto* Solver = Proxy ? Proxy->GetSolver<Chaos::FPhysicsSolver>() : nullptr;
+    if (!Solver) return;
+    Solver->EnqueueCommandImmediate([Proxy, Solver, Bone]()
+    {
+        auto* Particle = Proxy->GetParticleByIndex_Internal(Bone);
+        auto* Leaf = Particle ? Particle->CastToClustered() : nullptr;
+        if (!Leaf || Leaf->PhysicsProxy() != Proxy || Leaf->Disabled() || Leaf->Parent() ||
+            Leaf->ClusterIds().NumChildren || !Leaf->IsDynamic()) return;
+        Solver->GetEvolution()->SetParticleSleepType(Leaf, Chaos::ESleepType::NeverSleep);
+        Solver->GetEvolution()->WakeParticle(Leaf);
+    });
+}
+
+void FreezeDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, TFunction<void(bool)> Completion)
+{
+    check(IsInGameThread());
+    auto* Proxy = Concrete ? Concrete->GetPhysicsProxy() : nullptr;
+    auto* Solver = Proxy ? Proxy->GetSolver<Chaos::FPhysicsSolver>() : nullptr;
+    if (!Solver) { Completion(false); return; }
+    // Enqueue immediately on the owning solver, matching the native one-shot
+    // command lifetime. No raw proxy is stored for a later game-thread call.
+    Solver->EnqueueCommandImmediate([Proxy, Solver, Bone, Completion = MoveTemp(Completion)]() mutable
+    {
+        bool Frozen = false;
+        auto* Particle = Proxy->GetParticleByIndex_Internal(Bone);
+        auto* Leaf = Particle ? Particle->CastToClustered() : nullptr;
+        if (Leaf && Leaf->PhysicsProxy() == Proxy && !Leaf->Disabled() && !Leaf->Parent() &&
+            Leaf->ClusterIds().NumChildren == 0 && (Leaf->IsDynamic() || Leaf->IsSleeping()) &&
+            Leaf->GetV().SizeSquared() < 25. && Leaf->GetW().SizeSquared() < .04)
+        {
+            Leaf->SetV(Chaos::FVec3::ZeroVector);
+            Leaf->SetW(Chaos::FVec3::ZeroVector);
+            Leaf->SetKinematicTarget(Chaos::FKinematicTarget{});
+            Solver->GetEvolution()->SetParticleObjectState(Leaf, Chaos::EObjectStateType::Kinematic);
+            Solver->GetParticles().MarkTransientDirtyParticle(Leaf);
+            Frozen = true;
+        }
+        AsyncTask(ENamedThreads::GameThread, [Completion = MoveTemp(Completion), Frozen]() mutable { Completion(Frozen); });
     });
 }

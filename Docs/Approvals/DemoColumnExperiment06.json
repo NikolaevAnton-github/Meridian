@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-28",
+  "scope": "Owner-directed replacement of rejected Correction05",
+  "owner_feedback": [
+    "Concrete emerged through still-attached facing and the core appeared to eject.",
+    "Small fragments are rejected. Return to the previous column and make its large pieces detach more easily, taking surrounding facing with them."
+  ],
+  "direction": "Use checkpoint Correction04 geometry without additional fracturing; bind every overlapping tile to a released large piece; protect the inner core.",
+  "retention_limit": 50,
+  "workflow": "Direct, outside Multica; no task and no independent reviewer, as already authorized.",
+  "owner_visual_play_acceptance": "pending"
+}

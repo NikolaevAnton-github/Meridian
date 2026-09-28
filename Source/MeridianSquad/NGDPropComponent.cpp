@@ -1,5 +1,6 @@
 #include "NGDPropComponent.h"
 #include "DemoColumnCladding.h"
+#include "Components/InstancedStaticMeshComponent.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
@@ -152,14 +153,18 @@ void UNGDPropComponent::BeginPlay()
     // The supported column shell overlaps its retained core. Contact impulses
     // from a detached chip must not fracture the rest of that shell; the vendor
     // bullet field still supplies strain, and debris keeps physical collision.
-    if (SourceData->GetPathName() == TEXT("/Game/ReinforcedColumn01/DA_RC01_Column.DA_RC01_Column"))
+    if (SourceData->GetPathName() == TEXT("/Game/ReinforcedColumn01/DA_RC01_Column.DA_RC01_Column") ||
+        GetOwner()->ActorHasTag(TEXT("DemoColumnSurface05")) || GetOwner()->ActorHasTag(TEXT("DemoColumnCoarse06")))
     {
         Collection->SetEnableDamageFromCollision(false);
         // Fragments enclose the embedded reinforcement before they break. A
         // solver contact with those rods starts in penetration and traps debris.
         // Keep reinforcement query/pawn collision while letting fragments clear it.
-        if (UStaticMeshComponent* Rebar = GetOwner()->FindComponentByClass<UStaticMeshComponent>())
-            Rebar->SetCollisionResponseToChannel(ECC_Destructible, ECR_Ignore);
+        TArray<UStaticMeshComponent*> Meshes;
+        GetOwner()->GetComponents(Meshes);
+        for (auto* Mesh : Meshes)
+            if (!Mesh->IsA<UInstancedStaticMeshComponent>())
+                Mesh->SetCollisionResponseToChannel(ECC_Destructible, ECR_Ignore);
     }
     Collection->SetNotifyBreaks(true);
     Collection->OnChaosBreakEvent.AddUniqueDynamic(this, &UNGDPropComponent::OnBreak);
@@ -308,7 +313,9 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
         DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/DA_DemoTiledColumn01.DA_DemoTiledColumn01") &&
         DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction02/DA_DemoTiledColumn02.DA_DemoTiledColumn02") &&
         DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_DemoTiledColumn03.DA_DemoTiledColumn03") &&
-        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_DemoTiledColumn04.DA_DemoTiledColumn04")) return nullptr;
+        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_DemoTiledColumn04.DA_DemoTiledColumn04") &&
+        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction05/DA_DemoTiledColumn05.DA_DemoTiledColumn05") &&
+        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_DemoTiledColumn06.DA_DemoTiledColumn06")) return nullptr;
     UClass* Class = LoadClass<AActor>(nullptr, VendorClass);
     if (!Class) return nullptr;
     AActor* Actor = World->SpawnActorDeferred<AActor>(Class, Transform, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
@@ -328,9 +335,13 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
     C->RegisterComponent();
     Actor->Tags.Add(TEXT("NGD01"));
     const bool bVariedCladding = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_DemoTiledColumn04.DA_DemoTiledColumn04");
+    const bool bSurfaceExperiment = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction05/DA_DemoTiledColumn05.DA_DemoTiledColumn05");
+    const bool bCoarseExperiment = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_DemoTiledColumn06.DA_DemoTiledColumn06");
     if (bVariedCladding) Actor->Tags.Add(TEXT("DemoColumnCladding04"));
+    if (bSurfaceExperiment) Actor->Tags.Add(TEXT("DemoColumnSurface05"));
+    if (bCoarseExperiment) Actor->Tags.Add(TEXT("DemoColumnCoarse06"));
     Actor->FinishSpawning(Transform);
-    if (bVariedCladding || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_DemoTiledColumn03.DA_DemoTiledColumn03"))
+    if (bCoarseExperiment || bSurfaceExperiment || bVariedCladding || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_DemoTiledColumn03.DA_DemoTiledColumn03"))
     {
         // The concrete enlargement is baked. The independent vendor rebar mesh
         // still uses its original 5 m coordinates, including after F6 replacement.
