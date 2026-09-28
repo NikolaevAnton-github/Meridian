@@ -405,8 +405,28 @@ void UDemoColumnCladding::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     if (!Data || !Concrete || !GetWorld()->IsGameWorld()) return;
-    const auto& Bones = Concrete->GetComponentSpaceTransforms3f();
     const FTransform ComponentWorld = Concrete->GetComponentTransform();
+    const FTransform RootTransform = Concrete->GetRootCurrentComponentSpaceTransform();
+    const bool bStationary = FullUpdateCount > 0 && ComponentWorld.Equals(LastUpdatedComponentTransform, .0001f) &&
+        RootTransform.Equals(LastUpdatedRootTransform, .0001f);
+    // Keep a cheap sentinel for external movement and fracture, including damage
+    // that did not arrive through HandleImpact. Damaged columns retain the full
+    // update path for carried facing, moving debris and retention maintenance.
+    bIdleLastTick = bStackingExperiment && ImpactSerial == 0 && Concrete->GetRootIndex() != INDEX_NONE &&
+        !Concrete->IsRootBroken() && !Concrete->IsFullyDecayed() && ReleasedConcrete.IsEmpty() &&
+        Debris.IsEmpty() && CeramicDebris.IsEmpty() && bStationary && bHadStationaryUpdate;
+    if (bIdleLastTick)
+    {
+        ++SkippedIdleUpdates;
+        return;
+    }
+    // Run one stationary update after movement to clear tile velocities before
+    // sleeping; a later shot must not inherit the column's last moving velocity.
+    bHadStationaryUpdate = bStationary;
+    LastUpdatedComponentTransform = ComponentWorld;
+    LastUpdatedRootTransform = RootTransform;
+    ++FullUpdateCount;
+    const auto& Bones = Concrete->GetComponentSpaceTransforms3f();
     if (bCoarseExperiment && Concrete->GetDynamicCollection())
     {
         FGeometryCollectionDynamicStateFacade State(*Concrete->GetDynamicCollection());
@@ -931,6 +951,9 @@ FString UDemoColumnCladding::GetState() const
     Out->SetNumberField(TEXT("bonded_attached"), Bonded);
     Out->SetNumberField(TEXT("tile_hits"), HitCount);
     Out->SetNumberField(TEXT("debris"), Debris.Num());
+    Out->SetBoolField(TEXT("idle"), bIdleLastTick);
+    Out->SetNumberField(TEXT("full_updates"), static_cast<double>(FullUpdateCount));
+    Out->SetNumberField(TEXT("idle_updates_skipped"), static_cast<double>(SkippedIdleUpdates));
     Out->SetBoolField(TEXT("surface_experiment"), bSurfaceExperiment);
     Out->SetNumberField(TEXT("retained_tiles"), RetainedTiles.Num());
     Out->SetNumberField(TEXT("retained_concrete"), RetainedConcrete.Num());

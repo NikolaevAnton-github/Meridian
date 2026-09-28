@@ -1,0 +1,17 @@
+{
+  "decision_id": "LobbyColumnsPerf01-OwnerScope01",
+  "date": "2026-09-28",
+  "authority": "Owner instruction in direct chat",
+  "instruction_translation": "Implement the first two fixes from the table. Without a task and without an independent reviewer.",
+  "approved_scope": [
+    "Resolve NGD component membership once per actor during each existing blocker sample pass.",
+    "Skip unnecessary full cladding updates on intact stationary columns, with wake handling for hits, fracture and movement, and correct F6 reset behavior."
+  ],
+  "execution": "Direct implementation and self-checks; no Multica task and no independent reviewer for this change.",
+  "excluded_scope": [
+    "Blocker registry or projectile history redesign",
+    "Reduced collision, destruction detail or debris limits",
+    "New rendering representation or parallel execution"
+  ],
+  "handoff": "Docs/LobbyColumnsPerf01.md"
+}

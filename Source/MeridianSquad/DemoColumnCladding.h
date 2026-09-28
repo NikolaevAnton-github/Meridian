@@ -103,6 +103,12 @@ private:
     TSet<int32> ReleasedConcrete;
     TMap<int32, int32> CarriedGroupByOriginal;
     uint32 ImpactSerial = 0;
+    FTransform LastUpdatedComponentTransform;
+    FTransform LastUpdatedRootTransform;
+    bool bHadStationaryUpdate = false;
+    bool bIdleLastTick = false;
+    uint64 FullUpdateCount = 0;
+    uint64 SkippedIdleUpdates = 0;
     void Detach(int32 Tile, const FVector& Push);
     void DamageConcrete(const FHitResult& Hit);
     FVector FacingScatter(int32 Tile, const FHitResult& Hit) const;

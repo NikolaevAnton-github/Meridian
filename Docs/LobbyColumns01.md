@@ -1,5 +1,9 @@
 # LobbyColumns01
 
+The subsequent [LobbyColumnsPerf01](LobbyColumnsPerf01.md) removes repeated
+blocker lookups and full updates of pristine stationary cladding. Its focused
+PIE checks preserve the destruction/reset behavior documented here.
+
 [Owner scope](Approvals/LobbyColumns01-OwnerScope01.json): direct implementation,
 without a Multica task or independent review. The central accepted demo is the
 reference and remains unchanged. Only read-only source research was delegated.

@@ -274,6 +274,8 @@ TMap<TWeakObjectPtr<UPrimitiveComponent>, ACombatProjectileWorld::FBlockerSample
     for (TActorIterator<AActor> It(GetWorld()); It; ++It)
     {
         if (It->IsA<ACharacter>() || It->IsA<APhysicsControlDummy>() || AGASPEnemyFixture::FromFoundation(*It) || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics"))) continue;
+        // All facing components share their owner's destruction registration.
+        const bool bNGDActor = It->FindComponentByClass<UNGDPropComponent>() != nullptr;
         TInlineComponentArray<UPrimitiveComponent*> Parts(*It);
         for (UPrimitiveComponent* Part : Parts)
             if (Part->IsQueryCollisionEnabled() && Part->GetCollisionResponseToChannel(ECC_Visibility) == ECR_Block)
@@ -283,7 +285,7 @@ TMap<TWeakObjectPtr<UPrimitiveComponent>, ACombatProjectileWorld::FBlockerSample
                 // sweeps query the live per-piece collision directly. Retain
                 // registration/transform barriers and all launch-cover queries.
                 const bool bNGDCollection = (Part->IsA<UGeometryCollectionComponent>() || Part->ComponentHasTag(TEXT("DemoColumnCladding"))) &&
-                    It->FindComponentByClass<UNGDPropComponent>();
+                    bNGDActor;
                 Samples.Add(Part, {Part->GetComponentTransform(),
                     bNGDCollection ? FVector::ZeroVector : Part->Bounds.BoxExtent});
             }
