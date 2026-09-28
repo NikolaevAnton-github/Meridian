@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-28",
+  "scope": "Owner-directed refinement of the generally liked Correction06",
+  "baseline": "ee196f2",
+  "owner_feedback": [
+    "Make the large concrete pieces about 30 percent smaller.",
+    "Reduce ejection and bounce so concrete feels heavier, not like foam.",
+    "Facing carried by concrete should crumble on floor impact or when shot."
+  ],
+  "direction": "Split only the largest exterior pieces into two balanced visible areas; reduce mass-dependent launch speed, spin and restitution; add bounded temporary ceramic chips.",
+  "retention_limit": 50,
+  "temporary_ceramic_chip_limit": 32,
+  "workflow": "Direct, outside Multica; no task, agents or independent reviewer, as already authorized.",
+  "owner_visual_play_acceptance": "pending for Correction07"
+}

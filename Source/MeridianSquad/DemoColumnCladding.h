@@ -77,6 +77,7 @@ private:
     float DebrisPollTime = 0.f;
     bool bSurfaceExperiment = false;
     bool bCoarseExperiment = false;
+    bool bRefinedExperiment = false;
     bool bEndingPlay = false;
     int32 ConcreteImpacts = 0;
     int32 LastConcreteBone = INDEX_NONE;
@@ -96,4 +97,14 @@ private:
     void CarryTiles(int32 Bone);
     bool RemoveTileInstance(int32 Tile);
     bool HasStaticSupport(const FVector& Bottom) const;
+    void UpdateFacingImpacts();
+    void CrumbleCarriedFacing(int32 Bone, const FVector& Point, const FVector& Normal, bool bShot);
+    TArray<int32> ChipTemplates;
+    UPROPERTY(Transient) TArray<TObjectPtr<AActor>> CeramicDebris;
+    TMap<int32, FVector> PreviousConcreteVelocity;
+    TSet<int32> GroundCrumbled;
+    int32 GroundCrumbleEvents = 0;
+    int32 ShotCrumbleEvents = 0;
+    int32 CrumbledTiles = 0;
+    int32 SpawnedCeramicChips = 0;
 };

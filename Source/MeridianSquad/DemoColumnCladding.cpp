@@ -3,6 +3,8 @@
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/StaticMeshActor.h"
+#include "Engine/StaticMesh.h"
+#include "PhysicalMaterials/PhysicalMaterial.h"
 #include "Engine/World.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
 #include "GeometryCollection/GeometryCollectionObject.h"
@@ -51,9 +53,11 @@ UDemoColumnCladding::UDemoColumnCladding()
 void UDemoColumnCladding::Initialize()
 {
     if (!Groups.IsEmpty()) return;
+    bRefinedExperiment = GetOwner()->ActorHasTag(TEXT("DemoColumnRefined07"));
     bCoarseExperiment = GetOwner()->ActorHasTag(TEXT("DemoColumnCoarse06"));
     bSurfaceExperiment = bCoarseExperiment || GetOwner()->ActorHasTag(TEXT("DemoColumnSurface05"));
-    Data = LoadObject<UDemoColumnCladdingData>(nullptr, bCoarseExperiment
+    Data = LoadObject<UDemoColumnCladdingData>(nullptr, bRefinedExperiment
+        ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/DA_Cladding07.DA_Cladding07") : bCoarseExperiment
         ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_Cladding06.DA_Cladding06") : bSurfaceExperiment
         ? TEXT("/Game/Experiments/DemoTiledColumn01/Correction05/DA_Cladding05.DA_Cladding05")
         : GetOwner()->ActorHasTag(TEXT("DemoColumnCladding04")) ? VariedTileDataPath : TileDataPath);
@@ -82,6 +86,12 @@ void UDemoColumnCladding::Initialize()
     {
         const auto& Tile = Data->Tiles[I];
         if (!Tile.Mesh) continue;
+        if (bRefinedExperiment && Tile.AreaCm2 >= 30.f && Tile.AreaCm2 <= 300.f)
+        {
+            const FVector Extent = Tile.Mesh->GetBounds().BoxExtent;
+            if (FMath::Min(Extent.Y, Extent.Z) > 1.f && FMath::Max(Extent.Y, Extent.Z) / FMath::Min(Extent.Y, Extent.Z) < 2.5f)
+                ChipTemplates.Add(I);
+        }
         int32 GroupIndex;
         if (const auto* Found = MeshGroups.Find(Tile.Mesh)) GroupIndex = *Found;
         else
@@ -122,6 +132,9 @@ void UDemoColumnCladding::BeginPlay()
     Initialize();
     if (Concrete)
     {
+        if (bRefinedExperiment)
+            if (auto* Heavy = LoadObject<UPhysicalMaterial>(nullptr, TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/PM_HeavyConcrete07.PM_HeavyConcrete07")))
+                Concrete->SetPhysMaterialOverride(Heavy);
         AddTickPrerequisiteComponent(Concrete);
         // Enlarging the demo multiplies debris mass. Contact impacts must not
         // turn one rifle hit into a full-height secondary destruction cascade.
@@ -211,6 +224,16 @@ void UDemoColumnCladding::CarryTiles(int32 Bone)
             Part->SetupAttachment(Concrete);
             Part->SetRelativeTransform(FTransform::Identity);
             Part->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+            if (bRefinedExperiment)
+            {
+                // Ray queries keep carried/settled facing shootable without
+                // restoring simulation or pawn/debris contacts.
+                Part->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+                Part->SetCollisionObjectType(ECC_WorldDynamic);
+                Part->SetCollisionResponseToAllChannels(ECR_Ignore);
+                Part->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+                Part->ComponentTags.Add(TileTag);
+            }
             Part->SetCanEverAffectNavigation(false);
             Part->SetRemoveSwap();
             GetOwner()->AddInstanceComponent(Part);
@@ -243,6 +266,11 @@ bool UDemoColumnCladding::HandleImpact(FHitResult& Hit)
         if (Group.Instances != Part) continue;
         if (!Group.Tiles.IsValidIndex(Hit.Item)) return true;
         const int32 TileIndex = Group.Tiles[Hit.Item];
+        if (bRefinedExperiment && CarriedTiles[TileIndex])
+        {
+            CrumbleCarriedFacing(CarrierByTile[TileIndex], Hit.ImpactPoint, Hit.ImpactNormal, true);
+            return true;
+        }
         const auto& Tile = Data->Tiles[TileIndex];
         ++Hits[TileIndex];
         if (!Tile.bBonded || Hits[TileIndex] > 1)
@@ -294,7 +322,7 @@ void UDemoColumnCladding::DamageConcrete(const FHitResult& Hit)
             Objects.Reserve(ConcreteLeaves.Num());
             for (const int32 Bone : ConcreteLeaves)
             {
-                if (RetainedConcrete.Contains(Bone) || PendingConcrete.Contains(Bone) || RemovedConcrete.Contains(Bone)) continue;
+                if ((!bRefinedExperiment && (RetainedConcrete.Contains(Bone) || PendingConcrete.Contains(Bone))) || RemovedConcrete.Contains(Bone)) continue;
                 if (auto* Object = Concrete->GetPhysicsObjectById(Bone)) Objects.Add(Object);
             }
             auto Interface = FPhysicsObjectExternalInterface::LockRead(Objects);
@@ -309,6 +337,11 @@ void UDemoColumnCladding::DamageConcrete(const FHitResult& Hit)
         if (bProtectedCore) { ++ProtectedCoreImpacts; return; }
         if (LastConcreteBone != INDEX_NONE)
         {
+            if (bRefinedExperiment && ReleasedConcrete.Contains(LastConcreteBone))
+            {
+                CrumbleCarriedFacing(LastConcreteBone, Hit.ImpactPoint, Hit.ImpactNormal, true);
+                return;
+            }
             CarryTiles(LastConcreteBone);
             ReleaseDemoColumnLeaf(Concrete, LastConcreteBone, Hit, ImpactSerial);
         }
@@ -376,6 +409,7 @@ void UDemoColumnCladding::TickComponent(float DeltaTime, ELevelTick TickType, FA
     }
     for (const int32 G : ChangedGroups) Groups[G].Instances->MarkRenderStateDirty();
     Debris.RemoveAll([](AActor* Actor) { return !IsValid(Actor); });
+    if (bRefinedExperiment) UpdateFacingImpacts();
     if (bSurfaceExperiment) UpdateDebris(DeltaTime);
 }
 
@@ -390,6 +424,95 @@ bool UDemoColumnCladding::HasStaticSupport(const FVector& Bottom) const
     FCollisionQueryParams Params(SCENE_QUERY_STAT(DemoColumnGround), false, GetOwner());
     return GetWorld()->LineTraceSingleByObjectType(Hit, Bottom + FVector(0, 0, 5), Bottom - FVector(0, 0, 8),
         FCollisionObjectQueryParams(ECC_WorldStatic), Params) && !Hit.bStartPenetrating && Hit.ImpactNormal.Z >= .65f;
+}
+
+void UDemoColumnCladding::UpdateFacingImpacts()
+{
+    CeramicDebris.RemoveAll([](AActor* Actor) { return !IsValid(Actor); });
+    const auto* Proxy = Concrete ? Concrete->GetPhysicsProxy() : nullptr;
+    if (!Proxy) return;
+    for (const int32 Bone : ReleasedConcrete)
+    {
+        if (GroundCrumbled.Contains(Bone) || RemovedConcrete.Contains(Bone)) continue;
+        const auto* Particle = Proxy->GetParticleByIndex_External(Bone);
+        if (!Particle || Particle->Disabled()) continue;
+        const FVector Velocity = Particle->GetV();
+        const FVector Previous = PreviousConcreteVelocity.FindRef(Bone);
+        PreviousConcreteVelocity.Add(Bone, Velocity);
+        FVector Bottom;
+        // A downward velocity arrested at the actual collision hull is a floor
+        // impact. A wall contact or a body merely passing the floor is not.
+        if (Previous.Z < -100.f && Velocity.Z - Previous.Z > 60.f &&
+            ConcreteBottom(Particle, Bottom) && HasStaticSupport(Bottom))
+        {
+            GroundCrumbled.Add(Bone);
+            CrumbleCarriedFacing(Bone, Bottom, FVector::UpVector, false);
+        }
+    }
+}
+
+void UDemoColumnCladding::CrumbleCarriedFacing(int32 Bone, const FVector& Point, const FVector& Normal, bool bShot)
+{
+    if (!bRefinedExperiment || !Data || ChipTemplates.IsEmpty()) return;
+    TArray<int32> Candidates;
+    for (int32 I = 0; I < InstanceByTile.Num(); ++I)
+        if (InstanceByTile[I] != INDEX_NONE && CarriedTiles[I] && CarrierByTile[I] == Bone)
+            Candidates.Add(I);
+    Candidates.Sort([&](int32 A, int32 B)
+    {
+        return FVector::DistSquared(LastWorld[A].GetLocation(), Point) < FVector::DistSquared(LastWorld[B].GetLocation(), Point);
+    });
+    const int32 Count = FMath::Min(Candidates.Num(), bShot ? 1 : 2);
+    if (!Count) return;
+    if (bShot) ++ShotCrumbleEvents; else ++GroundCrumbleEvents;
+    FRandomStream Random(HashCombineFast(GetTypeHash(Bone), ++ImpactSerial + 70117u));
+    for (int32 C = 0; C < Count; ++C)
+    {
+        const int32 Tile = Candidates[C];
+        const FTransform Pose = LastWorld[Tile];
+        if (!RemoveTileInstance(Tile)) continue;
+        ++CrumbledTiles;
+        const FVector Half = Data->Tiles[Tile].Mesh->GetBounds().BoxExtent * Pose.GetScale3D().GetAbs();
+        for (int32 K = 0; K < 5; ++K)
+        {
+            CeramicDebris.RemoveAll([](AActor* Actor) { return !IsValid(Actor); });
+            while (CeramicDebris.Num() >= 32)
+            {
+                if (IsValid(CeramicDebris[0])) CeramicDebris[0]->Destroy();
+                CeramicDebris.RemoveAt(0);
+            }
+            auto* Mesh = Data->Tiles[ChipTemplates[Random.RandRange(0, ChipTemplates.Num()-1)]].Mesh.Get();
+            const FVector MeshHalf = Mesh->GetBounds().BoxExtent;
+            const float Width = FMath::Clamp(FMath::Sqrt(Data->Tiles[Tile].AreaCm2 / 5.f) * Pose.GetScale3D().GetAbsMax(), 6.f, 18.f);
+            const float Scale = Width / (2.f * FMath::Max(MeshHalf.Y, MeshHalf.Z));
+            FVector Location = Pose.GetLocation() + Pose.GetUnitAxis(EAxis::Y) * Random.FRandRange(-Half.Y*.7f, Half.Y*.7f)
+                + Pose.GetUnitAxis(EAxis::Z) * Random.FRandRange(-Half.Z*.7f, Half.Z*.7f) + Normal * 3.f;
+            if (!bShot) Location.Z = FMath::Max(Location.Z, Point.Z + Width*.6f + 2.f);
+            const FTransform ChipPose(Pose.GetRotation(), Location, FVector(FMath::Max(Scale, .5f), Scale, Scale));
+            FActorSpawnParameters Params;
+            Params.Owner = GetOwner();
+            Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+            auto* Actor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), ChipPose, Params);
+            if (!Actor) continue;
+            auto* Part = Actor->GetStaticMeshComponent();
+            Part->SetMobility(EComponentMobility::Movable);
+            Part->SetStaticMesh(Mesh);
+            Part->SetWorldTransform(ChipPose);
+            Part->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+            Part->SetCollisionObjectType(ECC_PhysicsBody);
+            Part->SetCollisionResponseToAllChannels(ECR_Ignore);
+            Part->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+            Part->SetCanEverAffectNavigation(false);
+            Part->SetUseCCD(true);
+            Part->SetSimulatePhysics(true);
+            Part->SetPhysicsLinearVelocity(Velocities[Tile].GetClampedToMaxSize(120.f)*.25f +
+                Random.VRand()*Random.FRandRange(35.f, 80.f) + Normal*45.f + FVector(0,0,65));
+            Part->SetPhysicsAngularVelocityInRadians(Random.VRand()*Random.FRandRange(3.f, 6.f));
+            Actor->SetLifeSpan(4.f);
+            CeramicDebris.Add(Actor);
+            ++SpawnedCeramicChips;
+        }
+    }
 }
 
 void UDemoColumnCladding::UpdateDebris(float DeltaTime)
@@ -455,7 +578,11 @@ void UDemoColumnCladding::UpdateDebris(float DeltaTime)
                 Self->PendingConcrete.Remove(Bone);
                 if (!bFrozen) { Self->ConcreteStillTime[Bone] = 0.f; return; }
                 Self->RetainedConcrete.Add(Bone);
-                Self->Concrete->SetPerParticleCollisionProfileName(TArray<int32>{Bone}, UCollisionProfile::NoCollision_ProfileName);
+                // The engine UI profile is query-only: Visibility blocks, all
+                // physical channels overlap. It keeps exposed retained concrete
+                // shootable without simulation, floor contacts or pawn blocking.
+                Self->Concrete->SetPerParticleCollisionProfileName(TArray<int32>{Bone}, Self->bRefinedExperiment
+                    ? FName(TEXT("UI")) : UCollisionProfile::NoCollision_ProfileName);
             });
         }
         else if (Age >= 12.f)
@@ -499,9 +626,17 @@ FString UDemoColumnCladding::GetState() const
     Out->SetNumberField(TEXT("concrete_impacts"), ConcreteImpacts);
     Out->SetNumberField(TEXT("last_concrete_bone"), LastConcreteBone);
     Out->SetBoolField(TEXT("coarse_experiment"), bCoarseExperiment);
+    Out->SetBoolField(TEXT("refined_experiment"), bRefinedExperiment);
+    Out->SetNumberField(TEXT("ground_crumble_events"), GroundCrumbleEvents);
+    Out->SetNumberField(TEXT("shot_crumble_events"), ShotCrumbleEvents);
+    Out->SetNumberField(TEXT("crumbled_tiles"), CrumbledTiles);
+    Out->SetNumberField(TEXT("spawned_ceramic_chips"), SpawnedCeramicChips);
+    Out->SetNumberField(TEXT("active_ceramic_chips"), CeramicDebris.Num());
+    Out->SetNumberField(TEXT("ceramic_templates"), ChipTemplates.Num());
     if (bCoarseExperiment && Concrete)
     {
-        int32 Carried = 0, Unsupported = 0, CarriedCollision = 0, CoreMoved = 0;
+        int32 Carried = 0, Unsupported = 0, CarriedCollision = 0, CarriedPhysics = 0, CoreMoved = 0;
+        TArray<TSharedPtr<FJsonValue>> Targets;
         for (int32 I = 0; I < Data->Tiles.Num(); ++I)
         {
             if (InstanceByTile[I] == INDEX_NONE) continue;
@@ -509,6 +644,16 @@ FString UDemoColumnCladding::GetState() const
             {
                 ++Carried;
                 CarriedCollision += Groups[GroupByTile[I]].Instances->GetCollisionEnabled() != ECollisionEnabled::NoCollision;
+                CarriedPhysics += Groups[GroupByTile[I]].Instances->IsPhysicsCollisionEnabled();
+                if (bRefinedExperiment && Targets.Num() < 30)
+                {
+                    auto Target = MakeShared<FJsonObject>();
+                    Target->SetNumberField(TEXT("tile"), I);
+                    Target->SetNumberField(TEXT("bone"), CarrierByTile[I]);
+                    Target->SetStringField(TEXT("position"), LastWorld[I].GetLocation().ToString());
+                    Target->SetStringField(TEXT("normal"), LastWorld[I].GetUnitAxis(EAxis::X).ToString());
+                    Targets.Add(MakeShared<FJsonValueObject>(Target));
+                }
             }
             else
                 Unsupported += Data->Tiles[I].SupportBones.ContainsByPredicate([&](int32 B) { return ReleasedConcrete.Contains(B); });
@@ -521,6 +666,8 @@ FString UDemoColumnCladding::GetState() const
         Out->SetNumberField(TEXT("wall_tiles"), Attached - Carried);
         Out->SetNumberField(TEXT("unsupported_wall_tiles"), Unsupported);
         Out->SetNumberField(TEXT("carried_collision_tiles"), CarriedCollision);
+        Out->SetNumberField(TEXT("carried_physics_tiles"), CarriedPhysics);
+        Out->SetArrayField(TEXT("carried_targets"), Targets);
         Out->SetNumberField(TEXT("protected_core_moved"), CoreMoved);
         Out->SetNumberField(TEXT("protected_core_impacts"), ProtectedCoreImpacts);
         Out->SetNumberField(TEXT("released_concrete"), ReleasedConcrete.Num());
@@ -528,7 +675,7 @@ FString UDemoColumnCladding::GetState() const
     if (bSurfaceExperiment && Concrete)
     {
         int32 TileSimulating = 0, TileCollision = 0, ConcreteDynamic = 0, ConcreteCollision = 0, ConcreteInvisible = 0;
-        int32 TileUnsupported = 0, ConcreteUnsupported = 0;
+        int32 TileUnsupported = 0, ConcreteUnsupported = 0, ConcretePhysics = 0, ConcreteQuery = 0;
         for (const auto& Weak : RetainedTiles)
             if (const auto* Actor = Weak.Get())
                 if (const auto* Part = Actor->FindComponentByClass<UStaticMeshComponent>())
@@ -549,7 +696,11 @@ FString UDemoColumnCladding::GetState() const
                 FVector Bottom;
                 ConcreteUnsupported += !ConcreteBottom(Particle, Bottom) || !HasStaticSupport(Bottom);
                 for (const auto& Shape : Particle->ShapesArray())
+                {
                     ConcreteCollision += Shape->GetSimEnabled() || Shape->GetQueryEnabled();
+                    ConcretePhysics += Shape->GetSimEnabled();
+                    ConcreteQuery += Shape->GetQueryEnabled();
+                }
             }
             ConcreteInvisible += !Particle || Particle->Disabled() || !Transforms.IsValidIndex(Bone) ||
                 Transforms[Bone].GetScale3D().GetAbsMin() < .02f;
@@ -558,6 +709,8 @@ FString UDemoColumnCladding::GetState() const
         Out->SetNumberField(TEXT("retained_tile_collision"), TileCollision);
         Out->SetNumberField(TEXT("retained_concrete_nonkinematic"), ConcreteDynamic);
         Out->SetNumberField(TEXT("retained_concrete_collision_shapes"), ConcreteCollision);
+        Out->SetNumberField(TEXT("retained_concrete_physics_shapes"), ConcretePhysics);
+        Out->SetNumberField(TEXT("retained_concrete_query_shapes"), ConcreteQuery);
         Out->SetNumberField(TEXT("retained_concrete_invisible"), ConcreteInvisible);
         Out->SetNumberField(TEXT("retained_tile_unsupported"), TileUnsupported);
         Out->SetNumberField(TEXT("retained_concrete_unsupported"), ConcreteUnsupported);
@@ -579,6 +732,7 @@ void UDemoColumnCladding::EndPlay(const EEndPlayReason::Type Reason)
 {
     bEndingPlay = true;
     for (AActor* Actor : Debris) if (IsValid(Actor)) Actor->Destroy();
+    for (AActor* Actor : CeramicDebris) if (IsValid(Actor)) Actor->Destroy();
     Debris.Reset();
     Super::EndPlay(Reason);
 }

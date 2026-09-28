@@ -7,6 +7,7 @@
 #include "PhysicsProxy/GeometryCollectionPhysicsProxy.h"
 #include "PhysicsSolver.h"
 #include "Async/Async.h"
+#include "GameFramework/Actor.h"
 
 void ApplyDemoColumnScatter(UGeometryCollectionComponent* Concrete, const FHitResult& Hit, uint32 Seed)
 {
@@ -108,7 +109,8 @@ void ReleaseDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, c
     auto* Solver = Proxy ? Proxy->GetSolver<Chaos::FPhysicsSolver>() : nullptr;
     if (!Solver || Bone == INDEX_NONE) return;
     const FVector Normal = Hit.ImpactNormal.GetSafeNormal();
-    Solver->EnqueueCommandImmediate([Proxy, Solver, Bone, Normal, Seed]()
+    const bool bHeavy = Concrete->GetOwner()->ActorHasTag(TEXT("DemoColumnRefined07"));
+    Solver->EnqueueCommandImmediate([Proxy, Solver, Bone, Normal, Seed, bHeavy]()
     {
         auto* Particle = Proxy->GetParticleByIndex_Internal(Bone);
         auto* Leaf = Particle ? Particle->CastToClustered() : nullptr;
@@ -134,8 +136,17 @@ void ReleaseDemoColumnLeaf(UGeometryCollectionComponent* Concrete, int32 Bone, c
             // The bounded debris controller freezes only supported, settled pieces.
             Evolution->SetParticleSleepType(Leaf, Chaos::ESleepType::NeverSleep);
             FRandomStream Random(Seed * 733u + uint32(Bone));
-            Leaf->SetV(Leaf->GetV() + Normal * 300. + Random.VRand() * 120. + FVector(0, 0, 70));
-            Leaf->SetW(Leaf->GetW() + Random.VRand() * Random.FRandRange(3.f, 7.f));
+            if (bHeavy)
+            {
+                const double Speed = FMath::Clamp(9000. / FMath::Max(double(Leaf->M()), 30.), 55., 115.);
+                Leaf->SetV(Leaf->GetV() + Normal * Speed + Random.VRand() * 12. + FVector(0, 0, 8));
+                Leaf->SetW(Leaf->GetW() + Random.VRand() * Random.FRandRange(.35f, .8f));
+            }
+            else
+            {
+                Leaf->SetV(Leaf->GetV() + Normal * 300. + Random.VRand() * 120. + FVector(0, 0, 70));
+                Leaf->SetW(Leaf->GetW() + Random.VRand() * Random.FRandRange(3.f, 7.f));
+            }
             Evolution->WakeParticle(Leaf);
         }
         UE_LOG(LogTemp, Display, TEXT("DemoColumn05 hit=%u bone=%d released=%d disabled=%d parent=%d"),

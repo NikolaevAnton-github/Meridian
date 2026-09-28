@@ -315,6 +315,7 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
         DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_DemoTiledColumn03.DA_DemoTiledColumn03") &&
         DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_DemoTiledColumn04.DA_DemoTiledColumn04") &&
         DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction05/DA_DemoTiledColumn05.DA_DemoTiledColumn05") &&
+        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/DA_DemoTiledColumn07.DA_DemoTiledColumn07") &&
         DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_DemoTiledColumn06.DA_DemoTiledColumn06")) return nullptr;
     UClass* Class = LoadClass<AActor>(nullptr, VendorClass);
     if (!Class) return nullptr;
@@ -336,10 +337,12 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
     Actor->Tags.Add(TEXT("NGD01"));
     const bool bVariedCladding = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_DemoTiledColumn04.DA_DemoTiledColumn04");
     const bool bSurfaceExperiment = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction05/DA_DemoTiledColumn05.DA_DemoTiledColumn05");
-    const bool bCoarseExperiment = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_DemoTiledColumn06.DA_DemoTiledColumn06");
+    const bool bRefinedExperiment = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/DA_DemoTiledColumn07.DA_DemoTiledColumn07");
+    const bool bCoarseExperiment = bRefinedExperiment || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_DemoTiledColumn06.DA_DemoTiledColumn06");
     if (bVariedCladding) Actor->Tags.Add(TEXT("DemoColumnCladding04"));
     if (bSurfaceExperiment) Actor->Tags.Add(TEXT("DemoColumnSurface05"));
     if (bCoarseExperiment) Actor->Tags.Add(TEXT("DemoColumnCoarse06"));
+    if (bRefinedExperiment) Actor->Tags.Add(TEXT("DemoColumnRefined07"));
     Actor->FinishSpawning(Transform);
     if (bCoarseExperiment || bSurfaceExperiment || bVariedCladding || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_DemoTiledColumn03.DA_DemoTiledColumn03"))
     {
