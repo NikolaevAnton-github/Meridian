@@ -1,5 +1,8 @@
 #include "DemoColumnCladding.h"
 #include "DemoColumnScatter.h"
+#include "LobbyFacingPool.h"
+#include "ProfilingDebugging/CsvProfiler.h"
+#include "HAL/IConsoleManager.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
@@ -23,9 +26,13 @@
 #include "Engine/CollisionProfile.h"
 #include "Serialization/JsonSerializer.h"
 
+CSV_DEFINE_CATEGORY(LobbyColumns, true);
+
 namespace
 {
 const FName TileTag(TEXT("DemoColumnCladding"));
+TAutoConsoleVariable<int32> ActiveFacing(TEXT("msq.Lobby.ActiveFacing"), 1,
+    TEXT("Update lobby tile poses only when their carrier moves; keep fracture and debris support checks live."));
 constexpr TCHAR TileDataPath[] = TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_Cladding03.DA_Cladding03");
 constexpr TCHAR VariedTileDataPath[] = TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_Cladding04.DA_Cladding04");
 
@@ -80,6 +87,8 @@ void UDemoColumnCladding::Initialize()
     Hits.Init(0, Count);
     LastWorld.SetNum(Count);
     Velocities.Init(FVector::ZeroVector, Count);
+    RenderHandles.Init(0, Count);
+    if (ULobbyFacingPool::ShouldPool(this)) FacingPool = GetWorld()->GetSubsystem<ULobbyFacingPool>();
     CarrierByTile.Init(INDEX_NONE, Count);
     CarrierRelative.SetNum(Count);
     CarriedTiles.Init(false, Count);
@@ -130,7 +139,29 @@ void UDemoColumnCladding::Initialize()
         LastWorld[I] = Tile.RestTransform * Concrete->GetComponentTransform();
         CarrierByTile[I] = Tile.Bone;
         CarrierRelative[I] = Tile.RelativeToBone;
+        TilesByCarrier.FindOrAdd(Tile.Bone).Add(I);
     }
+    if (FacingPool)
+        for (auto& Group : Groups)
+        {
+            bool bComplete = true;
+            for (const int32 Tile : Group.Tiles)
+            {
+                RenderHandles[Tile] = FacingPool->Add(this, Tile, Group.Instances, LastWorld[Tile]);
+                bComplete &= RenderHandles[Tile] != 0;
+            }
+            if (bComplete)
+            {
+                Group.Instances->SetVisibility(false);
+                Group.Instances->SetCastShadow(false);
+            }
+            else
+                for (const int32 Tile : Group.Tiles)
+                {
+                    FacingPool->Remove(this, RenderHandles[Tile]);
+                    RenderHandles[Tile] = 0;
+                }
+        }
 }
 
 void UDemoColumnCladding::BeginPlay()
@@ -235,9 +266,25 @@ bool UDemoColumnCladding::RemoveTileInstance(int32 TileIndex)
     const int32 Instance = InstanceByTile[TileIndex];
     const int32 MovedTile = Group.Tiles.Last();
     if (!Group.Instances->RemoveInstance(Instance)) return false;
+    if (FacingPool && RenderHandles[TileIndex])
+    {
+        FacingPool->Remove(this, RenderHandles[TileIndex]);
+        RenderHandles[TileIndex] = 0;
+    }
     Group.Tiles.RemoveAtSwap(Instance);
     if (Instance < Group.Tiles.Num()) InstanceByTile[MovedTile] = Instance;
     InstanceByTile[TileIndex] = INDEX_NONE;
+    const int32 Carrier = CarrierByTile[TileIndex];
+    if (auto* Tiles = TilesByCarrier.Find(Carrier))
+    {
+        Tiles->RemoveSingleSwap(TileIndex, EAllowShrinking::No);
+        if (Tiles->IsEmpty())
+        {
+            TilesByCarrier.Remove(Carrier);
+            LastCarrierWorld.Remove(Carrier);
+            MovingCarriersLastTick.Remove(Carrier);
+        }
+    }
     return true;
 }
 
@@ -283,6 +330,8 @@ void UDemoColumnCladding::CarryTiles(int32 Bone)
         CarriedTiles[I] = true;
         CarrierByTile[I] = Bone;
         CarrierRelative[I] = Tile.RestTransform.GetRelativeTransform(RestBones[Bone]);
+        TilesByCarrier.FindOrAdd(Bone).Add(I);
+        DirtyCarriers.Add(Bone);
         GroupByTile[I] = CarriedGroup;
         InstanceByTile[I] = Groups[CarriedGroup].Instances->AddInstance(Tile.RestTransform);
         Groups[CarriedGroup].Tiles.Add(I);
@@ -403,6 +452,7 @@ FVector UDemoColumnCladding::FacingScatter(int32 Tile, const FHitResult& Hit) co
 
 void UDemoColumnCladding::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
+    CSV_SCOPED_TIMING_STAT(LobbyColumns, CladdingTick);
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     if (!Data || !Concrete || !GetWorld()->IsGameWorld()) return;
     const FTransform ComponentWorld = Concrete->GetComponentTransform();
@@ -433,10 +483,39 @@ void UDemoColumnCladding::TickComponent(float DeltaTime, ELevelTick TickType, FA
         for (const int32 Bone : Data->SurfaceBones)
             if (!ReleasedConcrete.Contains(Bone) && State.HasBrokenOff(Bone) && !State.HasInternalClusterParent(Bone)) CarryTiles(Bone);
     }
+    const bool bActiveFacing = GetOwner()->ActorHasTag(TEXT("LobbyColumns01")) && ActiveFacing.GetValueOnGameThread() != 0;
+    TArray<int32, TInlineAllocator<768>> TilesToUpdate;
+    if (bActiveFacing)
+    {
+        TSet<int32> MovingNow;
+        for (const auto& Pair : TilesByCarrier)
+        {
+            const int32 Bone = Pair.Key;
+            if (!Bones.IsValidIndex(Bone)) continue;
+            const FTransform Pose = FTransform(Bones[Bone]) * ComponentWorld;
+            const FTransform* Previous = LastCarrierWorld.Find(Bone);
+            // Exact carrier equality avoids accumulating sub-tolerance movement
+            // or leaving a tiny last moving velocity on an otherwise idle tile.
+            const bool bChanged = !Previous || !Pose.Equals(*Previous, 0.f);
+            if (bChanged) MovingNow.Add(Bone);
+            if (bChanged || MovingCarriersLastTick.Contains(Bone) || DirtyCarriers.Contains(Bone) || Concrete->IsFullyDecayed())
+                TilesToUpdate.Append(Pair.Value);
+            else TilePoseUpdatesSkipped += Pair.Value.Num();
+            LastCarrierWorld.Add(Bone, Pose);
+        }
+        MovingCarriersLastTick = MoveTemp(MovingNow);
+        DirtyCarriers.Reset();
+        // Preserve the original tile processing order even when multiple carriers
+        // wake together; detach/retention randomness must not follow TMap order.
+        TilesToUpdate.Sort();
+    }
+    else
+        for (int32 I = 0; I < Data->Tiles.Num(); ++I) TilesToUpdate.Add(I);
     TSet<int32> ChangedGroups;
-    for (int32 I = 0; I < Data->Tiles.Num(); ++I)
+    for (const int32 I : TilesToUpdate)
     {
         if (InstanceByTile[I] == INDEX_NONE) continue;
+        ++TilePoseUpdates;
         const auto& Tile = Data->Tiles[I];
         const int32 Bone = CarrierByTile[I];
         if (!Bones.IsValidIndex(Bone)) continue;
@@ -445,6 +524,8 @@ void UDemoColumnCladding::TickComponent(float DeltaTime, ELevelTick TickType, FA
         Velocities[I] = ((World.GetLocation() - LastWorld[I].GetLocation()) / FMath::Max(DeltaTime, .001f)).GetClampedToMaxSize(1500.f);
         const bool bMoved = FVector::DistSquared(Local.GetLocation(), Tile.RestTransform.GetLocation()) > FMath::Square(.8f) ||
             Local.GetRotation().AngularDistance(Tile.RestTransform.GetRotation()) > FMath::DegreesToRadians(3.f);
+        if (FacingPool && RenderHandles[I] && !World.Equals(LastWorld[I], .0001f))
+            FacingPool->Update(this, RenderHandles[I], World);
         LastWorld[I] = World;
         if (Concrete->IsFullyDecayed() || World.GetScale3D().GetAbsMin() < .02f)
         {
@@ -730,6 +811,7 @@ void UDemoColumnCladding::SpawnTileShards(int32 Tile, const FTransform& Pose, co
 
 void UDemoColumnCladding::UpdateFacingImpacts()
 {
+    CSV_SCOPED_TIMING_STAT(LobbyColumns, FacingImpacts);
     CeramicDebris.RemoveAll([&](AActor* Actor) { return !IsValid(Actor) || (bStackingExperiment && RetainedTiles.Contains(Actor)); });
     for (auto It = WholeTileSources.CreateIterator(); It; ++It) if (!It.Key().IsValid()) It.RemoveCurrent();
     const auto* Proxy = Concrete ? Concrete->GetPhysicsProxy() : nullptr;
@@ -825,6 +907,7 @@ void UDemoColumnCladding::CrumbleCarriedFacing(int32 Bone, const FVector& Point,
 
 void UDemoColumnCladding::UpdateDebris(float DeltaTime)
 {
+    CSV_SCOPED_TIMING_STAT(LobbyColumns, DebrisUpdate);
     DebrisPollTime += DeltaTime;
     if (DebrisPollTime < .25f) return;
     const float Elapsed = DebrisPollTime;
@@ -884,7 +967,16 @@ void UDemoColumnCladding::UpdateDebris(float DeltaTime)
     if (!Proxy || !Dynamic) return;
     FGeometryCollectionDynamicStateFacade State(*Dynamic);
     TArray<int32> Evict;
-    for (const int32 Bone : ConcreteLeaves)
+    TArray<int32> ReleasedLeaves;
+    const bool bActiveFacing = bCoarseExperiment && GetOwner()->ActorHasTag(TEXT("LobbyColumns01")) && ActiveFacing.GetValueOnGameThread() != 0;
+    if (bActiveFacing)
+    {
+        // The per-tick external-fracture sentinel populates ReleasedConcrete
+        // before this poll. Keep the original ascending retention order.
+        ReleasedLeaves = ReleasedConcrete.Array();
+        ReleasedLeaves.Sort();
+    }
+    for (const int32 Bone : bActiveFacing ? ReleasedLeaves : ConcreteLeaves)
     {
         // An anchored core leaf may leave a cluster without becoming debris.
         if (bCoarseExperiment && !Data->SurfaceBones.Contains(Bone)) continue;
@@ -954,6 +1046,33 @@ FString UDemoColumnCladding::GetState() const
     Out->SetBoolField(TEXT("idle"), bIdleLastTick);
     Out->SetNumberField(TEXT("full_updates"), static_cast<double>(FullUpdateCount));
     Out->SetNumberField(TEXT("idle_updates_skipped"), static_cast<double>(SkippedIdleUpdates));
+    int32 SharedTiles = 0, RenderMismatches = 0;
+    if (FacingPool)
+        for (int32 I = 0; I < RenderHandles.Num(); ++I)
+            if (RenderHandles[I])
+            {
+                ++SharedTiles;
+                FTransform QueryWorld;
+                const auto* Part = Groups[GroupByTile[I]].Instances.Get();
+                if (!Part || !Part->GetInstanceTransform(InstanceByTile[I], QueryWorld, true) ||
+                    !FacingPool->Matches(this, RenderHandles[I], QueryWorld)) ++RenderMismatches;
+            }
+    Out->SetNumberField(TEXT("shared_tiles"), SharedTiles);
+    Out->SetNumberField(TEXT("render_mismatches"), RenderMismatches);
+    Out->SetNumberField(TEXT("tile_pose_updates"), static_cast<double>(TilePoseUpdates));
+    Out->SetNumberField(TEXT("tile_pose_updates_skipped"), static_cast<double>(TilePoseUpdatesSkipped));
+    int32 QueryMappingErrors = 0;
+    for (int32 G = 0; G < Groups.Num(); ++G)
+        for (int32 I = 0; I < Groups[G].Tiles.Num(); ++I)
+        {
+            const int32 Tile = Groups[G].Tiles[I];
+            if (InstanceByTile[Tile] != I || GroupByTile[Tile] != G) ++QueryMappingErrors;
+        }
+    Out->SetNumberField(TEXT("query_mapping_errors"), QueryMappingErrors);
+    double AttachedSpeed = 0.;
+    for (int32 I = 0; I < InstanceByTile.Num(); ++I)
+        if (InstanceByTile[I] != INDEX_NONE && !CarriedTiles[I]) AttachedSpeed = FMath::Max(AttachedSpeed, Velocities[I].Size());
+    Out->SetNumberField(TEXT("max_attached_tile_speed"), AttachedSpeed);
     Out->SetBoolField(TEXT("surface_experiment"), bSurfaceExperiment);
     Out->SetNumberField(TEXT("retained_tiles"), RetainedTiles.Num());
     Out->SetNumberField(TEXT("retained_concrete"), RetainedConcrete.Num());
@@ -1121,6 +1240,7 @@ FString UDemoColumnCladding::GetState() const
 void UDemoColumnCladding::EndPlay(const EEndPlayReason::Type Reason)
 {
     bEndingPlay = true;
+    if (FacingPool) FacingPool->RemoveOwner(this);
     for (AActor* Actor : Debris) if (IsValid(Actor)) Actor->Destroy();
     for (AActor* Actor : CeramicDebris) if (IsValid(Actor)) Actor->Destroy();
     Debris.Reset();

@@ -10,6 +10,7 @@ class UInstancedStaticMeshComponent;
 class UGeometryCollectionComponent;
 class UPrimitiveComponent;
 class UBoxComponent;
+class ULobbyFacingPool;
 
 USTRUCT()
 struct FDemoColumnTileShard
@@ -109,6 +110,14 @@ private:
     bool bIdleLastTick = false;
     uint64 FullUpdateCount = 0;
     uint64 SkippedIdleUpdates = 0;
+    UPROPERTY(Transient) TObjectPtr<ULobbyFacingPool> FacingPool;
+    TArray<uint64> RenderHandles;
+    TMap<int32, TArray<int32>> TilesByCarrier;
+    TMap<int32, FTransform> LastCarrierWorld;
+    TSet<int32> MovingCarriersLastTick;
+    TSet<int32> DirtyCarriers;
+    uint64 TilePoseUpdates = 0;
+    uint64 TilePoseUpdatesSkipped = 0;
     void Detach(int32 Tile, const FVector& Push);
     void DamageConcrete(const FHitResult& Hit);
     FVector FacingScatter(int32 Tile, const FHitResult& Hit) const;

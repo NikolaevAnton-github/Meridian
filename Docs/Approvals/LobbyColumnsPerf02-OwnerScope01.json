@@ -1,0 +1,20 @@
+{
+  "decision_id": "LobbyColumnsPerf02-OwnerScope01",
+  "date": "2026-09-28",
+  "authority": "Owner instruction in direct chat",
+  "instruction_translation": "Proceed with the five-step plan: attribute facing/concrete/rebar rendering; pilot and expand grouped rendering; optimize blocker collection/comparison if still material; optimize damaged-column updates; validate intact, firing, settled debris and F6 states.",
+  "approved_scope": [
+    "Measure shadows and visibility for facing, concrete and rebar in identical views.",
+    "Reduce separate render components through shared groups of identical geometry; first validate a small neighboring group, then expand to all 16 LobbyColumns01 columns.",
+    "Measure residual blocker collection and comparison; introduce supported registration/invalidation only if justified, preserving projectile history checks.",
+    "Restrict damaged-column work to moving parts and necessary support checks; safely wake settled fragments on relevant events.",
+    "Compare mean frame time and long-frame percentiles across intact, multi-column firing, settled debris and F6 states with identical settings/views."
+  ],
+  "constraints": [
+    "Preserve materials, visual detail, shadows, collision, destruction fidelity and first-hit behavior.",
+    "Preserve the central demo, unrelated experiments, architecture and owner edits.",
+    "No asset reduction, reduced fragment limits, or gameplay simplification is authorized.",
+    "The earlier Perf01 direct/self-review waiver covers its two changes only; normal execution and review policies apply here."
+  ],
+  "task": "Docs/Tasks/LobbyColumnsPerf02.md"
+}
