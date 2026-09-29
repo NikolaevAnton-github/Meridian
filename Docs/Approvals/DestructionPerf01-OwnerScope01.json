@@ -1,0 +1,14 @@
+{
+  "id": "DestructionPerf01-OwnerScope01",
+  "date": "2026-09-29",
+  "authority": "Direct owner request in the project chat",
+  "request": "Place an explosive at one fixed point between the lobby's destructible columns, trigger it with a button, measure and record performance, then provide a detailed plan for improving destruction so future levels can support substantial destruction.",
+  "reported_symptom": "The thrown grenade reduces performance from more than 120 FPS to approximately 25 FPS.",
+  "authorized_now": [
+    "Implement a repeatable fixed-position button-triggered blast fixture",
+    "Run and preserve focused performance measurements and diagnostic comparisons",
+    "Write a detailed optimization and production-scaling plan"
+  ],
+  "future_only": "The optimization plan is proposed work; this request does not authorize executing all of its implementation stages.",
+  "preservation": "Preserve the owner's current map, grenade asset, configuration edits and prior evidence. Final gameplay and visual acceptance belong to the owner."
+}

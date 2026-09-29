@@ -19,6 +19,7 @@ public:
     void Initialize();
     void BindInput(UEnhancedInputComponent* Input);
     void StartThrow();
+    bool SpawnFixed(FVector Position);
     void Reset();
     static void ResetWorld(UWorld* World);
     virtual void TickComponent(float Delta, ELevelTick TickType, FActorComponentTickFunction* TickFunction) override;

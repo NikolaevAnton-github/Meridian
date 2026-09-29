@@ -1,4 +1,5 @@
 #include "PrototypeGrenadeComponent.h"
+#include "DestructionPerfFixture.h"
 #include "OpeningLobbyCharacter.h"
 #include "CombatRifleComponent.h"
 #include "NGDPropComponent.h"
@@ -175,7 +176,9 @@ void UPrototypeGrenadeComponent::OnActorSpawned(AActor* Actor)
 {
     if (!Actor || Actor->GetClass()->GetPathName() != TEXT("/Game/NextGenDestruction/Blueprints/Actors/BP_DestructionField.BP_DestructionField_C")) return;
     for (const auto& Grenade : Grenades)
-        if (Grenade.IsValid() && Grenade->GetGameTimeSinceCreation() >= 1.9f &&
+        // Latent Delay may consume the creation frame's step. Under throttled
+        // PIE its completion can precede actor age 1.9s by part of one frame.
+        if (Grenade.IsValid() && Grenade->GetGameTimeSinceCreation() + GetWorld()->GetDeltaSeconds() >= 1.9f &&
             FVector::DistSquared(Grenade->GetActorLocation(), Actor->GetActorLocation()) < 4.f)
         {
             Actor->SetActorScale3D(FVector(FMath::Clamp(BlastRadius, 50.f, 1000.f) / 100.f));
@@ -196,6 +199,8 @@ void UPrototypeGrenadeComponent::OnActorSpawned(AActor* Actor)
             }
             Grenade->SetLifeSpan(4.f);
             ++Explosions;
+            if (Grenade->ActorHasTag(TEXT("DestructionPerf01")))
+                for (TActorIterator<ADestructionPerfFixture> It(GetWorld()); It; ++It) It->MarkDetonation();
             UE_LOG(LogTemp, Display, TEXT("Grenade exploded count=%d radius=%.1f position=%s"), Explosions, BlastRadius, *Actor->GetActorLocation().ToString());
             break;
         }
@@ -225,8 +230,38 @@ void UPrototypeGrenadeComponent::Reset()
 
 void UPrototypeGrenadeComponent::ResetWorld(UWorld* World)
 {
+    if (World) for (TActorIterator<ADestructionPerfFixture> It(World); It; ++It) It->ResetFixture();
     if (World) for (TActorIterator<AOpeningLobbyCharacter> It(World); It; ++It)
         if (auto* Component = It->FindComponentByClass<UPrototypeGrenadeComponent>()) Component->Reset();
+}
+
+bool UPrototypeGrenadeComponent::SpawnFixed(FVector Position)
+{
+    Initialize();
+    if (!Character || !GrenadeClass) return false;
+    FActorSpawnParameters Spawn;
+    Spawn.Owner = Character;
+    Spawn.Instigator = Character;
+    Spawn.ObjectFlags |= RF_Transient;
+    Spawn.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+    AActor* Grenade = GetWorld()->SpawnActor<AActor>(GrenadeClass, Position, FRotator::ZeroRotator, Spawn);
+    if (!Grenade) return false;
+    Grenade->Tags.Add(TEXT("PrototypeGrenade"));
+    Grenade->Tags.Add(TEXT("DestructionPerf01"));
+    Grenade->SetLifeSpan(8.f);
+    if (auto* Movement = Grenade->FindComponentByClass<UProjectileMovementComponent>())
+    {
+        Movement->StopMovementImmediately();
+        Movement->Deactivate();
+        Movement->SetComponentTickEnabled(false);
+    }
+    for (auto* Part : TInlineComponentArray<UPrimitiveComponent*>(Grenade))
+    {
+        Part->SetSimulatePhysics(false);
+        Part->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    }
+    Grenades.Add(Grenade);
+    return true;
 }
 
 void UPrototypeGrenadeComponent::EndPlay(const EEndPlayReason::Type Reason)

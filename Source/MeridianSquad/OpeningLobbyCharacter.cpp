@@ -2,6 +2,7 @@
 #include "CombatMovement.h"
 #include "CombatRifleComponent.h"
 #include "PrototypeGrenadeComponent.h"
+#include "DestructionPerfFixture.h"
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimMontage.h"
 #include "Camera/CameraComponent.h"
@@ -162,6 +163,13 @@ void AOpeningLobbyCharacter::BeginPlay()
     ConfigureAssembly();
     CombatRifle->InitializeRifle();
     GrenadeThrower->Initialize();
+    if (GetWorld()->GetMapName().EndsWith(TEXT("L_OpeningLobby_PainterStone01")) &&
+        !TActorIterator<ADestructionPerfFixture>(GetWorld()))
+    {
+        FActorSpawnParameters Spawn;
+        Spawn.ObjectFlags |= RF_Transient;
+        GetWorld()->SpawnActor<ADestructionPerfFixture>(FVector(-550, 0, 40), FRotator::ZeroRotator, Spawn);
+    }
 }
 
 void AOpeningLobbyCharacter::ConfigureAssembly()
