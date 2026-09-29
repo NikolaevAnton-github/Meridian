@@ -10,7 +10,7 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
   [Demo](DemoColumnExperiment09.md): outward debris, facing fracture, solid piles;
   80 retained, owner accepted. [LobbyColumns01](LobbyColumns01.md): 16 columns, damage to
   8.4 m, concrete seats and rebar; central demo unchanged.
-  [Perf01](LobbyColumnsPerf01.md) and [Perf02](Tasks/LobbyColumnsPerf02.md) delivered.
+  [MSQ-169 audit/plan](Tasks/DestructionAudit01.md): current correction unaccepted.
   [Scaling batch](DestructionScaling01Batch01.md): MSQ-162..167 delivered under
   direct/self-review waiver; owner verdict pending. MSQ-161 stopped; MSQ-168 unstarted.
   [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;

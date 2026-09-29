@@ -1,0 +1,10 @@
+{
+  "record_id": "DestructionAudit01-OwnerScope01",
+  "date_local": "2026-09-29",
+  "task": "MSQ-169",
+  "source": "Owner direct chat requesting a full technical destruction audit after repeated FPS regression",
+  "owner_request_english": "Audit destruction comprehensively and prepare a plan to optimize it as far as possible. Destruction is extremely important and should have as little performance impact as possible to support much more of it. Consider unconventional solutions when needed.",
+  "authorized_scope": "Read-only technical analysis of current source, engine integration, assets and existing evidence; a prioritized actionable optimization plan. Preserve current owner edits and candidate evidence.",
+  "execution_boundary": "This audit does not start MSQ-168, revive the stopped MSQ-161 fixture, authorize implementation successors or accept quality/mechanics tradeoffs. No production code, assets or configuration are changed. Multica MSQ-169 tracks the audit; read-only advisory analysis is separate from the prior task-scoped direct implementation waivers.",
+  "delivery": "Docs/Tasks/DestructionAudit01.md and evidence under Saved/DestructionAudit01; local task-scoped documentation commit. Future production execution uses the standing Multica route and task-scoped review."
+}
