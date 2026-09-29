@@ -11,10 +11,12 @@ requires dimensioned plans/sections with human scale, approved as a named packag
 before renewed 3D work. Preserve approved scale; label dimensional changes as
 proposals requiring owner review.
 
-Follow [VisualAcceptance](../VisualAcceptance.md) within authorized scope. Independent
-visual reviewers inspect actual art and comparable views. Technical validation,
-independent review and owner visual/play acceptance are distinct. A prototype pass
-or a next-task request does not approve a visual design.
+Follow [VisualAcceptance](../VisualAcceptance.md) for evidence and owner design
+approval within authorized scope. Under
+[DirectWorkflow01](../Approvals/DirectWorkflow01-OwnerRequest01.json), Codex works
+directly and extra visual reviewers are used only on owner request. The owner
+performs final visual/play acceptance. A prototype pass or next-task request does
+not approve a visual design.
 
 Use [GameBrief](../Design/GameBrief.md) for game/level requirements and
 [StoryCanon](../Design/StoryCanon.md) for narrative. Keep fixed facts, proposals and
@@ -36,7 +38,7 @@ concept packages and owner experiments. Named concept approval is required befor
 production modeling, including use of a concept as a planning example.
 
 The owner alone evaluates the protagonist concept batch: do not assign an
-independent concept reviewer. Later integrated review is separate. Existing
+independent concept reviewer. The owner also performs final integrated review. Existing
 Tripo Studio/Meshy web allowances are the scoped generation-budget exception;
 free Hunyuan3D Studio requires verified terms. No paid API/top-up/new subscription.
 

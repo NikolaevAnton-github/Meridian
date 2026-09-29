@@ -3,7 +3,10 @@
 The registry inventories accepted files without regenerating them. PostgreSQL
 17.11 runs in the existing portable installation on loopback port 15432.
 `meridian_assets` is a separate database, owned by the non-superuser login
-`meridian_assets_owner`. It contains no task records. Multica still owns tasks.
+`meridian_assets_owner`. It contains no task records. Multica is an optional board
+only under [DirectWorkflow01](Tasks/DirectWorkflow01.md); its worker is retired.
+The shared PostgreSQL installation/data retain their existing paths for registry
+compatibility. Stopping the board API/web leaves this database available.
 Python 3.11.8 and installed PostgreSQL command-line tools are sufficient; no pip
 packages, DCC connection, extra service, or paid API is used.
 

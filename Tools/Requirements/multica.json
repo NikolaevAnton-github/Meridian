@@ -1,4 +1,6 @@
 {
+  "usage": "Historical installation provenance; optional board only under DirectWorkflow01. Worker execution is retired.",
+  "retired_patch_note": "Patch paths below describe the previous installation at Git revision 53f2ac2f51ff4d16b14b73e478f7fc86a003a65b; they are no longer build or runtime inputs.",
   "multica": {
     "version": "0.4.43",
     "repository": "https://github.com/multica-ai/multica.git",

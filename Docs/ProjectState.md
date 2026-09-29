@@ -5,6 +5,9 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
 
 ## Active direction
 
+- **Workflow:** [DirectWorkflow01](Tasks/DirectWorkflow01.md): Codex works directly;
+  owner final testing/acceptance. Multica is an optional board only. Old worker,
+  dispatch, reviewer and runtime context requirements are retired project-wide.
 - **Grenade:** [direct G-key prototype](GrenadePrototype01.md), NGD sphere.
 - **Destruction:** [MSQ-171 rollback](LobbyRollback01.md) restored the lobby under the
   [owner decision](Approvals/LobbyRollback01-OwnerScope01.json), with
@@ -54,12 +57,7 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
 
 ## Lookup and maintenance
 
-Search `Docs/Tasks/` by ID/name; read scoped decisions and relevant evidence.
-For tooling, use the [execution policy](AgentPolicies/Execution.md); historical
-integration success never proves a live connection. For old decisions missing from
-the task, search the [history index](ContextHistory.md) and read only the matching
-section. Never load the history snapshot as routine startup context.
-
-Keep scope/blockers here, delivery in handoffs and live state in Multica.
-[Context/preservation checks](Tasks/ContextBudget02.md);
-[source routes](Subsystems/README.md), loaded only as needed.
+Search `Docs/Tasks/` by ID/name; read scoped decisions/evidence. Use the
+[execution policy](AgentPolicies/Execution.md), [history index](ContextHistory.md)
+and [source routes](Subsystems/README.md) only as needed. Keep current scope here
+and task progress/delivery in task notes.

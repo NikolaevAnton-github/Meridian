@@ -27,7 +27,8 @@ adapters. Old GASP/Mover deliveries and evidence stay preserved.
 retains the low-FPS recoil limitation. Manny is a technical placeholder.
 [MSQ-70 direct start](../Approvals/EnemyCombat01-OwnerStart02.json) permits direct
 implementation and build/source checks with owner gameplay testing for that task;
-it does not dispatch successors or waive their review requirements.
+it does not authorize successors. Direct implementation and owner final testing
+now apply project-wide under [DirectWorkflow01](../Approvals/DirectWorkflow01-OwnerRequest01.json).
 
 Slowdown: rifle cadence, bullets and world are **0.25**, hero movement **0.65**.
 This supersedes the old normal-player rule. Read

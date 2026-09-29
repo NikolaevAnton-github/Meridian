@@ -1,13 +1,14 @@
 # Orchestration A/B measurement and acceptance
 
-This is the finite harness for the September 13, 2026 comparison. It is not a
-task dispatcher. Multica owns scheduling, issue state and execution history.
+These are retained evidence readers and asset checks from the September 13, 2026
+comparison. [DirectWorkflow01](../../../Docs/Tasks/DirectWorkflow01.md) retires
+the native worker launcher and Multica execution. Do not rerun that experiment.
 Generated evidence and private native Codex homes stay under
 `Saved/AgentSetup/OrchestrationAB/`; source and accepted decisions stay in Git.
 
 See `Docs/Benchmarks/OrchestrationABComparison.md` and the frozen task before use.
 Both BenchA and BenchB already exist. Do not rerun their creation or overwrite
-their sources. The direct client refuses an existing output directory or home.
+their sources. Earlier execution sources remain in Git history.
 
 The saved `.blend` files are isolated libraries. In Blender, append Scene/BenchA
 or Scene/BenchB from the corresponding file. Unreal assets are under
@@ -47,9 +48,7 @@ executed versions remain in Saved. Checked-in copies only relocate source paths
 and preserve output paths; syntax, path configuration and read-only measurement
 entry points were checked after relocation.
 
-`run_direct.py` is a one-turn native app-server measurement client pinned to the
-installed Codex version. It uses ChatGPT login, records usage and native logs,
-rejects unexpected interactive requests, and does not retry or dispatch another
-task. Its common CLI arguments must match the benchmark Multica agent. The
-source includes no authentication values. Setup/controller actions and shared
-verification costs must be accounted separately from worker task tokens.
+The former `run_direct.py` native worker launcher was removed by DirectWorkflow01.
+Historical execution records remain under Saved; the source is available in Git
+before that migration. Read-only measurement tools remain for interpreting those
+records and do not authorize worker execution or renewed asset production.

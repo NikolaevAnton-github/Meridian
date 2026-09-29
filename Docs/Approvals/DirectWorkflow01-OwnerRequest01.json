@@ -1,0 +1,24 @@
+{
+  "decision_id": "DirectWorkflow01-OwnerRequest01",
+  "date": "2026-09-29",
+  "authority": "Explicit owner instruction in the project chat",
+  "scope": "Project-wide execution workflow",
+  "decision": {
+    "implementation": "Codex performs tasks directly in the owner conversation",
+    "multica": "Remove execution automation and supporting worker infrastructure; optional board and task storage only",
+    "final_testing": "The owner performs final testing and acceptance",
+    "review_routing": "No mandatory worker or independent reviewer pipeline; extra reviewers only on owner request"
+  },
+  "supersedes": [
+    "Mandatory Multica dispatch and live-state authority",
+    "Executor/controller/reviewer routing in prior policies and task documents",
+    "Mandatory runtime briefs, checkpoints, capability profiles and native usage gates"
+  ],
+  "preserve": [
+    "Owner edits, source assets, task history and exact evidence",
+    "Owner design approval requirements",
+    "Focused technical self-checks and local task-scoped commits",
+    "Existing separate asset registry and shared PostgreSQL data"
+  ],
+  "does_not_authorize": "Execution of prepared backlog tasks or acceptance of gameplay/art changes"
+}
