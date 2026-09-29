@@ -56,9 +56,11 @@ private:
     double NextDiagnosticAt = 0, ArmedSimulation = 0, DetonatedSimulation = 0;
     int32 Phase = -1;
     FString AutoName, LastOutput;
+    FString IsolationMode = TEXT("reference"), EvidenceSubdirectory = TEXT("DP-01");
     TSharedPtr<FJsonObject> Metadata;
     void SaveCapture(const FString& Outcome);
     void RefreshProps();
     void SetPhase(int32 NewPhase);
     void SampleDiagnostics();
+    void RecordIsolationPhase();
 };

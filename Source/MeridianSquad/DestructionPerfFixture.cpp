@@ -1,4 +1,5 @@
 #include "DestructionPerfFixture.h"
+#include "DestructionIsolation.h"
 #include "OpeningLobbyCharacter.h"
 #include "PrototypeGrenadeComponent.h"
 #include "NGDPropComponent.h"
@@ -29,6 +30,8 @@
 #include "HAL/PlatformMemory.h"
 #include "Misc/EngineVersion.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
+#include "GeometryCollection/GeometryCollectionObject.h"
+#include "GeometryCollection/GeometryCollection.h"
 #include "GeometryCollectionProxyData.h"
 #include "GeometryCollection/GeometryCollectionSimulationTypes.h"
 #include "NiagaraComponent.h"
@@ -97,6 +100,19 @@ void ADestructionPerfFixture::BeginPlay()
     History.SetNum(8192);
     Capture.Reserve(16384);
     LastTick = FPlatformTime::Seconds();
+    FParse::Value(FCommandLine::Get(), TEXT("DestructionPerfEvidence="), EvidenceSubdirectory);
+    // A single directory component only; never allow command-line output traversal.
+    if (EvidenceSubdirectory.IsEmpty() || !EvidenceSubdirectory.GetCharArray().FilterByPredicate([](TCHAR C)
+        { return C && !(FChar::IsAlnum(C) || C == TCHAR('-') || C == TCHAR('_')); }).IsEmpty())
+        EvidenceSubdirectory = TEXT("DP-01");
+    FParse::Value(FCommandLine::Get(), TEXT("DestructionPerfIsolation="), IsolationMode);
+    const bool bAutomated = FParse::Value(FCommandLine::Get(), TEXT("DestructionPerfAuto="), AutoName);
+    if ((bAutomated || IsolationMode != TEXT("reference")) && !DestructionIsolation::Start(GetWorld(), IsolationMode))
+    {
+        UE_LOG(LogTemp, Error, TEXT("DP02 isolation setup rejected: %s"), *IsolationMode);
+        FPlatformMisc::RequestExit(false);
+        return;
+    }
     bDiagnostics = FParse::Param(FCommandLine::Get(), TEXT("DestructionPerfDiagnostics"));
     if (bDiagnostics) AudioObservation = MakeShared<FAudioObservation, ESPMode::ThreadSafe>();
     RefreshProps();
@@ -125,7 +141,11 @@ void ADestructionPerfFixture::RefreshProps()
     PreviousActive.Reset();
     ObservedActivations.Reset();
     for (TActorIterator<AActor> It(GetWorld()); It; ++It)
-        if (auto* Prop = It->FindComponentByClass<UNGDPropComponent>()) Props.Add(Prop);
+        if (auto* Prop = It->FindComponentByClass<UNGDPropComponent>())
+        {
+            Props.Add(Prop);
+            DestructionIsolation::ConfigureProp(It->FindComponentByClass<UGeometryCollectionComponent>());
+        }
 }
 
 void ADestructionPerfFixture::SetPhase(int32 NewPhase)
@@ -139,7 +159,62 @@ void ADestructionPerfFixture::SetPhase(int32 NewPhase)
         TRACE_BOOKMARK(TEXT("DP01 Phase %s run=%d"), PhaseNames[Phase], AutoIndex);
         if (Metadata)
             Metadata->SetNumberField(FString(PhaseNames[Phase]) + TEXT("_platform_seconds"), FPlatformTime::Seconds());
+        RecordIsolationPhase();
     }
+}
+
+void ADestructionPerfFixture::RecordIsolationPhase()
+{
+    if (!Metadata) return;
+    auto Snapshot = DestructionIsolation::Snapshot();
+    Snapshot->SetNumberField(TEXT("platform_seconds"), FPlatformTime::Seconds());
+    Snapshot->SetNumberField(TEXT("simulation_seconds"), GetWorld()->GetTimeSeconds());
+    if (bDiagnostics)
+    {
+        TArray<TSharedPtr<FJsonValue>> Actors;
+        for (const auto& WeakProp : Props)
+            if (const auto* Prop = WeakProp.Get())
+                if (auto* GC = Prop->GetOwner()->FindComponentByClass<UGeometryCollectionComponent>())
+                    if (const auto* Dynamic = GC->GetDynamicCollection())
+                    {
+                        auto Actor = MakeShared<FJsonObject>();
+                        Actor->SetStringField(TEXT("actor_path"), Prop->GetOwner()->GetPathName());
+                        Actor->SetStringField(TEXT("adapter_id"), Prop->ObjectId.ToString());
+                        Actor->SetStringField(TEXT("location"), Prop->GetOwner()->GetActorLocation().ToString());
+                        Actor->SetBoolField(TEXT("root_broken"), GC->IsRootBroken());
+                        Actor->SetNumberField(TEXT("break_events"), Prop->BreakEvents);
+                        const auto& Transforms = GC->GetComponentSpaceTransforms3f();
+                        TArray<TSharedPtr<FJsonValue>> Particles;
+                        // Bounded phase observations, separate from the unobserved timing control.
+                        // Transform positions are game-thread mirrors, not solver trajectories.
+                        const auto* RestObject = GC->GetRestCollection();
+                        const auto Rest = RestObject ? RestObject->GetGeometryCollection() : nullptr;
+                        TArray<int32> Largest;
+                        if (Rest)
+                            for (int32 I = 0; I < Rest->TransformToGeometryIndex.Num(); ++I)
+                                if (Rest->TransformToGeometryIndex[I] >= 0) Largest.Add(I);
+                        auto Volume = [&Rest](int32 I) { return Rest->BoundingBox[Rest->TransformToGeometryIndex[I]].GetVolume(); };
+                        Largest.Sort([&Volume](int32 A, int32 B) { return Volume(A) == Volume(B) ? A < B : Volume(A) > Volume(B); });
+                        if (Largest.Num() > 32) Largest.SetNum(32);
+                        int32 ActiveCount = 0;
+                        for (int32 I = 0; I < Dynamic->Active.Num(); ++I) if (Dynamic->Active[I]) ++ActiveCount;
+                        Actor->SetNumberField(TEXT("active_transform_count"), ActiveCount);
+                        for (int32 I : Largest)
+                            if (I < Dynamic->Active.Num() && I < Transforms.Num())
+                            {
+                                const FVector Position = GC->GetComponentTransform().TransformPosition(FVector(Transforms[I].GetTranslation()));
+                                TArray<TSharedPtr<FJsonValue>> Row = {MakeShared<FJsonValueNumber>(I),
+                                    MakeShared<FJsonValueBoolean>(Dynamic->Active[I]), MakeShared<FJsonValueNumber>(Volume(I)),
+                                    MakeShared<FJsonValueNumber>(Dynamic->DynamicState[I]),
+                                    MakeShared<FJsonValueNumber>(Position.X), MakeShared<FJsonValueNumber>(Position.Y), MakeShared<FJsonValueNumber>(Position.Z)};
+                                Particles.Add(MakeShared<FJsonValueArray>(Row));
+                            }
+                        Actor->SetArrayField(TEXT("largest32_index_active_rest_bbox_volume_state_world_xyz"), Particles);
+                        Actors.Add(MakeShared<FJsonValueObject>(Actor));
+                    }
+        Snapshot->SetArrayField(TEXT("actors"), Actors);
+    }
+    Metadata->SetObjectField(FString(TEXT("isolation_phase_")) + (Phase >= 0 ? PhaseNames[Phase] : TEXT("complete")), Snapshot);
 }
 
 void ADestructionPerfFixture::SampleDiagnostics()
@@ -202,6 +277,8 @@ void ADestructionPerfFixture::Arm()
     Metadata->SetNumberField(TEXT("run_index"), ++AutoIndex);
     Metadata->SetStringField(TEXT("engine"), FEngineVersion::Current().ToString());
     Metadata->SetBoolField(TEXT("diagnostics_enabled"), bDiagnostics);
+    Metadata->SetStringField(TEXT("isolation_mode"), IsolationMode);
+    Metadata->SetObjectField(TEXT("isolation_before"), DestructionIsolation::Snapshot());
     FString TraceChannels, CandidateCommit, WorkloadIdentity;
     FParse::Value(FCommandLine::Get(), TEXT("trace="), TraceChannels);
     FParse::Value(FCommandLine::Get(), TEXT("DestructionPerfCommit="), CandidateCommit);
@@ -268,6 +345,7 @@ void ADestructionPerfFixture::MarkDetonation()
 void ADestructionPerfFixture::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    DestructionIsolation::Flush();
     if (bRefreshProps) { RefreshProps(); bRefreshProps = false; }
     const double Now = FPlatformTime::Seconds();
     FSample S{Now, (Now - LastTick) * 1000,
@@ -316,12 +394,14 @@ void ADestructionPerfFixture::SaveCapture(const FString& Outcome)
 {
     if (!Metadata || !ArmedAt) return;
     SetPhase(-1);
+    RecordIsolationPhase();
+    Metadata->SetObjectField(TEXT("isolation_after"), DestructionIsolation::Snapshot());
     TRACE_BOOKMARK(TEXT("DP01 Complete run=%d outcome=%s"), AutoIndex, *Outcome);
     Metadata->SetNumberField(TEXT("completion_platform_seconds"), FPlatformTime::Seconds());
     Metadata->SetNumberField(TEXT("completion_simulation_seconds"), GetWorld()->GetTimeSeconds());
     if (DetonatedAt) { TRACE_END_REGION(TEXT("DestructionPerfBlast")); }
     else { TRACE_END_REGION(TEXT("DestructionPerfPreBlast")); }
-    const FString Directory = FPaths::ProjectSavedDir() / TEXT("DestructionPerf01/DP-01/Captures");
+    const FString Directory = FPaths::ProjectSavedDir() / TEXT("DestructionPerf01") / EvidenceSubdirectory / TEXT("Captures");
     IFileManager::Get().MakeDirectory(*Directory, true);
     const FString Stem = Directory / (FDateTime::UtcNow().ToString(TEXT("%Y%m%d-%H%M%S")) + TEXT("-") + FGuid::NewGuid().ToString(EGuidFormats::Digits));
     FString CSV = TEXT("relative_seconds,frame_ms,game_ms,render_ms,rhi_ms,gpu_ms,engine_frame,simulation_seconds,break_events,diagnostic_sample,process_physical_bytes,process_virtual_bytes,process_peak_physical_bytes,gc_active_transforms,gc_sleeping_transforms,gc_dynamic_transforms,niagara_active_components,observed_transform_activations,audio_active_sources\n");
@@ -365,6 +445,7 @@ void ADestructionPerfFixture::SaveCapture(const FString& Outcome)
 void ADestructionPerfFixture::ResetFixture()
 {
     if (ArmedAt) SaveCapture(TEXT("aborted_reset"));
+    DestructionIsolation::Reset();
     bSpent = false;
     HistoryCount = 0;
     LastTick = FPlatformTime::Seconds();
@@ -377,6 +458,7 @@ void ADestructionPerfFixture::ResetFixture()
 void ADestructionPerfFixture::EndPlay(const EEndPlayReason::Type Reason)
 {
     if (ArmedAt) SaveCapture(TEXT("aborted_end_play"));
+    DestructionIsolation::Stop();
     Super::EndPlay(Reason);
 }
 

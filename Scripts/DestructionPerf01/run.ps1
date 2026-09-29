@@ -4,6 +4,7 @@ param(
     [switch]$Trace,
     [switch]$NamedEvents,
     [switch]$Diagnostics,
+    [ValidateSet('reference','profile_observe','profile_batch','collision_off')][string]$IsolationMode = 'reference',
     [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$EvidenceSubdirectory = 'DP-01',
     [switch]$NoNiagara,
     [switch]$NoSound,
@@ -44,6 +45,8 @@ $Arguments = @(
 )
 $Arguments += "-DestructionPerfCommit=$CandidateCommit"
 $Arguments += "-DestructionPerfIdentity=$Identity"
+$Arguments += "-DestructionPerfEvidence=$EvidenceSubdirectory"
+$Arguments += "-DestructionPerfIsolation=$IsolationMode"
 if ($Diagnostics) { $Arguments += '-DestructionPerfDiagnostics' }
 if ($NamedEvents) { $Arguments += '-statnamedevents' }
 $Commands = 't.MaxFPS 0,r.VSync 0,r.ScreenPercentage 100'
@@ -62,7 +65,7 @@ else {
 $Record = [ordered]@{ name=$Name; executable=$Executable; arguments=$Arguments;
     candidate_commit=$CandidateCommit; workload_identity=$Identity; asset_config_hashes=$AssetHashes; source_hashes=$SourceHashes;
     engine_build=(Get-Content -LiteralPath (Join-Path $Engine 'Engine/Build/Build.version') -Raw | ConvertFrom-Json);
-    diagnostics=[bool]$Diagnostics; named_events=[bool]$NamedEvents; trace=[bool]$Trace;
+    diagnostics=[bool]$Diagnostics; named_events=[bool]$NamedEvents; trace=[bool]$Trace; isolation_mode=$IsolationMode;
     dll_sha256=(Get-FileHash (Join-Path $ProjectRoot 'Binaries/Win64/UnrealEditor-MeridianSquad.dll')).Hash;
     map_sha256=(Get-FileHash (Join-Path $ProjectRoot 'Content/Maps/L_OpeningLobby_PainterStone01.umap')).Hash;
     started_utc=[DateTime]::UtcNow.ToString('o') }
