@@ -5,6 +5,7 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
 
 ## Active direction
 
+- **Grenade:** [direct G-key prototype](GrenadePrototype01.md), NGD sphere.
 - **Destruction:** [MSQ-171 rollback](LobbyRollback01.md) restored the lobby under the
   [owner decision](Approvals/LobbyRollback01-OwnerScope01.json), with
   [owner acceptance](Approvals/LobbyRollback01-OwnerAcceptance01.json). Baseline:
@@ -53,13 +54,12 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
 
 ## Lookup and maintenance
 
-Search `Docs/Tasks/` by task ID/name; read its scoped decisions and evidence as needed.
+Search `Docs/Tasks/` by ID/name; read scoped decisions and relevant evidence.
 For tooling, use the [execution policy](AgentPolicies/Execution.md); historical
 integration success never proves a live connection. For old decisions missing from
 the task, search the [history index](ContextHistory.md) and read only the matching
 section. Never load the history snapshot as routine startup context.
 
-Keep current scope/blockers here and delivery details in task handoffs.
-Context budget and preservation checks are described in
-[ContextBudget02](Tasks/ContextBudget02.md); source routes are indexed in
-[Subsystems](Subsystems/README.md), loaded only for the relevant task.
+Keep scope/blockers here, delivery in handoffs and live state in Multica.
+[Context/preservation checks](Tasks/ContextBudget02.md);
+[source routes](Subsystems/README.md), loaded only as needed.

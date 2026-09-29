@@ -53,6 +53,7 @@ public:
     // Returns true for a managed prop, including an invalid/duplicate request: fail closed.
     bool ReceiveBullet(int64 ShotId, const FHitResult& Hit);
     static void ResetAll(UWorld* World);
+    static void CancelPendingFields(UWorld* World, const TArray<FName>& Names);
     UFUNCTION(BlueprintPure, Category="Destruction") FString GetState() const;
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type Reason) override;

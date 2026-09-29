@@ -7,6 +7,7 @@
 class UCameraComponent;
 class UAnimMontage;
 class UCombatRifleComponent;
+class UPrototypeGrenadeComponent;
 
 /** Collision-aware lobby adapter for the supplied rifle gameplay Blueprints. */
 UCLASS()
@@ -17,6 +18,8 @@ public:
     AOpeningLobbyCharacter();
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat")
     TObjectPtr<UCombatRifleComponent> CombatRifle;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat")
+    TObjectPtr<UPrototypeGrenadeComponent> GrenadeThrower;
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
     virtual void CalcCamera(float DeltaSeconds, FMinimalViewInfo& OutResult) override;

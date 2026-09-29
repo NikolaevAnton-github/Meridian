@@ -1,6 +1,7 @@
 #include "OpeningLobbyCharacter.h"
 #include "CombatMovement.h"
 #include "CombatRifleComponent.h"
+#include "PrototypeGrenadeComponent.h"
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimMontage.h"
 #include "Camera/CameraComponent.h"
@@ -103,6 +104,7 @@ AOpeningLobbyCharacter::AOpeningLobbyCharacter()
     FirstPersonCamera->bEnableFirstPersonScale = true;
     FirstPersonCamera->FirstPersonScale = .3f;
     CombatRifle = CreateDefaultSubobject<UCombatRifleComponent>(TEXT("CombatRifle"));
+    GrenadeThrower = CreateDefaultSubobject<UPrototypeGrenadeComponent>(TEXT("GrenadeThrower"));
 }
 
 void AOpeningLobbyCharacter::CallSource(FName Name)
@@ -159,6 +161,7 @@ void AOpeningLobbyCharacter::BeginPlay()
     }
     ConfigureAssembly();
     CombatRifle->InitializeRifle();
+    GrenadeThrower->Initialize();
 }
 
 void AOpeningLobbyCharacter::ConfigureAssembly()
@@ -421,6 +424,7 @@ void AOpeningLobbyCharacter::PawnClientRestart()
     // Rifle owns ammunition, cadence and reload input. Retain the airborne
     // presentation observer after replacing the source demonstration callbacks.
     CombatRifle->BindInput(Input);
+    GrenadeThrower->BindInput(Input);
     Input->BindAction(Fire, ETriggerEvent::Started, this, &AOpeningLobbyCharacter::FireStarted);
     Input->BindAction(Fire, ETriggerEvent::Completed, this, &AOpeningLobbyCharacter::FireReleased);
     Input->BindAction(Fire, ETriggerEvent::Canceled, this, &AOpeningLobbyCharacter::FireReleased);

@@ -1,5 +1,6 @@
 #include "CombatProjectileWorld.h"
 #include "NGDPropComponent.h"
+#include "PrototypeGrenadeComponent.h"
 #include "GASPEnemyFixture.h"
 #include "EnemyCombatComponent.h"
 #include "OpeningLobbyCharacter.h"
@@ -662,6 +663,7 @@ void ACombatProjectileWorld::ResetTargets()
     PlayerTravel.Reset(); EnemyTravel.Reset(); TravelPlayer.Reset();
     ClearProjectiles();
     for (ACombatTarget* Target : Targets) if (IsValid(Target)) Target->ResetTarget();
+    UPrototypeGrenadeComponent::ResetWorld(GetWorld());
     UNGDPropComponent::ResetAll(GetWorld());
     for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy))
     {

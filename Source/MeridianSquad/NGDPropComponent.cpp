@@ -130,6 +130,11 @@ void UNGDWorldSubsystem::Publish(const FNGDCollisionChange& Change)
     OnCollisionChanged.Broadcast(Change);
 }
 
+void UNGDPropComponent::CancelPendingFields(UWorld* World, const TArray<FName>& Names)
+{
+    CancelQueuedFields(World, Names);
+}
+
 UNGDPropComponent::UNGDPropComponent()
 {
     PrimaryComponentTick.bCanEverTick = false;

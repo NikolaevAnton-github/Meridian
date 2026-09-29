@@ -1,0 +1,11 @@
+{
+  "record_id": "GrenadePrototype01-OwnerScope01",
+  "date_local": "2026-09-29",
+  "source": "Owner direct chat",
+  "owner_message_original": "Я сейчас расставил кучу колон из демонстрации, стрялял по ним, но просдаок даже близко таких нет, как были в наших колоннах. Значит ты что-то не правильно сделал. Сделай мне ипровизирвоанную гранату, тем более уже есть анимация на g, моделька - просто шарик.",
+  "decision": "Implement an improvised player grenade using the existing G throw animation and a simple sphere model, suitable for testing blast destruction of the currently placed Next Gen Destruction Toolkit demo columns.",
+  "implementation_defaults": "Reusable prototype throws, a short fuse, bouncing sphere and bounded radial blast; tune clear exposed defaults. Preserve the existing rifle and canonical slowdown. The owner's demo-column comparison is an observation, not a new performance diagnosis.",
+  "preservation": "Preserve all current owner-added lobby actors, unsaved editor work, vendor packages and the pre-existing Config/DefaultEngine.ini edit. Snapshot before any required save/restart. No custom-column restoration or debris-optimizer installation.",
+  "workflow_override_original": "без задачи и ппроверок независимых",
+  "verification": "The later owner instruction explicitly authorizes direct implementation without a Multica task or independent review. Perform only focused build/runtime self-checks and a scoped local commit. Owner play acceptance remains separate."
+}
