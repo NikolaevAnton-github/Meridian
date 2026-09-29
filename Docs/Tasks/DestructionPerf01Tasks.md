@@ -1,6 +1,6 @@
 # DestructionPerf01: optimization task breakdown
 
-2026-09-29. Status: **prepared; execution not started**.
+2026-09-29. Status: **DP-01 delivered; DP-02 through DP-10 prepared**.
 Authority: [owner task-creation request](../Approvals/DestructionPerf01-TaskCreation01.json).
 This index decomposes the existing [optimization plan](DestructionPerf01Plan.md).
 The [F7 fixture and baseline](DestructionPerf01.md) are already delivered; these
@@ -21,13 +21,14 @@ tasks address the remaining optimization work, not a new fixture implementation.
 | [DP-09](DestructionPerf01/DP-09.md) | Publish measured asset presets and validation; second representative asset | DP-03 through DP-08 resolved | 7 |
 | [DP-10](DestructionPerf01/DP-10.md) | Verify load scaling, combat, slowdown and reset; final regression and budget report | DP-09 | 8, performance contract |
 
-All ten tasks currently have the same prepared status. IDs are local task IDs;
-board records and Multica services are not required. Preparing them grants no
-implementation start. Future authorized work runs directly in the owner's chat.
+DP-01 is technically delivered under the owner's direct start and continuation requests.
+The remaining tasks are prepared. IDs are local task IDs; board records and
+Multica services are not required. Preparing a task grants no implementation
+start. Authorized work runs directly in the owner's chat.
 
-Start with DP-01, then DP-02. Prioritize the implementation branches using the
-measured ranking; collision/profile repetition is the leading existing clue,
-not proof that it explains the full slowdown. DP-03/04/05/07 have no mutual hard
+Continue with DP-02's controlled isolation, using the DP-01 reference and report.
+Profile updates, event fan-out and physics push/advance work have measured costs;
+their candidate savings still require paired experiments. DP-03/04/05/07 have no mutual hard
 dependency. Execute shared editor/code changes serially and keep only one heavy
 build, capture, bake or render active at a time.
 

@@ -14,6 +14,11 @@ public class MeridianSquad : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "Json", "PhysicsControl", "PhysicsCore", "AnimGraphRuntime", "RenderCore", "RHI", "Mover", "Niagara", "GeometryCollectionEngine", "ChaosSolverEngine", "Chaos" });
 
+		if (Target.bBuildEditor)
+		{
+			PrivateDependencyModuleNames.Add("TraceServices");
+		}
+
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 
