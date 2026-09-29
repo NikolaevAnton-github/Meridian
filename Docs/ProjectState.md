@@ -1,6 +1,6 @@
 # MeridianSquad current project state
 
-Updated 2026-09-29. Library-only lobby restored; owner accepted.
+Updated 2026-09-29. [Zero point](CleanupBaseline01.md); lobby accepted.
 Rules and policy routes: [AGENTS](../AGENTS.md).
 
 ## Active direction
@@ -11,7 +11,7 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
   [MSQ-152 Build02](LobbyPlaytestFix01.md): 14 ready-made library specimens,
   working rifle integration and F6. Subsequent custom destruction columns,
   runtime code and active custom assets removed; original static architecture restored.
-  Unrelated owner edits and recoverable history/evidence preserved.
+  Owner edits, Git history and evidence retained; old backups purged.
   MSQ-160, MSQ-162..168 and MSQ-170 are superseded by rollback; no further
   custom-column correction/scaling execution. MSQ-161 remains stopped.
   [NGD migration](NextGenDestruction01.md) remains; custom ED stays retired.

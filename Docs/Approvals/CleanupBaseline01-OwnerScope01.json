@@ -1,0 +1,13 @@
+{
+  "record_id": "CleanupBaseline01-OwnerScope01",
+  "date_local": "2026-09-29",
+  "source": "Owner direct chat",
+  "owner_instruction_translation": "Clean up all backup copies and other redundant files; take the current project state as the zero point.",
+  "execution_override": "Perform directly without creating a Multica task.",
+  "editor_authority": "Owner closed the editor and also authorized the controller to close it when needed.",
+  "scope": "Remove historical project backup payloads and reproducible temporary files from the current workspace, with an exact reviewed deletion manifest.",
+  "supersedes": "Earlier requirements to retain the selected local rollback and checkpoint payloads, including LobbyRollback01/Before. Historical technical reports and source experiments remain evidence, not an execution queue.",
+  "preserved": "Current project files and owner edits, unique art/source experiments, technical reports, Git history and LFS, installed tools and service databases.",
+  "git_scope": "No history reset was authorized. Commit cleanup documentation only; preserve pre-existing uncommitted owner edits in place.",
+  "baseline": "The current workspace is the new operational zero point. Existing paused or prepared work receives no execution authorization from this cleanup."
+}
