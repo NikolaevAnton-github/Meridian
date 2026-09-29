@@ -50,8 +50,9 @@ public:
     int32 Magazine = 30;
     UPROPERTY(BlueprintReadOnly, Category="Combat")
     int32 Reserve = 90;
+    /** Retained API name: infinite magazine and reserve, with reload disabled. */
     UPROPERTY(Transient, BlueprintReadOnly, Category="Combat|Prototype")
-    bool bInfiniteReserve = false;
+    bool bInfiniteReserve = true;
     UPROPERTY(BlueprintReadOnly, Category="Combat")
     bool bAutomatic = false;
     UPROPERTY(BlueprintReadOnly, Category="Combat")
@@ -77,6 +78,8 @@ public:
     void ToggleDummyImmortality();
     UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
     void ToggleDummyFallPrevention();
+    UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
+    void ToggleEnemyAI();
 
     // The projectile coordinator owns the interval after movement/camera sampling.
     void PrepareTimingFrame(double Start, double End);

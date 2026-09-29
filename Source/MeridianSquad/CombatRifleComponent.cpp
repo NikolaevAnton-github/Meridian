@@ -130,6 +130,8 @@ void UCombatRifleComponent::BindInput(UEnhancedInputComponent* Input)
         IE_Pressed, this, &UCombatRifleComponent::ToggleInfiniteReserve);
     static_cast<UInputComponent*>(Input)->BindKey(FInputChord(EKeys::F9, false, true, false, false),
         IE_Pressed, this, &UCombatRifleComponent::ToggleDummyFallPrevention);
+    static_cast<UInputComponent*>(Input)->BindKey(FInputChord(EKeys::F10, false, true, false, false),
+        IE_Pressed, this, &UCombatRifleComponent::ToggleEnemyAI);
 }
 void UCombatRifleComponent::ToggleDummyImmortality()
 {
@@ -139,8 +141,20 @@ void UCombatRifleComponent::ToggleDummyImmortality()
 void UCombatRifleComponent::ToggleInfiniteReserve()
 {
     bInfiniteReserve = !bInfiniteReserve;
+    if (bInfiniteReserve)
+    {
+        CancelReload();
+        Magazine = MagazineCapacity;
+        bDryForPress = false;
+        bDryFeedbackPending = false;
+    }
     if (!bReloading) StatusText.Empty();
     SyncPresentation();
+}
+void UCombatRifleComponent::ToggleEnemyAI()
+{
+    if (auto* World = ACombatProjectileWorld::Find(GetWorld()))
+        World->SetEnemyAIEnabled(!World->IsEnemyAIEnabled());
 }
 void UCombatRifleComponent::ToggleDummyFallPrevention()
 {
@@ -272,9 +286,9 @@ bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, c
     // rejection. No denied round is retained as debt or charged ammunition.
     const double Interval = FMath::Max(.05, double(ShotInterval));
     NextShotTime = Now + Interval;
-    if (Magazine <= 0)
+    if (!bInfiniteReserve && Magazine <= 0)
     {
-        StatusText = bInfiniteReserve || Reserve > 0 ? TEXT("EMPTY  |  R: RELOAD") : TEXT("EMPTY  |  NO RESERVE");
+        StatusText = Reserve > 0 ? TEXT("EMPTY  |  R: RELOAD") : TEXT("EMPTY  |  NO RESERVE");
         if (!bDryForPress && Now >= NextDryTime)
         {
             NextDryTime = Now + .3;
@@ -311,7 +325,8 @@ bool UCombatRifleComponent::EmitScheduledShot(double Now, const FVector& View, c
     const int64 Id = Simulation->LaunchTimed(Character, Start, Velocity, Damage, Birth);
     if (!Id) { StatusText = TEXT("PROJECTILE CAPACITY  |  WAIT"); return false; }
     // Reservation succeeded: this is the only ammunition-decrementing path.
-    --Magazine;
+    if (bInfiniteReserve) Magazine = MagazineCapacity;
+    else --Magazine;
     ++ShotCount;
     LastShotId = Id;
     LastShotTime = Now;
@@ -393,7 +408,7 @@ void UCombatRifleComponent::ChangeFireMode()
 }
 bool UCombatRifleComponent::RequestReload(bool Quick)
 {
-    if (!CanAct()) return false;
+    if (bInfiniteReserve || !CanAct()) return false;
     if (Magazine >= MagazineCapacity || (!bInfiniteReserve && Reserve <= 0))
     {
         StatusText = !bInfiniteReserve && Reserve <= 0 ? TEXT("NO RESERVE") : TEXT("MAGAZINE FULL");

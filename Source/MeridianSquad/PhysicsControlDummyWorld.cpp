@@ -38,7 +38,7 @@ void ACombatProjectileWorld::SetPhysicsDummyEnabled(bool Enabled)
             if (!Dummy) continue;
             Dummy->ConfigureReactionProfile(I + 1);
             Dummy->Combat->SetStableSpawnIndex(static_cast<uint32>(I));
-            Dummy->Combat->bEnabled = bEnemyCombatMode;
+            Dummy->Combat->bEnabled = bEnemyCombatMode && bEnemyAIEnabled;
             Dummy->FinishSpawning(Placement);
             PhysicsDummies.Add(Dummy);
         }
@@ -51,6 +51,13 @@ void ACombatProjectileWorld::SetEnemyCombatMode(bool bCombat)
     bEnemyCombatMode = bCombat;
     ResetTargets();
     SetPhysicsDummyEnabled(true);
+}
+void ACombatProjectileWorld::SetEnemyAIEnabled(bool bEnabled)
+{
+    bEnemyAIEnabled = bEnabled;
+    for (APhysicsControlDummy* Dummy : PhysicsDummies)
+        if (auto* Fixture = IsValid(Dummy) ? Cast<AGASPEnemyFixture>(Dummy) : nullptr)
+            Fixture->Combat->SetEnabled(bEnemyCombatMode && bEnemyAIEnabled);
 }
 TMap<TWeakObjectPtr<APhysicsControlDummy>, FDummyPose> ACombatProjectileWorld::SampleDummies() const
 {

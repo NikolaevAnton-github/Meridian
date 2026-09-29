@@ -667,7 +667,7 @@ void ACombatProjectileWorld::ResetTargets()
     UNGDPropComponent::ResetAll(GetWorld());
     for (APhysicsControlDummy* Dummy : PhysicsDummies) if (IsValid(Dummy))
     {
-        if (auto* Fixture = Cast<AGASPEnemyFixture>(Dummy)) Fixture->Combat->bEnabled = bEnemyCombatMode;
+        if (auto* Fixture = Cast<AGASPEnemyFixture>(Dummy)) Fixture->Combat->bEnabled = bEnemyCombatMode && bEnemyAIEnabled;
         Dummy->ResetDummy();
     }
     SetPhysicsPreviewScale(1);
@@ -704,6 +704,7 @@ FString ACombatProjectileWorld::GetCombatState() const
     Root->SetBoolField(TEXT("physics_dummy_enabled"), !PhysicsDummies.IsEmpty());
     Root->SetNumberField(TEXT("physics_dummy_count"), PhysicsDummies.Num());
     Root->SetBoolField(TEXT("enemy_combat_mode"), bEnemyCombatMode);
+    Root->SetBoolField(TEXT("enemy_ai_enabled"), bEnemyAIEnabled);
     Root->SetBoolField(TEXT("immortal_dummies"), bImmortalDummies);
     Root->SetBoolField(TEXT("recovery_assistance"), bRecoveryAssistance);
     Root->SetNumberField(TEXT("player_action_clock"), PlayerActionClock);

@@ -70,6 +70,13 @@ public:
     void SetEnemyCombatMode(bool bCombat);
     UFUNCTION(BlueprintPure, Category="Combat|Prototype")
     bool IsEnemyCombatMode() const { return bEnemyCombatMode; }
+    UFUNCTION(BlueprintCallable, Category="Combat|Prototype")
+    void SetEnemyAIEnabled(bool bEnabled);
+    UFUNCTION(BlueprintPure, Category="Combat|Prototype")
+    bool IsEnemyAIEnabled() const { return bEnemyAIEnabled; }
+    /** Session switch independent of fixture count; retained by reset/recreation. */
+    UPROPERTY(Transient, BlueprintReadOnly, Category="Combat|Prototype")
+    bool bEnemyAIEnabled = false;
     // Encounter lifetime is separate from projectile cancellation generations.
     uint64 GetEncounterGeneration() const { return EncounterGeneration; }
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat|Prototype")

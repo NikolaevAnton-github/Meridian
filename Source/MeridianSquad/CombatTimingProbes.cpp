@@ -37,6 +37,8 @@ FString ACombatProjectileWorld::ProbeTiming(const FString& Configuration)
     const int32 OriginalCapacity = MaxProjectiles;
     const int32 OriginalMagazine = Rifle->Magazine, OriginalReserve = Rifle->Reserve;
     const bool OriginalAuto = Rifle->bAutomatic;
+    // Timing probes exercise finite-ammunition boundaries independently of play defaults.
+    TGuardValue<bool> InfiniteAmmoGuard(Rifle->bInfiniteReserve, false);
     const double OriginalClock = FiringClock;
     const double OriginalActionClock = PlayerActionClock;
     TGuardValue<double> ActionClockGuard(PlayerActionClock, 0.0);

@@ -18,8 +18,8 @@ void ACombatPrototypeHUD::DrawHUD()
     if (!Canvas || !Rifle) return;
     const float Scale = FMath::Clamp(Canvas->SizeY / 900.f, .8f, 1.4f);
     const float X = 24.f * Scale;
-    const float Y = Canvas->SizeY - 173.f * Scale;
-    DrawRect(FLinearColor(0.012f, .018f, .025f, .8f), X - 10 * Scale, Y - 8 * Scale, 440 * Scale, 157 * Scale);
+    const float Y = Canvas->SizeY - 196.f * Scale;
+    DrawRect(FLinearColor(0.012f, .018f, .025f, .8f), X - 10 * Scale, Y - 8 * Scale, 440 * Scale, 180 * Scale);
     DrawText(TEXT("COMBAT PROTOTYPE"), FLinearColor(.55f,.65f,.7f), X, Y, GEngine->GetSmallFont(), Scale);
     const FString ReserveText = Rifle->bInfiniteReserve ? TEXT("INF") : FString::Printf(TEXT("%03d"), Rifle->Reserve);
     DrawText(FString::Printf(TEXT("%02d / %02d   |   RESERVE %s   |   %s"), Rifle->Magazine,
@@ -30,13 +30,16 @@ void ACombatPrototypeHUD::DrawHUD()
     DrawText(TEXT("F6 reset   Y slow preview   F10 mannequins"), FLinearColor(.65f,.73f,.76f),
         X, Y + 77 * Scale, GEngine->GetSmallFont(), Scale);
     const auto* CombatWorld = ACombatProjectileWorld::Find(GetWorld());
-    DrawText(FString::Printf(TEXT("Ctrl+F7 immortal: %s   Ctrl+F8 reserve: %s"),
+    DrawText(FString::Printf(TEXT("Ctrl+F7 immortal: %s   Ctrl+F8 inf ammo: %s"),
         CombatWorld && CombatWorld->bImmortalDummies ? TEXT("ON") : TEXT("OFF"),
         Rifle->bInfiniteReserve ? TEXT("ON") : TEXT("OFF")), FLinearColor(.65f,.83f,.76f),
         X, Y + 100 * Scale, GEngine->GetSmallFont(), Scale);
     DrawText(FString::Printf(TEXT("Ctrl+F9 bounded recovery assist: %s"),
         CombatWorld && CombatWorld->bRecoveryAssistance ? TEXT("ON") : TEXT("OFF")), FLinearColor(.65f,.83f,.76f),
         X, Y + 123 * Scale, GEngine->GetSmallFont(), Scale);
+    DrawText(FString::Printf(TEXT("Ctrl+F10 enemy AI: %s"),
+        CombatWorld && CombatWorld->IsEnemyAIEnabled() ? TEXT("ON") : TEXT("OFF")), FLinearColor(.65f,.83f,.76f),
+        X, Y + 146 * Scale, GEngine->GetSmallFont(), Scale);
     const float CX = Canvas->SizeX * .5f, CY = Canvas->SizeY * .5f;
     DrawRect(FLinearColor(1,1,1,.65f), CX - 1, CY - 1, 2, 2);
     if (const auto* Player = Cast<AOpeningLobbyCharacter>(Pawn))
