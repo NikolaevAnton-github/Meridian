@@ -8,8 +8,8 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
 - **Workflow:** [DirectWorkflow01](Tasks/DirectWorkflow01.md): Codex works directly;
   owner final testing/acceptance. Multica is an optional board only. Old worker,
   dispatch, reviewer and runtime context requirements are retired project-wide.
-- **Grenade/destruction:** [G throw](GrenadePrototype01.md);
-  [F7 benchmark and proposed optimization plan](Tasks/DestructionPerf01.md).
+- **Grenade/destruction:** [G throw](GrenadePrototype01.md); [F7](Tasks/DestructionPerf01.md);
+  [10 prepared tasks](Tasks/DestructionPerf01Tasks.md).
 - **Destruction:** [MSQ-171 rollback](LobbyRollback01.md) restored the lobby under the
   [owner decision](Approvals/LobbyRollback01-OwnerScope01.json), with
   [owner acceptance](Approvals/LobbyRollback01-OwnerAcceptance01.json). Baseline:

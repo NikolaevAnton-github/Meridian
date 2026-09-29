@@ -1,0 +1,22 @@
+{
+  "id": "DestructionPerf01-TaskCreation01",
+  "date_local": "2026-09-29",
+  "authority": "Direct owner request in the project chat",
+  "owner_message_original": "В предыдущем чате у нас был план по оптимизации физики, надо разбить его на задачки отдельные.",
+  "owner_message_english_translation": "In the previous chat we had a physics optimization plan; it needs to be split into separate tasks.",
+  "interpretation": "The current ProjectState route and the existing DestructionPerf01Plan identify the recent F7 lobby destruction optimization plan as the requested source.",
+  "decision": "Decompose the existing proposed plan into ten bounded local tasks with dependencies, deliverables and verification criteria.",
+  "authorized_now": [
+    "Create the task index and DP-01 through DP-10 task documents",
+    "Update plan and current-state navigation",
+    "Check and locally commit the task-scoped documentation"
+  ],
+  "execution_boundary": "Task preparation only. No optimization implementation, editor or asset changes, benchmarks, Multica dispatch or new production approval is authorized by this task-creation request.",
+  "status": "Prepared; execution not started",
+  "source_plan": "Docs/Tasks/DestructionPerf01Plan.md",
+  "baseline": "Docs/Tasks/DestructionPerf01.md",
+  "task_index": "Docs/Tasks/DestructionPerf01Tasks.md",
+  "tasks": ["DP-01", "DP-02", "DP-03", "DP-04", "DP-05", "DP-06", "DP-07", "DP-08", "DP-09", "DP-10"],
+  "performance_target": "120 FPS remains a proposed target; production hardware, scene limits and acceptance are not established by decomposition.",
+  "preservation": "Preserve owner map, configuration and grenade edits, stock/vendor sources, approved appearance, Git history and exact existing evidence. Retired custom destruction remains retired. Final testing and acceptance belong to the owner."
+}

@@ -1,6 +1,6 @@
 # DestructionPerf01 — Scalable NGD Destruction Plan
 
-Status: proposed future work; no optimization described here has been implemented or accepted. The current task provides the fixed central blast fixture and baseline measurements. Final testing and acceptance belong to the owner.
+Status: proposed future work, decomposed into [ten prepared tasks](DestructionPerf01Tasks.md) under the [2026-09-29 owner request](../Approvals/DestructionPerf01-TaskCreation01.json). No optimization described here has been implemented or accepted. The baseline task provides the fixed central blast fixture and measurements. Final testing and acceptance belong to the owner.
 
 ## Scope and design contract
 
