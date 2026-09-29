@@ -5,12 +5,18 @@ param(
     [switch]$NamedEvents,
     [switch]$Diagnostics,
     [ValidateSet('reference','profile_observe','profile_batch','collision_off')][string]$IsolationMode = 'reference',
+    [ValidateSet('vendor','observe','native')][string]$CollisionMode = 'vendor',
+    [ValidateSet('immediate','batch')][string]$NotificationMode = 'immediate',
     [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$EvidenceSubdirectory = 'DP-01',
     [switch]$NoNiagara,
     [switch]$NoSound,
+    [switch]$SlowdownAfterBlast,
     [ValidateRange(1,5)][int]$Repeats = 1
 )
 $ErrorActionPreference = 'Stop'
+if ($IsolationMode -ne 'reference' -and $CollisionMode -ne 'vendor') {
+    throw 'DP-02 delegate isolation must use the original vendor collision mode.'
+}
 $ProjectRoot = (Resolve-Path "$PSScriptRoot/../..").Path
 $OutputRoot = Join-Path $ProjectRoot "Saved/DestructionPerf01/$EvidenceSubdirectory"
 New-Item -ItemType Directory -Path $OutputRoot -Force | Out-Null
@@ -47,12 +53,15 @@ $Arguments += "-DestructionPerfCommit=$CandidateCommit"
 $Arguments += "-DestructionPerfIdentity=$Identity"
 $Arguments += "-DestructionPerfEvidence=$EvidenceSubdirectory"
 $Arguments += "-DestructionPerfIsolation=$IsolationMode"
+$Arguments += "-DestructionCollisionMode=$CollisionMode"
+$Arguments += "-DestructionNotificationMode=$NotificationMode"
 if ($Diagnostics) { $Arguments += '-DestructionPerfDiagnostics' }
 if ($NamedEvents) { $Arguments += '-statnamedevents' }
 $Commands = 't.MaxFPS 0,r.VSync 0,r.ScreenPercentage 100'
 if ($NoNiagara) { $Commands += ',fx.NiagaraComponentsEnabled 0' }
 $Arguments += '-ExecCmds="' + $Commands + '"'
 if ($NoSound) { $Arguments += '-nosound' }
+if ($SlowdownAfterBlast) { $Arguments += '-DP03SlowdownAfterBlast' }
 if ($Trace) {
     $Arguments += '-trace=cpu,frame,task,gpu,bookmark,counters,region'
     $Arguments += "-tracefile=$OutputRoot/$Name.utrace"
@@ -66,6 +75,7 @@ $Record = [ordered]@{ name=$Name; executable=$Executable; arguments=$Arguments;
     candidate_commit=$CandidateCommit; workload_identity=$Identity; asset_config_hashes=$AssetHashes; source_hashes=$SourceHashes;
     engine_build=(Get-Content -LiteralPath (Join-Path $Engine 'Engine/Build/Build.version') -Raw | ConvertFrom-Json);
     diagnostics=[bool]$Diagnostics; named_events=[bool]$NamedEvents; trace=[bool]$Trace; isolation_mode=$IsolationMode;
+    collision_mode=$CollisionMode; notification_mode=$NotificationMode;
     dll_sha256=(Get-FileHash (Join-Path $ProjectRoot 'Binaries/Win64/UnrealEditor-MeridianSquad.dll')).Hash;
     map_sha256=(Get-FileHash (Join-Path $ProjectRoot 'Content/Maps/L_OpeningLobby_PainterStone01.umap')).Hash;
     started_utc=[DateTime]::UtcNow.ToString('o') }

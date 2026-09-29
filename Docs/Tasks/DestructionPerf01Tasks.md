@@ -1,6 +1,6 @@
 # DestructionPerf01: optimization task breakdown
 
-2026-09-29. Status: **DP-01 and DP-02 delivered; DP-03 through DP-10 prepared**.
+2026-09-29. Status: **DP-01 through DP-03 delivered; DP-04 through DP-10 prepared**.
 Authority: [owner task-creation request](../Approvals/DestructionPerf01-TaskCreation01.json).
 This index decomposes the existing [optimization plan](DestructionPerf01Plan.md).
 The [F7 fixture and baseline](DestructionPerf01.md) are already delivered; these
@@ -21,16 +21,18 @@ tasks address the remaining optimization work, not a new fixture implementation.
 | [DP-09](DestructionPerf01/DP-09.md) | Publish measured asset presets and validation; second representative asset | DP-03 through DP-08 resolved | 7 |
 | [DP-10](DestructionPerf01/DP-10.md) | Verify load scaling, combat, slowdown and reset; final regression and budget report | DP-09 | 8, performance contract |
 
-DP-01 and DP-02 are technically delivered under the owner's direct start requests.
-DP-03 through DP-10 remain prepared. IDs are local task IDs; board records and
+DP-01 through DP-03 are technically delivered under the owner's direct start requests.
+DP-04 through DP-10 remain prepared. IDs are local task IDs; board records and
 Multica services are not required. Preparing a task grants no implementation
 start. Authorized work runs directly in the owner's chat.
 
-DP-02's paired diagnostics prioritize DP-03: warm burst p95 falls from 155.16 to
-46.66 ms with exact-index profile batching and deferred break replay. Every break
-callback is forwarded and the same ten core props break, but early motion and
-individual openings differ. This is an actionable hypothesis, not an adopted
-production path; scheduling, notifications and outcome checks remain in DP-03.
+DP-03 adopts native low-speed collision handling with immediate notifications:
+warm first-five p95 falls from 33.286 to 25.564 ms (-23.2%), beyond repeat spread.
+Changed-profile/break work remains; the worst warm blast frame is 179.541 ms and
+the proposed 8.33 ms target is unmet. DP-02's deferred profile/break experiment
+is rejected because it delays scene-query visibility. Correct notification
+batching is retained as opt-in only: fewer publications did not improve timing.
+Focused checks pass; owner traversal/cover and gameplay acceptance remain pending.
 DP-02 ranks presentation, fracture/contact, lifecycle, field/release and representation
 as conditional or unresolved. See its report for evidence and branch-specific limits.
 DP-03/04/05/07 have no mutual hard

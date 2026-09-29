@@ -63,6 +63,58 @@ TArray<TSharedPtr<FJsonValue>> PropStates(UWorld* World)
         }
     return Rows;
 }
+
+// Read-only outcome probes, only in explicitly instrumented runs. They are coarse
+// cover/opening evidence, not a navmesh or a substitute for owner traversal tests.
+TArray<TSharedPtr<FJsonValue>> CollisionProbes(UWorld* World)
+{
+    TArray<TSharedPtr<FJsonValue>> Rows;
+    FCollisionQueryParams Query(SCENE_QUERY_STAT(DP03Outcome), false);
+    Query.AddIgnoredActor(UGameplayStatics::GetPlayerPawn(World, 0));
+    for (TActorIterator<AActor> It(World); It; ++It)
+    {
+        const auto* Prop = It->FindComponentByClass<UNGDPropComponent>();
+        if (!Prop) continue;
+        for (int32 Axis = 0; Axis < 2; ++Axis)
+            for (int32 Height : {40, 90, 140, 200})
+            {
+                const FVector Center = It->GetActorLocation() + FVector(0, 0, Height);
+                const FVector Offset = Axis == 0 ? FVector(220, 0, 0) : FVector(0, 220, 0);
+                FHitResult Hit;
+                const bool bBlocked = World->SweepSingleByChannel(Hit, Center - Offset, Center + Offset,
+                    FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(.5f), Query);
+                auto Row = MakeShared<FJsonObject>();
+                Row->SetStringField(TEXT("prop"), It->GetPathName());
+                Row->SetStringField(TEXT("id"), Prop->ObjectId.ToString());
+                Row->SetStringField(TEXT("kind"), TEXT("bullet_visibility_radius_0.5"));
+                Row->SetNumberField(TEXT("axis"), Axis);
+                Row->SetNumberField(TEXT("height_cm"), Height);
+                Row->SetBoolField(TEXT("blocked"), bBlocked);
+                Row->SetStringField(TEXT("hit_actor"), Hit.GetActor() ? Hit.GetActor()->GetPathName() : TEXT(""));
+                Row->SetNumberField(TEXT("hit_item"), Hit.Item);
+                Row->SetNumberField(TEXT("fraction"), Hit.Time);
+                Rows.Add(MakeShared<FJsonValueObject>(Row));
+            }
+        for (int32 Axis = 0; Axis < 2; ++Axis)
+        {
+            const FVector Center = It->GetActorLocation() + FVector(0, 0, 90);
+            const FVector Offset = Axis == 0 ? FVector(220, 0, 0) : FVector(0, 220, 0);
+            FHitResult Hit;
+            const bool bBlocked = World->SweepSingleByChannel(Hit, Center - Offset, Center + Offset,
+                FQuat::Identity, ECC_Pawn, FCollisionShape::MakeCapsule(34, 88), Query);
+            auto Row = MakeShared<FJsonObject>();
+            Row->SetStringField(TEXT("prop"), It->GetPathName());
+            Row->SetStringField(TEXT("id"), Prop->ObjectId.ToString());
+            Row->SetStringField(TEXT("kind"), TEXT("pawn_capsule_34_88"));
+            Row->SetNumberField(TEXT("axis"), Axis);
+            Row->SetBoolField(TEXT("blocked"), bBlocked);
+            Row->SetBoolField(TEXT("start_penetrating"), Hit.bStartPenetrating);
+            Row->SetStringField(TEXT("hit_actor"), Hit.GetActor() ? Hit.GetActor()->GetPathName() : TEXT(""));
+            Rows.Add(MakeShared<FJsonValueObject>(Row));
+        }
+    }
+    return Rows;
+}
 }
 
 ADestructionPerfFixture::ADestructionPerfFixture()
@@ -278,6 +330,12 @@ void ADestructionPerfFixture::Arm()
     Metadata->SetStringField(TEXT("engine"), FEngineVersion::Current().ToString());
     Metadata->SetBoolField(TEXT("diagnostics_enabled"), bDiagnostics);
     Metadata->SetStringField(TEXT("isolation_mode"), IsolationMode);
+    FString CollisionMode = TEXT("native"), NotificationMode = TEXT("immediate");
+    FParse::Value(FCommandLine::Get(), TEXT("DestructionCollisionMode="), CollisionMode);
+    FParse::Value(FCommandLine::Get(), TEXT("DestructionNotificationMode="), NotificationMode);
+    Metadata->SetStringField(TEXT("collision_mode"), CollisionMode);
+    Metadata->SetStringField(TEXT("notification_mode"), NotificationMode);
+    Metadata->SetBoolField(TEXT("controlled_slowdown_after_blast"), FParse::Param(FCommandLine::Get(), TEXT("DP03SlowdownAfterBlast")));
     Metadata->SetObjectField(TEXT("isolation_before"), DestructionIsolation::Snapshot());
     FString TraceChannels, CandidateCommit, WorkloadIdentity;
     FParse::Value(FCommandLine::Get(), TEXT("trace="), TraceChannels);
@@ -296,6 +354,7 @@ void ADestructionPerfFixture::Arm()
     Metadata->SetStringField(TEXT("blast_location"), GetActorLocation().ToString());
     Metadata->SetNumberField(TEXT("blast_radius_cm"), Grenades->BlastRadius);
     Metadata->SetArrayField(TEXT("props_before"), PropStates(GetWorld()));
+    if (bDiagnostics) Metadata->SetArrayField(TEXT("dp03_collision_probes_before"), CollisionProbes(GetWorld()));
     Metadata->SetStringField(TEXT("thread_time_note"), TEXT("Engine global timings exclude idle, are delayed, and are not additive. GPU zero means unavailable. PIE includes editor work."));
     for (const TCHAR* Name : {TEXT("t.MaxFPS"), TEXT("r.VSync"), TEXT("r.ScreenPercentage"), TEXT("sg.ViewDistanceQuality"), TEXT("sg.AntiAliasingQuality"), TEXT("sg.PostProcessQuality"), TEXT("sg.EffectsQuality"), TEXT("sg.ShadowQuality"), TEXT("sg.GlobalIlluminationQuality"), TEXT("sg.ReflectionQuality"), TEXT("sg.TextureQuality"), TEXT("sg.FoliageQuality"), TEXT("sg.ShadingQuality"), TEXT("r.Nanite"), TEXT("fx.NiagaraComponentsEnabled")})
         if (auto* Var = IConsoleManager::Get().FindConsoleVariable(Name)) Metadata->SetStringField(Name, Var->GetString());
@@ -334,6 +393,12 @@ void ADestructionPerfFixture::MarkDetonation()
     Metadata->SetNumberField(TEXT("detonation_platform_seconds"), DetonatedAt);
     Metadata->SetNumberField(TEXT("detonation_simulation_seconds"), DetonatedSimulation);
     Metadata->SetNumberField(TEXT("detonation_engine_frame"), static_cast<double>(GFrameCounter));
+    Metadata->SetArrayField(TEXT("dp03_detonation_props"), PropStates(GetWorld()));
+    // Separate standalone correctness workload: arm at normal time, then request
+    // the existing .25 world/rifle/bullet, .65 hero mode after actual field spawn.
+    // F7's slowdown-arming rejection and ordinary 15-second controls are unchanged.
+    if (!AutoName.IsEmpty() && FParse::Param(FCommandLine::Get(), TEXT("DP03SlowdownAfterBlast")))
+        if (auto* Combat = ACombatProjectileWorld::Find(GetWorld())) Combat->SetPhysicsPreviewScale(.25f);
     SetPhase(1);
     TRACE_BOOKMARK(TEXT("DP01 Blast run=%d frame=%llu real=%.6f sim=%.6f"), AutoIndex, GFrameCounter, DetonatedAt, DetonatedSimulation);
     TRACE_BOOKMARK(TEXT("DestructionPerf01 Detonation"));
@@ -374,10 +439,16 @@ void ADestructionPerfFixture::Tick(float DeltaSeconds)
         if (DetonatedAt)
         {
             const double Elapsed = Now - DetonatedAt;
+            if (Elapsed >= 5 && !Metadata->HasField(TEXT("dp03_first_five_props")))
+            {
+                Metadata->SetArrayField(TEXT("dp03_first_five_props"), PropStates(GetWorld()));
+                Metadata->SetNumberField(TEXT("dp03_first_five_counter_end_seconds"), Elapsed);
+            }
             SetPhase(Elapsed >= 10 ? 4 : Elapsed >= 3 ? 3 : Elapsed >= .5 ? 2 : 1);
         }
-        if (DetonatedAt && Now - DetonatedAt >= 15) SaveCapture(TEXT("complete"));
-        else if (Now - ArmedAt > 25 || Capture.Num() >= 32768) SaveCapture(TEXT("incomplete_timeout_or_capacity"));
+        const double CaptureSeconds = FParse::Param(FCommandLine::Get(), TEXT("DP03SlowdownAfterBlast")) ? 60. : 15.;
+        if (DetonatedAt && Now - DetonatedAt >= CaptureSeconds) SaveCapture(TEXT("complete"));
+        else if ((!DetonatedAt && Now - ArmedAt > 25) || Capture.Num() >= 32768) SaveCapture(TEXT("incomplete_timeout_or_capacity"));
     }
     if (AutoAt && Now >= AutoAt) { AutoAt = 0; Arm(); }
     if (ResetAt && Now >= ResetAt)
@@ -399,6 +470,7 @@ void ADestructionPerfFixture::SaveCapture(const FString& Outcome)
     TRACE_BOOKMARK(TEXT("DP01 Complete run=%d outcome=%s"), AutoIndex, *Outcome);
     Metadata->SetNumberField(TEXT("completion_platform_seconds"), FPlatformTime::Seconds());
     Metadata->SetNumberField(TEXT("completion_simulation_seconds"), GetWorld()->GetTimeSeconds());
+    Metadata->SetNumberField(TEXT("completion_world_time_scale"), GetWorld()->GetWorldSettings()->GetEffectiveTimeDilation());
     if (DetonatedAt) { TRACE_END_REGION(TEXT("DestructionPerfBlast")); }
     else { TRACE_END_REGION(TEXT("DestructionPerfPreBlast")); }
     const FString Directory = FPaths::ProjectSavedDir() / TEXT("DestructionPerf01") / EvidenceSubdirectory / TEXT("Captures");
@@ -415,6 +487,7 @@ void ADestructionPerfFixture::SaveCapture(const FString& Outcome)
     Metadata->SetBoolField(TEXT("detonation_observed"), DetonatedAt > 0);
     Metadata->SetNumberField(TEXT("fuse_real_seconds"), DetonatedAt ? DetonatedAt - ArmedAt : -1);
     Metadata->SetArrayField(TEXT("props_after"), PropStates(GetWorld()));
+    if (bDiagnostics) Metadata->SetArrayField(TEXT("dp03_collision_probes_after"), CollisionProbes(GetWorld()));
     if (auto* PC = UGameplayStatics::GetPlayerController(this, 0))
     {
         FVector Eye; FRotator Rotation; PC->GetPlayerViewPoint(Eye, Rotation);

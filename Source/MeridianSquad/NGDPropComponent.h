@@ -9,6 +9,8 @@
 
 class UGeometryCollectionComponent;
 class UMaterialInterface;
+class UNGDPropComponent;
+class UDestructionCollisionPolicy;
 
 /** Initial collision contract. Bounds are conservative envelopes, not a navigation rebuild. */
 USTRUCT(BlueprintType)
@@ -16,13 +18,20 @@ struct FNGDCollisionChange
 {
     GENERATED_BODY()
     UPROPERTY(BlueprintReadOnly) FName ObjectId;
+    UPROPERTY(BlueprintReadOnly) FName ActorPath;
+    UPROPERTY(BlueprintReadOnly) FName AdapterPath;
+    UPROPERTY(BlueprintReadOnly) FName CollectionPath;
+    UPROPERTY(BlueprintReadOnly) int64 AdapterLifetimeId = 0;
+    UPROPERTY(BlueprintReadOnly) int32 FirstCollisionRevision = 0;
     UPROPERTY(BlueprintReadOnly) int32 CollisionRevision = 0;
+    UPROPERTY(BlueprintReadOnly) int32 ChangeCount = 1;
     UPROPERTY(BlueprintReadOnly) int32 ResetGeneration = 0;
     UPROPERTY(BlueprintReadOnly) FBox ChangedBounds = FBox(ForceInit);
     UPROPERTY(BlueprintReadOnly) FName Reason;
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNGDChanged, const FNGDCollisionChange&, Change);
+DECLARE_MULTICAST_DELEGATE_OneParam(FNGDChangedNative, const FNGDCollisionChange&);
 
 /** World lifetime subscription survives replacement of a reset vendor actor. */
 UCLASS()
@@ -32,7 +41,37 @@ class MERIDIANSQUAD_API UNGDWorldSubsystem : public UWorldSubsystem
 public:
     UPROPERTY(BlueprintAssignable) FNGDChanged OnCollisionChanged;
     UPROPERTY(BlueprintReadOnly) TMap<FName, FNGDCollisionChange> LatestChanges;
-    void Publish(const FNGDCollisionChange& Change);
+    // Experimental aggregate subscription: in batch mode, breaks flush in first-change
+    // order after actor ticks. Default/immediate mode delivers individual changes.
+    UPROPERTY(BlueprintAssignable) FNGDChanged OnCollisionChangesBatched;
+    FNGDChangedNative OnCollisionChangesBatchedNative;
+    UPROPERTY(BlueprintReadOnly) TMap<FName, FNGDCollisionChange> LatestActorChanges;
+    virtual void Initialize(FSubsystemCollectionBase& Subsystems) override;
+    virtual void Deinitialize() override;
+    bool UsesBatchedNotifications() const { return bBatchNotifications; }
+private:
+    friend class UNGDPropComponent;
+    friend class FNGDNotificationContractTest;
+    struct FPendingSource
+    {
+        TWeakObjectPtr<UNGDPropComponent> Adapter;
+        TWeakObjectPtr<UGeometryCollectionComponent> Collection;
+        int64 LifetimeId = 0;
+    };
+    TArray<FPendingSource> PendingSources;
+    TMap<TWeakObjectPtr<UActorComponent>, TWeakObjectPtr<UNGDPropComponent>> SourcesByCollection;
+    FDelegateHandle PostActorTickHandle;
+    FDelegateHandle CreatePhysicsHandle, DestroyPhysicsHandle;
+    int64 NextLifetimeId = 0;
+    bool bBatchNotifications = false;
+    bool bFlushing = false;
+    void Publish(UNGDPropComponent* Source, const FNGDCollisionChange& Change);
+    void PublishBatch(UNGDPropComponent* Source, const FNGDCollisionChange& Change);
+    FBox CancelPending(UNGDPropComponent* Source);
+    void FlushPending();
+    void PostActorTick(UWorld* World, ELevelTick TickType, float DeltaSeconds);
+    void PhysicsCreated(UActorComponent* Component);
+    void PhysicsDestroyed(UActorComponent* Component);
 };
 
 /** Opt-in adapter on unmodified BP_BreakableObject instances. Owns no fracture art. */
@@ -59,7 +98,10 @@ public:
     virtual void EndPlay(const EEndPlayReason::Type Reason) override;
 private:
     friend class UNGDTools;
+    friend class UNGDWorldSubsystem;
+    friend class FNGDNotificationContractTest;
     UPROPERTY(Transient) TObjectPtr<UGeometryCollectionComponent> Collection;
+    UPROPERTY(Transient) TObjectPtr<UDestructionCollisionPolicy> CollisionPolicy;
     UPROPERTY(Transient) TMap<int32, TObjectPtr<UMaterialInterface>> SourceMaterialOverrides;
     UPROPERTY(Transient) TObjectPtr<UObject> SourceData;
     UPROPERTY(Transient) TArray<TWeakObjectPtr<AActor>> Fields;
@@ -68,8 +110,24 @@ private:
     FBox ResetBounds = FBox(ForceInit);
     TArray<int64> RecentShots;
     TArray<FName> FieldNames;
+    FName ActorPath, AdapterPath, CollectionPath;
+    int64 AdapterLifetimeId = 0;
+    FNGDCollisionChange PendingChange;
+    bool bPendingNotification = false;
+    int64 QueuedNotificationChanges = 0;
+    int64 PublishedNotificationBatches = 0;
+    int64 PublishedNotificationChanges = 0;
+    int64 LegacyNotificationPublications = 0;
+    int64 ResetNotificationInvalidations = 0;
+    int64 InvalidatedNotificationChanges = 0;
+    int64 LifetimeInvalidatedNotificationChanges = 0;
+    int32 PhysicsRecreations = 0;
+    FBox PhysicsRecreationBounds = FBox(ForceInit);
+    bool bPhysicsRecreating = false;
+    uint64 LastNotificationFrame = MAX_uint64;
     bool bRetiring = false;
     UFUNCTION() void OnBreak(const FChaosBreakEvent& Event);
+    FNGDCollisionChange MakeChange(FName Reason, const FBox& Previous);
     void Publish(FName Reason, const FBox& Previous);
     void Retire();
 };

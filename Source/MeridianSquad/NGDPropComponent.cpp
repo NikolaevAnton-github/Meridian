@@ -1,4 +1,5 @@
 #include "NGDPropComponent.h"
+#include "DestructionCollisionPolicy.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/LatentActionManager.h"
@@ -13,6 +14,8 @@
 #include "InputKeyEventArgs.h"
 #include "Kismet/GameplayStatics.h"
 #include "Materials/MaterialInterface.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
 #include "Serialization/JsonSerializer.h"
 #include "TimerManager.h"
 #include "UObject/StructOnScope.h"
@@ -124,10 +127,170 @@ void VectorField(const TSharedRef<FJsonObject>& Object, const TCHAR* Name, const
 }
 }
 
-void UNGDWorldSubsystem::Publish(const FNGDCollisionChange& Change)
+void UNGDWorldSubsystem::Initialize(FSubsystemCollectionBase& Subsystems)
 {
+    Super::Initialize(Subsystems);
+    // Batching remains an opt-in standalone experiment; no scene timing gain was measured.
+    FString Mode;
+    if (!GIsEditor && GetWorld()->WorldType == EWorldType::Game &&
+        FParse::Value(FCommandLine::Get(), TEXT("DestructionNotificationMode="), Mode))
+    {
+        bBatchNotifications = Mode == TEXT("batch");
+        if (Mode != TEXT("immediate") && Mode != TEXT("batch"))
+            UE_LOG(LogTemp, Warning, TEXT("Unknown DestructionNotificationMode '%s'; using immediate"), *Mode);
+    }
+    PostActorTickHandle = FWorldDelegates::OnWorldPostActorTick.AddUObject(this, &UNGDWorldSubsystem::PostActorTick);
+    CreatePhysicsHandle = UActorComponent::GlobalCreatePhysicsDelegate.AddUObject(this, &UNGDWorldSubsystem::PhysicsCreated);
+    DestroyPhysicsHandle = UActorComponent::GlobalDestroyPhysicsDelegate.AddUObject(this, &UNGDWorldSubsystem::PhysicsDestroyed);
+}
+
+void UNGDWorldSubsystem::Deinitialize()
+{
+    FWorldDelegates::OnWorldPostActorTick.Remove(PostActorTickHandle);
+    UActorComponent::GlobalCreatePhysicsDelegate.Remove(CreatePhysicsHandle);
+    UActorComponent::GlobalDestroyPhysicsDelegate.Remove(DestroyPhysicsHandle);
+    for (const auto& Entry : PendingSources)
+        if (auto* Source = Entry.Adapter.Get())
+        {
+            Source->bPendingNotification = false;
+            Source->PendingChange = FNGDCollisionChange();
+        }
+    PendingSources.Reset();
+    SourcesByCollection.Reset();
+    LatestChanges.Reset();
+    LatestActorChanges.Reset();
+    OnCollisionChanged.Clear();
+    OnCollisionChangesBatched.Clear();
+    OnCollisionChangesBatchedNative.Clear();
+    Super::Deinitialize();
+}
+
+void UNGDWorldSubsystem::PostActorTick(UWorld* World, ELevelTick TickType, float DeltaSeconds)
+{
+    if (World == GetWorld()) FlushPending();
+}
+
+void UNGDWorldSubsystem::PhysicsDestroyed(UActorComponent* Component)
+{
+    const auto* Entry = SourcesByCollection.Find(Component);
+    auto* Source = Entry ? Entry->Get() : nullptr;
+    if (!Source || Source->bRetiring || Source->bPhysicsRecreating) return;
+    Source->bPhysicsRecreating = true;
+    Source->PhysicsRecreationBounds = Source->PreviousBounds + Source->Collection->Bounds.GetBox();
+    Source->PhysicsRecreationBounds += CancelPending(Source);
+    ++Source->ResetNotificationInvalidations;
+}
+
+void UNGDWorldSubsystem::PhysicsCreated(UActorComponent* Component)
+{
+    const auto* Entry = SourcesByCollection.Find(Component);
+    auto* Source = Entry ? Entry->Get() : nullptr;
+    if (!Source || Source->bRetiring || !Source->bPhysicsRecreating) return;
+    Source->bPhysicsRecreating = false;
+    Source->AdapterLifetimeId = ++NextLifetimeId;
+    Source->LastNotificationFrame = MAX_uint64;
+    ++Source->CollisionRevision;
+    ++Source->ResetGeneration;
+    ++Source->PhysicsRecreations;
+    const FBox Previous = Source->PhysicsRecreationBounds;
+    Source->PhysicsRecreationBounds = FBox(ForceInit);
+    // The component address/path can be unchanged while its particle/proxy lifetime is new.
+    Publish(Source, Source->MakeChange(TEXT("reset"), Previous));
+}
+
+void UNGDWorldSubsystem::Publish(UNGDPropComponent* Source, const FNGDCollisionChange& Change)
+{
+    // The legacy last-value map remains synchronous, including its copied-ObjectId behavior.
     LatestChanges.Add(Change.ObjectId, Change);
-    OnCollisionChanged.Broadcast(Change);
+    const bool bQueue = bBatchNotifications && Change.Reason == TEXT("break");
+    if (bQueue)
+    {
+        ++Source->QueuedNotificationChanges;
+        if (Source->bPendingNotification)
+        {
+            Source->PendingChange.ChangedBounds += Change.ChangedBounds;
+            Source->PendingChange.CollisionRevision = Change.CollisionRevision;
+            Source->PendingChange.ChangeCount += Change.ChangeCount;
+        }
+        else
+        {
+            Source->PendingChange = Change;
+            Source->bPendingNotification = true;
+            PendingSources.Add({Source, Source->Collection.Get(), Source->AdapterLifetimeId});
+        }
+    }
+    // Queue first: a legacy listener can reset/destroy the source during this exact callback.
+    if (OnCollisionChanged.IsBound())
+    {
+        ++Source->LegacyNotificationPublications;
+        OnCollisionChanged.Broadcast(Change);
+    }
+    if (!bQueue && !Source->bRetiring && !Source->bPhysicsRecreating && Source->AdapterLifetimeId == Change.AdapterLifetimeId)
+        PublishBatch(Source, Change);
+}
+
+void UNGDWorldSubsystem::PublishBatch(UNGDPropComponent* Source, const FNGDCollisionChange& Change)
+{
+    if (Source->bRetiring || Source->bPhysicsRecreating || Source->AdapterLifetimeId != Change.AdapterLifetimeId) return;
+    // A synchronous legacy listener may have recursively published a later revision.
+    const auto* Latest = LatestActorChanges.Find(Change.ActorPath);
+    if (Latest && Latest->AdapterLifetimeId == Change.AdapterLifetimeId &&
+        Latest->CollisionRevision > Change.CollisionRevision) return;
+    LatestActorChanges.Add(Change.ActorPath, Change);
+    ++Source->PublishedNotificationBatches;
+    Source->PublishedNotificationChanges += Change.ChangeCount;
+    OnCollisionChangesBatched.Broadcast(Change);
+    if (!Source->bRetiring && !Source->bPhysicsRecreating && Source->AdapterLifetimeId == Change.AdapterLifetimeId)
+        OnCollisionChangesBatchedNative.Broadcast(Change);
+}
+
+FBox UNGDWorldSubsystem::CancelPending(UNGDPropComponent* Source)
+{
+    FBox Bounds(ForceInit);
+    if (Source->bPendingNotification)
+    {
+        Bounds = Source->PendingChange.ChangedBounds;
+        Source->InvalidatedNotificationChanges += Source->PendingChange.ChangeCount;
+        Source->LifetimeInvalidatedNotificationChanges += Source->PendingChange.ChangeCount;
+        Source->bPendingNotification = false;
+        Source->PendingChange = FNGDCollisionChange();
+    }
+    PendingSources.RemoveAll([Source](const FPendingSource& Entry)
+    { return Entry.Adapter == Source && Entry.LifetimeId == Source->AdapterLifetimeId; });
+    if (const auto* Latest = LatestActorChanges.Find(Source->ActorPath);
+        Latest && Latest->AdapterLifetimeId == Source->AdapterLifetimeId)
+        LatestActorChanges.Remove(Source->ActorPath);
+    return Bounds;
+}
+
+void UNGDWorldSubsystem::FlushPending()
+{
+    if (bFlushing || PendingSources.IsEmpty()) return;
+    TGuardValue<bool> Guard(bFlushing, true);
+    // Detach the queue before callbacks. Reentrant new work belongs to a later flush.
+    TArray<FPendingSource> Sources = MoveTemp(PendingSources);
+    PendingSources.Reset();
+    for (const auto& Entry : Sources)
+    {
+        auto* Source = Entry.Adapter.Get();
+        if (!Source || Source->bRetiring || Source->bPhysicsRecreating || !Source->bPendingNotification ||
+            Source->AdapterLifetimeId != Entry.LifetimeId) continue;
+        if (Source->Collection != Entry.Collection.Get())
+        {
+            CancelPending(Source);
+            continue;
+        }
+        if (Source->LastNotificationFrame == GFrameCounter)
+        {
+            PendingSources.Add(Entry);
+            continue;
+        }
+        FNGDCollisionChange Change = MoveTemp(Source->PendingChange);
+        Source->PendingChange = FNGDCollisionChange();
+        Source->bPendingNotification = false;
+        Source->LastNotificationFrame = GFrameCounter;
+        PublishBatch(Source, Change);
+    }
 }
 
 void UNGDPropComponent::CancelPendingFields(UWorld* World, const TArray<FName>& Names)
@@ -154,32 +317,50 @@ void UNGDPropComponent::BeginPlay()
     }
     Collection->SetNotifyBreaks(true);
     Collection->OnChaosBreakEvent.AddUniqueDynamic(this, &UNGDPropComponent::OnBreak);
+    CollisionPolicy = NewObject<UDestructionCollisionPolicy>(GetOwner(), NAME_None, RF_Transient);
+    GetOwner()->AddInstanceComponent(CollisionPolicy);
+    CollisionPolicy->RegisterComponent();
+    CollisionPolicy->Initialize(Collection);
     PreviousBounds = Collection->Bounds.GetBox();
+    ActorPath = FName(*GetOwner()->GetPathName());
+    AdapterPath = FName(*GetPathName());
+    CollectionPath = FName(*Collection->GetPathName());
+    AdapterLifetimeId = ++GetWorld()->GetSubsystem<UNGDWorldSubsystem>()->NextLifetimeId;
+    GetWorld()->GetSubsystem<UNGDWorldSubsystem>()->SourcesByCollection.Add(Collection.Get(), this);
     Publish(ResetGeneration ? TEXT("reset") : TEXT("initial"), ResetBounds.IsValid ? ResetBounds : PreviousBounds);
 }
-void UNGDPropComponent::Publish(FName Reason, const FBox& Previous)
+FNGDCollisionChange UNGDPropComponent::MakeChange(FName Reason, const FBox& Previous)
 {
-    if (!Collection || !GetWorld()) return;
     const FBox Current = Collection->Bounds.GetBox();
     FNGDCollisionChange Change;
     Change.ObjectId = ObjectId;
+    Change.ActorPath = ActorPath;
+    Change.AdapterPath = AdapterPath;
+    Change.CollectionPath = CollectionPath;
+    Change.AdapterLifetimeId = AdapterLifetimeId;
+    Change.FirstCollisionRevision = CollisionRevision;
     Change.CollisionRevision = CollisionRevision;
     Change.ResetGeneration = ResetGeneration;
     Change.ChangedBounds = Previous + Current;
     Change.Reason = Reason;
     PreviousBounds = Current;
-    GetWorld()->GetSubsystem<UNGDWorldSubsystem>()->Publish(Change);
+    return Change;
+}
+void UNGDPropComponent::Publish(FName Reason, const FBox& Previous)
+{
+    if (!Collection || !GetWorld()) return;
+    GetWorld()->GetSubsystem<UNGDWorldSubsystem>()->Publish(this, MakeChange(Reason, Previous));
 }
 void UNGDPropComponent::OnBreak(const FChaosBreakEvent& Event)
 {
-    if (bRetiring || !bReady || Event.Component != Collection) return;
+    if (bRetiring || bPhysicsRecreating || !bReady || Event.Component != Collection) return;
     ++BreakEvents;
     ++CollisionRevision;
     Publish(TEXT("break"), PreviousBounds);
 }
 bool UNGDPropComponent::ReceiveBullet(int64 ShotId, const FHitResult& Hit)
 {
-    if (!bReady || bRetiring || ShotId <= 0 || Hit.GetActor() != GetOwner() || RecentShots.Contains(ShotId)) return true;
+    if (!bReady || bRetiring || bPhysicsRecreating || ShotId <= 0 || Hit.GetActor() != GetOwner() || RecentShots.Contains(ShotId)) return true;
     UFunction* Function = ImpactFunction(GetOwner());
     FStructProperty* Parameter = HitParameter(Function);
     if (!Parameter) return true;
@@ -212,7 +393,13 @@ void UNGDPropComponent::Retire()
     if (bRetiring) return;
     bRetiring = true;
     bReady = false;
+    if (auto* Subsystem = GetWorld() ? GetWorld()->GetSubsystem<UNGDWorldSubsystem>() : nullptr)
+    {
+        Subsystem->CancelPending(this);
+        Subsystem->SourcesByCollection.Remove(Collection.Get());
+    }
     if (Collection) Collection->OnChaosBreakEvent.RemoveDynamic(this, &UNGDPropComponent::OnBreak);
+    if (CollisionPolicy) CollisionPolicy->Restore();
     CancelWork(GetOwner());
     for (const auto& Field : Fields) if (Field.IsValid())
     {
@@ -242,13 +429,24 @@ void UNGDPropComponent::ResetAll(UWorld* World)
         const FTransform Transform = C->InitialTransform;
         const FName Id = C->ObjectId;
         const int32 Generation = C->ResetGeneration + 1, Revision = C->CollisionRevision + 1;
-        const FBox PriorBounds = C->Collection ? C->Collection->Bounds.GetBox() : C->PreviousBounds;
+        FBox PriorBounds = C->Collection ? C->Collection->Bounds.GetBox() : C->PreviousBounds;
+        PriorBounds += C->PhysicsRecreationBounds;
+        // Reset supersedes the pending old-lifetime signal but must retain every swept envelope.
+        if (auto* Subsystem = World->GetSubsystem<UNGDWorldSubsystem>())
+            PriorBounds += Subsystem->CancelPending(C);
+        ++C->ResetNotificationInvalidations;
         C->Retire();
         // Destroying the whole vendor instance retires its physics proxy, latent sound work,
         // per-particle collision overrides and delegate targets together.
         C->GetOwner()->SetActorEnableCollision(false);
         C->GetOwner()->Destroy();
-        if (!UNGDTools::Spawn(World, Data, Transform, Id, Generation, Revision, PriorBounds, MaterialOverrides))
+        if (auto* Replacement = UNGDTools::Spawn(World, Data, Transform, Id, Generation, Revision, PriorBounds, MaterialOverrides))
+        {
+            auto* NewAdapter = Replacement->FindComponentByClass<UNGDPropComponent>();
+            NewAdapter->ResetNotificationInvalidations = C->ResetNotificationInvalidations;
+            NewAdapter->InvalidatedNotificationChanges = C->InvalidatedNotificationChanges;
+        }
+        else
             UE_LOG(LogTemp, Error, TEXT("NGD reset failed: %s"), *Id.ToString());
     }
 }
@@ -264,6 +462,26 @@ FString UNGDPropComponent::GetState() const
     O->SetNumberField(TEXT("delivered_hits"), DeliveredHits);
     O->SetNumberField(TEXT("break_events"), BreakEvents);
     O->SetNumberField(TEXT("last_shot"), LastShotId);
+    auto Notifications = MakeShared<FJsonObject>();
+    const auto* Subsystem = GetWorld() ? GetWorld()->GetSubsystem<UNGDWorldSubsystem>() : nullptr;
+    Notifications->SetStringField(TEXT("mode"), Subsystem && Subsystem->UsesBatchedNotifications() ? TEXT("batch") : TEXT("immediate"));
+    Notifications->SetStringField(TEXT("actor_path"), ActorPath.ToString());
+    Notifications->SetStringField(TEXT("adapter_path"), AdapterPath.ToString());
+    Notifications->SetStringField(TEXT("collection_path"), CollectionPath.ToString());
+    Notifications->SetNumberField(TEXT("adapter_lifetime_id"), double(AdapterLifetimeId));
+    Notifications->SetNumberField(TEXT("raw_break_callbacks"), BreakEvents);
+    Notifications->SetNumberField(TEXT("queued_changes"), double(QueuedNotificationChanges));
+    Notifications->SetNumberField(TEXT("pending_changes"), bPendingNotification ? PendingChange.ChangeCount : 0);
+    Notifications->SetNumberField(TEXT("published_batches"), double(PublishedNotificationBatches));
+    Notifications->SetNumberField(TEXT("published_changes"), double(PublishedNotificationChanges));
+    Notifications->SetNumberField(TEXT("legacy_publications"), double(LegacyNotificationPublications));
+    Notifications->SetNumberField(TEXT("reset_invalidations"), double(ResetNotificationInvalidations));
+    Notifications->SetNumberField(TEXT("invalidated_changes"), double(InvalidatedNotificationChanges));
+    Notifications->SetNumberField(TEXT("lifetime_invalidated_changes"), double(LifetimeInvalidatedNotificationChanges));
+    Notifications->SetNumberField(TEXT("physics_recreations"), PhysicsRecreations);
+    Notifications->SetBoolField(TEXT("physics_recreating"), bPhysicsRecreating);
+    O->SetObjectField(TEXT("notifications"), Notifications);
+    if (CollisionPolicy) O->SetObjectField(TEXT("collision_policy"), CollisionPolicy->Snapshot());
     auto Overrides = MakeShared<FJsonObject>();
     for (const auto& Entry : SourceMaterialOverrides)
         Overrides->SetStringField(FString::FromInt(Entry.Key), Entry.Value ? Entry.Value->GetPathName() : TEXT(""));

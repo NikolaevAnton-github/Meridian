@@ -1,0 +1,11 @@
+{
+  "id": "DestructionPerf01-DP03-OwnerStart01",
+  "date_local": "2026-09-29",
+  "authority": "Direct owner request in the project chat",
+  "owner_message_original": "DP-03 го",
+  "owner_message_english_translation": "Go ahead with DP-03",
+  "decision": "Execute the prepared DP-03 task directly: implementation, controlled comparisons, focused verification, documentation and local task commit.",
+  "task": "Docs/Tasks/DestructionPerf01/DP-03.md",
+  "preservation": "Retain owner edits, vendor assets, all previous evidence, damage strength, required collision transitions and gameplay callbacks.",
+  "limits": "No start of DP-04 through DP-10, new art acceptance or packaged performance claim. Final gameplay and visual acceptance remain with the owner."
+}

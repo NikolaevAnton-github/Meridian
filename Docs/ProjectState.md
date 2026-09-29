@@ -9,7 +9,7 @@ Rules and policy routes: [AGENTS](../AGENTS.md).
   owner final testing/acceptance. Multica is an optional board only. Old worker,
   dispatch, reviewer and runtime context requirements are retired project-wide.
 - **Grenade/destruction:** [G throw](GrenadePrototype01.md); [F7](Tasks/DestructionPerf01.md);
-  [DP-02 results](Tasks/DestructionPerf01/DP-02.md).
+  [DP-03 results](Tasks/DestructionPerf01/DP-03.md).
 - **Destruction:** [MSQ-171 rollback](LobbyRollback01.md) restored the lobby under the
   [owner decision](Approvals/LobbyRollback01-OwnerScope01.json), with
   [owner acceptance](Approvals/LobbyRollback01-OwnerAcceptance01.json). Baseline:
