@@ -1,6 +1,4 @@
 #include "CombatProjectileWorld.h"
-#include "DemoColumnCladding.h"
-#include "DestructionFragmentWorld.h"
 #include "NGDPropComponent.h"
 #include "GASPEnemyFixture.h"
 #include "EnemyCombatComponent.h"
@@ -8,33 +6,23 @@
 #include "CombatTarget.h"
 #include "CombatRifleComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "Components/BoxComponent.h"
-#include "Algo/Reverse.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/World.h"
-#include "Engine/Level.h"
-#include "HAL/IConsoleManager.h"
 #include "Engine/StaticMeshActor.h"
 #include "Engine/StaticMesh.h"
 #include "EngineUtils.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/PlayerController.h"
-#include "GameFramework/WorldSettings.h"
 #include "Kismet/GameplayStatics.h"
 #include "Materials/MaterialInterface.h"
 #include "Serialization/JsonSerializer.h"
-#include "ProfilingDebugging/CsvProfiler.h"
-
-CSV_DEFINE_CATEGORY(ProjectileBlockers, true);
 
 namespace
 {
 constexpr float BulletRadius = .5f;
-TAutoConsoleVariable<int32> BlockerRegistry(TEXT("msq.Projectile.BlockerRegistry"), 1,
-    TEXT("0: legacy world scan; 1: live owner registry; 2: registry with per-sample legacy equivalence audit."));
 
 const APhysicsControlDummy* PhysicalProjectileOwner(const AActor* Actor)
 {
@@ -116,12 +104,6 @@ ACombatProjectileWorld::ACombatProjectileWorld()
 void ACombatProjectileWorld::BeginPlay()
 {
     Super::BeginPlay();
-    UWorld* World = GetWorld();
-    BlockerSpawnedHandle = World->AddOnActorSpawnedHandler(FOnActorSpawned::FDelegate::CreateUObject(this, &ACombatProjectileWorld::RegisterBlockerOwner));
-    BlockerRegisteredHandle = World->AddOnPostRegisterAllActorComponentsHandler(FOnPostRegisterAllActorComponents::FDelegate::CreateUObject(this, &ACombatProjectileWorld::RegisterBlockerOwner));
-    BlockerDestroyedHandle = World->AddOnActorDestroyedHandler(FOnActorDestroyed::FDelegate::CreateUObject(this, &ACombatProjectileWorld::RemoveBlockerOwner));
-    BlockerRemovedHandle = World->AddOnActorRemovedFromWorldHandler(FOnActorRemovedFromWorld::FDelegate::CreateUObject(this, &ACombatProjectileWorld::RemoveBlockerOwner));
-    for (TActorIterator<AActor> It(World, AActor::StaticClass(), EActorIteratorFlags::SkipPendingKill); It; ++It) RegisterBlockerOwner(*It);
     Bullets.Reserve(256);
     Impacts.Reserve(48);
     RecordCapsules();
@@ -286,190 +268,38 @@ TMap<TWeakObjectPtr<ACharacter>, ACombatProjectileWorld::FCapsuleSample> ACombat
         }
     return Samples;
 }
-void ACombatProjectileWorld::RegisterBlockerOwner(AActor* Actor)
+TMap<TWeakObjectPtr<UPrimitiveComponent>, ACombatProjectileWorld::FBlockerSample> ACombatProjectileWorld::SampleBlockers() const
 {
-    if (IsValid(Actor) && Actor->GetWorld() == GetWorld()) BlockerOwners.Add(Actor);
-}
-
-void ACombatProjectileWorld::RemoveBlockerOwner(AActor* Actor)
-{
-    BlockerOwners.Remove(Actor);
-}
-
-TArray<ACombatProjectileWorld::FBlockerSample> ACombatProjectileWorld::SampleBlockers()
-{
-    CSV_SCOPED_TIMING_STAT(ProjectileBlockers, Collect);
-    TArray<FBlockerSample> Samples;
-    Samples.Reserve(PreviousBlockers.Num());
-    const auto* FragmentSystem=GetWorld()->GetSubsystem<UDestructionFragmentWorld>();
-    auto SampleOwner = [&](AActor* Actor, auto& Destination)
+    TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample> Samples;
+    for (TActorIterator<AActor> It(GetWorld()); It; ++It)
     {
-        if (Actor->IsA<ACharacter>() || Actor->IsA<APhysicsControlDummy>() || AGASPEnemyFixture::FromFoundation(Actor) || Actor->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics"))) return;
-        // All facing components share their owner's destruction registration.
-        const bool bNGDActor = Actor->FindComponentByClass<UNGDPropComponent>() != nullptr;
-        const bool bFragmentActor=FragmentSystem && Actor->ActorHasTag(TEXT("DestructionFragmentBody"));
-        // Read the owned set directly on BOTH history boundaries. New/deleted,
-        // reparented and reconfigured components are visible immediately, without
-        // relying on editor-only or navigation-only component notifications.
-        for (UActorComponent* Component : Actor->GetComponents())
-            if (UPrimitiveComponent* Part = Cast<UPrimitiveComponent>(Component);
-                Part && Part->IsQueryCollisionEnabled() && Part->GetCollisionResponseToChannel(ECC_Visibility) == ECR_Block)
+        if (It->IsA<ACharacter>() || It->IsA<APhysicsControlDummy>() || AGASPEnemyFixture::FromFoundation(*It) || It->GetClass()->GetName().StartsWith(TEXT("BP_TFA_Physics"))) continue;
+        TInlineComponentArray<UPrimitiveComponent*> Parts(*It);
+        for (UPrimitiveComponent* Part : Parts)
+            if (Part->IsQueryCollisionEnabled() && Part->GetCollisionResponseToChannel(ECC_Visibility) == ECR_Block)
             {
                 // An opted-in Chaos collection deforms as its pieces move. Its
                 // aggregate bounds are not a rigid blocker resize: the finite
                 // sweeps query the live per-piece collision directly. Retain
                 // registration/transform barriers and all launch-cover queries.
-                const bool bNGDCollection = (Part->IsA<UGeometryCollectionComponent>() || Part->ComponentHasTag(TEXT("DemoColumnCladding"))) &&
-                    bNGDActor;
-                const int64 FragmentHandle=bFragmentActor ? FragmentSystem->Select(Part,INDEX_NONE) : 0;
-                // Registered physical fragments use the collection's live-piece
-                // query contract. Their motion must not cancel every firing frame.
-                // Keep BOTH registration boundaries, owner motion and reuse identity
-                // barriers; ordinary arbitrary moving geometry still fails closed.
-                const FTransform Transform=FragmentHandle && Actor->GetOwner()
-                    ? Actor->GetOwner()->GetActorTransform() : Part->GetComponentTransform();
-                Destination.Add(FBlockerSample{Part, Transform,
-                    (bNGDCollection || FragmentHandle) ? FVector::ZeroVector : Part->Bounds.BoxExtent,FragmentHandle});
+                const bool bNGDCollection = Part->IsA<UGeometryCollectionComponent>() &&
+                    It->FindComponentByClass<UNGDPropComponent>();
+                Samples.Add(Part, {Part->GetComponentTransform(),
+                    bNGDCollection ? FVector::ZeroVector : Part->Bounds.BoxExtent});
             }
-    };
-    const int32 Mode = BlockerRegistry.GetValueOnGameThread();
-    if (Mode == 0)
-        for (TActorIterator<AActor> It(GetWorld()); It; ++It) SampleOwner(*It, Samples);
-    else
-        for (auto It = BlockerOwners.CreateIterator(); It; ++It)
-        {
-            AActor* Actor = It->Get();
-            if (!Actor || Actor->GetWorld() != GetWorld()) { It.RemoveCurrent(); continue; }
-            const ULevel* Level = Actor->GetLevel();
-            if (Level != GetWorld()->PersistentLevel && Actor->IsA<AWorldSettings>()) continue;
-            // Match TActorIterator's OnlyActiveLevels filter, including streaming
-            // association and the currently ticking level collection.
-            if (!Level || !((Level->bIsVisible && !Level->bIsBeingRemoved) || Level->bIsAssociatingLevel || Level->bIsDisassociatingLevel)) continue;
-            const auto* Collection = Level->GetCachedLevelCollection();
-            const auto* Active = Level->OwningWorld ? Level->OwningWorld->GetActiveLevelCollection() : nullptr;
-            if (Active && Collection && Collection != Active && Collection->GetType() != ELevelCollectionType::StaticLevels) continue;
-            SampleOwner(Actor, Samples);
-        }
-    if (Mode >= 2)
-    {
-        TArray<FBlockerSample> Legacy;
-        for (TActorIterator<AActor> It(GetWorld()); It; ++It) SampleOwner(*It, Legacy);
-        auto LegacyMatch = [](const TArray<FBlockerSample>& A, const TArray<FBlockerSample>& B)
-        {
-            if (A.Num() != B.Num()) return false;
-            TMap<TWeakObjectPtr<UPrimitiveComponent>, const FBlockerSample*> Old;
-            for (const auto& Entry : B) Old.Add(Entry.Component, &Entry);
-            for (const auto& Entry : A)
-            {
-                const auto* Found = Old.Find(Entry.Component);
-                if (!Found || !(*Found)->Transform.Equals(Entry.Transform, 1.e-6) || !(*Found)->Extent.Equals(Entry.Extent, 1.e-4)) return false;
-            }
-            return true;
-        };
-        ++BlockerRegistryAudits;
-        if (!LegacyMatch(Samples, Legacy) || (bHaveBlockerSample &&
-            LegacyMatch(Legacy, PreviousBlockers) != SameBlockers(Samples, PreviousBlockers))) ++BlockerRegistryMismatches;
     }
     return Samples;
 }
-bool ACombatProjectileWorld::SameBlockers(const TArray<FBlockerSample>& Samples, const TArray<FBlockerSample>& Previous)
+bool ACombatProjectileWorld::BlockersMatch(const TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample>& Samples) const
 {
-    if (Samples.Num() != Previous.Num()) return false;
-    auto SamePose = [](const FBlockerSample& A, const FBlockerSample& B)
+    if (!bHaveBlockerSample) return true;
+    if (Samples.Num() != PreviousBlockers.Num()) return false;
+    for (const auto& Entry : Samples)
     {
-        return A.FragmentHandle==B.FragmentHandle && A.Transform.Equals(B.Transform, 1.e-6) && A.Extent.Equals(B.Extent, 1.e-4);
-    };
-    for (int32 I = 0; I < Samples.Num(); ++I)
-    {
-        if (Samples[I].Component != Previous[I].Component)
-        {
-            // Normal frames compare contiguous snapshots without hashing. A
-            // topology reorder alone must NOT invalidate projectile history.
-            TMap<TWeakObjectPtr<UPrimitiveComponent>, const FBlockerSample*> Lookup;
-            Lookup.Reserve(Previous.Num());
-            for (const auto& Old : Previous) Lookup.Add(Old.Component, &Old);
-            for (const auto& Current : Samples)
-            {
-                const auto* Old = Lookup.Find(Current.Component);
-                if (!Old || !SamePose(Current, **Old)) return false;
-            }
-            return true;
-        }
-        if (!SamePose(Samples[I], Previous[I])) return false;
+        const auto* Old = PreviousBlockers.Find(Entry.Key);
+        if (!Old || !Old->Transform.Equals(Entry.Value.Transform, 1.e-6) || !Old->Extent.Equals(Entry.Value.Extent, 1.e-4)) return false;
     }
     return true;
-}
-
-bool ACombatProjectileWorld::BlockersMatch(const TArray<FBlockerSample>& Samples) const
-{
-    CSV_SCOPED_TIMING_STAT(ProjectileBlockers, Compare);
-    return !bHaveBlockerSample || SameBlockers(Samples, PreviousBlockers);
-}
-
-FString ACombatProjectileWorld::ProbeBlockerRegistry()
-{
-    auto Report = MakeShared<FJsonObject>();
-#if WITH_EDITOR
-    if (GetWorld()->WorldType != EWorldType::PIE) return TEXT("{\"error\":\"PIE required\"}");
-    auto Check = [&](const TCHAR* Key, bool bValue) { Report->SetBoolField(Key, bValue); };
-    auto Has = [](const TArray<FBlockerSample>& Samples, UPrimitiveComponent* Part)
-    {
-        return Samples.ContainsByPredicate([&](const FBlockerSample& S) { return S.Component == Part; });
-    };
-    const auto Baseline = SampleBlockers();
-    FActorSpawnParameters Params;
-    Params.ObjectFlags |= RF_Transient;
-    AActor* Fixture = GetWorld()->SpawnActor<AActor>(Params);
-    if (!Fixture) return TEXT("{\"error\":\"Spawn failed\"}");
-    auto AddPart = [&]()
-    {
-        auto* Part = NewObject<UBoxComponent>(Fixture);
-        Fixture->AddInstanceComponent(Part);
-        Part->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-        Part->SetCollisionResponseToAllChannels(ECR_Ignore);
-        Part->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
-        Part->SetWorldLocation(FVector(10000, 8000, 12000));
-        Part->RegisterComponent();
-        return Part;
-    };
-    auto* First = AddPart();
-    const auto Initial = SampleBlockers();
-    Check(TEXT("spawn_and_dynamic_component"), Has(Initial, First) && Initial.Num() == Baseline.Num() + 1);
-    auto Reordered = Initial;
-    Algo::Reverse(Reordered);
-    Check(TEXT("reorder_preserves_history"), SameBlockers(Initial, Reordered));
-    First->AddWorldOffset(FVector(10, 0, 0));
-    Check(TEXT("movement_invalidates_history"), !SameBlockers(Initial, SampleBlockers()));
-    First->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-    Check(TEXT("collision_disable"), !Has(SampleBlockers(), First));
-    First->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-    First->SetCollisionResponseToChannel(ECC_Visibility, ECR_Ignore);
-    Check(TEXT("live_response_change"), !Has(SampleBlockers(), First));
-    First->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
-    Check(TEXT("collision_enable"), Has(SampleBlockers(), First));
-    auto* Second = AddPart();
-    Check(TEXT("component_addition"), Has(SampleBlockers(), Second));
-    const auto BeforeReplacement = SampleBlockers();
-    First->DestroyComponent();
-    auto* Replacement = AddPart();
-    const auto AfterReplacement = SampleBlockers();
-    Check(TEXT("same_count_replacement"), BeforeReplacement.Num() == AfterReplacement.Num() &&
-        !Has(AfterReplacement, First) && Has(AfterReplacement, Replacement) && !SameBlockers(BeforeReplacement, AfterReplacement));
-    // Legacy samples owned query components even while temporarily unregistered.
-    Second->UnregisterComponent();
-    Check(TEXT("unregister_preserves_owned_sample"), Has(SampleBlockers(), Second));
-    Second->RegisterComponent();
-    Check(TEXT("reregister"), Has(SampleBlockers(), Second));
-    Fixture->RemoveOwnedComponent(Second);
-    Check(TEXT("owner_component_removal"), !Has(SampleBlockers(), Second));
-    Fixture->AddOwnedComponent(Second);
-    Check(TEXT("owner_component_restore"), Has(SampleBlockers(), Second));
-    Fixture->Destroy();
-    Check(TEXT("actor_removal_restores_snapshot"), SameBlockers(Baseline, SampleBlockers()));
-#endif
-    FString Text;
-    FJsonSerializer::Serialize(Report, TJsonWriterFactory<>::Create(&Text));
-    return Text;
 }
 void ACombatProjectileWorld::Tick(float DeltaSeconds)
 {
@@ -621,13 +451,7 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
     if (bAdvancing) return;
     TGuardValue<bool> AdvancingGuard(bAdvancing, true);
     if (Bullets.IsEmpty()) return;
-    struct FPendingHit
-    {
-        FBullet Bullet; FHitResult Hit; double Time;
-        TWeakObjectPtr<UDemoColumnCladding> Cladding;
-        FDestructionFragmentId Fragment;
-        int64 LooseHandle = 0;
-    };
+    struct FPendingHit { FBullet Bullet; FHitResult Hit; double Time; };
     TArray<FPendingHit> PendingHits;
     FCollisionQueryParams Query(SCENE_QUERY_STAT(CombatBullet), true);
     BuildQuery(Query);
@@ -737,11 +561,7 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
             }
         if (bHit)
         {
-            auto* Cladding = Hit.GetActor() ? Hit.GetActor()->FindComponentByClass<UDemoColumnCladding>() : nullptr;
-            const auto* Fragments = GetWorld()->GetSubsystem<UDestructionFragmentWorld>();
-            PendingHits.Add({Bullet, Hit, FlightStart + FlightDuration * Hit.Time,
-                Cladding, Cladding ? Cladding->IdentifyHit(Hit) : FDestructionFragmentId{},
-                Fragments ? Fragments->Select(Hit.GetComponent(), Hit.Item) : 0});
+            PendingHits.Add({Bullet, Hit, FlightStart + FlightDuration * Hit.Time});
             Bullets.RemoveAtSwap(Index);
             continue;
         }
@@ -771,22 +591,7 @@ void ACombatProjectileWorld::AdvanceSegment(double StartTime, double EndTime, do
         }
         LastContactTime = PendingHits[Index].Time;
         FiringClock = PendingHits[Index].Time;
-        auto& Pending = PendingHits[Index];
-        if (Pending.LooseHandle)
-        {
-            const auto* Fragments = GetWorld()->GetSubsystem<UDestructionFragmentWorld>();
-            if (!Fragments || Fragments->Select(Pending.Hit.GetComponent(), Pending.Hit.Item) != Pending.LooseHandle)
-            { ++HitCount; continue; }
-        }
-        if (Pending.Fragment.IsValid() && (!Pending.Cladding.IsValid() ||
-            !Pending.Cladding->RefreshHit(Pending.Fragment, Pending.Hit)))
-        {
-            // The step-start blocker consumed this round. Never redirect its stale
-            // instance index to the tile swapped into that slot by an earlier hit.
-            ++HitCount;
-            continue;
-        }
-        ResolveHit(Pending.Bullet, Pending.Hit, RealNow);
+        ResolveHit(PendingHits[Index].Bullet, PendingHits[Index].Hit, RealNow);
     }
 }
 void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult& Hit, double Now)
@@ -808,10 +613,6 @@ void ACombatProjectileWorld::ResolveHit(const FBullet& Bullet, const FHitResult&
         QueueSound(Bullet.Shooter.Get(), Bullet.Category, CombatAI::Sense::Damage,
             Hit.ImpactPoint, 1, Bullet.Id, LastContactTime, Victim, Bullet.Velocity);
     auto* Breakable = IsValid(Victim) ? Victim->FindComponentByClass<UNGDPropComponent>() : nullptr;
-    if (!Breakable)
-        if (auto* Fragments = GetWorld()->GetSubsystem<UDestructionFragmentWorld>())
-            if (const int64 Handle = Fragments->Select(Hit.GetComponent(), Hit.Item))
-                Fragments->Impulse(Handle, Bullet.Velocity.GetSafeNormal()*120.f);
     const float Applied = Breakable && Breakable->ReceiveBullet(Bullet.Id, Hit) ? 0.f :
         IsValid(PhysicalTarget) ? PhysicalTarget->ReceiveBullet(Bullet.Id, Bullet.Damage,
         Bullet.Velocity.GetSafeNormal(), Hit, LastContactTime, Bullet.BirthTime, FrameSerial,
@@ -880,11 +681,6 @@ void ACombatProjectileWorld::ResetTargets()
 }
 void ACombatProjectileWorld::EndPlay(const EEndPlayReason::Type Reason)
 {
-    GetWorld()->RemoveOnActorSpawnedHandler(BlockerSpawnedHandle);
-    GetWorld()->RemoveOnPostRegisterAllActorComponentsHandler(BlockerRegisteredHandle);
-    GetWorld()->RemoveOnActorDestroyedHandler(BlockerDestroyedHandle);
-    GetWorld()->RemoveOnActorRemovedFromWorldHandler(BlockerRemovedHandle);
-    BlockerOwners.Reset();
     RestorePreviewTime();
     ClearProjectiles();
     PreviousCapsules.Reset();
@@ -895,10 +691,6 @@ void ACombatProjectileWorld::EndPlay(const EEndPlayReason::Type Reason)
 FString ACombatProjectileWorld::GetCombatState() const
 {
     auto Root = MakeShared<FJsonObject>();
-    Root->SetNumberField(TEXT("blocker_registry_owners"), BlockerOwners.Num());
-    Root->SetNumberField(TEXT("blocker_samples"), PreviousBlockers.Num());
-    Root->SetNumberField(TEXT("blocker_registry_audits"), static_cast<double>(BlockerRegistryAudits));
-    Root->SetNumberField(TEXT("blocker_registry_mismatches"), static_cast<double>(BlockerRegistryMismatches));
     Root->SetStringField(TEXT("encounter_generation"), LexToString(EncounterGeneration));
     Root->SetNumberField(TEXT("encounter_seed"), EncounterSeed);
     Root->SetNumberField(TEXT("sensory_queue_pending"),Stimuli.Num());

@@ -1,9 +1,5 @@
 #include "NGDPropComponent.h"
-#include "DestructionFragmentWorld.h"
-#include "DemoColumnCladding.h"
-#include "Components/InstancedStaticMeshComponent.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
-#include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/LatentActionManager.h"
 #include "Engine/World.h"
@@ -151,22 +147,6 @@ void UNGDPropComponent::BeginPlay()
         UE_LOG(LogTemp, Error, TEXT("NGD adapter unavailable: %s"), *GetOwner()->GetPathName());
         return;
     }
-    // The supported column shell overlaps its retained core. Contact impulses
-    // from a detached chip must not fracture the rest of that shell; the vendor
-    // bullet field still supplies strain, and debris keeps physical collision.
-    if (SourceData->GetPathName() == TEXT("/Game/ReinforcedColumn01/DA_RC01_Column.DA_RC01_Column") ||
-        GetOwner()->ActorHasTag(TEXT("DemoColumnSurface05")) || GetOwner()->ActorHasTag(TEXT("DemoColumnCoarse06")))
-    {
-        Collection->SetEnableDamageFromCollision(false);
-        // Fragments enclose the embedded reinforcement before they break. A
-        // solver contact with those rods starts in penetration and traps debris.
-        // Keep reinforcement query/pawn collision while letting fragments clear it.
-        TArray<UStaticMeshComponent*> Meshes;
-        GetOwner()->GetComponents(Meshes);
-        for (auto* Mesh : Meshes)
-            if (!Mesh->IsA<UInstancedStaticMeshComponent>())
-                Mesh->SetCollisionResponseToChannel(ECC_Destructible, ECR_Ignore);
-    }
     Collection->SetNotifyBreaks(true);
     Collection->OnChaosBreakEvent.AddUniqueDynamic(this, &UNGDPropComponent::OnBreak);
     PreviousBounds = Collection->Bounds.GetBox();
@@ -175,7 +155,6 @@ void UNGDPropComponent::BeginPlay()
 void UNGDPropComponent::Publish(FName Reason, const FBox& Previous)
 {
     if (!Collection || !GetWorld()) return;
-    if (auto* Fragments=GetWorld()->GetSubsystem<UDestructionFragmentWorld>()) Fragments->InvalidateSupport(GetOwner());
     const FBox Current = Collection->Bounds.GetBox();
     FNGDCollisionChange Change;
     Change.ObjectId = ObjectId;
@@ -204,15 +183,8 @@ bool UNGDPropComponent::ReceiveBullet(int64 ShotId, const FHitResult& Hit)
     RecentShots.Add(ShotId);
     LastShotId = ShotId;
     ++DeliveredHits;
-    FHitResult VendorHit = Hit;
-    if (auto* Cladding = GetOwner()->FindComponentByClass<UDemoColumnCladding>(); Cladding && Cladding->HandleImpact(VendorHit))
-    {
-        ++CollisionRevision;
-        Publish(TEXT("experiment_impact"), PreviousBounds);
-        return true;
-    }
     FStructOnScope Params(Function);
-    Parameter->CopyCompleteValue(Parameter->ContainerPtrToValuePtr<void>(Params.GetStructMemory()), &VendorHit);
+    Parameter->CopyCompleteValue(Parameter->ContainerPtrToValuePtr<void>(Params.GetStructMemory()), &Hit);
     // The vendor defaults (no radius override) retain per-source strain, anchoring and impulse choices.
     Fields.RemoveAll([](const TWeakObjectPtr<AActor>& Field) { return !Field.IsValid(); });
     const FDelegateHandle Handle = GetWorld()->AddOnActorSpawnedHandler(FOnActorSpawned::FDelegate::CreateLambda([this](AActor* Spawned)
@@ -308,19 +280,7 @@ FString UNGDPropComponent::GetState() const
 AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Transform, FName Id, int32 Generation, int32 Revision, FBox PriorBounds,
     const TMap<int32, TObjectPtr<UMaterialInterface>>& MaterialOverrides)
 {
-    if (!World || !DataAsset || Id.IsNone()) return nullptr;
-    const FString DataPath = DataAsset->GetPathName();
-    const bool bLobbyColumn = DataPath == TEXT("/Game/OpeningLobby/LobbyColumns01/DA_LobbyColumn01.DA_LobbyColumn01");
-    if (!bLobbyColumn && !DataPath.StartsWith(TEXT("/Game/NextGenDestruction/Blueprints/DataAssets/Destructible/")) &&
-        DataPath != TEXT("/Game/ReinforcedColumn01/DA_RC01_Column.DA_RC01_Column") &&
-        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/DA_DemoTiledColumn01.DA_DemoTiledColumn01") &&
-        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction02/DA_DemoTiledColumn02.DA_DemoTiledColumn02") &&
-        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_DemoTiledColumn03.DA_DemoTiledColumn03") &&
-        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_DemoTiledColumn04.DA_DemoTiledColumn04") &&
-        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction05/DA_DemoTiledColumn05.DA_DemoTiledColumn05") &&
-        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/DA_DemoTiledColumn07.DA_DemoTiledColumn07") &&
-        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction08/DA_DemoTiledColumn08.DA_DemoTiledColumn08") &&
-        DataPath != TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_DemoTiledColumn06.DA_DemoTiledColumn06")) return nullptr;
+    if (!World || !DataAsset || Id.IsNone() || !DataAsset->GetPathName().StartsWith(TEXT("/Game/NextGenDestruction/Blueprints/DataAssets/Destructible/"))) return nullptr;
     UClass* Class = LoadClass<AActor>(nullptr, VendorClass);
     if (!Class) return nullptr;
     AActor* Actor = World->SpawnActorDeferred<AActor>(Class, Transform, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
@@ -339,47 +299,7 @@ AActor* UNGDTools::Spawn(UWorld* World, UObject* DataAsset, const FTransform& Tr
     Actor->AddInstanceComponent(C);
     C->RegisterComponent();
     Actor->Tags.Add(TEXT("NGD01"));
-    const bool bVariedCladding = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction04/DA_DemoTiledColumn04.DA_DemoTiledColumn04");
-    const bool bSurfaceExperiment = DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction05/DA_DemoTiledColumn05.DA_DemoTiledColumn05");
-    const bool bStackingExperiment = bLobbyColumn || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction08/DA_DemoTiledColumn08.DA_DemoTiledColumn08");
-    const bool bRefinedExperiment = bStackingExperiment || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction07/DA_DemoTiledColumn07.DA_DemoTiledColumn07");
-    const bool bCoarseExperiment = bRefinedExperiment || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction06/DA_DemoTiledColumn06.DA_DemoTiledColumn06");
-    if (bVariedCladding) Actor->Tags.Add(TEXT("DemoColumnCladding04"));
-    if (bSurfaceExperiment) Actor->Tags.Add(TEXT("DemoColumnSurface05"));
-    if (bCoarseExperiment) Actor->Tags.Add(TEXT("DemoColumnCoarse06"));
-    if (bRefinedExperiment) Actor->Tags.Add(TEXT("DemoColumnRefined07"));
-    if (bStackingExperiment) Actor->Tags.Add(TEXT("DemoColumnStacking08"));
-    if (bLobbyColumn) Actor->Tags.Add(TEXT("LobbyColumns01"));
     Actor->FinishSpawning(Transform);
-    if (bCoarseExperiment || bSurfaceExperiment || bVariedCladding || DataPath == TEXT("/Game/Experiments/DemoTiledColumn01/Correction03/DA_DemoTiledColumn03.DA_DemoTiledColumn03"))
-    {
-        // The concrete enlargement is baked. The independent vendor rebar mesh
-        // still uses its original 5 m coordinates, including after F6 replacement.
-        TArray<UStaticMeshComponent*> Meshes;
-        Actor->GetComponents(Meshes);
-        for (auto* Mesh : Meshes)
-            if (Mesh->GetStaticMesh() && Mesh->GetStaticMesh()->GetName() == TEXT("SM_ConcretePillar_Square_5m_REBAR"))
-            {
-                // The derived lower segment is 840 cm, with 30 cm of reinforcement
-                // embedded in the structural floor. Reapply on every F6 replacement.
-                double RebarScaleZ = 3.6;
-                if (bLobbyColumn)
-                {
-                    const FBox RebarBounds = Mesh->GetStaticMesh()->GetBoundingBox();
-                    RebarScaleZ = 870. / RebarBounds.GetSize().Z;
-                    Mesh->SetRelativeLocation(FVector(0, 0, -30. - RebarBounds.Min.Z * RebarScaleZ));
-                }
-                Mesh->SetRelativeScale3D(FVector(2.364, 2.364, RebarScaleZ));
-            }
-        // The vendor construction script swaps its default collection. In editor
-        // worlds SetRestCollection does not always recreate the Nanite proxy.
-        if (!World->IsGameWorld())
-            if (auto* Concrete = Actor->FindComponentByClass<UGeometryCollectionComponent>()) Concrete->ReregisterComponent();
-        auto* Cladding = NewObject<UDemoColumnCladding>(Actor, TEXT("DemoColumnCladding"), RF_Transactional);
-        Actor->AddInstanceComponent(Cladding);
-        Cladding->RegisterComponent();
-        Cladding->Initialize();
-    }
 #if WITH_EDITOR
     if (!World->IsGameWorld())
     {

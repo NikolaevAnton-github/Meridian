@@ -1,20 +1,21 @@
 # MeridianSquad current project state
 
-Updated 2026-09-29. Destruction verdict pending.
+Updated 2026-09-29. Library-only lobby restored; owner accepted.
 Rules and policy routes: [AGENTS](../AGENTS.md).
 
 ## Active direction
 
-- **Destruction:** [NGD migration](NextGenDestruction01.md) accepted; custom ED retired.
-  [MSQ-74 plan](Tasks/EnvironmentDestruction01Plan.md) retains integration.
-  [Demo](DemoColumnExperiment09.md): outward debris, facing fracture, solid piles;
-  80 retained, owner accepted. [LobbyColumns01](LobbyColumns01.md): 16 columns, damage to
-  8.4 m, concrete seats and rebar; central demo unchanged.
-  [MSQ-169 audit/plan](Tasks/DestructionAudit01.md): current correction unaccepted.
-  [Scaling batch](DestructionScaling01Batch01.md): MSQ-162..167 delivered under
-  direct/self-review waiver; owner verdict pending. MSQ-161 stopped; MSQ-168 unstarted.
-  [MSQ-152 Build02](LobbyPlaytestFix01.md): fire fixed; 14 demo specimens with F6;
-  technically complete, owner review waiver. MSQ-150/151 are
+- **Destruction:** [MSQ-171 rollback](LobbyRollback01.md) restored the lobby under the
+  [owner decision](Approvals/LobbyRollback01-OwnerScope01.json), with
+  [owner acceptance](Approvals/LobbyRollback01-OwnerAcceptance01.json). Baseline:
+  [MSQ-152 Build02](LobbyPlaytestFix01.md): 14 ready-made library specimens,
+  working rifle integration and F6. Subsequent custom destruction columns,
+  runtime code and active custom assets removed; original static architecture restored.
+  Unrelated owner edits and recoverable history/evidence preserved.
+  MSQ-160, MSQ-162..168 and MSQ-170 are superseded by rollback; no further
+  custom-column correction/scaling execution. MSQ-161 remains stopped.
+  [NGD migration](NextGenDestruction01.md) remains; custom ED stays retired.
+  MSQ-150/151 are
   [cancelled for now](Approvals/NextGenDestruction01-Cancellation01.json);
   owner play/design acceptance is separate.
   Initial [lobby scope](Approvals/NextGenDestruction01-LobbyScope01.json): place ready-made

@@ -55,8 +55,6 @@ public:
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     FString ProbeTiming(const FString& Configuration);
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
-    FString ProbeBlockerRegistry();
-    UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     FString ProbeEnemy(bool bCoverOnly = false, bool bAimOnly = false);
     UFUNCTION(BlueprintCallable, Category="Combat|Verification")
     FString ProbePhysicsDummy();
@@ -230,18 +228,10 @@ private:
     TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> FrameEndCapsules;
     struct FBlockerSample
     {
-        TWeakObjectPtr<UPrimitiveComponent> Component;
         FTransform Transform;
         FVector Extent;
-        int64 FragmentHandle = 0;
     };
-    TArray<FBlockerSample> PreviousBlockers;
-    TSet<TWeakObjectPtr<AActor>> BlockerOwners;
-    FDelegateHandle BlockerSpawnedHandle, BlockerDestroyedHandle, BlockerRegisteredHandle, BlockerRemovedHandle;
-    uint64 BlockerRegistryAudits = 0;
-    uint64 BlockerRegistryMismatches = 0;
-    void RegisterBlockerOwner(AActor* Actor);
-    void RemoveBlockerOwner(AActor* Actor);
+    TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample> PreviousBlockers;
     bool bHaveBlockerSample = false;
     bool bProbeResetPending = false;
     int32 ProbeResetCallbacks = 0;
@@ -254,9 +244,8 @@ private:
     void AdvanceSegment(double StartTime, double EndTime, double RealNow);
     TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> SampleCapsules() const;
     TMap<TWeakObjectPtr<ACharacter>, FCapsuleSample> CapsulesAt(double Time) const;
-    TArray<FBlockerSample> SampleBlockers();
-    static bool SameBlockers(const TArray<FBlockerSample>& Samples, const TArray<FBlockerSample>& Previous);
-    bool BlockersMatch(const TArray<FBlockerSample>& Samples) const;
+    TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample> SampleBlockers() const;
+    bool BlockersMatch(const TMap<TWeakObjectPtr<UPrimitiveComponent>, FBlockerSample>& Samples) const;
     void RecordCapsules();
     void ResolveHit(const FBullet& Bullet, const FHitResult& Hit, double Now);
 };

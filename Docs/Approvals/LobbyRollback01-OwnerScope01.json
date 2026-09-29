@@ -1,0 +1,9 @@
+{
+  "date": "2026-09-29",
+  "source": "Owner direct chat",
+  "owner_instruction_english_translation": "Roll our lobby back to the state before our destruction tasks, when only destructible library samples were placed. Delete everything we wrote for it, all the columns and the rest.",
+  "decision": "Restore the retained lobby to the ready-made Next Gen Destruction library assortment from MSQ-152, before the custom reinforced demo column, replicated lobby columns and subsequent optimization work. Remove that later custom destruction implementation from active code and content while keeping the rifle-to-vendor integration needed by the library specimens.",
+  "baseline": "fd84f4a (MSQ-152 Build02), also unchanged at 9e6646b before MSQ-154",
+  "preservation": "Keep unrelated owner edits, original lobby architecture, player/AI changes, vendor assets, source history and exact existing evidence. Preserve a recoverable before snapshot of dirty files and live map state before destructive rollback. No whole-repository reset or evidence deletion.",
+  "execution": "Authorize one Multica production worker for the scoped rollback, focused verification, one independent technical review and controller local closure commit. Supersede ongoing/unstarted custom-destruction correction/scaling execution. No new architecture or art production."
+}

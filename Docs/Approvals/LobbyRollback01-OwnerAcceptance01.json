@@ -1,0 +1,8 @@
+{
+  "date": "2026-09-29",
+  "source": "Owner direct chat after opening the restored lobby",
+  "owner_instruction_english_translation": "I have already checked it; everything is fine.",
+  "decision": "Owner accepts the restored lobby. Stop additional automated gameplay reruns and complete technical evidence review and local closure commit using the successful build, exact baseline identity and existing evidence.",
+  "execution_note": "Controller stopped the MSQ-171 production run after this acceptance. Its editor child exited with the run. Reopen the saved map for handoff without starting another play test.",
+  "scope": "MSQ-171 library-only lobby rollback; unrelated work remains untouched."
+}
