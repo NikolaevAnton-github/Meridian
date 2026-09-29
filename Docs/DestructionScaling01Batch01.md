@@ -1,6 +1,6 @@
 # MSQ-162–167: direct destruction optimization batch
 
-Status: implemented, built and self-verified. Owner visual/play/performance verdict remains pending.
+Status: superseded by the owner-accepted [MSQ-171 rollback](LobbyRollback01.md). The owner rejected the performance outcome of `f0e95a2`; the measurements below describe that historical candidate, not an accepted optimization. No correction remains active.
 Authority: [DirectBatch01](Approvals/DestructionScaling01-DirectBatch01.json). One direct executor, self-review, no Multica launch/dispatch or independent agent. MSQ-168 remains separate.
 
 ## Implementation
